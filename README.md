@@ -33,6 +33,9 @@ This project provides a comprehensive solution for converting League of Legends 
 - Structured sections with table of contents
 - Proper tables for stats and attributes
 - Consistent formatting
+- Preserved nested bullets for Patch History and Trivia
+- Safer post-processing for common wiki template artifacts
+- Smarter unit suffixes (avoids appending on 'Global', 'Instant', etc.)
 
 ## Files Created
 
@@ -90,6 +93,25 @@ Run from the workspace root (`lol-wiki-md-3`):
 ```pwsh
 python .\extract_pages.py .\runes.xml .\items.xml .\champions.xml --out .\out --ext txt --verbose
 ```
+
+### Convert champions (PowerShell)
+
+```pwsh
+# Typical champion
+python .\simple_converter.py --champion Azir --wiki-root .\out --output .\markdown
+
+# Champion with an apostrophe in the name
+python .\simple_converter.py --champion \`"Bel'Veth\`" --wiki-root .\out --output .\markdown
+
+# Batch convert a small set
+$names = @('Azir','Yasuo','LeBlanc','Zed','Rakan','Riven','Kayle','Hwei','Aurora','Aphelios','Cassiopeia','Kai\'Sa')
+foreach ($n in $names) { python .\simple_converter.py --champion $n --wiki-root .\out --output .\markdown }
+```
+
+Tips:
+
+- Use `\`"Name With 'Apostrophe'\`"` for PowerShell to avoid parsing issues.
+- Some older or less common champions may be missing in your local `out/` depending on input XML dumps.
 
 - `--out` sets output directory (default `out`).
 - `--ext` changes the output file extension (default `txt`).
