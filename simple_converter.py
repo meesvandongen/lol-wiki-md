@@ -1777,36 +1777,9 @@ class SimpleLoLConverter:
                 
                 lines.append("")
                 
-                # Blurb (short description)
-                if ability.get('blurb'):
-                    blurb_text = ability['blurb']
-                    # Don't add extra bold if it already starts with **
-                    if blurb_text.startswith('**'):
-                        lines.append(blurb_text)
-                    else:
-                        lines.append(f"**{blurb_text}**")
-                    lines.append("")
+                # (Blurb lines will be rendered after descriptions to match template ordering)
                 
-                if ability.get('blurb2'):
-                    blurb2_text = ability['blurb2']
-                    # Don't add extra italic if it already starts with *
-                    if blurb2_text.startswith('*'):
-                        lines.append(blurb2_text)
-                    else:
-                        lines.append(f"*{blurb2_text}*")
-                    lines.append("")
-                
-                # Full description
-                descriptions = []
-                for i in range(1, 6):  # description, description2, etc.
-                    desc_key = 'description' if i == 1 else f'description{i}'
-                    if ability.get(desc_key):
-                        descriptions.append(ability[desc_key])
-                
-                if descriptions:
-                    full_description = " ".join(descriptions)
-                    lines.append(full_description)
-                    lines.append("")
+                # (Descriptions will be rendered after the attributes table to match template ordering)
                 
                 # Stats table (ordered to match Ability template)
                 stats_items = []
@@ -1903,49 +1876,74 @@ class SimpleLoLConverter:
                         lines.append(f"| **{attr}** | {value} |")
                     lines.append("")
                 
-                # Scaling information
-                scaling_items = []
-                if ability.get('leveling'):
-                    scaling_items.append(ability['leveling'])
-                if ability.get('leveling2'):
-                    scaling_items.append(ability['leveling2'])
-                if ability.get('leveling3'):
-                    scaling_items.append(ability['leveling3'])
-                if ability.get('leveling4'):
-                    scaling_items.append(ability['leveling4'])
-                if ability.get('leveling5'):
-                    scaling_items.append(ability['leveling5'])
-                if ability.get('leveling6'):
-                    scaling_items.append(ability['leveling6'])
-                if ability.get('extra_scaling'):
-                    scaling_items.extend(ability['extra_scaling'])
+                # Render descriptions in order, each followed by its own scaling (leveling) block if present
+                rendered_tables: set[str] = set()
+                printed_descs: set[str] = set()
+                for idx in range(1, 7):
+                    dkey = 'description' if idx == 1 else f'description{idx}'
+                    lkey = 'leveling' if idx == 1 else f'leveling{idx}'
+                    desc = ability.get(dkey)
+                    lev = ability.get(lkey)
+                    if desc:
+                        lines.append(desc)
+                        lines.append("")
+                        # Track normalized text for deduplication with blurbs
+                        norm = re.sub(r'\s+', ' ', re.sub(r'[\*`_~]', '', desc)).strip().lower()
+                        if norm:
+                            printed_descs.add(norm)
+                    if lev:
+                        # If it's a table block (from st), it may contain one or more concatenated tables
+                        if lev.lstrip().startswith('|'):
+                            blocks: List[str] = []
+                            current: List[str] = []
+                            for ln in lev.splitlines():
+                                if re.match(r'^\s*\|\s*Attribute\s*\|\s*Value\s*\|\s*$', ln):
+                                    if current:
+                                        blocks.append('\n'.join(current).strip())
+                                        current = []
+                                current.append(ln)
+                            if current:
+                                blocks.append('\n'.join(current).strip())
+                            if not blocks:
+                                blocks = [lev]
+                            for tbl in blocks:
+                                tkey = tbl.strip()
+                                if tkey:
+                                    rendered_tables.add(tkey)
+                                lines.append(tbl)
+                                lines.append("")
+                        else:
+                            # Non-table: render as a bullet list line
+                            lines.append(f"- {lev}")
+                            lines.append("")
                 
-                if scaling_items:
-                    lines.append("**Scaling:**")
+                # Any extra scaling tables not tied to a specific description
+                if ability.get('extra_scaling'):
                     prev_was_table = False
                     seen_tables: set[str] = set()
+                    emitted_any = False
                     def _emit_table_block(tbl: str):
                         nonlocal prev_was_table
+                        nonlocal emitted_any
                         tkey = tbl.strip()
                         if not tkey:
                             return
-                        if tkey in seen_tables:
+                        if tkey in seen_tables or tkey in rendered_tables:
                             return
                         seen_tables.add(tkey)
+                        if not emitted_any:
+                            lines.append("**Scaling:**")
+                            emitted_any = True
                         if prev_was_table:
                             lines.append("")
                         lines.append(tbl)
                         prev_was_table = True
-
-                    for scaling in scaling_items:
-                        # If scaling is a table block produced by {{st}}, it starts with '|'
+                    for scaling in ability['extra_scaling']:
                         if scaling.lstrip().startswith('|'):
-                            # Some scaling strings may contain multiple tables concatenated; split them
                             blocks: List[str] = []
                             current: List[str] = []
                             for ln in scaling.splitlines():
                                 if re.match(r'^\s*\|\s*Attribute\s*\|\s*Value\s*\|\s*$', ln):
-                                    # start of a new table
                                     if current:
                                         blocks.append('\n'.join(current).strip())
                                         current = []
@@ -1956,32 +1954,35 @@ class SimpleLoLConverter:
                                 blocks = [scaling]
                             for tbl in blocks:
                                 _emit_table_block(tbl)
-                            continue
-                        # Otherwise, handle multiple labeled values in one line
-                        if '**' in scaling and scaling.count('**') >= 4:
-                            # Split on pattern like "**Shield:** value**Damage:**"
-                            parts = re.split(r'(\*\*[^*]+\*\*)', scaling)
-                            current_item = ""
-                            for part in parts:
-                                part = part.strip()
-                                if part.startswith('**') and part.endswith('**'):
-                                    if current_item:
-                                        lines.append(f"- {current_item}")
-                                    current_item = part
-                                elif part and current_item:
-                                    current_item += f" {part}"
-                            if current_item:
-                                lines.append(f"- {current_item}")
                         else:
+                            if not emitted_any:
+                                lines.append("**Scaling:**")
+                                emitted_any = True
                             lines.append(f"- {scaling}")
-                        prev_was_table = False
-                    lines.append("")
+                            prev_was_table = False
+                    if emitted_any:
+                        lines.append("")
                 
                 # Optional flavor text (from Ability template)
                 if ability.get('flavortext'):
                     ft = ability['flavortext']
                     if ft:
                         lines.append(f"*{ft}*")
+                        lines.append("")
+
+                # Blurbs (rendered after descriptions per template order)
+                # Only output blurbs if no descriptions were printed to avoid duplication.
+                if not printed_descs:
+                    for key, style in [('blurb', 'bold'), ('blurb2', 'italic'), ('blurb3', 'plain'), ('blurb4', 'plain')]:
+                        val = ability.get(key)
+                        if not val:
+                            continue
+                        if style == 'bold' and not val.startswith('**'):
+                            lines.append(f"**{val}**")
+                        elif style == 'italic' and not val.startswith('*'):
+                            lines.append(f"*{val}*")
+                        else:
+                            lines.append(val)
                         lines.append("")
 
                 # Notes

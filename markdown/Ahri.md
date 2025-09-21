@@ -87,16 +87,14 @@
 
 ### Passive: Essence Theft
 
-**Innate:** **Ahri** generates a stack of *Essence Fragment* from killing minions and monsters. At max stacks, she consumes them to herself.
-
-*Whenever **Ahri** scores a champion takedown within a short time of damaging them, she consumes their essence to herself.*
-
-**Innate:** **Ahri** generates a stack of *Essence Fragment* whenever she kills a minion or monster. At 9 stacks, she consumes them to herself for 35 to 95 (+ 20% AP). Additionally, whenever **Ahri** scores a champion takedown within 3 seconds of damaging them, she brings their essence to her to consume it to heal herself for 75 to 165 (+ 30% AP).
-
 | Attribute | Value |
 |-----------|------:|
 | **Targeting** | Passive |
 | **Affects** | Self |
+
+**Innate:** **Ahri** generates a stack of *Essence Fragment* whenever she kills a minion or monster. At 9 stacks, she consumes them to herself for 35 to 95 (+ 20% AP).
+
+Additionally, whenever **Ahri** scores a champion takedown within 3 seconds of damaging them, she brings their essence to her to consume it to heal herself for 75 to 165 (+ 30% AP).
 
 **Notes:**
 
@@ -105,10 +103,6 @@
 ---
 
 ### Q: Orb of Deception
-
-**Active:** **Ahri** sends out her orb, dealing magic damage to enemies it passes through. After a point, the orb travels back to her, dealing the same amount in true damage to enemies it passes through.
-
-**Active:** **Ahri** sends her orb in the target direction that deals magic damage to enemies it passes through. Upon reaching maximum range, it returns to her to deal the same amount in *true damage* to enemies it passes through. *Enemies can be hit only once per pass.*
 
 | Attribute | Value |
 |-----------|------:|
@@ -126,11 +120,14 @@
 | **Spell Effects** | Area of effect |
 | **Projectile** | True |
 
-**Scaling:**
+**Active:** **Ahri** sends her orb in the target direction that deals magic damage to enemies it passes through. Upon reaching maximum range, it returns to her to deal the same amount in *true damage* to enemies it passes through.
+
 | Attribute | Value |
 |-----------|------:|
 | **Damage Per Pass** | $40-140$ (+ 50% AP) |
 | **Total Mixed Damage** | $40×2-140×2$ (+ $50×2$% AP) |
+
+*Enemies can be hit only once per pass.*
 
 **Notes:**
 
@@ -143,10 +140,6 @@
 ---
 
 ### W: Fox-Fire
-
-**Active:** **Ahri** gains a burst of *ms|move speed* and conjures three fox-fires that orbit her for a short time. Fox-fires home onto nearby enemies, dealing magic damage.
-
-**Active:** **Ahri** gains *40% **bonus** movement speed* that decays over 2 seconds and conjures three flames which orbit her clockwise for up to $2.5$ seconds. After $0.25$ seconds of the cast, each flame targets a sight enemy based on priority, or after $0.4$ seconds, simply targets the closest visible enemy in range. Each flame deals magic damage, with subsequent flames against a target dealing 30% damage. Flames prioritize enemy champions hit by **Charm**, then enemy champion, then minions that would die to 'Fox-Fire's* damage, and then the target of *'Ahri's' last basic attack within 3 seconds. 'Fox-Fire's damage is doubled against minions below *20% **maximum** health*.
 
 | Attribute | Value |
 |-----------|------:|
@@ -162,12 +155,19 @@
 | **Spell Effects** | Single target |
 | **Projectile** | True |
 
-**Scaling:**
+**Active:** **Ahri** gains *40% **bonus** movement speed* that decays over 2 seconds and conjures three flames which orbit her clockwise for up to $2.5$ seconds.
+
+After $0.25$ seconds of the cast, each flame targets a sight enemy based on priority, or after $0.4$ seconds, simply targets the closest visible enemy in range. Each flame deals magic damage, with subsequent flames against a target dealing 30% damage.
+
 | Attribute | Value |
 |-----------|------:|
 | **Initial Flame Magic Damage** | $40-120$ (+ 40% AP) |
 | **Subsequent Flame Magic Damage** | $40×0.3-120×0.3$ (+ $40×0.3$% AP) |
 | **Total Single-Target Damage** | $40×1.6-120×1.6$ (+ $40×1.6$% AP) |
+
+Flames prioritize enemy champions hit by **Charm**, then enemy champion, then minions that would die to 'Fox-Fire's* damage, and then the target of *'Ahri's' last basic attack within 3 seconds.
+
+'Fox-Fire's damage is doubled against minions below *20% **maximum** health*.
 
 | Attribute | Value |
 |-----------|------:|
@@ -184,10 +184,6 @@
 
 ### E: Charm
 
-**Active:** **Ahri** blows forth a kiss that charms the first enemy hit, dealing magic damage and knockdown.
-
-**Active:** **Ahri** blows forth a kiss in the target direction that deals magic damage to the first enemy hit, knockdown and charm and slow them by 65% for a duration.
-
 | Attribute | Value |
 |-----------|------:|
 | **Range** | 1000 units |
@@ -203,7 +199,8 @@
 | **Spell Effects** | spell |
 | **Projectile** | True |
 
-**Scaling:**
+**Active:** **Ahri** blows forth a kiss in the target direction that deals magic damage to the first enemy hit, knockdown and charm and slow them by 65% for a duration.
+
 | Attribute | Value |
 |-----------|------:|
 | **Magic Damage** | $80-240$ (+ 85% AP) |
@@ -220,14 +217,6 @@
 ---
 
 ### R: Spirit Rush
-
-**Active:** **Ahri** dash forward and fires essence bolts to nearby enemies, dealing magic damage.
-
-**Ahri** can cast this ability up to three times in quick succession. During this time, additional casts are gained whenever a champion essence is consumed via **Essence Theft**.
-
-**Active:** **Ahri** dashes to the target location and then fires essence bolts to up to 3 nearby sight enemies, each dealing magic damage. 
-
-*Spirit Rush* can be recast twice more within 15 seconds of the activation at no additional cost, with a 1-second static cooldown (Unaffected by ability haste) between casts. Consuming a champion's essence with **Essence Theft** while *Spirit Rush* is active extends the recast duration by and up to 10 seconds, and grants an additional recast, storing up to 3 recasts at a time. **Recast:** **Ahri** mimics the first cast's effects. 'Spirit Rush's recast duration will persist even after using all recasts. *Fox-Fire* can be cast during the dash.'
 
 | Attribute | Value |
 |-----------|------:|
@@ -248,10 +237,17 @@
 | **Grounded** | True |
 | **Knockdown** | True |
 
-**Scaling:**
+**Active:** **Ahri** dashes to the target location and then fires essence bolts to up to 3 nearby sight enemies, each dealing magic damage. 
+
+*Spirit Rush* can be recast twice more within 15 seconds of the activation at no additional cost, with a 1-second static cooldown (Unaffected by ability haste) between casts. Consuming a champion's essence with **Essence Theft** while *Spirit Rush* is active extends the recast duration by and up to 10 seconds, and grants an additional recast, storing up to 3 recasts at a time.
+
 | Attribute | Value |
 |-----------|------:|
 | **Magic Damage** | $60-120$ (+ 35% AP) |
+
+**Recast:** **Ahri** mimics the first cast's effects.
+
+'Spirit Rush's recast duration will persist even after using all recasts. *Fox-Fire* can be cast during the dash.'
 
 **Notes:**
 
