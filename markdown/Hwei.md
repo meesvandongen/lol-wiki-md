@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Basic Information](#basic-information)
 - [Statistics](#statistics)
+  - [Advanced Stats](#advanced-stats)
 - [Abilities](#abilities)
 - [Patch History](#patch-history)
 - [Trivia](#trivia)
@@ -12,6 +13,14 @@
 | Attribute | Value |
 |-----------|-------|
 | **Champion** | Hwei |
+| **Title** | the Visionary |
+| **Resource** | Mana |
+| **Range Type** | Ranged |
+| **Release Date** | 2023-12-05 |
+| **Release Patch** | V13.24 |
+| **Roles** | Artillery |
+| **Riot Positions** | Middle, Support |
+| **External Positions** | Middle, Support |
 
 ## Statistics
 
@@ -19,24 +28,48 @@
 
 | Stat | Base | Growth | Level 18 |
 |------|------|--------|----------|
-| **Health** | $550$ | $+85$ | $1995.0$ |
-| **Mana** | $350$ | $+50$ | $1200.0$ |
-| **Armor** | $22$ | $+3.5$ | $81.5$ |
-| **Magic Resist** | $30$ | $+0.5$ | $38.5$ |
-| **Attack Damage** | $56$ | $+3.1$ | $108.7$ |
-| **Attack Speed** | $0.625$ | $+3.2\%$ | $0.965$ |
+| **Health** | $580.0$ | $+109.0$ | $2433.0$ |
+| **Mana** | $480.0$ | $+30.0$ | $990.0$ |
+| **Health Regen** | $5.5$ | $+0.55$ | $14.9$ |
+| **Mana Regen** | $7.5$ | $+0.75$ | $20.2$ |
+| **Armor** | $21.0$ | $+4.7$ | $100.9$ |
+| **Magic Resist** | $30.0$ | $+1.3$ | $52.1$ |
+| **Attack Damage** | $54.0$ | $+3.3$ | $110.1$ |
+| **Attack Speed** | $0.690$ | $+2.5\%$ | $0.983$ |
+| **Movement Speed** | $330.0$ | $+0.0$ | $330.0$ |
+| **Attack Range** | $550.0$ | $+0.0$ | $550.0$ |
+
+### Advanced Stats
+
+| Metric | Value |
+|--------|-------|
+| **Base Attack Speed** | $0.69$ |
+| **Attack Speed Ratio** | $0.658$ |
+| **Bonus AS per Level** | $2.5\%$ |
+| **Attack Windup** | $18.7\%$ |
+| **Missile Speed** | $2800 units/second$ |
+| **Acquisition Radius** | $600 units$ |
+| **Pathing Radius** | $35 units$ |
+| **Selection Radius** | $135 units$ |
+| **Selection Height** | $180 units$ |
+| **Critical Damage** | $175.0\%$ |
 
 ## Abilities
 
 ### Passive: Signature of the Visionary
 
-**Innate:** damaging abilities mark enemies hit for a short time. Damaging them with a different ability consumes the mark to create an explosion at their location that deals magic damage in an area.
+**Innate:** **Hwei**’s damaging abilities mark enemies hit for a short time. Damaging them with a different ability consumes the mark to create an explosion at their location that deals magic damage in an area.
 
-**Innate:** ''Hwei's** damaging [abilities](./champion_ability.md) mark enemies hit for 4 seconds. Subsequent damaging abilities against marked targets consume the mark to create an explosion beneath them, dealing $35 to 230$ (+ 35% AP) **bonus'' magic damage to enemies in the area after a $0.85$-second delay.
+**Innate:** ''Hwei's** damaging abilities mark enemies hit for 4 seconds. Subsequent damaging abilities against marked targets consume the mark to create an explosion beneath them, dealing 35 to 230 (+ 35% AP) **bonus'' magic damage to enemies in the area after a $0.85$-second delay.
 
 | Attribute | Value |
 |-----------|-------|
-| **Cooldown** | targeting = Passive |
+| **Targeting** | Passive |
+| **Affects** | Self, Enemies |
+| **Damage Type** | Magic |
+| **Effect Radius** | 285 units |
+| **Spell Shield** | True |
+| **Spell Effects** | aoe |
 
 **Notes:**
 
@@ -59,9 +92,17 @@
 | Attribute | Value |
 |-----------|-------|
 | **Cast Time** | $0.25$ seconds |
+| **Targeting** | Direction |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Speed** | 2000 units/second |
+| **Effect Radius** | 175 units |
+| **Spell Shield** | True |
+| **Spell Effects** | spellaoe |
+| **Projectile** | True |
 
 **Scaling:**
-- **Magic Damage:** $50-170$ (+ 70% AP) (+ $3-7$% of target's
+- **Magic Damage:** $50-170$ (+ 70% AP)
 - **maximum** health)
 
 **Notes:**
@@ -78,8 +119,10 @@ No additional notes.
 
 | Attribute | Value |
 |-----------|-------|
-| **Cooldown** | cdstart = |
 | **Cast Time** | $0.25$ seconds |
+| **Targeting** | Direction |
+| **Affects** | Self, Allies |
+| **Projectile** | False |
 
 **Scaling:**
 - **Path Duration:** $4-6$ seconds
@@ -99,8 +142,14 @@ No additional notes.
 
 | Attribute | Value |
 |-----------|-------|
-| **Cooldown** | cdstart = |
 | **Cast Time** | $0.25$ seconds |
+| **Targeting** | Direction |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Speed** | 1300 units/second |
+| **Spell Shield** | True |
+| **Spell Effects** | spell |
+| **Projectile** | True |
 
 **Scaling:**
 - **Magic Damage:** $70-230$ (+ 65% AP)
@@ -123,6 +172,7 @@ No additional notes.
 | **Cooldown** | $10-6$ seconds |
 | **Cast Time** | none |
 | **Cost** | $80-120$ Mana |
+| **Targeting** | Auto |
 
 **Notes:**
 
@@ -139,8 +189,15 @@ No additional notes.
 | Attribute | Value |
 |-----------|-------|
 | **Range** | 900 units |
-| **Cooldown** | cdstart = |
 | **Cast Time** | $0.25$ seconds |
+| **Targeting** | Location |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Speed** | 1700 units/second |
+| **Effect Radius** | 350 / 600 / 450 units |
+| **Spell Shield** | True |
+| **Spell Effects** | spell |
+| **Projectile** | True |
 
 **Scaling:**
 - **Magic Damage:** $70-230$ (+ 65% AP)
@@ -159,19 +216,21 @@ No additional notes.
 
 **Active - WW:** **Hwei** summons a protective water pool at the target location that grants him and allied champions a shield for a few seconds that increases in strength if they remain within it.
 
-**Active - WW:** **Hwei** summons a pool of water at the target location, creating a protective zone for 3 seconds that grants him and allied champions a shield at the start of the cast time and for $0.5$ seconds while within the area. The shield refreshes and increases in strength by an amount every over the duration while they remain in the area. 'Pool of Reflection's' shield strength is reduced to 75% for allies.
+**Active - WW:** **Hwei** summons a pool of water at the target location, creating a protective zone for 3 seconds that grants him and allied champions a shield at the start of the cast time and for $0.5$ seconds while within the area. The shield refreshes and increases in strength by an amount every over the duration while they remain in the area. 'Pool of Reflection's shield strength is reduced to 75% for allies.
 
 | Attribute | Value |
 |-----------|-------|
 | **Range** | 650 units |
-| **Cooldown** | cdstart = |
 | **Cast Time** | $0.3$ seconds |
+| **Targeting** | Location |
+| **Affects** | Self, Allies |
+| **Effect Radius** | 350 units |
 
 **Scaling:**
 - **Initial Shield Strength:** $50-100$ (+ 30% AP)
 - **Bonus Shield per Tick:** $50/6-100/6 round=2$ (+ $30/6 Total Maximum Shield $100-200$ (+ 60% AP)
-- **Ally Initial Shield:** $50*0.75-100*0.75$ (+ $30*0.75$% AP)
-- **Ally Bonus Shield per Tick:** $50*0.75/6-1000.75/60.75/6 Ally Total Maximum Shield $100*0.75-200*0.75$ (+ $60*0.75$% AP)
+- **Ally Initial Shield:** $50×0.75-100×0.75$ (+ $30×0.75$% AP)
+- **Ally Bonus Shield per Tick:** $50×0.75/6-1000.75/60.75/6 Ally Total Maximum Shield $100×0.75-200×0.75$ (+ $60×0.75$% AP)
 
 **Notes:**
 
@@ -185,28 +244,32 @@ No additional notes.
 
 ### W: Severing Bolt
 
-**Active - QW:** **Hwei* strikes the target area with a lightning bolt, dealing magic damage to enemies within the area. Isolated or immobilize enemies are dealt ccs*missing** health.
+**Active - QW:** **Hwei** strikes the target area with a lightning bolt, dealing magic damage to enemies within the area. Isolated or immobilize enemies are dealt increased damage based on their **missing** health.
 
-**Active - QW:** **Hwei** calls upon a lightning bolt to strike at the target location after 1 second, dealing magic damage to enemies within the area. If *Severing Bolt hits only one enemy or immobilize enemies, it deals ccs*bonus** damage is capped at 300 against monsters. *Severing Bolt* deals 50% damage to minions and non-epic monsters.
+**Active - QW:** **Hwei** calls upon a lightning bolt to strike at the target location after 1 second, dealing magic damage to enemies within the area. If *Severing Bolt* hits only one enemy or immobilize enemies, it deals increased damage based on the See notes. This **bonus* damage is capped at 300 against monsters. *Maximum Damage Increase:* $%(1/4))*(+(-)(1/4))(2/4))*(+(-)(2/4))(3/4))*(+(-)*(3/4)) * (+ $*% AP) *Severing Bolt* deals 50% damage to minions and non-epic monsters.
 
 | Attribute | Value |
 |-----------|-------|
 | **Range** | 1900 units |
-| **Cooldown** | cdstart = |
 | **Cast Time** | $0.5$ seconds |
+| **Targeting** | Location |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Effect Radius** | 225 units |
+| **Spell Shield** | True |
+| **Spell Effects** | spellaoe |
 
 **Scaling:**
 - **Magic Damage:** $ (+
-- **Maximum Damage Increase:** $% (+(-)*(1/4))*(+(-)(1/4))(2/4))*(+(-)(2/4))(3/4))*(+(-)(3/4)) (+ $*% AP)
 
 **Notes:**
 
-- 'Severing Bolt's' damage against immobilized or isolated enemies is increased based on both its rank and a target's **missing** health. The list below shows the total damage multiplier at various thresholds as a percentage of the base/non-increased damage.
-  - Rank 1: $key1=%$%*100 for 11 health
-  - Rank 2: $key1=%$%+()*(1/4))*100 for 11/0 to 100 showtype=false health
-  - Rank 3: $key1=%$%+()*(2/4))*100 for 11/0 to 100 showtype=false health
-  - Rank 4: $key1=%$%+()*(3/4))*100 for 11/0 to 100 showtype=false health
-  - Rank 5: $key1=%$%*100 for 11 health
+- 'Severing Bolt's damage against immobilized or isolated enemies is increased based on both its rank and a target's **missing** health. The list below shows the total damage multiplier at various thresholds as a percentage of the base/non-increased damage.
+  - Rank 1: key=%*100 for 11 health
+  - Rank 2: key=%+()*(1/4))*100 for 11/0 to 100 showtype=false health
+  - Rank 3: key=%+()*(2/4))*100 for 11/0 to 100 showtype=false health
+  - Rank 4: key=%+()*(3/4))*100 for 11/0 to 100 showtype=false health
+  - Rank 5: key=%*100 for 11 health
 
 ---
 
@@ -221,6 +284,7 @@ No additional notes.
 | **Cooldown** | $18-16$ seconds |
 | **Cast Time** | none |
 | **Cost** | $90-110$ Mana |
+| **Targeting** | Auto |
 
 **Notes:**
 
@@ -237,8 +301,12 @@ No additional notes.
 | Attribute | Value |
 |-----------|-------|
 | **Range** | 800 units |
-| **Cooldown** | cdstart = |
 | **Cast Time** | $0.35$ seconds |
+| **Targeting** | Location |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Spell Shield** | True |
+| **Spell Effects** | spellaoe |
 
 **Scaling:**
 - **Magic Damage:** $70-230$ (+ 65% AP)
@@ -255,12 +323,18 @@ No additional notes.
 
 **Active - QE:** **Hwei** marks a blazing path in a direction that erupts after a delay into explosions. Each explosion deals magic damage and leaves behind a volcanic fissure that continually deals magic damage and slow enemies within.
 
-**Active - QE:** **Hwei** marks a blazing path in the target direction. After $0.6$ seconds, the path erupts into volcanic explosions every $0.2$ seconds from the point of cast, for a total of 7 explosions. Each explosion creates a shockwave that deals magic damage to nearby enemies. Each explosion also leaves a lava fissure in its wake. A fissure lasts for $2.5$ seconds, dealing magic damage every $0.25$ seconds to enemies within the area and slow them by 30%. 'Molten Fissure's' damage is reduced to 60% against minions and increased to 135% against monsters.
+**Active - QE:** **Hwei** marks a blazing path in the target direction. After $0.6$ seconds, the path erupts into volcanic explosions every $0.2$ seconds from the point of cast, for a total of 7 explosions. Each explosion creates a shockwave that deals magic damage to nearby enemies. Each explosion also leaves a lava fissure in its wake. A fissure lasts for $2.5$ seconds, dealing magic damage every $0.25$ seconds to enemies within the area and slow them by 30%. 'Molten Fissure's damage is reduced to 60% against minions and increased to 135% against monsters.
 
 | Attribute | Value |
 |-----------|-------|
-| **Cooldown** | cdstart = |
 | **Cast Time** | $0.35$ seconds |
+| **Targeting** | Direction |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Effect Radius** | 225 units |
+| **Spell Shield** | Special |
+| **Spell Effects** | Special |
+| **Projectile** | True |
 
 **Scaling:**
 - **Magic Damage:** $20-100$ (+ 30% AP)
@@ -271,7 +345,7 @@ No additional notes.
 - Applies area damage for the explosions and deals persistent area damage for the lava.
 - The shockwaves can only hit each enemy once.
 - Enemies will take damage over time for each lava fissure they are standing in.
-- Spell shield will block an explosion but not the persistent lava damage.
+- Spell shield will block an explosion but not the persistent lava damage. Effect at cast time start
 
 ---
 
@@ -279,16 +353,20 @@ No additional notes.
 
 **Active - WE:** **Hwei** surrounds himself in swirling flares that empower his next 3 basic attacks or abilities to deal **bonus** magic damage and restore *mana*.
 
-**Active - WE:** **Hwei** surrounds himself in swirling flares that empower his next 3 [basic attacks](./basic_attacks.md) or [ability](./champion_ability.md) hits within 9 seconds to each deal **bonus** magic damage and restore *mana*. 'Stirring Lights' ' **bonus** damage is reduced to 50% against minions or monsters if applied by his area of effect abilities.
+**Active - WE:** **Hwei** surrounds himself in swirling flares that empower his next 3 basic attacks or ability hits within 9 seconds to each deal **bonus** magic damage and restore *mana*. 'Stirring Lights' **bonus** damage is reduced to 50% against minions or monsters if applied by his area of effect abilities.
 
 | Attribute | Value |
 |-----------|-------|
-| **Cooldown** | cdstart = |
 | **Cast Time** | none |
+| **Targeting** | Auto |
+| **Affects** | Self, Enemies |
+| **Damage Type** | Magic |
+| **Spell Shield** | False |
+| **Spell Effects** | proc |
 
 **Scaling:**
-- **Bonus Magic Damage:* $20-60$ (+ 15% AP)3-60*3$ (+ $15*3$% AP) **Mana Restore:** $135/3-195/3$ Total Mana Restore $135-195$
-- **Reduced Bonus Damage:** $20*0.5-60*0.5$ (+ $15*0.5$% AP)
+- **Bonus Magic Damage:* $20-60$ (+ 15% AP)3-60×3$ (+ $15×3$% AP) **Mana Restore:** $135/3-195/3$ Total Mana Restore $135-195$
+- **Reduced Bonus Damage:** $20×0.5-60×0.5$ (+ $15×0.5$% AP)
 
 **Notes:**
 
@@ -308,6 +386,7 @@ No additional notes.
 | **Cooldown** | $13-11$ seconds |
 | **Cast Time** | none |
 | **Cost** | $50-70$ Mana |
+| **Targeting** | Auto |
 
 **Notes:**
 
@@ -317,26 +396,34 @@ No additional notes.
 
 ### R: Spiraling Despair
 
-**Active:** **Hwei** launches a globule in the target direction that collides with the first enemy champion hit, afflicting them with an [aura](./aura.md) that grows over a few seconds. Enemies within are continually dealt magic damage and gradually slow.
+**Active:** **Hwei** launches a globule in the target direction that collides with the first enemy champion hit, afflicting them with an aura that grows over a few seconds. Enemies within are continually dealt magic damage and gradually slow.
 
 *After the duration ends or when the target dies, the aura explodes to deal magic damage to all enemies within.*
 
-**Active:** **Hwei** launches a globule of pure despair in the target direction that collides with the first enemy champion hit, afflicting them with an [aura](./aura.md) that grows over 3 seconds, true sight the target, and grants sight within its radius. Enemies within are both dealt magic damage and applied a stack of *Despair* every $0.25$ seconds. **Despair:** For each stack, the target is slow by 10% for $0.25$ seconds, stacking up to 12 times. At the end of the duration or when the target dies, the aura explodes to deal magic damage to enemies within and remove all *Despair* stacks from affected enemies. *Spiraling Despair can only be cast if **Hwei** has not entered a mood.*
+**Active:** **Hwei** launches a globule of pure despair in the target direction that collides with the first enemy champion hit, afflicting them with an aura that grows over 3 seconds, true sight the target, and grants sight within its radius. Enemies within are both dealt magic damage and applied a stack of *Despair* every $0.25$ seconds. **Despair:** For each stack, the target is slow by 10% for $0.25$ seconds, stacking up to 12 times. At the end of the duration or when the target dies, the aura explodes to deal magic damage to enemies within and remove all *Despair* stacks from affected enemies. *Spiraling Despair can only be cast if **Hwei** has not entered a mood.*
 
 | Attribute | Value |
 |-----------|-------|
 | **Cooldown** | $140/115/80$ seconds |
 | **Cast Time** | $0.25$ seconds |
 | **Cost** | 100 Mana |
+| **Targeting** | Direction |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Speed** | 1400 units/second |
+| **Effect Radius** | 500 units |
+| **Spell Shield** | Special |
+| **Spell Effects** | Special |
+| **Projectile** | True |
 
 **Scaling:**
-- **Magic Damage per Tick:* $10/4-30/4$ (+ $5/4$% AP)3-30*3$ (+ $5*3$% AP)
-- **Magic Damage:* $200-450$ (+ 80% AP)3-450+30*3$ (+ $80+5*3$% AP)
+- **Magic Damage per Tick:* $10/4-30/4$ (+ $5/4$% AP)3-30×3$ (+ $5×3$% AP)
+- **Magic Damage:* $200-450$ (+ 80% AP)3-450+30×3$ (+ $80+5×3$% AP)
 
 **Notes:**
 
 - Applies persistent area damage for the aura and deals area damage for the explosion.
-- Spell shield can block the aura, explosion, and the application of the first *Despair* stack.
+- Spell shield can block the aura, explosion, and the application of the first *Despair* stack. Effect at cast time end
 
 ---
 
@@ -349,6 +436,8 @@ No additional notes.
 | Attribute | Value |
 |-----------|-------|
 | **Cast Time** | none |
+| **Targeting** | Auto |
+| **Affects** | Self |
 
 **Notes:**
 
@@ -373,15 +462,15 @@ No additional notes.
 
 ### V25.13
 - *Signature of the Visionary*
-  - ***Bug Fixes:*** After marking an enemy using *Gaze of the Abyss* and using another ability to trigger the explosion, the explosion no longer incorrectly casts at the location of a previously slain target who had been marked by *Signature of the Visionary* but its effect was not consumed to trigger an explosion, instead of at the location of the first.
+  - **Bug Fixes:** After marking an enemy using *Gaze of the Abyss* and using another ability to trigger the explosion, the explosion no longer incorrectly casts at the location of a previously slain target who had been marked by *Signature of the Visionary* but its effect was not consumed to trigger an explosion, instead of at the location of the first.
 
 ### V25.10
 - *Molten Fissure*
-  - ***Bug Fixes:*** Spawned fissures no longer prevent minions' pathing.
+  - **Bug Fixes:** Spawned fissures no longer prevent minions' pathing.
 
 ### V25.08
 - *Signature of the Visionary*
-  - Base damage increased to $35 to 230$ from $35 to 180$.
+  - Base damage increased to 35 to 230 from 35 to 180.
 - *Spiraling Despair*
   - Explosion base damage increased to $200-450 3$ from $200-400 3$.
 
@@ -392,13 +481,13 @@ No additional notes.
   - Base damage reduced to $60-160$ from $80-160$.
 - *Stirring Lights*
   - Base damage per hit reduced to $20-60$ from $25-65$.
-    - Total base damage reduced to $20*3-60*3$ from $25*3-65*3$.
+    - Total base damage reduced to $20×3-60×3$ from $25×3-65×3$.
   - AP ratio per hit reduced to 15% AP from 20% AP.
-    - Total AP ratio reduced to $15*3$% AP from $20*3$% AP.
+    - Total AP ratio reduced to $15×3$% AP from $20×3$% AP.
 
 ### V14.22
 - General
-  - ***Bug Fixes:*** Basic attack missile VFX now spawns at the brush's tip instead of ''Hwei's'' center.
+  - **Bug Fixes:** Basic attack missile VFX now spawns at the brush's tip instead of ''Hwei's' center.
 
 ### V14.21
 - *Devastating Fire*
@@ -420,16 +509,16 @@ No additional notes.
 
 ### V14.10
 - *Wash Brush*
-  - ***Bug Fixes:*** After the **Hwei** player disconnects, no longer locks **Hwei** in a permanent state of having no abilities due to activating one of his subjects but not using an ability before disconnecting.
+  - **Bug Fixes:** After the **Hwei** player disconnects, no longer locks **Hwei** in a permanent state of having no abilities due to activating one of his subjects but not using an ability before disconnecting.
 
 ## Trivia
 
 - **Hwei** is currently the champion with the largest number of abilities in League of Legends: 11 when excluding his subject selection spells, and 15 when including them.
-- ''Hwei's'' kit obeys the Rule of thirds in multiple aspects:
-  - He has 33 basic abilities.
+- ''Hwei's' kit obeys the Rule of thirds in multiple aspects:
+  - He has 3×3 basic abilities.
   - His passive requires two damaging abilities in order to deal a third damaging ability.
   - He studies two negative subjects and one positive subject.
-- *Subject: Serenity*, ''Hwei's'' positive mood, is placed between his other two negative moods, *Subject: Disaster* and *Subject: Torment*. This fact stems from lore implications, namely his inner turmoil, as detailed in his universe short stories: "Hwei faces the conflicting hues of Ionia" in [The Visionary](./The_Visionary.md) and "Art saves me, yet it can shatter me" in [Paintings Framed in Half-Light](./Paintings_Framed_in_Half-Light.md).
+- *Serenity*, ''Hwei's' positive mood, is placed between his other two negative moods, *anger* and *anguish*. This fact stems from lore implications, namely his inner turmoil, as detailed in his universe short stories: "Hwei faces the conflicting hues of Ionia" in The Visionary and "Art saves me, yet it can shatter me" in Paintings Framed in Half-Light.
 - When **Hwei** dies, his eyes, which reflect his current mood, fade into a colorless blankness, symbolizing the absence of any emotional presence in death.
 - ''Hwei's** name comes from Chinese, being the character **彗'' (Huì), meaning "comet".
 

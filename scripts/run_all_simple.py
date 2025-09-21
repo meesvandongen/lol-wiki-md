@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+import shutil
 from typing import List, Tuple
 
 # Ensure we can import from repo root
@@ -60,10 +61,22 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Run SimpleLoLConverter for all champions")
     ap.add_argument("--wiki-root", default="./out", help="Path to extracted wiki root (default: ./out)")
     ap.add_argument("--output", default="./markdown", help="Output directory for markdown files (default: ./markdown)")
+    ap.add_argument("--clean", action="store_true", help="Clean the output directory before writing")
     args = ap.parse_args()
 
     wiki_root = Path(args.wiki_root).resolve()
     output = Path(args.output).resolve()
+    # Clean output directory if requested
+    if args.clean and output.exists():
+        print(f"Cleaning output directory: {output}")
+        for child in output.iterdir():
+            try:
+                if child.is_file() or child.is_symlink():
+                    child.unlink(missing_ok=True)
+                elif child.is_dir():
+                    shutil.rmtree(child, ignore_errors=True)
+            except Exception as e:
+                print(f"Warning: failed to remove {child}: {e}")
     output.mkdir(parents=True, exist_ok=True)
 
     print(f"Wiki root: {wiki_root}")

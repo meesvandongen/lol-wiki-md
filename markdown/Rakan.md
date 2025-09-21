@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Basic Information](#basic-information)
 - [Statistics](#statistics)
+  - [Advanced Stats](#advanced-stats)
 - [Abilities](#abilities)
 - [Patch History](#patch-history)
 - [Trivia](#trivia)
@@ -12,6 +13,14 @@
 | Attribute | Value |
 |-----------|-------|
 | **Champion** | Rakan |
+| **Title** | The Charmer |
+| **Resource** | Mana |
+| **Range Type** | Melee |
+| **Release Date** | 2017-04-19 |
+| **Release Patch** | V7.8 |
+| **Roles** | Catcher |
+| **Riot Positions** | Support |
+| **External Positions** | Support |
 
 ## Statistics
 
@@ -19,12 +28,30 @@
 
 | Stat | Base | Growth | Level 18 |
 |------|------|--------|----------|
-| **Health** | $550$ | $+85$ | $1995.0$ |
-| **Mana** | $350$ | $+50$ | $1200.0$ |
-| **Armor** | $22$ | $+3.5$ | $81.5$ |
-| **Magic Resist** | $30$ | $+0.5$ | $38.5$ |
-| **Attack Damage** | $56$ | $+3.1$ | $108.7$ |
-| **Attack Speed** | $0.625$ | $+3.2\%$ | $0.965$ |
+| **Health** | $610.0$ | $+99.0$ | $2293.0$ |
+| **Mana** | $315.0$ | $+50.0$ | $1165.0$ |
+| **Health Regen** | $5.0$ | $+0.5$ | $13.5$ |
+| **Mana Regen** | $8.75$ | $+0.5$ | $17.2$ |
+| **Armor** | $30.0$ | $+4.9$ | $113.3$ |
+| **Magic Resist** | $32.0$ | $+2.05$ | $66.8$ |
+| **Attack Damage** | $62.0$ | $+3.5$ | $121.5$ |
+| **Attack Speed** | $0.635$ | $+3.0\%$ | $0.959$ |
+| **Movement Speed** | $335.0$ | $+0.0$ | $335.0$ |
+| **Attack Range** | $300.0$ | $+0.0$ | $300.0$ |
+
+### Advanced Stats
+
+| Metric | Value |
+|--------|-------|
+| **Base Attack Speed** | $0.635$ |
+| **Attack Speed Ratio** | $0.635$ |
+| **Bonus AS per Level** | $3.0\%$ |
+| **Attack Windup** | $17.1\%$ |
+| **Acquisition Radius** | $475 units$ |
+| **Pathing Radius** | $35 units$ |
+| **Selection Radius** | $125 units$ |
+| **Selection Height** | $200 units$ |
+| **Critical Damage** | $175.0\%$ |
 
 ## Abilities
 
@@ -32,13 +59,15 @@
 
 **Innate:** Periodically, **Rakan** generates a shield that regenerates out of combat if not broken.
 
-*''Rakan's'' basic attacks and ability hits against enemy champions ah this ability's cooldown.*
+*''Rakan's' basic attacks and ability hits against enemy champions ah this ability's cooldown.*
 
-**Innate:** Periodically, **Rakan** grants himself a shield for $30 to 225$ (+ 95% AP) that lasts until broken. After being [out of combat](./out_of_combat.md) for 5 seconds, any leftover shield will be restored to **maximum** value. ''Rakan's'* basic attacks and [ability](./champion_ability.md) hits reduce *Fey Feathers' ' *cooldown* by 1 second for each enemy champion hit. **Innate - Lover's Leap:** If either **Rakan** or **Xayah* is channeling completes.
+**Innate:** Periodically, **Rakan** grants himself a shield for 30 to 225 (+ 95% AP) that lasts until broken. After being out of combat for 5 seconds, any leftover shield will be restored to **maximum** value. ''Rakan's* basic attacks and ability hits reduce *Fey Feathers' *cooldown* by 1 second for each enemy champion hit. **Innate - Lover's Leap:** If either **Rakan** or **Xayah** is channeling Recall, the other may move nearby and channel their own to join alongside them. **Both** reach base at the time of which the initiator's Recall completes.
 
 | Attribute | Value |
 |-----------|-------|
-| **Cooldown** | $40 to 14.5$ seconds |
+| **Cooldown** | 40 to 14.5 seconds |
+| **Targeting** | Passive |
+| **Affects** | Self |
 
 **Notes:**
 
@@ -53,7 +82,7 @@
 
 *If the feather hits an enemy champion or epic monster, **Rakan** winds up a circular mark around him over a few seconds. When the mark completes, Rakan heal himself.*
 
-**Active:** **Rakan** slings an enchanted feather in the target direction that deals magic damage to the first enemy hit. If the target was an enemy champion or epic monster, a radius is marked around **Rakan**. After 3 seconds or if an allied champion enters the radius, **Rakan** heals himself and nearby allied champions for $40 to 210$ (+ 55% AP).
+**Active:** **Rakan** slings an enchanted feather in the target direction that deals magic damage to the first enemy hit. If the target was an enemy champion or epic monster, a radius is marked around **Rakan**. After 3 seconds or if an allied champion enters the radius, **Rakan** heals himself and nearby allied champions for 40 to 210 (+ 55% AP).
 
 | Attribute | Value |
 |-----------|-------|
@@ -61,6 +90,14 @@
 | **Cooldown** | $11-7$ seconds |
 | **Cast Time** | $0.25$ seconds |
 | **Cost** | 45 Mana |
+| **Targeting** | Direction |
+| **Affects** | Enemies / Allies |
+| **Damage Type** | Magic |
+| **Speed** | 1850 units/second |
+| **Effect Radius** | 200 units |
+| **Spell Shield** | Special |
+| **Spell Effects** | spell |
+| **Projectile** | True |
 
 **Scaling:**
 - **Magic Damage:** $70-250$ (+ 70% AP)
@@ -69,7 +106,7 @@
 
 - The trigger radius is slightly smaller than the heal radius.
 - Spell shield will not prevent the marked area from being formed.
-- The heal can activate immediately after the projectile hits the target, before the healing return animation completes.
+- The heal can activate immediately after the projectile hits the target, before the healing return animation completes. Effect at cast time end
 - The heal will trigger and affect **Rakan** even if he is untargetable.
 
 ---
@@ -88,6 +125,13 @@
 | **Cooldown** | $14-10$ seconds |
 | **Cast Time** | none |
 | **Cost** | $50-90$ Mana |
+| **Targeting** | Location |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Speed** | 1700 units/second |
+| **Effect Radius** | 275 units |
+| **Spell Shield** | True |
+| **Spell Effects** | spellaoe |
 
 **Scaling:**
 - **Magic Damage:** $70-270$ (+ 80% AP)
@@ -112,13 +156,16 @@
 | **Cooldown** | $20-12$ seconds |
 | **Cast Time** | none |
 | **Cost** | $40-60$ Mana |
+| **Targeting** | Unit |
+| **Affects** | Allies |
+| **Speed** | 1250 + 80% movement speed |
 
 **Scaling:**
 - **Shield Strength:** $50-150$ (+ 70% AP)
 
 **Notes:**
 
-- Both casts count as ability activations for the purposes of on-cast effects such as Spellblade and triggering passive.
+- Both casts count as ability activations for the purposes of on-cast effects such as Spellblade and triggering *Force Pulse*’s passive.
 - The shields do not stack if *Battle Dance* is cast on the same target twice. Only the duration and shield amount is refreshed.
 - *Battle Dance*, its recast, and its empowered version on **Xayah** all have a forgiveness radius of 175 units.
 - Sleep does not count for knocking the dash down.
@@ -129,15 +176,20 @@
 
 **Active:** **Rakan** breaks into a captivating sprint, becoming ghosted and gaining *ms **bonus** movement speed* for a few seconds. **Rakan** deals magic damage to enemies he touches, briefly charm and slow them.
 
-*Unique enemy champion collisions slightly extend 'The Quickness' 'duration. The first enemy champion **Rakan** touches also grants him a burst of *ms **bonus** movement speed*.*
+*Unique enemy champion collisions slightly extend 'The Quickness'duration. The first enemy champion **Rakan** touches also grants him a burst of *ms **bonus** movement speed*.*
 
-**Active:** **Rakan** breaks into a captivating sprint for 4 seconds, gaining ghosting and ms*bonus** movement speed* for the duration. During this time, he deals magic damage to enemies he collides with and charm and slow them by 75% for a duration. This cannot affect the same enemy more than once. Colliding with an enemy champion extends 'The Quickness' 'duration by $0.25$ seconds, which can occur once per champion. When **Rakan** collides with his first enemy champion, he gains an additional 75% **bonus** movement speed that decays after $0.5$ seconds by 20% every $0.5$ seconds, then by 15% after decaying by 60% over $1.5$ seconds. *During The Quickness, **Rakan** cannot basic attack enemy champions he did not collide with, unless the attack command was inputted before the ability was activated.*
+**Active:** **Rakan** breaks into a captivating sprint for 4 seconds, gaining ghosting and ms*bonus** movement speed* for the duration. During this time, he deals magic damage to enemies he collides with and charm and slow them by 75% for a duration. This cannot affect the same enemy more than once. Colliding with an enemy champion extends 'The Quickness'duration by $0.25$ seconds, which can occur once per champion. When **Rakan** collides with his first enemy champion, he gains an additional 75% **bonus** movement speed that decays after $0.5$ seconds by 20% every $0.5$ seconds, then by 15% after decaying by 60% over $1.5$ seconds. *During The Quickness, **Rakan** cannot basic attack enemy champions he did not collide with, unless the attack command was inputted before the ability was activated.*
 
 | Attribute | Value |
 |-----------|-------|
 | **Cooldown** | $130-90$ seconds |
 | **Cast Time** | 0.5 seconds |
 | **Cost** | 100 Mana |
+| **Targeting** | Auto |
+| **Affects** | Self / Enemies |
+| **Damage Type** | Magic |
+| **Spell Shield** | True |
+| **Spell Effects** | spellaoe |
 
 **Scaling:**
 - **Magic Damage:** $100-300$ (+ 50% AP)
@@ -153,22 +205,22 @@
 
 ### V14.20
 - *Battle Dance*
-  - ***New Effect:*** Cast & recast now have a forgiveness radius of 175 units.
+  - **New Effect:** Cast & recast now have a forgiveness radius of 175 units.
     - **This also applies to the extended version for **Xayah**.*
 
 ### V14.10
-- 
-  - ***Bug Fixes:*** Certain VO quotes that did not play can now once again properly be triggered by their events.
+- Rakan
+  - **Bug Fixes:** Certain VO quotes that did not play can now once again properly be triggered by their events.
 
 ### V14.2
 - *Grand Entrance*
-  - ***Bug Fixes:*** No longer counts as an 'immunity' spell to Challenges, making Rakan eligible to the category for those instead of the proper categories.
+  - **Bug Fixes:** No longer counts as an 'immunity' spell to Challenges, making Rakan eligible to the category for those instead of the proper categories.
 
 ### V13.20
-- 
-  - ***Bug Fixes:*** Model no longer swaps back to its idle position if Stasis was activated during his animation.
-- 
-  - ***Bug Fixes:*** Homeguard animation now properly plays even if it was activated prior to 14 minutes.
+- Rakan
+  - **Bug Fixes:** Model no longer swaps back to its idle position if *Zhonya's Hourglass* Stasis was activated during his Recall animation.
+- Rakan
+  - **Bug Fixes:** Homeguard animation now properly plays even if it was activated prior to 14 minutes.
 
 ### V13.8
 - Stats
@@ -177,18 +229,18 @@
 
 ### V13.6
 - General
-  - eyebrow on his model has been updated to reflect his splash art.
+  - Rakan eyebrow on his model has been updated to reflect his splash art.
 
 ### V13.5
 - General
-  - ***Bug Fixes:*** arm no longer moves unnaturally during certain idle animations.
-  - ***Bug Fixes:*** body is now properly invisible after dying.
+  - **Bug Fixes:** Rakan arm no longer moves unnaturally during certain idle animations.
+  - **Bug Fixes:** Rakan body is now properly invisible after dying.
 - *Battle Dance*
-  - ***Bug Fixes:*** Shield VFX no longer persists even after the shield is fully destroyed.
+  - **Bug Fixes:** Shield VFX no longer persists even after the shield is fully destroyed.
 
 ### V13.3
 - *Gleaming Quill*
-  - Base heal increased to $40 to 210$ from $30 to 115$.
+  - Base heal increased to 40 to 210 from 30 to 115.
   - Mana cost reduced to 45 from 60.
   - Cooldown reduced to $11-7$ seconds from $12-8$.
 - *Grand Entrance*
@@ -201,23 +253,23 @@
 
 ### V12.21
 - *The Quickness*
-  - ***Bug Fixes:*** Enemies hit by *The Quickness* and *Grand Entrance* can no longer use items and abilities while airborne.
+  - **Bug Fixes:** Enemies hit by *The Quickness* and *Grand Entrance* can no longer use items and abilities while airborne.
 
 ## Trivia
 
-- Rakan's and dual release is the first one since [V1.0.0.72](./V1.0.0.72.md).
-  - They were also the first [champion](./champion.md)s released in [2017](./Season_2017.md).
+- Rakan's and **Xayah**’s dual release is the first one since V1.0.0.72.
+  - They were also the first champions released in 2017.
 - Rakan's and Xayah's loading screens always align themselves to the rightmost before a game starts and when picked on the same team (to mirror their shared splash art).
 - Rakan's cloak is actually his wings disguised by Vastayan magic in order to blend in with humans.
 - Rakan and Xayah are sometimes depicted together with combined wings. The one-winged Birds_in_Chinese_mythology#Various_birds in Chinese mythology has a similar codependency, which represents the bond of two lovers.
 - Rakan has the second highest basic attack range amongst champions (300 units) behind (325 units).
-  - He used to have the lowest basic attack range amongst ranged champions prior to [V12.22](./V12.22.md).
-- Rakan's favorite human food is chocolate; even though chocolate's theobromine may [poison](http://www.oldworldaviaries.com/text/miscellaneous/toxicoses.html) Rakan due to his half-bird physiology, his human half may help metabolize the compound & alleviate its effects.
-- Rakan's dance references [Jailhouse Rock](https://www.youtube.com/watch?v=qka6JrKUM5U) by Elvis Presley.
-  - A side-by-side comparison can be seen [here.](https://www.youtube.com/watch?v=odWNRZNSfVg&feature=youtu.be&t=5)
+  - He used to have the lowest basic attack range amongst ranged champions prior to V12.22.
+- Rakan's favorite human food is chocolate; even though chocolate's theobromine may poison Rakan due to his half-bird physiology, his human half may help metabolize the compound & alleviate its effects.
+- Rakan's dance references Jailhouse Rock by Elvis Presley.
+  - A side-by-side comparison can be seen here.
     - He shared this dance with **Pantheon**, until the latter eventually got a full relaunch.
 - When Rakan basic attacks from a far distance he hits his target with his cape, if he is closer, he will punch them instead.
-  - At release, Rakan had a hidden passive: he also dealt 1 more [physical damage](./physical_damage.md) with his punches.
+  - At release, Rakan had a hidden passive: he also dealt 1 more physical damage with his punches.
 - His name resembles the Malay language noun *rakan* "friend, relative";
 - He is the only champion with 3 points at 3 skills by the client classification.
 

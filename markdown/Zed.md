@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Basic Information](#basic-information)
 - [Statistics](#statistics)
+  - [Advanced Stats](#advanced-stats)
 - [Abilities](#abilities)
 - [Patch History](#patch-history)
 - [Trivia](#trivia)
@@ -38,11 +39,24 @@
 | **Movement Speed** | $345.0$ | $+0.0$ | $345.0$ |
 | **Attack Range** | $125.0$ | $+0.0$ | $125.0$ |
 
+### Advanced Stats
+
+| Metric | Value |
+|--------|-------|
+| **Base Attack Speed** | $0.651$ |
+| **Attack Speed Ratio** | $0.651$ |
+| **Bonus AS per Level** | $3.3\%$ |
+| **Acquisition Radius** | $400 units$ |
+| **Pathing Radius** | $35 units$ |
+| **Selection Radius** | $100 units$ |
+| **Selection Height** | $100 units$ |
+| **Critical Damage** | $175.0\%$ |
+
 ## Abilities
 
 ### Passive: Contempt for the Weak
 
-**Innate:* cis*bonus** magic damage equal to a portion of their **maximum** health.
+**Innate:** **Zed**’s basic attacks against targets below half health will deal **bonus** magic damage equal to a portion of their **maximum** health.
 
 *This effect cannot recur on the same champion for a period.*
 
@@ -93,7 +107,7 @@
 
 - *Shurikens* blocked by spell shield still count as being hit for the reduced pass-through damage.
 - If **Zed** buffers an attack command during 'Razor Shuriken's cast time the attack will perform slower than if **Zed** had attacked after the cast time.
-  - The same does not happen if **Zed** recasts *Living Shadow 2* during 'Razor Shuriken's cast time.
+  - The same does not happen if **Zed** recasts *Living Shadow* during 'Razor Shuriken's cast time. Effect at cast time end
 
 ---
 
@@ -126,15 +140,15 @@
 - The passive will grant its energy refund at rank 1 even if *Living Shadow* hasn't been learned yet.
 - The energy refund is not granted if the mimicked ability is blocked by a spell shield.
 - *Living Shadow* cannot be recast while ground or root.
-- If *Living Shadow is recast during ais*Zed** will instantly release the shuriken from the cast location of *Q* while still remaining in cast time. Once he has swapped places, he will then throw the shuriken that the *Shadow* would have thrown instead.
+- If *Living Shadow* is recast during *Q*’s cast, **Zed** will instantly release the shuriken from the cast location of *Q* while still remaining in cast time. Once he has swapped places, he will then throw the shuriken that the *Shadow* would have thrown instead.
   - **Zed** will cast *Razor Shuriken* as he normally would from the new location, but over the remaining cast time and towards the same point of cast.
   - The *Shadow* will not throw a shuriken from its new location, but will continue to play the cast animation for *Q*.
-  - This special interaction does not occur with the swap recast of *Death Mark 2*; the recast will be buffered if used during cast.
+  - This special interaction does not occur with the swap recast of *Death Mark*; the recast will be buffered if used during *Q*’s cast.
 - **Zed** will swap places with the *Shadow* by all means if he buffers 'Living Shadow's recast during its dash.
   - *Living Shadow* cannot be recast while **Zed** is marking his target with *R*, but may still be recast if it was buffered.
-- If **Zed** casts *Living Shadow* while a non-**Death Mark 2* Shadow* is already present, the previous *Shadow* will instantly disappear.
+- If **Zed** casts *Living Shadow* while a non-**Death Mark* Shadow* is already present, the previous *Shadow* will instantly disappear.
 - If a *Shadow* expires while in the cast time of *Q*, the mimicked cast will be cancelled.
-- *Shadows* will cast *E* independently of being in cast time or not.
+- *Shadows* will cast *E* independently of being in *Q*’s cast time or not.
 - *Shadows* spawned from *Living Shadow* may sometimes last for up to an additional $0.25$ seconds.
 - *Shadows* will not disappear when **Zed** dies.
 
@@ -144,7 +158,7 @@
 
 **Active:** **Zed** slashes to deal physical damage to nearby enemies hit. Enemies hit by a 'Shadow's slash are also briefly slow.
 
-**Active:** **Zed** slashes to deal physical damage to nearby enemies. Enemies hit by a 'Shadow's slash are slow for $1.5$ seconds, with multiple slashes dealing no additional damage but the slow's effectiveness being increased by 50%. **Living Shadow** **current cooldown** is reduced by 3 seconds for each enemy champion hit by ''Zed's' slash.
+**Active:** **Zed** slashes to deal physical damage to nearby enemies. Enemies hit by a 'Shadow's slash are slow for $1.5$ seconds, with multiple slashes dealing no additional damage but the slow's effectiveness being increased by 50%. '*Living Shadow's** **current cooldown** is reduced by 3 seconds for each enemy champion hit by *'Zed's' slash.
 
 | Attribute | Value |
 |-----------|-------|
@@ -227,12 +241,12 @@
 ## Patch History
 
 ### V25.15
-- 
+- Zed
   - **Bug Fixes:** Haste animations are no longer missing and no longer always use the base walk animation when at higher movement speeds and/or during Homestart/Homeguard.
 
 ### V25.08
 - *Shadow Slash*
-  - **Bug Fixes:** Now correctly reduces aisShadow* from *Living Shadow* is present while the recast is available.
+  - **Bug Fixes:** Now correctly reduces *Living Shadow*’s cooldown by 3 seconds instead of 2 even if a *Shadow* from *Living Shadow* is present while the recast is available.
 
 ### V25.05
 - *Shadow Slash*
@@ -264,7 +278,7 @@
 ### V13.20
 - *Living Shadow*
   - Cooldown increased to $20-17$ seconds from $20-14$.
-- 
+- Zed
   - Skin renamed to *Worlds 2016 Zed* from *Championship Zed*.
 
 ### V13.18
@@ -272,7 +286,7 @@
   - Updated ability icons.
 
 ### V13.17
-- 
+- Zed
   - *Contempt for the Weak*
     - **Bug Fixes:** Model's lower body no longer becomes frozen in motion when performing the empowered attack.
 
@@ -297,19 +311,19 @@
 
 ## Trivia
 
-- 
+- This champion has no ability power ratio.
 - Zed's dance was inspired by various martial arts (the animator is a Black belt (martial arts)).
-- Zed is the first champion to not actually 'die' in his death animation, instead he drops into a shadow portal (Shockblade Zed disappears after struck by a lightning bolt). The second is **Ekko*, who rewinds time. ui*Nunu** does not.
+- Zed is the first champion to not actually 'die' in his death animation, instead he drops into a shadow portal (Shockblade Zed disappears after struck by a lightning bolt). The second is **Ekko**, who rewinds time. Willump does die, but **Nunu** does not.
 - Zed, **Sona**, **Garen** and **Vi** were targeted by **Jhin** in his teaser.
   - After Zed was shot, his champion icon on his League of Legends page and the champion list was updated to a gif with petals blowing past him.
 - Zed is the fifth champion to use ***energy** as a resource for abilities, after Akali***, **Kennen**, **Lee Sin**, and **Shen**, and the next one being **Ambessa**.
-- Before the release of and , neither him nor **Shen** reveal their faces in any of their skins, unlike **Akali* (,).
+- Before the release of Zed and Shen, neither him nor **Shen** reveal their faces in any of their skins, unlike **Akali** (Akali, Akali, Akali) and **Kennen** (Kennen,Kennen).
 - Zed, **Lucian**, and **Mel** perform the 'Naruto run' run when having very high movement speed.
 - *Razor Shuriken*, *Living Shadow*, and *Shadow Slash* respectively mirroring *Thundering Shuriken*, *Shadow Dash*, and *Crescent Slash*, as well as *Death Mark*, *Assassin's Mark*, and *Mark of the Storm* marking their targets reference Zed having been a Kinkou Order member.
-  - *Death Mark* was conceived with spawning two *Living Shadow* and was animated accordingly on release.
-  - Clicking one of the *Living Shadow* during *Death Mark* animation used to display portrait. This could only be done while spectating in slow motion as his shadows in an actual game were just simply too fast to be clicked on. It was removed after the new HUD came in 2015 and replaced the old one.
+  - *Death Mark* was conceived with spawning two *Living Shadows* and was animated accordingly on release.
+  - Clicking one of the *Living Shadows* during *Death Marks* animation used to display **Akali**’s portrait. This could only be done while spectating in slow motion as his shadows in an actual game were just simply too fast to be clicked on. It was removed after the new HUD came in 2015 and replaced the old one.
   - Zed and his enemy counterpart could theoretically increase their AD infinitely with *Reaper of Shadows* by alternating killing each other, before it was removed from the game in V9.4.
-- Zed used to gain the cosmetic Easter egg debuff ('"This unit is a flippin' ninja!"* - *"Ninjas are more effective when they work alone. For every Ninja on your team beyond yourself, you lose 1 health."') when he, **Akali**, **Kennen**, and/or **Shen** found themselves on the same team. It was removed in V3.14 for unknown reasons.
+- Zed used to gain the 'Law of Inverse Ninja Strength' cosmetic Easter egg debuff ('"This unit is a flippin' ninja!"* - *"Ninjas are more effective when they work alone. For every Ninja on your team beyond yourself, you lose 1 health."') when he, **Akali**, **Kennen**, and/or **Shen** found themselves on the same team. It was removed in V3.14 for unknown reasons.
 - At 23 August 2018 players who selected "Assassin" as their favorite class rated Zed 27% higher than the other assassins as "One of my favorite champions". This difference is the largest for a champion by class.
 
 ---

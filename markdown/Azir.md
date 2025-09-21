@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Basic Information](#basic-information)
 - [Statistics](#statistics)
+  - [Advanced Stats](#advanced-stats)
 - [Pets](#pets)
 - [Abilities](#abilities)
 - [Patch History](#patch-history)
@@ -38,6 +39,21 @@
 | **Attack Speed** | $0.625$ | $+5.0\%$ | $1.156$ |
 | **Movement Speed** | $330.0$ | $+0.0$ | $330.0$ |
 | **Attack Range** | $525.0$ | $+0.0$ | $525.0$ |
+
+### Advanced Stats
+
+| Metric | Value |
+|--------|-------|
+| **Base Attack Speed** | $0.625$ |
+| **Attack Speed Ratio** | $0.694$ |
+| **Bonus AS per Level** | $5.0\%$ |
+| **Attack Windup** | $15.6\%$ |
+| **Missile Speed** | $0 units/second$ |
+| **Acquisition Radius** | $700 units$ |
+| **Pathing Radius** | $35 units$ |
+| **Selection Radius** | $120 units$ |
+| **Selection Height** | $302.778 units$ |
+| **Critical Damage** | $175.0\%$ |
 
 ## Pets
 
@@ -244,7 +260,7 @@
 - The soldier units are spawned only 175 units behind **Azir**, but do not control the airborne directly. Each comes with a missile that travels the same path and conveys the damage and knockback effect.
   - The furthest area (from 325 to 175 units behind **Azir**) is covered by a separate set of missiles with the same effects.
   - All of the soldiers and their missiles will end the charge prematurely when one encounters *Wind Wall* / *Unbreakable* / *Blade Whirl* / *Rebuttal* or upon colliding with terrain that they cannot charge through.
-- The charge starts at $0.25$ seconds into the cast time.
+- The charge starts at $0.25$ seconds into the cast time. Effect at cast time start
 - When the dash of the soldiers comes to a halt, all not-yet-affected enemies on top of the soldiers' landing locations (125 radius) are also knocked back.
 - 'Emperor's Divide' will not be canceled if **Azir** dies during the cast time.
 - While the soldiers are charging forward, the wall is not impassable terrain.
@@ -263,7 +279,7 @@
 
 ### V25.15
 - *Arise!*
-  - **Bug Fixes:** **Azir** when a Soldier attacks their users.
+  - **Bug Fixes:** *Bramble Vest* and *Thornmail* Thorns now correctly trigger their effects against **Azir** when a Soldier attacks their users.
   - **Undocumented:** Soldiers' attacks now only grant 1 *Conqueror* stack.
 
 ### V25.14
@@ -306,7 +322,7 @@
 ### V14.10
 - *Arise!*
   - **New Effect:** Basic attacks are now mitigated by dodge and block effects.
-  - **Bug Fixes:** Basic attacks now trigger Thorns.
+  - **Bug Fixes:** Basic attacks now trigger *Bramble Vest* Thorns.
 - *Emperor's Divide*
   - **Undocumented:** No longer knocks back non-champions.
 
@@ -317,8 +333,8 @@
 - *Shurima's Legacy* may be referencing the Egyptian solar disc god Aten (depicted as a sphere emanating rays of light each ending with a hand) and titular god of the short-lived monotheistic religion imposed by Pharaoh Akhenaten. His son Tutankhamun later restored the polytheistic religion.
 - Azir's dance references Remember The Time by Michael Jackson.
   - A side-by-side comparison can be seen here.
-  - If Azir *Arise!* Sand Soldiers and then dances, they will follow him and dance all in sync.
-    - His soldiers will keep dance in Azir's stead while if the player types '/dance' while Azir is .
+  - If Azir *summons* Sand Soldiers and then dances, they will follow him and dance all in sync.
+    - His soldiers will keep dance in Azir's stead while if the player types '/dance' while Azir is Recall.
     - If enemies cannot see Azir while he dances, his soldiers will not appear to dance to them.
 
 ---

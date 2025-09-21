@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Basic Information](#basic-information)
 - [Statistics](#statistics)
+  - [Advanced Stats](#advanced-stats)
 - [Abilities](#abilities)
 - [Patch History](#patch-history)
 - [Trivia](#trivia)
@@ -12,6 +13,14 @@
 | Attribute | Value |
 |-----------|-------|
 | **Champion** | Aphelios |
+| **Title** | the Weapon of the Faithful |
+| **Resource** | Mana |
+| **Range Type** | Ranged |
+| **Release Date** | 2019-12-11 |
+| **Release Patch** | V9.24 |
+| **Roles** | Marksman |
+| **Riot Positions** | Bottom |
+| **External Positions** | Bottom |
 
 ## Statistics
 
@@ -19,12 +28,29 @@
 
 | Stat | Base | Growth | Level 18 |
 |------|------|--------|----------|
-| **Health** | $550$ | $+85$ | $1995.0$ |
-| **Mana** | $350$ | $+50$ | $1200.0$ |
-| **Armor** | $22$ | $+3.5$ | $81.5$ |
-| **Magic Resist** | $30$ | $+0.5$ | $38.5$ |
-| **Attack Damage** | $56$ | $+3.1$ | $108.7$ |
-| **Attack Speed** | $0.625$ | $+3.2\%$ | $0.965$ |
+| **Health** | $600.0$ | $+102.0$ | $2334.0$ |
+| **Mana** | $348.0$ | $+42.0$ | $1062.0$ |
+| **Health Regen** | $3.25$ | $+0.55$ | $12.6$ |
+| **Mana Regen** | $6.5$ | $+0.4$ | $13.3$ |
+| **Armor** | $26.0$ | $+4.2$ | $97.4$ |
+| **Magic Resist** | $30.0$ | $+1.3$ | $52.1$ |
+| **Attack Damage** | $55.0$ | $+2.3$ | $94.1$ |
+| **Attack Speed** | $0.665$ | $+2.1\%$ | $0.902$ |
+| **Movement Speed** | $325.0$ | $+0.0$ | $325.0$ |
+| **Attack Range** | $550.0$ | $+0.0$ | $550.0$ |
+
+### Advanced Stats
+
+| Metric | Value |
+|--------|-------|
+| **Base Attack Speed** | $0.665$ |
+| **Attack Speed Ratio** | $0.658$ |
+| **Bonus AS per Level** | $2.1\%$ |
+| **Attack Windup** | $15.3\%$ |
+| **Pathing Radius** | $35 units$ |
+| **Selection Radius** | $110 units$ |
+| **Selection Height** | $140 units$ |
+| **Critical Damage** | $175.0\%$ |
 
 ## Abilities
 
@@ -34,30 +60,41 @@
 
 **Moonlight:** Attacks and abilities consume a weapon's ammo. When out of ammo, **Aphelios** discards the weapon to the reserve and **Alune** assembles the next of the 5.
 
-**Innate:** **Aphelios** has access to an arsenal of 5 *Moonstone Weapons*, created by his sister **Alune**. He equips two weapons at any one time, one as his main weapon and one as his off-hand. Each weapon has a unique basic attack and effect. **Aphelios** begins the game with *Calibrum* as his main weapon and *Severum* in his off-hand, with *Gravitum*, *Infernum*, and *Crescendum* queued in reserve. His weapons are initially in this order, but they can be rearranged based on their usage. **Innate - Moonlight:** Weapons granted to **Aphelios** have 50 *Moonlight for ammunition, which is consumed upon basic attacking on-attack and upon casting his cciMoonlight*. Once his main weapon's *Moonlight* is exhausted, it is moved to the end of the reserve queue; **Alune* then assembles his next available weapon from the reserve over 1 second, placing its ccicooldown* from the start of the assembly. **Aphelios** cannot cast **Phase** during the assembly. **Innate - Weapon Master:** **Aphelios** cannot improve his abilities via skill points.md). He starts the game with *Phase* and automatically gains access to his primary abilities at level 2 and his ultimate ability, *Moonlight Vigil*, at level 6. *Moonlight Vigil* improves automatically at levels 11 and 16. **Aphelios** may spend his skill points to gain , or *lethality* instead.
+**Innate:** **Aphelios** has access to an arsenal of 5 *Moonstone Weapons*, created by his sister **Alune**. He equips two weapons at any one time, one as his main weapon and one as his off-hand. Each weapon has a unique basic attack and effect. **Aphelios** begins the game with *Calibrum* as his main weapon and *Severum* in his off-hand, with *Gravitum*, *Infernum*, and *Crescendum* queued in reserve. His weapons are initially in this order, but they can be rearranged based on their usage. **Innate - Moonlight:** Weapons granted to **Aphelios** have 50 *Moonlight* for ammunition, which is consumed upon basic attacking on-attack and upon casting his Q.png. Any of his abilities that automatically cause him to attack during their effect will not consume additional *Moonlight*. Once his main weapon's *Moonlight* is exhausted, it is moved to the end of the reserve queue; **Alune** then assembles his next available weapon from the reserve over 1 second, placing its Q.png on a $1.5$-second *cooldown* from the start of the assembly. **Aphelios** cannot cast **Phase** during the assembly. **Innate - Weapon Master:** **Aphelios** cannot improve his abilities via skill points.md). He starts the game with *Phase* and automatically gains access to his primary abilities at level 2 and his ultimate ability, *Moonlight Vigil*, at level 6. *Moonlight Vigil* improves automatically at levels 11 and 16. **Aphelios** may spend his skill points to gain , or *lethality* instead.
+
+| Attribute | Value |
+|-----------|-------|
+| **Targeting** | Passive |
+| **Affects** | Self |
 
 **Notes:**
 
-- The attack damage, attack speed and lethality within ''Aphelios' ''unique rank-up menu in the HUD correspond to the Q, W, E ability rank-up hotkeys, respectively, for the purposes of assigning skill points via keyboard.
+- The attack damage, attack speed and lethality within ''Aphelios''unique rank-up menu in the HUD correspond to the Q, W, E ability rank-up hotkeys, respectively, for the purposes of assigning skill points via keyboard.
 - Due to **Aphelios** lacking a fourth rankup option (R), his point assigment does not follow the same rules as other champions.
   - For example, the earliest level that an individual statistic can attain rank 6 is level 9, by assigning points at levels $1/2/3/5/7/9$.
-- An ammunition counter will appear to the right of the screen when ''Aphelios' '*main weapon has 10 or less *Moonlight'.
-- While at lower than 10 *Moonlight, casting his cciMoonlight* but instead consume all the remaining points.
-- will not consume additional *Moonlight* when firing its bolts.
+- An ammunition counter will appear to the right of the screen when ''Aphelios'*main weapon has 10 or less *Moonlight'.
+- While at lower than 10 *Moonlight*, casting his Q.png will not spend additional *Moonlight* but instead consume all the remaining points.
+- *Runaan's Hurricane* Wind's Fury will not consume additional *Moonlight* when firing its bolts.
 
 ---
 
 ### Q: Binding Eclipse
 
-**Active:** **Aphelios** deals magic damage and root all targets that are slow by *Gravitum*.
+**Active:** **Aphelios** deals magic damage and root all targets that are slow by *border=false*.
 
-***Gravitum* **Aphelios** expunges all enemies with 'Gravitum's' slow debuff, dealing $50 to 140 for 7$ (+ $32 to 50 for 7$ *bonus AD) (+ 70% AP) magic damage and root them for 1 second. *Binding Eclipse also empowers in-flight Gravitum projectiles to instantly affect their targets upon applying the slow successively.*
+***Gravitum* **Aphelios** expunges all enemies with 'Gravitum's slow debuff, dealing 50–140@1–13 (+ 32–50@1–13 (@=%) *bonus AD) (+ 70% AP) magic damage and root them for 1 second. *Binding Eclipse also empowers in-flight Gravitum projectiles to instantly affect their targets upon applying the slow successively.*
 
 | Attribute | Value |
 |-----------|-------|
-| **Cooldown** | $12 to 10 for 7$ seconds |
+| **Cooldown** | 12–10@1–13 seconds |
 | **Cast Time** | $0.3$ seconds |
 | **Cost** | 10 Moonlight + 60 Mana |
+| **Targeting** | Auto |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Effect Radius** | Global |
+| **Spell Shield** | True |
+| **Spell Effects** | Spellaoe |
 
 **Notes:**
 
@@ -71,26 +108,32 @@
 
 **Active:** **Aphelios** unleases a wave of energy in a cone, dealing physical damage to enemies hit and locking on to each of them, basic attacking them after a delay.
 
-**Active:** **Aphelios** unleashes a wave of energy in a cone in the target direction, dealing $25 to 65 for 7$ (+ $56 to 80 for 7$ *bonus AD) (+ 70% AP) physical damage to all enemies hit and locking onto each of them. After $0.25$ seconds, **Aphelios** then fires a volley of attacks at each locked-on target from his current off-hand weapon, dealing 100% AD physical damage and applying on-hit effects. The damage is affected by critical strike modifiers. There is no *range* limit for locked-on targets.
+**Active:** **Aphelios** unleashes a wave of energy in a cone in the target direction, dealing 25–65@1–13 (+ 56–80@1–13 (@=%) *bonus AD) (+ 70% AP) physical damage to all enemies hit and locking onto each of them. After $0.25$ seconds, **Aphelios** then fires a volley of attacks at each locked-on target from his current off-hand weapon, dealing 100% AD physical damage and applying on-hit effects. The damage is affected by critical strike modifiers. There is no *range* limit for locked-on targets.
 
 | Attribute | Value |
 |-----------|-------|
 | **Range** | 650 units |
-| **Cooldown** | $9 to 6 for 7$ seconds |
+| **Cooldown** | 9–6@1–13 seconds |
 | **Cast Time** | $0.4$ seconds |
 | **Cost** | 10 Moonlight + 60 Mana |
+| **Targeting** | Direction |
+| **Affects** | Enemies |
+| **Damage Type** | Physical |
+| **Spell Shield** | True |
+| **Spell Effects** | Special |
+| **Projectile** | True |
 
 **Notes:**
 
-- The volley applies area damage and the follow up attacks from the off-hand weapon deal basic damage. *The hitbox also includes a very small portion behind **Aphelios**' character model.
-- 'Duskwave's' name is modified based on **Aphelios**' off-hand weapon:
-  - *Calibrum*
-  - *Severum*
-  - *Gravitum*
-  - *Crescendum*
+- The volley applies area damage and the follow up attacks from the off-hand weapon deal basic damage. Effect at cast time start *The hitbox also includes a very small portion behind **Aphelios**' character model.
+- 'Duskwave's name is modified based on **Aphelios**' off-hand weapon:
+  - *Precision Duskwave*
+  - *Resurgent Duskwave*
+  - *Binding Duskwave*
+  - *Arcing Duskwave*
 - **Aphelios** is locked out of declaring attacks until the volley of attacks have been resolved.
 - The automatic attacks do not trigger **any** on-attack effects.
-  - *Pix, Faerie Companion* does not increase the damage of the volley.
+  - *Pix* does not increase the damage of the volley.
 - The volley of attacks won't deal any damage, if they are dodge, block, or if **Aphelios** is blind.
 
 ---
@@ -99,49 +142,62 @@
 
 **Active:** **Aphelios** fires a bolt of energy in the target direction that deals physical damage to the first enemy hit.
 
-**Active:** **Aphelios** fires a bolt of energy in the target direction that deals $70 to 160 for 7$ (+ $42 to 60 for 7$ *bonus AD) (+ 100% AP) physical damage to the first enemy hit.
+**Active:** **Aphelios** fires a bolt of energy in the target direction that deals 70–160 (+ 42–60 *bonus AD) (+ 100% AP) physical damage to the first enemy hit.
 
 | Attribute | Value |
 |-----------|-------|
 | **Range** | 1450 units |
-| **Cooldown** | $10 to 8 for 7$ seconds |
+| **Cooldown** | 10–8 seconds |
 | **Cast Time** | $0.4$ seconds |
 | **Cost** | 10 Moonlight + 60 Mana |
+| **Targeting** | Direction |
+| **Affects** | Enemies |
+| **Damage Type** | Physical |
+| **Speed** | 1850 units/second |
+| **Spell Shield** | True |
+| **Spell Effects** | spell |
+| **Projectile** | True |
 
 **Notes:**
 
-- 'Moonshot's' name is modified based on **Aphelios**' off-hand weapon:
-  - *Severum*
-  - *Gravitum*
-  - *Infernum*
-  - *Crescendum*
+- 'Moonshot's name is modified based on **Aphelios**' off-hand weapon:
+  - *Resurgent Moonshot*
+  - *Binding Moonshot*
+  - *Incendiary Moonshot*
+  - *Arcing Moonshot*
 
 ---
 
 ### Q: Onslaught
 
-**Active:** **Aphelios** gains **bonus** and quickly attacks a nearby enemy with *Severum* and his current off-hand weapon, dealing physical damage. The number of attacks is increased based on his *bonus attack speed.
+**Active:** **Aphelios** gains **bonus** and quickly attacks a nearby enemy with *border=false* and his current off-hand weapon, dealing physical damage. The number of attacks is increased based on his *bonus attack speed.
 
-**Active:** **Aphelios** enters an onslaught for $1.75$ seconds, gaining ms (+ 10% per 100 AP) **bonus** movement speed and automatically performing up to 6 (+ 2 per 100% *bonus attack speed) attacks over the duration against the nearest sight enemy, prioritizing enemy champions. Attacks alternate between *Severum* and his current off-hand weapon, each dealing $10 to 40 for 7$ (+ $22 to 40 for 7$ *bonus AD) physical damage, affected by critical strike modifiers, and applying on-hit effects, with on-hit damage reduced to 25% effectiveness. **Aphelios cannot cast **Phase* nor *Moonlight Vigil* during Onslaught, but he is still able to move. He cannot perform attacks while unable to declare basic attacks.*
+**Active:** **Aphelios** enters an onslaught for $1.75$ seconds, gaining ms (+ 10% per 100 AP) **bonus** movement speed and automatically performing up to 6 (+ 2 per 100% *bonus attack speed) attacks over the duration against the nearest sight enemy, prioritizing enemy champions. Attacks alternate between *Severum* and his current off-hand weapon, each dealing 10–40@1–13 (+ 22–40@1–13 (@=%) *bonus AD) physical damage, affected by critical strike modifiers, and applying on-hit effects, with on-hit damage reduced to 25% effectiveness. **Aphelios cannot cast **Phase* nor *Moonlight Vigil* during Onslaught, but he is still able to move. He cannot perform attacks while unable to declare basic attacks.*
 
 | Attribute | Value |
 |-----------|-------|
-| **Cooldown** | $10 to 8 for 7$ seconds |
+| **Cooldown** | 10–8@1–13 seconds |
 | **Cast Time** | none |
 | **Cost** | 10 Moonlight + 60 Mana |
+| **Targeting** | Auto |
+| **Affects** | Self, Enemies |
+| **Damage Type** | Physical |
+| **Effect Radius** | 550 units |
+| **Spell Effects** | attack |
+| **Projectile** | Special |
 
 **Notes:**
 
-- ''Severum's'* attacks are not projectile, but the attacks from the off-hand weapon are during *Onslaught'.
-- **Aphelios** will also not perform the attacks while channeling .
+- ''Severum's* attacks are not projectile, but the attacks from the off-hand weapon are during *Onslaught'.
+- **Aphelios** will also not perform the attacks while channeling Recall.
 - If **Aphelios** is taunt, he will still attack the nearest enemy.
-- During *Onslaught*, ''Aphelios' '' attack range is reducedand his attack commands instead issue movement commands to walk into the respective range of his target.
-- 'Onslaught's* name is modified based on *'Aphelios' '' off-hand weapon:
-  - *Calibrum*
-  - *Gravitum*
-  - *Infernum*
-  - *Crescendum*
-- 'Onslaught's' attacks stack Energized, but do not apply any other on-attack effects.
+- During *Onslaught*, ''Aphelios'' attack range is reducedand his attack commands instead issue movement commands to walk into the respective range of his target.
+- 'Onslaught's* name is modified based on *'Aphelios'' off-hand weapon:
+  - *Precision Onslaught*
+  - *Binding Onslaught*
+  - *Incendiary Onslaught*
+  - *Arcing Onslaught*
+- 'Onslaught's attacks stack Energized, but do not apply any other on-attack effects.
 - *Crescendum* will not deal damage if blocked by *Wind Wall*, but the stacks will still be gained.
 - Cosmetically, the *Moonlight* cost is consumed through the duration.
 
@@ -151,32 +207,42 @@
 
 **Active:** **Aphelios** deploys a lunar sentry that gains a copy of his off-hand weapon and attacks with it, dealing physical damage.
 
-**Active:** **Aphelios** deploys a lunar sentry at the target location that arms after $0.35$ seconds, lasting for up to 20 seconds, during which it is inactive and untargetable. The sentry activates if an enemy is within range of it, reducing its duration to 4 seconds and becoming targetable. Sentries have 6 health and take 3 damage per ranged basic attack and 4 damage per hit by abilities. Turret attacks destroy sentries instantly. The sentry grants sight of its surroundings and autonomously attacks the nearest visible enemy in range with a replica of ''Aphelios' ** current off-hand weapon, dealing $35 to 125 for 7$ (+ $42 to 60 for 7$ **bonus* AD) (+ 50% AP) physical damage per hit. The sentry can critically strike for critical damage*Aphelios'' attack speed and critical chance at 100% effectiveness. *See [Pets](#Pets) for more details about the sentry.*
+**Active:** **Aphelios** deploys a lunar sentry at the target location that arms after $0.35$ seconds, lasting for up to 20 seconds, during which it is inactive and untargetable. The sentry activates if an enemy is within range of it, reducing its duration to 4 seconds and becoming targetable. Sentries have 6 health and take 3 damage per ranged basic attack and 4 damage per hit by abilities. Turret attacks destroy sentries instantly. The sentry grants sight of its surroundings and autonomously attacks the nearest visible enemy in range with a replica of ''Aphelios' ** current off-hand weapon, dealing 35–125@1–13 (+ 42–60@1–13 (@=%) bonus AD) (+ 50% AP) physical damage per hit. The sentry can critically strike for critical damage*Aphelios'' attack speed and critical chance at 100% effectiveness. *See [Pets](#Pets) for more details about the sentry.*
 
 | Attribute | Value |
 |-----------|-------|
 | **Range** | 475 units |
-| **Cooldown** | $9 to 6 for 7$ seconds |
+| **Cooldown** | 9–6@1–13 seconds |
 | **Cast Time** | $0.25$ seconds |
 | **Cost** | 10 Moonlight + 60 Mana |
+| **Targeting** | Location |
+| **Affects** | Enemies |
+| **Damage Type** | physical |
+| **Effect Radius** | 500 units |
+| **Spell Effects** | spell |
+| **Projectile** | Special |
 
 **Notes:**
 
-- 'Sentry's' name is modified based on **Aphelios**' off-hand weapon:
-  - *Calibrum*
-  - *Severum* ** Heal Aphelios*** for any damage it deals. *** Attacks cannot be intercepted by *Wind Wall* and *Unbreakable*.
-  - *Gravitum*
-  - *Infernum*
+- 'Sentry's name is modified based on **Aphelios**' off-hand weapon:
+  - *Precision Sentry*
+  - *Resurgent Sentry* ** Heal Aphelios*** for any damage it deals. *** Attacks cannot be intercepted by *Wind Wall* and *Unbreakable*.
+  - *Binding Sentry*
+  - *Incendiary Sentry*
 - The *Sentry* will stop upon colliding with *Wind Wall*. It will be deployed in front of the wall.
-- The 'Sentry's' attacks can be dodge and block, but not missed from being blind.
+- The 'Sentry's attacks can be dodge and block, but not missed from being blind.
 
 ---
 
 ### Q: Weapons of the Faithful
 
-**The active effect of ability varies based on his current main weapon. **Calibrum* - *Moonshot*: Long range shot that marks its target for a long-range follow-up attack. **Severum* - *Onslaught*: Gain **bonus** while attacking a single enemy with both weapons. **Gravitum* - *Binding Eclipse*: Root enemies who are slow by this weapon. **Infernum* - *Duskwave*: Blast enemies in a cone and attack them with your off-hand weapon. **Crescendum* - *Sentry*: Deploy a sentry with your off-hand weapon that attacks nearby enemies.**
+**The active effect of **Aphelios**’s ability varies based on his current main weapon. **Calibrum* - *Moonshot*: Long range shot that marks its target for a long-range follow-up attack. **Severum* - *Onslaught*: Gain **bonus** while attacking a single enemy with both weapons. **Gravitum* - *Binding Eclipse*: Root enemies who are slow by this weapon. **Infernum* - *Duskwave*: Blast enemies in a cone and attack them with your off-hand weapon. **Crescendum* - *Sentry*: Deploy a sentry with your off-hand weapon that attacks nearby enemies.**
 
 The active effect of **Aphelios**' varies based on his current main weapon. The individual actives do not share a cooldown.
+
+| Attribute | Value |
+|-----------|-------|
+| **Targeting** | N/A |
 
 ---
 
@@ -189,6 +255,7 @@ The active effect of **Aphelios**' varies based on his current main weapon. The 
 | Attribute | Value |
 |-----------|-------|
 | **Cast Time** | None |
+| **Targeting** | Auto |
 
 **Notes:**
 
@@ -198,9 +265,13 @@ The active effect of **Aphelios**' varies based on his current main weapon. The 
 
 ### E: Weapon Queue System
 
-**The icon of this ability reflects the next weapon that is the next in weapon queue.**
+**The icon of this ability reflects the next weapon that is the next in **Aphelios**’s weapon queue.**
 
 The icon of this ability reflects the next weapon that is in reserve. **Active:** **Aphelios** receives a text prompt of the weapon **Alune** will create next.
+
+| Attribute | Value |
+|-----------|-------|
+| **Targeting** | Auto |
 
 **Notes:**
 
@@ -214,14 +285,22 @@ The icon of this ability reflects the next weapon that is in reserve. **Active:*
 
 *Then basic damage rain from the sky to the targets, dealing physical damage and applying unique effects of his main weapon. **Calibrum*: Applies an empowered mark on all targets. **Severum*: The initial blast heal **Aphelios**, and so do the attacks. **Gravitum*: An empowered slow applied on all targets. **Infernum*: The initial blast deals increased damage, and the attacks splash on each target. **Crescendum*: **Aphelios** gains more mirror chakrams with the more targets hit with the initial blast.*
 
-**Active:** **Aphelios** casts forth a lunar spotlight in the target direction that briefly grants sight of the area along its path and stops upon illuminating an enemy champion. **Alune** smites the area centered on the illuminated target, dealing $125 to 225 for 3$ (+ 20% *bonus AD) (+ 100% AP) physical damage to enemy champions struck and locking-on to each target hit, as well as granting sight of the area for 2 seconds. After $0.3$ seconds of the illumination, attacks based on ''Aphelios' ' current main weapon will launch from the sky against each locked-on target, dealing 100% AD physical damage and applying on-hit effects. These attacks can critically strike for Applies an empowered mark that deals $50 to 110 for 3$ per *mark* consumed. Heals **Aphelios** for $250 to 450 for 3$ if at least one enemy champion is hit. Increases the initial slow to 99% and empowers **Binding Eclipse** to root targets affected by the enhanced slow for $1.35$ seconds. The initial blast deals $50 to 150 for 3$ (+ 25% *bonus AD) **bonus* physical damage.Enemy champions will take damage from overlapping areas. Generates 5 additional spectral *Chakrams' that return to **Aphelios** from the first enemy champion hit, for a total of 6, on top of those from other targets hit.
+**Active:** **Aphelios** casts forth a lunar spotlight in the target direction that briefly grants sight of the area along its path and stops upon illuminating an enemy champion. **Alune** smites the area centered on the illuminated target, dealing 125–225@6–16 (+ 20% *bonus AD) (+ 100% AP) physical damage to enemy champions struck and locking-on to each target hit, as well as granting sight of the area for 2 seconds. After $0.3$ seconds of the illumination, attacks based on ''Aphelios' current main weapon will launch from the sky against each locked-on target, dealing 100% AD physical damage and applying on-hit effects. These attacks can critically strike for Applies an empowered mark that deals 50–110@6–16 per *mark* consumed. Heals **Aphelios** for 250–450@6–16 if at least one enemy champion is hit. Increases the initial slow to 99% and empowers **Binding Eclipse** to root targets affected by the enhanced slow for $1.35$ seconds. The initial blast deals 50–150@6–16 (+ 25% *bonus AD) **bonus* physical damage.Enemy champions will take damage from overlapping areas. Generates 5 additional spectral *Chakrams' that return to **Aphelios** from the first enemy champion hit, for a total of 6, on top of those from other targets hit.
 
 | Attribute | Value |
 |-----------|-------|
 | **Range** | 1300 units |
-| **Cooldown** | $120 to 100 for 3$ seconds |
+| **Cooldown** | 120–100@6–16 seconds |
 | **Cast Time** | $0.6$ seconds |
 | **Cost** | 100 Mana |
+| **Targeting** | Direction |
+| **Affects** | Enemies |
+| **Damage Type** | physical |
+| **Speed** | 1000 units/second |
+| **Effect Radius** | 300 units |
+| **Spell Shield** | Special |
+| **Spell Effects** | aoe |
+| **Projectile** | Special |
 
 **Notes:**
 
@@ -231,16 +310,16 @@ The icon of this ability reflects the next weapon that is in reserve. **Active:*
 - Attacks do not apply on-attack effects.
 - The attacks always count as projectile unless *Severum* is being used. The lunar spotlight, however, may always be intercepted regardless of which weapon is in play as the main weapon.
   - Due to this fact, non-*Severum* attacks will hit targets that are farther away from the center of the blast at a slightly longer delay.
-- Spell shield will block 'Moonlight Vigil's' initial detonation damage but does not prevent the attacks from locking-on.
+- Spell shield will block 'Moonlight Vigil's initial detonation damage but does not prevent the attacks from locking-on.
 - All attacks from *Moonlight Vigil* critically strike independently from each other.
-  - This includes bolts, which also critically strike independently from the primary attack's damage.
-- Changing weapons while *Moonlight Vigil* is in flight does not change the effect it has when it hits.
-- 'Moonlight Vigil's' effect radius is centered around the location of the missile as it collides.
+  - This includes *Infernum*’s bolts, which also critically strike independently from the primary attack's damage.
+- Changing weapons while *Moonlight Vigil* is in flight does not change the effect it has when it hits. Effect at cast time start
+- 'Moonlight Vigil's effect radius is centered around the location of the missile as it collides.
 - With *Severum*, the extra flat heal is given only once, not per target. However, all damage done by *Moonlight Vigil* with it also heals him from 'Severum's ' own passive effect.
-- With *Infernum*, 14 fire bolts splash from each target hit (18 for critical strike). Bolts do not activate if 'Moonlight Vigil's' initial damage kills the target.
+- With *Infernum*, 14 fire bolts splash from each target hit (18 for critical strike). Bolts do not activate if 'Moonlight Vigil's initial damage kills the target.
 - With *Crescendum*, 1 spectral chakram is generated for every target hit, meaning it is possible to generate up to 10 spectral chakrams with one cast of *Moonlight Vigil* if it hits 5 enemy champions.
 - The locked-on attacks' can be dodge and block, but won't be prevented if **Aphelios** is blind.
-  - Preventing the attack also prevents the additional effect (e.g. marking them with *Gravitum* or granting *Crescendum*).
+  - Preventing the attack also prevents the additional effect (e.g. marking them with *Gravitum* or granting *spectral chakrams*).
 - *Moonlight Vigil* has different visual effects changed accordingly to each weapon. *This may vary depending on the skin, this showcases the **default**:* Moonlight_Vigil_(Calibrum)_screenshot.png ***Calibrum*** Moonlight_Vigil_(Severum)_screenshot.png ***Severum*** Moonlight_Vigil_(Gravitum)_screenshot.png ***Gravitum*** Moonlight_Vigil_(Infernum)_screenshot.png ***Infernum*** Moonlight_Vigil_(Crescendum)_screenshot.png ***Crescendum***
 
 ---
@@ -251,16 +330,21 @@ The icon of this ability reflects the next weapon that is in reserve. **Active:*
 
 *While Calibrum is the main weapon, his ability will be:*
 
-**Aphelios** gains range*bonus** attack range* while **Calibrum** is his main weapon. Enemies damaged by **Calibrum** through an ability are marked for $4.5$ seconds, during which they are standard sight. ''Aphelios' ** next basic attack against a marked target uses the current off-hand weapon and has range, increased missile speed, and a brief cast time that lasts shorter based on **Aphelios' '' proximity to the target. The empowered attack will consume the marks from all targets, dealing 15 (+ 20% *bonus AD) **bonus** physical damage to the main target for each mark consumed. If **Calibrum** is the current off-hand weapon, the main weapon is used for the attack instead.
+**Aphelios** gains range*bonus** attack range* while **Calibrum** is his main weapon. Enemies damaged by **Calibrum** through an ability are marked for $4.5$ seconds, during which they are standard sight. ''Aphelios' ** next basic attack against a marked target uses the current off-hand weapon and has range, increased missile speed, and a brief cast time that lasts shorter based on **Aphelios'' proximity to the target. The empowered attack will consume the marks from all targets, dealing 15 (+ 20% *bonus AD) **bonus** physical damage to the main target for each mark consumed. If **Calibrum** is the current off-hand weapon, the main weapon is used for the attack instead.
 
 | Attribute | Value |
 |-----------|-------|
 | **Cost** | 1 Moonlight per attack |
+| **Targeting** | Passive |
+| **Affects** | Self, Enemies |
+| **Damage Type** | Physical |
+| **Spell Effects** | attack |
+| **Projectile** | Special |
 
 **Notes:**
 
-- outgoing basic attack can bypass and but cannot while returning.
-- Triggered *Marks apply on-hit effects, stack nieRunaan's Hurricane*, but no other on-attack effects.
+- *Crescendum*’s outgoing basic attack can bypass W and E but cannot while returning.
+- Triggered *Marks* apply on-hit effects, stack Energized and trigger *Runaan's Hurricane*, but no other on-attack effects.
 - The mark will not be triggered by *Onslaught* attacks.
 - The increased basic attack range is drawn for **Aphelios** to differentiate it from his normal attack range.
 - The empowered range for the mark will also be drawn as an indicator for **Aphelios**.
@@ -275,17 +359,22 @@ The icon of this ability reflects the next weapon that is in reserve. **Active:*
 
 *While Crescendum is the main weapon, his ability will be:*
 
-Basic attacks with **Crescendum** hurl the blade at the target, which lingers for $0.25$ seconds before homing back to **Aphelios**. He is unable to declare basic attacks until he retrieves **Crescendum**, but the attack timer is reset once caught. Whenever **Aphelios** casts an ability that would require him to throw **Crescendum**, he instead fires a spectral *Chakram* at the target that similarly returns to him. **Aphelios** accumulates the *Chakrams* he catches, up to 20, which last for 5 seconds or until **Crescendum** is depleted of *Moonlight*. *Chakram* duration is refreshed when **Aphelios** catches a new one or attacks a champion with **Crescendum**. Attacks with **Crescendum** are empowered to deal $0- then + 5*x$ AD **bonus** physical damage and have a lower attack windup of $0.159999996423721/1.5100100 round=2$% when critically strike. The **bonus** damage from *Chakrams* is affected by critical strike modifiers.
+Basic attacks with **Crescendum** hurl the blade at the target, which lingers for $0.25$ seconds before homing back to **Aphelios**. He is unable to declare basic attacks until he retrieves **Crescendum**, but the attack timer is reset once caught. Whenever **Aphelios** casts an ability that would require him to throw **Crescendum**, he instead fires a spectral *Chakram* at the target that similarly returns to him. **Aphelios** accumulates the *Chakrams* he catches, up to 20, which last for 5 seconds or until **Crescendum** is depleted of *Moonlight*. *Chakram* duration is refreshed when **Aphelios** catches a new one or attacks a champion with **Crescendum**. Attacks with **Crescendum** are empowered to deal 0–then + 5*x AD **bonus** physical damage and have a lower attack windup of $0.159999996423721/1.5100100 round=2$% when critically strike. The **bonus** damage from *Chakrams* is affected by critical strike modifiers.
 
 | Attribute | Value |
 |-----------|-------|
 | **Cost** | 1 Moonlight per attack |
+| **Targeting** | Passive |
+| **Affects** | Enemies |
+| **Damage Type** | Physical |
+| **Spell Effects** | attack |
+| **Projectile** | True |
 
 **Notes:**
 
 - Accumulated *Chakrams* accompany **Crescendum** whenever **Aphelios** performs a basic attack. This is merely a visual representation of the increased damage, and the separate blades are not considered separate damage sources nor projectile.
 - All *Chakram* stacks are lost if the **Crescendum** projectile is destroyed (i.e *W*, *E*).
-- Due to the return time, at high attack speeds **Crescendum** will increase ''Aphelios' ''effective time to cast attacks, even when right next to his target.
+- Due to the return time, at high attack speeds **Crescendum** will increase ''Aphelios''effective time to cast attacks, even when right next to his target.
 
 ---
 
@@ -300,30 +389,42 @@ Basic attacks with **Gravitum** slow enemies by 30% for $2.5$ seconds, decaying 
 | Attribute | Value |
 |-----------|-------|
 | **Cost** | 1 Moonlight per attack |
+| **Targeting** | Passive |
+| **Affects** | Enemies |
+| **Damage Type** | Physical |
+| **Spell Shield** | False |
+| **Spell Effects** | attack |
+| **Projectile** | True |
 
 **Notes:**
 
-- 'Gravitum's' debuff applies even if the target is immune to slow (via slow-immune or cc-immune).
+- 'Gravitum's debuff applies even if the target is immune to slow (via slow-immune or cc-immune).
   - The target will be affected after losing their immunity.
-- bolts will use 'Gravitum's* projectiles when **Aphelios** attacks with *Gravitum'.
+- *Runaan's Hurricane* bolts will use 'Gravitum's* projectiles when **Aphelios** attacks with *Gravitum'.
 
 ---
 
 ### Infernum
 
-**basic attacks will hit all enemies in its trajectory, dealing increased damage to the main target and less damage to other targets. The attack will then spread into a cone behind his main target.**
+**Aphelios**’s basic attacks will hit all enemies in its trajectory, dealing increased damage to the main target and less damage to other targets. The attack will then spread into a cone behind his main target.
 
 *While Infernum is the main weapon, his ability will be:*
 
-Basic attacks with **Infernum** shoot a fire bolt that upon arrival splits into a cone of 4 lesser bolts behind the target, dealing damage to enemies they pass through. The fire bolt deals 110% AD physical damage to the primary target. Secondary targets hit by any bolt are dealt $75;100$% of the triggering attack's damage, reduced to $23;30$% against minions. Critical strike instead spray 6 missiles in a 50% wider cone. Secondary targets hit count as being critical strike.
+Basic attacks with **Infernum** shoot a fire bolt that upon arrival splits into a cone of 4 lesser bolts behind the target, dealing damage to enemies they pass through. The fire bolt deals 110% AD physical damage to the primary target. Secondary targets hit by any bolt are dealt key=% of the triggering attack's damage, reduced to key=% against minions. Critical strike instead spray 6 missiles in a 50% wider cone. Secondary targets hit count as being critical strike.
 
 | Attribute | Value |
 |-----------|-------|
 | **Cost** | 1 Moonlight per attack |
+| **Targeting** | Passive |
+| **Affects** | Enemies |
+| **Damage Type** | Physical |
+| **Spell Shield** | False |
+| **Spell Effects** | default |
+| **Projectile** | True |
 
 **Notes:**
 
-- 'Infernum's' attack hit can be dodge by or blind against the primary target.
+- 'Infernum's attack hit can be dodge by or blind against the primary target.
   - This will not prevent the missile from dealing damage to secondary targets nor from splashing against additional targets behind the primary target. The damage cannot be dodged as or missed against a secondary target.
 - *Runaan's Hurricane* bolts will use 'Infernum's* projectiles when **Aphelios** attacks with *Infernum'.
   - The bolts' attacks shoot 3 missiles, increased to 5 missiles when they critically strike.
@@ -332,15 +433,20 @@ Basic attacks with **Infernum** shoot a fire bolt that upon arrival splits into 
 
 ### Severum
 
-**basic attacks will heal him, and create a shield from excess healing.**
+**Aphelios**’s basic attacks will heal him, and create a shield from excess healing.
 
 *While Severum is the main weapon, his ability will be:*
 
-Basic attacks with **Severum** are projectile and have an uncancellable windup. ''Severum's** attacks heal **Aphelios'' for $2-7$% of the post-mitigation damage dealt, increased to $5 to 17.75$ for attacks from abilities. Healing from **Severum** in excess of ''Aphelios' ** is converted into a shield for an amount of up to $10/20 to 140 for 13$ (+ 6% **maximum'' health), lingering for up to 30 seconds.
+Basic attacks with **Severum** are projectile and have an uncancellable windup. ''Severum's** attacks heal **Aphelios'' for key=% of the post-mitigation damage dealt, increased to 5 to 17.75 for attacks from abilities. Healing from **Severum** in excess of ''Aphelios' ** is converted into a shield for an amount of up to 10–20 to 140 for 13@1–18 (+ 6% **maximum'' health), lingering for up to 30 seconds.
 
 | Attribute | Value |
 |-----------|-------|
 | **Cost** | 1 Moonlight per attack |
+| **Targeting** | Passive |
+| **Affects** | Self |
+| **Damage Type** | Physical |
+| **Spell Effects** | attack |
+| **Projectile** | False |
 
 **Notes:**
 
@@ -354,7 +460,7 @@ Basic attacks with **Severum** are projectile and have an uncancellable windup. 
 - Stats
   - Base attack speed increased to $0.665$ from $0.64$.
 - *Moonshot*
-  - Base damage increased to $70 to 160 for 7$ from $60 to 160 for 7$.
+  - Base damage increased to 70–160 from 60–160.
 - *Onslaught*
   - Base bonus movement speed increased to 25% from 20%.
 
@@ -374,13 +480,13 @@ Basic attacks with **Severum** are projectile and have an uncancellable windup. 
 
 ### V14.14
 - *Onslaught*
-  - Bonus AD ratio increased to $22 to 40 for 7$ *bonus AD from $20 to 35 for 7$.
+  - Bonus AD ratio increased to 22–40@1–13 (@=%) *bonus AD from 20–35@1–13 (@=%).
 - *Binding Eclipse*
-  - Base damage increased to $50 to 140 for 7$ from $50 to 110 for 7$.
-  - Bonus AD ratio increased to $32 to 50 for 7$ *bonus AD from $26 to 35 for 7$.
+  - Base damage increased to 50–140@1–13 from 50–110@1–13.
+  - Bonus AD ratio increased to 32–50@1–13 (@=%) *bonus AD from 26–35@1–13 (@=%).
 - *Sentry*
-  - Base damage increased to $35 to 125 for 7$ from $31 to 100 for 7$.
-  - Bonus AD ratio increased to $42 to 60 for 7$ *bonus AD from $40 to 60 for 7$.
+  - Base damage increased to 35–125@1–13 from 31–100@1–13.
+  - Bonus AD ratio increased to 42–60@1–13 (@=%) *bonus AD from 40–60@1–13 (@=%).
 - Stats
   - Attack damage growth reduced to $2.3$ from 3.
 
@@ -396,8 +502,8 @@ Basic attacks with **Severum** are projectile and have an uncancellable windup. 
 - *Gravitum*
   - Slow duration reduced to $2.5$ seconds from $3.5$.
 - *Severum*
-  - Basic attacks heal reduced to $2-7$% from $5-9$%.
-  - Abilities heal reduced to $5 to 17.75$ from $8.33 to 30$.
+  - Basic attacks heal reduced to key=% from key=%.
+  - Abilities heal reduced to 5 to 17.75 from 8.33 to 30.
 - *Sentry*
   - Turret attack speed reduced to $0.64$ from $0.8$.
 
@@ -411,14 +517,14 @@ Basic attacks with **Severum** are projectile and have an uncancellable windup. 
 
 ## Trivia
 
-- The icon for *The Hitman and the Seer* changes based on the active skin and functions as ''Alune's** portrait, similarly to **Aphelios' ''portrait.
+- The icon for *The Hitman and the Seer* changes based on the active skin and functions as ''Alune's** portrait, similarly to **Aphelios''portrait.
 - **Aphelios** and are possibly inspired by the Proto-Indo-European_mythology#Sun_and_Moon from Proto-Indo-European mythology, although belong to the Lunari order.
 - Aphelios is the first and only champion to have fewer than five abilities.
 - A unique HUD is used due to the unorthodox arrangement of his kit.
 - Aphelios has a game start ceremony that forces him in place.
 - Aphelios is the only champion in League of Legends who can obtain the highest amount of Lethality.
 - Aphelios' **Severum** attack has the highest missile speed on an attack out of any champion, at 92400.
-  - This is by far higher than the second one, which is attacks at 10000.
+  - This is by far higher than the second one, which is Cultivation of Spirit attacks at 10000.
 - Since Aphelios can hold two weapons at a time with *The Hitman and the Seer*, there are 10 different possible combinations of weapons he can have equipped. These are:
   - *Calibrum* and *Severum*
   - *Calibrum* and *Gravitum*

@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Basic Information](#basic-information)
 - [Statistics](#statistics)
+  - [Advanced Stats](#advanced-stats)
 - [Abilities](#abilities)
 - [Patch History](#patch-history)
 - [Trivia](#trivia)
@@ -36,6 +37,20 @@
 | **Attack Speed** | $0.651$ | $+2.5\%$ | $0.928$ |
 | **Movement Speed** | $345.0$ | $+0.0$ | $345.0$ |
 | **Attack Range** | $175.0$ | $+0.0$ | $175.0$ |
+
+### Advanced Stats
+
+| Metric | Value |
+|--------|-------|
+| **Base Attack Speed** | $0.651$ |
+| **Attack Speed Ratio** | $0.651$ |
+| **Bonus AS per Level** | $2.5\%$ |
+| **Attack Windup** | $19.7\%$ |
+| **Acquisition Radius** | $475 units$ |
+| **Pathing Radius** | $35 units$ |
+| **Selection Radius** | $135 units$ |
+| **Selection Height** | $180 units$ |
+| **Critical Damage** | $175.0\%$ |
 
 ## Abilities
 
@@ -72,7 +87,7 @@
 
 **Active:** **Aatrox** performs an attack with his greatsword in the target direction, dealing physical damage to enemies within an area. The area varies and the damage increases per cast. Enemies within each area's Sweetspot receive increased damage and are briefly airborne. * **First Cast:** **Aatrox** strikes his greatsword in a long rectangle. * **Second Cast:** **Aatrox** slashes his greatsword in a wide trapezoid. * **Third Cast:** **Aatrox** slams his greatsword in a circle.
 
-**Aatrox** can activate *The Darkin Blade* three times before the ability goes on cooldown, with a 1-second static cooldown between casts. If **Aatrox** does not recast the ability within 4 seconds of the previous cast, it goes on cooldown. **Active:** **Aatrox* performs a strike with his greatsword for each of the three casts, dealing physical damage to enemies hit within an area. Enemies hit within a Sweetspot of the area take % more damage. **First Cast:** ''Aatrox's' first strike affects a 625180-unit rectangular area in the target direction, with him centered on the back line and the Sweetspot at the farthest edge. **Second Cast:** ''Aatrox's** second strike affects a trapezoidal area in the target direction, with the Sweetspot at the farthest edge. The hitbox begins 100-units behind **Aatrox'' and extends 475-units in front of him, measuring between 300 and 500-units wide from behind to in front. **Third Cast:** ''Aatrox's' third strike affects a 300-radius circular area centered on a target location that is 200 units in front of him, with a 180-radius Sweetspot within.
+**Aatrox** can activate *The Darkin Blade* three times before the ability goes on cooldown, with a 1-second static cooldown between casts. If **Aatrox** does not recast the ability within 4 seconds of the previous cast, it goes on cooldown. **Active:** **Aatrox** performs a strike with his greatsword for each of the three casts, dealing physical damage to enemies hit within an area. Enemies hit within a Sweetspot of the area take 70% **bonus** damage and also airborne for $0.25$ seconds. Each subsequent cast gains $% more damage. **First Cast:** ''Aatrox's' first strike affects a 625×180-unit rectangular area in the target direction, with him centered on the back line and the Sweetspot at the farthest edge. **Second Cast:** ''Aatrox's** second strike affects a trapezoidal area in the target direction, with the Sweetspot at the farthest edge. The hitbox begins 100-units behind **Aatrox'' and extends 475-units in front of him, measuring between 300 and 500-units wide from behind to in front. **Third Cast:** ''Aatrox's' third strike affects a 300-radius circular area centered on a target location that is 200 units in front of him, with a 180-radius Sweetspot within.
 
 | Attribute | Value |
 |-----------|-------|
@@ -85,7 +100,7 @@
 | **Spell Effects** | spellaoe |
 
 **Scaling:**
-- **First Cast Damage:* $ (+ $% AD) to * (+ $*% AD)
+- **First Cast Damage:* $ (+ $% AD) (+ $*% AD)
 
 **Notes:**
 
@@ -99,7 +114,7 @@
   - ''Aatrox's' facing-direction, for effects such as *Petrifying Gaze*, is the direction he is moving, and not the direction the model is facing.
 - All damage modifiers stacks multiplicatively.
 - There's a small period of time in which Aatrox can't declare basic attacks after casting *The Darkin Blade*.
-- This ability's damage is calculated based on the caster's current stats and changes dynamically.
+- This ability's damage is calculated based on the caster's current stats and changes dynamically. Effect at cast time end
 
 ---
 
@@ -132,7 +147,7 @@
 - The impact area is oriented relative to ''Aatrox's' position when the projectile hits, not where the projectile originated from.
 - The location that the target is dragged to is not at the target's original location, but slightly closer towards ''Aatrox's' position when the zone expires.
 - Spell shield will block the chain's application and initial damage but not the aftereffects of one already applied.
-- This ability's damage is calculated based on the caster's current stats and changes dynamically.
+- This ability's damage is calculated based on the caster's current stats and changes dynamically. Effect at cast time end
 
 ---
 
@@ -192,7 +207,7 @@
   - 'World Ender's healing amplification applies to the health gained by resurrecting.
 - *World Ender* will cast from wherever **Aatrox** is at the end of the cast time.
 - Casting *World Ender* while it is still active removes the timer on the resource bar.
-  - If this happens while using , the intensified tint effect of *World Ender* will stay on the screen for the rest of the game.
+  - If this happens while using Aatrox, the intensified tint effect of *World Ender* will stay on the screen for the rest of the game.
 
 ---
 
@@ -275,7 +290,7 @@
 - This champion has no ability power ratio.
 - The icon for *World Ender* is reused for the Teamfight Tactics item *Darkin*.
 - Aatrox's passive, Deathbringer Stance, is a reference to Final Fantasy IV in both name and function. "Deathbringer" is the name of the last sword you get in the game as a Dark Knight and the icon and ability looks exactly how Cecil holds his sword using his "Darkness" ability.
-- , , , and are the only abilities in *League of Legends* that have the same name as their champion's title.
+- The Darkin Blade, Grandmaster-at-Arms, Night Hunter, and The Relentless Storm are the only abilities in *League of Legends* that have the same name as their champion's title.
 - Aatrox's Series 1 Eternals make the following references:
   - *Chains Yanked* references the idiom yank one's chain as well as the pull of *Infernal Chains*.
   - 'QQ's references the QQ emoticon as well the multi-cast nature of *The Darkin Blade*.

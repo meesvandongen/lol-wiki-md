@@ -38,6 +38,11 @@ class SimpleLoLConverter:
             
             with open(main_page_path, 'r', encoding='utf-8') as f:
                 content = f.read()
+
+            # Validate this is actually a champion page; otherwise fail fast
+            if not self.is_champion(champion_name, content):
+                print(f"Error: '{champion_name}' is not a champion page (missing Champion info/module data)")
+                return None
             
             # Extract basic information
             champion_data = self._extract_champion_data(champion_name, content)
@@ -59,6 +64,31 @@ class SimpleLoLConverter:
         except Exception as e:
             print(f"Error converting {champion_name}: {e}")
             return None
+
+    def is_champion(self, champion_name: str, content: Optional[str] = None) -> bool:
+        """Heuristic to determine if the given page belongs to a champion.
+        Checks for '{{Champion info' on the main page or presence in Module:ChampionData.
+        """
+        try:
+            # Check Module:ChampionData
+            mod = self._load_champion_module_data(champion_name)
+            if isinstance(mod, dict) and mod:
+                return True
+        except Exception:
+            pass
+        # Check page content for Champion info template
+        if content is None:
+            page = self.wiki_root / "Main" / champion_name / "page.txt"
+            if page.exists():
+                try:
+                    content = page.read_text(encoding='utf-8')
+                except Exception:
+                    content = None
+        if content and re.search(r'\{\{\s*Champion info\b', content, flags=re.IGNORECASE):
+            return True
+        # As an additional weak signal, presence of an abilities section AND a template folder
+        # Do not rely solely on this to avoid false positives; require at least one strong signal above
+        return False
     
     def _extract_champion_data(self, champion_name: str, content: str) -> Dict[str, Any]:
         """Extract champion data from MediaWiki content."""
@@ -70,6 +100,8 @@ class SimpleLoLConverter:
             "patch_history": [],
             "trivia": [],
             "stats": {},
+            "advanced_stats": {},
+            "map_stats": {},
         }
         
         # Extract abilities section
@@ -98,6 +130,7 @@ class SimpleLoLConverter:
         
         # Extract stats (from Module:ChampionData if available)
         data["stats"] = self._extract_basic_stats(champion_name)
+        data["advanced_stats"] = self._extract_advanced_stats(champion_name)
 
         # Enrich basic info from Module:ChampionData when available
         try:
@@ -113,6 +146,7 @@ class SimpleLoLConverter:
                 "rangetype": "range_type",
                 "date": "release_date",
                 "patch": "release_patch",
+                "changes": "latest_changes",
             }
             for src, dst in mapping.items():
                 val = module_info.get(src)
@@ -125,7 +159,39 @@ class SimpleLoLConverter:
                 val = module_info.get(key)
                 if isinstance(val, list) and val:
                     basic_info[dst] = ", ".join([str(x) for x in val if x])
+            # Pricing and misc hero info
+            if module_info.get("be") is not None:
+                basic_info.setdefault("be", str(module_info.get("be")))
+            if module_info.get("rp") is not None:
+                basic_info.setdefault("rp", str(module_info.get("rp")))
+            if module_info.get("difficulty") is not None:
+                basic_info.setdefault("difficulty", str(module_info.get("difficulty")))
+            if isinstance(module_info.get("herotype"), str) and module_info.get("herotype"):
+                basic_info.setdefault("hero_type", module_info.get("herotype"))
+            if isinstance(module_info.get("alttype"), str) and module_info.get("alttype"):
+                basic_info.setdefault("alt_type", module_info.get("alttype"))
+            if isinstance(module_info.get("adaptivetype"), str) and module_info.get("adaptivetype"):
+                basic_info.setdefault("adaptive_type", module_info.get("adaptivetype"))
+            # Style metrics if present
+            for k in ("damage", "toughness", "control", "mobility", "utility", "style"):
+                if module_info.get(k) is not None and str(module_info.get(k)) != "":
+                    basic_info.setdefault(k, str(module_info.get(k)))
             data["basic_info"] = basic_info
+            # Map-specific stats from module stats block
+            if isinstance(module_info.get("stats"), dict):
+                stats_block = module_info["stats"]
+                maps: Dict[str, Dict[str, Any]] = {}
+                for map_key in ("aram", "urf", "usb"):
+                    mv = stats_block.get(map_key)
+                    if isinstance(mv, dict):
+                        entry: Dict[str, Any] = {}
+                        for mk in ("dmg_dealt", "dmg_taken", "healing"):
+                            if mk in mv:
+                                entry[mk] = mv[mk]
+                        if entry:
+                            maps[map_key] = entry
+                if maps:
+                    data["map_stats"] = maps
         
         # Extract patch history reference
         patch_match = re.search(r'\{\{Patch box\|([^}]+)\}\}', content)
@@ -133,6 +199,76 @@ class SimpleLoLConverter:
             data["patch_history"] = self._extract_patch_history(champion_name)
         
         return data
+
+    def _extract_advanced_stats(self, champion_name: str) -> Dict[str, Any]:
+        """Extract advanced champion stats from Module:ChampionData when available.
+        Includes: base AS, AS ratio, bonus AS per level, windup% (if derivable), missile speed,
+        selection/pathing/acquisition/gameplay radii and selection height; plus critical damage default.
+        """
+        adv: Dict[str, Any] = {}
+        data = self._load_champion_module_data(champion_name)
+        if not data or not isinstance(data.get("stats"), dict):
+            return adv
+        s = data["stats"]
+        def getf(k: str) -> Optional[float]:
+            v = s.get(k)
+            try:
+                if v is None:
+                    return None
+                if isinstance(v, (int, float)):
+                    return float(v)
+                v_str = str(v).strip()
+                v_str = re.split(r"[^0-9.+-]", v_str)[0]
+                return float(v_str) if v_str else None
+            except Exception:
+                return None
+        # Attack speed details
+        base_as = getf("as_base")
+        as_ratio = getf("as_ratio")
+        as_lvl = getf("as_lvl")  # percent per level
+        if base_as is not None:
+            adv["base_attack_speed"] = base_as
+        if as_ratio is not None:
+            adv["attack_speed_ratio"] = as_ratio
+        if as_lvl is not None:
+            adv["bonus_attack_speed_per_level_percent"] = as_lvl
+        # Windup% if derivable from attack_cast_time / attack_total_time
+        cast = getf("attack_cast_time")
+        total = getf("attack_total_time")
+        if cast is not None and total and total > 0:
+            adv["attack_windup_percent"] = round((cast / total) * 100.0, 1)
+        # Windup modifier (some champs specify this directly)
+        windup_mod = getf("windup_modifier")
+        if windup_mod is not None:
+            adv["windup_modifier"] = windup_mod
+        # Missile speed
+        mspeed = getf("missile_speed")
+        if mspeed is not None:
+            adv["missile_speed"] = mspeed
+        # Radii and selection metrics
+        acq = getf("acquisition_radius")
+        if acq is not None:
+            adv["acquisition_radius"] = acq
+        sel_r = getf("selection_radius")
+        if sel_r is not None:
+            adv["selection_radius"] = sel_r
+        sel_h = getf("selection_height")
+        if sel_h is not None:
+            adv["selection_height"] = sel_h
+        path_r = getf("pathing_radius")
+        if path_r is not None:
+            adv["pathing_radius"] = path_r
+        gameplay_r = getf("gameplay_radius")
+        if gameplay_r is not None:
+            adv["gameplay_radius"] = gameplay_r
+        # Critical damage: not in module data; use game default with simple overrides
+        crit_default = 175.0
+        low_name = champion_name.strip().lower()
+        if low_name in ("yasuo", "yone"):
+            adv["critical_damage_percent"] = 160.0
+        else:
+            adv["critical_damage_percent"] = crit_default
+        return adv
 
     # ------ Pets parsing ------
     def _extract_pets(self, pets_content: str) -> List[Dict[str, Any]]:
@@ -320,15 +456,8 @@ class SimpleLoLConverter:
                 if k not in essential and (v.get("base", 0) == 0 and v.get("growth", 0) == 0):
                     del stats[k]
             return stats
-        # Fallback minimal example if module not found
-        return {
-            "health": {"base": 550, "growth": 85},
-            "mana": {"base": 350, "growth": 50},
-            "armor": {"base": 22, "growth": 3.5},
-            "magic_resist": {"base": 30, "growth": 0.5},
-            "attack_damage": {"base": 56, "growth": 3.1},
-            "attack_speed": {"base": 0.625, "growth": 3.2},
-        }
+        # No fallback: if module not found, leave stats empty
+        return {}
 
     # ------ Module:ChampionData helpers ------
     def _module_data_path(self) -> Path:
@@ -433,29 +562,75 @@ class SimpleLoLConverter:
         return [m.group(1) for m in re.finditer(r'"([^"]+)"', s)]
 
     def _parse_lua_simple_kv(self, table_text: str) -> Dict[str, Any]:
-        """Parse a simple Lua table of form { ["k"]=v, ["k2"]=v2, ... } with scalar numbers/strings."""
+        """Parse a Lua table of form { ["k"]=v, ["k2"]=v2, ... } supporting nested subtables.
+        Values can be numbers, quoted strings, or nested tables (recursively parsed).
+        """
         out: Dict[str, Any] = {}
-        inner = table_text
-        # Remove outer braces if present
-        if inner.strip().startswith('{') and inner.strip().endswith('}'):
-            inner = inner.strip()[1:-1]
-        for m in re.finditer(r'\[\"([^\"]+)\"\]\s*=\s*([^,}]+)', inner):
-            k = m.group(1)
-            v = m.group(2).strip()
-            # Try number
-            try:
-                if re.match(r'^-?\d+(?:\.\d+)?$', v):
-                    out[k] = float(v) if '.' in v else int(v)
-                    continue
-            except Exception:
-                pass
-            # Try quoted string
-            sm = re.match(r'^"([^"]*)"$', v)
-            if sm:
-                out[k] = sm.group(1)
-                continue
-            # Fallback raw
-            out[k] = v
+        s = table_text.strip()
+        # Strip outer braces
+        if s.startswith('{') and s.endswith('}'):
+            s = s[1:-1]
+        i = 0
+        n = len(s)
+        while i < n:
+            # Skip whitespace and commas
+            while i < n and s[i] in ' \t\r\n,':
+                i += 1
+            if i >= n:
+                break
+            # Expect key like ["key"]
+            key_m = re.match(r'\[\"([^\"]+)\"\]\s*=\s*', s[i:])
+            if not key_m:
+                # Can't parse further
+                break
+            key = key_m.group(1)
+            i += key_m.end()
+            if i >= n:
+                break
+            # Determine value type
+            ch = s[i]
+            # Nested table
+            if ch == '{':
+                depth = 0
+                start = i
+                while i < n:
+                    if s[i] == '{':
+                        depth += 1
+                    elif s[i] == '}':
+                        depth -= 1
+                        if depth == 0:
+                            i += 1  # include closing brace
+                            break
+                    i += 1
+                sub = s[start:i]
+                try:
+                    out[key] = self._parse_lua_simple_kv(sub)
+                except Exception:
+                    out[key] = sub
+            # Quoted string
+            elif ch == '"':
+                i += 1
+                start = i
+                while i < n and s[i] != '"':
+                    # naive string parse; escapes rare in this data
+                    i += 1
+                out[key] = s[start:i]
+                i += 1  # skip closing quote
+            else:
+                # Bare value until comma or end or closing brace at top level
+                start = i
+                while i < n and s[i] not in ',}\n':
+                    i += 1
+                val = s[start:i].strip()
+                # Try number
+                num_m = re.match(r'^-?\d+(?:\.\d+)?$', val)
+                if num_m:
+                    out[key] = float(val) if '.' in val else int(val)
+                else:
+                    out[key] = val.strip('"')
+            # Move past trailing spaces/commas before next pair
+            while i < n and s[i] in ' \t\r\n,':
+                i += 1
         return out
 
     def _load_champion_module_data(self, champion_name: str) -> Optional[Dict[str, Any]]:
@@ -819,66 +994,66 @@ class SimpleLoLConverter:
         # The surrounding text already mentions Teamfight Tactics item, so postfix is redundant
         text = re.sub(r'\{\{TFT Item\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text)
 
-    # High-frequency templates from audit: provide safe text-only mappings
-    # LoR card/link templates -> keep display text
-    text = re.sub(r'\{\{tiplor\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{lor\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    # Wild Rift / TFT tooltips -> keep display text
-    text = re.sub(r'\{\{tiptft\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{wrtip\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    # Styled/special links/icons -> prefer plain text
-    text = re.sub(r'\{\{csl\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{si\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{cai\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{cid\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    # Items (plural) -> italicize like ii
-    text = re.sub(r'\{\{iis\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
-    # Styled italic (linked variant) -> italicize content
-    text = re.sub(r'\{\{stil\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
-    # Gold-related templates -> append unit
-    text = re.sub(r'\{\{g\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1 gold', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{\s*g\s*\}\}', 'gold', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{gold value\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1 gold', text, flags=re.IGNORECASE)
-    # Symbol helpers
-    text = re.sub(r'\{\{times(?:\|[^}]*)?\}\}', '×', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{degree(?:\|[^}]*)?\}\}', '°', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{plus(?:\|[^}]*)?\}\}', '+', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{tftt\}\}', 'Teamfight Tactics', text, flags=re.IGNORECASE)
-    # Structural/maintenance templates -> drop
-    text = re.sub(r'\{\{(?:references|lol navigation|champions|champion categories|doc|fairuse|section top)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{(?:rune header|rune footer)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{(?:game banner|patch box)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{!\}\}', '', text)  # table/format helper
-    # Scribunto/cargo variables or invocations -> drop
-    text = re.sub(r'\{\{\s*#var:[^}]+\}\}', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{\s*#invoke:[^}]+\}\}', '', text, flags=re.IGNORECASE)
-    # Numeric-only templates frequently used as layout helpers -> drop
-    text = re.sub(r'\{\{\s*\d+\s*\}\}', '', text)
-    # Misc pass-through (keep primary text)
-    text = re.sub(r'\{\{(?:rd|nie|spells|recurring)\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    # Specific label template seen in audit
-    text = re.sub(r'\{\{\s*effect at cast time end\s*\}\}', 'Effect at cast time end', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{\s*effect at cast time start\s*\}\}', 'Effect at cast time start', text, flags=re.IGNORECASE)
-    # Champion info/infobox occurrences in body -> drop
-    text = re.sub(r'\{\{\s*champion info\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
-    # Champion color/style wrappers: keep content
-    text = re.sub(r'\{\{cc[dsib]?\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    # TFT helper templates (icons/names/categories) -> keep primary text
-    text = re.sub(r'\{\{tft[inc]?\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    # Wild Rift wrappers
-    text = re.sub(r'\{\{wr\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{wri\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
-    # Unit/item plural wrappers
-    text = re.sub(r'\{\{uis\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{items\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
-    # Generic wrappers: keep or drop
-    text = re.sub(r'\{\{(?:builds|grouped ability|map changes|recipe/item|recipe|link|text)\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{(?:icononly|image|clear|width|alttext|documentation|border|class|iconclass|iconstyle|labelclass|labelstyle|style|display|label|height|pagename|variant|nolink)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
-    # Simple keyword templates
-    text = re.sub(r'\{\{\s*adaptive\s*\}\}', 'adaptive', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{\s*critical damage\s*\}\}', 'critical damage', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{\s*equals\s*\}\}', '=', text, flags=re.IGNORECASE)
-    text = re.sub(r'\{\{\s*separator\s*\}\}', '•', text, flags=re.IGNORECASE)
+        # High-frequency templates from audit: provide safe text-only mappings
+        # LoR card/link templates -> keep display text
+        text = re.sub(r'\{\{tiplor\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{lor\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        # Wild Rift / TFT tooltips -> keep display text
+        text = re.sub(r'\{\{tiptft\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{wrtip\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        # Styled/special links/icons -> prefer plain text
+        text = re.sub(r'\{\{csl\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{si\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{cai\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{cid\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        # Items (plural) -> italicize like ii
+        text = re.sub(r'\{\{iis\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+        # Styled italic (linked variant) -> italicize content
+        text = re.sub(r'\{\{stil\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+        # Gold-related templates -> append unit
+        text = re.sub(r'\{\{g\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1 gold', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{\s*g\s*\}\}', 'gold', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{gold value\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1 gold', text, flags=re.IGNORECASE)
+        # Symbol helpers
+        text = re.sub(r'\{\{times(?:\|[^}]*)?\}\}', '×', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{degree(?:\|[^}]*)?\}\}', '°', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{plus(?:\|[^}]*)?\}\}', '+', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{tftt\}\}', 'Teamfight Tactics', text, flags=re.IGNORECASE)
+        # Structural/maintenance templates -> drop
+        text = re.sub(r'\{\{(?:references|lol navigation|champions|champion categories|doc|fairuse|section top)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{(?:rune header|rune footer)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{(?:game banner|patch box)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{!\}\}', '', text)  # table/format helper
+        # Scribunto/cargo variables or invocations -> drop
+        text = re.sub(r'\{\{\s*#var:[^}]+\}\}', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{\s*#invoke:[^}]+\}\}', '', text, flags=re.IGNORECASE)
+        # Numeric-only templates frequently used as layout helpers -> drop
+        text = re.sub(r'\{\{\s*\d+\s*\}\}', '', text)
+        # Misc pass-through (keep primary text)
+        text = re.sub(r'\{\{(?:rd|nie|spells|recurring)\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        # Specific label template seen in audit
+        text = re.sub(r'\{\{\s*effect at cast time end\s*\}\}', 'Effect at cast time end', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{\s*effect at cast time start\s*\}\}', 'Effect at cast time start', text, flags=re.IGNORECASE)
+        # Champion info/infobox occurrences in body -> drop
+        text = re.sub(r'\{\{\s*champion info\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
+        # Champion color/style wrappers: keep content
+        text = re.sub(r'\{\{cc[dsib]?\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        # TFT helper templates (icons/names/categories) -> keep primary text
+        text = re.sub(r'\{\{tft[inc]?\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        # Wild Rift wrappers
+        text = re.sub(r'\{\{wr\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{wri\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+        # Unit/item plural wrappers
+        text = re.sub(r'\{\{uis\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{items\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+        # Generic wrappers: keep or drop
+        text = re.sub(r'\{\{(?:builds|grouped ability|map changes|recipe/item|recipe|link|text)\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{(?:icononly|image|clear|width|alttext|documentation|border|class|iconclass|iconstyle|labelclass|labelstyle|style|display|label|height|pagename|variant|nolink)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
+        # Simple keyword templates
+        text = re.sub(r'\{\{\s*adaptive\s*\}\}', 'adaptive', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{\s*critical damage\s*\}\}', 'critical damage', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{\s*equals\s*\}\}', '=', text, flags=re.IGNORECASE)
+        text = re.sub(r'\{\{\s*separator\s*\}\}', '•', text, flags=re.IGNORECASE)
 
         # Handle special formatting
         text = re.sub(r'\{\{w\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text)  # Wikipedia links
@@ -1175,6 +1350,8 @@ class SimpleLoLConverter:
             lines.append("- [Basic Information](#basic-information)")
         if data['stats']:
             lines.append("- [Statistics](#statistics)")
+            if data.get('map_stats'):
+                lines.append("  - [Map-specific Stats](#map-specific-stats)")
         if data.get('pets'):
             lines.append("- [Pets](#pets)")
         lines.append("- [Abilities](#abilities)")
@@ -1235,7 +1412,82 @@ class SimpleLoLConverter:
                         lines.append(f"| **{display_name}** | ${float(base):.3f}$ | $+{float(growth):.1f}\\%$ | ${float(level_18):.3f}$ |")
                     else:
                         lines.append(f"| **{display_name}** | ${base}$ | $+{growth}$ | ${level_18:.1f}$ |")
+            # Merge Advanced Stats into the same table as base stats
+            if data.get('advanced_stats'):
+                adv = data['advanced_stats']
+                # helpers to format numbers similar to base table
+                def _fmt_num(val: Any, decimals: int = 3) -> str:
+                    try:
+                        f = float(val)
+                        s = f"{f:.{decimals}f}"
+                        s = s.rstrip('0').rstrip('.') if '.' in s else s
+                        return f"${s}$"
+                    except Exception:
+                        return str(val)
+                def _format_adv_value(value: Optional[Any], suffix: Optional[str] = None, percent: bool = False) -> Optional[str]:
+                    if value is None:
+                        return None
+                    if percent:
+                        try:
+                            v = float(value)
+                            val_s = f"${v:.1f}\\%$"
+                        except Exception:
+                            val_s = str(value)
+                    else:
+                        val_s = _fmt_num(value)
+                    if suffix:
+                        # Always keep unit outside of math for proper spacing
+                        val_s = f"{val_s} {suffix}"
+                    return val_s
+                adv_rows: List[Tuple[str, Optional[Any], Optional[str], bool]] = [
+                    ("Base Attack Speed", adv.get("base_attack_speed"), None, False),
+                    ("Attack Speed Ratio", adv.get("attack_speed_ratio"), None, False),
+                    ("Bonus AS per Level", adv.get("bonus_attack_speed_per_level_percent"), None, True),
+                    ("Attack Windup", adv.get("attack_windup_percent"), None, True),
+                    ("Windup Modifier", adv.get("windup_modifier"), None, False),
+                    ("Missile Speed", adv.get("missile_speed"), "units/second", False),
+                    ("Acquisition Radius", adv.get("acquisition_radius"), "units", False),
+                    ("Gameplay Radius", adv.get("gameplay_radius"), "units", False),
+                    ("Pathing Radius", adv.get("pathing_radius"), "units", False),
+                    ("Selection Radius", adv.get("selection_radius"), "units", False),
+                    ("Selection Height", adv.get("selection_height"), "units", False),
+                    ("Critical Damage", adv.get("critical_damage_percent"), None, True),
+                ]
+                for label, value, suffix, is_percent in adv_rows:
+                    val_s = _format_adv_value(value, suffix=suffix, percent=is_percent)
+                    if val_s is not None:
+                        lines.append(f"| **{label}** | {val_s} |  |  |")
+            # end of combined stats table
             lines.append("")
+            # Map-specific stats tables
+            if data.get('map_stats'):
+                lines.append("### Map-specific Stats")
+                lines.append("")
+                map_names = {
+                    'aram': 'ARAM',
+                    'urf': 'URF',
+                    'usb': 'Ultimate Spellbook',
+                }
+                def _fmt_percent(mult: Any) -> str:
+                    try:
+                        v = float(mult) * 100.0
+                        return f"${v:.1f}\\%$"
+                    except Exception:
+                        return str(mult)
+                for key in ['aram', 'urf', 'usb']:
+                    if key in data['map_stats'] and data['map_stats'][key]:
+                        lines.append(f"#### {map_names.get(key, key.upper())}")
+                        lines.append("")
+                        lines.append("| Metric | Value |")
+                        lines.append("|--------|-------|")
+                        entry = data['map_stats'][key]
+                        if 'dmg_dealt' in entry:
+                            lines.append(f"| **Damage Dealt** | {_fmt_percent(entry['dmg_dealt'])} |")
+                        if 'dmg_taken' in entry:
+                            lines.append(f"| **Damage Taken** | {_fmt_percent(entry['dmg_taken'])} |")
+                        if 'healing' in entry:
+                            lines.append(f"| **Healing** | {_fmt_percent(entry['healing'])} |")
+                        lines.append("")
         
         # Pets
         if data.get('pets'):

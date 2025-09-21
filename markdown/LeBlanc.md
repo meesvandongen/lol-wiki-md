@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Basic Information](#basic-information)
 - [Statistics](#statistics)
+  - [Advanced Stats](#advanced-stats)
 - [Abilities](#abilities)
 - [Patch History](#patch-history)
 - [Trivia](#trivia)
@@ -12,6 +13,14 @@
 | Attribute | Value |
 |-----------|-------|
 | **Champion** | LeBlanc |
+| **Title** | the Deceiver |
+| **Resource** | Mana |
+| **Range Type** | Ranged |
+| **Release Date** | 2010-11-02 |
+| **Release Patch** | V1.0.0.104 |
+| **Roles** | Burst, Assassin |
+| **Riot Positions** | Middle |
+| **External Positions** | Middle |
 
 ## Statistics
 
@@ -19,12 +28,30 @@
 
 | Stat | Base | Growth | Level 18 |
 |------|------|--------|----------|
-| **Health** | $550$ | $+85$ | $1995.0$ |
-| **Mana** | $350$ | $+50$ | $1200.0$ |
-| **Armor** | $22$ | $+3.5$ | $81.5$ |
-| **Magic Resist** | $30$ | $+0.5$ | $38.5$ |
-| **Attack Damage** | $56$ | $+3.1$ | $108.7$ |
-| **Attack Speed** | $0.625$ | $+3.2\%$ | $0.965$ |
+| **Health** | $598.0$ | $+111.0$ | $2485.0$ |
+| **Mana** | $400.0$ | $+25.0$ | $825.0$ |
+| **Health Regen** | $7.5$ | $+0.55$ | $16.9$ |
+| **Mana Regen** | $8.0$ | $+0.8$ | $21.6$ |
+| **Armor** | $22.0$ | $+4.7$ | $101.9$ |
+| **Magic Resist** | $30.0$ | $+1.3$ | $52.1$ |
+| **Attack Damage** | $55.0$ | $+2.2$ | $92.4$ |
+| **Attack Speed** | $0.658$ | $+2.4\%$ | $0.921$ |
+| **Movement Speed** | $340.0$ | $+0.0$ | $340.0$ |
+| **Attack Range** | $525.0$ | $+0.0$ | $525.0$ |
+
+### Advanced Stats
+
+| Metric | Value |
+|--------|-------|
+| **Base Attack Speed** | $0.658$ |
+| **Attack Speed Ratio** | $0.4$ |
+| **Bonus AS per Level** | $2.4\%$ |
+| **Missile Speed** | $1700 units/second$ |
+| **Acquisition Radius** | $525 units$ |
+| **Pathing Radius** | $35 units$ |
+| **Selection Radius** | $100 units$ |
+| **Selection Height** | $85 units$ |
+| **Critical Damage** | $175.0\%$ |
 
 ## Abilities
 
@@ -34,7 +61,12 @@
 
 *The clone will run forward to a random location, and lasts for a period.*
 
-**Innate:** Periodically, when **LeBlanc** is damaged to health*maximum** health*, she creates a clone of herself, after which they both instantly become invisibility for 1 second. The clone can cast basic attacks with no effect and lasts 8 seconds. Upon spawning, it starts moving up to 1900 units toward a random direction in front of ''LeBlanc's'' movement, determined at the moment of its spawning. *See [Pets](#Pets) for more details about *'LeBlanc's'* clone.*
+**Innate:** Periodically, when **LeBlanc** is damaged to health*maximum** health*, she creates a clone of herself, after which they both instantly become invisibility for 1 second. The clone can cast basic attacks with no effect and lasts 8 seconds. Upon spawning, it starts moving up to 1900 units toward a random direction in front of ''LeBlanc's' movement, determined at the moment of its spawning. *See [Pets](#Pets) for more details about *'LeBlanc's* clone.*
+
+| Attribute | Value |
+|-----------|-------|
+| **Targeting** | Passive |
+| **Affects** | Self |
 
 **Notes:**
 
@@ -49,7 +81,7 @@
 
 *Her next damaging ability against the marked target will consume the mark to deal magic damage.*
 
-**Active:** **LeBlanc** projects an orb at the target enemy that deals magic damage and marks them for $3.5$ seconds. ''LeBlanc's'' next damaging ability against the marked target will consume the mark to deal the again. 'Sigil of Malice's' orb deals $10 to 146$ **bonus** magic damage against minion and refunds 100% of its *mana cost* and 30% of its remaining *cooldown* if either the orb or its mark's consumption kills the target.
+**Active:** **LeBlanc** projects an orb at the target enemy that deals magic damage and marks them for $3.5$ seconds. ''LeBlanc's' next damaging ability against the marked target will consume the mark to deal the same magic damage again. 'Sigil of Malice's orb deals 10 to 146 **bonus** magic damage against minion and refunds 100% of its *mana cost* and 30% of its remaining *cooldown* if either the orb or its mark's consumption kills the target.
 
 | Attribute | Value |
 |-----------|-------|
@@ -57,10 +89,17 @@
 | **Cooldown** | 6 seconds |
 | **Cast Time** | $0.25$ seconds |
 | **Cost** | 50 Mana |
+| **Targeting** | Unit |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Speed** | 2000 units/second |
+| **Spell Shield** | True |
+| **Spell Effects** | Spell |
+| **Projectile** | True |
 
 **Scaling:**
 - **Magic Damage:** $65-165$ (+ 40% AP)
-- **Total Magic Damage:** $65*2-165*2$ (+ $40*2$% AP)
+- **Total Magic Damage:** $65×2-165×2$ (+ $40×2$% AP)
 
 **Notes:**
 
@@ -75,7 +114,7 @@
 
 **Recast:** **LeBlanc** blinks to the return pad.
 
-**Active:** **LeBlanc** dashes to the target location, dealing magic damage to all nearby enemies upon arrival and leaving a return pad at the cast location for 4 seconds. *Distortion* can be recast after $0.2$ seconds of the dash ending for the pad's duration. **Recast:** **LeBlanc** blink to 'Distortion's' return pad, regardless of range.
+**Active:** **LeBlanc** dashes to the target location, dealing magic damage to all nearby enemies upon arrival and leaving a return pad at the cast location for 4 seconds. *Distortion* can be recast after $0.2$ seconds of the dash ending for the pad's duration. **Recast:** **LeBlanc** blink to 'Distortion's return pad, regardless of range.
 
 | Attribute | Value |
 |-----------|-------|
@@ -83,6 +122,13 @@
 | **Cooldown** | $15-10$ seconds |
 | **Cast Time** | none |
 | **Cost** | $60-100$ Mana |
+| **Targeting** | Location / Auto |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Speed** | 1450 units/second |
+| **Effect Radius** | 240 units |
+| **Spell Shield** | True |
+| **Spell Effects** | spellaoe |
 
 **Scaling:**
 - **Magic Damage:** $75-235$ (+ 70% AP)
@@ -90,9 +136,9 @@
 **Notes:**
 
 - *Distortion* will be buffered and cast as soon as the cooldown ends if the player attempts to cast it within $0.5$ seconds of the cooldown ending.
-  - The **recast** will be buffered and cast as soon as it becomes available if the player attempts to cast it within $0.3$ seconds of it becoming available to cast. *The initial cast counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering passive. **Recasting the ability does not. ***Mimic: Distortion* has the same properties.
+  - The **recast** will be buffered and cast as soon as it becomes available if the player attempts to cast it within $0.3$ seconds of it becoming available to cast. *The initial cast counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering *Force Pulse*’s passive. **Recasting the ability does not. ***Mimic: Distortion* has the same properties.
 - *Distortion* and *Mimic: Distortion* have independent return pads and **LeBlanc** can travel to both while they are active.
-- 'Distortion's' pad duration starts once the dash ends.
+- 'Distortion's pad duration starts once the dash ends.
 
 ---
 
@@ -110,17 +156,24 @@
 | **Cooldown** | $14-11$ seconds |
 | **Cast Time** | $0.25$ seconds |
 | **Cost** | 50 Mana |
+| **Targeting** | Direction |
+| **Affects** | Enemies |
+| **Damage Type** | Magic |
+| **Speed** | 1750 units/second |
+| **Spell Shield** | Special |
+| **Spell Effects** | spell |
+| **Projectile** | True |
 
 **Scaling:**
 - **Magic Damage:** $50-130$ (+ 40% AP)
-- **Magic Damage:** $80-240$ (+ 85% AP) Total Damage $50+80-130+240$ (+ $40+85$% AP)
+- **Magic Damage:** $80-240$ (+ 85% AP)
 
 **Notes:**
 
 - Both the initial and the delayed damage can detonate *Sigil of Malice*.
 - *Ethereal Chains* and *Mimic: Ethereal Chains* are separate debuffs, and can both be tethered to the same target without overriding each other. The root duration for either one are unchanged.
 - Spell shield will block the tether's application and initial damage but not the aftereffects of one already applied.
-- The tether remains for a minimum of $0.25$ seconds regardless of distance.
+- The tether remains for a minimum of $0.25$ seconds regardless of distance. Effect at cast time end
 
 ---
 
@@ -133,9 +186,12 @@
 | Attribute | Value |
 |-----------|-------|
 | **Cooldown** | $45-25$ seconds |
+| **Targeting** | Varied |
+| **Affects** | Self |
+| **Damage Type** | Magic |
 
 **Scaling:**
-- **Orb Magic Damage:* $70-210$ (+ 40% AP)2-2102$ (+ 80% AP)3-210*3$ (+ 120% AP)
+- **Orb Magic Damage:* $70-210$ (+ 40% AP)2-2102$ (+ 80% AP)3-210×3$ (+ 120% AP)
 - **Magic Damage:** $150-450$ (+ 75% AP)
 
 **Notes:**
@@ -149,7 +205,7 @@
 
 ### V25.18
 - *Distortion* & *Mimic: Distortion*
-  - **Bug Fixes:** props no longer sometimes appear during the dash.
+  - **Bug Fixes:** Recall props no longer sometimes appear during the dash.
 
 ### V25.15
 - General
@@ -171,17 +227,17 @@
 - General
   - Updated ability icons.
   - Complete visual update across all skins.
-    - New splash artwork for , , and .
-    - Adjusted splash artwork for , , , , , , , , , and .
+    - New splash artwork for LeBlanc, LeBlanc, LeBlanc and LeBlanc.
+    - Adjusted splash artwork for LeBlanc, LeBlanc, LeBlanc, LeBlanc, LeBlanc, LeBlanc, LeBlanc, LeBlanc, LeBlanc, and LeBlanc.
   - New voice-over.
   - Updated sound effects.
-  - cost increased to from .
-  - cost increased to from .
+  - LeBlanc cost increased to from .
+  - LeBlanc cost increased to from .
 
 ### V25.04
-- 
+- LeBlanc
   - **Bug Fixes:** Non-damaging displacement effects can no longer be prematurely canceled by using the Toggle expression during the movement.
-- 
+- LeBlanc
   - Updated skin border to reflect Faker's fifth World Championship title.
 
 ### V14.24
@@ -193,12 +249,12 @@
 ### V14.17
 - *Sigil of Malice*
   - AP ratio reduced to 40% AP from 45% AP.
-    - Total AP ratio reduced to $40*2$% AP from $45*2$% AP.
+    - Total AP ratio reduced to $40×2$% AP from $45×2$% AP.
 - *Distortion*
   - AP ratio reduced to 70% AP from 75% AP.
 
 ### V14.14
-- 
+- LeBlanc
   - *Mirror Image*
     - **Bug Fixes:** Restored clone death SFX.
 
@@ -210,16 +266,16 @@
 
 ## Trivia
 
-- LeBlanc is the first champion to have a Loading screen and Portrait icon not focus the actual champion, in her case, focus on her *Mirror Image*.
+- LeBlanc is the first champion to have a Loading screen and Portrait icon not focus the actual champion, in her case, focus on her *Mimic*.
   - The second one is **Jhin**, focus on the mirror image.
-  - The same case applies for some of her skins: , , and .
+  - The same case applies for some of her skins: LeBlanc, LeBlanc, LeBlanc and LeBlanc.
 - *Mimic* used to be the only ability (currently *Relentless Pursuit, AiDivine Judgement* and *Purge*) that ended up costing 0 mana when fully-ranked.
 - LeBlanc is one of a few champions to have multiple textures in one skin. When she uses *Mirror Image*, her clone will be of a different colour palette which can only be seen by LeBlanc and her allies. To the opposing team, LeBlanc and her clone look exactly the same, including copies of any external buffs and item effects active at the moment the clone is spawned (Prior to patch V5.22, clones did not duplicate external buff/active item effect particles).
-  - Four other champions with this feature are **Wukong** (via *Warrior Trickster), cisHallucinate*), **Nasus** (via *Fury of the Sands*) and **Malphite** (via *Granite Shield* and *Thunderclap*).
+  - Four other champions with this feature are **Wukong** (via *Warrior Trickster*), **Shaco**’s (via *Hallucinate*), **Nasus** (via *Fury of the Sands*) and **Malphite** (via *Granite Shield* and *Thunderclap*).
 - The Black Rose might have been inspired by and/or might be referencing the Black Hand.
 - Her staff appears to be inspired, partially or in full, by that of Tsukasa from .hack//SIGN.
 - The name 'LeBlanc' may be a reference to Maurice Leblanc, creator of the character Arsène Lupin. Like Lupin, part of LeBlanc's character is that of a master of disguise.
-- For a very short time while her 2025 Visual Update was on PBE (patch V25.07), LeBlanc was illegally able to cast her *Sigil of Malice* and *Ethereal Chains* during dash.
+- For a very short time while her 2025 Visual Update was on PBE (patch V25.07), LeBlanc was illegally able to cast her *Sigil of Malice* and *Ethereal Chains* during *Distortion*’s dash.
 
 ---
 *This page was automatically generated from League of Legends Wiki data.*
