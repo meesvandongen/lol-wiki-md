@@ -758,6 +758,8 @@ class SimpleLoLConverter:
             'leveling': 'leveling',
             'leveling2': 'leveling2',
             'leveling3': 'leveling3',
+            'leveling4': 'leveling4',
+            'leveling5': 'leveling5',
             'notes': 'notes',
             'recharge': 'recharge',
             'cast time': 'cast_time',
@@ -780,6 +782,12 @@ class SimpleLoLConverter:
                 ability_data[dst_key] = self._format_notes(val)
             else:
                 ability_data[dst_key] = self._convert_wiki_to_markdown(val)
+
+        # Collect any free-floating {{st|...}} blocks not tied to a parameter line
+        extra_st = self._collect_free_st_blocks(content)
+        if extra_st:
+            # Render them to markdown tables now
+            ability_data['extra_scaling'] = [self._render_st(inner) for inner in extra_st if inner.strip()]
 
         return ability_data
 
@@ -823,6 +831,55 @@ class SimpleLoLConverter:
                     val_lines.append(line)
         flush()
         return params
+
+    def _collect_free_st_blocks(self, text: str) -> List[str]:
+        """Collect brace-aware {{st|...}} blocks that appear outside key=value param lines.
+        We'll scan all occurrences and then subtract those that clearly belong to known 'leveling*' param values.
+        Returns list of inner strings for rendering.
+        """
+        inners: List[str] = []
+        i = 0
+        n = len(text)
+        while i < n:
+            j = text.find('{{st|', i)
+            if j == -1:
+                break
+            # ensure not inside a param value line starting with '|'
+            line_start = text.rfind('\n', 0, j) + 1
+            if line_start < 0:
+                line_start = 0
+            if text[line_start:line_start+1] == '|':
+                # belongs to a parameter; skip, handled via params
+                # move past this '{{st|'
+                i = j + 5
+                continue
+            # parse brace-aware until closing '}}'
+            k = j + 5
+            depth = 1
+            buf: List[str] = []
+            while k < n:
+                if k + 1 < n and text[k] == '{' and text[k+1] == '{':
+                    depth += 1
+                    buf.append(text[k:k+2])
+                    k += 2
+                    continue
+                if k + 1 < n and text[k] == '}' and text[k+1] == '}':
+                    depth -= 1
+                    if depth == 0:
+                        k += 2
+                        break
+                    buf.append(text[k:k+2])
+                    k += 2
+                    continue
+                buf.append(text[k])
+                k += 1
+            inner = ''.join(buf)
+            if inner.startswith('st|'):
+                inner = inner[3:]
+            if inner:
+                inners.append(inner)
+            i = k
+        return inners
     
     def _format_notes(self, notes_text: str) -> str:
         """Format notes section preserving list structure."""
@@ -918,28 +975,30 @@ class SimpleLoLConverter:
         """Convert basic MediaWiki syntax to markdown."""
         if not text:
             return ""
-            
+
         # Convert formulas with better handling
         text = re.sub(r'\{\{ap\|([^}]+)\}\}', self._convert_ap_formula, text)
         text = re.sub(r'\{\{pp\|([^}]+)\}\}', self._convert_pp_formula, text)
         text = re.sub(r'\{\{fd\|([^}]+)\}\}', r'$\1$', text)  # Fixed decimals
-        text = re.sub(r'\{\{tt\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text)  # Tooltips
-        
+        # Tooltips: {{tt|value|tooltip}} -> value (tooltip)
+        text = re.sub(r'\{\{tt\|([^}]+)\}\}', self._convert_tt, text)
+
         # Convert styled text
         text = re.sub(r'\{\{as\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text)
-        text = re.sub(r'\{\{st\|([^}|]+)\|([^}]+)\}\}', r'**\1:** \2', text)
+        # Skill tabs: {{st|Label1|Value1|Label2|Value2|...}} -> table (brace-aware)
+        text = self._convert_st_blocks(text)
         text = re.sub(r'\{\{sbc\|([^}]+)\}\}', r'**\1**', text)  # Small bold caps
         text = re.sub(r'\{\{sti\|([^}]+)\}\}', r'*\1*', text)  # Styled italic
-        
+
         # Fix double bold markers
         text = re.sub(r'\*\*\*\*([^*]+):\*\*', r'**\1:**', text)  # ****text:** -> **text:**
-        
+
         # Convert section links BEFORE general links so they don't get captured by the general rule
         # [[Page#Anchor|Display]] -> [Display](./Page.md#Anchor)
         text = re.sub(r'\[\[([^|\]#]+)#([^|\]]+)(?:\|([^\]]*))?\]\]', self._convert_section_link, text)
         # Convert links with better handling (general case)
         text = re.sub(r'\[\[([^|\]]+)(?:\|([^]]*))?\]\]', self._convert_link, text)
-        
+
         # Convert champion/ability references
         text = re.sub(r'\{\{ci\|([^}|]+)(?:\|[^}]*)?\}\}', r'**\1**', text)
         # cis: champion info possessive (e.g., {{cis|Lulu}} -> **Lulu**’s)
@@ -1057,48 +1116,46 @@ class SimpleLoLConverter:
 
         # Handle special formatting
         text = re.sub(r'\{\{w\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text)  # Wikipedia links
-        
+
         # Handle stock and other gameplay terms
         text = re.sub(r'\[\[stock\]\]', 'stock', text)
         text = re.sub(r'\[\[basic attack\]\]', 'basic attack', text)
-        
+
         # Handle file/image references
         text = re.sub(r'\[\[File:[^\]]+\]\]', '', text)  # Remove file references
         text = re.sub(r'!\[[^\]]*\]\([^)]*\)', '', text)  # Remove broken image markdown
         text = re.sub(r'\{\{sm2\|[^}]+\}\}', '', text)  # Remove sound files
-        
+
         # Handle bug markers and special notations
         text = re.sub(r'\{\{bug\}\}', '', text)
         text = re.sub(r'\{\{bug\|[^}]+\}\}', '', text)
         # Champion without ability power ratio -> hard-coded text
         text = re.sub(r'\{\{\s*Champion without ability power ratio\s*\|[^}]*\}\}', 'This champion has no ability power ratio.', text)
         text = re.sub(r'\{\{\s*Champion without ability power ratio\s*\}\}', 'This champion has no ability power ratio.', text)
-        
+
         # Remove references
         text = re.sub(r'<ref[^>]*>.*?</ref>', '', text, flags=re.DOTALL)
         text = re.sub(r'<ref[^>]*\s*/>', '', text)
-        
+
         # Clean up HTML tags
         text = re.sub(r'<br\s*/?>', '\n', text)
         text = re.sub(r'<[^>]+>', '', text)
-        
+
         # Convert bold/italic with better handling
         text = re.sub(r"'''([^']+)'''", r'**\1**', text)
         text = re.sub(r"''([^']+)''", r'*\1*', text)
-        
+
         # Fix malformed bold/italic combinations and extra asterisks
         text = re.sub(r'\*\*\*\*([^*]+)\*\*', r'**\1**', text)  # ****text** -> **text**
         text = re.sub(r'\*\*\*([^*]+)\*\*([^*]+)\*', r'**\1\2**', text)  # ***text**other* -> **textother**
-        text = re.sub(r'\*([^*|]+)\|([^*]+)\*', r'\1', text)  # *text|other* -> text
-        
+
         # Clean up remaining templates
         text = re.sub(r'\{\{[^}]+\}\}', '', text)
         # Replace digit-separated pipes with slashes (e.g., 120|105|90 -> 120/105/90)
         text = re.sub(r'(?<=\d)\|(?=\d)', '/', text)
         # Remove any stray template braces left over
         text = text.replace('{{', '').replace('}}', '')
-        # Drop any remaining pipe characters which often leak from templates
-        text = text.replace('|', ' ')
+        # Do not drop '|' globally; needed for markdown tables generated from templates
         # Strip leftover short template prefixes that may leak mid-sentence (safe, space-bounded)
         text = re.sub(r'(?<=\s)(?:si|ui|ais|ci|ai|ri|ii)[a-z]{0,2}(?=\s)', '', text)
         # Fix common pluralization glitches after link conversion
@@ -1117,12 +1174,11 @@ class SimpleLoLConverter:
         text = re.sub(r'\*\*\s*New:\*', '**New:**', text, flags=re.IGNORECASE)
         text = re.sub(r'\*\*\s*Removed:\*', '**Removed:**', text, flags=re.IGNORECASE)
         text = re.sub(r'\*\*\s*Changed:\*', '**Changed:**', text, flags=re.IGNORECASE)
-        
-        # Clean up extra whitespace but preserve intentional line breaks
-        text = re.sub(r'(?<!\n)\n(?!\n)', ' ', text)  # Single newlines to spaces (keep double newlines)
-        text = re.sub(r'\s+', ' ', text)  # Multiple spaces to single
+
+        # Clean up extra whitespace and keep newlines to preserve tables and lists
+        text = re.sub(r'[ \t]+', ' ', text)
         text = text.strip()
-        
+
         return text
 
     def _normalize_anchor(self, anchor: str) -> str:
@@ -1145,6 +1201,119 @@ class SimpleLoLConverter:
         page_md = page.replace(' ', '_')
         anchor_md = self._normalize_anchor(anchor)
         return f"[{display}](./{page_md}.md#{anchor_md})"
+
+    def _convert_tt(self, match) -> str:
+        """Convert {{tt|value|tooltip}} -> 'value (tooltip)'.
+        If only one arg present, return it. Ignore extra pipes.
+        """
+        inner = match.group(1)
+        parts = [p.strip() for p in inner.split('|')]
+        if not parts:
+            return ''
+        if len(parts) == 1:
+            return parts[0]
+        value = parts[0]
+        tip = parts[1]
+        if not tip:
+            return value
+        return f"{value} ({tip})"
+
+    def _convert_st_blocks(self, text: str) -> str:
+        """Find and replace all top-level {{st|...}} blocks with markdown tables, preserving nested templates.
+        This is brace-aware to avoid splitting on inner pipes.
+        """
+        out: List[str] = []
+        i = 0
+        n = len(text)
+        while i < n:
+            j = text.find('{{st|', i)
+            if j == -1:
+                out.append(text[i:])
+                break
+            # append text before match
+            out.append(text[i:j])
+            # parse from j
+            k = j + 5  # position after '{{st|'
+            depth = 1  # depth of nested templates after '{{st|'
+            buf: List[str] = []
+            while k < n:
+                if k + 1 < n and text[k] == '{' and text[k+1] == '{':
+                    depth += 1
+                    buf.append(text[k:k+2])
+                    k += 2
+                    continue
+                if k + 1 < n and text[k] == '}' and text[k+1] == '}':
+                    depth -= 1
+                    if depth == 0:
+                        k += 2
+                        break
+                    buf.append(text[k:k+2])
+                    k += 2
+                    continue
+                buf.append(text[k])
+                k += 1
+            # buf contains "Label1|Value1|..." plus possibly leading parameters including 'st|'
+            inner = ''.join(buf)
+            # Remove any leading template name remnants if present
+            if inner.startswith('st|'):
+                inner = inner[3:]
+            table_md = self._render_st(inner) if inner else ''
+            out.append(table_md)
+            i = k
+        return ''.join(out)
+
+    def _convert_st(self, match) -> str:
+        """Convert {{st|Label1|Value1|Label2|Value2|...}} to a markdown table with right-aligned values."""
+        inner = match.group(1)
+        return self._render_st(inner)
+
+    def _split_top_level_pipes(self, s: str) -> List[str]:
+        parts: List[str] = []
+        buf: List[str] = []
+        depth = 0
+        i = 0
+        n = len(s)
+        while i < n:
+            if i + 1 < n and s[i] == '{' and s[i+1] == '{':
+                depth += 1
+                buf.append(s[i]); buf.append(s[i+1])
+                i += 2
+                continue
+            if i + 1 < n and s[i] == '}' and s[i+1] == '}':
+                depth = max(0, depth - 1)
+                buf.append(s[i]); buf.append(s[i+1])
+                i += 2
+                continue
+            if s[i] == '|' and depth == 0:
+                parts.append(''.join(buf))
+                buf = []
+                i += 1
+                continue
+            buf.append(s[i])
+            i += 1
+        parts.append(''.join(buf))
+        return parts
+
+    def _render_st(self, inner: str) -> str:
+        parts = [p.strip() for p in self._split_top_level_pipes(inner)]
+        if not parts:
+            return ''
+        rows: List[Tuple[str, str]] = []
+        i = 0
+        while i + 1 < len(parts):
+            label = parts[i]
+            value = parts[i+1]
+            i += 2
+            if not label:
+                continue
+            value_md = self._convert_wiki_to_markdown(value) if value else ''
+            rows.append((label, value_md))
+        if not rows:
+            return ''
+        lines = ["| Attribute | Value |", "|-----------|------:|"]
+        for label, value in rows:
+            lines.append(f"| **{label}** | {value} |")
+        return "\n".join(lines)
     
     def _convert_ap_formula(self, match) -> str:
         """Convert {{ap|...}} formulas to markdown math."""
@@ -1366,20 +1535,26 @@ class SimpleLoLConverter:
             lines.append("## Basic Information")
             lines.append("")
             lines.append("| Attribute | Value |")
-            lines.append("|-----------|-------|")
+            lines.append("|-----------|------:|")
+            # Friendly labels for certain keys
+            label_map = {
+                'be': 'Blue Essence',
+                'rp': 'Riot Points',
+            }
             for key, value in data['basic_info'].items():
                 if value:
-                    lines.append(f"| **{key.title().replace('_', ' ')}** | {value} |")
+                    label = label_map.get(str(key).lower(), key.title().replace('_', ' '))
+                    lines.append(f"| **{label}** | {value} |")
             lines.append("")
         
         # Statistics
         if data['stats']:
             lines.append("## Statistics")
             lines.append("")
-            lines.append("### Base Stats (Level 1-18)")
+            lines.append("### Base Stats")
             lines.append("")
-            lines.append("| Stat | Base | Growth | Level 18 |")
-            lines.append("|------|------|--------|----------|")
+            lines.append("| Stat | Base | Growth |")
+            lines.append("|------|-----:|-------:|")
             
             # Resource-aware labeling for mana/energy (do not hide any rows; all stats are important)
             resource = (data.get('basic_info', {}) or {}).get('resource')
@@ -1397,21 +1572,13 @@ class SimpleLoLConverter:
                     disp = display_label(stat_name)
                     base = stat_data['base']
                     growth = stat_data['growth']
-                    # Compute level 18 value; attack speed uses percent growth per level
-                    if stat_name == 'attack_speed':
-                        try:
-                            level_18 = float(base) * (1.0 + (float(growth) / 100.0) * 17.0)
-                        except Exception:
-                            level_18 = base
-                    else:
-                        level_18 = base + (growth * 17)
-                    
                     # Format the stat name nicely
                     display_name = disp.replace('_', ' ').title()
                     if stat_name == 'attack_speed':
-                        lines.append(f"| **{display_name}** | ${float(base):.3f}$ | $+{float(growth):.1f}\\%$ | ${float(level_18):.3f}$ |")
+                        # For attack speed, show only the base here; growth is presented separately below
+                        lines.append(f"| **{display_name}** | ${float(base):.3f}$ |  |")
                     else:
-                        lines.append(f"| **{display_name}** | ${base}$ | $+{growth}$ | ${level_18:.1f}$ |")
+                        lines.append(f"| **{display_name}** | ${base}$ | $+{growth}$ |")
             # Merge Advanced Stats into the same table as base stats
             if data.get('advanced_stats'):
                 adv = data['advanced_stats']
@@ -1456,7 +1623,7 @@ class SimpleLoLConverter:
                 for label, value, suffix, is_percent in adv_rows:
                     val_s = _format_adv_value(value, suffix=suffix, percent=is_percent)
                     if val_s is not None:
-                        lines.append(f"| **{label}** | {val_s} |  |  |")
+                        lines.append(f"| **{label}** | {val_s} |  |")
             # end of combined stats table
             lines.append("")
             # Map-specific stats tables
@@ -1479,7 +1646,7 @@ class SimpleLoLConverter:
                         lines.append(f"#### {map_names.get(key, key.upper())}")
                         lines.append("")
                         lines.append("| Metric | Value |")
-                        lines.append("|--------|-------|")
+                        lines.append("|--------|------:|")
                         entry = data['map_stats'][key]
                         if 'dmg_dealt' in entry:
                             lines.append(f"| **Damage Dealt** | {_fmt_percent(entry['dmg_dealt'])} |")
@@ -1533,7 +1700,7 @@ class SimpleLoLConverter:
                         rows.append((label, val_fmt))
                 if rows:
                     lines.append("| Attribute | Value |")
-                    lines.append("|-----------|-------|")
+                    lines.append("|-----------|------:|")
                     for label, val in rows:
                         lines.append(f"| **{label}** | {val} |")
                     lines.append("")
@@ -1645,7 +1812,7 @@ class SimpleLoLConverter:
                 
                 if stats_items:
                     lines.append("| Attribute | Value |")
-                    lines.append("|-----------|-------|")
+                    lines.append("|-----------|------:|")
                     for attr, value in stats_items:
                         lines.append(f"| **{attr}** | {value} |")
                     lines.append("")
@@ -1658,11 +1825,51 @@ class SimpleLoLConverter:
                     scaling_items.append(ability['leveling2'])
                 if ability.get('leveling3'):
                     scaling_items.append(ability['leveling3'])
+                if ability.get('leveling4'):
+                    scaling_items.append(ability['leveling4'])
+                if ability.get('leveling5'):
+                    scaling_items.append(ability['leveling5'])
+                if ability.get('extra_scaling'):
+                    scaling_items.extend(ability['extra_scaling'])
                 
                 if scaling_items:
                     lines.append("**Scaling:**")
+                    prev_was_table = False
+                    seen_tables: set[str] = set()
+                    def _emit_table_block(tbl: str):
+                        nonlocal prev_was_table
+                        tkey = tbl.strip()
+                        if not tkey:
+                            return
+                        if tkey in seen_tables:
+                            return
+                        seen_tables.add(tkey)
+                        if prev_was_table:
+                            lines.append("")
+                        lines.append(tbl)
+                        prev_was_table = True
+
                     for scaling in scaling_items:
-                        # Handle multiple scaling values in one line
+                        # If scaling is a table block produced by {{st}}, it starts with '|'
+                        if scaling.lstrip().startswith('|'):
+                            # Some scaling strings may contain multiple tables concatenated; split them
+                            blocks: List[str] = []
+                            current: List[str] = []
+                            for ln in scaling.splitlines():
+                                if re.match(r'^\s*\|\s*Attribute\s*\|\s*Value\s*\|\s*$', ln):
+                                    # start of a new table
+                                    if current:
+                                        blocks.append('\n'.join(current).strip())
+                                        current = []
+                                current.append(ln)
+                            if current:
+                                blocks.append('\n'.join(current).strip())
+                            if not blocks:
+                                blocks = [scaling]
+                            for tbl in blocks:
+                                _emit_table_block(tbl)
+                            continue
+                        # Otherwise, handle multiple labeled values in one line
                         if '**' in scaling and scaling.count('**') >= 4:
                             # Split on pattern like "**Shield:** value**Damage:**"
                             parts = re.split(r'(\*\*[^*]+\*\*)', scaling)
@@ -1679,6 +1886,7 @@ class SimpleLoLConverter:
                                 lines.append(f"- {current_item}")
                         else:
                             lines.append(f"- {scaling}")
+                        prev_was_table = False
                     lines.append("")
                 
                 # Notes

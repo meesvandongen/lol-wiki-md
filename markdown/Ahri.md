@@ -11,7 +11,7 @@
 ## Basic Information
 
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
 | **Title** | the Nine-Tailed Fox |
 | **Resource** | Mana |
 | **Range Type** | Ranged |
@@ -21,8 +21,8 @@
 | **Roles** | Burst |
 | **Riot Positions** | Middle |
 | **External Positions** | Middle |
-| **Be** | 1575 |
-| **Rp** | 790 |
+| **Blue Essence** | 1575 |
+| **Riot Points** | 790 |
 | **Difficulty** | 2 |
 | **Hero Type** | Mage |
 | **Alt Type** | Assassin |
@@ -36,36 +36,36 @@
 
 ## Statistics
 
-### Base Stats (Level 1-18)
+### Base Stats
 
-| Stat | Base | Growth | Level 18 |
-|------|------|--------|----------|
-| **Health** | $590.0$ | $+104.0$ | $2358.0$ |
-| **Mana** | $418.0$ | $+25.0$ | $843.0$ |
-| **Health Regen** | $2.5$ | $+0.6$ | $12.7$ |
-| **Mana Regen** | $8.0$ | $+0.8$ | $21.6$ |
-| **Armor** | $21.0$ | $+4.2$ | $92.4$ |
-| **Magic Resist** | $30.0$ | $+1.3$ | $52.1$ |
-| **Attack Damage** | $53.0$ | $+3.0$ | $104.0$ |
-| **Attack Speed** | $0.668$ | $+2.2\%$ | $0.918$ |
-| **Movement Speed** | $330.0$ | $+0.0$ | $330.0$ |
-| **Attack Range** | $550.0$ | $+0.0$ | $550.0$ |
-| **Base Attack Speed** | $0.668$ | | |
-| **Attack Speed Ratio** | $0.625$ | | |
-| **Bonus AS per Level** | $2.2\%$ | | |
-| **Missile Speed** | $1750$ units/second | | |
-| **Acquisition Radius** | $525$ units | | |
-| **Pathing Radius** | $35$ units | | |
-| **Selection Radius** | $100$ units | | |
-| **Selection Height** | $135$ units | | |
-| **Critical Damage** | $175.0\%$ | | |
+| Stat | Base | Growth |
+|------|-----:|-------:|
+| **Health** | $590.0$ | $+104.0$ |
+| **Mana** | $418.0$ | $+25.0$ |
+| **Health Regen** | $2.5$ | $+0.6$ |
+| **Mana Regen** | $8.0$ | $+0.8$ |
+| **Armor** | $21.0$ | $+4.2$ |
+| **Magic Resist** | $30.0$ | $+1.3$ |
+| **Attack Damage** | $53.0$ | $+3.0$ |
+| **Attack Speed** | $0.668$ | |
+| **Movement Speed** | $330.0$ | $+0.0$ |
+| **Attack Range** | $550.0$ | $+0.0$ |
+| **Base Attack Speed** | $0.668$ | |
+| **Attack Speed Ratio** | $0.625$ | |
+| **Bonus AS per Level** | $2.2\%$ | |
+| **Missile Speed** | $1750$ units/second | |
+| **Acquisition Radius** | $525$ units | |
+| **Pathing Radius** | $35$ units | |
+| **Selection Radius** | $100$ units | |
+| **Selection Height** | $135$ units | |
+| **Critical Damage** | $175.0\%$ | |
 
 ### Map-specific Stats
 
 #### ARAM
 
 | Metric | Value |
-|--------|-------|
+|--------|------:|
 | **Damage Dealt** | $100.0\%$ |
 | **Damage Taken** | $100.0\%$ |
 | **Healing** | $90.0\%$ |
@@ -73,14 +73,14 @@
 #### URF
 
 | Metric | Value |
-|--------|-------|
+|--------|------:|
 | **Damage Dealt** | $90.0\%$ |
 | **Damage Taken** | $105.0\%$ |
 
 #### Ultimate Spellbook
 
 | Metric | Value |
-|--------|-------|
+|--------|------:|
 | **Damage Taken** | $95.0\%$ |
 
 ## Abilities
@@ -94,7 +94,7 @@
 **Innate:** **Ahri** generates a stack of *Essence Fragment* whenever she kills a minion or monster. At 9 stacks, she consumes them to herself for 35 to 95 (+ 20% AP). Additionally, whenever **Ahri** scores a champion takedown within 3 seconds of damaging them, she brings their essence to her to consume it to heal herself for 75 to 165 (+ 30% AP).
 
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
 | **Targeting** | Passive |
 | **Affects** | Self |
 
@@ -111,21 +111,24 @@
 **Active:** **Ahri** sends her orb in the target direction that deals magic damage to enemies it passes through. Upon reaching maximum range, it returns to her to deal the same amount in *true damage* to enemies it passes through. *Enemies can be hit only once per pass.*
 
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
 | **Cooldown** | 7 seconds |
 | **Cast Time** | $0.25$ seconds |
 | **Cost** | $55-95$ mana |
 | **Targeting** | Direction |
 | **Affects** | Enemies |
 | **Damage Type** | Magic True |
-| **Speed** | 1550 / 60 - 2600 units/second |
-| **Effect Radius** | 100 units |
+| **Speed** | 1550 (Outgoing missile) / 60 - 2600 (Returning missile, acceleration 1900) units/second |
+| **Effect Radius** | 100 (Circle check at return point) units |
 | **Spell Shield** | Special |
 | **Spell Effects** | Area of effect |
 | **Projectile** | True |
 
 **Scaling:**
-- **Damage Per Pass:* $40-140$ (+ 50% AP)2-140×2$ (+ $50×2$% AP)
+| Attribute | Value |
+|-----------|------:|
+| **Damage Per Pass** | $40-140$ (+ 50% AP) |
+| **Total Mixed Damage** | $40×2-140×2$ (+ $50×2$% AP) |
 
 **Notes:**
 
@@ -139,26 +142,35 @@
 
 ### W: Fox-Fire
 
-**Active:** **Ahri** gains a burst of ms and conjures three fox-fires that orbit her for a short time. Fox-fires home onto nearby enemies, dealing magic damage.
+**Active:** **Ahri** gains a burst of *ms|move speed* and conjures three fox-fires that orbit her for a short time. Fox-fires home onto nearby enemies, dealing magic damage.
 
 **Active:** **Ahri** gains *40% **bonus** movement speed* that decays over 2 seconds and conjures three flames which orbit her clockwise for up to $2.5$ seconds. After $0.25$ seconds of the cast, each flame targets a sight enemy based on priority, or after $0.4$ seconds, simply targets the closest visible enemy in range. Each flame deals magic damage, with subsequent flames against a target dealing 30% damage. Flames prioritize enemy champions hit by **Charm**, then enemy champion, then minions that would die to 'Fox-Fire's* damage, and then the target of *'Ahri's' last basic attack within 3 seconds. 'Fox-Fire's damage is doubled against minions below *20% **maximum** health*.
 
 | Attribute | Value |
-|-----------|-------|
-| **Cooldown** | $10-6$ seconds |
+|-----------|------:|
+| **Cooldown** | $10-6$ (Starts post-effect) seconds |
 | **Cast Time** | none |
 | **Cost** | 30 mana |
 | **Targeting** | Auto |
 | **Affects** | Enemies |
 | **Damage Type** | Magic |
-| **Speed** | $75.92$ / 1400 units/second |
-| **Effect Radius** | 150 / 550 / 725 units |
+| **Speed** | $75.92$ / 1400 (Fired missile speed) units/second |
+| **Effect Radius** | 150 (Orbit radius) / 550 (Non-prioritized targets, from the missile location) / 725 (Prioritized targets, from Ahri's location) units |
 | **Spell Shield** | True |
 | **Spell Effects** | Single target |
 | **Projectile** | True |
 
 **Scaling:**
-- **Initial Flame Magic Damage:* $40-120$ (+ 40% AP)0.3-120×0.3$ (+ $400.3$% AP)1.6-120×1.6$ (+ $40×1.6$% AP)
+| Attribute | Value |
+|-----------|------:|
+| **Initial Flame Magic Damage** | $40-120$ (+ 40% AP) |
+| **Subsequent Flame Magic Damage** | $40×0.3-120×0.3$ (+ $40×0.3$% AP) |
+| **Total Single-Target Damage** | $40×1.6-120×1.6$ (+ $40×1.6$% AP) |
+
+| Attribute | Value |
+|-----------|------:|
+| **Increased Initial Flame Minion Damage** | $40×2-120×2$ (+ $40×2$% AP) |
+| **Increased Subsequent Flame Minion Damage** | $40×2×0.3-120×2×0.3$ (+ $40×2×0.3$% AP) |
 
 **Notes:**
 
@@ -175,7 +187,7 @@
 **Active:** **Ahri** blows forth a kiss in the target direction that deals magic damage to the first enemy hit, knockdown and charm and slow them by 65% for a duration.
 
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
 | **Cooldown** | 12 seconds |
 | **Cast Time** | $0.25$ seconds |
 | **Cost** | 60 mana |
@@ -188,8 +200,13 @@
 | **Projectile** | True |
 
 **Scaling:**
-- **Magic Damage:** $80-240$ (+ 85% AP)
-- **Disable Duration:** $1.2-1.8$ seconds
+| Attribute | Value |
+|-----------|------:|
+| **Magic Damage** | $80-240$ (+ 85% AP) |
+
+| Attribute | Value |
+|-----------|------:|
+| **Disable Duration** | $1.2-1.8$ seconds |
 
 **Notes:**
 
@@ -204,25 +221,29 @@
 
 **Ahri** can cast this ability up to three times in quick succession. During this time, additional casts are gained whenever a champion essence is consumed via **Essence Theft**.
 
-**Active:** **Ahri** dashes to the target location and then fires essence bolts to up to 3 nearby sight enemies, each dealing magic damage. *Spirit Rush* can be recast twice more within 15 seconds of the activation at no additional cost, with a 1-second static cooldown between casts. Consuming a champion's essence with **Essence Theft** while *Spirit Rush* is active extends the recast duration by and up to 10 seconds, and grants an additional recast, storing up to 3 recasts at a time. **Recast:** **Ahri** mimics the first cast's effects. 'Spirit Rush's recast duration will persist even after using all recasts. *Fox-Fire* can be cast during the dash.'
+**Active:** **Ahri** dashes to the target location and then fires essence bolts to up to 3 nearby sight enemies, each dealing magic damage. 
+
+*Spirit Rush* can be recast twice more within 15 seconds of the activation at no additional cost, with a 1-second static cooldown (Unaffected by ability haste) between casts. Consuming a champion's essence with **Essence Theft** while *Spirit Rush* is active extends the recast duration by and up to 10 seconds, and grants an additional recast, storing up to 3 recasts at a time. **Recast:** **Ahri** mimics the first cast's effects. 'Spirit Rush's recast duration will persist even after using all recasts. *Fox-Fire* can be cast during the dash.'
 
 | Attribute | Value |
-|-----------|-------|
-| **Range** | 500 units |
-| **Cooldown** | $140-100$ seconds |
+|-----------|------:|
+| **Range** | 500 (Maximum dash range) units |
+| **Cooldown** | $140-100$ (Starts after first cast, and refreshes upon gaining recasts) seconds |
 | **Cast Time** | none |
 | **Cost** | 100 mana |
 | **Targeting** | Location |
 | **Affects** | Enemies |
 | **Damage Type** | Magic |
-| **Speed** | 1200 + Dash speed / 1400 units/second |
-| **Effect Radius** | 600 units |
+| **Speed** | 1200 + / 1400 (Energy bolt missile speed) units/second |
+| **Effect Radius** | 600 (Energy bolts target search radius, from Ahri's location on dash end/interrupt) units |
 | **Spell Shield** | True |
 | **Spell Effects** | aoe |
 | **Projectile** | True |
 
 **Scaling:**
-- **Magic Damage:** $60-120$ (+ 35% AP)
+| Attribute | Value |
+|-----------|------:|
+| **Magic Damage** | $60-120$ (+ 35% AP) |
 
 **Notes:**
 
