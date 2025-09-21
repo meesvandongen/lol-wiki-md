@@ -46,7 +46,7 @@
 
 *This effect cannot recur on the same champion for a period.*
 
-**Innate:** ''Zed's** basic attacks against targets below 50% **maximum'' health are empowered to deal $6-10$% of the target's **maximum** health as **bonus** magic damage. Against monsters, *Contempt for the Weak* deals 200% damage, capped at 300. *Contempt for the Weak* cannot occur on the same champion more than once every few seconds.
+**Innate:** ''Zed's** basic attacks against targets below 50% **maximum'' health are empowered to deal key=% of the target's **maximum** health as **bonus** magic damage. Against monsters, *Contempt for the Weak* deals 200% damage, capped at 300. *Contempt for the Weak* cannot occur on the same champion more than once every few seconds.
 
 | Attribute | Value |
 |-----------|-------|
@@ -87,8 +87,7 @@
 | **Projectile** | True |
 
 **Scaling:**
-- **Physical Damage:** $80-240$ (+ 100% **bonus* AD)0.6-240*0.6$ (+ $100*0.6$%
-- *bonus AD)
+- **Physical Damage:** $80-240$ (+ 100% bonus AD); pass-through: $80-240$ × 0.6 (+ $100×0.6$% bonus AD)
 
 **Notes:**
 
@@ -160,9 +159,8 @@
 | **Spell Effects** | aoe |
 
 **Scaling:**
-- **Physical Damage:** $70-170$ (+ 80%
-- *bonus AD)
-- **Slow:* $20-40$%1.5-40*1.5$%
+- **Physical Damage:** $70-170$ bonus AD)
+- **Slow:* $20-40$%1.5-40×1.5$%
 
 **Notes:**
 
@@ -198,7 +196,7 @@
 | **Spell Effects** | Single target |
 
 **Scaling:**
-- **Physical Damage:** 100% AD (+ $25/40/55$% of damage stored)
+- **Physical Damage:** $25/40/55$
 
 **Notes:**
 
@@ -244,16 +242,16 @@
 ### V14.15
 - *Razor Shuriken*
   - Base damage increased to $80-240$ from $80-220$.
-    - Subsequent target base damage increased to $80*0.6-240*0.6$ from $80*0.6-220*0.6$.
+    - Subsequent target base damage increased to $80×0.6-240×0.6$ from $80×0.6-220×0.6$.
   - Bonus AD ratio reduced to 100% *bonus AD from 110% *bonus AD.
-    - Subsequent target bonus AD ratio reduced to $100*0.6$% *bonus AD from $110*0.6$% *bonus AD.
+    - Subsequent target bonus AD ratio reduced to $100×0.6$% *bonus AD from $110×0.6$% *bonus AD.
 - *Death Mark*
   - Cooldown increased to $120-100 3$ seconds from $120-80 3$.
 
 ### V14.14
 - *Razor Shuriken*
   - Base damage increased to $80-220$ from $70-210$.
-    - Subsequent target base damage increased to $80*0.6-220*0.6$ from $70*0.6-210*0.6$.
+    - Subsequent target base damage increased to $80×0.6-220×0.6$ from $70×0.6-210×0.6$.
 - *Shadow Slash*
   - *Living Shadow* cooldown reduction increased to 3 seconds from 2.
 - *Living Shadow*

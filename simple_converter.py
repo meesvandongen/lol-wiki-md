@@ -767,10 +767,118 @@ class SimpleLoLConverter:
         
         # Convert champion/ability references
         text = re.sub(r'\{\{ci\|([^}|]+)(?:\|[^}]*)?\}\}', r'**\1**', text)
-        text = re.sub(r'\{\{ai\|([^}|]+)\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text)  # Just ability name in italics
+        # cis: champion info possessive (e.g., {{cis|Lulu}} -> **Lulu**’s)
+        text = re.sub(r'\{\{cis\|([^}|]+)(?:\|[^}]*)?\}\}', r'**\1**’s', text)
+        # ai template: {{ai|Ability|Champion}} or {{ai|Ability|Champion|Display}}
+        # Prefer 3rd arg (Display) when present, else 1st arg (Ability). Keep italics, drop linking.
+        def _ai_repl(m: re.Match) -> str:
+            full = m.group(0)
+            # Capture up to 3 args loosely to allow pipes
+            inner = full[2:-2]  # strip '{{' '}}'
+            parts = inner.split('|')
+            # parts[0] == 'ai'
+            args = parts[1:]
+            ability = args[0].strip() if len(args) >= 1 else ''
+            display = args[2].strip() if len(args) >= 3 and args[2].strip() else ability
+            return f"*{display}*"
+        text = re.sub(r'\{\{ai\|[^}]+\}\}', _ai_repl, text)
+        # ais template: like ai but possessive; render italic with trailing ’s
+        def _ais_repl(m: re.Match) -> str:
+            full = m.group(0)
+            inner = full[2:-2]
+            parts = inner.split('|')
+            args = parts[1:]
+            ability = args[0].strip() if len(args) >= 1 else ''
+            display = args[2].strip() if len(args) >= 3 and args[2].strip() else ability
+            # Use typographic apostrophe for possessive
+            return f"*{display}*’s"
+        text = re.sub(r'\{\{ais\|[^}]+\}\}', _ais_repl, text)
+        # bi: buff information; keep the most relevant text (prefer last non-empty arg, else first)
+        def _bi_repl(m: re.Match) -> str:
+            full = m.group(0)
+            inner = full[2:-2]
+            parts = inner.split('|')
+            args = [a.strip() for a in parts[1:] if a.strip()]
+            if not args:
+                return ''
+            # Heuristic: if multiple args, last is often the label/quoted text
+            return args[-1]
+        text = re.sub(r'\{\{bi\|[^}]+\}\}', _bi_repl, text)
+        # ui: unit information; keep the primary text (first arg)
+        def _ui_repl(m: re.Match) -> str:
+            full = m.group(0)
+            inner = full[2:-2]
+            parts = inner.split('|')
+            arg = parts[1].strip() if len(parts) > 1 else ''
+            return arg
+        text = re.sub(r'\{\{ui\|[^}]+\}\}', _ui_repl, text)
         text = re.sub(r'\{\{tip\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text)
         text = re.sub(r'\{\{ri\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text)  # Rune references
         text = re.sub(r'\{\{ii\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text)  # Item references
+        # TFT item template: {{TFT Item|Name}} -> *Name*
+        # The surrounding text already mentions Teamfight Tactics item, so postfix is redundant
+        text = re.sub(r'\{\{TFT Item\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text)
+
+    # High-frequency templates from audit: provide safe text-only mappings
+    # LoR card/link templates -> keep display text
+    text = re.sub(r'\{\{tiplor\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{lor\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    # Wild Rift / TFT tooltips -> keep display text
+    text = re.sub(r'\{\{tiptft\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{wrtip\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    # Styled/special links/icons -> prefer plain text
+    text = re.sub(r'\{\{csl\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{si\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{cai\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{cid\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    # Items (plural) -> italicize like ii
+    text = re.sub(r'\{\{iis\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+    # Styled italic (linked variant) -> italicize content
+    text = re.sub(r'\{\{stil\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+    # Gold-related templates -> append unit
+    text = re.sub(r'\{\{g\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1 gold', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{\s*g\s*\}\}', 'gold', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{gold value\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1 gold', text, flags=re.IGNORECASE)
+    # Symbol helpers
+    text = re.sub(r'\{\{times(?:\|[^}]*)?\}\}', '×', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{degree(?:\|[^}]*)?\}\}', '°', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{plus(?:\|[^}]*)?\}\}', '+', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{tftt\}\}', 'Teamfight Tactics', text, flags=re.IGNORECASE)
+    # Structural/maintenance templates -> drop
+    text = re.sub(r'\{\{(?:references|lol navigation|champions|champion categories|doc|fairuse|section top)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{(?:rune header|rune footer)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{(?:game banner|patch box)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{!\}\}', '', text)  # table/format helper
+    # Scribunto/cargo variables or invocations -> drop
+    text = re.sub(r'\{\{\s*#var:[^}]+\}\}', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{\s*#invoke:[^}]+\}\}', '', text, flags=re.IGNORECASE)
+    # Numeric-only templates frequently used as layout helpers -> drop
+    text = re.sub(r'\{\{\s*\d+\s*\}\}', '', text)
+    # Misc pass-through (keep primary text)
+    text = re.sub(r'\{\{(?:rd|nie|spells|recurring)\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    # Specific label template seen in audit
+    text = re.sub(r'\{\{\s*effect at cast time end\s*\}\}', 'Effect at cast time end', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{\s*effect at cast time start\s*\}\}', 'Effect at cast time start', text, flags=re.IGNORECASE)
+    # Champion info/infobox occurrences in body -> drop
+    text = re.sub(r'\{\{\s*champion info\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
+    # Champion color/style wrappers: keep content
+    text = re.sub(r'\{\{cc[dsib]?\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    # TFT helper templates (icons/names/categories) -> keep primary text
+    text = re.sub(r'\{\{tft[inc]?\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    # Wild Rift wrappers
+    text = re.sub(r'\{\{wr\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{wri\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+    # Unit/item plural wrappers
+    text = re.sub(r'\{\{uis\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{items\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+    # Generic wrappers: keep or drop
+    text = re.sub(r'\{\{(?:builds|grouped ability|map changes|recipe/item|recipe|link|text)\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{(?:icononly|image|clear|width|alttext|documentation|border|class|iconclass|iconstyle|labelclass|labelstyle|style|display|label|height|pagename|variant|nolink)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
+    # Simple keyword templates
+    text = re.sub(r'\{\{\s*adaptive\s*\}\}', 'adaptive', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{\s*critical damage\s*\}\}', 'critical damage', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{\s*equals\s*\}\}', '=', text, flags=re.IGNORECASE)
+    text = re.sub(r'\{\{\s*separator\s*\}\}', '•', text, flags=re.IGNORECASE)
 
         # Handle special formatting
         text = re.sub(r'\{\{w\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text)  # Wikipedia links
@@ -787,6 +895,9 @@ class SimpleLoLConverter:
         # Handle bug markers and special notations
         text = re.sub(r'\{\{bug\}\}', '', text)
         text = re.sub(r'\{\{bug\|[^}]+\}\}', '', text)
+        # Champion without ability power ratio -> hard-coded text
+        text = re.sub(r'\{\{\s*Champion without ability power ratio\s*\|[^}]*\}\}', 'This champion has no ability power ratio.', text)
+        text = re.sub(r'\{\{\s*Champion without ability power ratio\s*\}\}', 'This champion has no ability power ratio.', text)
         
         # Remove references
         text = re.sub(r'<ref[^>]*>.*?</ref>', '', text, flags=re.DOTALL)
@@ -1383,6 +1494,11 @@ class SimpleLoLConverter:
         # Normalize malformed emphasis around common tokens
         md = re.sub(r'\*bonus\*\*\s*AD\b', 'bonus AD', md)
         md = re.sub(r'\*bonus\*\*\s*AP\b', 'bonus AP', md)
+        # Additional robust cleanup for emphasis around bonus labels
+        md = re.sub(r'\*{1,3}bonus\*{1,3}\s*AD\b', 'bonus AD', md, flags=re.IGNORECASE)
+        md = re.sub(r'\*{1,3}bonus\*{1,3}\s*AP\b', 'bonus AP', md, flags=re.IGNORECASE)
+        # Replace asterisk multiplication between numbers with × to avoid markdown italic parsing
+        md = re.sub(r'(?<=\d)\*(?=\d)', '×', md)
         md = re.sub(r'\*bonus\*\*\s*armor\b', 'bonus armor', md)
         md = re.sub(r'\*bonus\*\*\s*attack speed\b', 'bonus attack speed', md)
         md = re.sub(r'\*modified\*\*\s*', 'modified ', md)
@@ -1433,6 +1549,70 @@ class SimpleLoLConverter:
             before, section, after = md[:m.start(2)], m.group(2), md[m.end(2):]
             fixed_section = _fix_patch_history(section)
             md = before + fixed_section + after
+        # Repair common damage scaling formatting with pass-through factors (e.g., ×0.6)
+        def _fix_damage_scaling_lines(text: str) -> str:
+            lines = text.split('\n')
+            out = []
+            i = 0
+            while i < len(lines):
+                line = lines[i]
+                # Merge orphan bullet like '- *bonus AD)' into previous line, if applicable (rare artifact)
+                m_orphan = re.match(r'^\s*-\s*\*bonus\s+(AD|AP)\)\s*$', line, flags=re.IGNORECASE)
+                if m_orphan:
+                    if out:
+                        token = m_orphan.group(1).upper()
+                        suffix = f" bonus {token})"
+                        prev = out[-1].rstrip()
+                        # Avoid duplicating the suffix if it's already present
+                        if not prev.endswith(suffix):
+                            # Ensure a separating space
+                            sep = '' if prev.endswith(' ') else ' '
+                            out[-1] = prev + sep + suffix
+                    i += 1
+                    continue
+                mline = re.match(r'^(?P<prefix>\s*-\s+\*\*(?:Physical|Magic) Damage:\*\*\s*)(?P<body>.+)$', line)
+                if mline:
+                    prefix = mline.group('prefix')
+                    body = mline.group('body')
+                    # Capture first math range as base
+                    mbase = re.search(r'(\$[^$]+\$)', body)
+                    base = mbase.group(1) if mbase else None
+                    # Capture presence of bonus AD/AP percent in the first segment
+                    bonus_label = None
+                    mbonus = re.search(r'\(\+\s*([0-9]+\%[^)]*?)\)', body)
+                    if mbonus:
+                        bonus_label = mbonus.group(1)
+                    # Detect a pass-through multiplication factor (e.g., ×0.6) after the first segment
+                    passthrough = None
+                    mp = re.search(r'×\s*(0\.?\d+)', body)
+                    if mp and base:
+                        factor = mp.group(1)
+                        passthrough = f"{base} × {factor}"
+                    # Detect bonus ratio pass-through (e.g., $100×0.6$%)
+                    bonus_pt = None
+                    mbpt = re.search(r'(\$\s*\d+\s*×\s*0\.?\d+\s*\$\s*\%?)', body)
+                    if mbpt:
+                        # Ensure trailing '%' after math if present
+                        val = mbpt.group(1)
+                        if not val.endswith('%') and '%'+val not in body:
+                            # Leave as-is; a following % may exist
+                            pass
+                        bonus_pt = val
+                    if base:
+                        rebuilt = base
+                        if bonus_label:
+                            rebuilt += f" (+ {bonus_label})"
+                        if passthrough:
+                            rebuilt += f"; pass-through: {passthrough}"
+                            if bonus_pt:
+                                rebuilt += f" (+ {bonus_pt} bonus AD)"
+                        out.append(prefix + rebuilt)
+                        i += 1
+                        continue
+                out.append(line)
+                i += 1
+            return '\n'.join(out)
+        md = _fix_damage_scaling_lines(md)
         # Unwrap links that are not same-page anchors: keep [text](#anchor), strip others to plain text
         if self._current_page_basename:
             current = re.escape(self._current_page_basename)
