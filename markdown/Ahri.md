@@ -112,14 +112,16 @@
 
 | Attribute | Value |
 |-----------|------:|
-| **Cooldown** | 7 seconds |
+| **Range** | 900 (Without return point aoe) units |
 | **Cast Time** | $0.25$ seconds |
+| **Effect Radius** | 100 (Circle check at return point) units |
+| **Width** | 200 units |
+| **Speed** | 1550 (Outgoing missile) / 60 - 2600 (Returning missile, acceleration 1900) units/second |
 | **Cost** | $55-95$ mana |
+| **Cooldown** | 7 seconds |
 | **Targeting** | Direction |
 | **Affects** | Enemies |
 | **Damage Type** | Magic True |
-| **Speed** | 1550 (Outgoing missile) / 60 - 2600 (Returning missile, acceleration 1900) units/second |
-| **Effect Radius** | 100 (Circle check at return point) units |
 | **Spell Shield** | Special |
 | **Spell Effects** | Area of effect |
 | **Projectile** | True |
@@ -148,14 +150,14 @@
 
 | Attribute | Value |
 |-----------|------:|
-| **Cooldown** | $10-6$ (Starts post-effect) seconds |
 | **Cast Time** | none |
+| **Effect Radius** | 150 (Orbit radius) / 550 (Non-prioritized targets, from the missile location) / 725 (Prioritized targets, from Ahri's location) units |
+| **Speed** | $75.92$ / 1400 (Fired missile speed) units/second |
 | **Cost** | 30 mana |
+| **Cooldown** | $10-6$ (Starts post-effect) seconds |
 | **Targeting** | Auto |
 | **Affects** | Enemies |
 | **Damage Type** | Magic |
-| **Speed** | $75.92$ / 1400 (Fired missile speed) units/second |
-| **Effect Radius** | 150 (Orbit radius) / 550 (Non-prioritized targets, from the missile location) / 725 (Prioritized targets, from Ahri's location) units |
 | **Spell Shield** | True |
 | **Spell Effects** | Single target |
 | **Projectile** | True |
@@ -188,13 +190,15 @@
 
 | Attribute | Value |
 |-----------|------:|
-| **Cooldown** | 12 seconds |
+| **Range** | 1000 units |
 | **Cast Time** | $0.25$ seconds |
+| **Width** | 120 units |
+| **Speed** | 1550 units/second |
 | **Cost** | 60 mana |
+| **Cooldown** | 12 seconds |
 | **Targeting** | Direction |
 | **Affects** | Enemies |
 | **Damage Type** | Magic |
-| **Speed** | 1550 units/second |
 | **Spell Shield** | True |
 | **Spell Effects** | spell |
 | **Projectile** | True |
@@ -227,18 +231,22 @@
 
 | Attribute | Value |
 |-----------|------:|
-| **Range** | 500 (Maximum dash range) units |
-| **Cooldown** | $140-100$ (Starts after first cast, and refreshes upon gaining recasts) seconds |
 | **Cast Time** | none |
+| **Target Range** | 500 (Maximum dash range) units |
+| **Effect Radius** | 600 (Energy bolts target search radius, from Ahri's location on dash end/interrupt) units |
+| **Speed** | 1200 + / 1400 (Energy bolt missile speed) units/second |
 | **Cost** | 100 mana |
+| **Cooldown** | $140-100$ (Starts after first cast, and refreshes upon gaining recasts) seconds |
+| **Cooldown Start** | on-cast |
 | **Targeting** | Location |
 | **Affects** | Enemies |
 | **Damage Type** | Magic |
-| **Speed** | 1200 + / 1400 (Energy bolt missile speed) units/second |
-| **Effect Radius** | 600 (Energy bolts target search radius, from Ahri's location on dash end/interrupt) units |
 | **Spell Shield** | True |
 | **Spell Effects** | aoe |
 | **Projectile** | True |
+| **Out of Range Behavior** | cast at max |
+| **Grounded** | True |
+| **Knockdown** | True |
 
 **Scaling:**
 | Attribute | Value |

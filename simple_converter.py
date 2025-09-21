@@ -744,14 +744,24 @@ class SimpleLoLConverter:
         key_map = {
             'blurb': 'blurb',
             'blurb2': 'blurb2',
+            'blurb3': 'blurb3',
+            'blurb4': 'blurb4',
             'description': 'description',
             'description2': 'description2',
             'description3': 'description3',
             'description4': 'description4',
             'description5': 'description5',
+            'description6': 'description6',
             'target range': 'target_range',
+            'range': 'range',
+            'attack range': 'attack_range',
+            'ai range': 'ai_range',
+            'windup': 'windup',
+            'collision radius': 'collision_radius',
             'cooldown': 'cooldown',
             'cooldown2': 'cooldown2',
+            'cdstart': 'cdstart',
+            'static': 'static',
             'cost': 'cost',
             'cost2': 'cost2',
             'costtype': 'costtype',
@@ -760,6 +770,7 @@ class SimpleLoLConverter:
             'leveling3': 'leveling3',
             'leveling4': 'leveling4',
             'leveling5': 'leveling5',
+            'leveling6': 'leveling6',
             'notes': 'notes',
             'recharge': 'recharge',
             'cast time': 'cast_time',
@@ -768,9 +779,36 @@ class SimpleLoLConverter:
             'damagetype': 'damage_type',
             'speed': 'speed',
             'effect radius': 'effect_radius',
+            'angle': 'angle',
+            'inner radius': 'inner_radius',
+            'tether radius': 'tether_radius',
+            'width': 'width',
             'spellshield': 'spell_shield',
             'spelleffects': 'spell_effects',
+            'outofrange': 'outofrange',
+            'targetwarning': 'targetwarning',
+            'terraingrace': 'terraingrace',
+            'parry': 'parry',
             'projectile': 'projectile',
+            'callforhelp': 'callforhelp',
+            'grounded': 'grounded',
+            'knockdown': 'knockdown',
+            'silence': 'silence',
+            'customlabel': 'customlabel',
+            'custominfo': 'custominfo',
+            'customlabel2': 'customlabel2',
+            'custominfo2': 'custominfo2',
+            'cdstart': 'cdstart',
+            'static': 'static',
+            'ontargetcdstatic': 'ontargetcdstatic',
+            'ontargetcd': 'ontargetcd',
+            'queue time': 'queue_time',
+            'flavortext': 'flavortext',
+            'flavorsound': 'flavorsound',
+            'differences': 'differences',
+            'tips': 'tips',
+            'yvideo': 'yvideo',
+            'yvideo2': 'yvideo2',
         }
 
         for src_key, dst_key in key_map.items():
@@ -1770,45 +1808,93 @@ class SimpleLoLConverter:
                     lines.append(full_description)
                     lines.append("")
                 
-                # Stats table
+                # Stats table (ordered to match Ability template)
                 stats_items = []
+                # Ranges and timings
+                if ability.get('range'):
+                    stats_items.append(('Range', self._format_with_unit(self._clean_attribute_value(ability['range']), 'units')))
+                if ability.get('cast_time'):
+                    stats_items.append(('Cast Time', self._format_with_unit(self._clean_attribute_value(ability['cast_time']), 'seconds')))
                 if ability.get('target_range'):
-                    stats_items.append(('Range', self._format_with_unit(ability['target_range'], 'units')))
-                # Merge cooldown/cooldown2 if both exist
+                    stats_items.append(('Target Range', self._format_with_unit(self._clean_attribute_value(ability['target_range']), 'units')))
+                if ability.get('attack_range'):
+                    stats_items.append(('Attack Range', self._format_with_unit(self._clean_attribute_value(ability['attack_range']), 'units')))
+                if ability.get('ai_range'):
+                    stats_items.append(('AI Range', self._format_with_unit(self._clean_attribute_value(ability['ai_range']), 'units')))
+                if ability.get('windup'):
+                    stats_items.append(('Windup', self._format_with_unit(self._clean_attribute_value(ability['windup']), 'seconds')))
+                if ability.get('collision_radius'):
+                    stats_items.append(('Collision Radius', self._format_with_unit(self._clean_attribute_value(ability['collision_radius']), 'units')))
+                if ability.get('effect_radius'):
+                    stats_items.append(('Effect Radius', self._format_with_unit(self._clean_attribute_value(ability['effect_radius']), 'units')))
+                if ability.get('angle'):
+                    stats_items.append(('Angle', self._clean_attribute_value(ability['angle'])))
+                if ability.get('inner_radius'):
+                    stats_items.append(('Inner Radius', self._format_with_unit(self._clean_attribute_value(ability['inner_radius']), 'units')))
+                if ability.get('tether_radius'):
+                    stats_items.append(('Tether Radius', self._format_with_unit(self._clean_attribute_value(ability['tether_radius']), 'units')))
+                if ability.get('width'):
+                    stats_items.append(('Width', self._format_with_unit(self._clean_attribute_value(ability['width']), 'units')))
+                if ability.get('speed'):
+                    stats_items.append(('Speed', self._format_with_unit(self._clean_attribute_value(ability['speed']), 'units/second')))
+                # Costs
+                if ability.get('cost') and ability.get('costtype'):
+                    cost_val = self._clean_attribute_value(ability['cost'])
+                    if ability.get('cost2'):
+                        cost_val2 = self._clean_attribute_value(ability['cost2'])
+                        cost_val = f"{cost_val} / {cost_val2}"
+                    stats_items.append(('Cost', f"{cost_val} {self._clean_attribute_value(ability['costtype'])}"))
+                # Cooldowns and recharge
                 if ability.get('cooldown') or ability.get('cooldown2'):
                     cd_parts: List[str] = []
                     if ability.get('cooldown'):
-                        cd_parts.append(self._format_with_unit(ability['cooldown'], 'seconds'))
+                        cd_parts.append(self._format_with_unit(self._clean_attribute_value(ability['cooldown']), 'seconds'))
                     if ability.get('cooldown2'):
-                        cd_parts.append(self._format_with_unit(ability['cooldown2'], 'seconds'))
+                        cd_parts.append(self._format_with_unit(self._clean_attribute_value(ability['cooldown2']), 'seconds'))
                     stats_items.append(('Cooldown', ' / '.join([p for p in cd_parts if p])))
                 if ability.get('recharge'):
-                    stats_items.append(('Recharge', self._format_with_unit(ability['recharge'], 'seconds')))
-                if ability.get('cast_time'):
-                    stats_items.append(('Cast Time', self._format_with_unit(ability['cast_time'], 'seconds')))
-                # Merge cost/cost2 if available
-                if ability.get('cost') and ability.get('costtype'):
-                    cost_val = ability['cost']
-                    if ability.get('cost2'):
-                        cost_val = f"{ability['cost']} / {ability['cost2']}"
-                    stats_items.append(('Cost', f"{cost_val} {ability['costtype']}"))
-                # Additional parsed attributes
+                    stats_items.append(('Recharge', self._format_with_unit(self._clean_attribute_value(ability['recharge']), 'seconds')))
+                if ability.get('cdstart'):
+                    stats_items.append(('Cooldown Start', self._clean_attribute_value(self._convert_wiki_to_markdown(ability['cdstart']))))
+                if ability.get('static'):
+                    stats_items.append(('Static Cooldown', self._clean_attribute_value(self._convert_wiki_to_markdown(ability['static']))))
+                if ability.get('ontargetcd'):
+                    stats_items.append(('On-target Cooldown', self._format_with_unit(self._clean_attribute_value(ability['ontargetcd']), 'seconds')))
+                if ability.get('ontargetcdstatic'):
+                    stats_items.append(('On-target CD Static', self._clean_attribute_value(self._convert_wiki_to_markdown(ability['ontargetcdstatic']))))
+                if ability.get('queue_time'):
+                    stats_items.append(('Queue Time', self._format_with_unit(self._clean_attribute_value(ability['queue_time']), 'seconds')))
+                # Targeting and effects
                 if ability.get('targeting'):
                     stats_items.append(('Targeting', self._clean_attribute_value(self._convert_wiki_to_markdown(ability['targeting']))))
                 if ability.get('affects'):
                     stats_items.append(('Affects', self._clean_attribute_value(self._convert_wiki_to_markdown(ability['affects']))))
                 if ability.get('damage_type'):
                     stats_items.append(('Damage Type', self._clean_attribute_value(self._convert_wiki_to_markdown(ability['damage_type']))))
-                if ability.get('speed'):
-                    stats_items.append(('Speed', self._format_with_unit(self._clean_attribute_value(ability['speed']), 'units/second')))
-                if ability.get('effect_radius'):
-                    stats_items.append(('Effect Radius', self._format_with_unit(self._clean_attribute_value(ability['effect_radius']), 'units')))
                 if ability.get('spell_shield'):
                     stats_items.append(('Spell Shield', self._clean_attribute_value(self._convert_wiki_to_markdown(ability['spell_shield']))))
                 if ability.get('spell_effects'):
                     stats_items.append(('Spell Effects', self._clean_attribute_value(self._convert_wiki_to_markdown(ability['spell_effects']))))
                 if ability.get('projectile'):
                     stats_items.append(('Projectile', self._clean_attribute_value(self._convert_wiki_to_markdown(ability['projectile']))))
+                # Extra boolean/status fields
+                for key, label in [
+                    ('outofrange', 'Out of Range Behavior'),
+                    ('targetwarning', 'Target Warning'),
+                    ('terraingrace', 'Terrain Grace'),
+                    ('parry', 'Parry'),
+                    ('callforhelp', 'Call For Help'),
+                    ('grounded', 'Grounded'),
+                    ('knockdown', 'Knockdown'),
+                    ('silence', 'Silence'),
+                ]:
+                    if ability.get(key):
+                        stats_items.append((label, self._clean_attribute_value(self._convert_wiki_to_markdown(ability[key]))))
+                # Custom info fields
+                if ability.get('customlabel') and ability.get('custominfo'):
+                    stats_items.append((self._clean_attribute_value(ability['customlabel']), self._clean_attribute_value(self._convert_wiki_to_markdown(ability['custominfo']))))
+                if ability.get('customlabel2') and ability.get('custominfo2'):
+                    stats_items.append((self._clean_attribute_value(ability['customlabel2']), self._clean_attribute_value(self._convert_wiki_to_markdown(ability['custominfo2']))))
                 
                 if stats_items:
                     lines.append("| Attribute | Value |")
@@ -1829,6 +1915,8 @@ class SimpleLoLConverter:
                     scaling_items.append(ability['leveling4'])
                 if ability.get('leveling5'):
                     scaling_items.append(ability['leveling5'])
+                if ability.get('leveling6'):
+                    scaling_items.append(ability['leveling6'])
                 if ability.get('extra_scaling'):
                     scaling_items.extend(ability['extra_scaling'])
                 
@@ -1889,6 +1977,13 @@ class SimpleLoLConverter:
                         prev_was_table = False
                     lines.append("")
                 
+                # Optional flavor text (from Ability template)
+                if ability.get('flavortext'):
+                    ft = ability['flavortext']
+                    if ft:
+                        lines.append(f"*{ft}*")
+                        lines.append("")
+
                 # Notes
                 if ability.get('notes'):
                     lines.append(f"**Notes:**")
