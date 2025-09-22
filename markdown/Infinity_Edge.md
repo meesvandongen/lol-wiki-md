@@ -38,7 +38,7 @@
 
 ## Notes
 
-- The critical strike damage stat provided by **Infinity Edge** increases most champions' total *critical strike damage* from 175% AD to .
+- The critical strike damage stat provided by **Infinity Edge** increases most champions' total *critical strike damage* from 175% AD to 215% AD.
 
 ## Similar items
 

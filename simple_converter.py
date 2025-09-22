@@ -17,6 +17,8 @@ import re
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any, Union
+import ast
+import math
 
 class SimpleLoLConverter:
     """Simplified converter using only built-in Python libraries."""
@@ -898,6 +900,9 @@ class SimpleLoLConverter:
         else:
             # Fallback: prettify folder key
             ability_name = ability_key.replace('_', ' ').strip()
+        
+        # Extract page-level variables defined with #vardefine before parsing params
+        vars_map = self._extract_vardefines(content)
 
         # Parse parameters robustly using top-level '|' separators (ignore nested templates)
         params = self._parse_template_params(content)
@@ -989,14 +994,17 @@ class SimpleLoLConverter:
             raw_val = params.get(src_key)
             if raw_val is None:
                 continue
-            val = raw_val.strip()
+            # First, resolve any {{#var:...}} with values from #vardefine
+            val = self._resolve_vars(raw_val.strip(), vars_map)
             if dst_key == 'notes':
-                ability_data[dst_key] = self._format_notes(val)
+                ability_data[dst_key] = self._format_notes(val, vars_map)
             else:
                 ability_data[dst_key] = self._convert_wiki_to_markdown(val)
 
         # Collect any free-floating {{st|...}} blocks not tied to a parameter line
-        extra_st = self._collect_free_st_blocks(content)
+        # Resolve vars in full content before scanning for free st blocks
+        content_resolved = self._resolve_vars(content, vars_map)
+        extra_st = self._collect_free_st_blocks(content_resolved)
         if extra_st:
             # Render them to markdown tables now
             ability_data['extra_scaling'] = [self._render_st(inner) for inner in extra_st if inner.strip()]
@@ -1093,11 +1101,15 @@ class SimpleLoLConverter:
             i = k
         return inners
     
-    def _format_notes(self, notes_text: str) -> str:
-        """Format notes section preserving list structure."""
+    def _format_notes(self, notes_text: str, vars_map: Optional[Dict[str, str]] = None) -> str:
+        """Format notes section preserving list structure. Optionally resolve {{#var:...}} using vars_map."""
         if not notes_text:
             return "No additional notes."
         
+        # Resolve variables if provided
+        if vars_map:
+            notes_text = self._resolve_vars(notes_text, vars_map)
+
         # Parse the raw notes text preserving structure
         lines = []
         for line in notes_text.split('\n'):
@@ -1120,6 +1132,34 @@ class SimpleLoLConverter:
                     lines[-1] += f" {item.strip()}"
         
         return '\n'.join(lines) if lines else "No additional notes."
+
+    def _extract_vardefines(self, text: str) -> Dict[str, str]:
+        """Extract {{#vardefine:name|value}} variables from a template page content.
+        Returns a mapping of variable name -> raw value string.
+        """
+        if not text:
+            return {}
+        # Remove HTML comments to avoid false positives inside comments
+        cleaned = re.sub(r'<!--[\s\S]*?-->', '', text)
+        vars_map: Dict[str, str] = {}
+        # Pattern: {{#vardefine:var|value}}
+        for m in re.finditer(r"\{\{\s*#vardefine\s*:\s*([^|}]+)\|([^}]*)\}\}", cleaned, flags=re.IGNORECASE):
+            name = m.group(1).strip()
+            value = m.group(2).strip()
+            if name:
+                # Strip enclosing quotes if any and whitespace
+                value = value.strip().strip('"')
+                vars_map[name] = value
+        return vars_map
+
+    def _resolve_vars(self, text: str, vars_map: Optional[Dict[str, str]]) -> str:
+        """Replace {{#var:name}} with the corresponding value from vars_map."""
+        if not text or not vars_map:
+            return text
+        def repl(m: re.Match) -> str:
+            name = m.group(1).strip()
+            return vars_map.get(name, m.group(0))
+        return re.sub(r"\{\{\s*#var\s*:\s*([^}|]+)\s*\}\}", repl, text, flags=re.IGNORECASE)
     
     def _extract_trivia(self, trivia_content: str) -> List[str]:
         """Extract trivia items, preserving nested bullets as indentation."""
@@ -1214,6 +1254,10 @@ class SimpleLoLConverter:
         """Convert basic MediaWiki syntax to markdown."""
         if not text:
             return ""
+
+        # Evaluate simple arithmetic: {{#expr: ... }} -> computed value
+        # This is done early so nested uses like {{as|{{#expr:175+40}}% AD}} resolve correctly
+        text = self._evaluate_expr_templates(text)
 
         # Convert formulas with better handling
         text = re.sub(r'\{\{ap\|([^}]+)\}\}', self._convert_ap_formula, text)
@@ -1384,9 +1428,10 @@ class SimpleLoLConverter:
         text = re.sub(r'\{\{\s*Champion without ability power ratio\s*\|[^}]*\}\}', 'This champion has no ability power ratio.', text)
         text = re.sub(r'\{\{\s*Champion without ability power ratio\s*\}\}', 'This champion has no ability power ratio.', text)
 
-        # Remove references
+        # Remove references and HTML comments
         text = re.sub(r'<ref[^>]*>.*?</ref>', '', text, flags=re.DOTALL)
         text = re.sub(r'<ref[^>]*\s*/>', '', text)
+        text = re.sub(r'<!--([\s\S]*?)-->', '', text)
 
         # Clean up HTML tags
         text = re.sub(r'<br\s*/?>', '\n', text)
@@ -1432,7 +1477,122 @@ class SimpleLoLConverter:
         # Strip stray equals signs at line ends (artifact of template params)
         text = re.sub(r'(?m)=\s*$', '', text)
 
+        # Final pass: evaluate any {{#expr:...}} that may have become evaluable after prior substitutions
+        text = self._evaluate_expr_templates(text)
         return text
+
+    def _evaluate_expr_templates(self, text: str) -> str:
+        """Find and replace {{#expr: ...}} with a safely evaluated result.
+        Supports basic arithmetic (+,-,*,/,^,mod), parentheses, and a few functions (round, floor, ceil, min, max, abs).
+        """
+        if not text or '{{#expr' not in text:
+            return text
+
+        # Pre-compile a simple non-greedy regex that does not support nested templates inside the expr body.
+        # This covers the vast majority of cases found in item/champion notes.
+        expr_re = re.compile(r"\{\{\s*#expr\s*:\s*([^{}]+?)\s*\}\}", flags=re.IGNORECASE | re.DOTALL)
+
+        def repl(m: re.Match) -> str:
+            expr = m.group(1)
+            try:
+                val = self._safe_eval_num_expr(expr)
+                if val is None:
+                    return m.group(0)  # leave unchanged if cannot evaluate
+                # Format: integer if close to int, else concise decimal
+                if abs(val - round(val)) < 1e-9:
+                    return str(int(round(val)))
+                s = f"{val:.3f}".rstrip('0').rstrip('.')
+                return s
+            except Exception:
+                # On any failure, return the original template unchanged
+                return m.group(0)
+
+        # Iterate until no more changes (to catch multiple instances)
+        prev = None
+        cur = text
+        # Cap iterations to avoid pathological loops
+        for _ in range(10):
+            prev = cur
+            cur = expr_re.sub(repl, prev)
+            if cur == prev:
+                break
+        return cur
+
+    def _safe_eval_num_expr(self, expr: str) -> Optional[float]:
+        """Safely evaluate a numeric expression subset used in {{#expr:...}}.
+        Allowed:
+          - Numbers (int/float), parentheses
+          - Operators: + - * / ^ (as power), % (mod)
+          - Functions: round(x[,ndigits]), floor, ceil, min, max, abs
+          - Constants: pi, e
+        Returns float or None if not evaluable.
+        """
+        if not expr:
+            return None
+        s = str(expr)
+        # Normalize: replace caret power and 'mod' token
+        s = s.replace('^', '**')
+        s = re.sub(r'\bmod\b', '%', s, flags=re.IGNORECASE)
+        # Remove thousands separators
+        s = s.replace(',', '')
+        # Trim spaces
+        s = s.strip()
+
+        # Parse with AST and evaluate with a whitelist
+        try:
+            node = ast.parse(s, mode='eval')
+        except Exception:
+            return None
+
+        allowed_funcs = {
+            'round': round,
+            'floor': math.floor,
+            'ceil': math.ceil,
+            'min': min,
+            'max': max,
+            'abs': abs,
+        }
+        allowed_names = {'pi': math.pi, 'e': math.e}
+
+        def _check(n: ast.AST) -> None:
+            if isinstance(n, ast.Expression):
+                _check(n.body)
+            elif isinstance(n, ast.BinOp) and isinstance(n.op, (ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.Pow)):
+                _check(n.left); _check(n.right)
+            elif isinstance(n, ast.UnaryOp) and isinstance(n.op, (ast.UAdd, ast.USub)):
+                _check(n.operand)
+            elif isinstance(n, ast.Num):  # py<3.8
+                return
+            elif isinstance(n, ast.Constant):
+                if isinstance(n.value, (int, float)):
+                    return
+                raise ValueError('Invalid constant')
+            elif isinstance(n, ast.Call):
+                # Only allow simple function names from the whitelist
+                if isinstance(n.func, ast.Name) and n.func.id in allowed_funcs:
+                    for arg in n.args:
+                        _check(arg)
+                    # Disallow keywords for safety except round(x, ndigits)
+                    for kw in n.keywords:
+                        _check(kw.value)
+                    return
+                raise ValueError('Disallowed function')
+            elif isinstance(n, ast.Name):
+                if n.id in allowed_names:
+                    return
+                raise ValueError('Unknown name')
+            else:
+                raise ValueError('Disallowed expression')
+
+        _check(node)
+        try:
+            val = eval(compile(node, '<expr>', 'eval'), {'__builtins__': {}}, {**allowed_funcs, **allowed_names})
+        except Exception:
+            return None
+        try:
+            return float(val)
+        except Exception:
+            return None
 
     def _normalize_anchor(self, anchor: str) -> str:
         """Normalize a wiki anchor for markdown link: keep case, replace spaces with underscores."""

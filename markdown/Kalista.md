@@ -3,7 +3,7 @@
 ## Table of Contents
 - [Basic Information](#basic-information)
 - [Statistics](#statistics)
-  - [Advanced Stats](#advanced-stats)
+  - [Map-specific Stats](#map-specific-stats)
 - [Abilities](#abilities)
 - [Patch History](#patch-history)
 - [Trivia](#trivia)
@@ -11,63 +11,101 @@
 ## Basic Information
 
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
 | **Champion** | Kalista |
 | **Title** | the Spear of Vengeance |
 | **Resource** | Mana |
 | **Range Type** | Ranged |
 | **Release Date** | 2014-11-20 |
 | **Release Patch** | V4.20 |
+| **Latest Changes** | V25.16 |
 | **Roles** | Marksman |
 | **Riot Positions** | Bottom |
 | **External Positions** | Bottom |
+| **Blue Essence** | 2400 |
+| **Riot Points** | 880 |
+| **Difficulty** | 3 |
+| **Hero Type** | Marksman |
+| **Adaptive Type** | Physical |
+| **Damage** | 3 |
+| **Toughness** | 1 |
+| **Control** | 1 |
+| **Mobility** | 3 |
+| **Utility** | 2 |
+| **Style** | 10 |
 
 ## Statistics
 
-### Base Stats (Level 1-18)
+### Base Stats
 
-| Stat | Base | Growth | Level 18 |
-|------|------|--------|----------|
-| **Health** | $560.0$ | $+-20.0$ | $220.0$ |
-| **Mana** | $300.0$ | $+45.0$ | $1065.0$ |
-| **Health Regen** | $4.0$ | $+0.75$ | $16.8$ |
-| **Mana Regen** | $6.3$ | $+0.8$ | $19.9$ |
-| **Armor** | $24.0$ | $+5.2$ | $112.4$ |
-| **Magic Resist** | $30.0$ | $+1.3$ | $52.1$ |
-| **Attack Damage** | $57.0$ | $+4.25$ | $129.2$ |
-| **Attack Speed** | $0.694$ | $+4.5\%$ | $1.225$ |
-| **Movement Speed** | $330.0$ | $+0.0$ | $330.0$ |
-| **Attack Range** | $525.0$ | $+0.0$ | $525.0$ |
+| Stat | Base | Growth |
+|------|-----:|-------:|
+| **Health** | $560.0$ | $+114.0$ |
+| **Mana** | $300.0$ | $+45.0$ |
+| **Health Regen** | $4.0$ | $+0.75$ |
+| **Mana Regen** | $6.3$ | $+0.8$ |
+| **Armor** | $24.0$ | $+5.2$ |
+| **Magic Resist** | $30.0$ | $+1.3$ |
+| **Attack Damage** | $57.0$ | $+4.25$ |
+| **Attack Speed** | $0.694$ | |
+| **Movement Speed** | $330.0$ | $+0.0$ |
+| **Attack Range** | $525.0$ | $+0.0$ |
+| **Base Attack Speed** | $0.694$ | |
+| **Attack Speed Ratio** | $0.694$ | |
+| **Bonus AS per Level** | $4.5\%$ | |
+| **Windup Modifier** | $0.75$ | |
+| **Missile Speed** | $2600$ units/second | |
+| **Acquisition Radius** | $900$ units | |
+| **Pathing Radius** | $35$ units | |
+| **Selection Radius** | $100$ units | |
+| **Selection Height** | $135$ units | |
+| **Critical Damage** | $175.0\%$ | |
 
-### Advanced Stats
+### Map-specific Stats
+
+#### ARAM
 
 | Metric | Value |
-|--------|-------|
-| **Base Attack Speed** | $0.694$ |
-| **Attack Speed Ratio** | $0.694$ |
-| **Bonus AS per Level** | $4.5\%$ |
-| **Windup Modifier** | $0.75$ |
-| **Missile Speed** | $2600 units/second$ |
-| **Acquisition Radius** | $900 units$ |
-| **Pathing Radius** | $35 units$ |
-| **Selection Radius** | $100 units$ |
-| **Selection Height** | $135 units$ |
-| **Critical Damage** | $175.0\%$ |
+|--------|------:|
+| **Damage Dealt** | $110.0\%$ |
+| **Damage Taken** | $90.0\%$ |
+
+#### URF
+
+| Metric | Value |
+|--------|------:|
+| **Damage Dealt** | $110.0\%$ |
+| **Damage Taken** | $90.0\%$ |
 
 ## Abilities
 
 ### Passive: Martial Poise
 
-**Innate:** During each basic attack or casting of **Pierce**, **Kalista** can optionally choose a target direction to quickly dash to. The range is based on dash angle and ''Kalista's** Boots tier. The dash speed scales with **bonus'' attack speed and certain movement speed effects.
-
-**Innate - Oathsworn Bond:** **Kalista** begins the game with an exclusive *Black Spear*.
-
-**Innate:** Whenever **Kalista** inputs a movement command during her attack windup or the cast time of **Pierce**, at the end she will dash a short distance in the direction of the inputted location. **Kalista cannot dash while immobilize or ground, and she will be knockdown by any immobilize or polymorph crowd control during the dash.** 'Martial Poise**s dash range and speed details: * Dash range of basic attacks is modified by the tier of **Kalista's* Boots and the specific angle of the dash. ** At a 0° angle towards the target, the minimum dash range is 140–175 units. ** At a 90° angle, the maximum dash range is 240–300 units. * Dash range of **Pierce** is 300 units when dashing anywhere in the direction of the point of cast. ** If the dash is inputted to a location that is *away* from **Pierce*’s* point of cast, the dash range is reduced based on the cast angle, with a minimum distance of 150 units if the inputted location is directly opposite to the point of cast. * Dash speed is increased based on the tier of *'Kalista's** Boots, and is affected by her ***bonus'' attack speed* as well as multiplicative modifiers she is under the effect of (including slow). **Innate - Oathsworn Bond:** **Kalista** begins the game with an exclusive **Black Spear** that she can activate on an allied champion to force them to swear an *oath* with her. Once the *oath* has been sworn, the ally becomes her *Oathsworn*, causing **Kalista** to form a tether between her and them. While she and the ally bound as the *Oathsworn* are within tether range of each other, they can both interact with **Soul-Mark** and '*Fate's Call*'. **Kalista can purchase the **Black Spear* from the shop at no cost to obtain it again and, before 3 minutes of game time, may activate the item again on a different target to rebind and swear an oath with a new ally. See *Black Spear* for more details.*
-
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
+| **Tether Radius** | 1100 units |
 | **Targeting** | Direction |
 | **Affects** | Self |
+| **Grounded** | True |
+| **Knockdown** | True |
+| **Maximum Target Range** | 240–300 |
+| **Dash Speed** | 1025–1160 |
+
+**Innate:** Whenever **Kalista** inputs a movement command (Default MB2/right click) during her attack windup or the cast time of **Pierce**, at the end she will dash a short distance in the direction of the inputted location.
+
+**Kalista cannot dash (See notes) while immobilize or ground, and she will be knockdown by any immobilize or polymorph crowd control during the dash.**
+
+'Martial Poise**s dash range and speed details:
+* Dash range of basic attacks is modified by the tier (See notes) of **Kalista's* Boots and the specific angle of the dash.
+** At a 0° angle towards the target, the minimum dash range is 140–175 units.
+** At a 90° angle, the maximum dash range is 240–300 units.
+* Dash range of **Pierce** is 300 units when dashing anywhere in the direction of the point of cast.
+** If the dash is inputted to a location that is *away* from **Pierce*’s* point of cast, the dash range is reduced based on the cast angle, with a minimum distance of 150 units if the inputted location is directly opposite (Backwards dash) to the point of cast.
+* Dash speed is increased based on the tier (+75 for Boots and +135 for finished Boots) of *'Kalista's** Boots, and is affected by her ***bonus'' attack speed* as well as multiplicative modifiers she is under the effect of (including slow).
+
+**Innate - Oathsworn Bond:** **Kalista** begins the game with an exclusive **Black Spear** that she can activate on an allied champion to force them (Selected ally cannot reject the oath by any means) to swear an *oath* with her. Once the *oath* has been sworn, the ally becomes her *Oathsworn*, causing **Kalista** to form a tether between her and them. While she and the ally bound as the *Oathsworn* are within tether range of each other, they can both interact with **Soul-Mark** and '*Fate's Call*'.
+
+**Kalista can purchase the **Black Spear* from the shop at no cost to obtain it again and, before 3 minutes of game time, may activate the item again on a different target to rebind and swear an oath with a new ally. See *Black Spear* for more details.*
 
 **Notes:**
 
@@ -75,7 +113,8 @@
   - The movement command will still be buffered to the end of the immobilization or the end of the attack windup or cast time of **Pierce** while grounded if it has not been overridden by other inputs.
 - If multiple movement commands are inputted during the attack windup, the most recent one is used for the dash's targeting.
   - If the most recent input is not a movement command, the dash will not trigger. *** In this case, the buffer for the previous movement command was cancelled by a new non-movement command such as an input for an attack or ability cast.
-- Dash distance decreases as the dash direction becomes closer to the minimum direction. This defines a forward distance for basic attacks and a backwards distance for *Pierce*. Empirical testing has given the following values below.
+- Dash distance decreases as the dash direction becomes closer to the minimum direction. This defines a forward distance for basic attacks and a backwards distance for *Pierce*.
+ Empirical testing has given the following values below.
   - Basic attack dash range given the angle θ: *** \begin{cases}(175 + (125 \times \sin(\theta))) \times T \end{cases} **** Where T = 0.800, 0.875, 0.950, 1.000 depending on the tier of Boots (T0, T1, T2, T3) *** Minimum dash range of 225 units when dashing backwards
   - '*Pierce's*' dash range given the angle θ: *** \begin{cases} 150 + (150 \times \sin(\theta)) & \mathrm{Backwards} \\ 300 & \mathrm{Otherwise} \end{cases}
 - There is a very brief grace period after completing a basic attack windup wherein **Kalista** can still input a movement command to trigger the dash.
@@ -90,28 +129,28 @@
 
 ### Q: Pierce
 
-**Active:** **Kalista** throws a spear in the target direction that deals physical damage to the first enemy hit.
-
-*If *Pierce* kills the target, the spear continues onward to transfer all of the target's **Rend** stacks to the next enemy it hits.*
-
-**Active:** **Kalista** launches a spear in the target direction that deals physical damage to the first enemy hit. If *Pierce* kills the target, the spear continues onward to transfer all of the target's **Rend** stacks to the next enemy it hits. This can repeat indefinitely until the spear reaches its maximum range.
-
 | Attribute | Value |
-|-----------|-------|
-| **Range** | 1200 units |
-| **Cooldown** | 9 seconds |
+|-----------|------:|
 | **Cast Time** | $0.25$ seconds |
+| **Target Range** | 1200 units |
+| **Width** | 80 units |
+| **Speed** | 2400 units/second |
 | **Cost** | $60-80$ Mana |
+| **Cooldown** | 9 seconds |
 | **Targeting** | Direction |
 | **Affects** | Enemies |
 | **Damage Type** | Physical |
-| **Speed** | 2400 units/second |
 | **Spell Shield** | True |
 | **Spell Effects** | Single target |
 | **Projectile** | True |
 
-**Scaling:**
-- **Physical Damage:** $10-270$ (+ 105% AD)
+**Active:** **Kalista** launches a spear in the target direction that deals physical damage to the first enemy hit.
+
+| Attribute | Value |
+|-----------|------:|
+| **Physical Damage** | $10-270$ (+ 105% AD) |
+
+If *Pierce* kills the target, the spear continues onward to transfer all of the target's **Rend** stacks to the next enemy it hits. This can repeat indefinitely until the spear reaches its maximum range.
 
 **Notes:**
 
@@ -121,32 +160,43 @@ No additional notes.
 
 ### W: Sentinel
 
-**Passive - Soul-Marked:** While **Kalista** and her *The Black Spear* are tether, their basic attacks and **Pierce** apply a *Soul-Mark* to their targets for a few seconds. If both *Soul-Marks* are applied to the same target, they take **bonus** magic damage.
-
-**Passive:** **Kalista** periodically stocks a *Sentinel* charge, up to a cap.
-
-**Passive - Soul-Marked:** While **Kalista** and her **The Black Spear** are tether, their basic attacks and **Pierce** apply a *Soul-Mark* to the target hit for 4 seconds. If both ''Kalista's* and the *Oathsworn's* *Soul-Mark* are applied to the same enemy, the marks are consumed to deal magic damage to the target, capped against non-champions. *Soul-Mark' cannot affect an enemy more than once every few seconds. **Active:** **Kalista** summons a *Sentinel* that patrols back and forth on a path along the target direction, granting sight of its surroundings as it travels. **Kalista** periodically stocks a *Sentinel* charge, up to a maximum of 2. *See [Pets](#Pets) for more details about Sentinels.*
-
 | Attribute | Value |
-|-----------|-------|
-| **Range** | 1400 / 5000 units |
+|-----------|------:|
+| **Cast Time** | $0.5$ seconds |
+| **Target Range** | 1400 (Minimum range) / 5000 (Maximum range) units |
+| **Tether Radius** | cr |
 | **Cooldown** | 30 seconds |
 | **Recharge** | $90-50$ seconds |
-| **Cast Time** | $0.5$ seconds |
+| **On-target CD Static** | 10 |
 | **Targeting** | Location |
 | **Affects** | Enemies |
 | **Damage Type** | magic |
 | **Spell Effects** | proc |
+| **Out of Range Behavior** | cast at max |
+| **Parry** | unknown |
 
-**Scaling:**
-- **Bonus Magic Damage:** $10-18$% of target's
-- **maximum** health
-- **Maximum Non-Champion Damage:** $100-200$
+**Passive - Soul-Marked:** While **Kalista** and her **The Black Spear** are tether, their basic attacks and **Pierce** apply a *Soul-Mark* to the target hit for 4 seconds.
+
+If both ''Kalista's* and the *Oathsworn's* *Soul-Mark* are applied to the same enemy, the marks are consumed to deal magic damage to the target, capped against non-champions. *Soul-Mark' cannot affect an enemy more than once every few seconds.
+
+| Attribute | Value |
+|-----------|------:|
+| **Bonus Magic Damage** | $10-18$% of target's **maximum** health |
+
+| Attribute | Value |
+|-----------|------:|
+| **Maximum Non-Champion Damage** | $100-200$ |
+
+**Active:** **Kalista** summons a *Sentinel* that patrols back and forth on a path along the target direction, granting sight of its surroundings as it travels.
+
+**Kalista** periodically stocks a *Sentinel* charge, up to a maximum of 2.
+
+*See [Pets](#Pets) for more details about Sentinels.*
 
 **Notes:**
 
 - The damage is dealt on-attack of ''Kalista's* basic attack if she applies the second mark. If the *Oathsworn' does so instead, the damage is dealt on-hit of their basic attack.
-- 'Soul-Marked's bonus damage is credited to **Kalista** and will benefit from both her magic penetration and spell effects.
+- 'Soul-Marked's bonus damage is credited to **Kalista** and will benefit from both her *magic penetration|magic penetration* and spell effects.
   - If her *The Black Spear* ally scores a kill using 'Soul-Marked's bonus damage they will get a message stating 'Kill Secured' in place of the usual gold pop-up (the gold itself is credited to **Kalista**).
 - The 'Sentinel's sight reveal on enemy champion is accredited for assists and potentially kills (if they die shortly after being spotted).
   - It does not reveal stealth targets.
@@ -158,27 +208,39 @@ No additional notes.
 
 ### E: Rend
 
-**Passive:** **Kalista**’s basic attacks on-hit and **Pierce** lodge a spear into their target, applying a stack of *Rend* for a few seconds.
-
-**Active:** **Kalista** all lodged spears from nearby enemies, consuming all of their stacks to deal physical damage and slow them for a short time. Each additional spear on the target deals reduced damage.
-
-**Passive:** ''Kalista's* basic attacks on-hit and **Pierce** apply a stack of *Rend' to enemies for 4 seconds, refreshing on subsequent hits and stacking up to 254 times. **Active:** **Kalista** all lodged spears from nearby enemies, consuming all of their stacks to deal them physical damage and slow them for 2 seconds. Each additional spear on the target deals modified damage. *Rend* deals 50% damage against epic monsters. If *Rend* kills at least one target, the *cooldown* is reset and **Kalista** restores *mana*. 'A nearby enemy with a Rend stack is required to cast this ability. Rend can be used during the dash of *Martial Poise* and the cast time of *Pierce*. In-flight spears and *Pierce* if in cast will be empowered to apply Rend's effects to their targets. These empowered spears can also trigger Rend's refund.'
-
 | Attribute | Value |
-|-----------|-------|
-| **Cooldown** | $10-8$ seconds |
+|-----------|------:|
 | **Cast Time** | $0.25$ seconds |
+| **Effect Radius** | 1100 units |
 | **Cost** | 30 Mana |
+| **Cooldown** | $10-8$ seconds |
 | **Targeting** | Proximity |
 | **Affects** | Enemies |
 | **Damage Type** | Physical |
-| **Effect Radius** | 1100 units |
 | **Spell Shield** | True |
 | **Spell Effects** | Area of effect |
+| **Parry** | Special |
 
-**Scaling:**
-- **Physical Damage:* $ (+ (+ *Slow:** $10-42$% (+ 5% per 100 AP)
-- **Mana Restored:** $10-30$
+**Passive:** ''Kalista's* basic attacks on-hit and **Pierce** apply a stack of *Rend' to enemies for 4 seconds, refreshing on subsequent hits and stacking up to 254 times.
+
+**Active:** **Kalista** all lodged spears from nearby enemies, consuming all of their stacks to deal them physical damage and slow them for 2 seconds. Each additional spear on the target deals modified damage. *Rend* deals 50% damage against epic monsters.
+
+| Attribute | Value |
+|-----------|------:|
+| **Physical Damage** | $5-45$ (+ 70% AD) (+ 65% AP) |
+| **Damage per Additional Stack** | $7-35$ (+ $20-40$% AD) (+ 50% AP) |
+
+| Attribute | Value |
+|-----------|------:|
+| **Slow** | $10-42$% (+ 5% per 100 AP) |
+
+If *Rend* kills at least one target, the *cooldown* is reset and **Kalista** restores *mana*.
+
+| Attribute | Value |
+|-----------|------:|
+| **Mana Restored** | $10-30$ |
+
+'A nearby enemy with a Rend stack is required to cast this ability. Rend can be used during the dash of *Martial Poise* and the cast time of *Pierce*. In-flight spears and *Pierce* if in cast will be empowered to apply Rend's effects to their targets. These empowered spears can also trigger Rend's refund.'
 
 **Notes:**
 
@@ -191,30 +253,36 @@ No additional notes.
 - While *berserk*, ''Kalista's* attacks will also apply *Rend' stacks on allies.
   - **Kalista** will be unable to cast *Rend* if there are no stacks on an enemy in range. *** *Rend* cannot cast on allies, even if a valid enemy target exists. As such, any spears on allied units are purely cosmetic.
 - *Rend* has a lower cast range than effect range.
-- *Rend* at maximum stacks will deal a total of $( to )253253% AD) (+ % AP) physical damage.
+- *Rend* at maximum stacks will deal a total of $(5 to 45)+(7 to 35)*253$ (+ $70+(20-40)*253$% AD) (+ 12715% AP) physical damage.
 
 ---
 
 ### R: Fate's Call
 
-**Active:** **Kalista** invokes her *The Black Spear* to retrieve her *Oathsworn*, vanish and cleanse them from all crowd control, and hold them for a few seconds.
-
-*While held, the *Oathsworn* may dash to reappear at the target location. If they collide with an enemy champion, they airborne all nearby enemies.*
-
-**Active:** **Kalista** invokes her *The Black Spear* to retrieve and hold her *Oathsworn* for 4 seconds. **Kalista** cleanse the *Oathsworn* from all crowd control and renders them invulnerable and untargetable for the duration, and dash them to her over 1 second. While held, the *Oathsworn* is vanish and may select a target location to dash to with displacement immunity, ending 'Fate's Call's* invocation and reappearing at the location. If the invocation ends without the *Oathsworn* selecting a target location, they will automatically do so at maximum range from *'Kalista's' facing direction. The 'Oathsworn's* dash stops upon colliding with an enemy champion. Upon the dash ending by collision or arriving to the targeted location, the *Oathsworn' airborne all nearby enemies and keeps them airborne for a set duration, while simultaneously lunge to their *attack range **base** attack range* from the closest target hit. 'The Oathsworn must be within tether range to cast this ability, and is also silence and unable to perform movement or attack commands while Fate's Call is in effect.'
-
 | Attribute | Value |
-|-----------|-------|
-| **Range** | 1200 units |
-| **Cooldown** | $160-120$ seconds |
+|-----------|------:|
 | **Cast Time** | none |
+| **Target Range** | 1200 units |
+| **Tether Radius** | 1100 units |
 | **Cost** | 100 mana |
+| **Cooldown** | $160-120$ seconds |
+| **Cooldown Start** | on-cast |
 | **Targeting** | Proximity |
 | **Affects** | *Black Spear* Ally / Enemies |
 | **Spell Shield** | True |
+| **Knockdown** | False |
 
-**Scaling:**
-- **Airborne Duration:** $1-2$ seconds
+**Active:** **Kalista** invokes her *The Black Spear* to retrieve and hold her *Oathsworn* for 4 seconds. **Kalista** cleanse the *Oathsworn* from all crowd control and renders them invulnerable and untargetable for the duration, and dash them to her over 1 second.
+
+While held, the *Oathsworn* is vanish and may select (Default MB1 / left-click) a target location to dash to with displacement immunity, ending 'Fate's Call's* invocation and reappearing at the location. If the invocation ends without the *Oathsworn* selecting a target location, they will automatically do so at maximum range from *'Kalista's' facing direction.
+
+The 'Oathsworn's* dash stops upon colliding with an enemy champion. Upon the dash ending by collision or arriving to the targeted location, the *Oathsworn' airborne all nearby enemies and keeps them airborne for a set duration, while simultaneously lunge to their *attack range|**base** attack range* from the closest target hit (See notes).
+
+| Attribute | Value |
+|-----------|------:|
+| **Airborne Duration** | $1-2$ seconds |
+
+'The Oathsworn must be within tether range to cast this ability, and is also silence and unable to perform movement or attack commands while Fate's Call is in effect.'
 
 **Notes:**
 
@@ -242,16 +310,20 @@ No additional notes.
 
 ### Basic Attack
 
-Basic Attack ''Kalista's* basic attack windup is uncancellable windup except by casting **Rend*', although she can input a new attack command to change her target during the windup. Additionally, ''Kalista's** attack windup is only reduced by $0.75$% per as*bonus'' attack speed*.
-
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
+| **Attack Range** | Kalista |
+| **Speed** | Kalista |
 | **Targeting** | Unit |
 | **Affects** | Enemies |
 | **Damage Type** | Physical |
-| **Speed** | Kalista |
 | **Spell Effects** | Attack |
 | **Projectile** | True |
+| **Parry** | True |
+
+Basic Attack ''Kalista's* basic attack windup is uncancellable windup except by casting **Rend*', although she can input a new attack command to change her target during the windup.
+
+Additionally, ''Kalista's** attack windup is only reduced by $0.75$% (Compared to the standard 1% per 1%) per *as|1% **bonus'' attack speed*.
 
 **Notes:**
 
@@ -289,6 +361,8 @@ No additional notes.
   - **Bug Fixes:** Now properly benefits from certain boots.
 - *Sentinel*
   - Mark damage reduced to $10-18$% of target's **maximum** health from $14-18$%.
+
+### V25.S1.1
 - Stats
   - Mana regeneration growth increased to $0.8$ from $0.4$.
 - *Martial Poise*
@@ -345,13 +419,6 @@ No additional notes.
 - *Rend*
   - **New Effect:** Damage now scales with 20% AP and 20% AP per subsequent spear.
   - **New Effect:** Slow now scales with 5% per 100 AP.
-
-### V13.7
-- Stats
-  - Attack damage growth increased to $3.75$ from $3.5$.
-- *Martial Poise*
-  - Oathsworn Bond timer reduced to 9 seconds from 13.
-  - **New Effect:** Is now forced to channel on the *Black Spear* while her Oathsworn is reviving.
 
 ## Trivia
 

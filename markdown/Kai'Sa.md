@@ -3,7 +3,7 @@
 ## Table of Contents
 - [Basic Information](#basic-information)
 - [Statistics](#statistics)
-  - [Advanced Stats](#advanced-stats)
+  - [Map-specific Stats](#map-specific-stats)
 - [Abilities](#abilities)
 - [Patch History](#patch-history)
 - [Trivia](#trivia)
@@ -11,67 +11,92 @@
 ## Basic Information
 
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
 | **Champion** | Kai'Sa |
 | **Title** | Daughter of the Void |
 | **Resource** | Mana |
 | **Range Type** | Ranged |
 | **Release Date** | 2018-03-07 |
 | **Release Patch** | V8.5 |
+| **Latest Changes** | V25.14 |
 | **Roles** | Marksman |
 | **Riot Positions** | Bottom |
 | **External Positions** | Bottom |
+| **Blue Essence** | 675 |
+| **Riot Points** | 585 |
+| **Difficulty** | 3 |
+| **Hero Type** | Marksman |
+| **Alt Type** | Mage |
+| **Adaptive Type** | Magic |
+| **Damage** | 3 |
+| **Toughness** | 1 |
+| **Control** | 1 |
+| **Mobility** | 3 |
+| **Utility** | 1 |
+| **Style** | 10 |
 
 ## Statistics
 
-### Base Stats (Level 1-18)
+### Base Stats
 
-| Stat | Base | Growth | Level 18 |
-|------|------|--------|----------|
-| **Health** | $640.0$ | $+102.0$ | $2374.0$ |
-| **Mana** | $345.0$ | $+40.0$ | $1025.0$ |
-| **Health Regen** | $4.0$ | $+0.55$ | $13.4$ |
-| **Mana Regen** | $8.2$ | $+0.7$ | $20.1$ |
-| **Armor** | $27.0$ | $+4.2$ | $98.4$ |
-| **Magic Resist** | $30.0$ | $+1.3$ | $52.1$ |
-| **Attack Damage** | $59.0$ | $+2.6$ | $103.2$ |
-| **Attack Speed** | $0.644$ | $+1.8\%$ | $0.841$ |
-| **Movement Speed** | $335.0$ | $+0.0$ | $335.0$ |
-| **Attack Range** | $525.0$ | $+0.0$ | $525.0$ |
+| Stat | Base | Growth |
+|------|-----:|-------:|
+| **Health** | $640.0$ | $+102.0$ |
+| **Mana** | $345.0$ | $+40.0$ |
+| **Health Regen** | $4.0$ | $+0.55$ |
+| **Mana Regen** | $8.2$ | $+0.7$ |
+| **Armor** | $27.0$ | $+4.2$ |
+| **Magic Resist** | $30.0$ | $+1.3$ |
+| **Attack Damage** | $59.0$ | $+2.6$ |
+| **Attack Speed** | $0.644$ | |
+| **Movement Speed** | $335.0$ | $+0.0$ |
+| **Attack Range** | $525.0$ | $+0.0$ |
+| **Base Attack Speed** | $0.644$ | |
+| **Attack Speed Ratio** | $0.644$ | |
+| **Bonus AS per Level** | $1.8\%$ | |
+| **Attack Windup** | $16.1\%$ | |
+| **Missile Speed** | $2000$ units/second | |
+| **Acquisition Radius** | $800$ units | |
+| **Pathing Radius** | $40.68$ units | |
+| **Selection Radius** | $100$ units | |
+| **Selection Height** | $122.222$ units | |
+| **Critical Damage** | $175.0\%$ | |
 
-### Advanced Stats
+### Map-specific Stats
+
+#### ARAM
 
 | Metric | Value |
-|--------|-------|
-| **Base Attack Speed** | $0.644$ |
-| **Attack Speed Ratio** | $0.644$ |
-| **Bonus AS per Level** | $1.8\%$ |
-| **Attack Windup** | $16.1\%$ |
-| **Missile Speed** | $2000 units/second$ |
-| **Acquisition Radius** | $800 units$ |
-| **Pathing Radius** | $40.68 units$ |
-| **Selection Radius** | $100 units$ |
-| **Selection Height** | $122.222 units$ |
-| **Critical Damage** | $175.0\%$ |
+|--------|------:|
+| **Damage Dealt** | $100.0\%$ |
+| **Damage Taken** | $90.0\%$ |
+
+#### URF
+
+| Metric | Value |
+|--------|------:|
+| **Damage Dealt** | $90.0\%$ |
+| **Damage Taken** | $110.0\%$ |
 
 ## Abilities
 
 ### Passive: Second Skin
 
-**Innate - Living Weapon:** **Kai'Sa** can permanently evolve each of her basic abilities by obtaining , , and , respectively.
-
-**Innate - Plasma:** ''Kai'Sa'' applies stacks of Plasma through basic attacks, *Void Seeker*, and allied polymorph and immobilize effects.
-
-**Innate - Living Weapon:** ''Kai'Sa'' can evolve each of her ability by gaining a set amount of permanent stats from items and stat growth, granting them additional effects. Evolving an ability causes her to enter a 2-second cast time. The upgrade is lost if the stat requirement is no longer met. **Innate - Plasma:** ''Kai'Sa's* basic attacks on-hit and **Void Seeker** apply stacks of Plasma to enemies for 4 seconds, refreshing on subsequent applications and stacking up to 5 times. Basic attacks each apply 1 stack and **Void Seeker*' applies 2 stacks, increased to 3 if it is *evolved*. Her and nearby allies' immobilize effects and polymorph against enemy champions will also apply a stack of Plasma. **Innate - Caustic Wounds:** Plasma stacks applied by ''Kai'Sa's* basic attacks or **Void Seeker*' deal 4 to 24 (+ 1 to 6 per Plasma stack before application) (+ 12–24@0–4 (@=Plasma stacks before application) AP) **bonus** magic damage. The fifth stack against a target consumes them all to deal **additional bonus** magic damage equal to 15% , capped at 400 against monster.
-
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
+| **Effect Radius** | 2750 (Radius for allied disables to apply Plasma) units |
 | **Targeting** | Passive |
 | **Affects** | Self, Enemies |
 | **Damage Type** | Magic |
-| **Effect Radius** | 2750 units |
 | **Spell Shield** | Special |
 | **Spell Effects** | Proc |
+| **Parry** | True |
+
+**Innate - Living Weapon:** ''Kai'Sa'' can evolve each of her ability by gaining a set amount of permanent stats from items and stat growth (Includes all stats gained when leveling (including base AD gained), but does not include stats at level 1.), granting them additional effects. Evolving an ability causes her to enter a 2-second cast time. The upgrade is lost if the stat requirement is no longer met.
+
+**Innate - Plasma:** ''Kai'Sa's* basic attacks on-hit and **Void Seeker** apply stacks of Plasma to enemies for 4 seconds, refreshing on subsequent applications and stacking up to 5 times. Basic attacks each apply 1 stack and **Void Seeker*' applies 2 stacks, increased to 3 if it is *evolved*. Her and nearby allies' immobilize effects and polymorph against enemy champions will also apply a stack of Plasma.
+
+**Innate - Caustic Wounds:** Plasma stacks applied by ''Kai'Sa's* basic attacks or **Void Seeker*' deal 4 to 24 (+ 1 to 6 per Plasma stack before application) (+ 12–24@0–4 (@=Plasma stacks before application) AP) **bonus** magic damage. The fifth stack against a target consumes them all to deal **additional bonus** magic damage equal to 15% , capped at 400 against monster.
 
 **Notes:**
 
@@ -84,25 +109,21 @@
 - Plasma stacks that exceed the rupture are reapplied normally.
 - Spell shield will block the Plasma application from *Void Seeker* only.
 - With *Void Seeker*, if the stacks detonate Plasma, any remaining stacks are reapplied afterwards. *Void Seeker* also deals 'Caustic Wounds'damage based on Plasma stacks on the target. This damage is calculated as if each stack was applied successively.<!-- Outdated
-  - Hitting a target with 0 stack with normal *Void Seeker*: − (based on level)2+% AP) 0 stack AP ratio % + 1 stack AP ratio %
-  - Hitting a target with 3 stacks with normal *Void Seeker*: − (based on level)7 − (based on level)2+7% AP)3% + 4 stacks AP ratio %
-  - Hitting a target with 0 stack with evolved *Void Seeker*: − (based on level)3 − (based on level)3+3% AP)2%
-  - Hitting a target with 2 stacks with evolved *Void Seeker*: − (based on level)9 − (based on level)3+9% AP)2% + 3 stacks AP ratio % + 4 stacks AP ratio %-->
+  - Hitting a target with 0 stack with normal *Void Seeker*: (based on level)|magic damage|2 stacks, - each |0 stack + 1 stack, - each % AP)|0 stack AP ratio % + 1 stack AP ratio %
+  - Hitting a target with 3 stacks with normal *Void Seeker*: (based on level)|magic damage|2 stacks, - each (based on level)|buzzword|3 stacks + 4 stacks, - each % AP)|3 stacks AP ratio % + 4 stacks AP ratio %
+  - Hitting a target with 0 stack with evolved *Void Seeker*: (based on level)|magic damage|3 stacks, - each (based on level)|buzzword|0 stack + 1 stack + 2 stacks, - each % AP)|0 stack AP ratio % + 1 stack AP ratio % + 2 stacks AP ratio %
+  - Hitting a target with 2 stacks with evolved *Void Seeker*: (based on level)|magic damage|3 stacks, - each (based on level)|buzzword|2 stacks + 3 stacks + 4 stacks, - each % AP)|2 stacks AP ratio % + 3 stacks AP ratio % + 4 stacks AP ratio %-->
 
 ---
 
 ### Q: Icathian Rain
 
-**Active:** **Kai'Sa** shoots a swarm of missiles that evenly seek out nearby enemies, dealing physical damage.
-
-**Active:** ''Kai'Sa'' releases a swarm of 6 missiles that evenly distributes among nearby sight enemies, each one hitting their target after $0.4$ seconds to deal physical damage. Minions below health take double damage. Non-minions take $% damage from missiles beyond their first. **Evolution:** Requires from items *100 attack damage* from items and stat growthto upgrade – *Icathian Rain* instead fires 12 missiles. *A nearby enemy is required to cast this ability.*
-
 | Attribute | Value |
-|-----------|-------|
-| **Range** | 600 units |
-| **Cooldown** | $10-6$ seconds |
+|-----------|------:|
 | **Cast Time** | none |
+| **Target Range** | 600 units |
 | **Cost** | 55 Mana |
+| **Cooldown** | $10-6$ seconds |
 | **Targeting** | Proximity |
 | **Affects** | Enemies |
 | **Damage Type** | Physical |
@@ -110,12 +131,26 @@
 | **Spell Effects** | Special |
 | **Projectile** | True |
 
-**Scaling:**
-- **Physical Damage Per Missile:** $ (+ (+
-- **Reduced Damage Per Missile:** $* (+ $% bonus AD) (+ $% AP)5) to *(1+*5) (+ $%
-- *bonus AD) (+ $% AP)
-- **Total Evolved Single-Target Damage:** $*(1+*11) (+ $%
-- *bonus AD) (+ $% AP)
+**Active:** ''Kai'Sa'' releases a swarm of 6 missiles that evenly distributes among nearby sight enemies, each one hitting their target after $0.4$ seconds to deal physical damage. Minions below *health|35% health* take double damage.
+
+| Attribute | Value |
+|-----------|------:|
+| **Physical Damage Per Missile** | $ (+ (+ |
+
+Non-minions take $% damage from missiles beyond their first.
+
+| Attribute | Value |
+|-----------|------:|
+| **Reduced Damage Per Missile** | $ to * (+ $% *bonus AD) (+ $% AP) |
+| **Total Single-Target Damage** | $*5) to *(1+*5) (+ $% *bonus AD) (+ $% AP) |
+
+**Evolution:** Requires from items|*100 attack damage* from items and stat growthto upgrade – *Icathian Rain* instead fires 12 missiles.
+
+| Attribute | Value |
+|-----------|------:|
+| **Total Evolved Single-Target Damage** | $*11) to *(1+*11) (+ $% *bonus AD) (+ $% AP) |
+
+*A nearby enemy is required to cast this ability.*
 
 **Notes:**
 
@@ -129,26 +164,28 @@
 
 ### W: Void Seeker
 
-**Active:** **Kai'Sa** fires a void bolt in the target direction that grants sight around its trajectory as it travels and deals magic damage to the first enemy hit, true sight them for a few seconds.
-
-**Active:** ''Kai'Sa'' fires a void bolt in the target direction that briefly grants sight around its trajectory as it travels, deals magic damage to the first enemy hit, applies 2 Plasma, and true sight them for 4 seconds. **Evolution:** Requires *100 ability power* from items to upgrade – *Void Seeker* applies 3 Plasma instead and refunds 75% of its *cooldown* if it hits an enemy champion.
-
 | Attribute | Value |
-|-----------|-------|
-| **Range** | 3000 units |
-| **Cooldown** | $22-14$ seconds |
+|-----------|------:|
 | **Cast Time** | $0.4$ seconds |
+| **Target Range** | 3000 units |
+| **Width** | 200 units |
+| **Speed** | 1750 units/second |
 | **Cost** | $55-75$ Mana |
+| **Cooldown** | $22-14$ seconds |
 | **Targeting** | Direction |
 | **Affects** | Enemies |
 | **Damage Type** | Magic |
-| **Speed** | 1750 units/second |
 | **Spell Shield** | True |
 | **Spell Effects** | Single |
 | **Projectile** | True |
 
-**Scaling:**
-- **Magic Damage:** $30-130$ (+ 130% AD)
+**Active:** ''Kai'Sa'' fires a void bolt in the target direction that briefly grants sight around its trajectory as it travels, deals magic damage to the first enemy hit, applies 2 Plasma, and true sight them for 4 seconds.
+
+| Attribute | Value |
+|-----------|------:|
+| **Magic Damage** | $30-130$ (+ 130% AD) (+ 45% AP) |
+
+**Evolution:** Requires *100 ability power* from items to upgrade – *Void Seeker* applies 3 Plasma instead and refunds 75% of its *cooldown* if it hits an enemy champion.
 
 **Notes:**
 
@@ -158,21 +195,31 @@ No additional notes.
 
 ### E: Supercharge
 
-**Active:** **Kai'Sa** briefly becomes ghosted and gains *ms **bonus** move speed* during the cast time, then gains *as *bonus attack speed* for a few seconds.
-
-**Active:** ''Kai'Sa** charges up over the cast time, during which she is still able to move, becoming ghosted and gaining ms*bonus** movement speed* for the duration, with the effectiveness increased by type=**bonus'' attack speed. After completing the charge, she gains *as *bonus attack speed* for 4 seconds, during which her attacks have a lower attack windup of $(0.1/Kai'Sa% and an increased missile speed. 'Supercharge's **current cooldown** is reduced by $0.5$ seconds on-attack. **Evolution:** Requires from items *100% attack speed* from items and stat growthto upgrade – *Supercharge* grants invisibility at the start of the cast time for $0.5$ seconds.
-
 | Attribute | Value |
-|-----------|-------|
-| **Cooldown** | $16-10$ seconds |
-| **Cast Time** | type=*bonus attack speed |
+|-----------|------:|
+| **Cast Time** | *bonus attack speed |
 | **Cost** | 30 Mana |
+| **Cooldown** | $16-10$ seconds |
 | **Targeting** | Auto |
 | **Affects** | Self |
+| **Attack Missile Speed** | 2500 |
 
-**Scaling:**
-- **Minimum Movement Speed:* $55-75$%2-75×2$%
-- **Bonus Attack Speed:** $40-80$%
+**Active:** ''Kai'Sa** charges up over the cast time, during which she is still able to move, becoming ghosted and gaining *ms| for the duration, with the effectiveness increased by type=**bonus'' attack speed.
+
+| Attribute | Value |
+|-----------|------:|
+| **Minimum Movement Speed** | $55-75$% |
+| **Maximum Movement Speed** | $55×2-75×2$% |
+
+After completing the charge, she gains *as|*bonus attack speed* for 4 seconds, during which her attacks have a lower attack windup of $(0.1/Kai'Sa% and an increased missile speed.
+
+| Attribute | Value |
+|-----------|------:|
+| **Bonus Attack Speed** | $40-80$% |
+
+'Supercharge's **current cooldown** is reduced by $0.5$ seconds on-attack.
+
+**Evolution:** Requires from items|*100% attack speed* from items and stat growthto upgrade – *Supercharge* grants invisibility at the start of the cast time for $0.5$ seconds.
 
 **Notes:**
 
@@ -183,22 +230,26 @@ No additional notes.
 
 ### R: Killer Instinct
 
-**Active:** **Kai'Sa** briefly shields herself and dashes near an enemy champion affected by Plasma.
-
-**Active:** ''Kai'Sa'' grants herself a shield for 2 seconds and dash to a target location near a sight enemy champion that was affected by Plasma within the last 4 seconds. The shield's duration is refreshed when the dash ends. *An enemy champion within range and affected by Plasma is required to cast this ability. Killer Instinct Basic attack reset *'Kai'Sa's** basic attack timer. **Kai'Sa'* can cast any of her abilities during the dash.*
-
 | Attribute | Value |
-|-----------|-------|
-| **Range** | $2000-3000$ units |
-| **Cooldown** | $120-60$ seconds |
+|-----------|------:|
 | **Cast Time** | none |
+| **Target Range** | $2000-3000$ units |
+| **Effect Radius** | 525 (Area around enemy champions) units |
 | **Cost** | 100 Mana |
+| **Cooldown** | $120-60$ seconds |
 | **Targeting** | Location |
 | **Affects** | Self |
-| **Effect Radius** | 525 units |
+| **Out of Range Behavior** | False |
+| **Grounded** | True |
+| **Knockdown** | True |
 
-**Scaling:**
-- **Shield Strength:** $70-110$ (+ $90-180$% AD) (+ 120% AP)
+**Active:** ''Kai'Sa'' grants herself a shield for 2 seconds and dash to a target location near a sight enemy champion that was affected (Stack application or consumption) by Plasma within the last 4 seconds. The shield's duration is refreshed when the dash ends.
+
+| Attribute | Value |
+|-----------|------:|
+| **Shield Strength** | $70-110$ (+ $90-180$% AD) (+ 120% AP) |
+
+*An enemy champion within range and affected by Plasma is required to cast this ability. Killer Instinct Basic attack reset *'Kai'Sa's** basic attack timer. **Kai'Sa'* can cast any of her abilities during the dash.*
 
 **Notes:**
 
@@ -255,7 +306,7 @@ No additional notes.
 
 ### V13.22
 - *Second Skin*
-  - **Bug Fixes:** No longer overlaps with mark indicator.
+  - **Bug Fixes:** No longer overlaps with *Concussive Blows*’s mark indicator.
 
 ## Trivia
 
