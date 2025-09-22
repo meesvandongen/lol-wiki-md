@@ -7,6 +7,8 @@ For full functionality, install the requirements and use lol_wiki_converter.py
 
 Usage:
     python simple_converter.py --champion Azir --output ./markdown
+    python simple_converter.py --item "Infinity Edge" --output ./markdown
+    python simple_converter.py --rune Electrocute --output ./markdown
 """
 
 import argparse
@@ -63,6 +65,56 @@ class SimpleLoLConverter:
             
         except Exception as e:
             print(f"Error converting {champion_name}: {e}")
+            return None
+
+    # ---------------- Items ----------------
+    def convert_item(self, item_name: str) -> Optional[Path]:
+        """Convert a single item page to markdown using Module:ItemData and the item's Main page."""
+        try:
+            print(f"Converting item {item_name}...")
+            # Read main page (may contain notes/patch history)
+            main_page_path = self.wiki_root / "Main" / item_name.replace(' ', '_') / "page.txt"
+            main_content: Optional[str] = None
+            if main_page_path.exists():
+                main_content = main_page_path.read_text(encoding='utf-8')
+
+            item_data = self._load_item_module_data(item_name)
+            if not item_data:
+                print(f"Error: Item data not found for '{item_name}' in Module:ItemData")
+                return None
+
+            md = self._generate_item_markdown(item_name, item_data, main_content or "")
+            output_file = self.output_dir / f"{item_name.replace(' ', '_')}.md"
+            self._current_page_basename = item_name.replace(' ', '_')
+            md = self._postprocess_markdown(md)
+            output_file.write_text(md, encoding='utf-8')
+            print(f"Successfully converted {item_name} to {output_file}")
+            return output_file
+        except Exception as e:
+            print(f"Error converting item '{item_name}': {e}")
+            return None
+
+    # ---------------- Runes ----------------
+    def convert_rune(self, rune_name: str) -> Optional[Path]:
+        """Convert a single rune page to markdown (basic conversion of notes and patch history)."""
+        try:
+            print(f"Converting rune {rune_name}...")
+            main_page_path = self.wiki_root / "Main" / rune_name.replace(' ', '_') / "page.txt"
+            if not main_page_path.exists():
+                print(f"Error: Rune page not found at {main_page_path}")
+                return None
+            content = main_page_path.read_text(encoding='utf-8')
+
+            data = self._extract_rune_data(rune_name, content)
+            md = self._generate_rune_markdown(data)
+            output_file = self.output_dir / f"{rune_name.replace(' ', '_')}.md"
+            self._current_page_basename = rune_name.replace(' ', '_')
+            md = self._postprocess_markdown(md)
+            output_file.write_text(md, encoding='utf-8')
+            print(f"Successfully converted {rune_name} to {output_file}")
+            return output_file
+        except Exception as e:
+            print(f"Error converting rune '{rune_name}': {e}")
             return None
 
     def is_champion(self, champion_name: str, content: Optional[str] = None) -> bool:
@@ -580,11 +632,18 @@ class SimpleLoLConverter:
                 break
             # Expect key like ["key"]
             key_m = re.match(r'\[\"([^\"]+)\"\]\s*=\s*', s[i:])
-            if not key_m:
-                # Can't parse further
-                break
-            key = key_m.group(1)
-            i += key_m.end()
+            if key_m:
+                key = key_m.group(1)
+                i += key_m.end()
+            else:
+                key_m_num = re.match(r'\[(\d+)\]\s*=\s*', s[i:])
+                if key_m_num:
+                    # Numeric-indexed keys -> keep as stringified index for dict; callers may convert to list if desired
+                    key = key_m_num.group(1)
+                    i += key_m_num.end()
+                else:
+                    # Can't parse further
+                    break
             if i >= n:
                 break
             # Determine value type
@@ -603,10 +662,22 @@ class SimpleLoLConverter:
                             break
                     i += 1
                 sub = s[start:i]
+                # First try as key-value style subtable
+                parsed_sub: Union[Dict[str, Any], List[Any], str]
+                parsed_sub = {}
                 try:
-                    out[key] = self._parse_lua_simple_kv(sub)
+                    parsed_sub = self._parse_lua_simple_kv(sub)
                 except Exception:
-                    out[key] = sub
+                    parsed_sub = {}
+                # If empty, try as array-like table
+                if isinstance(parsed_sub, dict) and not parsed_sub:
+                    arr = self._parse_lua_array(sub)
+                    if arr:
+                        out[key] = arr
+                    else:
+                        out[key] = sub
+                else:
+                    out[key] = parsed_sub
             # Quoted string
             elif ch == '"':
                 i += 1
@@ -632,6 +703,109 @@ class SimpleLoLConverter:
             while i < n and s[i] in ' \t\r\n,':
                 i += 1
         return out
+
+    def _parse_lua_array(self, table_text: str) -> List[Any]:
+        """Parse a Lua array-like table {"a", "b", 3, 4} into a Python list.
+        Supports simple quoted strings and numbers; ignores nested subtables.
+        Returns [] if no array elements found.
+        """
+        s = table_text.strip()
+        if s.startswith('{') and s.endswith('}'):
+            s = s[1:-1]
+        # Tokenize by commas at top-level (no nested braces handling needed for our use-cases)
+        parts: List[str] = []
+        buf: List[str] = []
+        depth = 0
+        i = 0
+        n = len(s)
+        while i < n:
+            ch = s[i]
+            if ch == '{':
+                depth += 1
+                buf.append(ch)
+                i += 1
+                continue
+            if ch == '}':
+                depth = max(0, depth - 1)
+                buf.append(ch)
+                i += 1
+                continue
+            if ch == ',' and depth == 0:
+                parts.append(''.join(buf).strip())
+                buf = []
+                i += 1
+                continue
+            buf.append(ch)
+            i += 1
+        if buf:
+            parts.append(''.join(buf).strip())
+        out: List[Any] = []
+        for p in parts:
+            if not p:
+                continue
+            # Strip trailing comments or spaces
+            p = re.sub(r'--.*$', '', p).strip()
+            # Quoted string
+            m = re.match(r'^"([^"]*)"$', p)
+            if m:
+                out.append(m.group(1))
+                continue
+            # Number
+            if re.match(r'^-?\d+(?:\.\d+)?$', p):
+                out.append(float(p) if '.' in p else int(p))
+                continue
+            # Fallback: raw token
+            out.append(p.strip('"'))
+        return out
+
+    # ------ Module:ItemData helpers ------
+    def _item_data_path(self) -> Path:
+        return self.wiki_root / "Module" / "ItemData" / "data" / "page.txt"
+
+    def _find_item_block(self, text: str, item_name: str) -> Optional[str]:
+        """Find Lua table block for the given item name inside Module:ItemData/data/page.txt."""
+        pat = re.escape(f'["{item_name}"]') + r'\s*=\s*\{'
+        m = re.search(pat, text)
+        if not m:
+            return None
+        start = m.end() - 1  # at '{'
+        depth = 0
+        i = start
+        n = len(text)
+        while i < n:
+            ch = text[i]
+            if ch == '{':
+                depth += 1
+            elif ch == '}':
+                depth -= 1
+                if depth == 0:
+                    return text[start:i+1]
+            i += 1
+        return None
+
+    def _load_item_module_data(self, item_name: str) -> Optional[Dict[str, Any]]:
+        """Load item entry from Module:ItemData/data/page.txt as a Python dict."""
+        path = self._item_data_path()
+        if not path.exists():
+            return None
+        text = self._read_file_text(path)
+        if not text:
+            return None
+        block = self._find_item_block(text, item_name)
+        if not block:
+            # Try alternative names with underscores replaced by spaces or vice versa
+            alt = item_name.replace('_', ' ')
+            if alt != item_name:
+                block = self._find_item_block(text, alt)
+                if block:
+                    item_name = alt
+            if not block:
+                return None
+        try:
+            data = self._parse_lua_simple_kv(block)
+        except Exception:
+            data = None
+        return data if data else None
 
     def _load_champion_module_data(self, champion_name: str) -> Optional[Dict[str, Any]]:
         """Load champion entry from Module:ChampionData/data/page.txt and return a dict with keys like stats/title/resource/etc."""
@@ -977,8 +1151,8 @@ class SimpleLoLConverter:
         
         patches = []
         
-        # Find version sections
-        version_pattern = r';?\[\[([V\d.]+)\]\]'
+        # Find version sections (allow non-digit sublabels e.g., V25.S1.3)
+        version_pattern = r';?\[\[([^\]]+)\]\]'
         sections = re.split(version_pattern, content)
         
         for i in range(1, len(sections), 2):
@@ -994,10 +1168,10 @@ class SimpleLoLConverter:
                     if not m:
                         continue
                     level = len(m.group(1))
-                    content = m.group(2).strip()
-                    if not content:
+                    line_content = m.group(2).strip()
+                    if not line_content:
                         continue
-                    content_md = self._convert_wiki_to_markdown(content)
+                    content_md = self._convert_wiki_to_markdown(line_content)
                     indent = '  ' * (level - 1)
                     changes.append(f"{indent}- {content_md}")
                 
@@ -1008,6 +1182,33 @@ class SimpleLoLConverter:
                     })
         
         return patches[:10]  # Limit to recent patches
+
+    def _parse_patch_history_text(self, text: str) -> List[Dict[str, Any]]:
+        """Parse a patch history block that uses ;[[V...]] headers and * bullets into structured data."""
+        version_pattern = r';?\[\[([^\]]+)\]\]'
+        sections = re.split(version_pattern, text)
+        patches: List[Dict[str, Any]] = []
+        for i in range(1, len(sections), 2):
+            if i + 1 < len(sections):
+                version = sections[i]
+                changes_text = sections[i + 1].strip()
+                changes: List[str] = []
+                for raw in changes_text.split('\n'):
+                    if not raw.strip():
+                        continue
+                    m = re.match(r'^(\*+)\s*(.*)$', raw.rstrip())
+                    if not m:
+                        continue
+                    level = len(m.group(1))
+                    content = m.group(2).strip()
+                    if not content:
+                        continue
+                    content_md = self._convert_wiki_to_markdown(content)
+                    indent = '  ' * (level - 1)
+                    changes.append(f"{indent}- {content_md}")
+                if changes:
+                    patches.append({"version": version, "changes": changes})
+        return patches
     
     def _convert_wiki_to_markdown(self, text: str) -> str:
         """Convert basic MediaWiki syntax to markdown."""
@@ -1065,6 +1266,16 @@ class SimpleLoLConverter:
             # Use typographic apostrophe for possessive
             return f"*{display}*’s"
         text = re.sub(r'\{\{ais\|[^}]+\}\}', _ais_repl, text)
+        # cais: champion ability possessive with champion label; render italic with trailing ’s using 1st arg as display when present
+        def _cais_repl(m: re.Match) -> str:
+            full = m.group(0)
+            inner = full[2:-2]
+            parts = inner.split('|')
+            args = parts[1:]
+            ability = args[0].strip() if len(args) >= 1 else ''
+            display = args[2].strip() if len(args) >= 3 and args[2].strip() else ability
+            return f"*{display}*’s"
+        text = re.sub(r'\{\{cais\|[^}]+\}\}', _cais_repl, text)
         # bi: buff information; keep the most relevant text (prefer last non-empty arg, else first)
         def _bi_repl(m: re.Match) -> str:
             full = m.group(0)
@@ -1116,6 +1327,8 @@ class SimpleLoLConverter:
         text = re.sub(r'\{\{degree(?:\|[^}]*)?\}\}', '°', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{plus(?:\|[^}]*)?\}\}', '+', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{tftt\}\}', 'Teamfight Tactics', text, flags=re.IGNORECASE)
+        # Mastery icon shortcodes (mi6) -> keep label only
+        text = re.sub(r'\{\{mi6\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
         # Structural/maintenance templates -> drop
         text = re.sub(r'\{\{(?:references|lol navigation|champions|champion categories|doc|fairuse|section top)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{(?:rune header|rune footer)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
@@ -1216,6 +1429,8 @@ class SimpleLoLConverter:
         # Clean up extra whitespace and keep newlines to preserve tables and lists
         text = re.sub(r'[ \t]+', ' ', text)
         text = text.strip()
+        # Strip stray equals signs at line ends (artifact of template params)
+        text = re.sub(r'(?m)=\s*$', '', text)
 
         return text
 
@@ -1542,6 +1757,463 @@ class SimpleLoLConverter:
             return f"![{display}](./images/{target[5:].replace(' ', '_')})"
         else:
             return f"[{display}](./{target.replace(' ', '_')}.md)"
+
+    # ------ Item Markdown generation ------
+    def _generate_item_markdown(self, name: str, item: Dict[str, Any], main_content: str) -> str:
+        lines: List[str] = []
+        lines.append(f"# {name}")
+        lines.append("")
+        lines.append("## Table of Contents")
+        lines.append("- [Basic Information](#basic-information)")
+        lines.append("- [Statistics](#statistics)")
+        if item.get('effects'):
+            lines.append("- [Effects](#effects)")
+        # Recipe/builds
+        if item.get('recipe'):
+            lines.append("- [Build Path](#build-path)")
+        # Parse Item info once for additional sections
+        info = self._parse_item_info_block(main_content) or {}
+        # Extra sections in TOC if present
+        if info.get('notes'):
+            lines.append("- [Notes](#notes)")
+        # Role/category lists
+        for sec_id, _label in [
+            ('similaritems', 'Similar items'),
+            ('assassinitems', 'Assassin items'),
+            ('fighteritems', 'Fighter items'),
+            ('mageitems', 'Mage items'),
+            ('marksmanitems', 'Marksman items'),
+            ('supportitems', 'Support items'),
+            ('tankitems', 'Tank items'),
+            ('prismaticitems', 'Prismatic items'),
+        ]:
+            if info.get(sec_id):
+                anchor = sec_id.replace('items', '-items') if sec_id != 'similaritems' else 'similar-items'
+                lines.append(f"- [{_label}](#{anchor})")
+        if info.get('strategy'):
+            lines.append("- [Strategy](#strategy)")
+        if info.get('background'):
+            lines.append("- [Background](#background)")
+        if info.get('quotes'):
+            lines.append("- [Quotes](#quotes)")
+        if info.get('sfx'):
+            lines.append("- [Sound Effects](#sound-effects)")
+        if info.get('revisions'):
+            lines.append("- [Revisions](#revisions)")
+        # Patch history if we can find any
+        if info.get('patchhistory'):
+            lines.append("- [Patch History](#patch-history)")
+        lines.append("")
+
+        # Basic Information
+        lines.append("## Basic Information")
+        lines.append("")
+        lines.append("| Attribute | Value |")
+        lines.append("|-----------|------:|")
+        # Type / Tier
+        if isinstance(item.get('type'), dict) or isinstance(item.get('type'), list):
+            types = []
+            if isinstance(item['type'], dict):
+                # parse_lua_simple_kv may parse array-like as dict with numeric keys; collect values
+                for v in item['type'].values():
+                    types.append(str(v))
+            else:
+                types = [str(x) for x in item['type']]
+            if types:
+                lines.append(f"| **Type** | {', '.join(types)} |")
+        if item.get('tier') is not None:
+            lines.append(f"| **Tier** | {item['tier']} |")
+        # Mode availability
+        modes = item.get('modes')
+        if isinstance(modes, dict) and modes:
+            def _mflag(k: str) -> Optional[str]:
+                v = modes.get(k)
+                if v is None:
+                    return None
+                return 'Available' if bool(v) else 'Unavailable'
+            for key, label in [("classic sr 5v5", "SR 5v5"), ("aram", "ARAM"), ("nb", "Nexus Blitz"), ("arena", "Arena")]:
+                flag = _mflag(key)
+                if flag is not None:
+                    lines.append(f"| **{label}** | {flag} |")
+        # Limits / Exclusive / Ornn
+        if item.get('itemlimit'):
+            lines.append(f"| **Item Limit** | {self._convert_wiki_to_markdown(str(item['itemlimit']))} |")
+        if item.get('limit'):
+            lines.append(f"| **Limit** | {self._convert_wiki_to_markdown(str(item['limit']))} |")
+        if item.get('exclusive'):
+            lines.append(f"| **Exclusive** | {self._convert_wiki_to_markdown(str(item['exclusive']))} |")
+        if item.get('ornn') is True:
+            lines.append(f"| **Ornn** | Can be forged by Ornn |")
+        if item.get('removed') is True:
+            lines.append(f"| **Removed** | True |")
+        # Gold values
+        buy = item.get('buy')
+        if buy is not None:
+            lines.append(f"| **Cost** | {buy} gold |")
+            # Combine cost if recipe exists
+            comb = self._compute_item_combine_cost(name, item)
+            if comb is not None:
+                lines.append(f"| **Combine Cost** | {comb} gold |")
+            # Sell price
+            sell = item.get('sell')
+            if sell is None:
+                # estimate using ratio
+                sellratio = item.get('sellratio')
+                if sellratio is None:
+                    # default ratios similar to Lua getter
+                    primary_type = None
+                    if isinstance(item.get('type'), list) and item['type']:
+                        primary_type = item['type'][0]
+                    elif isinstance(item.get('type'), dict) and item['type']:
+                        primary_type = list(item['type'].values())[0]
+                    ratio = 0.4 if (primary_type in ("Starter", "Potion")) else 0.7
+                    sellratio = ratio
+                try:
+                    sell = int(float(buy) * float(sellratio))
+                except Exception:
+                    sell = None
+            if sell is not None:
+                lines.append(f"| **Sell** | {sell} gold |")
+        lines.append("")
+
+        # Statistics
+        lines.append("## Statistics")
+        lines.append("")
+        stats = item.get('stats') if isinstance(item.get('stats'), dict) else {}
+        if stats:
+            lines.append("| Stat | Value |")
+            lines.append("|------|------:|")
+            for key, val in stats.items():
+                label = self._item_stat_label(key)
+                sval = self._item_stat_format(key, val)
+                lines.append(f"| **{label}** | {sval} |")
+            lines.append("")
+        else:
+            lines.append("No inherent stats.")
+            lines.append("")
+
+        # Effects
+        if item.get('effects') and isinstance(item['effects'], dict):
+            lines.append("## Effects")
+            lines.append("")
+            # iterate in stable order groups
+            order = ["act", "act2", "pass", "pass2", "pass3", "pass4", "pass5", "pass6", "aura"]
+            for k in order:
+                eff = item['effects'].get(k)
+                if not isinstance(eff, dict):
+                    continue
+                name_part = eff.get('name')
+                unique = eff.get('unique') is True
+                head = []
+                if k.startswith('act'):
+                    head.append("Active")
+                elif k.startswith('pass'):
+                    head.append("Passive")
+                elif k == 'aura':
+                    head.append("Aura")
+                if unique:
+                    head.append("Unique")
+                title = ' '.join(head)
+                if name_part:
+                    title = f"{title} — {name_part}"
+                desc = eff.get('description') or ''
+                desc2 = eff.get('description2') or ''
+                desc3 = eff.get('description3') or ''
+                desc4 = eff.get('description4') or ''
+                desc5 = eff.get('description5') or ''
+                extra_bits: List[str] = []
+                if eff.get('cd'):
+                    extra_bits.append(self._format_with_unit(str(eff['cd']), 'seconds'))
+                if eff.get('recharge'):
+                    extra_bits.append(self._format_with_unit(str(eff['recharge']), 'seconds recharge'))
+                if eff.get('charges'):
+                    extra_bits.append(f"{eff['charges']} charges")
+                if eff.get('range'):
+                    extra_bits.append(self._format_with_unit(str(eff['range']), 'range'))
+                if eff.get('radius'):
+                    extra_bits.append(self._format_with_unit(str(eff['radius']), 'radius'))
+                # Build effect body
+                body_parts = [p for p in [desc, desc2, desc3, desc4, desc5] if p]
+                body = '<br>'.join(body_parts)
+                body = self._convert_wiki_to_markdown(body)
+                if extra_bits:
+                    tail = '; '.join(extra_bits)
+                    if body.endswith('.'):  # mirror compile_effect punctuation
+                        body = body[:-1]
+                    body = f"{body} ({tail})."
+                lines.append(f"- **{title}:** {body}")
+            lines.append("")
+
+        # Build Path
+        if item.get('recipe'):
+            lines.append("## Build Path")
+            lines.append("")
+            recipe = item['recipe']
+            if isinstance(recipe, dict):
+                # numeric keys -> list
+                parts = [str(v) for _, v in sorted(recipe.items(), key=lambda kv: str(kv[0]))]
+            else:
+                parts = [str(x) for x in recipe] if isinstance(recipe, list) else []
+            if parts:
+                lines.append("- **Recipe:** " + ", ".join([f"*{p}*" for p in parts]))
+            comb = self._compute_item_combine_cost(name, item)
+            if comb is not None:
+                lines.append(f"- **Combine Cost:** {comb} gold")
+            lines.append("")
+
+        # Notes (from Item info)
+        if info.get('notes'):
+            lines.append("## Notes")
+            lines.append("")
+            notes_md = self._format_notes(info.get('notes', ''))
+            for ln in notes_md.splitlines():
+                if ln.strip():
+                    lines.append(ln if ln.strip().startswith('- ') else f"- {ln.strip()}")
+            lines.append("")
+
+        # Similar and role-based item lists
+        def _render_item_list(param_key: str, header: str, anchor_override: Optional[str] = None):
+            raw = info.get(param_key)
+            if not raw:
+                return
+            lines.append(f"## {header}")
+            lines.append("")
+            # Values may be separated by ';'
+            items = [x.strip() for x in str(raw).split(';') if x.strip()]
+            for it in items:
+                # Use ii template rendering behavior: italicize name
+                label = self._convert_wiki_to_markdown(f"{{{{ii|{it}}}}}")
+                lines.append(f"- {label}")
+            lines.append("")
+
+        _render_item_list('similaritems', 'Similar items')
+        _render_item_list('assassinitems', 'Assassin items')
+        _render_item_list('fighteritems', 'Fighter items')
+        _render_item_list('mageitems', 'Mage items')
+        _render_item_list('marksmanitems', 'Marksman items')
+        _render_item_list('supportitems', 'Support items')
+        _render_item_list('tankitems', 'Tank items')
+        _render_item_list('prismaticitems', 'Prismatic items')
+
+        # Strategy / Background / Quotes / Media / SFX / Revisions
+        if info.get('strategy'):
+            lines.append("## Strategy")
+            lines.append("")
+            lines.append(self._convert_wiki_to_markdown(info['strategy']))
+            lines.append("")
+        if info.get('background'):
+            lines.append("## Background")
+            lines.append("")
+            # Background in Item info is typically italicized; keep italics
+            bg = self._convert_wiki_to_markdown(info['background'])
+            if not (bg.startswith('*') and bg.endswith('*')):
+                bg = f"*{bg}*"
+            lines.append(bg)
+            lines.append("")
+        if info.get('quotes'):
+            lines.append("## Quotes")
+            lines.append("")
+            lines.append(self._convert_wiki_to_markdown(info['quotes']))
+            lines.append("")
+        if info.get('sfx'):
+            lines.append("## Sound Effects")
+            lines.append("")
+            lines.append(self._convert_wiki_to_markdown(info['sfx']))
+            lines.append("")
+        if info.get('revisions'):
+            lines.append("## Revisions")
+            lines.append("")
+            lines.append(self._convert_wiki_to_markdown(info['revisions']))
+            lines.append("")
+
+        # Patch History from Item info block if present
+        if info and info.get('patchhistory'):
+            lines.append("## Patch History")
+            lines.append("")
+            raw_ph = info['patchhistory']
+            # Try to parse into structured patches, else fallback to raw conversion
+            patches = self._parse_patch_history_text(raw_ph)
+            if patches:
+                for patch in patches:
+                    lines.append(f"### {patch['version']}")
+                    for ch in patch['changes']:
+                        lines.append(ch)
+                    lines.append("")
+            else:
+                ph = self._convert_wiki_to_markdown(raw_ph)
+                lines.append(ph.strip())
+                lines.append("")
+
+        lines.append("---")
+        lines.append("*This page was automatically generated from League of Legends Wiki data.*")
+        return '\n'.join(lines)
+
+    def _parse_item_info_block(self, content: str) -> Optional[Dict[str, str]]:
+        """Extract top-level parameters from an Item info template block on the page."""
+        if not content:
+            return None
+        m = re.search(r'\{\{\s*Item info', content)
+        if not m:
+            return None
+        block = self._extract_balanced_braces(content, m.start())
+        if not block:
+            return None
+        return self._parse_template_params(block)
+
+    def _item_stat_label(self, key: str) -> str:
+        labels = {
+            'ad': 'Attack Damage',
+            'ah': 'Ability Haste',
+            'ap': 'Ability Power',
+            'apunique': 'Ability Power (Unique)',
+            'armor': 'Armor',
+            'armorunique': 'Armor (Unique)',
+            'armpen': 'Armor Penetration',
+            'rpen': 'Armor Penetration',
+            'as': 'Attack Speed',
+            'cdr': 'Cooldown Reduction',
+            'cdrunique': 'Cooldown Reduction (Unique)',
+            'crit': 'Critical Strike Chance',
+            'critdamage': 'Critical Strike Damage',
+            'gp10': 'Gold per 10 sec',
+            'hp': 'Health',
+            'hp5': 'Health Regen (per 5s)',
+            'hp5flat': 'Health Regen (Flat)',
+            'hsp': 'Heal and Shield Power',
+            'lethality': 'Lethality',
+            'lethalityunique': 'Lethality (Unique)',
+            'lifesteal': 'Life Steal',
+            'mana': 'Mana',
+            'mp5': 'Mana Regen (per 5s)',
+            'mp5flat': 'Mana Regen (Flat)',
+            'mpen': 'Magic Penetration',
+            'mpenflat': 'Magic Penetration (Flat)',
+            'mr': 'Magic Resist',
+            'ms': 'Movement Speed',
+            'msflat': 'Movement Speed (Flat)',
+            'msunique': 'Movement Speed (Unique)',
+            'omnivamp': 'Omnivamp',
+            'pvamp': 'Physical Vamp',
+            'spellvamp': 'Spell Vamp',
+            'tenacity': 'Tenacity',
+            'spec': 'Special',
+            'spec2': 'Special 2',
+        }
+        return labels.get(key, key)
+
+    def _item_stat_format(self, key: str, val: Any) -> str:
+        percent_keys = {"armpen","as","cdr","crit","critdamage","hsp","lifesteal","ms","hp5","mp5","mpen","omnivamp","pvamp","spellvamp","tenacity"}
+        try:
+            f = float(val)
+            if key in percent_keys:
+                return f"${f:.1f}\\%$"
+            # integers prefer no trailing .0
+            if abs(f - round(f)) < 1e-9:
+                return f"${int(round(f))}$"
+            return f"${f}$"
+        except Exception:
+            return str(val)
+
+    def _compute_item_combine_cost(self, item_name: str, item_data: Dict[str, Any]) -> Optional[int]:
+        """Compute combine cost as buy - sum(child buys)."""
+        try:
+            buy = item_data.get('buy')
+            recipe = item_data.get('recipe')
+            if buy is None or recipe is None:
+                return None
+            parts: List[str] = []
+            if isinstance(recipe, dict):
+                parts = [str(v) for v in recipe.values()]
+            elif isinstance(recipe, list):
+                parts = [str(x) for x in recipe]
+            total_parts = 0
+            resolved = 0
+            for p in parts:
+                sub = self._load_item_module_data(p)
+                if sub and sub.get('buy') is not None:
+                    try:
+                        total_parts += int(float(sub['buy']))
+                        resolved += 1
+                    except Exception:
+                        pass
+            # If we couldn't resolve any component prices, avoid returning a bogus combine cost
+            if resolved == 0:
+                return None
+            return int(float(buy)) - total_parts
+        except Exception:
+            return None
+
+    # ------ Rune helpers ------
+    def _extract_rune_data(self, rune_name: str, content: str) -> Dict[str, Any]:
+        data = {"name": rune_name, "notes": [], "patch_history": []}
+        # Notes section
+        m = re.search(r'==\s*Notes\s*==([\s\S]*?)(?==\s*[A-Z][^=]+=|\Z)', content, flags=re.IGNORECASE)
+        if m:
+            raw = m.group(1)
+            notes = self._format_notes(raw)
+            data['notes'] = [ln for ln in notes.split('\n') if ln.strip()]
+        # Patch History: either explicit section or embedded Scroll box
+        ph_match = re.search(r'==\s*Patch History\s*==([\s\S]*?)(?==\s*[A-Z][^=]+=|\Z)', content, flags=re.IGNORECASE)
+        ph_text = ph_match.group(1) if ph_match else ''
+        if not ph_text:
+            # try to extract from Scroll box content parameter
+            sm = re.search(r'\{\{\s*Scroll box\s*\|\s*content\s*=([\s\S]*?)\}\}', content, flags=re.IGNORECASE)
+            if sm:
+                ph_text = sm.group(1)
+        if ph_text:
+            # Reuse champion patch parsing by building a synthetic page
+            sections = re.split(r';?\[\[([V\d\.]+)\]\]', ph_text)
+            patches = []
+            for i in range(1, len(sections), 2):
+                if i + 1 < len(sections):
+                    version = sections[i]
+                    changes_text = sections[i + 1].strip()
+                    changes: List[str] = []
+                    for raw in changes_text.split('\n'):
+                        if not raw.strip():
+                            continue
+                        m2 = re.match(r'^(\*+)\s*(.*)$', raw.rstrip())
+                        if not m2:
+                            continue
+                        level = len(m2.group(1))
+                        content2 = m2.group(2).strip()
+                        if not content2:
+                            continue
+                        content_md = self._convert_wiki_to_markdown(content2)
+                        indent = '  ' * (level - 1)
+                        changes.append(f"{indent}- {content_md}")
+                    if changes:
+                        patches.append({"version": version, "changes": changes})
+            data['patch_history'] = patches
+        return data
+
+    def _generate_rune_markdown(self, data: Dict[str, Any]) -> str:
+        lines: List[str] = []
+        lines.append(f"# {data['name']}")
+        lines.append("")
+        lines.append("## Table of Contents")
+        if data.get('notes'):
+            lines.append("- [Notes](#notes)")
+        if data.get('patch_history'):
+            lines.append("- [Patch History](#patch-history)")
+        lines.append("")
+        if data.get('notes'):
+            lines.append("## Notes")
+            lines.append("")
+            for n in data['notes']:
+                lines.append(n if n.strip().startswith('- ') else f"- {n}")
+            lines.append("")
+        if data.get('patch_history'):
+            lines.append("## Patch History")
+            lines.append("")
+            for patch in data['patch_history']:
+                lines.append(f"### {patch['version']}")
+                for ch in patch['changes']:
+                    lines.append(ch)
+                lines.append("")
+        lines.append("---")
+        lines.append("*This page was automatically generated from League of Legends Wiki data.*")
+        return '\n'.join(lines)
     
     def _generate_markdown(self, data: Dict[str, Any]) -> str:
         """Generate markdown content."""
@@ -2239,14 +2911,24 @@ class SimpleLoLConverter:
 def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(description="Simple LoL Wiki to Markdown Converter")
-    parser.add_argument("--champion", required=True, help="Champion name to convert")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--champion", help="Champion name to convert")
+    group.add_argument("--item", help="Item name to convert")
+    group.add_argument("--rune", help="Rune name to convert")
     parser.add_argument("--wiki-root", default="./out", help="Path to extracted wiki files")
     parser.add_argument("--output", default="./markdown", help="Output directory")
     
     args = parser.parse_args()
     
     converter = SimpleLoLConverter(args.wiki_root, args.output)
-    result = converter.convert_champion(args.champion)
+    if args.champion:
+        result = converter.convert_champion(args.champion)
+    elif args.item:
+        result = converter.convert_item(args.item)
+    elif args.rune:
+        result = converter.convert_rune(args.rune)
+    else:
+        result = None
     
     if result:
         print(f"Conversion completed successfully!")
