@@ -135,7 +135,7 @@
 | **Target Range** | 1200 units |
 | **Width** | 80 units |
 | **Speed** | 2400 units/second |
-| **Cost** | $60-80$ Mana |
+| **Cost** | 60 / 65 / 70 / 75 / 80 Mana |
 | **Cooldown** | 9 seconds |
 | **Targeting** | Direction |
 | **Affects** | Enemies |
@@ -148,7 +148,7 @@
 
 | Attribute | Value |
 |-----------|------:|
-| **Physical Damage** | $10-270$ (+ 105% AD) |
+| **Physical Damage** | 10 / 75 / 140 / 205 / 270 (+ 105% AD) |
 
 If *Pierce* kills the target, the spear continues onward to transfer all of the target's **Rend** stacks to the next enemy it hits. This can repeat indefinitely until the spear reaches its maximum range.
 
@@ -166,7 +166,7 @@ No additional notes.
 | **Target Range** | 1400 (Minimum range) / 5000 (Maximum range) units |
 | **Tether Radius** | cr |
 | **Cooldown** | 30 seconds |
-| **Recharge** | $90-50$ seconds |
+| **Recharge** | 90 / 80 / 70 / 60 / 50 seconds |
 | **On-target CD Static** | 10 |
 | **Targeting** | Location |
 | **Affects** | Enemies |
@@ -181,11 +181,11 @@ If both ''Kalista's* and the *Oathsworn's* *Soul-Mark* are applied to the same e
 
 | Attribute | Value |
 |-----------|------:|
-| **Bonus Magic Damage** | $10-18$% of target's **maximum** health |
+| **Bonus Magic Damage** | 10 / 12 / 14 / 16 / 18% of target's **maximum** health |
 
 | Attribute | Value |
 |-----------|------:|
-| **Maximum Non-Champion Damage** | $100-200$ |
+| **Maximum Non-Champion Damage** | 100 / 125 / 150 / 175 / 200 |
 
 **Active:** **Kalista** summons a *Sentinel* that patrols back and forth on a path along the target direction, granting sight of its surroundings as it travels.
 
@@ -213,7 +213,7 @@ If both ''Kalista's* and the *Oathsworn's* *Soul-Mark* are applied to the same e
 | **Cast Time** | $0.25$ seconds |
 | **Effect Radius** | 1100 units |
 | **Cost** | 30 Mana |
-| **Cooldown** | $10-8$ seconds |
+| **Cooldown** | 10 / 9.5 / 9 / 8.5 / 8 seconds |
 | **Targeting** | Proximity |
 | **Affects** | Enemies |
 | **Damage Type** | Physical |
@@ -227,18 +227,18 @@ If both ''Kalista's* and the *Oathsworn's* *Soul-Mark* are applied to the same e
 
 | Attribute | Value |
 |-----------|------:|
-| **Physical Damage** | $5-45$ (+ 70% AD) (+ 65% AP) |
-| **Damage per Additional Stack** | $7-35$ (+ $20-40$% AD) (+ 50% AP) |
+| **Physical Damage** | 5 / 15 / 25 / 35 / 45 (+ 70% AD) (+ 65% AP) |
+| **Damage per Additional Stack** | 7 / 14 / 21 / 28 / 35 (+ 20 / 25 / 30 / 35 / 40% AD) (+ 50% AP) |
 
 | Attribute | Value |
 |-----------|------:|
-| **Slow** | $10-42$% (+ 5% per 100 AP) |
+| **Slow** | 10 / 18 / 26 / 34 / 42% (+ 5% per 100 AP) |
 
 If *Rend* kills at least one target, the *cooldown* is reset and **Kalista** restores *mana*.
 
 | Attribute | Value |
 |-----------|------:|
-| **Mana Restored** | $10-30$ |
+| **Mana Restored** | 10 / 15 / 20 / 25 / 30 |
 
 'A nearby enemy with a Rend stack is required to cast this ability. Rend can be used during the dash of *Martial Poise* and the cast time of *Pierce*. In-flight spears and *Pierce* if in cast will be empowered to apply Rend's effects to their targets. These empowered spears can also trigger Rend's refund.'
 
@@ -253,7 +253,7 @@ If *Rend* kills at least one target, the *cooldown* is reset and **Kalista** res
 - While *berserk*, ''Kalista's* attacks will also apply *Rend' stacks on allies.
   - **Kalista** will be unable to cast *Rend* if there are no stacks on an enemy in range. *** *Rend* cannot cast on allies, even if a valid enemy target exists. As such, any spears on allied units are purely cosmetic.
 - *Rend* has a lower cast range than effect range.
-- *Rend* at maximum stacks will deal a total of $(5 to 45)+(7 to 35)*253$ (+ $70+(20-40)*253$% AD) (+ 12715% AP) physical damage.
+- *Rend* at maximum stacks will deal a total of (5 to 45)+(7 to 35)*253 (+ 70+(20 to 40)*253% AD) (+ 12715% AP) physical damage.
 
 ---
 
@@ -265,7 +265,7 @@ If *Rend* kills at least one target, the *cooldown* is reset and **Kalista** res
 | **Target Range** | 1200 units |
 | **Tether Radius** | 1100 units |
 | **Cost** | 100 mana |
-| **Cooldown** | $160-120$ seconds |
+| **Cooldown** | 160 / 150 / 140 / 130 / 120 seconds |
 | **Cooldown Start** | on-cast |
 | **Targeting** | Proximity |
 | **Affects** | *Black Spear* Ally / Enemies |
@@ -280,7 +280,7 @@ The 'Oathsworn's* dash stops upon colliding with an enemy champion. Upon the das
 
 | Attribute | Value |
 |-----------|------:|
-| **Airborne Duration** | $1-2$ seconds |
+| **Airborne Duration** | 1 / 1.25 / 1.5 / 1.75 / 2 seconds |
 
 'The Oathsworn must be within tether range to cast this ability, and is also silence and unable to perform movement or attack commands while Fate's Call is in effect.'
 
@@ -352,7 +352,7 @@ No additional notes.
   - Base attack damage reduced to 57 from 59.
   - Attack damage growth increased to 4 from $3.25$.
 - *Rend*
-  - Base damage reduced to $5-45$ from $10-50$.
+  - Base damage reduced to 5 / 15 / 25 / 35 / 45 from 10 / 20 / 30 / 40 / 50.
 
 ### V25.04
 - General
@@ -360,7 +360,7 @@ No additional notes.
 - *Martial Poise*
   - **Bug Fixes:** Now properly benefits from certain boots.
 - *Sentinel*
-  - Mark damage reduced to $10-18$% of target's **maximum** health from $14-18$%.
+  - Mark damage reduced to 10 / 12 / 14 / 16 / 18% of target's **maximum** health from 14 / 15 / 16 / 17 / 18%.
 
 ### V25.S1.1
 - Stats
@@ -376,23 +376,23 @@ No additional notes.
   - Restored the dash animation when basic attacking.
   - **Bug Fixes:** Using *Pierce* during her attack winddown animation no longer causes her attack and idle animations to constantly reset when repeatedly inputting movement and stop commands without allowing the winddown animation cycle to finish.
 - *Pierce*
-  - Mana cost increased to $60-80$ from $50-70$.
-  - Base damage reduced to $10-270$ from $20-280$.
+  - Mana cost increased to 60 / 65 / 70 / 75 / 80 from 50 / 55 / 60 / 65 / 70.
+  - Base damage reduced to 10 / 75 / 140 / 205 / 270 from 20 / 85 / 150 / 215 / 280.
 - *Rend*
-  - Base damage per subsequent spear changed to $7-35$ from $8-24$.
-  - AD ratio per subsequent spear reduced to $20-40$% AD from $25-45$% AD.
+  - Base damage per subsequent spear changed to 7 / 14 / 21 / 28 / 35 from 8 / 12 / 16 / 20 / 24.
+  - AD ratio per subsequent spear reduced to 20 / 25 / 30 / 35 / 40% AD from 25 / 30 / 35 / 40 / 45% AD.
 
 ### V14.13
 - Stats
   - Base attack damage reduced to 59 from 61.
 - *Fate's Call*
-  - Cooldown increased to $160-120 3$ seconds from $150-90 3$.
+  - Cooldown increased to 160 / 140 / 120 seconds from 150 / 120 / 90.
 
 ### V14.4
 - *Martial Poise*
   - **Bug Fixes:** Tier 1 *Boots* now properly affect dash distance.
 - *Rend*
-  - Base damage reduced to $10-50$ from $20-60$.
+  - Base damage reduced to 10 / 20 / 30 / 40 / 50 from 20 / 30 / 40 / 50 / 60.
 
 ### V13.20
 - Kalista
@@ -411,9 +411,9 @@ No additional notes.
 - *Pierce*
   - AD ratio increased to 105% AD from 100% AD.
 - *Rend*
-  - Base damage per spear reduced to $8-24$ from $10-34$.
-  - AD ratio per subsequent spear increased to $25-45$% AD from $23.2-40.6$% AD.
-  - Cooldown reduced to $10-8$ from $14-8$.
+  - Base damage per spear reduced to 8 / 12 / 16 / 20 / 24 from 10 / 16 / 22 / 28 / 34.
+  - AD ratio per subsequent spear increased to 25 / 30 / 35 / 40 / 45% AD from 23.2 / 27.55 / 31.9 / 36.25 / 40.6% AD.
+  - Cooldown reduced to 10 / 9.5 / 9 / 8.5 / 8 from 14 / 12.5 / 11 / 9.5 / 8.
 
 ### V13.10
 - *Rend*
@@ -422,7 +422,7 @@ No additional notes.
 
 ## Trivia
 
-- A fully-stacked *Rend* has the highest AD ratio in the game ($60+20×253-60+35×253$% AD).
+- A fully-stacked *Rend* has the highest AD ratio in the game (5120 / 6068.75 / 7017.5 / 7966.25 / 8915% AD).
 - **Kalista** has the longest basic attack windup time of all champions, however this is easily offset by her high base attack speed and attack speed scaling.
 - Kalista's dance references spear dance from Game of Thrones.
   - A side-by-side comparison can be seen here.

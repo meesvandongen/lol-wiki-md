@@ -1729,13 +1729,280 @@ class SimpleLoLConverter:
         return "\n".join(lines)
     
     def _convert_ap_formula(self, match) -> str:
-        """Convert {{ap|...}} formulas to markdown math."""
+        """Convert {{ap|...}} into a progression list matching Module:Ability_progression.
+
+        Supported forms (examples):
+        - {{ap|50|70|90}} -> 50 / 70 / 90
+        - {{ap|2*x}} -> 5 values by default: 2 / 4 / 6 / 8 / 10
+        - {{ap|60 to 200}} -> 5 values linearly spaced from start..finish inclusive
+        - {{ap|2*x 3}} -> override count: 2 / 4 / 6
+        - {{ap|60 to 200 4}} -> linear with 4 values
+        - Nested 'to' in formulas is supported via expansion into a function of x and times.
+        Named params supported: round=(number|ceil|floor|abs|trunc), skill=R (default values = 3).
+        Up to 6 values total; display an error if exceeded.
+        """
         content = match.group(1)
-        if ' to ' in content:
-            parts = content.split(' to ')
-            if len(parts) == 2:
-                return f"${parts[0].strip()}-{parts[1].strip()}$"
-        return f"${content}$"
+
+        # Split args on top-level '|' (no braces here; parentheses don't contain '|')
+        parts = [p.strip() for p in content.split('|')]
+        pos_args: List[str] = []
+        named: Dict[str, str] = {}
+        for p in parts:
+            if not p:
+                continue
+            if '=' in p:
+                k, v = p.split('=', 1)
+                named[k.strip().lower()] = v.strip()
+            else:
+                pos_args.append(p)
+
+        # Rounding settings
+        round_param: Optional[str] = named.get('round')
+        skill_param = named.get('skill')
+        # Default fill count: 5 or 3 if ultimate (skill=R)
+        fill = 3 if (skill_param and skill_param.strip().upper() == 'R') else 5
+
+        # Max total values
+        remaining = 6
+        results: List[str] = []
+
+        def half_up_round(val: float, decimals: int) -> float:
+            if decimals <= 0:
+                # emulate Lua floor(val + 0.5) for non-negative, ceil(val - 0.5) for negative
+                return math.floor(val + 0.5) if val >= 0 else math.ceil(val - 0.5)
+            scale = 10 ** decimals
+            if val >= 0:
+                return math.floor(val * scale + 0.5) / scale
+            else:
+                return math.ceil(val * scale - 0.5) / scale
+
+        def apply_rounding(val: Union[float, int, str]) -> Union[float, int, str]:
+            if round_param is None:
+                return val
+            rp = round_param.strip().lower()
+            try:
+                if rp == 'abs':
+                    return abs(float(val))
+                if rp == 'ceil':
+                    return math.ceil(float(val))
+                if rp == 'floor':
+                    return math.floor(float(val))
+                if rp == 'trunc':
+                    return float(str(val)).split('.')[0]
+                # numeric decimals
+                dec = int(float(rp))
+                return half_up_round(float(val), dec)
+            except Exception:
+                return val
+
+        def fmt_number(v: Union[float, int, str]) -> str:
+            if isinstance(v, (int,)):
+                return str(v)
+            if isinstance(v, float):
+                # General format to avoid long floats; similar to Lua's display
+                return format(v, 'g')
+            return str(v)
+
+        # Expand nested 'to' into function of x and times
+        def expand_to(expr: str) -> str:
+            s = expr
+            # Keep expanding the first top-level 'to' found
+            while True:
+                # Scan for 'to' at top-level (depth 0)
+                depth = 0
+                idx = -1
+                i = 0
+                while i + 1 < len(s):
+                    ch = s[i]
+                    if ch == '(':
+                        depth += 1
+                    elif ch == ')':
+                        depth = max(0, depth - 1)
+                    # match 'to' when depth==0 and surrounded by non-word boundaries
+                    if depth == 0 and s[i:i+2] == 'to':
+                        # ensure token-ish boundaries
+                        left_ok = (i == 0) or (s[i-1].isspace() or s[i-1] in '+-*/^,(')
+                        right_ok = (i+2 >= len(s)) or (s[i+2].isspace() or s[i+2] in '+-*/^,)')
+                        if left_ok and right_ok:
+                            idx = i
+                            break
+                    i += 1
+                if idx == -1:
+                    return s
+
+                # Find left operand bounds
+                l = idx - 1
+                while l >= 0 and s[l].isspace():
+                    l -= 1
+                if l >= 0 and s[l] == ')':
+                    # find matching '('
+                    bal = 1
+                    l -= 1
+                    while l >= 0 and bal > 0:
+                        if s[l] == ')':
+                            bal += 1
+                        elif s[l] == '(':
+                            bal -= 1
+                        l -= 1
+                    start_start = l + 1
+                    start_end = idx - 1
+                else:
+                    # scan left over token chars
+                    token_chars = set('._%')  # allow % in numbers like 10% (we'll strip later if needed)
+                    while l >= 0 and (s[l].isalnum() or s[l] in token_chars):
+                        l -= 1
+                    start_start = l + 1
+                    start_end = idx - 1
+
+                # Find right operand bounds
+                r = idx + 2
+                while r < len(s) and s[r].isspace():
+                    r += 1
+                if r < len(s) and s[r] == '(':
+                    bal = 1
+                    r += 1
+                    while r < len(s) and bal > 0:
+                        if s[r] == '(':
+                            bal += 1
+                        elif s[r] == ')':
+                            bal -= 1
+                        r += 1
+                    finish_start = idx + 2
+                    finish_end = r
+                else:
+                    # scan right over token chars
+                    token_chars_r = set('._%')
+                    while r < len(s) and (s[r].isalnum() or s[r] in token_chars_r):
+                        r += 1
+                    finish_start = idx + 2
+                    finish_end = r
+
+                start = s[start_start:start_end].strip()
+                finish = s[finish_start:finish_end].strip()
+                # Recurse on finish for nested 'to'
+                finish_expanded = expand_to(finish) if 'to' in finish else finish
+                # Build replacement
+                repl = f"({start})+((({finish_expanded})-({start}))/(times-1)*(x-1))"
+                s = s[:start_start] + repl + s[finish_end:]
+            # not reached
+
+        def eval_expr(expr: str) -> Optional[float]:
+            try:
+                # Replace percent like '20%' -> '0.2'
+                expr_pct = re.sub(r'(\d+(?:\.\d+)?)%', lambda m: str(float(m.group(1))/100.0), expr)
+                return float(self._safe_eval_num_expr(expr_pct))
+            except Exception:
+                return None
+
+        # Helper: append a single value (numeric or string)
+        def append_value(v: Union[float, int, str]):
+            nonlocal remaining
+            if remaining <= 0:
+                return
+            if isinstance(v, (int, float)):
+                v2 = apply_rounding(v)
+                try:
+                    v_num = float(v2)
+                    results.append(fmt_number(v_num))
+                except Exception:
+                    results.append(str(v2))
+            else:
+                results.append(str(v))
+            remaining -= 1
+
+        # Process each positional argument
+        for token in pos_args:
+            if remaining <= 0:
+                break
+            if not token:
+                continue
+            t = token.strip()
+            has_to = 'to' in t
+            has_x = 'x' in t
+
+            # Branch 1: simple linear range without x -> start to finish [times]
+            if has_to and not has_x:
+                m = re.match(r'^(.*)\bto\b(.*)$', t)
+                if m:
+                    start_str = m.group(1).strip()
+                    right = m.group(2).strip()
+                    m2 = re.match(r'^(.*?)(?:\s+(\S+))?$', right)
+                    finish_str = (m2.group(1) if m2 else right).strip()
+                    times_token = (m2.group(2) if m2 else '')
+
+                    start_val = eval_expr(start_str)
+                    finish_val = eval_expr(finish_str)
+                    times_val: Optional[int] = None
+                    if times_token:
+                        tv = eval_expr(times_token)
+                        if tv is not None:
+                            times_val = int(tv)
+                    elif fill:
+                        times_val = fill
+                        fill = 0
+
+                    if start_val is not None and finish_val is not None and times_val and times_val > 0:
+                        # Emit linear interpolation inclusive
+                        if remaining - times_val < 0:
+                            # exceed limit -> display error
+                            return "[ap error: maximum size exceeded]"
+                        if times_val == 1:
+                            append_value(start_val)
+                        else:
+                            scale = (finish_val - start_val) / (times_val - 1)
+                            for i in range(times_val):
+                                val = start_val + scale * i
+                                append_value(val)
+                        continue
+                # fallback to generic handling
+
+            # Branch 2: formula (may include nested 'to') possibly with trailing times
+            # Detect trailing times: only if last token is a number
+            m = re.match(r'^(.*\S)\s+([\-+]?\d+(?:\.\d+)?)$', t)
+            base_formula = t
+            times_val: Optional[int] = None
+            if m:
+                base_formula = m.group(1).strip()
+                tv = eval_expr(m.group(2))
+                if tv is not None:
+                    times_val = int(tv)
+            if times_val is None and fill:
+                times_val = fill
+                fill = 0
+
+            if has_to:
+                base_formula = expand_to(base_formula)
+                # replace whole-word 'times' with concrete value if known
+                if times_val is not None:
+                    base_formula = re.sub(r'\btimes\b', str(times_val), base_formula)
+
+            # If we have times and either x present or 'to' expanded, try evaluating sequence
+            if times_val and times_val > 0 and (has_x or has_to):
+                if remaining - times_val < 0:
+                    return "[ap error: maximum size exceeded]"
+                ok_any = False
+                for x in range(1, times_val + 1):
+                    expr_x = re.sub(r'\bx\b', str(x), base_formula)
+                    val = eval_expr(expr_x)
+                    if val is None:
+                        ok_any = False
+                        break
+                    ok_any = True
+                    append_value(val)
+                if ok_any:
+                    continue
+
+            # Branch 3: literal or single expression value
+            val1 = eval_expr(t)
+            if val1 is not None:
+                append_value(val1)
+            else:
+                append_value(t)
+
+        # If nothing produced, keep original content
+        if not results:
+            return content
+        return " / ".join(results)
     
     def _convert_pp_formula(self, match) -> str:
         """Convert {{pp|...}} templates to a compact list of values aligned to level breakpoints.
