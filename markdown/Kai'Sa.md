@@ -92,23 +92,23 @@
 | **Spell Effects** | Proc |
 | **Parry** | True |
 
-**Innate - Living Weapon:** ''Kai'Sa'' can evolve each of her ability by gaining a set amount of permanent stats from items and stat growth (Includes all stats gained when leveling (including base AD gained), but does not include stats at level 1.), granting them additional effects. Evolving an ability causes her to enter a 2-second cast time. The upgrade is lost if the stat requirement is no longer met.
+**INNATE - LIVING WEAPON:** **Kai'Sa** can evolve each of her basic abilities by gaining a set amount of permanent stats from items and stat growth (Includes all stats gained when leveling (including base AD gained), but does not include stats at level 1.), granting them additional effects. Evolving an ability causes her to enter a 2-second cast time. The upgrade is lost if the stat requirement is no longer met.
 
-**Innate - Plasma:** ''Kai'Sa's* basic attacks on-hit and **Void Seeker** apply stacks of Plasma to enemies for 4 seconds, refreshing on subsequent applications and stacking up to 5 times. Basic attacks each apply 1 stack and **Void Seeker*' applies 2 stacks, increased to 3 if it is *evolved*. Her and nearby allies' immobilize effects and polymorph against enemy champions will also apply a stack of Plasma.
+**INNATE - PLASMA:** **Kai'Sa**’s basic attacks on-hit and *Void Seeker* apply stacks of Plasma to enemies for 4 seconds, refreshing on subsequent applications and stacking up to 5 times. Basic attacks each apply 1 stack and *Void Seeker* applies 2 stacks, increased to 3 if it is evolved. Her and nearby allies' immobilizing effects and polymorphs against enemy champions will also apply a stack of Plasma.
 
-**Innate - Caustic Wounds:** Plasma stacks applied by ''Kai'Sa's* basic attacks or **Void Seeker*' deal 4 to 24 (+ 1 to 6 per Plasma stack before application) (+ 12–24@0–4 (@=Plasma stacks before application) AP) **bonus** magic damage. The fifth stack against a target consumes them all to deal **additional bonus** magic damage equal to 15% , capped at 400 against monster.
+**INNATE - CAUSTIC WOUNDS:** Plasma stacks applied by **Kai'Sa**’s basic attacks or *Void Seeker* deal 4 to 24 (+ 1 to 6 per Plasma stack before application) (+ 12–24@0–4 (@=Plasma stacks before application) AP) **bonus** magic damage. The fifth stack against a target consumes them all to deal **additional bonus** magic damage equal to 15% (+ 6% per 100 AP) of the target's **missing** health, capped at 400 against monsters.
 
 **Notes:**
 
-- cast time can cancel the cast time and animation of 'Living Weapon's evolution.
+- Recall’s cast time can cancel the cast time and animation of *Living Weapon*’s evolution.
 - Adaptive force from items does not count toward evolutions.
-- ''Kai'Sa'' may receive an evolution even if she dies during its lockout.
-- ''Kai'Sa'' can evolve an ability even if she hasn't learned it yet.
-- The bonus missing health damage is evaluated after the initial damage from *Caustic Wounds* is evaluated, and after *Void Seeker*’s damage if triggered by it, but before a triggering basic attack's is.
-  - This effectively increases the "flat" *Caustic Wounds* damage preceding the expunge proc and (if applicable) *Void Seeker* damage and any potential preceding on-hit damage (usually not possible to acquire due to buff slot order) by 15% (+ 6% per 100 AP) divided by (1+the target's MR post penetration/100).
+- **Kai'Sa** may receive an evolution even if she dies during its lockout.
+- **Kai'Sa** can evolve an ability even if she hasn't learned it yet.
+- The bonus missing health damage is evaluated after the initial damage from *Caustic Wounds* is evaluated, and after Void Seeker’s damage if triggered by it, but before a triggering basic attack's is.
+  - This effectively increases the "flat" *Caustic Wounds* damage preceding the expunge proc and (if applicable) Void Seeker damage and any potential preceding on-hit damage (usually not possible to acquire due to buff slot order) by 15% (+ 6% per 100 AP) divided by (1+the target's MR post penetration/100).
 - Plasma stacks that exceed the rupture are reapplied normally.
-- Spell shield will block the Plasma application from *Void Seeker* only.
-- With *Void Seeker*, if the stacks detonate Plasma, any remaining stacks are reapplied afterwards. *Void Seeker* also deals 'Caustic Wounds'damage based on Plasma stacks on the target. This damage is calculated as if each stack was applied successively.<!-- Outdated
+- Spell shield will block the Plasma application from Void Seeker only.
+- With Void Seeker, if the stacks detonate Plasma, any remaining stacks are reapplied afterwards. Void Seeker also deals *Caustic Wounds' *damage based on Plasma stacks on the target. This damage is calculated as if each stack was applied successively.<!-- Outdated
   - Hitting a target with 0 stack with normal *Void Seeker*: (based on level)|magic damage|2 stacks, - each |0 stack + 1 stack, - each % AP)|0 stack AP ratio % + 1 stack AP ratio %
   - Hitting a target with 3 stacks with normal *Void Seeker*: (based on level)|magic damage|2 stacks, - each (based on level)|buzzword|3 stacks + 4 stacks, - each % AP)|3 stacks AP ratio % + 4 stacks AP ratio %
   - Hitting a target with 0 stack with evolved *Void Seeker*: (based on level)|magic damage|3 stacks, - each (based on level)|buzzword|0 stack + 1 stack + 2 stacks, - each % AP)|0 stack AP ratio % + 1 stack AP ratio % + 2 stacks AP ratio %
@@ -123,7 +123,7 @@
 | **Cast Time** | none |
 | **Target Range** | 600 units |
 | **Cost** | 55 Mana |
-| **Cooldown** | $10-6$ seconds |
+| **Cooldown** | 10 / 9 / 8 / 7 / 6 seconds |
 | **Targeting** | Proximity |
 | **Affects** | Enemies |
 | **Damage Type** | Physical |
@@ -131,33 +131,33 @@
 | **Spell Effects** | Special |
 | **Projectile** | True |
 
-**Active:** ''Kai'Sa'' releases a swarm of 6 missiles that evenly distributes among nearby sight enemies, each one hitting their target after $0.4$ seconds to deal physical damage. Minions below *health|35% health* take double damage.
+**ACTIVE:** **Kai'Sa** releases a swarm of 6 missiles that evenly distributes among nearby visible enemies, each one hitting their target after $0.4$ seconds to deal physical damage. Minions below health take double damage.
 
 | Attribute | Value |
 |-----------|------:|
-| **Physical Damage Per Missile** | $ (+ (+ |
+| **Physical Damage Per Missile** | 40 / 55 / 70 / 85 / 100 (+ 55% **bonus** AD) (+ 20% AP) |
 
-Non-minions take $% damage from missiles beyond their first.
-
-| Attribute | Value |
-|-----------|------:|
-| **Reduced Damage Per Missile** | $ to * (+ $% *bonus AD) (+ $% AP) |
-| **Total Single-Target Damage** | $*5) to *(1+*5) (+ $% *bonus AD) (+ $% AP) |
-
-**Evolution:** Requires from items|*100 attack damage* from items and stat growthto upgrade – *Icathian Rain* instead fires 12 missiles.
+Non-minions take 25% damage from missiles beyond their first.
 
 | Attribute | Value |
 |-----------|------:|
-| **Total Evolved Single-Target Damage** | $*11) to *(1+*11) (+ $% *bonus AD) (+ $% AP) |
+| **Reduced Damage Per Missile** | 10 / 13.75 / 17.5 / 21.25 / 25 (+ 13.75% **bonus** AD) (+ 5% AP) |
+| **Total Single-Target Damage** | 90 / 123.75 / 157.5 / 191.25 / 225 (+ 123.75% **bonus** AD) (+ 45% AP) |
+
+** Requires from items|100 attack damage from items and stat growthto upgrade – *Icathian Rain* instead fires 12 missiles.
+
+| Attribute | Value |
+|-----------|------:|
+| **Total Evolved Single-Target Damage** | 150 / 206.25 / 262.5 / 318.75 / 375 (+ 206.25% **bonus** AD) (+ 75% AP) |
 
 *A nearby enemy is required to cast this ability.*
 
 **Notes:**
 
 - The first missile on a target applies area damage, while the rest on the same target apply persistent area damage.
-- Spell shield only block the damage from a single missile.
+- Spell shields only block the damage from a single missile.
 - *Icathian Rain* acquires its targets upon cast. Moving will not change its targets.
-- Charging *Supercharge* will not stop the missiles from firing.
+- Charging Supercharge will not stop the missiles from firing.
 - It takes 1 second for all missiles to fire at a single target.
 
 ---
@@ -170,8 +170,8 @@ Non-minions take $% damage from missiles beyond their first.
 | **Target Range** | 3000 units |
 | **Width** | 200 units |
 | **Speed** | 1750 units/second |
-| **Cost** | $55-75$ Mana |
-| **Cooldown** | $22-14$ seconds |
+| **Cost** | 55 / 60 / 65 / 70 / 75 Mana |
+| **Cooldown** | 22 / 20 / 18 / 16 / 14 seconds |
 | **Targeting** | Direction |
 | **Affects** | Enemies |
 | **Damage Type** | Magic |
@@ -179,13 +179,13 @@ Non-minions take $% damage from missiles beyond their first.
 | **Spell Effects** | Single |
 | **Projectile** | True |
 
-**Active:** ''Kai'Sa'' fires a void bolt in the target direction that briefly grants sight around its trajectory as it travels, deals magic damage to the first enemy hit, applies 2 Plasma, and true sight them for 4 seconds.
+**ACTIVE:** **Kai'Sa** fires a void bolt in the target direction that briefly grants sight around its trajectory as it travels, deals magic damage to the first enemy hit, applies 2 Plasma, and reveals them for 4 seconds.
 
 | Attribute | Value |
 |-----------|------:|
-| **Magic Damage** | $30-130$ (+ 130% AD) (+ 45% AP) |
+| **Magic Damage** | 30 / 55 / 80 / 105 / 130 (+ 130% AD) (+ 45% AP) |
 
-**Evolution:** Requires *100 ability power* from items to upgrade – *Void Seeker* applies 3 Plasma instead and refunds 75% of its *cooldown* if it hits an enemy champion.
+** Requires 100 ability power from items to upgrade – *Void Seeker* applies 3 Plasma instead and refunds 75% of its cooldown if it hits an enemy champion.
 
 **Notes:**
 
@@ -197,34 +197,34 @@ No additional notes.
 
 | Attribute | Value |
 |-----------|------:|
-| **Cast Time** | *bonus attack speed |
+| **Cast Time** | **bonus** attack speed |
 | **Cost** | 30 Mana |
-| **Cooldown** | $16-10$ seconds |
+| **Cooldown** | 16 / 14.5 / 13 / 11.5 / 10 seconds |
 | **Targeting** | Auto |
 | **Affects** | Self |
 | **Attack Missile Speed** | 2500 |
 
-**Active:** ''Kai'Sa** charges up over the cast time, during which she is still able to move, becoming ghosted and gaining *ms| for the duration, with the effectiveness increased by type=**bonus'' attack speed.
+**ACTIVE:** **Kai'Sa** charges up over the cast time, during which she is still able to move, becoming ghosted and gaining ms for the duration, with the effectiveness increased by type=**bonus** attack speed.
 
 | Attribute | Value |
 |-----------|------:|
-| **Minimum Movement Speed** | $55-75$% |
-| **Maximum Movement Speed** | $55×2-75×2$% |
+| **Minimum Movement Speed** | 55 / 60 / 65 / 70 / 75% |
+| **Maximum Movement Speed** | 110 / 120 / 130 / 140 / 150% |
 
-After completing the charge, she gains *as|*bonus attack speed* for 4 seconds, during which her attacks have a lower attack windup of $(0.1/Kai'Sa% and an increased missile speed.
+After completing the charge, she gains as for 4 seconds, during which her attacks have a lower windup of (0.1/% and an increased missile speed.
 
 | Attribute | Value |
 |-----------|------:|
-| **Bonus Attack Speed** | $40-80$% |
+| **Bonus Attack Speed** | 40 / 50 / 60 / 70 / 80% |
 
-'Supercharge's **current cooldown** is reduced by $0.5$ seconds on-attack.
+*Supercharge*’s **current** cooldown is reduced by $0.5$ seconds on-attack.
 
-**Evolution:** Requires from items|*100% attack speed* from items and stat growthto upgrade – *Supercharge* grants invisibility at the start of the cast time for $0.5$ seconds.
+** Requires from items|100% attack speed from items and stat growthto upgrade – *Supercharge* grants invisibility at the start of the cast time for $0.5$ seconds.
 
 **Notes:**
 
-- Her attack commands during this time are switched to movement commands instead. Upon finishing the charge and if an attack command was issued, ''Kai'Sa'' will continue walking toward her target.
-  - ''Kai'Sa'' behaves normally if attack move click was issued not on a target during the cast time, stopping at attack range of the closest target and starts attacking when charged up.
+- Her attack commands during this time are switched to movement commands instead. Upon finishing the charge and if an attack command was issued, **Kai'Sa** will continue walking toward her target.
+  - **Kai'Sa** behaves normally if attack move click was issued not on a target during the cast time, stopping at attack range of the closest target and starts attacking when charged up.
 
 ---
 
@@ -233,30 +233,30 @@ After completing the charge, she gains *as|*bonus attack speed* for 4 seconds, d
 | Attribute | Value |
 |-----------|------:|
 | **Cast Time** | none |
-| **Target Range** | $2000-3000$ units |
+| **Target Range** | 2000 / 2250 / 2500 / 2750 / 3000 units |
 | **Effect Radius** | 525 (Area around enemy champions) units |
 | **Cost** | 100 Mana |
-| **Cooldown** | $120-60$ seconds |
+| **Cooldown** | 120 / 105 / 90 / 75 / 60 seconds |
 | **Targeting** | Location |
 | **Affects** | Self |
 | **Out of Range Behavior** | False |
 | **Grounded** | True |
 | **Knockdown** | True |
 
-**Active:** ''Kai'Sa'' grants herself a shield for 2 seconds and dash to a target location near a sight enemy champion that was affected (Stack application or consumption) by Plasma within the last 4 seconds. The shield's duration is refreshed when the dash ends.
+**ACTIVE:** **Kai'Sa** grants herself a shield for 2 seconds and dashes to a target location near a visible enemy champion that was affected (Stack application or consumption) by Plasma within the last 4 seconds. The shield's duration is refreshed when the dash ends.
 
 | Attribute | Value |
 |-----------|------:|
-| **Shield Strength** | $70-110$ (+ $90-180$% AD) (+ 120% AP) |
+| **Shield Strength** | 70 / 80 / 90 / 100 / 110 (+ 90 / 112.5 / 135 / 157.5 / 180% AD) (+ 120% AP) |
 
-*An enemy champion within range and affected by Plasma is required to cast this ability. Killer Instinct Basic attack reset *'Kai'Sa's** basic attack timer. **Kai'Sa'* can cast any of her abilities during the dash.*
+*An enemy champion within range and affected by Plasma is required to cast this ability. Killer Instinct resets **Kai'Sa**’s basic attack timer. **Kai'Sa** can cast any of her abilities during the dash.*
 
 **Notes:**
 
-- ''Kai'Sa** will issue a movement command to the targeted location regardless of whether the target location is valid. The dash is not buffered during this movement command. **Kai'Sa'' will not dash if the targeted location becomes valid by walking in range or a nearby enemy champion becomes affected by Plasma.
+- **Kai'Sa** will issue a movement command to the targeted location regardless of whether the target location is valid. The dash is not buffered during this movement command. **Kai'Sa** will not dash if the targeted location becomes valid by walking in range or a nearby enemy champion becomes affected by Plasma.
   - If the targeted location is not valid, the range indicator will glow.
-- The enemy champion recently affected by Plasma must be in range of ''Kai'Sa'' for the targeted location to be valid, and not the targeted location itself.
-- The basic attack reset is not considered one for *Hail of Blades*.
+- The enemy champion recently affected by Plasma must be in range of **Kai'Sa** for the targeted location to be valid, and not the targeted location itself.
+- The basic attack reset is not considered one for Hail of Blades.
 
 ---
 
@@ -270,15 +270,15 @@ After completing the charge, she gains *as|*bonus attack speed* for 4 seconds, d
 - Stats
   - Base armor increased to 27 from 25.
   - Base health regeneration increased to 4 from $3.5$.
-- *Killer Instinct*
-  - Cooldown reduced to $120-60 3$ seconds from $130-70 3$.
+- Killer Instinct
+  - Cooldown reduced to 120 / 90 / 60 seconds from 130 / 100 / 70.
 
 ### V14.23
 - General
   - **Bug Fixes:** Honeyfruit consumption & kill count VO now properly play.
 
 ### V14.21
-- *Second Skin*
+- Second Skin
   - Plasma base damage changed to 4 to 24 from 5 to 23.
   - Plasma base damage per stack reduced to 1 to 6 from 1 to 12.
     - Maximum plasma base damage reduced to 8 to 48 from 9 to 71.
@@ -289,24 +289,24 @@ After completing the charge, she gains *as|*bonus attack speed* for 4 seconds, d
   - **Bug Fixes:** VO lines are no longer sometimes out of sync with their respective events or fail to trigger.
 
 ### V14.8
-- *Icathian Rain*
-  - Bonus AD ratio per missile increased to 55% *bonus AD from 50%.
+- Icathian Rain
+  - Bonus AD ratio per missile increased to 55% **bonus** AD from 50%.
 
 ### V14.5
-- *Killer Instinct*
+- Killer Instinct
   - **Bug Fixes:** Cast range indicator increased to match target range.
 
 ### V14.4
-- *Killer Instinct*
-  - Target range increased to $2000-3000 3$ units from $1500-3000 3$.
+- Killer Instinct
+  - Target range increased to 2000 / 2500 / 3000 units from 1500 / 2250 / 3000.
 
 ### V14.3
-- *Second Skin*
+- Second Skin
   - **Bug Fixes:** Mark's consumption SFX is no longer delayed if she has very high attack speed.
 
 ### V13.22
-- *Second Skin*
-  - **Bug Fixes:** No longer overlaps with *Concussive Blows*’s mark indicator.
+- Second Skin
+  - **Bug Fixes:** No longer overlaps with Concussive Blows’s mark indicator.
 
 ## Trivia
 

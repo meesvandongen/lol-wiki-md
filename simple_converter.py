@@ -330,38 +330,81 @@ class SimpleLoLConverter:
         pets: List[Dict[str, Any]] = []
         # Find tabber content
         m = re.search(r'<tabber>([\s\S]*?)</tabber>', pets_content, flags=re.IGNORECASE)
-        if not m:
+        if m:
+            tab_body = m.group(1)
+            # Split by tab delimiters `|-|`
+            chunks = re.split(r'\|\-\|', tab_body)
+            for chunk in chunks:
+                # Extract tab title like `Name=`
+                header_m = re.match(r'\s*([^\n=]+)=', chunk)
+                tab_title = header_m.group(1).strip() if header_m else ""
+                # Find Infobox/Pet block
+                idx = chunk.find('{{Infobox/Pet')
+                if idx == -1:
+                    continue
+                box = self._extract_balanced_braces(chunk, idx)
+                if not box:
+                    continue
+                info = self._parse_infobox_pet(box)
+                if tab_title and not info.get('name'):
+                    info['name'] = tab_title
+                # Abilities from infobox field or from following lines in the chunk
+                abilities: List[Dict[str, str]] = []
+                infobox_abilities = info.get('abilities')
+                if isinstance(infobox_abilities, str) and infobox_abilities.strip():
+                    text = infobox_abilities
+                    hdr = re.search(r'(?m)^\s*={2,}[^\n]*', text)
+                    if hdr:
+                        text = text[:hdr.start()].rstrip()
+                    for am in re.finditer(r'(?m)^;\s*(?P<title>[^\n]+)\n(?P<body>[\s\S]*?)(?=^\s*;|\Z)', text):
+                        title = am.group('title').strip()
+                        body = am.group('body').strip()
+                        if title.startswith('='):
+                            continue
+                        if title or body:
+                            abilities.append({
+                                'title': self._convert_wiki_to_markdown(title),
+                                'description': self._convert_wiki_to_markdown(body)
+                            })
+                if not abilities:
+                    after = chunk[idx + len(box):]
+                    for am in re.finditer(r'(?m)^;\s*(?P<title>[^\n]+)\n(?P<body>[\s\S]*?)(?=^\s*;|\Z)', after):
+                        title = am.group('title').strip()
+                        body = am.group('body').strip()
+                        if title or body:
+                            abilities.append({
+                                'title': self._convert_wiki_to_markdown(title),
+                                'description': self._convert_wiki_to_markdown(body)
+                            })
+                info['abilities'] = abilities
+                pets.append(info)
             return pets
-        tab_body = m.group(1)
-        # Split by tab delimiters `|-|`
-        chunks = re.split(r'\|\-\|', tab_body)
-        for chunk in chunks:
-            # Extract tab title like `Sand Soldier=`
-            header_m = re.match(r'\s*([^\n=]+)=', chunk)
-            tab_title = header_m.group(1).strip() if header_m else ""
-            # Find Infobox/Pet block
-            idx = chunk.find('{{Infobox/Pet')
-            if idx == -1:
-                continue
-            box = self._extract_balanced_braces(chunk, idx)
+
+        # No <tabber>: parse one or more standalone Infobox/Pet blocks in the Pets section
+        # Find all occurrences of '{{Infobox/Pet'
+        starts = [m.start() for m in re.finditer(r'\{\{Infobox/Pet', pets_content)]
+        if not starts:
+            return pets
+        # Build segments for each infobox and the text after it (up to next infobox or end)
+        for idx_i, start in enumerate(starts):
+            box = self._extract_balanced_braces(pets_content, start)
             if not box:
                 continue
+            end = start + len(box)
+            next_start = starts[idx_i + 1] if idx_i + 1 < len(starts) else len(pets_content)
+            segment_after = pets_content[end:next_start]
             info = self._parse_infobox_pet(box)
-            if tab_title and not info.get('name'):
-                info['name'] = tab_title
-            # Abilities: prefer from infobox 'abilities' field if present; else parse after the infobox
+            # Abilities
             abilities: List[Dict[str, str]] = []
             infobox_abilities = info.get('abilities')
             if isinstance(infobox_abilities, str) and infobox_abilities.strip():
                 text = infobox_abilities
-                # Trim any trailing 'General' or other headers starting with '=' that sometimes follow abilities
                 hdr = re.search(r'(?m)^\s*={2,}[^\n]*', text)
                 if hdr:
                     text = text[:hdr.start()].rstrip()
                 for am in re.finditer(r'(?m)^;\s*(?P<title>[^\n]+)\n(?P<body>[\s\S]*?)(?=^\s*;|\Z)', text):
                     title = am.group('title').strip()
                     body = am.group('body').strip()
-                    # Skip header-like titles
                     if title.startswith('='):
                         continue
                     if title or body:
@@ -370,9 +413,7 @@ class SimpleLoLConverter:
                             'description': self._convert_wiki_to_markdown(body)
                         })
             if not abilities:
-                # Fallback: parse abilities following the infobox
-                after = chunk[idx + len(box):]
-                for am in re.finditer(r'(?m)^;\s*(?P<title>[^\n]+)\n(?P<body>[\s\S]*?)(?=^\s*;|\Z)', after):
+                for am in re.finditer(r'(?m)^;\s*(?P<title>[^\n]+)\n(?P<body>[\s\S]*?)(?=^\s*;|\Z)', segment_after):
                     title = am.group('title').strip()
                     body = am.group('body').strip()
                     if title or body:
@@ -1102,36 +1143,42 @@ class SimpleLoLConverter:
         return inners
     
     def _format_notes(self, notes_text: str, vars_map: Optional[Dict[str, str]] = None) -> str:
-        """Format notes section preserving list structure. Optionally resolve {{#var:...}} using vars_map."""
+        """Format notes section preserving list structure. Optionally resolve {{#var:...}} using vars_map.
+        Supports MediaWiki list markers '*', '#', and mixed sequences like '*#' with multi-level indentation.
+        The list type for each line is determined by the last marker in the prefix (e.g., '*#' -> ordered sublist).
+        """
         if not notes_text:
             return "No additional notes."
-        
+
         # Resolve variables if provided
         if vars_map:
             notes_text = self._resolve_vars(notes_text, vars_map)
 
-        # Parse the raw notes text preserving structure
-        lines = []
-        for line in notes_text.split('\n'):
-            line = line.strip()
-            if line.startswith('* '):
-                # Main bullet point - convert the whole line
-                item = line[2:].strip()  # Remove '* '
-                item = self._convert_wiki_to_markdown(item)
-                lines.append(f"- {item}")
-            elif line.startswith('** '):
-                # Nested bullet point - convert the whole line
-                item = line[3:].strip()  # Remove '** '
-                item = self._convert_wiki_to_markdown(item)
-                lines.append(f"  - {item}")
-            elif line and not line.startswith('|') and not line.startswith('}') and line.strip():
-                # Continue previous line (for multiline bullet points)
-                item = self._convert_wiki_to_markdown(line)
-                if lines and item.strip():
-                    # Append to last line
-                    lines[-1] += f" {item.strip()}"
-        
-        return '\n'.join(lines) if lines else "No additional notes."
+        out_lines: List[str] = []
+        for raw in notes_text.split('\n'):
+            s = raw.rstrip('\r')
+            if not s.strip():
+                continue
+            # Match any combination of '*' and '#' at start followed by at least one space
+            m = re.match(r'^(?P<prefix>[\*\#]+)\s+(?P<body>.*)$', s)
+            if m:
+                prefix = m.group('prefix')
+                body = m.group('body').strip()
+                if not body:
+                    continue
+                level = len(prefix)
+                marker = prefix[-1]  # decide '-' vs '1.' by last symbol (handles '*#')
+                indent = '  ' * (level - 1)
+                bullet = '- ' if marker == '*' else '1. '
+                item_md = self._convert_wiki_to_markdown(body)
+                out_lines.append(f"{indent}{bullet}{item_md}")
+            else:
+                # Continuation of previous bullet: append inline
+                cont = self._convert_wiki_to_markdown(s.strip())
+                if out_lines and cont:
+                    out_lines[-1] += f" {cont}"
+
+        return '\n'.join(out_lines) if out_lines else "No additional notes."
 
     def _extract_vardefines(self, text: str) -> Dict[str, str]:
         """Extract {{#vardefine:name|value}} variables from a template page content.
@@ -1162,21 +1209,28 @@ class SimpleLoLConverter:
         return re.sub(r"\{\{\s*#var\s*:\s*([^}|]+)\s*\}\}", repl, text, flags=re.IGNORECASE)
     
     def _extract_trivia(self, trivia_content: str) -> List[str]:
-        """Extract trivia items, preserving nested bullets as indentation."""
+        """Extract trivia items, preserving nested bullets and ordered sublists.
+        Supports MediaWiki prefixes composed of '*' (unordered) and '#' (ordered),
+        including mixed cases like '*#' which indicate an ordered sublist nested under an unordered item.
+        """
         trivia: List[str] = []
         for raw in trivia_content.split('\n'):
-            if not raw.strip():
+            line = raw.rstrip()
+            if not line.strip():
                 continue
-            m = re.match(r'^(\*+)\s*(.*)$', raw.rstrip())
+            m = re.match(r'^(?P<prefix>[\*\#]+)\s+(?P<body>.*)$', line)
             if not m:
                 continue
-            level = len(m.group(1))
-            content = m.group(2).strip()
-            if not content:
+            prefix = m.group('prefix')
+            body = m.group('body').strip()
+            if not body:
                 continue
-            item_md = self._convert_wiki_to_markdown(content)
+            level = len(prefix)
+            marker = prefix[-1]  # decide list type by the last marker (handles mixed '*#')
             indent = '  ' * (level - 1)
-            trivia.append(f"{indent}- {item_md}")
+            bullet = '- ' if marker == '*' else '1. '
+            item_md = self._convert_wiki_to_markdown(body)
+            trivia.append(f"{indent}{bullet}{item_md}")
         return trivia
     
     def _extract_patch_history(self, champion_name: str) -> List[Dict[str, Any]]:
@@ -1259,22 +1313,174 @@ class SimpleLoLConverter:
         # This is done early so nested uses like {{as|{{#expr:175+40}}% AD}} resolve correctly
         text = self._evaluate_expr_templates(text)
 
+        # NOTE: Do NOT try to handle bold/italic with naive regex; we run a robust apostrophe parser later.
+
+        # Unwrap common icon/link templates to plain text only (no styling), preserving possessive for specific variants.
+        # This pass is brace-aware and runs early so later specialized handlers won't restyle the content.
+        def _unwrap_icon_like_templates(s: str) -> str:
+            names_plain = {
+                # champion/item/rune/unit/skill wrappers
+                'ci', 'ii', 'iis', 'ri', 'ui', 'uis', 'si', 'sti', 'stil', 'wi', 'wri',
+                # ability wrappers
+                'ai', 'cai',
+                # misc link/icon wrappers
+                'cid', 'csl', 'items', 'tft item', 'tip',
+                # mastery icons common variants
+                'mi', 'mi1', 'mi2', 'mi3', 'mi4', 'mi5', 'mi6', 'mi7',
+            }
+            names_possessive = {'cis', 'ais', 'cais', 'ris', 'sis'}
+            # Process by scanning for '{{' and then extract balanced template when name matches
+            out: List[str] = []
+            i = 0
+            n = len(s)
+            while i < n:
+                j = s.find('{{', i)
+                if j == -1:
+                    out.append(s[i:])
+                    break
+                out.append(s[i:j])
+                # Try to read the template name token
+                k = j + 2
+                # Skip whitespace
+                while k < n and s[k].isspace():
+                    k += 1
+                # Read name up to '|' or '}}'
+                name_start = k
+                while k < n and s[k] not in '|}':
+                    k += 1
+                name_raw = s[name_start:k].strip()
+                name_lc = name_raw.lower()
+                # Now extract balanced braces to get full template
+                # Walk from j to matching '}}'
+                t = j
+                depth = 0
+                while t < n - 1:
+                    if s[t:t+2] == '{{':
+                        depth += 1
+                        t += 2
+                        continue
+                    if s[t:t+2] == '}}':
+                        depth -= 1
+                        t += 2
+                        if depth == 0:
+                            break
+                        continue
+                    t += 1
+                tpl = s[j:t] if t <= n else s[j:]
+                # Determine if this template should be unwrapped to plain text
+                is_target = (name_lc in names_plain or name_lc in names_possessive)
+                # Heuristic fallback: short icon-like wrappers (e.g., ci/ii/ri/ui/si/wi/sti/stil/mi1..), including mi with digits
+                if not is_target:
+                    if name_lc != 'bi' and (re.match(r'^(?:[a-z]{1,4}i|[a-z]{1,4}is)$', name_lc) or re.match(r'^mi\d+$', name_lc)):
+                        is_target = True
+                if not is_target:
+                    out.append(tpl)
+                    i = t
+                    continue
+                # Extract inner (drop '{{' and '}}')
+                inner = tpl[2:-2]
+                # Remove name and leading pipe if present
+                rest = inner[len(name_raw):].lstrip()
+                if rest.startswith('|'):
+                    rest = rest[1:]
+                # Split on top-level pipes to get args; ignore key=value args
+                parts = self._split_top_level_pipes(rest)
+                pos_args = [p.strip() for p in parts if p.strip() and '=' not in p]
+                display = ''
+                if pos_args:
+                    if name_lc in ('ai', 'ais', 'cais'):
+                        # {{ai|Ability|Champion|Display}} -> prefer 3rd arg (display) else 1st (ability)
+                        display = (pos_args[2] if len(pos_args) >= 3 and pos_args[2] else pos_args[0])
+                    elif name_lc == 'tip':
+                        # {{tip|Subject|Display|...}} -> prefer 2nd positional (display) else 1st (subject)
+                        display = (pos_args[1] if len(pos_args) >= 2 and pos_args[1] else pos_args[0])
+                    else:
+                        # For others (ci/ii/ri/ui/si/sti/stil/wi/wri/cai/cid/csl/items/mi*), prefer first arg
+                        display = pos_args[0]
+                # Recursively convert the extracted display text (so nested templates like sbc still apply)
+                disp_md = self._convert_wiki_to_markdown(display) if display else ''
+                if name_lc in names_possessive:
+                    disp_md = f"{disp_md}’s" if disp_md else ''
+                out.append(disp_md)
+                i = t
+            return ''.join(out)
+
+        text = _unwrap_icon_like_templates(text)
+
+        # Convert MediaWiki lists (*, **, ***, #, ##, ...) to Markdown nested lists.
+        # Perform this BEFORE bold/italic conversions so that leading "** " isn't mistaken for bold.
+        def _mw_list_repl(m: re.Match) -> str:
+            prefix = m.group('prefix')
+            level = len(prefix)
+            # Use the LAST marker to determine the list type for this line.
+            # This correctly maps mixed prefixes like '*#' to an ordered sublist.
+            marker = prefix[-1]
+            indent = '  ' * (level - 1)
+            if marker == '*':
+                return f"{indent}- "
+            else:
+                return f"{indent}1. "
+        text = re.sub(r'(?m)^(?P<prefix>[\*\#]+)\s+', _mw_list_repl, text)
+
         # Convert formulas with better handling
         text = re.sub(r'\{\{ap\|([^}]+)\}\}', self._convert_ap_formula, text)
         text = re.sub(r'\{\{pp\|([^}]+)\}\}', self._convert_pp_formula, text)
+        text = re.sub(r'\{\{pptooltip\|([^}]+)\}\}', self._convert_pptooltip, text)
         text = re.sub(r'\{\{fd\|([^}]+)\}\}', r'$\1$', text)  # Fixed decimals
         # Tooltips: {{tt|value|tooltip}} -> value (tooltip)
         text = re.sub(r'\{\{tt\|([^}]+)\}\}', self._convert_tt, text)
 
         # Convert styled text
-        text = re.sub(r'\{\{as\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text)
+        # Convert {{as|...}} (styled inline content) using a brace-aware parser to avoid breaking inner pipes
+        def _convert_as_blocks(s: str) -> str:
+            out: List[str] = []
+            i = 0
+            n = len(s)
+            while i < n:
+                j = s.find('{{as|', i)
+                if j == -1:
+                    out.append(s[i:])
+                    break
+                out.append(s[i:j])
+                k = j + 5
+                depth = 1
+                buf: List[str] = []
+                while k < n:
+                    if k + 1 < n and s[k] == '{' and s[k+1] == '{':
+                        depth += 1
+                        buf.append(s[k:k+2])
+                        k += 2
+                        continue
+                    if k + 1 < n and s[k] == '}' and s[k+1] == '}':
+                        depth -= 1
+                        if depth == 0:
+                            k += 2
+                            break
+                        buf.append(s[k:k+2])
+                        k += 2
+                        continue
+                    buf.append(s[k])
+                    k += 1
+                inner = ''.join(buf)
+                # inner may contain parameters separated by top-level '|', we only need the first arg for display
+                parts = self._split_top_level_pipes(inner)
+                content = parts[0] if parts else ''
+                out.append(self._convert_wiki_to_markdown(content))
+                i = k
+            return ''.join(out)
+        text = _convert_as_blocks(text)
         # Skill tabs: {{st|Label1|Value1|Label2|Value2|...}} -> table (brace-aware)
         text = self._convert_st_blocks(text)
-        text = re.sub(r'\{\{sbc\|([^}]+)\}\}', r'**\1**', text)  # Small bold caps
-        text = re.sub(r'\{\{sti\|([^}]+)\}\}', r'*\1*', text)  # Styled italic
+        # Small bold caps: uppercase the display text and make it bold
+        def _sbc_repl(m: re.Match) -> str:
+            inner = m.group(1)
+            # Take first arg before any extra pipes
+            display = inner.split('|', 1)[0].strip()
+            return f"**{display.upper()}**"
+        text = re.sub(r'\{\{sbc\|([^}]+)\}\}', _sbc_repl, text)
 
         # Fix double bold markers
-        text = re.sub(r'\*\*\*\*([^*]+):\*\*', r'**\1:**', text)  # ****text:** -> **text:**
+        # text = re.sub(r'\*\*\*\*([^*]+):\*\*', r'**\1:**', text)  # ****text:** -> **text:**
 
         # Convert section links BEFORE general links so they don't get captured by the general rule
         # [[Page#Anchor|Display]] -> [Display](./Page.md#Anchor)
@@ -1358,6 +1564,17 @@ class SimpleLoLConverter:
         text = re.sub(r'\{\{si\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{cai\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{cid\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
+        # tip template: keep display name when present (2nd positional), otherwise subject (1st positional); drop named params
+        def _tip_fallback(m: re.Match) -> str:
+            inner = m.group(1)
+            parts = [p.strip() for p in inner.split('|')]
+            # parts[0] is 'tip'
+            args = [p for p in parts[1:] if p and '=' not in p]
+            if not args:
+                return ''
+            disp = args[1] if len(args) >= 2 and args[1] else args[0]
+            return disp
+        text = re.sub(r'\{\{tip\|([^}]+)\}\}', _tip_fallback, text, flags=re.IGNORECASE)
         # Items (plural) -> italicize like ii
         text = re.sub(r'\{\{iis\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
         # Styled italic (linked variant) -> italicize content
@@ -1437,13 +1654,10 @@ class SimpleLoLConverter:
         text = re.sub(r'<br\s*/?>', '\n', text)
         text = re.sub(r'<[^>]+>', '', text)
 
-        # Convert bold/italic with better handling
-        text = re.sub(r"'''([^']+)'''", r'**\1**', text)
-        text = re.sub(r"''([^']+)''", r'*\1*', text)
+        # Convert MediaWiki apostrophe styles ('' italic, ''' bold, ''''' both) with a robust parser
+        text = self._convert_apostrophe_styles(text)
 
-        # Fix malformed bold/italic combinations and extra asterisks
-        text = re.sub(r'\*\*\*\*([^*]+)\*\*', r'**\1**', text)  # ****text** -> **text**
-        text = re.sub(r'\*\*\*([^*]+)\*\*([^*]+)\*', r'**\1\2**', text)  # ***text**other* -> **textother**
+    # Rely on the robust apostrophe-run parser; avoid any bold/italic cleanup here.
 
         # Clean up remaining templates
         text = re.sub(r'\{\{[^}]+\}\}', '', text)
@@ -1471,15 +1685,99 @@ class SimpleLoLConverter:
         text = re.sub(r'\*\*\s*Removed:\*', '**Removed:**', text, flags=re.IGNORECASE)
         text = re.sub(r'\*\*\s*Changed:\*', '**Changed:**', text, flags=re.IGNORECASE)
 
-        # Clean up extra whitespace and keep newlines to preserve tables and lists
-        text = re.sub(r'[ \t]+', ' ', text)
+        # Clean up extra whitespace while preserving indentation at line starts (for nested lists)
+        # Collapse 2+ spaces that are NOT immediately after a newline into a single space
+        text = re.sub(r'(?m)(?<!\n)[ \t]{2,}', ' ', text)
         text = text.strip()
         # Strip stray equals signs at line ends (artifact of template params)
         text = re.sub(r'(?m)=\s*$', '', text)
 
-        # Final pass: evaluate any {{#expr:...}} that may have become evaluable after prior substitutions
+    # Final pass: evaluate any {{#expr:...}} that may have become evaluable after prior substitutions
+    # Remove stray leading single quote left at start of lines (from mismatched wiki italics)
+        text = re.sub(r"(?m)^'(?=[A-Za-z])", '', text)
+
         text = self._evaluate_expr_templates(text)
         return text
+
+    def _convert_apostrophe_styles(self, s: str) -> str:
+        """Convert MediaWiki apostrophe-based styles to Markdown safely.
+        Handles:
+        - ''italic'' -> *italic*
+        - '''bold''' -> **bold**
+        - '''''both''''' -> ***both***
+        And mixed patterns like '''''X''' rest'' (open both, close bold, keep italic),
+        while preserving single apostrophes inside words (e.g., Ambessa's).
+        Strategy: scan runs of apostrophes, prefer 5, then 3, then 2; toggle states accordingly.
+        """
+        if not s or "'" not in s:
+            return s
+        out: List[str] = []
+        i = 0
+        n = len(s)
+        italic_on = False
+        bold_on = False
+        while i < n:
+            ch = s[i]
+            if ch != "'":
+                out.append(ch)
+                i += 1
+                continue
+            # Count consecutive apostrophes
+            j = i
+            while j < n and s[j] == "'":
+                j += 1
+            count = j - i
+            # Special-case: close italic + possessive written as '''s
+            # MediaWiki authors often write ''Word'''s to mean: close italic (''), then apostrophe + s.
+            # When we're currently italic and not bold, interpret '''s as: close italic + literal ’ + keep 's' as text.
+            if count == 3 and italic_on and not bold_on and j < n and s[j].lower() == 's':
+                # Close italic
+                out.append('*')
+                italic_on = False
+                # Typographic apostrophe
+                out.append('’')
+                # Advance past the three apostrophes; the 's' will be processed next iteration
+                i = j
+                continue
+            # If only a single apostrophe, it's not a style marker; emit as-is
+            if count == 1:
+                out.append("'")
+                i = j
+                continue
+            # Process runs in priority: 5, then 3, then 2. Leftover singles are emitted.
+            remaining = count
+            def toggle_both():
+                nonlocal italic_on, bold_on
+                # Emit *** whether opening or closing combined
+                out.append('***')
+                italic_on = not italic_on
+                bold_on = not bold_on
+            def toggle_bold():
+                nonlocal bold_on
+                out.append('**')
+                bold_on = not bold_on
+            def toggle_italic():
+                nonlocal italic_on
+                out.append('*')
+                italic_on = not italic_on
+
+            # Handle groups of 5 first
+            while remaining >= 5:
+                toggle_both()
+                remaining -= 5
+            # Then bold (3)
+            if remaining >= 3:
+                toggle_bold()
+                remaining -= 3
+            # Then italic (2)
+            if remaining >= 2:
+                toggle_italic()
+                remaining -= 2
+            # Any leftover singles are literal apostrophes
+            if remaining > 0:
+                out.append("'" * remaining)
+            i = j
+        return ''.join(out)
 
     def _evaluate_expr_templates(self, text: str) -> str:
         """Find and replace {{#expr: ...}} with a safely evaluated result.
@@ -1719,13 +2017,20 @@ class SimpleLoLConverter:
             i += 2
             if not label:
                 continue
+            # Convert both label and value through the wiki->markdown pipeline so any templates
+            # (tt, ai, ii, fd, as, etc.) inside labels/values are unwrapped and styled correctly.
+            label_md = self._convert_wiki_to_markdown(label) if label else ''
+            # Avoid double-bold on labels: if label is already wrapped in ** **, strip it before we bold below.
+            label_md = re.sub(r'^\s*\*\*(.*?)\*\*\s*$', r'\1', label_md)
             value_md = self._convert_wiki_to_markdown(value) if value else ''
-            rows.append((label, value_md))
+            rows.append((label_md, value_md))
         if not rows:
             return ''
         lines = ["| Attribute | Value |", "|-----------|------:|"]
+        def _esc_pipes(s: str) -> str:
+            return s.replace('|', '\\|') if s else s
         for label, value in rows:
-            lines.append(f"| **{label}** | {value} |")
+            lines.append(f"| **{_esc_pipes(label)}** | {_esc_pipes(value)} |")
         return "\n".join(lines)
     
     def _convert_ap_formula(self, match) -> str:
@@ -2129,12 +2434,62 @@ class SimpleLoLConverter:
                 # Fall through to simpler formatting
                 pass
 
-        # Without usable levels, prefer endpoints when possible
+        # Without usable numeric levels, prefer full list to preserve distinct tiers (e.g., Boots tiers)
         if values:
-            if len(values) >= 2:
-                return f"{values[0]}–{values[-1]}"
-            return values[0]
+            return " / ".join(values)
         return ''
+
+    def _convert_pptooltip(self, match) -> str:
+        """Convert {{pptooltip|...}} to a readable inline string.
+        Supported keys (best-effort): bot_values, top_values, bot_label, top_label, bot_key, top_key, displayformula, start, finish.
+        Output example: "140 / 153 / 166 / 175 (Boots Tier: None / Basic / Finished / Zephyr)".
+        """
+        inner = match.group(1)
+        parts = [p.strip() for p in inner.split('|') if p.strip()]
+        kv: Dict[str, str] = {}
+        for p in parts:
+            if '=' in p:
+                k, v = p.split('=', 1)
+                kv[k.strip().lower()] = v.strip()
+        # Values
+        bot_vals_raw = kv.get('bot_values', '')
+        top_vals_raw = kv.get('top_values', '')
+        bot_vals = [s.strip() for s in bot_vals_raw.split(';') if s.strip()]
+        top_vals = [s.strip() for s in top_vals_raw.split(';') if s.strip()]
+        bot_label = kv.get('bot_label') or kv.get('label') or 'value'
+        top_label = kv.get('top_label') or 'level'
+        bot_key = kv.get('bot_key', '')
+        top_key = kv.get('top_key', '')
+        displayformula = kv.get('displayformula', '')
+
+        out_parts: List[str] = []
+        if bot_vals:
+            vals = ' / '.join(bot_vals)
+            if bot_key:
+                vals = f"{vals}{bot_key}"
+            out_parts.append(vals)
+        elif displayformula:
+            out_parts.append(displayformula)
+        else:
+            # Try start/finish fallback
+            start = kv.get('start', '').replace(';', ' / ')
+            finish = kv.get('finish', '').replace(';', ' / ')
+            if start or finish:
+                if start and finish:
+                    out_parts.append(f"{start} – {finish}")
+                else:
+                    out_parts.append(start or finish)
+
+        anno_parts: List[str] = []
+        if top_vals:
+            tvals = ' / '.join(top_vals)
+            if top_key:
+                tvals = f"{tvals}{top_key}"
+            anno_parts.append(f"{top_label}: {tvals}")
+        # Combine
+        if anno_parts:
+            return f"{'; '.join(out_parts)} ({'; '.join(anno_parts)})"
+        return '; '.join(out_parts)
 
     def _pp_parse_levels(self, spec: str) -> List[int]:
         """Parse a levels spec like '1;7 to 18' into a list of ints: [1,7,8,...,18]."""
@@ -3118,8 +3473,8 @@ class SimpleLoLConverter:
             lines.append("")
             for item in data['trivia']:
                 if item.strip():
-                    # 'item' may already include indentation and '- ' prefix
-                    if re.match(r'^\s*-\s', item):
+                    # 'item' may already include indentation and a list marker ('- ' or '1. ')
+                    if re.match(r'^\s*(?:-\s|\d+\.\s)', item):
                         lines.append(item)
                     else:
                         lines.append(f"- {item}")
@@ -3136,6 +3491,21 @@ class SimpleLoLConverter:
         # Generic cleanup (avoid champion-specific hacks)
         # Remove stray asterisks after normalized labels like '**Bug Fix:**' followed by an extra '*'
         md = re.sub(r'(\*\*\s*(?:Bug Fix|Undocumented|New Effect):\s*\*\*)\*', r'\1', md)
+        # Remove stray single quotes flanking emphasis markers or emphasized spans
+        # Cases like: ' **Name**' -> **Name** and **Name**' -> **Name**
+        md = re.sub(r"(?m)^\s*'\s*(\*{1,3}[^\n]+\*{1,3})", r"\1", md)
+        md = re.sub(r"(\*{1,3}[^\n]+\*{1,3})\s*'\s*$", r"\1", md)
+        # Paired quotes around emphasis: '**Name**' or '*Title*' -> **Name** / *Title*
+        md = re.sub(r"'\s*(\*{1,3}[^\n]+?\*{1,3})\s*'", r"\1", md)
+        # Normalize italic possessive placement: *Word's* -> *Word*’s (prefer typographic apostrophe)
+        md = re.sub(r"\*([A-Za-z][^*\n]*?)'s\*", r"*\1*’s", md)
+        # Also handle plural possessive inside italics: *Words'* -> *Words*’
+        md = re.sub(r"\*([A-Za-z][^*\n]*?)'\*", r"*\1*’", md)
+        # Normalize bold possessive placement: **Word’s** -> **Word**’s and **Word's** -> **Word**’s
+        md = re.sub(r"\*\*([^*\n]+?)’s\*\*", r"**\1**’s", md)
+        md = re.sub(r"\*\*([^*\n]+?)'s\*\*", r"**\1**’s", md)
+        # Fix mixed bold+italic around possessive from apostrophe parser: **Word*’s* -> **Word**’s
+        md = re.sub(r"\*\*([^*\n]+?)\*’s\*", r"**\1**’s", md)
         # Fix repeated word artifacts
         md = re.sub(r'\b(critical|magic|physical) damage damage\b', r'\1 damage', md, flags=re.IGNORECASE)
         # Additional repeated-word guards for common gameplay terms
@@ -3146,17 +3516,26 @@ class SimpleLoLConverter:
         for term in repeated_terms:
             pattern = re.compile(rf"\b({re.escape(term)})\s+\1\b", flags=re.IGNORECASE)
             md = pattern.sub(r"\1", md)
-        # Normalize malformed emphasis around common tokens
-        md = re.sub(r'\*bonus\*\*\s*AD\b', 'bonus AD', md)
-        md = re.sub(r'\*bonus\*\*\s*AP\b', 'bonus AP', md)
-        # Additional robust cleanup for emphasis around bonus labels
-        md = re.sub(r'\*{1,3}bonus\*{1,3}\s*AD\b', 'bonus AD', md, flags=re.IGNORECASE)
-        md = re.sub(r'\*{1,3}bonus\*{1,3}\s*AP\b', 'bonus AP', md, flags=re.IGNORECASE)
+        # Repair mismatched emphasis around 'bonus' near common tokens without stripping valid bold
+        # Examples fixed: '*bonus** AD' -> '**bonus** AD', '**bonus* AP' -> '**bonus** AP'
+        md = re.sub(r'\*bonus\*\*\s*(?=AD\b)', r'**bonus** ', md)
+        md = re.sub(r'\*bonus\*\*\s*(?=AP\b)', r'**bonus** ', md)
+        md = re.sub(r'\*\*bonus\*\s*(?=AD\b)', r'**bonus** ', md)
+        md = re.sub(r'\*\*bonus\*\s*(?=AP\b)', r'**bonus** ', md)
+        # Also handle triple-then-double case: '***bonus** X' -> '**bonus** X'
+        md = re.sub(r'\*\*\*bonus\*\*\s*(?=AD\b)', r'**bonus** ', md)
+        md = re.sub(r'\*\*\*bonus\*\*\s*(?=AP\b)', r'**bonus** ', md)
         # Replace asterisk multiplication between numbers with × to avoid markdown italic parsing
         md = re.sub(r'(?<=\d)\*(?=\d)', '×', md)
-        md = re.sub(r'\*bonus\*\*\s*armor\b', 'bonus armor', md)
-        md = re.sub(r'\*bonus\*\*\s*attack speed\b', 'bonus attack speed', md)
-        md = re.sub(r'\*modified\*\*\s*', 'modified ', md)
+        # Similarly for armor and attack speed
+        md = re.sub(r'\*bonus\*\*\s*(?=armor\b)', r'**bonus** ', md, flags=re.IGNORECASE)
+        md = re.sub(r'\*\*bonus\*\s*(?=armor\b)', r'**bonus** ', md, flags=re.IGNORECASE)
+        md = re.sub(r'\*bonus\*\*\s*(?=attack speed\b)', r'**bonus** ', md, flags=re.IGNORECASE)
+        md = re.sub(r'\*\*bonus\*\s*(?=attack speed\b)', r'**bonus** ', md, flags=re.IGNORECASE)
+        md = re.sub(r'\*\*\*bonus\*\*\s*(?=armor\b)', r'**bonus** ', md, flags=re.IGNORECASE)
+        md = re.sub(r'\*\*\*bonus\*\*\s*(?=attack speed\b)', r'**bonus** ', md, flags=re.IGNORECASE)
+        # Fix 'modified' mismatched emphasis without removing valid bold if present
+        md = re.sub(r'\*modified\*\*\s*', r'**modified** ', md)
         # Generic tidy for any Width line: strip math markers and add a comma between two numeric ranges if missing
         def _clean_width_line(m: re.Match) -> str:
             prefix = m.group('prefix')

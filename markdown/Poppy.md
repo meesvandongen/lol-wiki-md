@@ -3,7 +3,6 @@
 ## Table of Contents
 - [Basic Information](#basic-information)
 - [Statistics](#statistics)
-  - [Advanced Stats](#advanced-stats)
 - [Abilities](#abilities)
 - [Patch History](#patch-history)
 - [Trivia](#trivia)
@@ -11,88 +10,92 @@
 ## Basic Information
 
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
 | **Champion** | Poppy |
 | **Title** | Keeper of the Hammer |
 | **Resource** | Mana |
 | **Range Type** | Melee |
 | **Release Date** | 2010-01-13 |
 | **Release Patch** | V1.0.0.70 |
+| **Latest Changes** | V25.15 |
 | **Roles** | Warden |
 | **Riot Positions** | Top, Jungle |
 | **External Positions** | Top, Jungle |
+| **Blue Essence** | 225 |
+| **Riot Points** | 260 |
+| **Difficulty** | 2 |
+| **Hero Type** | Tank |
+| **Alt Type** | Fighter |
+| **Adaptive Type** | Physical |
+| **Damage** | 2 |
+| **Toughness** | 3 |
+| **Control** | 3 |
+| **Mobility** | 2 |
+| **Utility** | 1 |
+| **Style** | 75 |
 
 ## Statistics
 
-### Base Stats (Level 1-18)
+### Base Stats
 
-| Stat | Base | Growth | Level 18 |
-|------|------|--------|----------|
-| **Health** | $610.0$ | $+110.0$ | $2480.0$ |
-| **Mana** | $280.0$ | $+40.0$ | $960.0$ |
-| **Health Regen** | $8.0$ | $+0.8$ | $21.6$ |
-| **Mana Regen** | $7.0$ | $+0.7$ | $18.9$ |
-| **Armor** | $35.0$ | $+5.0$ | $120.0$ |
-| **Magic Resist** | $32.0$ | $+2.05$ | $66.8$ |
-| **Attack Damage** | $60.0$ | $+4.0$ | $128.0$ |
-| **Attack Speed** | $0.658$ | $+2.5\%$ | $0.938$ |
-| **Movement Speed** | $345.0$ | $+0.0$ | $345.0$ |
-| **Attack Range** | $125.0$ | $+0.0$ | $125.0$ |
-
-### Advanced Stats
-
-| Metric | Value |
-|--------|-------|
-| **Base Attack Speed** | $0.658$ |
-| **Attack Speed Ratio** | $0.625$ |
-| **Bonus AS per Level** | $2.5\%$ |
-| **Attack Windup** | $23.4\%$ |
-| **Acquisition Radius** | $400 units$ |
-| **Gameplay Radius** | $55 units$ |
-| **Pathing Radius** | $35 units$ |
-| **Selection Radius** | $100 units$ |
-| **Selection Height** | $115 units$ |
-| **Critical Damage** | $175.0\%$ |
+| Stat | Base | Growth |
+|------|-----:|-------:|
+| **Health** | $610.0$ | $+110.0$ |
+| **Mana** | $280.0$ | $+40.0$ |
+| **Health Regen** | $8.0$ | $+0.8$ |
+| **Mana Regen** | $7.0$ | $+0.7$ |
+| **Armor** | $35.0$ | $+5.0$ |
+| **Magic Resist** | $32.0$ | $+2.05$ |
+| **Attack Damage** | $60.0$ | $+4.0$ |
+| **Attack Speed** | $0.658$ | |
+| **Movement Speed** | $345.0$ | $+0.0$ |
+| **Attack Range** | $125.0$ | $+0.0$ |
+| **Base Attack Speed** | $0.658$ | |
+| **Attack Speed Ratio** | $0.625$ | |
+| **Bonus AS per Level** | $2.5\%$ | |
+| **Attack Windup** | $23.4\%$ | |
+| **Acquisition Radius** | $400$ units | |
+| **Gameplay Radius** | $55$ units | |
+| **Pathing Radius** | $35$ units | |
+| **Selection Radius** | $100$ units | |
+| **Selection Height** | $115$ units | |
+| **Critical Damage** | $175.0\%$ | |
 
 ## Abilities
 
 ### Passive: Iron Ambassador
 
-**Innate:** Periodically, **Poppy** projectile her buckler as her next basic attack, which has **bonus range** and deals **bonus** magic damage. The buckler then falls nearby and remains for a few seconds, which she and enemy champions can step over to either retrieve or destroy it.
-
-*If this attack kills the target, the buckler bounces back to Poppy instead of falling.*
-
-**Innate:** Periodically, ''Poppy's** next basic attack is empowered to throw her buckler, gaining *350 **bonus** range* and dealing 20 to 180 **bonus'' magic damage. After it hits, the buckler then falls to a location near the target over 1 second, landing and remaining there for up to 4 seconds. **Poppy** can move over the buckler to retrieve it, gaining a shield for health*maximum** health* for 3 seconds. If the buckler kills the target, or if the target is already dead when the buckler hits it, the buckler will bounce back to **Poppy** instead of falling. Enemy champion can move over the buckler to destroy it.
-
 | Attribute | Value |
-|-----------|-------|
+|-----------|------:|
+| **Speed** | 1600 (Both attack missile and on-kill return missile speeds) units/second |
+| **Static Cooldown** | 16–8@1–13 |
 | **Targeting** | Passive |
 | **Affects** | Self |
 | **Damage Type** | Magic |
-| **Speed** | 1600 units/second |
 | **Spell Shield** | False |
 | **Spell Effects** | Proc |
 | **Projectile** | True |
+| **Parry** | True |
+
+**INNATE:** Periodically, **Poppy**’s next basic attack is empowered to throw her buckler, gaining 350 **bonus** range and dealing 20 to 180 **bonus** magic damage. After it hits, the buckler then falls to a location near the target over 1 second, landing and remaining there for up to 4 seconds.
+
+**Poppy** can move over the buckler to retrieve it, gaining a shield for health for 3 seconds. If the buckler kills the target, or if the target is already dead when the buckler hits it, the buckler will bounce back to **Poppy** instead of falling. Enemy champions can move over the buckler to destroy it.
 
 **Notes:**
 
-- 'Iron Ambassador's buckler attack counts as melee.
+- *Iron Ambassador*’s buckler attack counts as melee.
 
 ---
 
 ### Q: Hammer Shock
 
-**Active:** **Poppy** smashes the area in the target direction, dealing physical damage to enemies hit based on their **maximum** health.
-
-*The impact creates a brief field that slow enemies within, then ruptures to deal the same physical damage again.*
-
-**Active:** **Poppy** smashes the area in the target direction, dealing physical damage to enemies hit. Against minions and monsters, the damage based on their health ratio is capped. The impact creates a field for 1 second that slow enemies within, which then ruptures to deal the same physical damage.
-
 | Attribute | Value |
-|-----------|-------|
-| **Cooldown** | $8-4$ seconds |
+|-----------|------:|
+| **Range** | 460 / -120 (Edge range, but behaves very weirdly. These values are for targets of 65 radius) units |
 | **Cast Time** | $0.3325$ seconds |
-| **Cost** | $35-55$ Mana |
+| **Width** | 160 units |
+| **Cost** | 35 / 40 / 45 / 50 / 55 Mana |
+| **Cooldown** | 8 / 7 / 6 / 5 / 4 seconds |
 | **Targeting** | Direction |
 | **Affects** | Enemies |
 | **Damage Type** | Physical |
@@ -100,77 +103,102 @@
 | **Spell Effects** | spellaoe |
 | **Projectile** | False |
 
-**Scaling:**
-- **Physical Damage:** $30-130$
-- *bonus AD) (+ 9% of target's
-- **maximum** health) **Capped Minion/Monster Health Damage:* $75-195$bonus AD)
-- **Slow:** $20-40$%
-- **Total Physical Damage:** $30×2-130×2$ (+ $100×2$%
-- *bonus AD) (+ 18% of target's **maximum* health)2-(130+195)*2$ (+ $100×2$% bonus AD)
+**ACTIVE:** **Poppy** smashes the area in the target direction, dealing physical damage to enemies hit. Against minions and monsters, the damage based on their health ratio is capped.
+
+| Attribute | Value |
+|-----------|------:|
+| **Physical Damage** | 30 / 55 / 80 / 105 / 130 (+ 100% **bonus** AD) (+ 9% of target's **maximum** health) |
+
+| Attribute | Value |
+|-----------|------:|
+| **Capped Minion/Monster Health Damage** | 75 / 105 / 135 / 165 / 195 |
+| **Maximum Minion/Monster Damage** | 105 / 160 / 215 / 270 / 325 (+ 100% **bonus** AD) |
+
+The impact creates a field for 1 second that slows enemies within, which then ruptures to deal the same physical damage.
+
+| Attribute | Value |
+|-----------|------:|
+| **Slow** | 20 / 25 / 30 / 35 / 40% |
+
+| Attribute | Value |
+|-----------|------:|
+| **Total Physical Damage** | 60 / 110 / 160 / 210 / 260 (+ 200% **bonus** AD) (+ 18% of target's **maximum** health) |
+| **Total Maximum Minion/Monster Damage** | 210 / 320 / 430 / 540 / 650 (+ 200% **bonus** AD) |
 
 **Notes:**
 
-- Spell shield will block only a single instance of damage. Effect at cast time end
+- Spell shields will block only a single instance of damage. Effect at cast time end
 
 ---
 
 ### W: Steadfast Presence
 
-**Passive:** **Poppy** increases her *armor **total** armor* and *mr **total** magic resist*. This effect is doubled while she is at low health.
-
-**Active:** **Poppy** gains *ms **bonus** movement speed* for a short time and creates an aura that stops enemy dashes. Enemies that dash within the aura are dealt magic damage and briefly airborne, they are then grounded and slow for a short time.
-
-**Passive - Stubborn to a Fault:** **Poppy** increases her *armor **total** armor* and *mr **total** magic resistance* by 12%, doubled to 24% while she is below 40% **maximum** health. **Active:** **Poppy** gains ms*bonus** movement speed* and creates an aura around herself for 2 seconds, causing all enemies who attempt to dash into or within it to be dealt magic damage and airborne for $0.5$ seconds. If a target was successfully interrupted, they become grounded and slow by 25% for 2 seconds. *Steadfast Presence* can only block a single dash per enemy per cast.
-
 | Attribute | Value |
-|-----------|-------|
-| **Cooldown** | $20-12$ seconds |
+|-----------|------:|
 | **Cast Time** | none |
+| **Effect Radius** | 400 units |
 | **Cost** | 50 Mana |
+| **Cooldown** | 20 / 18 / 16 / 14 / 12 seconds |
 | **Targeting** | Auto |
 | **Affects** | Self |
 | **Damage Type** | Magic |
-| **Effect Radius** | 400 units |
 | **Spell Shield** | True |
 | **Spell Effects** | aoe |
 
-**Scaling:**
-- **Magic Damage:** $70-230$ (+ 70% AP)
+**PASSIVE - STUBBORN TO A FAULT:** **Poppy** increases her armor and mr by 12%, doubled to 24% while she is below 40% **maximum** health.
+
+**ACTIVE:** **Poppy** gains ms and creates an aura around herself for 2 seconds, causing all enemies who attempt to dash into or within it to be dealt magic damage and knocked up for $0.5$ seconds. If a target was successfully interrupted, they become grounded and slowed by 25% for 2 seconds.
+
+| Attribute | Value |
+|-----------|------:|
+| **Magic Damage** | 70 / 110 / 150 / 190 / 230 (+ 70% AP) |
+
+*Steadfast Presence* can only block a single dash per enemy per cast.
 
 **Notes:**
 
-- 'Stubborn to a Fault's armor amplification stacks with an instance of recursion.
-- *Steadfast Presence* does not stop dash if the unit is cc-immune, displacement immune, untargetable, or protected by spell shield in the process (e.g. *Death Mark*, *Stormbringer*, *Unstoppable Force*).
-  - Dashes when the unit is cc-immune or displacement immune still trigger the aura and take the damage, but do not get airborne and thus also never become ground and slow.
-  - spell shield deny all the effects if *Steadfast Presence* is triggered by their holder, and are consumed in the process.
+- *Stubborn to a Fault*’s armor amplification stacks with an instance of recursion.
+- *Steadfast Presence* does not stop dashes if the unit is crowd control immune, displacement immune, untargetable, or protected by spell shield in the process (e.g. Death Mark, Stormbringer, Unstoppable Force).
+  - Dashes when the unit is crowd control immune or displacement immune still trigger the aura and take the damage, but do not get knocked up and thus also never become grounded and slowed.
+  - Spell shields deny all the effects if *Steadfast Presence* is triggered by their holder, and are consumed in the process.
   - Being untargetable prevents *Steadfast Presence* from triggering, but this does not prevent it from triggering against another, targetable dash.
-- *Steadfast Presence* does not trigger against lunge.
+- *Steadfast Presence* does not trigger against lunges.
 
 ---
 
 ### E: Heroic Charge
 
-**Active:** **Poppy** dashes to the target enemy, dealing physical damage and airborne them forward. If the target hits terrain, **Poppy** deals the same physical damage again and briefly stun them.
-
-**Active:** **Poppy** dashes to the target enemy's location. If they are in range upon arrival, she deals physical damage and airborne them along with her for up to 400 units. If the target hits terrain, she stops to deal the same physical damage again and stun them for a duration.
-
 | Attribute | Value |
-|-----------|-------|
-| **Range** | 475 units |
-| **Cooldown** | $14-10$ seconds |
+|-----------|------:|
 | **Cast Time** | none |
+| **Target Range** | 475 units |
+| **Speed** | 1800 units/second |
 | **Cost** | 70 Mana |
+| **Cooldown** | 14 / 13 / 12 / 11 / 10 seconds |
 | **Targeting** | Unit |
 | **Affects** | Enemies |
 | **Damage Type** | Physical |
-| **Speed** | 1800 units/second |
 | **Spell Shield** | True |
 | **Spell Effects** | spell |
+| **Call For Help** | True |
+| **Grounded** | True |
+| **Knockdown** | True |
 
-**Scaling:**
-- **Physical Damage:** $40-120$ bonus AD)
-- **Stun Duration:** $1.6-2$ seconds
-- **Total Physical Damage:** $40×2-120×2$ (+ 120% bonus AD)
+**ACTIVE:** **Poppy** dashes to the target enemy's location. If they are in range upon arrival, she deals physical damage and carries them along with her for up to 400 units.
+
+| Attribute | Value |
+|-----------|------:|
+| **Physical Damage** | 40 / 60 / 80 / 100 / 120 (+ 60% **bonus** AD) |
+
+If the target hits terrain, she stops to deal the same physical damage again and stuns them for a duration.
+
+| Attribute | Value |
+|-----------|------:|
+| **Stun Duration** | 1.6 / 1.7 / 1.8 / 1.9 / 2 seconds |
+
+| Attribute | Value |
+|-----------|------:|
+| **Total Physical Damage** | 80 / 120 / 160 / 200 / 240 (+ 120% **bonus** AD) |
 
 **Notes:**
 
@@ -179,83 +207,93 @@
   - Both instances of damage and crowd control are all the same cast instance. Effects that only trigger once per spell cast will not trigger twice.
 - **Poppy** dashes slightly less far than the distance she pushes the target.
 - *Heroic Charge* can interact with player-generated terrain.
-- The dash does not follow targets. The target's position at the time of 'Heroic Charge's cast is the direction **Poppy** will dash towards.
-  - **Poppy** does not airborne nor deal damage to the target if they have left a certain radius before she collides with them.
+- The dash does not follow targets. The target's position at the time of *Heroic Charge*’s cast is the direction **Poppy** will dash towards.
+  - **Poppy** does not carry nor deal damage to the target if they have left a certain radius before she collides with them.
 
 ---
 
 ### R: Keeper's Verdict
 
-**Active:** **Poppy** channels up to a few seconds, increasing the *range* and airborne distance of her hammer. After a brief period, it becomes empowered with a new effect.
-
-**Recast:** **Poppy** swings her hammer, dealing physical damage to enemies nearby and in the area in front of her, briefly airborne.
-
-**Active:** **Poppy** channels while being slow by 15% for up to 4 seconds to increase 'Keeper's Verdict's* *range* and airborne distance over $0.5$ seconds after the first $0.5$ seconds of the channel. *Keeper's Verdict' can be recast within the duration. **Recast:** **Poppy** releases the charge to launch her hammer upwards, dealing physical damage to enemies nearby and in an area in front of her and airborne for 1 second. If 'Keeper's Verdict' was charged for at least $0.5$ seconds, it deals 100% increased damage and enemies hit are airborne up-to 3400 units toward the enemy team's fountain, during which they are standard sight and rendered untargetable. Additionally, if no enemies are hit in front of **Poppy**, she sends a shockwave that travels in the target direction until it collides with an enemy champion, which causes a hammer to erupt. Targets hit by the shockwave or the eruption receive the charged effects. If the charge is interrupt or completes without reactivation, 'Keeper's Verdict' is cancelled and the ability is put on a cd cooldown.
-
 | Attribute | Value |
-|-----------|-------|
-| **Cooldown** | $140-100$ seconds |
-| **Cast Time** | $0.25$ / $0.35$ seconds |
+|-----------|------:|
+| **Range** | 500 (Uncharged range) / channel time units |
+| **Cast Time** | $0.25$ (Uncharged release) / $0.35$ (Charged release) seconds |
+| **Effect Radius** | 180 (Uncharged radius around Poppy) / 225 (Eruption radius upon missile collision) units |
+| **Width** | 180 (Both uncharged area and shockwave missile width) units |
+| **Speed** | 2500 (Shockwave missile speed) units/second |
 | **Cost** | 100 Mana |
+| **Cooldown** | 140 / 130 / 120 / 110 / 100 seconds |
+| **Cooldown Start** | post-effect |
 | **Targeting** | Auto / Direction |
 | **Affects** | Enemies |
 | **Damage Type** | Physical |
-| **Speed** | 2500 units/second |
-| **Effect Radius** | 180 / 225 units |
 | **Spell Shield** | True |
 | **Spell Effects** | Area of effect |
 | **Projectile** | True |
+| **Silence** | True |
 
-**Scaling:**
-- **Physical Damage:* $100bonus AD)
-- **Increased Damage:* $200bonus AD)
+**ACTIVE:** **Poppy** charges while being slowed by 15% for up to 4 seconds to increase *Keeper's Verdict*’s range and knock back distance over $0.5$ seconds after the first $0.5$ seconds of the channel. *Keeper's Verdict* can be recast within the duration.
+
+**RECAST:** **Poppy** releases the charge to launch her hammer upwards, dealing physical damage to enemies nearby and in an area in front of her and knocking them up for 1 second.
+
+| Attribute | Value |
+|-----------|------:|
+| **Physical Damage** | 100 / 150 / 200 (+ 45% **bonus** AD) |
+
+If *Keeper's Verdict* was charged for at least $0.5$ seconds, it deals 100% increased damage and enemies hit are knocked back up-to 3400 units (Scales up to this value over the first 1 second of the channel) toward the enemy team's fountain, during which they are revealed and rendered untargetable. Additionally, if no enemies are hit in front (Same as uncharged radius) of **Poppy**, she sends a shockwave that travels in the target direction until it collides with an enemy champion, which causes a hammer to erupt. Targets hit by the shockwave or the eruption receive the charged effects.
+
+| Attribute | Value |
+|-----------|------:|
+| **Increased Damage** | 200 / 300 / 400 (+ 90% **bonus** AD) |
+
+If the charge is interrupted or completes without reactivation, *Keeper's Verdict* is cancelled and the ability is put on a cd cooldown.
 
 **Notes:**
 
-- During the Recast's cast time, ''Poppy's' Flash is lockout.
+- During the Recast's cast time, **Poppy**’s Flash is sealed.
 - The erupting hammer of the charged cast that sends out a missile will be centered on the first champion struck, not at the location the missile collided with them.
-- Enemies within the enemy team's fountain (at least 400 units away from the center of the fountain) that are hit by a 'Keeper's Verdict' that would knock them back are instead airborne for $0.75$ seconds and not rendered untargetable, like the uncharged effect. They still receive the full damage.
-- 'Keeper's Verdict' does not destroy in-flight projectile for enemies hit if they are rendered untargetable.
-- The airborne will only displace enemies as far as they can go (e.g. to the furthest current spot available of *Realm of Death*’s and *The Hextech Ultimatum*’s borders and to the corner of the fountain).
+- Enemies within the enemy team's fountain (at least 400 units away from the center of the fountain (the respawning point)) that are hit by a *Keeper's Verdict* that would knock them back are instead knocked up for $0.75$ seconds and not rendered untargetable, like the uncharged effect. They still receive the full damage.
+- *Keeper's Verdict* does not destroy in-flight projectiles for enemies hit if they are rendered untargetable.
+- The knock back will only displace enemies as far as they can go (e.g. to the furthest current spot available of Realm of Death’s and The Hextech Ultimatum’s borders and to the corner of the fountain).
   - The displacement's duration will remain unchanged regardless of if the knock back cannot achieve its full distance due to the affected target being restricted by boundaries they are unable to cross. In order for this to be possible, the speed of the knock back is decreased (based on where the actual landing point is) to match the amount of distance covered to time spent displaced.
-- 'Keeper's Verdict's airborne debuff is non-dispellable and thus cannot be removed by cleanse effects.
+- *Keeper's Verdict*’s airborne debuff is non-dispellable and thus cannot be removed by cleansing effects.
   - The debuff will remove itself automatically when the forced movement ends.
-- The following table refers for interactions while **Poppy** is channel:
+- The following table refers for interactions while **Poppy** is channeling:
 
 ---
 
 ## Patch History
 
 ### V25.15
-- *Hammer Shock*
-  - **Undocumented / Bug Fix:** Tooltip now correctly mentions that the health ratio damage cap also applies to minions and not only monsters.
+- Hammer Shock
+  - **UNDOCUMENTED / BUG FIX:** Tooltip now correctly mentions that the health ratio damage cap also applies to minions and not only monsters.
 
 ### V25.09
-- *Steadfast Presence*
+- Steadfast Presence
   - **Bug Fixes:** No longer is able to activate the blocking/grounding effect on enemy targets landing via Teleport / Unleashed Teleport.
 
 ### V25.06
-- *Hammer Shock*
-  - Health ratio damage cap per hit against minions and monsters increased to $75-195$ from $50-170$.
+- Hammer Shock
+  - Health ratio damage cap per hit against minions and monsters increased to 75 / 105 / 135 / 165 / 195 from 50 / 80 / 110 / 140 / 170.
 
 ### V25.05
 - Stats
   - Health growth increased to 110 from 104.
-- *Iron Ambassador*
+- Iron Ambassador
   - Shield health ratio changed to key=% **maximum** health from key=%. *Now scales with each level.*
-- *Heroic Charge*
-  - Base damage per hit reduced to $40-120$ from $50-130$.
-  - Bonus AD ratio per hit increased to 60% *bonus AD from 50%.
-- *Keeper's Verdict*
-  - **Bug Fixes:** If *Aftershock* is equipped and ready, no longer fails to cast and consumes the cooldown when buffering the ability during *Heroic Charge*.
+- Heroic Charge
+  - Base damage per hit reduced to 40 / 60 / 80 / 100 / 120 from 50 / 70 / 90 / 110 / 130.
+  - Bonus AD ratio per hit increased to 60% **bonus** AD from 50%.
+- Keeper's Verdict
+  - **Bug Fixes:** If Aftershock is equipped and ready, no longer fails to cast and consumes the cooldown when buffering the ability during Heroic Charge.
 
 ### V14.24
 - Stats
   - Base armor reduced to 35 from 38.
   - Armor growth increased to 5 from $4.7$
-- *Hammer Shock*
-  - Base damage changed to $30-130$ from $40-120$.
-  - Bonus AD ratio increased to 100% *bonus AD from 90%.
+- Hammer Shock
+  - Base damage changed to 30 / 55 / 80 / 105 / 130 from 40 / 60 / 80 / 100 / 120.
+  - Bonus AD ratio increased to 100% **bonus** AD from 90%.
 
 ### V14.22
 - Stats
@@ -263,32 +301,32 @@
   - Base attack speed increased to $0.658$ from $0.625$.
 
 ### V14.20
-- *Iron Ambassador*
+- Iron Ambassador
   - Cooldown increased to 16–8@1–13 from 13–7@1–13.
-- *Hammer Shock*
-  - Health ratio damage cap per hit against minions and monsters increased to $50-170$ from $30-150$.
-- *Heroic Charge*
-  - Base damage reduced to $50-130$ from $60-140$.
+- Hammer Shock
+  - Health ratio damage cap per hit against minions and monsters increased to 50 / 80 / 110 / 140 / 170 from 30 / 60 / 90 / 120 / 150.
+- Heroic Charge
+  - Base damage reduced to 50 / 70 / 90 / 110 / 130 from 60 / 80 / 100 / 120 / 140.
 
 ### V14.9
 - Stats
   - Selection radius increased to 100 units from 95.
 
 ### V14.2
-- *Iron Ambassador*
+- Iron Ambassador
   - **New Effect:** Buckler now bounces back to her even if the target dies while the missile is in flight.
 
 ### V13.8
-- *Hammer Shock*
+- Hammer Shock
   - Health ratio increased to 9% of target's **maximum** health from 8%.
-- *Steadfast Presence*
+- Steadfast Presence
   - Increased resistances increased to 12% from 10%.
 
 ## Trivia
 
 - Poppy was the first champion released in 2010.
 - Poppy is the first and so far only post-launch champion to be priced at on release (all other champions with the same price were already present when the game officially launched in October 2009).
-- Poppy is one of two champions that went into the weekly champion rotation on the day of their release. The other one is **Udyr**.
+- Poppy is one of two champions that went into the weekly champion rotation on the day of their release. The other one is Udyr.
 - Of all champion updates in the game, Poppy has gone the longest without an update to her base splash art prior to her VGU in 2015.
 - Poppy is the first champion with full facial animation.
 - Poppy is the first champion to receive updated splash artwork for all of her skins.
