@@ -195,7 +195,7 @@ Attacks with *Purge* deal ***modified** physical damage, with a minimum threshol
 - **Urgot**’s facing direction during *Purge* is in the direction he's moving and not in the direction of his attack target.
 - Before maximum rank, if continuously attacking without being interrupted or interrupting or canceling the cast, **Urgot** will attack 13 times.
 - The bolts are considered basic attacks and thus apply life steal at full efficiency.
-- During *Purge*, **Urgot**’s attack range is reducedand his attack commands instead issue movement commands to walk into the respective range of his target.
+- During *Purge*, **Urgot**’s attack range is reduced「 to 150 ⟷ by 200 」and his attack commands instead issue movement commands to walk into the respective range of his target.
 - Slow resist does not modify flat reductions in movement speed.
 - Percentage slows apply after the flat movement reduction.
 - *Purge*’s attacks do not interact with **Urgot**’s basic attack timer.

@@ -84,7 +84,7 @@ At rank 5, *Breath of Light*’s channel duration is increased to 160 seconds.
 
 - Applies spell damage on the burst and persistent area damage on the beam.
 - *Breath of Light*’s bursts against an enemy champion will aggro nearby enemy minions.
-- *Breath of Light* places a timer on each target, which ticks in $0.2$ second intervals. Thus, at , the burst damage is procced.
+- *Breath of Light* places a timer on each target, which ticks in $0.2$ second intervals. Thus, at 「 5 completed intervals ⟷ 1 full second 」, the burst damage is procced.
   - The timer's visuals themselves otherwise serve no other purpose than gameplay clarity.
   - The timer falls off and resets to zero immediately upon no longer damaging affected targets.
 - Spell shield will only block the burst damage.

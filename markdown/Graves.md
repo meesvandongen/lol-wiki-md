@@ -90,9 +90,9 @@
 
 **INNATE - DOUBLE BARREL:** **Graves**' basic attacks fire his shotgun to consume ammunition within 2 shells. He will reload (Graves is unable to declare basic attacks during this time.) over a few seconds immediately after expending all shells or withholding leftover shells for a while. The reload time is reduced by **Graves**' level and as, and can be interrupted by declaring an attack or casting an ability.
 
-**INNATE - 12-GAUGE:** **Graves**' basic attack sprays 4 pellets in a cone, each colliding with the first enemy unit in their path, dealing key=% AD physical damage plusfor each subsequent pellet hitting the same target, up to key=% AD **total** physical damage against a single target. Pellets deal 25% reduced damage against structures.
+**INNATE - 12-GAUGE:** **Graves**' basic attack sprays 4 pellets in a cone, each colliding with the first enemy unit in their path, dealing 70% / 100.01% AD physical damage plus「 23.31% / 33.3% AD **additional** physical damage ⟷ about one-third of the damage 」for each subsequent pellet hitting the same target, up to 139.93% / 199.92% AD **total** physical damage against a single target. Pellets deal 25% reduced damage against structures.
 
-Critical strikes spray 6 pellets over a 25% wider cone, with each pellet dealingresulting in (+ Infinity Edge key=%*0.45/100)) AD **total** physical damageif all pellets hit a single target.
+Critical strikes spray 6 pellets over a 25% wider cone, with each pellet dealing「 increased damage, ⟷ increased damage equal to 45% **bonus** critical damage, 」resulting in「 critical damage **total** damage ⟷ 100*(0.6895 + 0.01765*x*(0.595 + 0.0225*(x-1)))*(1+5×0.33302)*(1+(Graves (+ Infinity Edge 100*(0.6895 + 0.01765*x*(0.595 + 0.0225*(x-1)))*(1+5×0.33302)*(Infinity Edge) AD **total** physical damage 」if all pellets hit a single target.
 
 Pellets apply life steal at 100% effectiveness. Only the first pellet to hit each enemy applies on-hit effects.
 
@@ -332,7 +332,7 @@ Upon hitting an enemy champion or reaching the end of its range, the shell explo
   - Pellet critical strike bonus damage increased to 45% from 40%.
     - Bonus damage per pellet critical strike increased to ($33.75$% + Infinity Edge) from (30% + Infinity Edge).
   - Relative **bonus** damage of critical attacks where all pellets hit increased to critical damage from critical damage.
-    - Maximum critical strike damage increased to key=% (+Infinity Edge key=%) AD from key=% (+Infinity Edge key=%) AD.
+    - Maximum critical strike damage increased to 249.52% / 356.48% (+Infinity Edge 41.98% / 59.97%) AD from 242.52% / 346.48% (+Infinity Edge 37.31% / 53.3%) AD.
 
 ### V14.7
 - Collateral Damage

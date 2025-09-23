@@ -105,7 +105,7 @@
 - **Flame Aura:** *Tibbers* deals 2 / 3 / 4 (+ 1% AP) magic damage to all enemies within a 350 unit radius every $0.25$ seconds.
 - **Recovery:** While out of combat for at least 5 seconds **Tibbers** heals himself for 6% **maximum** health per second and gains 250 **bonus** movement speed when moving towards **Annie**’s location from further than 600 units away, decreased to 100 **bonus** movement speed from further than 150 units.
 - **Enrage:** *Tibbers* enrages for 3 seconds on summon and when Pyromania stuns an enemy champion. During this time, *Tibbers* becomes ghosted and gains 100% **bonus** movement speed, which decays over the duration. His **base** attack speed is also increased to $1.736$ for his next 5 attacks while enraged, but decreasing with each attack until returning at his normal attack speed.
-- There can be two formulas that can display **Tibbers' **attack speed with approximated values: .
+- There can be two formulas that can display **Tibbers' **attack speed with approximated values: 「 1.736*(1-(11.505*(x-1)+0.3*((x-2)^3-(x-2))/6+1.7*(x-2)*(x-1)/2)/100) for 5 ⟷ 1.736*(1-(11.5*(1.15^(x-1)-1)/(1.15-1))/100) for 5 」.
 - **Revenge:** If **Annie** dies while *Tibbers* is active, he instantly heals himself for 50% of his **missing** health, becomes *enraged* for 10 seconds, and will target **Annie**’s killer. His health will rapidly decay over time and if **Annie**’s killer is too far away, he'll target the nearest lowest-health enemy champion instead.
 
 ---

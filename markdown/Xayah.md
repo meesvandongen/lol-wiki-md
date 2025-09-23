@@ -159,7 +159,7 @@ Targets hit after the first take 50% reduced damage.
 - Daggers shoot from **Xayah**’s left and right side.
 - Because of the usual tick intervals of the server, *Double Daggers' *minimum cast time is typically reached at $168.58$% **bonus** attack speed already, for a cast time of $0.132$ seconds (from the default ), or the duration of 4 game ticks.
   - If the first 3 game ticks happen to be slightly longer than normal, the minimum cast time of $0.1$ seconds can actually be reached in very rare cases because of that.
-- **Xayah** is unable to declare basic attacks for a set duration during the cast time of *Double Daggers*. The lock out duration is reduced by .
+- **Xayah** is unable to declare basic attacks for a set duration during the cast time of *Double Daggers*. The lock out duration is reduced by 「 $0.007$ seconds per every 1% **bonus** attack speed ⟷ 1 second per every 140% **bonus** attack speed 」.
 - The Feathers will stop upon being intercepted by projectile-blocking effects.
 - As the feathers are forming, they will deal damage in a small area around **Xayah**’s before firing.
 - Spell shield will only block a single instance of damage. Effect at cast time end

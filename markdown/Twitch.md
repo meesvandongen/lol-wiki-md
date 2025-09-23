@@ -92,7 +92,7 @@
 
 **INNATE:** **Twitch**’s basic attacks on-hit apply a stack of *Deadly Venom* for 6 seconds, refreshing on subsequent applications and stacking up to 6 times.
 
-**DEADLY VENOM:** For each stack, the target is dealtfor a maximum ofThis effect is considered a poison.
+**DEADLY VENOM:** For each stack, the target is dealt「 true damage (+ 3% AP) true damage per second over the duration, ⟷ true damage (+ 18% AP) **total** true damage over the duration, 」for a maximum of「 1×6 to 5×6 for 5 (+ 18% AP) true damage with each tick. ⟷ 1×6×6 to 5×6×6 for 5 (+ 108% AP) **total** true damage over the duration. 」This effect is considered a poison.
 
 **Notes:**
 

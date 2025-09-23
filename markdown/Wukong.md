@@ -109,11 +109,11 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Wukong** gains armor and health regeneration an additional
+**INNATE:** **Wukong** gains armor and health regeneration an additional「 $0.35$% of his **maximum** health every 5 seconds. ⟷ $0.035$% of his **maximum** health every $0.5$ seconds. 」
 
 Whenever **Wukong** or his *clone* damage an enemy champion or monster, he generates a stack of *Strength of Stone* for 5 seconds, refreshing on subsequent hits and stacking up to 5 times. Stacks expire by one every second when the duration ends.
 
-**STRENGTH OF STONE:** For each stack,up to a maximum of 6*(1+1×5) to 10*(1+1×5) **bonus** armor and total additional regeneration of
+**STRENGTH OF STONE:** For each stack,「 *Stone Skin*’s effects are increased by 100%, ⟷ **Wukong** gains 6 to 10 **additional bonus** armor and further regenerates an additional $0.35$% of his **maximum** health every 5 seconds, 」up to a maximum of 6*(1+1×5) to 10*(1+1×5) **bonus** armor and total additional regeneration of「 2.1% **maximum** health every 5 seconds. ⟷ 0.21% **maximum** health every $0.5$ seconds. 」
 
 **Notes:**
 
@@ -289,7 +289,7 @@ Upon arrival, **Wukong** gains **bonus** attack speed for 5 seconds.
 - *Cyclone* is special cased to grant stacks of Conqueror for each tick of damage.
 - Casting a basic ability will always interrupt **Wukong**’s *Cyclone*. A clone can be interrupted by casting Crushing Blow, but only if the clone was made during the current *Cyclone* cast and only for that cast. This means if both **Wukong** and his clone are spinning, the clone cannot be interrupted.
 - *Cyclone*’s remaining duration always stays the same even after the clone replicated the ability.
-- During *Cyclone*, **Wukong** and his clone's attack ranges are reduced.
+- During *Cyclone*, **Wukong** and his clone's attack ranges are reduced「 to 50 ⟷ by 125 」.
 - Spell shield will block one instance of damage.
   - Blocking the knock up will still grant immunity to it from either of *Cyclone*’s casts.
 

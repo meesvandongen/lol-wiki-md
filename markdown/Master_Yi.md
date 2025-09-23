@@ -67,9 +67,9 @@ If **Master Yi**’s primary target is killed before the second strike, he will 
 | **Parry** | Special |
 | **Grounded** | True |
 
-**ACTIVE:** **Master Yi** vanishes and becomes unable to act. After , he marks the target enemy and then proceeds to mark the nearest visible un-marked enemy within 600 units, recurring every If there are no other un-marked targets before then, **Master Yi** can mark the same enemies again. During *Alpha Strike*, **Master Yi** can select a direction from the primary target.
+**ACTIVE:** **Master Yi** vanishes and becomes unable to act. After , he marks the target enemy and then proceeds to mark the nearest visible un-marked enemy within 600 units, recurring every 「 up to 3 times. ⟷ for a total of 4 marks. 」If there are no other un-marked targets before then, **Master Yi** can mark the same enemies again. During *Alpha Strike*, **Master Yi** can select a direction from the primary target.
 
-Upon finishing marking, **Master Yi** reappears 75 units in the targeted direction, or in front of the target otherwise, and then becomes able to act again.|$1.087$ seconds total (Effective time due to game ticks) after the start of the cast with 4 bounces.If the primary target dies or is too far away during the delay, **Master Yi** will reappear at the initial cast location instead.
+Upon finishing marking, **Master Yi** reappears 75 units in the targeted direction, or in front of the target otherwise, and then becomes able to act again「 after . ⟷ $1.087$ seconds total (Effective time due to game ticks) after the start of the cast with 4 bounces. 」If the primary target dies or is too far away during the delay, **Master Yi** will reappear at the initial cast location instead.
 
 **Master Yi** then detonates the marks to deal physical damage and apply on-hit effects, with on-hit damage reduced to 65% effectiveness. Marks after the first on the same target instead detonate instantly upon application to deal $25$% damage and apply on-hit effects, with on-hit damage reduced to 16.25% effectiveness. *Alpha Strike* deals **bonus** physical damage to monsters per hit.
 
@@ -86,7 +86,7 @@ Upon finishing marking, **Master Yi** reappears 75 units in the targeted directi
 | **Reduced Monster Damage per hit** | 20 / 31.25 / 42.5 / 53.75 / 65 (+ 17.5% AD) |
 | **Max Single-Target Monster Damage** | 140 / 218.75 / 297.5 / 376.25 / 455 (+ 122.5% AD) |
 
-*Alpha Strike*’s primary and lesser damage can critically strike for
+*Alpha Strike*’s primary and lesser damage can critically strike for「 and damage respectively. ⟷ 100% + 100% of **bonus** critical damage, reduced to 25% for the lesser damage. 」
 
 Basic attacks on-hit reduce *Alpha Strike*’s **current** cooldown by 1 second, affected by ability haste.
 

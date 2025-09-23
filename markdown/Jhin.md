@@ -116,7 +116,7 @@
 
 **Jhin**’s final round attack has an uncancellable windup, always critically strikes, including against structures, and deals **bonus** physical damage equal to key=% of the target's **missing** health. The damage based on the target's health is capped at 800 against monsters.
 
-**INNATE - EVERY MOMENT MATTERS:** **Jhin** gains ad equal to key=%AD.
+**INNATE - EVERY MOMENT MATTERS:** **Jhin** gains ad equal to key=%「 (+ $0.35$% per 1% critical strike chance) (+ $0.3$% per 1% **bonus** attack speed) ⟷ (+ 35% critical strike chance) (+ 30% **bonus** attack speed) 」AD.
 
 Additionally, critical strikes against enemies grant **Jhin** 14% (+ $0.4$% per 1% **bonus** attack speed) **bonus** movement speed for 2 seconds.
 
@@ -333,7 +333,7 @@ The fourth shot critically strikes for damage.
 
 **BASIC ATTACK:** **Jhin** fires at the target with Whisper, dealing 100% AD physical damage, applying on-hit effects, and triggering on-attack effects.
 
-**Jhin**’s basic attacks can critically strike. These attacks have slightly increased missile speed, but deal only% of the critical damage champions usually have.
+**Jhin**’s basic attacks can critically strike. These attacks have slightly increased missile speed, but deal only「 AD physical damage. ⟷ $% of the critical damage champions usually have. 」
 
 **Jhin**’s attack speed cannot be improved at all except through growth.
 

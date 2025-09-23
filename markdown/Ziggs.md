@@ -85,7 +85,7 @@
 | **Spell Effects** | Proc |
 | **Parry** | unknown |
 
-**INNATE:** Periodically, **Ziggs** empowers his next basic attack to deal 20 / 24 / 28 / 32 / 36 / 40 / 48 / 56 / 64 / 72 / 80 / 88 / 100 / 112 / 124 / 136 / 148 / 160 (+ 50% AP) **bonus** magic damage,
+**INNATE:** Periodically, **Ziggs** empowers his next basic attack to deal 20 / 24 / 28 / 32 / 36 / 40 / 48 / 56 / 64 / 72 / 80 / 88 / 100 / 112 / 124 / 136 / 148 / 160 (+ 50% AP) **bonus** magic damage,「 increased by 75% against structures. ⟷ increased to 1.75*(20+4*(x-1)) for 6 / then +1.75×8*x for 6 / then +1.75×12*x (+ 87.5% AP) against structures. 」
 
 *Short Fuse*’s cooldown is reduced by 4–6@1–13 seconds whenever **Ziggs** casts an ability.
 

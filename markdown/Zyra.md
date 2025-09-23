@@ -290,7 +290,7 @@ If *Grasping Roots* hits a Seed, it sprouts into a *[Vine Lasher](#Pets)*, which
 
 After 2 seconds, the thicket snaps upward to knock up enemies within for 1 second.
 
-*Plants* hit by the thicket become enraged, restoring health, increasing their **maximum** health by 50%, gaining 25% increased size and refreshing their duration while the thicket expands. Additionally they attack in a flurry, launching two shots per attack, dealing
+*Plants* hit by the thicket become enraged, restoring health, increasing their **maximum** health by 50%, gaining 25% increased size and refreshing their duration while the thicket expands. Additionally they attack in a flurry, launching two shots per attack, dealing 「 150% damage per flurry. ⟷ 75% damage per shot. 」
 
 **Notes:**
 

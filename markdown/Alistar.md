@@ -177,7 +177,7 @@ At 7 stacks, **Alistar** consumes them all to heal himself for 5% of his **maxim
 - The knockback direction is in a straight line from **Alistar**’s original location at start of cast and the enemy when **Alistar**’s dash ends.
 - *Headbutt* can knock enemies through terrain. The knockback stops short on walls that cannot be surpassed but the disable duration is not changed.
 - The spell indicator for this ability also displays the direction for the knock back relative to **Alistar**’s position.
-- **Alistar**’s attack range is reducedduring *Headbutt*, to prevent him from being able to attack the target when he completes the dash.
+- **Alistar**’s attack range is reduced「 to -375 ⟷ by 500 」during *Headbutt*, to prevent him from being able to attack the target when he completes the dash.
 - Displacement immunity will not resist the application of the stun.
 
 ---

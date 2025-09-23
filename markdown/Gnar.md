@@ -82,7 +82,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE - RAGE GENE:** Gnar generates 4–11@1–11 *Rage* over 2 seconds upon dealing or receiving damage, up to 100. Against non-champions, basic attacks and *Boomerang Throw* instantly generate Against champions, *Boomerang Throw* instantly generatesand basic attacks instantly generate*Boomerang Throw* can only generate *Rage* once per cast, and grants *Rage* based on the first enemy hit. **Gnar**’s *Rage* decays after being out of combat for 13 seconds.
+**INNATE - RAGE GENE:** Gnar generates 4–11@1–11 *Rage* over 2 seconds upon dealing or receiving damage, up to 100. Against non-champions, basic attacks and *Boomerang Throw* instantly generate「 4×0.125–11×0.125@1–11 *Rage*. ⟷ $12.5%$ of the amount. 」 Against champions, *Boomerang Throw* instantly generates「 4×0.25–11×0.25@1–11 *Rage*, ⟷ 25% of the amount, 」and basic attacks instantly generate「 4×0.5–11×0.5@1–11. ⟷ 50% of the amount. 」*Boomerang Throw* can only generate *Rage* once per cast, and grants *Rage* based on the first enemy hit. **Gnar**’s *Rage* decays after being out of combat for 13 seconds.
 
 At maximum *Rage*, **Gnar**’s abilities switch to Mega Gnar’s abilities, for 4 seconds and until transforming back to his *Mini Gnar* form, with the exception of *Hop*, which switches after the transformation. Casting any of them during this time also causes **Gnar** to transform into Mega Gnar instantly, else he will transform automatically after the 4 seconds have elapsed.
 

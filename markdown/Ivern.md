@@ -124,7 +124,7 @@
 
 **Ivern** cannot place a grove while he is unable to cast abilities.
 
-The grove matures over 40 / 38 / 36 / 34 / 32 / 30 / 27 / 24 / 21 / 18 / 15 / 11 / 7 / 3 / 1 seconds. When fully matured, **Ivern** can target the camp again to *free* it after a $0.5$-second cast time, clearing the camp and receiving the bounties. Using Smite on a monster within the grove will instantly *free* the camp regardless of maturity.
+The grove matures over 40 / 38 / 36 / 34 / 32 / 30 / 27 / 24 / 21 / 18 / 15 / 11 / 7 / 3 / 1 seconds. When fully matured, **Ivern** can target the camp again to *free* it after a $0.5$-second cast time, clearing the camp and receiving the |Not full when freeing Krug camp, see notes bounties. Using Smite on a monster within the grove will instantly *free* the camp regardless of maturity.
 
 If the camp's large monster has already been slain prior to planting a grove, **Ivern** will *free* the camp upon completing the channel at no cost. Similarly, the grove will instantly mature if the large monster is slain.
 

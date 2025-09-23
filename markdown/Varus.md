@@ -159,7 +159,7 @@ While *Living Vengeance*’s bonus is active, **Varus' **attack speed cap is inc
 
 **BLIGHT:** For each stack consumed, the target is dealt **bonus** magic damage. If the stacks were consumed with *Piercing Arrow*, this damage is increased by 0 / 5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50, for a total cap of 360 at maximum stacks.
 
-Additionally, each stack consumed against a champion or epic monster reduces the **remaining** cooldowns of **Varus' ** basic abilities by 13% of each of their **total** cooldowns, up to a 39% cooldown reduction per target. If the stacks were consumed with **Piercing Arrow**, the cooldown reduction is increased by 0 / 5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50 cooldown reduction per target from consuming maximum stacks against them.
+Additionally, each stack consumed against a champion or epic monster reduces the of **Varus' ** basic abilities by 13% of each of their **total** cooldowns, up to a 39% cooldown reduction per target. If the stacks were consumed with **Piercing Arrow**, the cooldown reduction is increased by 0 / 5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50 cooldown reduction per target from consuming maximum stacks against them.
 
 | Attribute | Value |
 |-----------|------:|

@@ -351,7 +351,7 @@ Scoring a takedown against an enemy champion within 3 seconds of damaging them r
 
 **Samira**’s taunt prevents her from inputting attack commands and casting non-movement abilities, and she may only interrupt it herself with a movement command. After 3 seconds without interruption, she will toss a coin in the direction she is facing.
 
-If she has at least 1 gold, the coin deals 1 true damage to the first enemy champion hit, triggering *Daredevil Impulse* but granting them 1 gold of **Samira**’s gold.
+If she has at least 1 gold, the coin deals to the first enemy champion hit, triggering *Daredevil Impulse* but granting them 1 gold of **Samira**’s gold.
 
 If cast within 1200 units of a visible enemy champion, **Samira** will turn to face towards the closest one to perform the animation.
 

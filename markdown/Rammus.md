@@ -140,7 +140,7 @@
   - If the ability is not manually recasted, the secondary effect will trigger without being considered as an ability activation.
 - The **bonus** movement speed stacks multiplicatively with other sources of movement speed boosts.
 - *Powerball* will still collide with enemies if **Rammus** is ghosted.
-- For the purpose of moving closer to an enemy when right clicking them, *Powerball* also reduces **Rammus**' attack rangefor the duration.
+- For the purpose of moving closer to an enemy when right clicking them, *Powerball* also reduces **Rammus**' attack range「 to 0 ⟷ by 125 」for the duration.
   - Regardless of this, during *Powerball* **Rammus** will also always attempt to path towards his target's center instead.
 - **Rammus** will ignore unit collision for the purpose of pathfinding during *Powerball*.
   - Rammus acts as if he were ghosted for the duration of *Powerball*.

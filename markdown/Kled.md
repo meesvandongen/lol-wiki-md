@@ -417,8 +417,8 @@ While charging, the duo gain a shield for every $0.25$ seconds of traveling, up 
 
 - During the charge the duo gain (950(**starting** movement speed (movement speed at the beginning of the charge; after movement speed soft caps)))12×(time$0.25$) **bonus** movement speed
   - The bonus movement speed is not affected by movement speed caps.
-  - The charge will not give any movement speed to the duo if they have more than .
-- The trail will not give **Kled** and his allies any movement speed out-of-champion-combat if they have more than .
+  - The charge will not give any movement speed to the duo if they have more than 「 1440 raw movement speed ⟷ 950 after movement speed soft caps 」.
+- The trail will not give **Kled** and his allies any movement speed out-of-champion-combat if they have more than 「 840 raw movement speed ⟷ 650 after movement speed soft caps 」.
 - Movement speed is granted by facing the direction of the draft and lasts for upon exiting the trail or facing another direction.
 - **Kled** will re-path if his current path is blocked by a newly created terrain (either player created or by the Mountain Drake).
 - The charge will continue towards the target location even if **Kled**’s location changes drastically.

@@ -204,7 +204,7 @@ No additional notes.
 **Notes:**
 
 - *Lightning Rush* will only damage any particular enemy once per cast.
-- For the purpose of aim-assist, **Kennen**’s attack range is reducedduring *Lightning Rush*, further reduced to -$33.75$ with Rapid Firecannon.
+- For the purpose of aim-assist, **Kennen**’s attack range is reduced「 by 575 ⟷ to -25 」during *Lightning Rush*, further reduced to -$33.75$ with Rapid Firecannon.
 
 ---
 

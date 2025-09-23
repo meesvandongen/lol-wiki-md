@@ -83,7 +83,7 @@
 | **Spell Effects** | periodic |
 | **Parry** | Unknown |
 
-**INNATE:** **Milio**’s ability hits on himself and allied champions grant an enchantment for 4 seconds, which causes the next basic attack or ability hit against enemies to deal 7@1; 11@6; 15@9 (@=%) of enchanted target's AD **bonus** magic damage and apply a burn that deals
+**INNATE:** **Milio**’s ability hits on himself and allied champions grant an enchantment for 4 seconds, which causes the next basic attack or ability hit against enemies to deal 7@1; 11@6; 15@9 (@=%) of enchanted target's AD **bonus** magic damage and apply a burn that deals「 10 to 50 (+ 20% of **Milio**’s AP) magic damage over $1.5$ seconds. ⟷ 10/6 to 50/6 (+ 3.33% of **Milio**’s AP) magic damage every $0.25$ seconds over $1.5$ seconds. 」
 
 **Notes:**
 

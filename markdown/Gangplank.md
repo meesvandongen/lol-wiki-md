@@ -103,7 +103,7 @@
 | **Spell Effects** | default |
 | **Parry** | Special |
 
-**INNATE:** Periodically, **Gangplank** empowers his next basic attack to set the target on fire, dealing themTurrets are dealt 50% damage.
+**INNATE:** Periodically, **Gangplank** empowers his next basic attack to set the target on fire, dealing them「 50 to 250 (+ 100% **bonus** AD) (+ 2 per 1% critical strike chance) **bonus** true damage over $2.5$ seconds. ⟷ 50/10 to 250/10 (+ 10% **bonus** AD) (+ $0.2$ per 1% critical strike chance) **bonus** true damage every $0.25$ seconds over $2.5$ seconds. 」Turrets are dealt 50% damage.
 
 If **Gangplank** successfully hits a target with *Trial by Fire*, he gains ms for 2 seconds. Every time a *Powder Keg* explodes, the cooldown for *Trial by Fire* resets and **Gangplank** gains its **bonus** movement speed.
 
@@ -308,7 +308,7 @@ Where:
 |-----------|------:|
 | **Total Mixed Damage with Death's Daughter** | 600 / 825 / 1050 / 1275 / 1500 (+ 150% AP) |
 
-** *Cannon Barrage* fires over its duration; 18 waves of cannonballs are called down in clusters of 3 every $1.33$ seconds.
+** *Cannon Barrage* fires「 6 additional waves ⟷ 2 additional clusters 」 over its duration; 18 waves of cannonballs are called down in clusters of 3 every $1.33$ seconds.
 
 | Attribute | Value |
 |-----------|------:|

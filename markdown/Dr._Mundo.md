@@ -23,7 +23,7 @@
 | **Affects** | Self |
 | **Projectile** | False |
 
-**INNATE:** **Dr. Mundo** health regeneration an additional
+**INNATE:** **Dr. Mundo** health regeneration an additional「 0.4 to 0.65 for 6 / 0.75 to 1.25 for 6 / 1.4 / 1.55 / 1.7 / 1.9 / 2.1 / 2.3 of his **maximum** health every 5 seconds. ⟷ 0.4/10 to 0.65/10 for 6 / 0.75/10 to 1.25/10 for 6 / 1.4/10 / 1.55/10 / 1.7/10 / 1.9/10 / 2.1/10 / 2.3/10 of his **maximum** health every $0.5$ seconds. 」
 
 **PASSIVE:** Periodically, **Dr. Mundo** gains immunity to the next hostile immobilizing effect to affect him. Upon resisting one, **Dr. Mundo** pays a health cost equal to 4% of his **current** health and propels a canister that lands 525 units in the general direction of its source, remaining on the ground for 7 seconds.
 

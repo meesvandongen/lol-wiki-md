@@ -144,7 +144,7 @@ Non-minions take 25% damage from missiles beyond their first.
 | **Reduced Damage Per Missile** | 10 / 13.75 / 17.5 / 21.25 / 25 (+ 13.75% **bonus** AD) (+ 5% AP) |
 | **Total Single-Target Damage** | 90 / 123.75 / 157.5 / 191.25 / 225 (+ 123.75% **bonus** AD) (+ 45% AP) |
 
-** Requires from items|100 attack damage from items and stat growthto upgrade – *Icathian Rain* instead fires 12 missiles.
+** Requires「 ⟷ 」 from items| from items and stat growthto upgrade – *Icathian Rain* instead fires 12 missiles.
 
 | Attribute | Value |
 |-----------|------:|
@@ -219,7 +219,7 @@ After completing the charge, she gains as for 4 seconds, during which her attack
 
 *Supercharge*’s **current** cooldown is reduced by $0.5$ seconds on-attack.
 
-** Requires from items|100% attack speed from items and stat growthto upgrade – *Supercharge* grants invisibility at the start of the cast time for $0.5$ seconds.
+** Requires「 ⟷ 」 from items| from items and stat growthto upgrade – *Supercharge* grants invisibility at the start of the cast time for $0.5$ seconds.
 
 **Notes:**
 

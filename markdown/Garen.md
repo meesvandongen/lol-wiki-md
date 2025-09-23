@@ -85,7 +85,7 @@
 | **Affects** | Self |
 | **Spell Effects** | Heal |
 
-**INNATE:** **Garen** health regeneration an additional
+**INNATE:** **Garen** health regeneration an additional「 ⟷ 」
 
 *Perseverance* is lost for 8 seconds (Not a cooldown, unaffected by ability haste) if **Garen** takes damage from champions, epic monsters, or turrets, or if he is hit by an enemy ability or affected by an enemy summoner spell, refreshing on subsequent damage and hits taken from them.
 
@@ -211,13 +211,13 @@ Enemy champions hit 6 times by *Judgment* are inflicted with armor penetration f
 
 **RECAST:** **Garen** ends *Judgment*.
 
-*Judgment* can critically strike for
+*Judgment* can critically strike for「 damage. ⟷ 80% **total** critical damage. 」
 
 **Notes:**
 
 - Deactivating the ability manually does not count as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - Each spin triggers a stack of Conqueror.
-- For the purpose of moving closer to an enemy when right clicking them, *Judgment* also reduces **Garen**’s attack range for the duration.
+- For the purpose of moving closer to an enemy when right clicking them, *Judgment* also reduces **Garen**’s attack range 「 to 100 ⟷ by 75 」 for the duration.
 - *Judgment* cancels **Garen**’s last movement command upon ending.
 - Each spin deals damage simultaneously to all enemies within its range when the spin is completed.
 - The spin animation is capped at once per $0.2$ seconds, but the amount of ticks will keep on scaling.

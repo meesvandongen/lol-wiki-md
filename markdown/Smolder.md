@@ -141,7 +141,7 @@
 | **Maximum Physical Damage** | 56.875 / 70 / 83.125 / 96.25 / 109.375 (+ 113.75% **bonus** AD) |
 | **Maximum Physical Damage with Infinity Edge Infinity Edge** | 69.875 / 86 / 102.125 / 118.25 / 134.375 (+ 139.75% **bonus** AD) |
 
-**TIER 3 - 225 STACKS:** Enemies hit are set on fire for 3 seconds, causing them to take **bonus** true damage equal toSubsequent applications of the burn stack, though not refreshing the duration of the previous burn. Enemy champions afflicted with the burn are also executed once **Smolder** deals damage to them that would leave them below $6.5$% of their **maximum** health.
+**TIER 3 - 225 STACKS:** Enemies hit are set on fire for 3 seconds, causing them to take **bonus** true damage equal to「 $2.5$% per 100 **bonus** AD (+ $0.5$% per 100 *Dragon Practice* stacks) of their **maximum** health over the duration, capped at 300 against monsters. ⟷ 0.83% per 100 **bonus** AD (+ 0.17% per 100 *Dragon Practice* stacks) of their **maximum** health each second, capped at 100 per tick against monsters. 」Subsequent applications of the burn stack, though not refreshing the duration of the previous burn. Enemy champions afflicted with the burn are also executed once **Smolder** deals damage to them that would leave them below $6.5$% of their **maximum** health.
 
 **Notes:**
 

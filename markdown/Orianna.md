@@ -108,7 +108,7 @@
 **INNATE:** **Orianna**’s basic attacks generate a stack of *Clockwork Winding* for 4 seconds, refreshing on subsequent attacks and stacking up to 2 times. All stacks are lost when attacking a new enemy.
 
 
-**CLOCKWORK WINDING:** **Orianna**’s basic attacks are empowered to deal 10 to 50 (+ 15% AP) **bonus** magic damage on-hit, increased byper stack, up to 10*(1+0.2×2) to 50*(1+0.2×2) (+ 21% AP) **total bonus** magic damage.
+**CLOCKWORK WINDING:** **Orianna**’s basic attacks are empowered to deal 10 to 50 (+ 15% AP) **bonus** magic damage on-hit, increased by「 20% ⟷ 10×0.2 to 50×0.2 (+ 3% AP) 」per stack, up to 10*(1+0.2×2) to 50*(1+0.2×2) (+ 21% AP) **total bonus** magic damage.
 
 *See [Pets](#Pets) for more details about The Ball.*
 

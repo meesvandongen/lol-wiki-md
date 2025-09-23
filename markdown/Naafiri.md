@@ -96,7 +96,7 @@
 
 **Abilities:**
 
-- **Prey Drive:** After **Naafiri** casts an ability, *Packmates* dealon their next basic attack within 3 seconds. They can store up to 3 empowered attacks at a time.
+- **Prey Drive:** After **Naafiri** casts an ability, *Packmates* deal「 30% increased damage ⟷ 10×1.3 to 20×1.3 (+ 5.2% **bonus** AD) physical damage 」on their next basic attack within 3 seconds. They can store up to 3 empowered attacks at a time.
 - **Pouncing Assault:** *Packmates* will dash to visible targets hit by **Naafiri**’s basic attacks and abilities within 1300 units. They will also charge alongside **Naafiri** when she uses *Hounds' Pursuit*, becoming untargetable in the process.
 - **Recalling of the Pack:** When **Naafiri** casts *The Call of the Pack* or *Eviscerate*, *Packmates* vanish immediately. They will then reappear near her shortly afterwards.
 - **Replenish:** *Packmates* are healed to full health when they reappear from being vanished by *Eviscerate*.

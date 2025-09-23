@@ -24,7 +24,7 @@
 
 **INNATE:** After casting an ability, **Lee Sin**’s next 2 basic attacks within 3 seconds gain attack speed and restore energy.
 
-The first attack restores 20–40@1–13 energy and the second attack restores
+The first attack restores 20–40@1–13 energy and the second attack restores「 10–20@1–13 energy. ⟷ half of the previous amount. 」
 
 **Notes:**
 

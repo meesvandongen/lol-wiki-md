@@ -92,7 +92,7 @@
 
 **INNATE:** **Darius' ** damaging basic attacks and abilities apply a stack of *Hemorrhage* to enemies for 5 seconds, refreshing on subsequent applications and stacking up to 5 times.
 
-**HEMORRHAGE:** For each stack, the target is dealtup to a maximum of*Hemorrhage* deals 200% damage against monsters.
+**HEMORRHAGE:** For each stack, the target is dealt「 13 to 30 (+ 30% **bonus** AD) **total** physical damage over the duration, ⟷ 3.25 to 7.5 (+ $7.5$% **bonus** AD) physical damage every $1.25$ seconds over the duration, 」up to a maximum of「 13×5 to 30×5 (+ 150% **bonus** AD) **total** physical damage over the duration. ⟷ 3.25×5 to 7.5×5 (+ $37.5$% **bonus** AD) physical damage with each tick. 」*Hemorrhage* deals 200% damage against monsters.
 
 When **Darius** kills a champion with *Noxian Guillotine*, or applies 5 stacks on an enemy champion, he becomes empowered with *Noxian Might* for 5 seconds.
 

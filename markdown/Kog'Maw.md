@@ -101,7 +101,7 @@ While under this state, **Kog'Maw** becomes invulnerable, untargetable, and immu
 - *Icathian Surprise* will still trigger if **Kog'Maw** is killed by the Nexus Obelisk.
 - If **Kog'Maw** has the missile from a basic attack in-flight at the same time that he's moving while he dies, as long as the missile hits the target after *Icathian Surprise* has started, **Kog'Maw** will be able to use a basic attack once during *Icathian Surprise*.
 - **Kog'Maw**’s usable summoner spells will be placed on a 5 second cooldown upon becoming a zombie.
-- During *Icathian Surprise*, **Kog'Maw**’s attack range is reduced, making him automatically path near enemies he is trying to target.
+- During *Icathian Surprise*, **Kog'Maw**’s attack range is reduced「 to 0 ⟷ by 500 」, making him automatically path near enemies he is trying to target.
 
 ---
 

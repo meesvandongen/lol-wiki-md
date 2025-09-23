@@ -86,7 +86,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Rek'Sai** basic attacks and ability hits generate 25 Fury. After 8 seconds of being out of combat, she loses 20 Fury per second. Fury gain is reducedagainst minions, wards, and plants. *Prey Seeker* will not generate Fury against non-champions.
+**INNATE:** **Rek'Sai** basic attacks and ability hits generate 25 Fury. After 8 seconds of being out of combat, she loses 20 Fury per second. Fury gain is reduced「 by 80% ⟷ to 5 per hit 」against minions, wards, and plants. *Prey Seeker* will not generate Fury against non-champions.
 
 When **Rek'Sai** becomes **, she consumes her current Fury over 3 seconds to heal for up to 10–20@1–16 (@=%) **maximum** health at 100 Fury, stopping once fully consumed or she reaches health. If she starts generating Fury while **BURROWED**, the consumption occurs after 5 seconds.
 

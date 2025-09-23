@@ -88,7 +88,7 @@
 
 The fourth stack against a target consumes them all to deal 26 to 196 magic damage and stun them for changedisplay=true seconds.
 
-This effect cannot apply to the same target more than once every few seconds. During this immunity period, affected targets takefrom **Braum**’s basic attacks.
+This effect cannot apply to the same target more than once every few seconds. During this immunity period, affected targets take「 **bonus** magic damage equal to 20% of the trigger damage ⟷ 26×0.2 to 196×0.2 **bonus** magic damage 」from **Braum**’s basic attacks.
 
 **Notes:**
 

@@ -98,7 +98,7 @@
 | **Spell Effects** | Proc |
 | **Parry** | True |
 
-**INNATE - HEART OF THE HALF-BEAST:** **Sett** health regeneration
+**INNATE - HEART OF THE HALF-BEAST:** **Sett** health regeneration「 an additional 0.075 / 0.25 / 0.5 / 1 health every $0.5$ seconds per 5% of his **missing** health. ⟷ up-to an additional 0.075×19 / 0.25×19 / 0.5×19 / 1×19 health per $0.5$ seconds, with the maximum reached at the threshold of 95% **missing** health. 」
 
 **INNATE - HEAVY HANDS:** **Sett**’s basic attacks alternate between his Left Punch and a Right Punch on-attack. **Sett** begins attacking with his Left Punch, and will reset back to it after 2 seconds of not performing a Right Punch.
 
@@ -107,7 +107,7 @@
 **Notes:**
 
 - Alternatively, *Pit Grit* grants **Sett** 0.075×10 / 0.25×10 / 0.5×10 / 1×10 **bonus** health regeneration for every 5% **missing** health, up to 0.075×10×19 / 0.25×10×19 / 0.5×10×19 / 1×10×19 at the cap of 95% **missing** health.
-- The Right Punch does not grant **bonus** attack speed, rather its windup is sped up and fixed at
+- The Right Punch does not grant **bonus** attack speed, rather its windup is sped up and fixed at 「 $12.5%$ of a Left Punch's windup time. ⟷ 800% of a Left Punch's windup speed. 」
   - The windup is still affected by cripples and attack speed buffs that were not already active for the previous Left Punch's.
 - The bonus physical damage from the Right Punch benefits from life steal.
 
@@ -172,7 +172,7 @@ For $1.5$ seconds, **Sett** also gains movement speed while facing visible enemy
 
 **ACTIVE:** **Sett** charges up a strike over the cast time. Additionally, he immediately consumes all of his stored *Grit* to grant himself a shield at the start of the cast time that is equal to the expended *Grit* for 3 seconds, decaying in strength over the duration after $0.75$ seconds.
 
-After the cast time, he unleashes a massive blast in an area in the target direction, dealing physical damage to enemies hit; those hit in a line in the middle are dealt true damage instead.
+After the cast time, he unleashes a massive blast in an area in the target direction, dealing physical damage to enemies hit; those hit in a line in the middle are dealt instead.
 
 | Attribute | Value |
 |-----------|------:|

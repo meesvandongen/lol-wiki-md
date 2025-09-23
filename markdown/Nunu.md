@@ -140,9 +140,9 @@ The snowball rolls over enemy minions and small monsters hit, dealing $33.3$% of
     - Y = $0.1$ per 1% %MS
   - The delay is not modified from its initially calculated value on-cast, even if additional movement speed is gained.
 - **Nunu and Willump** keep all increases in movement speed at time of cast for the duration of the charge.
-- **Nunu and Willump**’s movement speed always increases in increments of ~14, reaching the greater value between
+- **Nunu and Willump**’s movement speed always increases in increments of ~14, reaching the greater value between 「 **Total** MS + 85 to 255 ⟷ **Total** [Movement_speed#Movement_speed_caps 」
   - This takes 6 increments to reach the **Total** MS + 85, but may take more to reach the Uncapped Flat + 85. Due to flat bonuses increasing the time threshold, it is possible for the ability's effects to end before reaching the **total** uncapped movement speed.
-  - The **bonus** movement speed ignores the movement speed cap.
+  - The **bonus** movement speed ignores the [movement speed cap.
 - If **Nunu** turns continuously he will create a 600 (Estimated) unit circle, increased with **bonus** movement speed, striking the same point up to 3 times, for a maximum of 180 / 225 / 270 / 315 / 360 (+ 300% AP) magic damage. The damage can be further increased by detonating the snowball, for a **total** of 360 / 450 / 540 / 630 / 720 (+450% AP) magic damage.
 - Realm Warp will only teleport **Nunu and Willump**, leaving the behind.
 - Hovering the cursor on the HUD (e.g mini map.md) / champion portraits) does not affect the cast and steering of *Biggest Snowball Ever!*.

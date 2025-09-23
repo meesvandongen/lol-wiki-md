@@ -98,7 +98,7 @@
 
 **INNATE:** **Mordekaiser** generates a stack for each enemy champion or large monster hit by his damaging basic attacks or basic abilities, lasting for 4 seconds, refreshing on subsequent hits, and stacking up to 3 times. At 3 stacks, he gains *Darkness Rise*.
 
-**DARKNESS RISE:** **Mordekaiser** gains ms and dealsto nearby enemies. Against monsters, the damage is capped at
+**DARKNESS RISE:** **Mordekaiser** gains ms and deals「 ⟷ 」to nearby enemies. Against monsters, the damage is capped at「 40 to 200 per second. ⟷ 40×0.125 to 200×0.125 per $0.125$ seconds. 」
 
 **Notes:**
 
@@ -118,7 +118,7 @@
 
 **INNATE:** **Mordekaiser** shields himself for 25% of the damage dealt by his abilities, halved to $12.5$% against enemy minions and capped at health.
 
-After a $1.5$ seconds delay, *Iron Man*’s shield decays at a rate of health per second down to a minimum of.
+After a $1.5$ seconds delay, *Iron Man*’s shield decays at a rate of health per second down to a minimum of「 health ⟷ 25% **maximum** shield 」.
 
 **Notes:**
 
@@ -178,7 +178,7 @@ After a $1.5$ seconds delay, *Iron Man*’s shield decays at a rate of health pe
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**PASSIVE:** **Mordekaiser** stores 45% of the post-mitigation (Damage calculated after modifiers) damage he deals and $7.5$% of the pre-mitigation (Damage calculated before modifiers) damage he takes,as *Potential Shield* on his secondary resource bar, up to health. The *Potential Shield* decays by 8 to 25 every second after not dealing or taking damage for 1 second. While *Indestructible* is not on cooldown, the *Potential Shield* will not decay below a minimum of 5% of his **maximum** health, and it will be set to that amount when it comes off cooldown if it was previously below it.
+**PASSIVE:** **Mordekaiser** stores 45% of the post-mitigation (Damage calculated after modifiers) damage he deals and $7.5$% of the pre-mitigation (Damage calculated before modifiers) damage he takes,「 reduced by 75% for non-champion sources, ⟷ reduced to $11.25$% of damage dealt and $3.75$% of damage taken for non-champion sources, 」as *Potential Shield* on his secondary resource bar, up to health. The *Potential Shield* decays by 8 to 25 every second after not dealing or taking damage for 1 second. While *Indestructible* is not on cooldown, the *Potential Shield* will not decay below a minimum of 5% of his **maximum** health, and it will be set to that amount when it comes off cooldown if it was previously below it.
 
 **ACTIVE:** **Mordekaiser** consumes his *Potential Shield* to grant himself a shield for the same amount for 4 seconds. The shield decays exponentially over the duration. *Indestructible* can be recast after $0.5$ seconds while the shield is active.
 

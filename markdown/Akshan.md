@@ -95,7 +95,7 @@
 
 **INNATE:** Whenever **Akshan** uses a basic attack, he fires an additional shot after a delay that deals 50% AD physical damage, increased to 100% AD against minions. Issuing an attack order (Default right-click/MB2) on a different target before the additional shot has been launched causes **Akshan** to fire it at the new target. If the second shot is cancelled instead, he gains 20 to 75 × (1 + 100% **bonus** attack speed) **bonus** movement speed decaying over 1 second.
 
-The additional shot applies on-hit effects, triggers on-attack effects, and can critically strike
+The additional shot applies on-hit effects, triggers on-attack effects, and can critically strike「 for bonus damage. ⟷ 100% base damage + 30% **bonus** critical damage. 」
 
 **INNATE:** **Akshan**’s basic attacks on-hit and ability hits apply a stack of *Dirty Fighting* to enemies for 5 seconds, refreshing on subsequent applications and stacking up to 3 times. The third stack against a target consumes them all to deal them 15@1; 40@6; 80@11; 150@16 (+ 60% AP) **bonus** magic damage; if the target is a champion, **Akshan** will also gain a 40+(240/17)*(x-1)*(0.7025+0.0175*(x-1)) (+ 35% **bonus** AD) shield for 2 seconds. The shield may be gained only once every few seconds.
 
@@ -239,7 +239,7 @@ When **Akshan** claims a *Scoundrel*’s bounty he removes the marks of all othe
 
 **THIRD CAST:** **Akshan** ends the swing by jumping to the target location and fires one last shot at a nearby visible enemy.
 
-Scoring an enemy champion takedown reduces *Heroic Swing*’s **current** cooldown to $0.5$ seconds. The shots can critically strike forand apply life steal at 100% effectiveness.
+Scoring an enemy champion takedown reduces *Heroic Swing*’s **current** cooldown to $0.5$ seconds. The shots can critically strike for「 damage ⟷ 90% **total** critical damage 」and apply life steal at 100% effectiveness.
 
 *Avengerang and Going Rogue can be cast during the third cast's dash. Comeuppance can be cast at all points during Heroic Swing, though **Akshan** cannot fire during the swing while it is active. **Akshan** prioritizes firing at enemy champions with stacks of Dirty Fighting, then those damaged by his targeted spells in the last 4 seconds, then the nearest enemy. Heroic Swing can be cast during **Akshan**’s other abilities.*
 
@@ -359,7 +359,7 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 \|blurb = **ACTIVE:** **Akshan** locks onto the target enemy champion and begins channel power into his gun to store bullets, true sight them as well as sight himself. *Comeuppance* will recast after the channel, or can recast early.
 \|blurb2 = **RECAST:** Akshan fires the stored bullets at the target, each dealing physical damage to the first enemy hit, increased by their **missing** health.
 \|blurb3 = **Akshan** can move normally and cast **Heroic Swing** while channeling and firing *Comeuppance*.
-\|blurb4 = *Comeuppance* applies life steal and can hit turrets. |
+\|blurb4 = *Comeuppance* applies and can hit turrets. |
 
 **Notes:**
 

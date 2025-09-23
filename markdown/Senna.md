@@ -348,9 +348,9 @@ The broad wave grants a shield to **Senna** and allied champions hit for 3 secon
 
 **BASIC ATTACK:** **Senna** blasts the target with her relic cannon that uses a non-projectile beam, dealing 100% AD physical damage, applying on-hit effects, and triggering on-attack effects.
 
-**Senna** has an attack ratio of $, meaning she only gains attack speed per 100% **bonus** attack speed.|% of the attack speed she would gain if her attack speed ratio was the same as her base attack speed.
+**Senna** has an attack ratio of $, meaning she only gains「 + $ attack speed per 100% **bonus** attack speed. ⟷ % of the attack speed she would gain if her attack speed ratio was the same as her base attack speed. 」
 
-Additionally, **Senna**’s base attack windup is reduced,|by 100-(0.5 to 0.35)/0.5×100,but is only reduced by % of the expected value given attack speed bonuses.
+Additionally, **Senna**’s base attack windup is reduced「 by 100-(0.5 to 0.35)/0.5×100, ⟷ 」but is only reduced by % of the expected value given attack speed bonuses.
 
 **Notes:**
 

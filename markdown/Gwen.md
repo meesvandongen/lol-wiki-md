@@ -117,7 +117,7 @@
 
 **PASSIVE:** **Gwen**’s basic attacks generate a stack of *Snippy* on-hit for 6 seconds, stacking up to 4 times and refreshing on subsequent attacks.
 
-**ACTIVE:** **Gwen** snips at least twice with her scissors in a cone in the target direction over the cast time, dealing magic damage per snip to all enemies within the area, with the final snip dealing increased damage. The center of each snip converts 50% of the damage to true damage, then applies *A Thousand Cuts*. *Snip Snip!* deals 75% damage against minions, and executes them on the first damage instance if they are **below** 20% health.
+**ACTIVE:** **Gwen** snips at least twice with her scissors in a cone in the target direction over the cast time, dealing magic damage per snip to all enemies within the area, with the final snip dealing increased damage. The center of each snip converts 50% of the damage to , then applies *A Thousand Cuts*. *Snip Snip!* deals 75% damage against minions, and executes them on the first damage instance if they are **below** 20% health.
 
 | Attribute | Value |
 |-----------|------:|

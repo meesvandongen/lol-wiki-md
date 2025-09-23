@@ -145,7 +145,7 @@ Additionally, **Udyr** gains **bonus** attack speed and deals **bonus** physical
 |-----------|------:|
 | **Bonus Physical Damage On-Hit** | 5 / 11 / 17 / 23 / 29 / 35 (+ 25% **bonus** AD) |
 
-**RECAST - AWAKEN:** **Udyr** gains an additional 20 to 70 **bonus** attack speed. The empowered attacks deal an additional 2 to 4 (+ 3% per 100 **bonus** AD) of the target's **maximum** health **bonus** physical damage. **Udyr**’s next two basic attacks in any *Stance* within 4 seconds are each empowered to strike with lightningdealing **bonus** magic damage equal to 1.5 to 3 (+ $0.8$% per 100 AP) of the target's **maximum** health per hit, chaining to up to 3 nearby visible enemies and being able to hit the same target multiple times, for a total of 1.5×6 to 3×6 (+ 4.8% per 100 AP) of the target's **maximum** health. Each lightning strike deals a minimum of 40 to 160 against minions and is capped at 15 (+ 100% **bonus** AD) (+ 50% AP) against monsters.
+**RECAST - AWAKEN:** **Udyr** gains an additional 20 to 70 **bonus** attack speed. The empowered attacks deal an additional 2 to 4 (+ 3% per 100 **bonus** AD) of the target's **maximum** health **bonus** physical damage. **Udyr**’s next two basic attacks in any *Stance* within 4 seconds are each empowered to strike with lightning「 6 times over 1 second, ⟷ every $0.2$ seconds (First strike is applied instantly, while the remaining 5 are applied every 0.2 seconds thereafter) over 1 second, 」dealing **bonus** magic damage equal to 1.5 to 3 (+ $0.8$% per 100 AP) of the target's **maximum** health per hit, chaining to up to 3 nearby visible enemies and being able to hit the same target multiple times, for a total of 1.5×6 to 3×6 (+ 4.8% per 100 AP) of the target's **maximum** health. Each lightning strike deals a minimum of 40 to 160 against minions and is capped at 15 (+ 100% **bonus** AD) (+ 50% AP) against monsters.
 
 **Notes:**
 
@@ -278,7 +278,7 @@ Additionally, **Udyr** summons a blizzard around himself for 4 seconds that deal
 |-----------|------:|
 | **Slow** | 15 / 18 / 21 / 24 / 27 / 30% |
 
-**RECAST - AWAKEN:** **Udyr** ends the blizzard if it is active and unleashes a glacial storm for 4 seconds that is able to move on its own, as well as causes the empowered attacks to instead deal their damage to enemies within that storm. The storm applies the same effects as the blizzard but deals **bonus** magic damage equal toand slows by an additional 5%. Against monsters, the storm deals a minimum of .
+**RECAST - AWAKEN:** **Udyr** ends the blizzard if it is active and unleashes a glacial storm for 4 seconds that is able to move on its own, as well as causes the empowered attacks to instead deal their damage to enemies within that storm. The storm applies the same effects as the blizzard but deals **bonus** magic damage equal to「 8/8 to 14/8 (+ 0.4375% per 100 AP) of the target's **maximum** health per tick ⟷ 8 to 14 (+ $3.5$% per 100 AP) of the target's **maximum** health over the duration 」and slows by an additional 5%. Against monsters, the storm deals a minimum of 「 40/8 to 280/8 per tick, and is capped at 80/8 to 400/8 ⟷ 40 to 280 over the duration, and is capped at 80 to 400 」.
 
 | Attribute | Value |
 |-----------|------:|

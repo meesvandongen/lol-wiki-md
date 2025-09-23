@@ -1304,6 +1304,66 @@ class SimpleLoLConverter:
                     patches.append({"version": version, "changes": changes})
         return patches
     
+    def _convert_ft_blocks(self, s: str) -> str:
+        """Convert FlipText templates to a static inline swap marker.
+        Handles {{ft|text1|text2}} and {{FlipText|text1|text2}} with brace-aware parsing.
+        Output format (always inline): 「 text1 ⟷ text2 」
+        """
+        out: List[str] = []
+        i = 0
+        n = len(s)
+        while i < n:
+            j = s.find('{{', i)
+            if j == -1:
+                out.append(s[i:])
+                break
+            out.append(s[i:j])
+            # Attempt to read template name
+            k = j + 2
+            while k < n and s[k].isspace():
+                k += 1
+            name_start = k
+            while k < n and s[k] not in '|}':
+                k += 1
+            name_raw = s[name_start:k].strip()
+            name_norm = name_raw.lower().replace('_', ' ').strip()
+            # Walk forward to find balanced end of this template
+            t = j
+            depth = 0
+            while t < n - 1:
+                if s[t:t+2] == '{{':
+                    depth += 1
+                    t += 2
+                    continue
+                if s[t:t+2] == '}}':
+                    depth -= 1
+                    t += 2
+                    if depth == 0:
+                        break
+                    continue
+                t += 1
+            tpl = s[j:t] if t <= n else s[j:]
+            if name_norm in ("ft", "fliptext", "flip text"):
+                # Extract inner content after the name and first '|'
+                inner = tpl[2:-2]
+                rest = inner[len(name_raw):].lstrip()
+                if rest.startswith('|'):
+                    rest = rest[1:]
+                # Split on top-level pipes to get args; ignore named params
+                parts = self._split_top_level_pipes(rest)
+                pos_args = [p.strip() for p in parts if p.strip() and '=' not in p]
+                a = pos_args[0] if len(pos_args) >= 1 else ''
+                b = pos_args[1] if len(pos_args) >= 2 else ''
+                a_md = self._convert_wiki_to_markdown(a) if a else ''
+                b_md = self._convert_wiki_to_markdown(b) if b else ''
+                out.append(f"「 {a_md} ⟷ {b_md} 」")
+                i = t
+            else:
+                # Not FlipText: keep template as-is for other passes
+                out.append(tpl)
+                i = t
+        return ''.join(out)
+    
     def _convert_wiki_to_markdown(self, text: str) -> str:
         """Convert basic MediaWiki syntax to markdown."""
         if not text:
@@ -1469,6 +1529,8 @@ class SimpleLoLConverter:
                 i = k
             return ''.join(out)
         text = _convert_as_blocks(text)
+        # FlipText: {{ft|text1|text2}} -> 「 text1 ⟷ text2 」 (brace-aware)
+        text = self._convert_ft_blocks(text)
         # Skill tabs: {{st|Label1|Value1|Label2|Value2|...}} -> table (brace-aware)
         text = self._convert_st_blocks(text)
         # Small bold caps: uppercase the display text and make it bold
@@ -1480,7 +1542,7 @@ class SimpleLoLConverter:
         text = re.sub(r'\{\{sbc\|([^}]+)\}\}', _sbc_repl, text)
 
         # Fix double bold markers
-        # text = re.sub(r'\*\*\*\*([^*]+):\*\*', r'**\1:**', text)  # ****text:** -> **text:**
+        text = re.sub(r'\*\*\*\*([^*]+):\*\*', r'**\1:**', text)  # ****text:** -> **text:**
 
         # Convert section links BEFORE general links so they don't get captured by the general rule
         # [[Page#Anchor|Display]] -> [Display](./Page.md#Anchor)
@@ -1657,7 +1719,7 @@ class SimpleLoLConverter:
         # Convert MediaWiki apostrophe styles ('' italic, ''' bold, ''''' both) with a robust parser
         text = self._convert_apostrophe_styles(text)
 
-    # Rely on the robust apostrophe-run parser; avoid any bold/italic cleanup here.
+        # Rely on the robust apostrophe-run parser; avoid any bold/italic cleanup here.
 
         # Clean up remaining templates
         text = re.sub(r'\{\{[^}]+\}\}', '', text)
@@ -1692,8 +1754,8 @@ class SimpleLoLConverter:
         # Strip stray equals signs at line ends (artifact of template params)
         text = re.sub(r'(?m)=\s*$', '', text)
 
-    # Final pass: evaluate any {{#expr:...}} that may have become evaluable after prior substitutions
-    # Remove stray leading single quote left at start of lines (from mismatched wiki italics)
+        # Final pass: evaluate any {{#expr:...}} that may have become evaluable after prior substitutions
+        # Remove stray leading single quote left at start of lines (from mismatched wiki italics)
         text = re.sub(r"(?m)^'(?=[A-Za-z])", '', text)
 
         text = self._evaluate_expr_templates(text)
@@ -2317,32 +2379,38 @@ class SimpleLoLConverter:
         Output (compact, level-annotated): e.g. '30@1; 35–90@7–18'. Falls back to endpoints when needed.
         """
         content = match.group(1)
-        parts = [p.strip() for p in content.split('|') if p.strip()]
-        if not parts:
-            return f"${content}$"
-        values_spec = parts[0]
-        levels_spec = parts[1] if len(parts) > 1 and '=' not in parts[1] else ''
-        # Optional key label via named params; prioritize 'type=' (as seen in Sun Disc hp), then others
-        # Default behavior: if no label provided, omit legend (level is implied)
+        # Use brace-aware splitting to avoid breaking on nested templates
+        raw_parts = [p.strip() for p in self._split_top_level_pipes(content) if p.strip()]
+        if not raw_parts:
+            return content
+        # Separate positional vs named args
+        pos_args: List[str] = []
+        named: Dict[str, str] = {}
+        for p in raw_parts:
+            if '=' in p:
+                k, v = p.split('=', 1)
+                named[k.strip().lower()] = v.strip()
+            else:
+                pos_args.append(p)
+        # Values spec is the first positional argument
+        if not pos_args:
+            # Nothing to compute; if a 'key' is present, drop it and return empty
+            return ''
+        values_spec = pos_args[0]
+        # Levels spec may be provided as the next positional argument
+        levels_spec = pos_args[1] if len(pos_args) > 1 else ''
+        # Named extras
+        key_suffix = (named.get('key') or '').strip()
+        round_param = (named.get('round') or '').strip()
+        # Optional key label for annotations
         key_label: Optional[str] = None
-        if len(parts) > 2:
-            # First pass: look for 'type='
-            for extra in parts[2:]:
-                if '=' in extra:
-                    k, v = extra.split('=', 1)
-                    if k.strip().lower() == 'type' and v.strip():
-                        key_label = v.strip()
-                        break
-            # Second pass: fallbacks if type not set
-            if key_label is None:
-                for extra in parts[2:]:
-                    if '=' in extra:
-                        k, v = extra.split('=', 1)
-                        k = k.strip().lower()
-                        v = v.strip()
-                        if k in ('key', 'label', 'per', 'by', 'scale') and v:
-                            key_label = v
-                            break
+        if 'type' in named and named['type'].strip():
+            key_label = named['type'].strip()
+        else:
+            for k in ('label', 'per', 'by', 'scale'):
+                if k in named and named[k].strip():
+                    key_label = named[k].strip()
+                    break
 
         # Try to parse canonical 'start to end for n' form
         m = re.match(r'^(-?\d+(?:\.\d+)?)\s*to\s*(-?\d+(?:\.\d+)?)\s*for\s*(\d+)$', values_spec, flags=re.IGNORECASE)
@@ -2359,7 +2427,7 @@ class SimpleLoLConverter:
                 step = (end - start) / (count - 1)
                 seq = [start + i * step for i in range(count)]
             values_num = seq
-            values = [self._pp_num_fmt(x) for x in seq]
+            values = [self._pp_num_fmt(x) + (key_suffix if key_suffix else '') for x in seq]
             if levels_spec:
                 levels = self._pp_parse_levels(levels_spec)
         else:
@@ -2371,16 +2439,59 @@ class SimpleLoLConverter:
                 for s in seq_raw:
                     if re.match(r'^-?\d+(?:\.\d+)?$', s):
                         f = float(s)
-                        values.append(self._pp_num_fmt(f))
+                        values.append(self._pp_num_fmt(f) + (key_suffix if key_suffix else ''))
                         values_num.append(f)
                     else:
-                        values.append(s)
+                        values.append(s + (key_suffix if (key_suffix and re.match(r'^-?\d', s)) else ''))
                         values_num.append(None)
                 if levels_spec:
                     levels = self._pp_parse_levels(levels_spec)
             else:
-                # Plain value or unknown form: return as-is
-                return values_spec
+                # Try to evaluate expression possibly containing 'x' by sampling endpoints (level 1 and 18)
+                def _eval_expr(expr: str, x_val: int) -> Optional[float]:
+                    # Replace percent literals like '10%' with 0.1
+                    expr2 = re.sub(r'(\d+(?:\.\d+)?)%', lambda m: str(float(m.group(1))/100.0), expr)
+                    # Replace whole-word 'x' with level value
+                    expr2 = re.sub(r'\bx\b', str(x_val), expr2)
+                    try:
+                        val = self._safe_eval_num_expr(expr2)
+                        return float(val) if val is not None else None
+                    except Exception:
+                        return None
+                v1 = _eval_expr(values_spec, 1)
+                v18 = _eval_expr(values_spec, 18)
+                # Optionally apply rounding similar to Module: round defaults to 2
+                def _apply_round(v: float) -> float:
+                    if not round_param:
+                        # default 2 decimals
+                        return float(f"{v:.2f}")
+                    rp = round_param.lower()
+                    try:
+                        if rp == 'abs':
+                            return abs(v)
+                        if rp == 'ceil':
+                            return float(math.ceil(v))
+                        if rp == 'floor':
+                            return float(math.floor(v))
+                        if rp == 'trunc':
+                            return float(int(v))
+                        nd = int(float(rp))
+                        return float(f"{v:.{nd}f}")
+                    except Exception:
+                        return v
+                if v1 is not None and v18 is not None:
+                    a = _apply_round(v1)
+                    b = _apply_round(v18)
+                    # If equal after rounding, show single value; else show range
+                    if abs(a - b) < 1e-9:
+                        values = [self._pp_num_fmt(a) + (key_suffix if key_suffix else '')]
+                    else:
+                        values = [self._pp_num_fmt(a) + (key_suffix if key_suffix else ''), self._pp_num_fmt(b) + (key_suffix if key_suffix else '')]
+                        values_num = [a, b]
+                        levels = [1, 18]
+                else:
+                    # Plain value or unknown form: return the raw spec without the 'key=' noise
+                    return values_spec
 
         # If we have a levels spec, produce a compact, annotated summary
         if levels_spec and levels:

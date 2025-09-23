@@ -80,7 +80,7 @@
 | **Targeting** | Passive |
 | **Affects** | Allies |
 
-**INNATE:** **Nami**’s abilities grant ms (+ 25% AP) **bonus** movement speed to allied champions hit, decaying over $1.5$ seconds. The bonus isfrom *Tidal Wave*.
+**INNATE:** **Nami**’s abilities grant ms (+ 25% AP) **bonus** movement speed to allied champions hit, decaying over $1.5$ seconds. The bonus is「 doubled ⟷ increased to 200 (+ 50% AP) 」from *Tidal Wave*.
 
 **Notes:**
 

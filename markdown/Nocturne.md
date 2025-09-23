@@ -94,7 +94,7 @@
 
 **INNATE:** Periodically, **Nocturne** empowers his next basic attack to slash in a circle, dealing 120% AD physical damage to the target and nearby enemies and healing himself for 13 to 30 (+ 30% AP) per enemy hit. Against minions, *Umbra Blade*’s damage to secondary targets and healing are reduced by 50% and it applies on-hit effects to all targets at 100% effectiveness.
 
-*Umbra Blades* can critically strike against the primary target, modifying the physical damage dealt to
+*Umbra Blades* can critically strike against the primary target, modifying the physical damage dealt to「 AD. ⟷ 110% AD×**total** critical damage. 」
 
 Basic attacks reduce *Umbra Blades' * cooldown by 1 second, increased to 3 against enemy champions and monsters.
 

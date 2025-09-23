@@ -87,7 +87,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Pyke**’s health cannot increase except through growth (per level), instead he gains
+**INNATE:** **Pyke**’s health cannot increase except through growth (per level), instead he gains「 1 **bonus** attack damage per 14 **bonus** health. ⟷ **bonus** attack damage equal to $7.143$% of **bonus** health. 」
 
 **INNATE:** **Pyke** gains 1 **bonus** movement speed while in the river.
 
@@ -228,7 +228,7 @@ After 1 second, the *Phantom* homes back to **Pyke** to stun enemies around it a
 | **Call For Help** | Special |
 | **Grounded** | True |
 
-**ACTIVE:** **Pyke** marks the target location with the shape of an *X* before striking it, executing enemy champions within the area that are below 250–550@6–18 (+ 80% **bonus** AD) (+ $1.5$ per 1 Lethality) health. Other enemies hit and enemy champions above the threshold are instead dealt
+**ACTIVE:** **Pyke** marks the target location with the shape of an *X* before striking it, executing enemy champions within the area that are below 250–550@6–18 (+ 80% **bonus** AD) (+ $1.5$ per 1 Lethality) health. Other enemies hit and enemy champions above the threshold are instead dealt「 50% of the amount as physical damage. ⟷ 125–275@6–18 (+ 40% **bonus** AD) (+ $0.75$ per 1 Lethality) physical damage. 」
 
 If *Death from Below* hits an enemy champion or at least one is killed inside the *X* by the *execution* or an ally, **Pyke** will blink to the center of the *X*. For the latter case **Pyke** can also recast the ability within 20 seconds at no cost.
 

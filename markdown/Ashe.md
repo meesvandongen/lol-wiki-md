@@ -135,7 +135,7 @@
 
 - The flurries deal 1 instance of basic damage followed by 4 instances of a non-reactive type of damage (either default or proc).
   - The flurries are classified as a basic attack on a script level, but are considered an ability for other effects (e.g. Sap Magic).
-- The first flurry of a *Ranger's Focus* cast fires
+- The first flurry of a *Ranger's Focus* cast fires「 one additional arrow, dealing 20% increased total damage. ⟷ arrows, dealing a total of 132 / 141 / 150 / 159 / 168% attack damage. 」
 - *Ranger's Focus* works against structures.
 - Flat damage reductions (e.g. Tantrum, Nimble Fighter, or Eclipse) apply per arrow, resulting in extremely increased effectiveness against *Ranger's Focus*.
   - The sole exception is Warden's Mail Rock Solid, as that applies per cast instance rather than per damage instance.
@@ -202,7 +202,7 @@ Enemies can intercept multiple arrows but do not take damage from any beyond the
 | **Spell Shield** | False |
 | **Projectile** | Special |
 
-**ACTIVE:** **Ashe** sends a hawk spirit to a location, granting sight of the area along its pathand at its destination for 5 seconds.
+**ACTIVE:** **Ashe** sends a hawk spirit to a location, granting sight of the area along its path「 repeatedly for $0.5$ seconds after every 100 units traveled ⟷ for effectively up-to $1.8$ seconds at any location 」and at its destination for 5 seconds.
 
 **Ashe** periodically stocks a *Hawkshot* charge, up to a maximum of 2.
 

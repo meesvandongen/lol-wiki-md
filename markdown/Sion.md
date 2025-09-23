@@ -115,7 +115,7 @@
 | **Spell Effects** | proc |
 | **Parry** | True |
 
-**INNATE:** Upon taking fatal damage, **Sion** enters stasis for $1.5$ seconds to reanimate into a frenzy, restoring 100% of his **maximum** health but losing 2 to 19 health every , increasing byper subsequent tick. **Sion**’s health regeneration and any healing (except life steal) he receives during this time is 0% effective (See notes).
+**INNATE:** Upon taking fatal damage, **Sion** enters stasis for $1.5$ seconds to reanimate into a frenzy, restoring 100% of his **maximum** health but losing 2 to 19 health every , increasing by「 70% of the **base** value ⟷ 2×0.7 to 19×0.7 」per subsequent tick. **Sion**’s health regeneration and any healing (except life steal) he receives during this time is 0% effective (See notes).
 
 **Sion** can only move and use his basic attacks and item actives, and empowers himself with the following effects:
 - attack speed minimum and maximum

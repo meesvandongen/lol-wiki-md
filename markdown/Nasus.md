@@ -141,7 +141,7 @@ If *Siphoning Strike* kills the target, **Nasus** permanently gains 3 stacks, in
 | **Spell Shield** | True |
 | **Call For Help** | True |
 
-**ACTIVE:** **Nasus** ages the target enemy champion for 5 seconds, slowing them by 35% and crippling them byboth increasing every second over the duration.
+**ACTIVE:** **Nasus** ages the target enemy champion for 5 seconds, slowing them by 35% and crippling them by「 75% of that amount, ⟷ 26.25%, 」both increasing every second over the duration.
 
 | Attribute | Value |
 |-----------|------:|

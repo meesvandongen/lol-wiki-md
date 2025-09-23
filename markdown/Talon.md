@@ -84,7 +84,7 @@
 
 **INNATE:** **Talon**’s abilities apply a stack of *Wound* to enemy champions and large monsters hit for 6 seconds, refreshing on basic attacks and subsequent applications and stacking up to 3 times.
 
-**Talon**’s next basic attack against an enemy with 3 *Wound* stacks is empowered to consume them all to cause the target to bleed, dealingincreased to 110% damage against monsters. The target cannot gain *Wound* stacks during this time.
+**Talon**’s next basic attack against an enemy with 3 *Wound* stacks is empowered to consume them all to cause the target to bleed, dealing「 80 to 280 (+ 210% **bonus** AD) **total** physical damage over 2 seconds, ⟷ 80/16 to 280/16 (+ 13.125% **bonus** AD) physical damage every $0.125$ seconds over 2 seconds, 」increased to 110% damage against monsters. The target cannot gain *Wound* stacks during this time.
 
 **Notes:**
 

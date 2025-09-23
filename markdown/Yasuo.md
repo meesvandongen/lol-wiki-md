@@ -76,9 +76,9 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE - INTENT:** **Yasuo**’s **total** critical strike chance is doubled from all other sources. Additionally,
+**INNATE - INTENT:** **Yasuo**’s **total** critical strike chance is doubled from all other sources. Additionally,「 every 1% critical strike chance in excess of 100% is converted into $0.5$ **bonus** attack damage. ⟷ every 50% critical strike chance in excess of 100% is converted into 25 **bonus** attack damage. 」
 
-**INNATE - RESOLVE:** **Yasuo** generates a stack of Flow for every 59–46@1–13 units he travels by any means. Atand upon taking damage from an enemy champion or monster, **Yasuo** consumes all Flow to grant himself a shield for 125+((600-125)/17*(x-1)*(0.7025+0.0175*(x-1))) that lasts for 1 second.
+**INNATE - RESOLVE:** **Yasuo** generates a stack of Flow for every 59–46@1–13 units he travels by any means. At「 100 stacks ⟷ 59×100 to 46×100 for 3 units traveled 」and upon taking damage from an enemy champion or monster, **Yasuo** consumes all Flow to grant himself a shield for 125+((600-125)/17*(x-1)*(0.7025+0.0175*(x-1))) that lasts for 1 second.
 
 **Notes:**
 

@@ -125,7 +125,7 @@ Whenever **Galio** hits at least one enemy champion or epic monster with an abil
 |-----------|------:|
 | **Magic Damage** | 70 / 105 / 140 / 175 / 210 (+ 70% AP) |
 
-When the blasts meet, the gusts form a tornado that persists for 2 seconds, slowly moving forward and dealing magic damage equal toto enemies within the area, capped atagainst monsters.
+When the blasts meet, the gusts form a tornado that persists for 2 seconds, slowly moving forward and dealing magic damage equal to「 2% (+ 1% per 100 AP) of target's **maximum** health every $0.5$ seconds ⟷ 8% (+ 4% per 100 AP) of target's **maximum** health over the duration 」to enemies within the area, capped at「 150 per tick ⟷ 600 total 」against monsters.
 
 **Notes:**
 

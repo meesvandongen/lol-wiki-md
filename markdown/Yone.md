@@ -87,7 +87,7 @@
 | **Spell Effects** | basic |
 | **Parry** | True |
 
-**INNATE - INTENT:** **Yone**’s **total** critical strike chance is doubled from all other sources. Additionally,
+**INNATE - INTENT:** **Yone**’s **total** critical strike chance is doubled from all other sources. Additionally,「 every 1% critical strike chance in excess of 100% is converted into $0.5$ **bonus** attack damage. ⟷ every 50% critical strike chance in excess of 100% is converted into 25 **bonus** attack damage. 」
 
 **INNATE - STEEL AND SPIRIT:** **Yone**’s basic attacks alternate between his Steel Sword and Azakana Sword on-attack. **Yone** begins attacking with Steel Sword, and basic attacks with Azakana Sword deal 50% AD physical damage and 50% AD magic damage.
 

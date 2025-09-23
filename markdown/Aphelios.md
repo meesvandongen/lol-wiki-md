@@ -277,7 +277,7 @@ Attacks alternate between *Severum* and his current off-hand weapon, each dealin
 - **Severum**’s attacks are not intercepted, but the attacks from the off-hand weapon are during *Onslaught*.
 - **Aphelios** will also not perform the attacks while channeling Recall.
 - If **Aphelios** is taunted, he will still attack the nearest enemy.
-- During *Onslaught*, **Aphelios' ** attack range is reducedand his attack commands instead issue movement commands to walk into the respective range of his target.
+- During *Onslaught*, **Aphelios' ** attack range is reduced「 to 410 ⟷ by 140 」and his attack commands instead issue movement commands to walk into the respective range of his target.
 - *Onslaught*’s name is modified based on **Aphelios' ** off-hand weapon:
   - Precision Onslaught
   - Binding Onslaught
@@ -396,7 +396,7 @@ After $0.3$ seconds of the illumination, attacks based on **Aphelios' ** current
  Applies an empowered mark that deals 50–110@6–16 **bonus** physical damage per *mark* consumed.
  Heals **Aphelios** for 250–450@6–16 if at least one enemy champion is hit.
  Increases the initial slow to 99% and empowers *Binding Eclipse* to root targets affected by the enhanced slow for $1.35$ seconds.
- The initial blast deals 50–150@6–16 (+ 25% **bonus** AD) **bonus** physical damage.Enemy champions will take damage from overlapping areas.
+ The initial blast deals 50–150@6–16 (+ 25% **bonus** AD) **bonus** physical damage.「 Performs *Infernum*’s attacks and *Infernum*’s bolts in a 400-radius circle: primary targets are dealt *Infernum*’s primary damage; secondary targets are dealt 90% of *Infernum*’s regular bolt damage; both are modified by *Moonlight Vigil*’s critical damage modifier. ⟷ 」Enemy champions will take damage from overlapping areas.
  Generates 5 additional spectral *Chakrams* that return to **Aphelios** from the first enemy champion hit, for a total of 6, on top of those from other targets hit.
 
 **Notes:**

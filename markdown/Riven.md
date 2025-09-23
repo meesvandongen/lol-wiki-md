@@ -87,7 +87,7 @@
 | **Spell Effects** | Proc |
 | **Parry** | True |
 
-**INNATE:** **Riven**’s ability casts generate a stack of *Charge* for 6 seconds, refreshing on subsequent casts and stacking up to 3 times. **Riven**’s basic attacks are empowered to each consume a stack to deal **bonus** physical damage equal to key=% AD, reduced toagainst structures.
+**INNATE:** **Riven**’s ability casts generate a stack of *Charge* for 6 seconds, refreshing on subsequent casts and stacking up to 3 times. **Riven**’s basic attacks are empowered to each consume a stack to deal **bonus** physical damage equal to key=% AD, reduced to「 50% ⟷ 」against structures.
 
 The **bonus** damage is affected by critical strike modifiers and applies life steal at 100% effectiveness.
 

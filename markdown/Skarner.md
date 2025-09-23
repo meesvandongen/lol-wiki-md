@@ -89,7 +89,7 @@
 | **Spell Effects** | proc |
 | **Parry** | Special |
 
-**INNATE:** **Skarner**’s basic attacks on-hit, *Shattered Earth*, *Upheaval*, and *Impale* apply a stack of *Quaking* to enemies hit for 4 seconds, refreshing on subsequent applications and stacking up to 3 times. Enemies afflicted with 3 stacks take magic damage equal to
+**INNATE:** **Skarner**’s basic attacks on-hit, *Shattered Earth*, *Upheaval*, and *Impale* apply a stack of *Quaking* to enemies hit for 4 seconds, refreshing on subsequent applications and stacking up to 3 times. Enemies afflicted with 3 stacks take magic damage equal to 「 5 to 9 of their **maximum** health over the duration, capped at 100 to 300 against monsters. ⟷ 5×0.125 to 9×0.125 of their **maximum** health every $0.5$ seconds over the duration, capped at 100/8 to 300/8 per tick against monsters. 」
 
 **Notes:**
 

@@ -86,7 +86,7 @@
 
 **INNATE:** **Mel**’s damaging basic attacks and abilities apply a stack of *Overwhelm* to enemies for 5 seconds, refreshing on subsequent applications and stacking infinitely.
 
-**OVERWHELM:** Store type=[File:Golden Eclipse.png (+ 10% AP) magic damage on the affected enemy with the first stack, reducedagainst minions. For each stack, store an additional type=[[File:Golden Eclipse.png (+ $0.75$% AP) magic damage on the target. If the total post-mitigation damage (Damage calculated after modifiers) stored exceeds the target's **current** health and shields, the next stack will consume them all to deal the damage.
+**OVERWHELM:** Store type=[File:Golden Eclipse.png (+ 10% AP) magic damage on the affected enemy with the first stack, reduced「 to 60% ⟷ 」against minions. For each stack, store an additional type=[[File:Golden Eclipse.png (+ $0.75$% AP) magic damage on the target. If the total post-mitigation damage (Damage calculated after modifiers) stored exceeds the target's **current** health and shields, the next stack will consume them all to deal the damage.
 
 **INNATE - SEARING BRILLIANCE:** **Mel**’s ability casts each generate 3 stacks of *Searing Brilliance* for 5 seconds, refreshing on subsequent casts and stacking up to 9 times. Her next basic attack consumes all stacks of *Searing Brilliance* to additionally fire an equal number of blazing projectiles at the target. Each projectile deals 8 to 25 (+ 1% AP) magic damage.
 

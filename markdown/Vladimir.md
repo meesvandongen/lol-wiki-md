@@ -128,7 +128,7 @@
 
 At 2 points of *Crimson Rush*, **Vladimir** surges, gaining ms decaying over $0.5$ seconds while the *Crimson Rush* depletes over $2.5$ seconds. *Crimson Rush* depletes 75% slower during *Sanguine Pool*, *Tides of Blood*, or stasis.
 
-Casting *Transfusion* during the surge consumes all *Crimson Rush* to deal 85% increased damage and heal **Vladimir** for an additional 30 to 200 (+ 5% (+ 4% per 100 AP) of his **missing** health). The bonus healing is reduced toagainst minions.
+Casting *Transfusion* during the surge consumes all *Crimson Rush* to deal 85% increased damage and heal **Vladimir** for an additional 30 to 200 (+ 5% (+ 4% per 100 AP) of his **missing** health). The bonus healing is reduced to「 35% ⟷ 30×0.35 to 200×0.35 (+ 1.75% (+ 1.4% per 100 AP) of his **missing** health) 」against minions.
 
 | Attribute | Value |
 |-----------|------:|
@@ -179,7 +179,7 @@ Enemies within the pool are dealt magic damage every $0.5$ seconds over the dura
 - The slow ends immediately once affected enemies get out of range.
 - **Vladimir** can still use summoner spells and item actives during *Sanguine Pool*.
 - While unable to attack, **Vladimir** can still input attack commands - causing him to follow his attack target.
-  - **Vladimir**’s attack range is reducedwhile pooled - causing him to attempt to move right up to his attack target.
+  - **Vladimir**’s attack range is reduced「 to 0 ⟷ by 450 」while pooled - causing him to attempt to move right up to his attack target.
 
 ---
 
