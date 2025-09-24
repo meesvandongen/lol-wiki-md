@@ -192,7 +192,7 @@ If this kills an enemy, it generates 1 stack of *Phenomenal Evil*, tripled again
 - Displacement immune enemies will still be stunned, but not knocked down.
 - **Veigar** marks enemy champions in a 390-radius from the zone's center in order to gain kill/assist credit, lasting for the standard credit timer.
 - *Event Horizon* may fail to catch enemies that move very quickly through the boundary distance.
-  - More modern area checks such as The Box or Yordle Snap Trap do not have this issue.
+  - More modern area checks such as Thresh’s The Box or Caitlyn’s Yordle Snap Trap do not have this issue.
 
 ---
 

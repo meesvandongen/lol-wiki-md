@@ -257,17 +257,17 @@ He also gains a shield that absorbs magic damage for $1.5$ seconds.
 ### V14.22
 - Null Sphere
   - **Bug Fixes:** Now correctly interrupts the following channels:
-    - Glacial Storm
-    - Royal Maelstrom
-    - The Culling
-    - Realm Warp
-    - Inferno Trigger
-    - Stand United
-    - Ixtal's Impact.
+    - Anivia’s Glacial Storm
+    - Bel'Veth’s Royal Maelstrom
+    - Lucian’s The Culling
+    - Ryze’s Realm Warp
+    - Samira’s Inferno Trigger
+    - Shen’s Stand United
+    - Skarner’s Ixtal's Impact.
     - *This includes their hijacked version.*
-  - **Bug Fixes:** Now properly interrupts Hero's Entrance, instead of causing it to skip its channel's initial duration before the untargetability is granted.
+  - **Bug Fixes:** Now properly interrupts Galio’s Hero's Entrance, instead of causing it to skip its channel's initial duration before the untargetability is granted.
   - **Bug Fixes:** No longer interrupts channels while the target is under the effects of crowd control immunity.
-  - **Bug Fixes:** No longer interrupts Nether Grasp while his Void Shift is available.
+  - **Bug Fixes:** No longer interrupts Malzahar’s Nether Grasp while his Void Shift is available.
   - **Bug Fixes:** When interrupting a champion's channel, no longer counts progress twice toward the "404's" (Champion channels interrupted) Eternal.
 
 ### V14.21
@@ -282,7 +282,7 @@ He also gains a shield that absorbs magic damage for $1.5$ seconds.
 
 ### V14.10
 - Null Sphere
-  - **Bug Fixes:** No longer interrupts Unstoppable Onslaught.
+  - **Bug Fixes:** No longer interrupts Sion’s Unstoppable Onslaught.
 
 ### V14.9
 - Force Pulse

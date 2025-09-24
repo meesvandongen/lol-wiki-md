@@ -151,7 +151,7 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
     - When striking critically as a non-champion with a projectile attack, the attack projectile is invisible and hits near-instantly, but can still be intercepted by Wind Wall and similar abilities.
   - (attack range) **Base** attack range of the unit's base form
     - For example, in the case of Gnar, she will adopt attack range.
-  - Damage dealt to champions (physical damage, magic damage) ratio for the purposes of Adaptive Defenses.
+  - Damage dealt to champions (physical damage, magic damage) ratio for the purposes of Camille’s Adaptive Defenses.
   - Size (including modifiers and base unit size) at the time of disguising
   - Voice lines
   - Base unit model, regardless of current form
@@ -165,14 +165,14 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
 - **Neeko** does **not** adopt the allegiance of the disguise, meaning enemy turrets and minions will aggro her while disguised as a neutral monster or jungle plant.
 - While disguised as a plant or ward, **Neeko** can be targeted by minions and affected by most abilities and item effects that normally don't affect them.
   - If the ability or item effect only affects units of certain classifications (e.g. champion, minion), it does not affect disguised **Neeko**.
-    - For example, Chaaaaaaaarge!!! does not affect **Neeko** because it only affects champions.
+    - For example, Kled’s Chaaaaaaaarge!!! does not affect **Neeko** because it only affects champions.
   - If the ability or item effect affects units regardless of classification, it affects disguised **Neeko**.
-    - For example, Shocking Orb affects **Neeko** because it always affects the first unit hit.
+    - For example, Xerath’s Shocking Orb affects **Neeko** because it always affects the first unit hit.
   - If the ability normally affects all units, but affects certain classifications differently, it may or may not affect disguised **Neeko**.
-    - For example, Bear Trap on a Rope and Pocket Pistol affect **Neeko**, but Jousting does not.
+    - For example, Kled’s Bear Trap on a Rope and Pocket Pistol affect **Neeko**, but Jousting does not.
   - Taking damage from non-attacks while disguised as a plant or ward does not damage the disguise's form.
   - is the same true for traps and other unique health bars?
-- While disguised as a unit not targetable by turrets (e.g. wards, traps, Sentinel), **Neeko** cannot be targeted by turrets until she damages a champion.
+- While disguised as a unit not targetable by turrets (e.g. wards, traps, Kalista’s Sentinel), **Neeko** cannot be targeted by turrets until she damages a champion.
   - Disguising as a unit not targetable by turrets does not drop ongoing turret aggro.
 - While disguised as a jungle plant or trap, **Neeko**’s facing direction visually appears to not change while moving.
   - **Neeko**’s real facing direction is, however, affected by movement for the purposes of direction-facing effects (e.g. Petrifying Gaze, Backstab).
@@ -182,13 +182,13 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
 - While disguised as a ward, **Neeko** can be disabled by control wards, but not by sweeper drones or Umbral Glaive Blackout.
   - While disguised as a ward, **Neeko** does not trigger *Blackout*.
 - While disguised as a ward, when attacked by champions using Umbral Glaive, **Neeko** takes damage from Extinguish, but the disguise's form does not.
-- While disguised as a non-champion, **Neeko** can be directly hit by Spiraling Despair.
-- While disguised as a non-champion, **Neeko** cannot be affected by Deadly Flourish, Powerball’s negative effects, cannot be knocked up by Dragon Strike, and cannot attach Time Bomb to herself.
-- While disguised as a non-champion, **Neeko** cannot be tethered by Bastion. If she was tethered before changing, the tether will break as soon as she changes into a non-champion and Taric's spells can not be mimicked onto her. Once she changes into a champion the tether will automatically come back.
+- While disguised as a non-champion, **Neeko** can be directly hit by Hwei’s Spiraling Despair.
+- While disguised as a non-champion, **Neeko** cannot be affected by Jhin’s Deadly Flourish, Powerball’s negative effects, cannot be knocked up by Jarvan IV’s Dragon Strike, and cannot attach Zilean’s Time Bomb to herself.
+- While disguised as a non-champion, **Neeko** cannot be tethered by Taric’s Bastion. If she was tethered before changing, the tether will break as soon as she changes into a non-champion and Taric's spells can not be mimicked onto her. Once she changes into a champion the tether will automatically come back.
 - Requiem does not affect **Neeko** while disguised as a non-champion if Karthus is casting it during Death Defied, but does otherwise.
 - While disguised as a non-champion, **Neeko** will break Mountain Dragon Soul's shield.
 - While disguised as a non-champion, enemy Sundered Sky Lightshield Strike indicator will not be displayed on **Neeko**, but she will still be affected by the empowered attack.
-- Abilities and item actives with champion targeting forgiveness (e.g. All Out, Inspire, Mounting Dread) can be cast on **Neeko** even while she is disguised as a non-champion.
+- Abilities and item actives with champion targeting forgiveness (e.g. K'Sante’s All Out, Karma’s Inspire, Kindred’s Mounting Dread) can be cast on **Neeko** even while she is disguised as a non-champion.
 - While disguised, **Neeko** cannot be targeted by Smite.
 - While disguised as a monster, **Neeko** does not receive damage from (this is different from 0 damage as it will not cause damage-related events) Unleashed Smite and Primal Smite.
 - While disguised as Daisy, **Neeko**’s basic attacks will deal no damage (won't trigger damage-related effects (e.g. turret aggro)).
@@ -201,10 +201,10 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
 - While disguised as Lulu, **Neeko** will spawn a Pix with the same skin ID as **Neeko**’s.
   - For example, Neeko (skin 10) will always produce a Lulu with a Ruby Chroma (skin 10).
 - While disguised as Bel'Veth, **Neeko**’s basic attacks always deal 0 damage (will trigger damage-related effects (e.g. turret aggro)).
-- While disguised as Spider Queen or Summon: Tibbers, **Neeko**’s basic attacks will only deal 100% **bonus** AD physical damage.
+- While disguised as Elise’s Spiderlings or Annie’s Tibbers, **Neeko**’s basic attacks will only deal 100% **bonus** AD physical damage.
   - If **Neeko** has no **bonus** AD, she will deal no damage (won't trigger damage-related effects (e.g. turret aggro)).
   - However, **Neeko**’s critical strikes while disguised will deal 175% **total** AD physical damage as expected.
-- While disguised as Death in Lavender, Deadly Spines or Vine Lashers, **Neeko** cannot issue a basic attack command.
+- While disguised as Bel'Veth’s Void Remoras, Zyra’s Thorn Spitters or Vine Lashers, **Neeko** cannot issue a basic attack command.
 - While disguised as a non-champion, **Neeko** takes reduced damage from Kled’s dismounted attacks, but is not considered a champion for the ability's other effects.
 - **Neeko** benefits from *Mr. Kled's Wild Ride* even while disguised as a lane minion or Voidmite.
 - While disguised as a non-champion, **Neeko** cannot purchase Runaan's Hurricane regardless of her current range type.

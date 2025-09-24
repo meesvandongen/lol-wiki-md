@@ -36,7 +36,7 @@
 - Upon being triggered by a hostile immobilizing effect, *Goes Where He Pleases* will also grant **Dr. Mundo** immunity to additional immobilizing effects from the same cast instance.
   - Abilities where non-immobilizing effects and damage are nested into immobilizing ones will have them also prevented. Non-immobilizing effects and damage applied separately (the vast majority of cases) are not prevented.
 - Spell shield and Black Shield take priority over *Goes Where He Pleases*.
-- The canister, whether in flight and on the ground, will transition in and out of Realm of Death alongside *Dr. Mundo*.
+- The canister, whether in flight and on the ground, will transition in and out of Mordekaiser’s Realm of Death alongside *Dr. Mundo*.
 - The canister cannot be interacted with while untargetable.
 
 ---
@@ -237,7 +237,7 @@ At rank 3, *Maximum Dosage*’s increased **base** health and **bonus** health r
 
 ### V14.15
 - Goes Where He Pleases
-  - **Bug Fixes:** No longer ignores Aurora’s Between Worlds’s boundary collision push.
+  - **Bug Fixes:** No longer ignores Aurora’s Between Worlds’ boundary collision push.
 
 ### V13.22
 - Blunt Force Trauma
@@ -287,7 +287,7 @@ At rank 3, *Maximum Dosage*’s increased **base** health and **bonus** health r
 - His dance is a Pec Flex which involves flexing his pectoral muscles.
 - His death animation shows him assume the morgue pose whilst adding a toe tag to himself.
 - Goes Where He Pleases is among a few abilities that were named after a quote of their champion. In this case, it references his "Mundo goes where he pleases" quote which he had before the patch he got the ability, V11.12.
-  - The others are League of Draven and End of the Line.
+  - The others are Draven’s League of Draven and Graves’ End of the Line.
 - Following his rework, his kit was given a higher emphasis on medical equipment and terms, thus making several references to them.
   - Infected Bonesaw was renamed from Infected Cleaver to have Dr. Mundo utilize the Bone cutter.
   - Heart Zapper is based on the act of defibrillation.

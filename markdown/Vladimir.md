@@ -265,7 +265,7 @@ After the duration, the infection bursts to deal magic damage to all affected ta
   - True damage will however not be amplified.
   - *Hemoplague*’s effect stacks multiplicatively with other damage modifiers.
   - *Hemoplague* amplifies itself for an actual damage of 165 / 220 / 275 / 330 / 385 (+ $77$% AP).
-- *Hemoplague*’s modifier to incoming damage stacks additively with Unbreakable Will for a total damage reduction of 45 / 55 / 65%.
+- *Hemoplague*’s modifier to incoming damage stacks additively with Alistar’s Unbreakable Will for a total damage reduction of 45 / 55 / 65%.
 - Spell shield does not negate the detonation.
 
 ---

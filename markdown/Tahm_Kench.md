@@ -199,7 +199,7 @@ After 1 second, **Tahm Kench** can cast *Regurgitate* while a target is inside o
 - The self-slow is affected by slow resist.
 - **Tahm Kench** cannot use gates during *Devour*.
 - Allies can see if this spell is ready next to **Tahm Kench**’s health bar.
-- The swallowed target is not considered to be vanished. They are instead hidden below the visible map plane, to maintain ongoing effects such as Curse of the Black Mist.
+- The swallowed target is not considered to be vanished. They are instead hidden below the visible map plane, to maintain ongoing effects such as Senna’s Curse of the Black Mist.
 - During *Devour*’s attachment and Regurgitate’s displacement, the swallowed target's camera is locked and centered on their champion.
   - This does not affect **Tahm Kench**.
 - The following table refers for interactions while the target is unable to act:
@@ -283,7 +283,7 @@ After 1 second, **Tahm Kench** can cast *Regurgitate* while a target is inside o
 
 ### V13.4
 - Devour
-  - **Bug Fixes:** No longer causes an allied Goes Where He Pleases and Void Shift to be triggered by the ability.
+  - **Bug Fixes:** No longer causes an allied Dr. Mundo’s Goes Where He Pleases and Malzahar’s Void Shift to be triggered by the ability.
 
 ## Trivia
 

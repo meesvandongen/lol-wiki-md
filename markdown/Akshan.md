@@ -426,7 +426,7 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 
 ### V13.15
 - Dirty Fighting
-  - **Bug Fixes:** Now properly triggers the second shot when attacking W and I.
+  - **Bug Fixes:** Now properly triggers the second shot when attacking Malzahar’s Voidlings and Yorick’s Mist Walkers.
 
 ### V13.13
 - Comeuppance

@@ -132,9 +132,9 @@ After the duration, **Zac** is revived with 10 – 50% (Based on his bloblets' t
 - **Zac**’s untargetability upon triggering *Cell Division* does not destroy in-flight projectiles.
 - Chronoshift and Guardian Angel will take priority over *Cell Division*.
 - Spirit Visage and Heal Power increases the healing of both *chunks* and *bloblets*.
-- Realm Warp is able to individually teleport **Zac** or his *bloblets* during *Cell Division*.
+- Ryze’s Realm Warp is able to individually teleport **Zac** or his *bloblets* during *Cell Division*.
   - If **Zac** is transported to a new location before the *bloblets* landed, they will travel to form at his new position, adjusting their speed accordingly. If *Cell Division*’s duration permits during this time, **Zac** will be revived even if the *bloblets* fail to physically recombine.
-- *Cell Division*’s *bloblets* can be targeted by Teleport and Force of Will.
+- *Cell Division*’s *bloblets* can be targeted by Teleport and Syndra’s Force of Will.
   - Other *bloblets* are not interrupted by the conditions above and will continue to recombine instinctively.
 - If **Zac**’s health is higher than it is supposed to be when the *bloblets* converge on him, his health will be set to the correct value.
 - The following table refers for interactions while **Zac** is in resurrection:
@@ -191,7 +191,7 @@ If the two targets are within 700 units of each other, they are instead slammed 
     - The damage, slow, stun, and knock up from the impact of the second *Stretching Strike* hitting a different target will all be blocked, but not the root and the displacement.
   - If as the primary target of the second *Stretching Strike*, the root will be blocked, but the displacement, damage, slow, stun, and knock up afterwards will not.
   - If as the secondary target of the impact, the damage and slow will be blocked.
-- The second *Stretching Strike* does not trigger when attacking Prophet of an Elder God, Powder Keg.
+- The second *Stretching Strike* does not trigger when attacking Illaoi’s tentacles, Gangplank’s kegs.
   - Does it trigger against blind, dodge, block, stealthed trap, farsight ward?
 - If the tethered target is untargetable during the second *Stretching Strike* via basic attack, they are completely unaffected by the ability.
 - Displacement immunity will also resist the application of the stun. Effect at cast time end

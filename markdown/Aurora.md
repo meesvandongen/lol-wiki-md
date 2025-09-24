@@ -166,7 +166,7 @@ Scoring a takedown against an enemy champion within 3 seconds of damaging them w
 **Notes:**
 
 - **Aurora** will **not** gain the stealth if her dash is interrupted.
-  - She will however gain the stealth despite the dash being interrupted from colliding with *Between Worlds’s* border.
+  - She will however gain the stealth despite the dash being interrupted from colliding with *Between Worlds’* border.
     - Her dash is interrupted in this case from being overridden by the dash.
 - **Aurora** is locked out of using all abilities, summoner spells, and item actives during the dash.
   - She cannot buffer these spells to cast after the lockout. This is in place to prevent her from breaking the stealth from certain spell casts.

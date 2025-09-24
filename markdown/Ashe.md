@@ -134,10 +134,10 @@
 **Notes:**
 
 - The flurries deal 1 instance of basic damage followed by 4 instances of a non-reactive type of damage (either default or proc).
-  - The flurries are classified as a basic attack on a script level, but are considered an ability for other effects (e.g. Sap Magic).
+  - The flurries are classified as a basic attack on a script level, but are considered an ability for other effects (e.g. Maokai’s Sap Magic).
 - The first flurry of a *Ranger's Focus* cast fires「 one additional arrow, dealing 20% increased total damage. ⟷ arrows, dealing a total of 132 / 141 / 150 / 159 / 168% attack damage. 」
 - *Ranger's Focus* works against structures.
-- Flat damage reductions (e.g. Tantrum, Nimble Fighter, or Eclipse) apply per arrow, resulting in extremely increased effectiveness against *Ranger's Focus*.
+- Flat damage reductions (e.g. Amumu’s Tantrum, Fizz’s Nimble Fighter, or Leona’s Eclipse) apply per arrow, resulting in extremely increased effectiveness against *Ranger's Focus*.
   - The sole exception is Warden's Mail Rock Solid, as that applies per cast instance rather than per damage instance.
 - A flurry can apply 5 stacks of Black Cleaver Carve to a single target as it deals 5 instances of physical damage.
 - *Ranger's Focus* also empowers Runaan's Hurricane Wind's Fury bolts to become a flurry of 5 bolts each as well.

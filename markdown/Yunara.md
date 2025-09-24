@@ -323,7 +323,7 @@ No additional notes.
 
 **Notes:**
 
-- An ongoing *Kanmei's Steps’s* effect is not lost when quickly replaced by *Untouchable Shadow*.
+- An ongoing *Kanmei's Steps’* effect is not lost when quickly replaced by *Untouchable Shadow*.
 - Cultivation of Spirit is cast alongside *Transcend One's Self*. If the former was not already active, this will also grant its attack reset.
   - The attack reset does **not** originate from *Transcend One's Self* nor is *Transcend One's Self* tagged as granting one itself (e.g. for the purposes of Hail of Blades).
 - *Transcend One's Self* cannot be cast again while active.
@@ -455,7 +455,7 @@ No additional notes.
 - Her dance is a reference to the Season 2 opening for *Mashle*.
   - A side-by-side comparison can be viewed here.
 - **Yunara**’s *Cultivation of Spirit* attack has the second highest missile speed on an attack out of any champion, at 10000.
-  - Severum attacks have the highest speed, at 92400.
+  - Aphelios’ Severum attacks have the highest speed, at 92400.
 - Her exclusive Augment in Arena, **Quest: Three Sacred Treasures**, is named after the Imperial Regalia of Japan.
   - Its effect is based on a version of Arc of Ruin during development that deals physical and magic damage.
 

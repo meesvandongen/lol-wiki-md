@@ -329,12 +329,12 @@ If an enemy champion is pulled in, she calls down a beam of moonlight to strike 
   - 5 enemies: Full moon
 - A functional replica of Moonfall old.png was crafted in an episode of YouTube series Man At Arms: Reforged.
   - There are also videos where the following are crafted:
-    - Preparation (functional)
-    - Zenith Blade (functional)
-    - Highlander (functional)
-    - Hammer Shock (functional)
-    - Steel Tempest (functional)
-    - Short Fuse (prop)
+    - Katarina’s Daggers (functional)
+    - Leona’s Zenith Blade (functional)
+    - Master Yi’s Highlander' Ring Sword (functional)
+    - Poppy’s Hammer of Orlon (functional)
+    - Yasuo’s Last Breath' Sword (functional)
+    - Ziggs’ Hexplosive Bomb (prop)
 
 ---
 *This page was automatically generated from League of Legends Wiki data.*

@@ -221,7 +221,7 @@ If cast without a valid target, or self-cast, *Celestial Blessing* will automati
 **Notes:**
 
 - *Celestial Blessing*’s cast time does not interrupt movement and the effects are applied at the start. **Interactions & Other**
-- If cast with auto-targeting, *Celestial Blessing* may target allies who are untargetable, or allied clones that cannot be targeted by allies (such as Warrior Trickster).
+- If cast with auto-targeting, *Celestial Blessing* may target allies who are untargetable, or allied clones that cannot be targeted by allies (such as Wukong’s Warrior Trickster).
 
 ---
 
@@ -385,7 +385,7 @@ After $2.5$ seconds, she rains the swords down around the target, dealing magic 
 - In the now-removed official League of Legends forums, the original icon of Intervention was used to represent the "Mac Client" section.
 - **Kayle**, Elise, Gnar, Jayce, and Nidalee are the only champions to be conditionally considered both ranged and melee.
 - The projectile speed of Kayle's basic attack is the third highest in the game among all ranged attackers that utilize projectiles, at 5000.
-  - The highest and second highest are Severum and Cultivation of Spirit at 92400 and 10000, respectively.
+  - The highest and second highest are Aphelios’ Severum and Yunara’s Cultivation of Spirit at 92400 and 10000, respectively.
 - The first buff from her innate ( **Zeal**) shares its name with the item Zeal.
 - Her dance references Elaine Benes dance from Seinfeld.
   - A side-by-side comparison can be seen here.

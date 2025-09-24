@@ -134,7 +134,7 @@ If the target is further away from **Samira**’s attack range, initiating an at
 - The empowered attack will trigger on immobilizes from any source.
   - It specifically cannot trigger against enemies affected by Blast Cone displacement triggered by anyone.
 - The empowered attack will not trigger against crowd control immune and displacement immune targets.
-- Riposte can resist the knock up from *Daredevil Impulse*, but the ability will not trigger its on-immobilization empowerment condition from the attack alone.
+- Fiora’s Riposte can resist the knock up from *Daredevil Impulse*, but the ability will not trigger its on-immobilization empowerment condition from the attack alone.
 - **Samira** may dash and have her dash to an immobilized target canceled an indefinite number of times, so long as the empowered attack has not triggered. When the empowered attack begins, *Daredevil Impulse*’s cooldown is applied on the target which also prevents her from initiating the dash and the attack again on them for the duration.
 - The on-target cooldown will start even if the empowered attack is parried.
 - While grounded or rooted, **Samira** cannot dash into range to use the empowered attack. She can only use it if her target is within her attack range while under this condition.

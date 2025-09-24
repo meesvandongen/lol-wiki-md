@@ -347,7 +347,7 @@ During *World Ender*, **Aatrox** gains **bonus** attack damage, has 5% increased
 - This champion has no ability power ratio.
 - The icon for World Ender is reused for the Teamfight Tactics item Darkin.
 - Aatrox's passive, Deathbringer Stance, is a reference to Final Fantasy IV in both name and function. "Deathbringer" is the name of the last sword you get in the game as a Dark Knight and the icon and ability looks exactly how Cecil holds his sword using his "Darkness" ability.
-- The Darkin Blade, Grandmaster-at-Arms, Night Hunter, and The Relentless Storm are the only abilities in *League of Legends* that have the same name as their champion's title.
+- Aatrox’s The Darkin Blade, Jax’s Grandmaster-at-Arms, Vayne’s Night Hunter, and Volibear’s The Relentless Storm are the only abilities in *League of Legends* that have the same name as their champion's title.
 - Aatrox's Series 1 Eternals make the following references:
   - *Chains Yanked* references the idiom yank one's chain as well as the pull of Infernal Chains.
   - *QQ*’s references the QQ emoticon as well the multi-cast nature of The Darkin Blade.

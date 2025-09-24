@@ -164,7 +164,7 @@
 **Notes:**
 
 - Spell shield will prevent *Call of the Void*’s refresh on Malefic Visions.
-  - Malefic Visions’s debuff will also be removed.
+  - Malefic Visions’ debuff will also be removed.
 
 ---
 
@@ -292,7 +292,7 @@ Additionally, a *Null Zone* is opened beneath the target's location at the time 
 
 ### V25.04
 - Malefic Visions
-  - **Bug Fixes:** No longer instantly kills Garden of Thorns.
+  - **Bug Fixes:** No longer instantly kills Zyra’s plants.
 
 ### V25.S1.2
 - Void Swarm
@@ -346,10 +346,10 @@ Additionally, a *Null Zone* is opened beneath the target's location at the time 
 
 - After the Battlemage update in V6.9, Malzahar's Voidlings had their color scheme changed from Voidling to gray with purple eyes.
 - Malzahar is one of the few champions to have a pet, the others being Annie, Elise, Heimerdinger, Ivern, Shaco, and Yorick.
-- Malzahar and his Voidlings’s dance references U Can't Touch This by MC Hammer.
+- Malzahar and his Voidlings’ dance references U Can't Touch This by MC Hammer.
   - A side-by-side comparison for Malzahar's part can be seen here.
-  - A side-by-side comparison for his Voidlings’s part can be seen here.
-    - He shares this dance (specifically his Voidlings’s part) with Jayce.
+  - A side-by-side comparison for his Voidlings’ part can be seen here.
+    - He shares this dance (specifically his Voidlings’ part) with Jayce.
 - Upon the removal of Zz'Rot Portal in patch V9.23, *Gathering Swarm* stacks for Void Swarm was renamed to *Zz'Rot Swarm* to honor the item.
   - This might indirectly imply that Malzahar's Voidling are a similar if not the same species as the Voidspawn that spawned from that item.
 - Malzahar's Voidling had its assets reused for several rotating game modes.

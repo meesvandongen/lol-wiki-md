@@ -312,7 +312,7 @@ While channeling, **Lucian** is ghosted and may still move.
 
 ## Trivia
 
-- Lucian's is the first login screen to start with an animated sequence (his shows his wife Senna's soul being dragged into Dark Passage).
+- Lucian's is the first login screen to start with an animated sequence (his shows his wife Senna's soul being dragged into Thresh’s lantern).
 - The Culling used to be the first ability in the game to directly scale with attack speed (until V5.22) and is the first that allows firing backwards while moving.
 - Lucian's Recall references Equilibrium (film).
   - A by comparison can be seen here.

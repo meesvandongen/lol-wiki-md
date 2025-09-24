@@ -165,7 +165,7 @@ This effect cannot occur on the same target more than once every few seconds.
 **Notes:**
 
 - The goo missile is VFX only, to convey which location Singed threw the adhesive at. It has a fixed travel time but is independent from when the zone is established. It is not destructible by effects such as Wind Wall.
-- *Mega Adhesive*’s slow and ground debuffs are each marked as non-dispellable, so they are not removed by most cleanses. Each is however allowed to be removed by cleanses that **also** grant immunity to the debuff type, such as Ragnarok.
+- *Mega Adhesive*’s slow and ground debuffs are each marked as non-dispellable, so they are not removed by most cleanses. Each is however allowed to be removed by cleanses that **also** grant immunity to the debuff type, such as Olaf’s Ragnarok.
 
 ---
 
@@ -267,7 +267,7 @@ During this time, *Poison Trail* additionally applies Grievous Wounds for 1 seco
   - Per-target cooldown increased to 10 seconds from 8.
 - Poison Trail
   - AP ratio per tick increased to 10.625% AP from 10% AP.
-  - **Bug Fixes:** No longer is able to illegally kill enemies who are under the effect of Undying Rage.
+  - **Bug Fixes:** No longer is able to illegally kill enemies who are under the effect of Tryndamere’s Undying Rage.
 - Insanity Potion
   - Bonus stats reduced to 25 / 60 / 95 from 30 / 65 / 100.
 

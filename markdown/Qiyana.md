@@ -225,7 +225,7 @@ Once *Terrashape* has been learned, **Qiyana** is automatically given the Terras
 
 - *Terrashape* does not interact with player-generated terrain.
 - The water puddles formed by the Ocean Drake on Summoner's Rift count as valid terrain for obtaining the Terrashape River.png **RIVER** element.
-- The brushes grown by Brushmaker count for gathering the Terrashape Brush.png **BRUSH** element.
+- The brushes grown by Ivern’s Brushmaker count for gathering the Terrashape Brush.png **BRUSH** element.
 - Passive bonus damage from basic attacks can be blocked.
 - The passive damage works with Guinsoo's Rageblade *Phantom Hit*.
 - : Passive bonus damage interaction with *parrying* effects (dodge, blind).
@@ -297,7 +297,7 @@ The windblast creates a cascading shockwave across any **RIVER** or **BRUSH** it
 
 - The windblast needs only to reach near terrain to trigger the terrain shockwave.
 - The shockwave grants sight along each part of its path for $0.75$ seconds.
-- Artificial terrain (e.g, Crystallize, Weaver's Wall, Pillar of Ice) touching map terrain will be treated as a single piece of terrain, even when bridging two pieces of map terrain together; the shockwave will wrap around all connecting terrain. The shockwave's path is determined once it initially spreads; any expired terrain will be treated as if it were still there.
+- Artificial terrain (e.g, Anivia’s Crystallize, Taliyah’s Weaver's Wall, Trundle’s Pillar of Ice) touching map terrain will be treated as a single piece of terrain, even when bridging two pieces of map terrain together; the shockwave will wrap around all connecting terrain. The shockwave's path is determined once it initially spreads; any expired terrain will be treated as if it were still there.
 - Projectile-intercepting effects will block the windblast but not the shockwave. Effect at cast time end
 
 ---

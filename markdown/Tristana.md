@@ -357,7 +357,7 @@ Scoring an enemy champion takedown or detonating *Explosive Charge* at maximum s
 
 - Rocket Jump is a reference to rocket jumping in FPS Arena games (like Quake) which allows oneself mobility by using a RPG or any other rocket launcher to accelerates one's jump.
 - Buster Shot is a reference to the attack used by Megaman.
-- Tristana has the fifth longest possible basic attack range in the game with (range) 700 units at level 18, right after Kog'Maw when he uses his Bio-Arcane Barrage, which grants him a 710 attack range, Switcheroo! at rank 5, which grants her a 725 attack range, Twitch when he uses Spray and Pray which grants him a total of 850 attack range, and Seraphine when she have full stacks(20 stacks) of her passive, Stage Presence, granting her a grand total of 1025 attack range(25 per note). This does not count champions that can have theoretically infinite range with stacking.
+- Tristana has the fifth longest possible basic attack range in the game with (range) 700 units at level 18, right after Kog'Maw when he uses his Bio-Arcane Barrage, which grants him a 710 attack range, Jinx’s Fishbones at rank 5, which grants her a 725 attack range, Twitch when he uses Spray and Pray which grants him a total of 850 attack range, and Seraphine when she have full stacks(20 stacks) of her passive, Stage Presence, granting her a grand total of 1025 attack range(25 per note). This does not count champions that can have theoretically infinite range with stacking.
 - Her dance references a typical soldier's stationary marching while singing a military cadence.
   - A side-by-side comparison can be seen here.
 - **Tristana** can attack the Baron Nashor over the back wall once she hits Level 15 due to the extra attack range she gains from Draw a Bead.

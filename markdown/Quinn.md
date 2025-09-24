@@ -277,7 +277,7 @@ Once *Behind Enemy Lines* has been learned, respawning or entering any (see note
 | **Spell Shield** | True |
 | **Spell Effects** | spellaoe |
 
-**ACTIVE:** **Quinn** detaches from **Valor**, ending *Behind Enemy Lines’s* effects and raining arrows down around her, dealing 70% AD physical damage to nearby enemies and marking them as *Vulnerable*.
+**ACTIVE:** **Quinn** detaches from **Valor**, ending *Behind Enemy Lines’* effects and raining arrows down around her, dealing 70% AD physical damage to nearby enemies and marking them as *Vulnerable*.
 
 Declaring a basic attack or casting *Blinding Assault* or *Vault* during *Behind Enemy Lines* automatically activates *Skystrike*.
 

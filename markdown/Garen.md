@@ -176,7 +176,7 @@ Additionally, **Garen** empowers his next basic attack within $4.5$ seconds to h
   - Wards.
   - Turrets (including Sun Disk) and other structures
   - Jungle plants.
-  - Units destroyed by 'trampling' such as Rampant Growth, Cell Division or Tunnel.
+  - Units destroyed by 'trampling' such as Zyra’s seeds, Zac’s goo or Rek'Sai’s tunnels.
 - *Courage* will only grant bonus resistances from units killed by **Garen** himself. Eye of the Herald does not count.
 - The Tenacity increase stacks additively with the *tenacity reduction* from Brittle, but multiplicatively with other sources.
 

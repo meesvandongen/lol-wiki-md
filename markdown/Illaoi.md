@@ -320,12 +320,12 @@ Enemies made a Vessel continuously spawn a Tentacle near themselves, when possib
       - The addition of the two, causes an increasing difference of expected damage when the pre-mitigated damage is between Spirit current healthSpiritmod and Spirit current healthEmod.
   - **Illaoi** needs (100-(25 to 45))/8×100 **total** AD to reach 100% redirected damage. As per above, the damage is still dependent on the Spirit's and Vessel's damage modifiers and may not always be able to deal 100% of the target's **current** health as total redirected damage.
 - Spell shields may only prevent the initial spirit grab and the *slow* upon becoming a Vessel. *Spell shields* will not prevent becoming a Vessel or Tentacles from attacking.
-- The tendril can be blocked by projectile-destroying effects (e.g. W).
-  - It will only be destroyed and not replicated against Rebuttal.
-- The application of the slowing missile cannot be blocked by projectile- destroying effects (e.g. W).
+- The tendril can be blocked by projectile-destroying effects (e.g. Yasuo’s W).
+  - It will only be destroyed and not replicated against Mel’s Rebuttal.
+- The application of the slowing missile cannot be blocked by projectile- destroying effects (e.g. Yasuo’s W).
   - Effects that destroy homing missiles (i.e certain untargetabilities) will prevent the application of the slowing missile.
   - The slowing missile will not be fired if the target is already untargetable when the Spirit dies.
-- The spirit pull is not considered a crowd control effect and will not be blocked by crowd control immunity, with the exception of E.
+- The spirit pull is not considered a crowd control effect and will not be blocked by crowd control immunity, with the exception of Morgana’s E.
 - The projectile tentacle model is linked to **Illaoi**’s model animation and size. However gameplay wise it is not, thus the actual hitbox being different than the position, width and length of the visible model. [https://www.youtube.com/watch?v=uH8C8ByFH0Q]
   - The model will stop mid-air / vanish if **Illaoi** goes into stasis, sleep or airborne, however the actual hitbox will continue its trajectory unseen. [https://www.youtube.com/watch?v=PoLVkhvhY-c] Effect at cast time end
   - And will fire towards the same pointed location.
@@ -346,8 +346,8 @@ Enemies made a Vessel continuously spawn a Tentacle near themselves, when possib
 - When the tether is broken (whether the Spirit's lifetime ran out or the target moved out of range), the Spirit will vanish and move to **Illaoi**’s location.
   - An uncancellable windup attack may still kill the Spirit after it *vanished* to grant the gold, but without making the target a Vessel. [https://www.youtube.com/watch?v=Ph8_kGqAlOQ&t=670s]
 - When the Spirit is killed, it will remain in the same position for less than a second before moving to an unknown location. This will cancel any remaining Tentacle queued attacks, for the target being out of range. [https://youtu.be/2svtm_PHEug] [https://youtu.be/dqvf_ID0UFo] [https://youtu.be/x7tXVYPXJ48]
-- The Spirit is immune to stasis (i.e. Tempered Fate).
-- Riposte can be used to prevent becoming a Vessel if used before the Spirit is killed [https://www.youtube.com/watch?v=2jcsdMpvZRc], or while leaving the tether's range. [https://www.youtube.com/watch?v=yI121hbf3jA]
+- The Spirit is immune to stasis (i.e. Bard’s Tempered Fate).
+- Fiora’s Riposte can be used to prevent becoming a Vessel if used before the Spirit is killed [https://www.youtube.com/watch?v=2jcsdMpvZRc], or while leaving the tether's range. [https://www.youtube.com/watch?v=yI121hbf3jA]
 - Sion’s Spirit cannot be spawned during Glory in Death. Spirits created before *Sion*’s zombie state will remain active.
 - If the target that had its Spirit pulled from them is taken into the Realm of Death, the tether will break, but they will not be made into a Vessel.
 - The following table refers for interactions while **Illaoi** is firing the projectile and while the target's Spirit is being pulled:
@@ -432,7 +432,7 @@ For the duration, *Harsh Lesson’s* cooldown is halved, all Tentacles awakened 
 
 ### V25.09
 - Prophet of an Elder God
-  - **Bug Fixes:** Tentacle slams no longer apply their damage through different dimensions (e.g. Realm of Death).
+  - **Bug Fixes:** Tentacle slams no longer apply their damage through different dimensions (e.g. Mordekaiser’s Realm of Death).
 
 ### V25.S1.1
 - Test of Spirit

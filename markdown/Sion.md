@@ -279,7 +279,7 @@ If *Decimating Smash* was charged for at least 1 second, **Sion** instead slams 
   - Turrets (including Sun Disk) and other structures
   - Jungle plants (destroying which does not grant kill credit).
   - Voidmite (including both summoned and pit Voidmite)
-  - Units destroyed by 'trampling' such as Rampant Growth, Cell Division or Tunnel.
+  - Units destroyed by 'trampling' such as Zyra’s seeds, Zac’s goo or Rek'Sai’s tunnels.
 
 ---
 
@@ -376,13 +376,13 @@ Enemies, including turrets, hit by the slam are dealt the same damage and are sl
   - Reaching the threshold on Sion changes his particle effects instead, most notably the 'Boosters' behind the vehicle.
   - The turning angle is not based on time and can easily be seen in practice when a **Sion** *charges* in-place due to bugs.
 - **Sion**’s movement speed gains during the charge are unaffected by movement speed caps. Effects that would increase or decrease his movement speed do not affect him as well.
-  - I is the only known effect that can affect **Sion**’s movement speed during the *charge* and that can place him above the normal MS value. However, without further multipliers, surpassing the 950 movement speed cap will require Nami to have over 2150 ability power.
+  - Nami’s I is the only known effect that can affect **Sion**’s movement speed during the *charge* and that can place him above the normal MS value. However, without further multipliers, surpassing the 950 movement speed cap will require Nami to have over 2150 ability power.
 - **Sion** does not always crash with terrain immediately upon touching it, enabling the player to turn beyond his maximum turning angle.
   - Casting the ability at point blank of a terrain will most often automatically change the *charge*’s direction.
   - This is not usually possible with player-generated terrain.
 - *Unstoppable Onslaught* cannot *charge* through but can *leap* over player-generated terrain.
 - **Sion** loses the crowd control immunity after finishing the leap.
-- **Sion** is not immune to an *allied* Tempered Fate if it hits **Sion** during the $0.05$-second delay before he starts the channel, he will not resist the effect and will initiate the *slam* immediately while in stasis.
+- **Sion** is not immune to an *allied* Bard’s Tempered Fate if it hits **Sion** during the $0.05$-second delay before he starts the channel, he will not resist the effect and will initiate the *slam* immediately while in stasis.
 - *Unstoppable Onslaught* cannot strike the same non-champion twice in less than 1 second (Like most AOE spells or spells with traveling hitboxes, it places a marker buff on struck targets. This one lasts 1 second).
 - Even though the cooldown of *Unstoppable Onslaught* starts at the end of the effect, gaining or losing ability haste, or upgrading the ability during the effect, will not change the resuming cooldown.
 - Removing the airborne before $0.5$ seconds will **not** prevent the stun from being applied.
@@ -408,11 +408,11 @@ Enemies, including turrets, hit by the slam are dealt the same damage and are sl
 - Unstoppable Onslaught
   - Minimum bonus AD ratio increased to 60% **bonus** AD from 40%.
   - Maximum bonus AD ratio increased to 120% **bonus** AD from 80%.
-  - **Bug Fixes:** The Show Stopper can no longer illegally interrupt the charge.
+  - **Bug Fixes:** Sett’s The Show Stopper can no longer illegally interrupt the charge.
 
 ### V25.15
 - Unstoppable Onslaught
-  - **Bug Fixes:** Now properly affects enemies casting The Show Stopper when colliding with them. Previously, **Sion** would collide with the target and end his charge (appropriately) but apply no effects to them, which is incorrect.
+  - **Bug Fixes:** Now properly affects enemies casting Sett’s The Show Stopper when colliding with them. Previously, **Sion** would collide with the target and end his charge (appropriately) but apply no effects to them, which is incorrect.
 
 ### V25.11
 - Decimating Smash
@@ -448,7 +448,7 @@ Enemies, including turrets, hit by the slam are dealt the same damage and are sl
 
 ### V14.10
 - Unstoppable Onslaught
-  - **Bug Fixes:** Is no longer interrupted by Null Sphere.
+  - **Bug Fixes:** Is no longer interrupted by Kassadin’s Null Sphere.
 
 ## Trivia
 

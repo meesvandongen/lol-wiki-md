@@ -97,7 +97,7 @@
   - Whenever Golden Eclipse’s damage would put them below *Overwhelm*’s threshold, the mark will darken and glow more prominently.
 - Just before *Overwhelm* stacks are consumed, targets have 5 additional stacks applied to them.
   - These stacks are consumed immediately.
-- *Overwhelm* stacks will **not** be consumed against Undying Rage.
+- *Overwhelm* stacks will **not** be consumed against Tryndamere’s Undying Rage.
 
 ---
 
@@ -179,21 +179,21 @@ Replicated projectiles have the same features (See notes) that the original ones
   - Spell effects, as well as interactions with spell shield and projectile-interception effects, all vary based on the original missile that was replicated.
   - The only exception to this is the copied missile's path, or trajectory, which is based on the targeting paradigm that the original missile used when fired by its source. The replicated missile acquires the original missile source as the target.
     - If the original missile was fired by a unit or auto-targeted effect, the replicated missile will be fired as a homing missile with the target being the original missile source.
-      - Healing projectiles, such as Starcall and Aria of Perseverance, will instead target **Mel**.
-    - If the original missile was fired via any other targeting paradigm, the replicated missile will by default fire in the direction of the original missile source at the time of replication. This includes vector-targeted projectiles (currently only Hextech Ray), for which the origin will always be **Mel**’s center (since she cannot control the cast point).
+      - Healing projectiles, such as Soraka’s Rejuvenation and Sona’s Aria of Perseverance, will instead target **Mel**.
+    - If the original missile was fired via any other targeting paradigm, the replicated missile will by default fire in the direction of the original missile source at the time of replication. This includes vector-targeted projectiles (currently only Viktor’s Hextech Ray), for which the origin will always be **Mel**’s center (since she cannot control the cast point).
 - The replicated missile will mimic all of the functions of and copy the behavior of the original missile, unless otherwise stated. This includes every aspect and effect of the missile conforming to the attack or spell from which the missile originated.
   - The scaling of the effects of the copied missile is calculated using the original missile source's attributes (namely their stats). The damage of the missile only benefits from **Mel**’s damage modifiers and magic penetration, and not the original source's.
 - The following missiles are destroyed, but not replicated:
-  - Whirling Death on its way back to him.
-  - Boomerang Throw on its way back to him.
-  - Test of Spirit
-  - Boomerang Blade on its way back to her.
-  - Hijack
-  - Bladecaller and Featherstorm
-  - Stretching Strikes
+  - Draven’s Whirling Death on its way back to him.
+  - Gnar’s Boomerang Throw on its way back to him.
+  - Illaoi’s Test of Spirit
+  - Sivir’s Boomerang Blade on its way back to her.
+  - Sylas’ Hijack
+  - Xayah’s Bladecaller and Featherstorm
+  - Zac’s Stretching Strikes
 - The following abilities will be stopped short of their trajectory without replication:
-  - Emperor's Divide
-  - Dark Sphere thrown with her Scatter the Weak
+  - Azir’s Emperor's Divide
+  - Syndra’s Spheres thrown with her Scatter the Weak
 - **Mel** may occasionally fail to attribute Echoes of Helia damage projectile to herself.
   - This can cause the enemy to be able to kill their own allies, and gain all the kill's rewards.
 
@@ -307,7 +307,7 @@ Both the orb and the field of *Solar Snare* deal 50% damage against minions.
 ### V25.15
 - Rebuttal
   - **Bug Fixes:** After reflecting Fear Beyond Death’s missile and affecting the initial target with the effect, casting Golden Eclipse within Fear Beyond Death's mark's duration no longer causes **Mel** to fail to cast Golden Eclipse and repeatedly expend its mana over the remaining mark duration.
-  - **Bug Fixes:** No longer fails to reflect Sleepy Trouble Bubble shortly after being hit by her basic attack or More Sparkles! attack.
+  - **Bug Fixes:** No longer fails to reflect Zoe’s Sleepy Trouble Bubble shortly after being hit by her basic attack or More Sparkles! attack.
 
 ### V25.14
 - General
@@ -315,11 +315,11 @@ Both the orb and the field of *Solar Snare* deal 50% damage against minions.
 
 ### V25.13
 - Searing Brilliance
-  - **Bug Fixes:** Damaging and killing an ally with any number of projectiles via an empowered attack while under the effects of Hostile Takeover no longer incorrectly credits **Mel** for the kill instead of Hostile Takeover's user.
+  - **Bug Fixes:** Damaging and killing an ally with any number of projectiles via an empowered attack while under the effects of Renata Glasc’s Hostile Takeover no longer incorrectly credits **Mel** for the kill instead of Hostile Takeover's user.
 
 ### V25.10
 - Searing Brilliance
-  - **Bug Fixes:** No longer fails to apply Overwhelm stacks against Goes Where He Pleases while its immunity is active.
+  - **Bug Fixes:** No longer fails to apply Overwhelm stacks against Dr. Mundo’s Goes Where He Pleases while its immunity is active.
 
 ### V25.08
 - Stats
@@ -340,13 +340,13 @@ Both the orb and the field of *Solar Snare* deal 50% damage against minions.
 - Radiant Volley
   - Cast range reduced to 950 from 1000.
   - Bolt speed reduced to 4500 from 5000.
-  - **Bug Fixes:** Fixed a bug that caused the cooldown to reset when killing enemy champions affected by Deadly Venom applied by Rebuttal.
+  - **Bug Fixes:** Fixed a bug that caused the cooldown to reset when killing enemy champions affected by Twitch’s Deadly Venom applied by Rebuttal.
 - Rebuttal
   - Duration reduced to $0.75$ seconds from 1 second.
   - Mana cost increased to 80 / 60 / 40 / 20 / 0 from 60 / 45 / 30 / 15 / 0.
   - Base damage modifier reduced to 40 / 45 / 50 / 55 / 60% from 40 / 47.5 / 55 / 62.5 / 70%.
   - **Bug Fixes:** Some critical strike attacks no longer bypass the effect.
-  - **Bug Fixes:** No longer always incorrectly reflects projectiles from Pix, Faerie Companion back to Pix.
+  - **Bug Fixes:** No longer always incorrectly reflects projectiles from Lulu’s Pix, Faerie Companion back to Pix.
 - Solar Snare
   - Orb root duration reduced to 1.25 / 1.5 / 1.75 / 2 / 2.25 seconds from 1.75 / 1.875 / 2 / 2.125 / 2.25.
   - Orb damage increased to 60 / 105 / 150 / 195 / 240 from 60 / 100 / 140 / 180 / 220.
@@ -354,7 +354,7 @@ Both the orb and the field of *Solar Snare* deal 50% damage against minions.
   - **Bug Fixes:** Both the orb and the field now properly apply as area damage instead of spell damage.
 - Golden Eclipse
   - Active per-stack AP ratio increased to $3.5$% AP from $2.5$% AP.
-  - **Bug Fixes:** No longer illegally resets the ability's cooldown after reflecting Whirling Death.
+  - **Bug Fixes:** No longer illegally resets the ability's cooldown after reflecting Draven’s Whirling Death.
 
 ### V25.S1.3
 - General
@@ -363,9 +363,9 @@ Both the orb and the field of *Solar Snare* deal 50% damage against minions.
 - Mel
   - Dress is now whiter and brighter.
 - Rebuttal
-  - **Bug Fixes:** Reflected Hawkshot no longer additionally grants vision to the original user's team.
+  - **Bug Fixes:** Reflected Ashe’s Hawkshot no longer additionally grants vision to the original user's team.
   - **Bug Fixes:** Reflected Jhin Lotus Trap now plays the correct SFX.
-  - **Bug Fixes:** If Edge of Ixtal is reflected and that missile would apply her Royal Privilege, Mel no longer receives the innate effects of Royal Privilege for the rest of the game.
+  - **Bug Fixes:** If Qiyana’s Edge of Ixtal is reflected and that missile would apply her Royal Privilege, Mel no longer receives the innate effects of Royal Privilege for the rest of the game.
 
 ### V25.S1.2#January 25th Hotfix|V25.S1.2
 - Searing Brilliance
@@ -385,7 +385,7 @@ Both the orb and the field of *Solar Snare* deal 50% damage against minions.
 - Rebuttal’s barrier bears functional and visual similarity to Zelda's Reflection move (called "Nayru's Love") in the fighting videogame *Super Smash Bros*. The spell (also called Nayru's Love) was originally seen in The_Legend_of_Zelda:_Ocarina_of_Time.
   - **Mel**’s game designer, Riot Emizery, confirmed in an interview that this was not intentional, but rather a serendipitous coincidence.
 - Solar Snare’s bears functional and visual similarity to Anduin's Chastise from .
-- Mel has a unique twirl animation for picking up a reflected dagger dropped by Bouncing Blade specifically.
+- Mel has a unique twirl animation for picking up a reflected dagger dropped by Katarina’s Bouncing Blade specifically.
 - Mel's Homeguard animation resembles the typical run of the famous character from the *Naruto* manga/anime.
   - This is shared with Zed.
 - Since V25.04 Mel has gold-colored spell indicators and is the only champion to date to have this.

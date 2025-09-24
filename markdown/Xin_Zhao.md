@@ -230,7 +230,7 @@ For the next 4 seconds, **Xin Zhao** is invulnerable against enemy champions far
 - Wind Becomes Lightning
   - **Bug Fixes:** No longer illegally causes more slashes than intended if used in combination with Flash.
 - Crescent Guard
-  - **Bug Fixes:** Invulnerability shield VFX is now properly visible when an enemy **Xin Zhao** moves in and out of an allied Realm of Death.
+  - **Bug Fixes:** Invulnerability shield VFX is now properly visible when an enemy **Xin Zhao** moves in and out of an allied Mordekaiser’s Realm of Death.
 
 ### V25.17
 - General
@@ -285,7 +285,7 @@ For the next 4 seconds, **Xin Zhao** is invulnerable against enemy champions far
 
 ### V14.17
 - Crescent Guard
-  - **Bug Fixes:** Invulnerability now properly functions when the ability is cast while inside Realm of Death.
+  - **Bug Fixes:** Invulnerability now properly functions when the ability is cast while inside Mordekaiser’s Realm of Death.
 
 ### V14.5
 - Three Talon Strike

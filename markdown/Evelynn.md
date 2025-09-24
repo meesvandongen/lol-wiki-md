@@ -222,7 +222,7 @@ Against monsters, the *expunge* deals **bonus** magic damage and increases the d
 - The (magic penetration) magic resistance reduction will be applied to the attack or ability that triggers it.
 - *Allure*’s mark application on a target cannot be blocked by spell shield.
   - The expunge will not occur if the ability is blocked by a spell shield. The mark does not trigger and will remain on the target in this case.
-- The (magic penetration) magic resistance reduction debuff is applied independently of the Charm debuff when the matured mark is expunged, meaning a target can still have their magic resistance reduced while they are resisting applications of CC debuffs (e.g. Black Shield).
+- The (magic penetration) magic resistance reduction debuff is applied independently of the Charm debuff when the matured mark is expunged, meaning a target can still have their magic resistance reduced while they are resisting applications of CC debuffs (e.g. Morgana’s Black Shield).
 - If the target becomes untargetable, dies, or is too far away or no longer in sight during the cast time, this ability will cancel but still go on cooldown and pay its cost.
   - *Allure* will restart its cooldown whenever the mark debuff is removed.
 

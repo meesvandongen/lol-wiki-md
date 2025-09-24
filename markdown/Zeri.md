@@ -328,7 +328,7 @@ During *Overcharged*, **Zeri** can generate stacks of *Hypercharged* from enemy 
 
 ### V13.14
 - Burst Fire
-  - **Bug Fixes:** Now deals the correct amount of damage against Jack in the Box.
+  - **Bug Fixes:** Now deals the correct amount of damage against Shaco’s Jack in the Box.
 
 ### V13.12
 - Stats

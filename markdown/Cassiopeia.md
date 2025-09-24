@@ -167,7 +167,7 @@ Enemies within the clouds are poisoned to take magic damage every 0.263 seconds 
 
 **Notes:**
 
-- *Miasma*’s slow and ground debuffs are each marked as non-dispellable, so they are not removed by most cleanses. Each is however allowed to be removed by cleanses that **also** grant immunity to the debuff type, such as Ragnarok.
+- *Miasma*’s slow and ground debuffs are each marked as non-dispellable, so they are not removed by most cleanses. Each is however allowed to be removed by cleanses that **also** grant immunity to the debuff type, such as Olaf’s Ragnarok.
 - If a target becomes untargetable while affected by the ground, the debuff will refresh to $0.25$ seconds.
 - Wind Wall will block the portion of *Miasma* it destroys.
 - *Miasma* inflicts 5 / 6.25 / 7.5 / 8.75 / 10 (+ $2.5$% AP) magic damage per tick, and in fact because there is 19 ticks and not 20 ticks, the **total** magic damage is currently not 100 / 125 / 150 / 175 / 200 (+ 50% AP) but 95 / 118.75 / 142.5 / 166.25 / 190 (+ $47.5$% AP).
@@ -248,7 +248,7 @@ Against a poisoned target, *Twin Fang* deals **bonus** magic damage and heals **
   - *Petrifying Gaze*’s target direction will change if **Cassiopeia**’s facing direction changes during the cast time (i.e. through knockbacks).
     - The visual effect will not follow changes in **Cassiopeia**’s facing direction and may not portray *Petrifying Gaze*’s target direction accurately.
 - The facing direction of champions whose abilities/animations cause them to lock their facing or spin is always the direction they are moving in. For abilities that cause the champion to spin in place (e.g. Death Lotus, Judgment) it will factor the direction they were facing on cast.
-  - R is an exception and his facing direction is actually considered to be the direction he is facing.
+  - Lucian’s R is an exception and his facing direction is actually considered to be the direction he is facing.
 
 ---
 

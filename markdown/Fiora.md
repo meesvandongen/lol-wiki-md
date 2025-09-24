@@ -212,7 +212,7 @@ The enemy champion struck is also slowed and crippled by 25% for 2 seconds. If *
 - *Riposte* is not invulnerability but instead reduces any damage to her by 100% late into the damage event. Because of this, it interacts differently with effects triggered from damage:
   - Life steal and Healing based on damage dealt (Vamp) will still have effect even if the damage is ultimately ignored by *Riposte*.
   - Shields will absorb damage before *Riposte* takes effect.
-  - **Fiora** cannot be executed by Death from Below during *Riposte*, but she may by Aspect of the Dragon.
+  - **Fiora** cannot be executed by Pyke’s Death from Below during *Riposte*, but she may by Aspect of the Dragon.
 - *Riposte* will not negate nearsight.
 - Immobilizing effects include those from Blast Cone (only if triggered by an enemy) and epic monsters.
 - (Non-crowd-control) debuff immunity encompasses debuffs from summoner spells such as Exhaust’s damage reduction and all of Ignite’s effects, as well as persistent damage and other effects.
@@ -303,7 +303,7 @@ If **Fiora** triggers at least one Vital before the target dies, or triggers all
 **Notes:**
 
 - *Grand Challenge* is dispelled instantly if targeting a decoy.
-  - *Grand Challenge* can't be cast on Glory in Death.
+  - *Grand Challenge* can't be cast on Sion’s Glory in Death.
 - The damage of this ability scales with Duelist's Dance.
 - Even if **Fiora** dies, the *Victory Zone* will trigger so long as she hit at least one Vital and they die before the Vitals wear off.
   - Resurrection effects will not prevent the activation of the *Victory Zone*.
@@ -341,7 +341,7 @@ If **Fiora** triggers at least one Vital before the target dies, or triggers all
 
 ### V14.9
 - Riposte
-  - **Bug Fixes:** Ixtal's Impact now properly triggers the ability's stun condition.
+  - **Bug Fixes:** Skarner’s Ixtal's Impact now properly triggers the ability's stun condition.
 - Bladework
   - **New Effect:** Now defaults to the highest damage effect between Sundered Sky and *Bladework*’s crit attack when they are both active at the same time.
 

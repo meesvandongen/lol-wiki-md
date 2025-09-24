@@ -277,8 +277,8 @@ For the next 15 seconds, the damage dealt by **Yasuo**’s critical strikes igno
   - On the Yasuo skin, these shifts in facing direction do not occur, but the targets' facing directions will still snap to **Yasuo** upon *Last Breath*’s cast.
 - **Yasuo** does not need sight of enemy champions near his target to affect them with the ability.
 - *Last Breath* applies its damage and removes its forced movement on the target when it ends, including if it is removed early by being cleansed.
-  - This is in contrast to most other effects with airborne, which have their forced movement linger if the disabling debuff is removed and have to be overridden by another movement spell (such as Relentless Pursuit or Flash).
-  - It behaves similar to Aqua Prison in this but is not considered suspension.
+  - This is in contrast to most other effects with airborne, which have their forced movement linger if the disabling debuff is removed and have to be overridden by another movement spell (such as Lucian’s Relentless Pursuit or Flash).
+  - It behaves similar to Nami’s Aqua Prison in this but is not considered suspension.
 - Terrain displacing abilities (e.g. Weaver's Wall, Pillar of Ice, Volcanic Rupture) that affect enemy champions are considered airborne, and will therefore interact with *Last Breath*.
 - While *blinking*, **Yasuo** creates an untargetable *clone* of himself that cues a dashing animation (similar to Sweeping Blade’s) towards the target. This unit's rules do not follow those of a clone's. As such, it is more alike a champion, unless special cased.
 - While performing *Last Breath*, **Yasuo** is locked out of performing actions.
@@ -313,7 +313,7 @@ For the next 15 seconds, the damage dealt by **Yasuo**’s critical strikes igno
   - **Removed:*** No longer grants Yasuo a critical damage penalty of 10%.
     - This penalty would also apply to Steel Tempest.
 - Wind Wall
-  - **Bug Fixes:** Hostile Takeover no longer sometimes bypasses Wind Wall.
+  - **Bug Fixes:** Renata Glasc’s Hostile Takeover no longer sometimes bypasses Wind Wall.
 
 ### V14.24
 - Wind Wall
@@ -360,21 +360,21 @@ For the next 15 seconds, the damage dealt by **Yasuo**’s critical strikes igno
   - From Old Japanese **yasu-* "cheap, easy > peaceful" & masculine morpheme **wo*.
 - Way of the Wanderer’s modified critical strike chance references Samurai gameplay portrayals in video games.
 - For April Fools' Day 2017, a video showcasing a joke rework for Yasuo was posted by the official Riot Games Twitter account.
-  - Way of the Wanderer was shown to have **RESOLVE'S** shield also provide crowd control immunity, similar to Black Shield.
-  - Steel Tempest’s third cast was shown to split into three additional whirlwinds in a cone after hitting a champion, similar to Collateral Damage.
-  - Wind Wall was shown to form a pentagon of walls, similar to The Box.
-    - Notably, this 'protection from projectiles from all angles' mechanic was later implemented by Blade Whirl.
+  - Way of the Wanderer was shown to have **RESOLVE'S** shield also provide crowd control immunity, similar to Morgana’s Black Shield.
+  - Steel Tempest’s third cast was shown to split into three additional whirlwinds in a cone after hitting a champion, similar to Graves’ Collateral Damage.
+  - Wind Wall was shown to form a pentagon of walls, similar to Thresh’s The Box.
+    - Notably, this 'protection from projectiles from all angles' mechanic was later implemented by Samira’s Blade Whirl.
   - Sweeping Blade was shown to be able to target wards and champion summoned units (e.g. Demacian Standard).
   - Last Breath was shown to be able to be recast for a seemingly infinite amount of times while the affected champion is still airborne.
 - A functional real-life replica of Yasuo's Steel Blade was crafted in an episode of YouTube series Man At Arms: Reforged.
   - This video can be viewed here.
     - There are also videos where the following are crafted:
-      - Moonfall (functional)
-      - Preparation (functional)
-      - Zenith Blade (functional)
-      - Highlander (functional)
-      - Hammer Shock (functional, but impractically wieldy)
-      - Short Fuse (prop)
+      - Diana’s Crescent Moonblade (functional)
+      - Katarina’s Daggers (functional)
+      - Leona’s Zenith Blade (functional)
+      - Master Yi’s Highlander' Ring Sword (functional)
+      - Poppy’s Hammer of Orlon (functional, but impractically wieldy)
+      - Ziggs’ Hexplosive Bomb (prop)
 - On 25 August 2018, some results of a survey regarding champion gameplay was published by Riot Blaustoise. On the statement "One of my favorites", players ranked Yasuo 2nd in CN and 56th in NA. On "Fair to play against" they ranked him 23rd in CN and 137th in NA. Overall on "Gameplay, Visuals, Voice, etc.." they ranked him 1st in CN and 38th in NA.
 - As an easter egg, in Set 4 of Teamfight Tactics, Yasuo would flash a Mastery 7 emote if he single-handedly defeats the enemy team as the only remaining unit. This references the community stereotype of Yasuo players loving to flash their Mastery in League of Legends matches.
   - A video demonstration of this can be seen here.

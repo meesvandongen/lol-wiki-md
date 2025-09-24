@@ -197,7 +197,7 @@ After $0.5$ seconds of the cast, **Skarner** gains the ability to use *Upheaval*
 - **Skarner**’s attack speed is not immediately updated upon casting *Shattered Earth*. Beginning the first attack shortly after casting results in an attack that does not benefit from the attack speed granted by the ability.
 - If *Upheaval* hits an enemy while a new instance of *Shattered Earth* is active, *Shattered Earth*’s effects are immediately lost.
 - While *Shattered Earth* is active, it will not benefit from cooldown refund effects such as Transcendence or Navori Flickerblade Transcendence.
-  - This is not a **Skarner**-specific issue. Various abilities, including Ultimates, that grant a different ability in their slot after activation may suffer from this problem (e.g. Blood Frenzy and Snack Attack) and may be fixed or may have been fixed on a case-by-case basis.
+  - This is not a **Skarner**-specific issue. Various abilities, including Ultimates, that grant a different ability in their slot after activation may suffer from this problem (e.g. Briar’s Blood Frenzy and Snack Attack) and may be fixed or may have been fixed on a case-by-case basis.
 - The empowered attacks lack spell effects as they deal proc damage, which does not match with how empowered attacks supposed to behave in general.
   - This is possibly a band-aid fix to avoid an issue where *Shattered Earth* would trigger various effects twice per attack instead of once, as it could be seen during the first PBE deploy of the rework's release, after which the ability was changed from spell damage to proc.
 - The buff used for *Shattered Earth* is fuzzy. Each attack removes 1 stack on a delay of up to $0.25$ seconds. This has no known effects currently.
@@ -435,7 +435,7 @@ If **Skarner**’s attached target collides with terrain, the charge ends, detac
 - Upheaval
   - Target health ratio reduced to 10% of target's **maximum** health from 15%.<!--
 - Ixtal's Impact
-  - **Bug Fixes:** Now is properly canceled by Facebreaker.-->
+  - **Bug Fixes:** Now is properly canceled by Sett’s Facebreaker.-->
 
 ### V14.12
 - Stats

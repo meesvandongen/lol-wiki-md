@@ -208,7 +208,7 @@ After the cast time, **Sejuani** lashes out with her flail in a line in the same
 - *Permafrost*’s targeting prioritizes champions within cr 50 units of the cursor's selection, then non-champions within cr 50 units of the cursor's selection, then champions within cr 350 units of the cursor's selection, then the closest unit to the cursor within cr 2500 units (the last case strictly applies if there is **no** target being selected).
 - *Frost* stacks will not be applied if the basic attack is blocked.
 - : *Permafrost*’s stack application interaction with *parrying* effects (dodge, blind).
-- Alpha Strike does **not** interact with *Permafrost*.
+- Master Yi’s Alpha Strike does **not** interact with *Permafrost*.
 - If the target becomes untargetable, dies, or is too far away or no longer in sight during the cast time, this ability will cancel but still go on cooldown and pay its cost.
 
 ---

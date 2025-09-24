@@ -343,7 +343,7 @@ While there are at least 3 *graves* nearby and *Last Rites* is active or on cool
 
 ### V25.11
 - Dark Procession
-  - **Undocumented:** The no longer follows Yorick into Realm of Death.
+  - **Undocumented:** The no longer follows Yorick into Mordekaiser’s Realm of Death.
 
 ### V25.10
 - Shepherd of Souls
@@ -353,9 +353,9 @@ While there are at least 3 *graves* nearby and *Last Rites* is active or on cool
 - Shepherd of Souls
   - Mist Walker monster damage reduced to 60% from 70%.
 - Dark Procession
-  - **UNDOCUMENTED / NEW EFFECT:** The now follows Yorick into Realm of Death.
+  - **UNDOCUMENTED / NEW EFFECT:** The now follows Yorick into Mordekaiser’s Realm of Death.
 - Eulogy of the Isles
-  - **UNDOCUMENTED / NEW EFFECT:** The Maiden now follows Yorick into Realm of Death.
+  - **UNDOCUMENTED / NEW EFFECT:** The Maiden now follows Yorick into Mordekaiser’s Realm of Death.
 
 ### V25.08
 - Shepherd of Souls

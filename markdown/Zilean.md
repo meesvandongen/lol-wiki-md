@@ -292,7 +292,7 @@ If the target takes fatal damage within the duration, they enter resurrection fo
 
 ## Trivia
 
-- The original icon for Time Bomb featured a soldier that was mirrored from the icon art of Grandmaster's Might.
+- The original icon for Time Bomb featured a soldier that was mirrored from the icon art of Jax’s Grandmaster's Might.
 - Zilean is one of the four champions with a single damaging ability (Time Bomb) the others being Bard (Cosmic Binding) Taric (Dazzle) and Tryndamere (Spinning Slash).
   - Time Bomb is the only in-game ability to scale non-linearly per rank (75 / 40 / 50 / 65 / 70).
 - Time in a Bottle references the eponymous song by Jim Croce.

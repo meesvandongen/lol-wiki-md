@@ -283,12 +283,12 @@ If this damages a champion, **Sylas** is also healed, increased by 0%–100%@0�
 
 - *Petricite Burst*’s stack from casting *Hijack* is given after **Sylas** receives the Hijacked ability.
 - *Hijack*’s per target cooldown is indicated by a under recently targetted enemy champions, and is only visible to **Sylas** and each individual enemy.
-- *Hijack*’s base chain missile will only be destroyed and not replicated against Rebuttal. **Sylas** will not receive a Hijacked Golden Eclipse.
+- *Hijack*’s base chain missile will only be destroyed and not replicated against Mel’s Rebuttal. **Sylas** will not receive a Hijacked Golden Eclipse.
 - If **Sylas** casts *Hijack* on a clone, no ultimate is stolen and the ability will be placed on full cooldown.
   - The same does not occur for champions within a zombie state.
 - Clones do not copy *Hijack*’s target cooldown indicator, potentially revealing them to **Sylas**.
-  - Inherent Glamour does not hide her personal cooldown indicator, nor does she copy her allies'. ** If the same happens when casting an on-target stolen ability, the ability will instead cancel and go on cooldown.
-- If *Hijack* is intercepted by Unbreakable, **Sylas** will gain a copy of R instead and an on-target cooldown will be applied to him.
+  - Neeko’s Inherent Glamour does not hide her personal cooldown indicator, nor does she copy her allies'. ** If the same happens when casting an on-target stolen ability, the ability will instead cancel and go on cooldown.
+- If *Hijack* is intercepted by Braum’s Unbreakable, **Sylas** will gain a copy of R instead and an on-target cooldown will be applied to him.
   - If Braum has an on-target cooldown on him (by being previously *Hijacked*) upon interception, no ultimate will be stolen.
 - Since the copied ability scales based on *Hijack*’s rank, abilities can be copied regardless of their rank.
 - *Hijack* will copy all passives, actives and recast effects of the stolen ability. *Hijack* will not trigger the effects of other abilities unless absolutely necessary.
@@ -304,81 +304,81 @@ If this damages a champion, **Sylas** is also healed, increased by 0%–100%@0�
   - Upon transforming, a Petricite Burst stack will be deducted.
   - Petricite Burst stacks will still be gained from abilities cast in alternate forms, but the stacks are gained independently from the normal ones.
     - If **Sylas** has both normal and transformed stacks, *Petricite Burst* will prioritize consuming **Sylas** stacks before the transformed ones.
-- Ultimates comply with One for All rules if an ally is playing the hijacked champion. For example, an allied Hemorrhage stacks will increase the damage of the hijacked Noxian Guillotine; or an allied Dark Sphere will add extra damage to hijacked Unleashed Power as well as producing 3 spheres that she can use. ;Ultimate Interactions
-- Spirit Rush - Gains a charge upon scoring a champion takedown within 3 seconds of damaging them.
-- Comeuppance - **Sylas** can cast Abscond, but doing so ends the channel prematurely. If **Comeuppance** is cast after Abduct but before the chains hit a target, **Sylas** isn't pulled to the target and the channel continues as usual.
-- Curse of the Sad Mummy - Does not apply Cursed Touch.
-- Moonlight Vigil - Based on the main weapon at the moment of steal.
+- Ultimates comply with One for All rules if an ally is playing the hijacked champion. For example, an allied Darius’ Hemorrhage stacks will increase the damage of the hijacked Noxian Guillotine; or an allied Syndra’s Dark Sphere will add extra damage to hijacked Unleashed Power as well as producing 3 spheres that she can use. ;Ultimate Interactions
+- Ahri’s Spirit Rush - Gains a charge upon scoring a champion takedown within 3 seconds of damaging them.
+- Akshan’s Comeuppance - **Sylas** can cast Abscond, but doing so ends the channel prematurely. If **Comeuppance** is cast after Abduct but before the chains hit a target, **Sylas** isn't pulled to the target and the channel continues as usual.
+- Amumu’s Curse of the Sad Mummy - Does not apply Cursed Touch.
+- Aphelios’ Moonlight Vigil - Based on the main weapon at the moment of steal.
   - Crescendum empowers his basic attacks temporarily.
   - Calibrum does not apply marks.
   - Severum grants a shield if healed while at full health.
-- Enchanted Crystal Arrow - Does not apply Frost Shot to secondary targets.
-- Pyroclasm - Does not apply stacks of Blaze.
-- Feast - Gains permanent *Feast* stacks on-kill.
-- Missile Barrage - Gains max charges.
-- Noxian Guillotine - Does not apply a stack of Hemorrhage. Upon gaining a reset from a Rank 3 *Noxian Guillotine*, **Sylas** can hold onto the ability for up to 300 seconds.
-- Grand Challenge - Gains movement speed in the effect and deals bonus Vitals true damage and can trigger the area healing.
-- Hero's Entrance - Gives **Sylas** and allies Shield of Durand's magic shield, based on Kingslayer rank.
-- Cannon Barrage - Does not steal cannon upgrades.
-- GNAR! - Gains a usable ultimate regardless of cast on Gnar or Mega Gnar.
-- Needlework - Does not apply A Thousand Cuts.
-- UPGRADE!!! - **Sylas**’s basic abilities are replaced with *Heimerdinger*’s empowered abilities. The upgrade buff lasts until the ultimate can be stolen again.
-- Leap of Faith - Does not reduce cooldown of Kingslayer.
-- Vanguard's Edge - Applies marks of Bladesurge.
-- Grandmaster-at-Arms - Applies magic damage on-hit while holding onto **Grandmaster-at-Arms** and while it is active.
-- Riftwalk - Only provides one use.
-- Killer Instinct - **Sylas**' basic attacks, Abduct and nearby allies' immobilizations apply stacks of Plasma, up to 4. **Sylas** is unable to apply the 5th stack necessary to expunge the stacks.
-- Fate's Call - Only castable with a Black Spear (purchasable in the Shop for 0 gold gold).
-- Mantra - **Sylas**' basic abilities are replaced with *Karma*’s empowered abilities, according to **Sylas**' own ability ranks (including *Hijack* for Mantra bonuses).
-- Death Lotus - Can be cast without a target.
-- Umbral Trespass - Based on current form (Shadow Assassin / Rhaast).
-- Void Assault - Can steal the ability's evolution bonus effects.
-- Slicing Maelstrom - Applies Mark of the Storm.
-- Chaaaaaaaarge!!! - Does not need mount to cast.
-- Living Artillery - Only provides one use.
-- Mimic - Uses the empowered version of LeBlanc last cast basic ability. Mimic Sigil of Malice does not apply its mark. If she has not cast any abilities, Mimic Sigil of Malice is copied.
-- Solar Flare - Does not apply Sunlight.
-- Lilting Lullaby - **Sylas**' abilities apply Dream-Laden Bough’s debuff, which does not deal its damage over time.
-- The Culling - Can cast Abscond and Abduct freely during the channel.
-- Final Spark - Does not apply Illumination.
-- Highlander - Takedowns reduce basic ability cooldowns while holding onto *Highlander* and while it is active.
-- Golden Eclipse - **Sylas**' basic attacks and abilities apply stacks of Overwhelm, which will execute targets below the threshold.
-- Realm of Death - Can join the *dimension* of outgoing realms if cast in the proper range *(does not extend their duration)*.
-- Fury of the Sands - Does not reduce cooldown of Chain Lash.
-- Inherent Glamour - Always steals Pop Blossom, regardless of the champion Neeko is disguised as.
-- Command: Shockwave - Cast on self without a Ball.
-- Grand Starfall - The spear deals damage based on Chain Lash rank and scales with 46% AP.
-- Behind Enemy Lines - Does not cast Skystrike upon attacking an enemy champion. It can be casted manually however.
-- Thrill of the Hunt - **Sylas** will gain Unseen Predator on his next attack.
-- Dominus - Grants **Sylas** 20 mana on cast and then 5 mana per second (up to 75 total mana over the duration).
-- Void Rush - **Sylas**' attacks against enemy champions will apply a mark which can be used to cast the ability.
-- Blade of the Exile - Grants AD based on **Sylas**' AP on cast and grants him 75 **bonus** attack range for his auto attacks aswell for Chain Lash and Kingslayer.
-- Inferno Trigger - Can use without a Grade.
-- Encore - Allies do not gain Notes.
-- Hallucinate - Creates a **Sylas** Clone that also copies **Sylas**' stolen ultimate indicator. The clone behaves like a **Shaco** clone, being able to Backstab, apply Two-Shiv Poison's slow scaling with Abscond rank, and summoning mini-boxes that deal damage based on Hijack rank.
-- Dragon's Descent - Has a 200 second base cooldown.
-- Impale - Can freely cast abilities during the suppression, but cannot basic attack or Flash.
-- Hijack - Steals the ability that the enemy **Sylas** has stolen. Cannot be targeted if no ability has been stolen.
-- Unleashed Power - Throws a minimum of 3 spheres, which are left on the ground afterwards and vanish after 6 seconds.
-- Shadow Assault - Does not apply Blade's End.
-- Devour - *Sylas** basic attacks apply An Acquired Taste, allowing him to cast *Devour* on enemies.
-- Noxious Trap - Gains max charges.
-- Buster Shot - Always has 525 cast range as **Sylas** does not benefit from Draw a Bead’s per-level cast range increase.
-- Spray and Pray - Gains 300 attack range and his attacks produce missiles that travel 850 range. These attacks are classified as melee.
+- Ashe’s Enchanted Crystal Arrow - Does not apply Frost Shot to secondary targets.
+- Brand’s Pyroclasm - Does not apply stacks of Blaze.
+- Cho'Gath’s Feast - Gains permanent *Feast* stacks on-kill.
+- Corki’s Missile Barrage - Gains max charges.
+- Darius’ Noxian Guillotine - Does not apply a stack of Hemorrhage. Upon gaining a reset from a Rank 3 *Noxian Guillotine*, **Sylas** can hold onto the ability for up to 300 seconds.
+- Fiora’s Grand Challenge - Gains movement speed in the effect and deals bonus Vitals true damage and can trigger the area healing.
+- Galio’s Hero's Entrance - Gives **Sylas** and allies Shield of Durand's magic shield, based on Kingslayer rank.
+- Gangplank’s Cannon Barrage - Does not steal cannon upgrades.
+- Gnar’s GNAR! - Gains a usable ultimate regardless of cast on Gnar or Mega Gnar.
+- Gwen’s Needlework - Does not apply A Thousand Cuts.
+- Heimerdinger’s UPGRADE!!! - **Sylas**’s basic abilities are replaced with *Heimerdinger*’s empowered abilities. The upgrade buff lasts until the ultimate can be stolen again.
+- Illaoi’s Leap of Faith - Does not reduce cooldown of Kingslayer.
+- Irelia’s Vanguard's Edge - Applies marks of Bladesurge.
+- Jax’s Grandmaster-at-Arms - Applies magic damage on-hit while holding onto **Grandmaster-at-Arms** and while it is active.
+- Kassadin’s Riftwalk - Only provides one use.
+- Kai'Sa’s Killer Instinct - **Sylas**' basic attacks, Abduct and nearby allies' immobilizations apply stacks of Plasma, up to 4. **Sylas** is unable to apply the 5th stack necessary to expunge the stacks.
+- Kalista’s Fate's Call - Only castable with a Black Spear (purchasable in the Shop for 0 gold gold).
+- Karma’s Mantra - **Sylas**' basic abilities are replaced with *Karma*’s empowered abilities, according to **Sylas**' own ability ranks (including *Hijack* for Mantra bonuses).
+- Katarina’s Death Lotus - Can be cast without a target.
+- Kayn’s Umbral Trespass - Based on current form (Shadow Assassin / Rhaast).
+- Kha'Zix’s Void Assault - Can steal the ability's evolution bonus effects.
+- Kennen’s Slicing Maelstrom - Applies Mark of the Storm.
+- Kled’s Chaaaaaaaarge!!! - Does not need mount to cast.
+- Kog'Maw’s Living Artillery - Only provides one use.
+- LeBlanc’s Mimic - Uses the empowered version of LeBlanc last cast basic ability. Mimic Sigil of Malice does not apply its mark. If she has not cast any abilities, Mimic Sigil of Malice is copied.
+- Leona’s Solar Flare - Does not apply Sunlight.
+- Lillia’s Lilting Lullaby - **Sylas**' abilities apply Dream-Laden Bough’s debuff, which does not deal its damage over time.
+- Lucian’s The Culling - Can cast Abscond and Abduct freely during the channel.
+- Lux’s Final Spark - Does not apply Illumination.
+- Master Yi’s Highlander - Takedowns reduce basic ability cooldowns while holding onto *Highlander* and while it is active.
+- Mel’s Golden Eclipse - **Sylas**' basic attacks and abilities apply stacks of Overwhelm, which will execute targets below the threshold.
+- Mordekaiser’s Realm of Death - Can join the *dimension* of outgoing realms if cast in the proper range *(does not extend their duration)*.
+- Nasus’ Fury of the Sands - Does not reduce cooldown of Chain Lash.
+- Neeko’s Inherent Glamour - Always steals Pop Blossom, regardless of the champion Neeko is disguised as.
+- Orianna’s Command: Shockwave - Cast on self without a Ball.
+- Pantheon’s Grand Starfall - The spear deals damage based on Chain Lash rank and scales with 46% AP.
+- Quinn’s Behind Enemy Lines - Does not cast Skystrike upon attacking an enemy champion. It can be casted manually however.
+- Rengar’s Thrill of the Hunt - **Sylas** will gain Unseen Predator on his next attack.
+- Renekton’s Dominus - Grants **Sylas** 20 mana on cast and then 5 mana per second (up to 75 total mana over the duration).
+- Rek'Sai’s Void Rush - **Sylas**' attacks against enemy champions will apply a mark which can be used to cast the ability.
+- Riven’s Blade of the Exile - Grants AD based on **Sylas**' AP on cast and grants him 75 **bonus** attack range for his auto attacks aswell for Chain Lash and Kingslayer.
+- Samira’s Inferno Trigger - Can use without a Grade.
+- Seraphine’s Encore - Allies do not gain Notes.
+- Shaco’s Hallucinate - Creates a **Sylas** Clone that also copies **Sylas**' stolen ultimate indicator. The clone behaves like a **Shaco** clone, being able to Backstab, apply Two-Shiv Poison's slow scaling with Abscond rank, and summoning mini-boxes that deal damage based on Hijack rank.
+- Shyvana’s Dragon's Descent - Has a 200 second base cooldown.
+- Skarner’s Impale - Can freely cast abilities during the suppression, but cannot basic attack or Flash.
+- Sylas’ Hijack - Steals the ability that the enemy **Sylas** has stolen. Cannot be targeted if no ability has been stolen.
+- Syndra’s Unleashed Power - Throws a minimum of 3 spheres, which are left on the ground afterwards and vanish after 6 seconds.
+- Talon’s Shadow Assault - Does not apply Blade's End.
+- Tahm Kench’s Devour - *Sylas** basic attacks apply An Acquired Taste, allowing him to cast *Devour* on enemies.
+- Teemo’s Noxious Trap - Gains max charges.
+- Tristana’s Buster Shot - Always has 525 cast range as **Sylas** does not benefit from Draw a Bead’s per-level cast range increase.
+- Twitch’s Spray and Pray - Gains 300 attack range and his attacks produce missiles that travel 850 range. These attacks are classified as melee.
 - Udyr - Steals Wingborne Storm, and can recast to Awaken it. Effects are based on *Hijack*’s rank.
-- Fear Beyond Death - Can cast Kingslayer during the recast.
-- Chain of Corruption - Applies stacks of Blight to targets hit that can be detonated by **Sylas**' other abilities, dealing damage based on Kingslayer rank.
-- Final Hour - Gains the AD and MS bonuses. Additionally, **Sylas** gains invisibility when he casts Chain Lash.
-- Life Form Disintegration Ray - Does not apply Organic Deconstruction.
-- Sovereign's Domination - Always steals Heartbreaker, regardless of the champion Viego is possessing.
-- Arcane Storm - If Viktor has augmented the ability, **Sylas' ** hijacked version will also have the augment's effects.
-- Featherstorm - Feathers do not interact with an ally or enemy Xayah.
-- Last Breath - Critical strikes ignore 60% of the target's **bonus** armor after activation.
-- R - Grants Q’s active effects, but no other bonuses.
-- Final Chapter - Can freely cast abilities during the channel.
-- Let's Bounce! - Cannot declare attacks nor use any abilities nor while bouncing. **Sylas** does not create chunks.
-- Lightning Crash - Can gain *Overcharge*’s effects and refresh it on basic attacks (even without being charged) and abilities.
-- Death Mark - *Shadow* does not mimic abilities but can be reactivated to swap places.
+- Urgot’s Fear Beyond Death - Can cast Kingslayer during the recast.
+- Varus’ Chain of Corruption - Applies stacks of Blight to targets hit that can be detonated by **Sylas**' other abilities, dealing damage based on Kingslayer rank.
+- Vayne’s Final Hour - Gains the AD and MS bonuses. Additionally, **Sylas** gains invisibility when he casts Chain Lash.
+- Vel'Koz’s Life Form Disintegration Ray - Does not apply Organic Deconstruction.
+- Viego’s Sovereign's Domination - Always steals Heartbreaker, regardless of the champion Viego is possessing.
+- Viktor’s Arcane Storm - If Viktor has augmented the ability, **Sylas' ** hijacked version will also have the augment's effects.
+- Xayah’s Featherstorm - Feathers do not interact with an ally or enemy Xayah.
+- Yasuo’s Last Breath - Critical strikes ignore 60% of the target's **bonus** armor after activation.
+- Yunara’s R - Grants Q’s active effects, but no other bonuses.
+- Yuumi’s Final Chapter - Can freely cast abilities during the channel.
+- Zac’s Let's Bounce! - Cannot declare attacks nor use any abilities nor while bouncing. **Sylas** does not create chunks.
+- Zeri’s Lightning Crash - Can gain *Overcharge*’s effects and refresh it on basic attacks (even without being charged) and abilities.
+- Zed’s Death Mark - *Shadow* does not mimic abilities but can be reactivated to swap places.
 
 ---
 
@@ -414,7 +414,7 @@ If this damages a champion, **Sylas** is also healed, increased by 0%–100%@0�
 
 ### V25.07
 - Hijack
-  - **Bug Fixes:** Now correctly incurs its slot cooldown upon copying Lightning Crash.
+  - **Bug Fixes:** Now correctly incurs its slot cooldown upon copying Zeri’s Lightning Crash.
 
 ### V25.S1.1
 - Sylas

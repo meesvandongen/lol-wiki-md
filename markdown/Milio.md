@@ -234,7 +234,7 @@ No additional notes.
 
 ### V25.18
 - Fired Up!
-  - **Bug Fixes:** No longer instantly kills Cell Division blobs the first time it triggers or refreshes after the blobs spawn.
+  - **Bug Fixes:** No longer instantly kills Zac’s Cell Division blobs the first time it triggers or refreshes after the blobs spawn.
 
 ### V25.13
 - Fired Up!

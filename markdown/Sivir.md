@@ -251,7 +251,7 @@ While active, **Sivir**’s basic attacks on-attack reduce her basic abilities' 
 
 ### V25.08
 - Spell Shield
-  - **Bug Fixes:** No longer fails to block and be consumed against Bola Strike.
+  - **Bug Fixes:** No longer fails to block and be consumed against Rengar’s Bola Strike.
 
 ### V14.24
 - Spell Shield

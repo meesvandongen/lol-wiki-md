@@ -328,7 +328,7 @@ After $0.3$ seconds (From the end of the cast time), a gust rushes along the sam
 
 ### V25.09
 - Spirit Cleave
-  - **Bug Fixes:** Vault hitting him during its cast time is no longer able to override its initial casting direction.
+  - **Bug Fixes:** Quinn’s Vault hitting him during its cast time is no longer able to override its initial casting direction.
 
 ### V25.08
 - Spirit Cleave

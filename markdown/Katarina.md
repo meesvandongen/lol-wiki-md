@@ -339,12 +339,12 @@ Each dagger deals physical damage and magic damage, applies on-hit effects, with
 - A functional real-life replica of Katarina's Daggers was crafted in an episode of YouTube series Man At Arms: Reforged.
   - This video can be viewed here.
     - There are also videos where the following are crafted:
-      - Moonfall (functional)
-      - Zenith Blade (functional)
-      - Highlander (functional)
-      - Hammer Shock (functional)
-      - Steel Tempest (functional)
-      - Short Fuse (prop)
+      - Diana’s Crescent Moonblade (functional)
+      - Leona’s Zenith Blade (functional)
+      - Master Yi’s Highlander' Ring Sword (functional)
+      - Poppy’s Hammer of Orlon (functional)
+      - Yasuo’s Last Breath' Sword (functional)
+      - Ziggs’ Hexplosive Bomb (prop)
 - Katarina's Series 2 Eternals make the following references:
   - *9 Lives* is a reference to the myth that cats have 9 lives.
 

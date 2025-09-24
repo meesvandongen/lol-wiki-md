@@ -144,7 +144,7 @@ The snowball rolls over enemy minions and small monsters hit, dealing $33.3$% of
   - This takes 6 increments to reach the **Total** MS + 85, but may take more to reach the Uncapped Flat + 85. Due to flat bonuses increasing the time threshold, it is possible for the ability's effects to end before reaching the **total** uncapped movement speed.
   - The **bonus** movement speed ignores the [movement speed cap.
 - If **Nunu** turns continuously he will create a 600 (Estimated) unit circle, increased with **bonus** movement speed, striking the same point up to 3 times, for a maximum of 180 / 225 / 270 / 315 / 360 (+ 300% AP) magic damage. The damage can be further increased by detonating the snowball, for a **total** of 360 / 450 / 540 / 630 / 720 (+450% AP) magic damage.
-- Realm Warp will only teleport **Nunu and Willump**, leaving the behind.
+- Ryze’s Realm Warp will only teleport **Nunu and Willump**, leaving the behind.
 - Hovering the cursor on the HUD (e.g mini map.md) / champion portraits) does not affect the cast and steering of *Biggest Snowball Ever!*.
 - **Nunu** gains a slightly larger field of view during *Biggest Snowball Ever!*.
 - Projectile-interception effects will destroy the snowball only after it has been released.
@@ -304,7 +304,7 @@ After 3 seconds from the first cast, *Snowbound* enemies near **Willump** take m
 
 ### V11.17
 - Biggest Snowball Ever!
-  - **Bug Fixes:** Fixed a bug where he would be knocked up to a very high height when hit by Unburrow while channeling.
+  - **Bug Fixes:** Fixed a bug where he would be knocked up to a very high height when hit by Rek'Sai’s Unburrow while channeling.
 - Snowball Barrage
   - **Bug Fixes:** Fixed a bug where it was missing its tooltip when hovering during mid-cast.
   - **Bug Fixes:** Fixed a bug where the tooltip was incorrectly displaying damage as "total damage" when it is actually "per snowball".

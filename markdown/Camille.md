@@ -320,13 +320,13 @@ The target cannot escape the zone through any means. While within the zone, **Ca
 - If the target manages to be outside of the boundaries, they will immediately be pulled back towards the center of the hexagon.
 - The boundaries are not considered terrain (Unstoppable Onslaught exception), and enemies that try to move out of the area will be displaced back inside.
   - Dashes, blinks, displacements, and other forms of movement will cap their effect range to the boundary. Targets will stop at the boundary even after it expired.
-  - Chronobreak will still deal damage at the hologram's location.
+  - Ekko’s Chronobreak will still deal damage at the hologram's location.
   - An active Cease and Desist on a target outside the perimeter will cause Vi to continue her charge until *The Hextech Ultimatum* ends. She can knockback and damage secondary targets multiple times.
   - If the target attaches to a unit, they will only be displaced back inside once they detach. *The Hextech Ultimatum* does not end nor break the bind to the victim.
-    - Umbral Trespass allows him to cast it even if his target is outside the area, dashing through the borders and attaching despite being unable to escape.
-    - You and Me! allows her to bypass the borders if the unit she attaches to leaves the area.
-    - Rocket Jump does not allow her to escape, but she applies the magic damage and slow.
-    - The Show Stopper does not allow him to pass through the borders and the dash will end prematurely when he encounters them.
+    - Kayn’s Umbral Trespass allows him to cast it even if his target is outside the area, dashing through the borders and attaching despite being unable to escape.
+    - Yuumi’s You and Me! allows her to bypass the borders if the unit she attaches to leaves the area.
+    - Tristana’s Rocket Jump does not allow her to escape, but she applies the magic damage and slow.
+    - Sett’s The Show Stopper does not allow him to pass through the borders and the dash will end prematurely when he encounters them.
       - If the target of The Show Stopper is also the target of *The Hextech Ultimatum*, they can go through the borders while attached to him.
 - If **Camille** enters resurrection during the initial cast, the dash is stopped and the zone is formed immediately.
   - *The Hextech Ultimatum* ends if the target enters *resurrection*, but not if **Camille** does.
@@ -402,7 +402,7 @@ The target cannot escape the zone through any means. While within the zone, **Ca
 - This champion has no ability power ratio.
 - Camille was the last champion released in 2016, designed to make players 'feel like in-control badasses'.
 - Her design bears a very strong resemblance to Lin Beifong from the series Legend of Korra, with similar appearance, profession, and fighting style. She may have also been influenced by Gazelle from the movie Kingsman: The Secret Service.
-- Adaptive Defenses was the first instance of a shield that exclusively protects from physical damage. It was the only one until the introduction of Armored Advance Noxian Endurance on patch V25.S1.1.
+- Camille’s Adaptive Defenses was the first instance of a shield that exclusively protects from physical damage. It was the only one until the introduction of Armored Advance Noxian Endurance on patch V25.S1.1.
 - *Camille* is the French derivative of Latin *Camilla*, feminine form of cognomen *Camillus*.
   - *Camillus/a* means 'temple attendant,' and has no Latin root. Earlier forms include Greek Cadmus-Κάμιλλος-Κᾰσμῖλος-Κᾰδμῖλος, loaned from Pre-Greek **Hatʸmilʸ-*.
   - The name Camille could also be a reference to the mythological warrior Camilla(mythology) who appears in the second half of Vergil's Aeneid on the of the Rutuli. She is a warrior virgin queen of the Volsci and serves under the goddess Diana. She was said to be so swift-footed she could run through a wheat field without breaking the tops of the stalks and run across the ocean without wetting her feet.

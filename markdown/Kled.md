@@ -148,9 +148,9 @@ While **MOUNTED**, healing and health regeneration will first replenish **Skaarl
 - The Collector Death is special cased to not affect **Kled** while he is **MOUNTED** regardless of the duo's combined **current** health.
 - If **Skaarl** health is reduced below 0 by Eclipse Ever Rising Moon, **Kled** will take the triggering attack's damage.
 - While untargetable, **Kled** rapidly destroys enemy projectiles targeting him.
-- **Kled** does not receive damage from Test of Spirit, or Umbral Trespass while dismounting.
+- **Kled** does not receive damage from Illaoi’s Test of Spirit, or Kayn’s Umbral Trespass while dismounting.
 - Dismounting removes Speed Shrine's movement speed buff from **Kled** and prevent him from regaining it for the next 5 seconds, even if he remounts or enters the shrine again.
-- The lunge can pass through Dark Procession.
+- The lunge can pass through Yorick’s Dark Procession.
 - Buying items while **Kled** and **Skaarl** combined **current** health is lower than **Kled**’s **maximum** health will cause **Kled** to dismount upon undoing the purchase and potentially lose health.
 - Dismounting with a spell shield sometimes consumes the spell shield and negates the effects of dismounting.
 - The following table refers for interactions while **Kled** is lunging:
@@ -205,7 +205,7 @@ The tether's radius shrinks over its duration, and if it is not broken before th
   - All other pets are considered small pets for the purposes of this ability.
 - *Bear Trap on a Rope* will not pull the target if they are in stasis.
 - The tether cannot be broken within the first $0.25$ (estimated) seconds of its application.
-- Void Rush will break the tether upon the beginning of its cast time.
+- Rek'Sai’s Void Rush will break the tether upon the beginning of its cast time.
 - The pull damage is updated dynamically based on **Kled**’s' current attack damage.
 - Kled has no sound cue for when the tether is broken.
 - The damage is also increased to 150% against Neeko disguised as a ward.
@@ -258,7 +258,7 @@ The tether's radius shrinks over its duration, and if it is not broken before th
 - Black Cleaver will specifically apply a stack for every pellet hit.
 - Spell shield will negate multiple pellets if they hit at the same time.
   - Even if the first pellet is negated, subsequent non-negated pellets will still only deal 20% of the damage.
-- Pellets will restore Courage when colliding with units protected by spell shield, but will not restore Courage when colliding with Riposte.
+- Pellets will restore Courage when colliding with units protected by spell shield, but will not restore Courage when colliding with Fiora’s Riposte.
 - *Pocket Pistol* will have no charges if **Kled** dismounts and triggers Transcendence at the same time.
 - *Pocket Pistol* will falsely visually appear to have another charge ready if the end of its cast time coincides with a charge being stocked.
 
@@ -353,7 +353,7 @@ The mark will remain even if the target dies, and ends prematurely if the duo ar
   - The 200 (estimated) unit dash cannot pass through terrain.
   - If the marked target's location at the time of recasting happens to be inside terrain, *Jousting* will end upon reaching terrain.
 - The first dash can enter terrain within a short radius.
-  - This allows **Kled** to sometimes pass through Dark Procession with the first cast of *Jousting*.
+  - This allows **Kled** to sometimes pass through Yorick’s Dark Procession with the first cast of *Jousting*.
   - the first dash's terrain forgiveness radius
 - *Jousting* can be recast even while the target is untargetable or dead.
 - *Jousting*’s hitbox
@@ -505,9 +505,9 @@ This ability is unusable while *dismounted*.
   - **Bug Fixes:** Allied projectiles are no longer destroyed by the untargetability while dismounting.
   - **Bug Fixes:** Courage bar now always turns yellow when equal to or above 50 Courage instead of only when at 50–59 Courage.
   - **Bug Fixes:** Kled's health no longer sometimes shows an incorrect amount after remounting.
-  - **Bug Fixes:** Taking fatal damage while affected by Bailout no longer breaks **Kled**’s health bar for the rest of the game.
-  - **Bug Fixes:** **Skaarl**’s health is no longer unintentionally displayed while only **Kled** is affected by the protection of Bailout after taking fatal damage.
-  - **Bug Fixes:** Wild Growth no longer grants **Kled** more health than the intended health bonus based on **Skaarl**’s base health.
+  - **Bug Fixes:** Taking fatal damage while affected by Renata Glasc’s Bailout no longer breaks **Kled**’s health bar for the rest of the game.
+  - **Bug Fixes:** **Skaarl**’s health is no longer unintentionally displayed while only **Kled** is affected by the protection of Renata Glasc’s Bailout after taking fatal damage.
+  - **Bug Fixes:** Lulu’s Wild Growth no longer grants **Kled** more health than the intended health bonus based on **Skaarl**’s base health.
   - **Bug Fixes:** Health regeneration is now properly calculated upon remounting and no longer uses incorrect numbers for up to $0.25$ seconds after remounting (it is no longer "fuzzy").
   - **Bug Fixes:** No longer unintentionally loses a minuscule amount of attack damage while dismounted.
 - Bear Trap on a Rope

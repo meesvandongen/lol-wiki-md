@@ -182,10 +182,10 @@ Walk in range of the target location to cast (recast) |
 - *Force of Will* cleanses the target minion or monster grabbed from all crowd control.
 - *Force of Will* prevents non-sphere targets from dying when picking them up.
 - *Force of Will* cannot grab units that are being Teleport on.
-- **Syndra** can grab pets, such as Jack in the Box.
+- **Syndra** can grab pets, such as Shaco’s Jack in the Box.
 - Casting Teleport or Recall will cause **Syndra** to cancel *Force of Will* autonomously and drop anything she is holding.
 - Grabbing prioritizes *Dark Spheres*.
-- Enemy pets that passively have an effect on their surroundings will continue to affect the area around them while they are being held. For example, Summon: Tibbers will continue to inflict burn damage on surrounding units while being held.
+- Enemy pets that passively have an effect on their surroundings will continue to affect the area around them while they are being held. For example, Annie’s Tibbers will continue to inflict burn damage on surrounding units while being held.
 - Grabbing a Dark Sphere will cause the duration on it to refresh, but only on the first cast, not when it is thrown.
 - *Force of Will* has additional effects when targeting the Blue Sentinel and Red Brambleback. Throwing the former will refund 10 mana to **Syndra** upon cast and will reduce the cooldown of *Force of Will* by 1 second, while throwing the latter will apply the Crest of Cinders burn to any affected units in the area of effect.
 - *Force of Will*’s first cast uses a modified icon while it has the Transcendent bonus.
@@ -324,7 +324,7 @@ The *Dark Spheres* will then remain on the ground for 6 seconds.
 ### V14.12
 - Scatter the Weak
   - **Bug Fixes:** Is no longer able to apply the knockback and move Rek'Sai’s placed Tunnels.
-  - **Bug Fixes:** Dark Sphere combo is now properly nullified by Hallowed Mist.
+  - **Bug Fixes:** Dark Sphere combo is now properly nullified by Gwen’s Hallowed Mist.
 
 ### V13.24#December 12th Hotfix|V13.24
 - Transcendent
@@ -342,10 +342,10 @@ The *Dark Spheres* will then remain on the ground for 6 seconds.
 
 ## Trivia
 
-- Syndra is the first champion to directly manipulate minions and neutral monsters to deal damage to other champions with Force of Will. The only other champion to do so is Sion with Roar of the Slayer.
+- Syndra is the first champion to directly manipulate minions and neutral monsters to deal damage to other champions with Force of Will. The only other champion to do so is Sion with Sion’s Roar of the Slayer.
 - Syndra's spheres appear as red instead of blue when on the opposing team. She is the fourth champion to have team perspective based particles, with the third being Draven, the second being Cassiopeia and the first being Singed.
   - On her Atlantean and Snow Day skins, they appear purple to enemy instead.
-- Using Force of Will to hit an enemy unit with the Red Brambleback will apply the debuff on them. Also, if Syndra throws the Blue Sentinel, she will be refunded 10 mana and the ability's cooldown will be lowered by 1 second.
+- Using Syndra’s Force of Will to hit an enemy unit with the Red Brambleback will apply the debuff on them. Also, if Syndra throws the Blue Sentinel, she will be refunded 10 mana and the ability's cooldown will be lowered by 1 second.
 - Syndra is the third of the dark-themed Ionian Champions. The first two being Shen & Varus, followed by Zed, Jhin, Xayah, & Kayn.
 - Syndra's imprisonment under the Dream Pool shares some similarities with the Arthurian lore about Lady of the Lake; though Syndra herself is the prisoner, not the jailer.
 - Syndra's dance references the choreography for the song *Hoot_(song)* by *Girls' Generation* (소녀시대: So Nyeo Shi Dae), a popular Korean girl group.
@@ -354,7 +354,7 @@ The *Dark Spheres* will then remain on the ground for 6 seconds.
 - Each of Syndra's abilities gain new graphical details when leveled to max rank. For details, see below in her Skin section.
 - Syndra is the second champion speculated to be **omnipotent**, or nearly so. The first one was Xerath.
 - As seen in this video, Syndra appears to be able to use the balls from another Syndra.
-- The fact that Unleashed Power can use up to seven balls is possibly a reference to the *Dragon Ball* franchise as there are seven Dragon Balls.
+- The fact that Syndra’s Unleashed Power can use up to seven balls is possibly a reference to the *Dragon Ball* franchise as there are seven Dragon Balls.
 - Syndra is the second of three dark themed champions to have a light themed skin, with Varus being the first and Aatrox being the third.
 - Syndra derives from Proto-Germanic **az* ("of/by/for one self"; whence English *sunder*), with possible influence from unrelated Greek *syndrome*.
   - Her brother's name, *Evard*, likewise combines two Germanic elements *īhwaz* "Taxus" & *wardaz* "guard".

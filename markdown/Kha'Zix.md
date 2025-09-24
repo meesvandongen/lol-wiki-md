@@ -93,22 +93,22 @@
 
 - Any form of vision loss may trigger *Unseen Threat*, such as Curse of the Black Mist, nearsight and Brushmaker.
 - Void Assault grants *Unseen Threat* even if **Kha'Zix** never becomes unseen (e.g. affected by true sight).
-  - Other stealth such as E does not do this.
+  - Other stealth such as Senna’s E does not do this.
 - Both the attack's damage and bonus spell damage are grouped under the same Spell ID.
   - Because of this, a single *Unseen Threat* attack does **not** trigger two Electrocute stacks.
 - A team's allies are champions, pets, minions and outer turrets.
   - Monsters are considered allies for other monsters.
   - Wards do not prevent *Isolation*.
 - A number of targetable champion summoned units are specifically tagged to not be a valid ally of a potentially *Isolated* target. These units are:
-  - Powder Keg
-  - Prophet of an Elder God
-  - Captive Audience
-  - Bushwhack
-  - Tunnel
+  - Gangplank’s Powder Keg
+  - Illaoi’s Prophet of an Elder God
+  - Jhin’s Captive Audience
+  - Nidalee’s Bushwhack
+  - Rek'Sai’s Tunnel
   - Absolution’s *Mist Wraiths*
-  - Noxious Trap
+  - Teemo’s Noxious Trap
   - Sovereign's Domination’s *Mist Wraiths*
-  - Dark Procession
+  - Yorick’s Dark Procession
 - Isolation effects are registered at the following timings for each ability:
   - For *Evolved Reaper Claws*, the start of cast.
   - For *Evolved Spike Racks*, when the enemy is hit.

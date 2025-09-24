@@ -188,7 +188,7 @@ No additional notes.
 - *Black Shield* will not resist self nor allied crowd control (including e.g. an allied Tempered Fate).
 - *Black Shield* will not resist nearsight.
 - *Black Shield* negates crowd control effects before any magic damage is absorbed; even if the shield is broken by an enemy dealing enough damage, its associated disables will not apply. Shield-destroying effects bypass this however, since they destroy the shield before applying their effects.
-- *Black Shield* will not prevent effects other than crowd control from triggering (e.g. Nether Grasp will not suppress a target protected by *Black Shield* but the tether still applies).
+- *Black Shield* will not prevent effects other than crowd control from triggering (e.g. Malzahar’s Nether Grasp will not suppress a target protected by *Black Shield* but the tether still applies).
   - Although not considered a *crowd control* effect, *Black Shield* is special-cased to block Test of Spirit’s spirit pull.
 - *Black Shield* takes priority over other sources of crowd control immunity and those that grant immunity to specific types of crowd control (displacement immunity and slow immunity).
 - Spell shield will take priority over *Black Shield*.

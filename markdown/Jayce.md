@@ -424,7 +424,7 @@ No additional notes.
   - The fourth champion to have access to all four abilities at Level 1, the other ones being Elise, Karma, Nidalee, and Udyr.
 - Jayce's dance references U Can't Touch This by MC Hammer.
   - A side-by-side comparison can be seen here.
-  - He shares this dance with Malzahar (specifically his Voidlings’s part).
+  - He shares this dance with Malzahar (specifically his Voidlings’ part).
   - Coincidentally, 'Mercury Cannon / Hammer' can be shortened to 'MC Hammer'.
   - One of Jayce's Series 2 Eternals: *Hammer Time* also references this.
 - Jayce's title, *"the Defender of Tomorrow"*, likely references Superman: The Man of Tomorrow.

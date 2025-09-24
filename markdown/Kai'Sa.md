@@ -306,7 +306,7 @@ After completing the charge, she gains (as) **bonus** attack speed for 4 seconds
 
 ### V13.22
 - Second Skin
-  - **Bug Fixes:** No longer overlaps with Concussive Blows’s mark indicator.
+  - **Bug Fixes:** No longer overlaps with Concussive Blows’ mark indicator.
 
 ## Trivia
 

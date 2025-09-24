@@ -1443,6 +1443,27 @@ class SimpleLoLConverter:
         if not text:
             return ""
 
+        # Helper: apply English possessive rules with typographic apostrophe
+        # - If the last alphabetic character is 's' or 'S', append ’ (s-only plural possessive)
+        # - Otherwise append ’s
+        def _last_alpha(s: str) -> str:
+            for ch in reversed(s):
+                if ch.isalpha():
+                    return ch
+            return ''
+        # Expose as an instance method for reuse in other handlers
+        # Note: define on self dynamically if not already present (for single-file simplicity)
+        if not hasattr(self, '_make_possessive'):
+            def _make_possessive_impl(label: str) -> str:
+                base = label or ''
+                if not base:
+                    return ''
+                last = _last_alpha(base)
+                if last.lower() == 's':
+                    return base + '’'
+                return base + '’s'
+            setattr(self, '_make_possessive', _make_possessive_impl)
+
         # Evaluate simple arithmetic: {{#expr: ... }} -> computed value
         # This is done early so nested uses like {{as|{{#expr:175+40}}% AD}} resolve correctly
         text = self._evaluate_expr_templates(text)
@@ -1456,7 +1477,7 @@ class SimpleLoLConverter:
                 # champion/item/rune/unit/skill wrappers
                 'ci', 'ii', 'iis', 'ri', 'ui', 'uis', 'si', 'sti', 'stil', 'wi', 'wri',
                 # ability wrappers
-                'ai', 'cai',
+                'ai',
                 # misc link/icon wrappers
                 'cid', 'csl', 'items', 'tft item', 'tip',
                 # mastery icons common variants
@@ -1544,6 +1565,21 @@ class SimpleLoLConverter:
                         i2 += 1
                     if not has_top_eq:
                         pos_args.append(seg_s)
+                # Special rule: champion ability link -> Champion’s Ability
+                if name_lc == 'cai':
+                    cur = getattr(self, '_current_page_basename', None)
+                    ability = pos_args[0] if len(pos_args) >= 1 else ''
+                    champion = pos_args[1] if len(pos_args) >= 2 else ''
+                    display = pos_args[2] if len(pos_args) >= 3 and pos_args[2] else ability
+                    champ_md = self._convert_wiki_to_markdown_ctx(champion, cur) if champion else ''
+                    abil_md = self._convert_wiki_to_markdown_ctx(display, cur) if display else ''
+                    # Build possessive champion label + ability label
+                    possessive_champ = self._make_possessive(champ_md) if champ_md else ''
+                    # Avoid stray leading/trailing spaces if any part is empty
+                    combined = f"{possessive_champ} {abil_md}".strip()
+                    out.append(combined)
+                    i = t
+                    continue
                 # Special rule: sti with exactly two unnamed args -> (first) second
                 if name_lc == 'sti' and len(pos_args) == 2:
                     left = self._convert_wiki_to_markdown_ctx(pos_args[0], getattr(self, '_current_page_basename', None)) if pos_args[0] else ''
@@ -1565,7 +1601,7 @@ class SimpleLoLConverter:
                 # Recursively convert the extracted display text (so nested templates like sbc still apply)
                 disp_md = self._convert_wiki_to_markdown(display) if display else ''
                 if name_lc in names_possessive:
-                    disp_md = f"{disp_md}’s" if disp_md else ''
+                    disp_md = self._make_possessive(disp_md) if disp_md else ''
                 out.append(disp_md)
                 i = t
             return ''.join(out)
@@ -1657,8 +1693,14 @@ class SimpleLoLConverter:
 
         # Convert champion/ability references
         text = re.sub(r'\{\{ci\|([^}|]+)(?:\|[^}]*)?\}\}', r'**\1**', text)
-        # cis: champion info possessive (e.g., {{cis|Lulu}} -> **Lulu**’s)
-        text = re.sub(r'\{\{cis\|([^}|]+)(?:\|[^}]*)?\}\}', r'**\1**’s', text)
+        # cis: champion info possessive (e.g., {{cis|Lulu}} -> **Lulu**’s or **Lulu**’)
+        def _cis_repl(m: re.Match) -> str:
+            name = (m.group(1) or '').strip()
+            name_md = self._convert_wiki_to_markdown(name)
+            # Determine correct suffix outside bold: ’s vs ’
+            suffix = self._make_possessive(name_md)[len(name_md):]
+            return f"**{name_md}**{suffix}"
+        text = re.sub(r'\{\{cis\|([^}|]+)(?:\|[^}]*)?\}\}', _cis_repl, text)
         # ai template: {{ai|Ability|Champion}} or {{ai|Ability|Champion|Display}}
         # Prefer 3rd arg (Display) when present, else 1st arg (Ability). Keep italics, drop linking.
         def _ai_repl(m: re.Match) -> str:
@@ -1680,8 +1722,9 @@ class SimpleLoLConverter:
             args = parts[1:]
             ability = args[0].strip() if len(args) >= 1 else ''
             display = args[2].strip() if len(args) >= 3 and args[2].strip() else ability
-            # Use typographic apostrophe for possessive
-            return f"*{display}*’s"
+            disp_md = self._convert_wiki_to_markdown(display) if display else ''
+            suffix = self._make_possessive(disp_md)[len(disp_md):] if disp_md else ''
+            return f"*{disp_md}*{suffix}"
         text = re.sub(r'\{\{ais\|[^}]+\}\}', _ais_repl, text)
         # cais: champion ability possessive with champion label; render italic with trailing ’s using 1st arg as display when present
         def _cais_repl(m: re.Match) -> str:
@@ -1691,7 +1734,9 @@ class SimpleLoLConverter:
             args = parts[1:]
             ability = args[0].strip() if len(args) >= 1 else ''
             display = args[2].strip() if len(args) >= 3 and args[2].strip() else ability
-            return f"*{display}*’s"
+            disp_md = self._convert_wiki_to_markdown(display) if display else ''
+            suffix = self._make_possessive(disp_md)[len(disp_md):] if disp_md else ''
+            return f"*{disp_md}*{suffix}"
         text = re.sub(r'\{\{cais\|[^}]+\}\}', _cais_repl, text)
         # bi: buff information; keep the most relevant text (prefer last non-empty arg, else first)
         def _bi_repl(m: re.Match) -> str:
@@ -1729,7 +1774,6 @@ class SimpleLoLConverter:
         # Styled/special links/icons -> prefer plain text
         text = re.sub(r'\{\{csl\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{si\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-        text = re.sub(r'\{\{cai\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{cid\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
         # tip template: keep display name when present (2nd positional), otherwise subject (1st positional); drop named params
         def _tip_fallback(m: re.Match) -> str:
@@ -3750,6 +3794,8 @@ class SimpleLoLConverter:
         # Normalize bold possessive placement: **Word’s** -> **Word**’s and **Word's** -> **Word**’s
         md = re.sub(r"\*\*([^*\n]+?)’s\*\*", r"**\1**’s", md)
         md = re.sub(r"\*\*([^*\n]+?)'s\*\*", r"**\1**’s", md)
+        # Also handle s’-only case inside bold: **Words’** -> **Words**’
+        md = re.sub(r"\*\*([^*\n]+?)’\*\*", r"**\1**’", md)
         # Fix mixed bold+italic around possessive from apostrophe parser: **Word*’s* -> **Word**’s
         md = re.sub(r"\*\*([^*\n]+?)\*’s\*", r"**\1**’s", md)
         # Fix repeated word artifacts

@@ -237,7 +237,7 @@ At 5 stacks, **Alistar**’s next basic attack on-hit against a champion within 
 **Notes:**
 
 - True damage cannot be reduced by any means and will deal full damage to **Alistar** during *Unbreakable Will*.
-- *Unbreakable Will*’s modifier to incoming damage stacks additively with Hemoplague for a total reduction of 45/55/65%.
+- *Unbreakable Will*’s modifier to incoming damage stacks additively with Vladimir’s Hemoplague for a total reduction of 45/55/65%.
 
 ---
 

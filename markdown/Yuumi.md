@@ -223,7 +223,7 @@ If targeting an ally with the recast, the ability will not cast |
   - When she or her *Anchor* enters resurrection.
     - If **Yuumi** is channeling *You and Me!* or already dashing towards an ally who enters resurrection, then she will successfully attach to the resurrecting ally, and she will be able to heal/shield them during it.
 - **Yuumi** doesn't *detach* instantly when her *Anchor* dies. There's a small grace period in which she can recast *You and Me!* to attach to another champion without the channel or dash in the target direction.
-- **Yuumi** can dash to targetable zombie state allies (currently only Glory in Death), but she cannot attach when she reaches them.
+- **Yuumi** can dash to targetable zombie state allies (currently only Sion’s Glory in Death), but she cannot attach when she reaches them.
   - The same goes for allies channeling Teleport.
 - While attached to the *Anchor*, **Yuumi** is considered in being at her *Anchor*’s position, regardless of where she is visually placed near them. For example, turret shots will appear as if they were hitting the *Anchor*, but in reality they're actually hitting **Yuumi**.
   - However, for the purposes of *You and Me!*, such as casting it or being unattached for other reasons, **Yuumi** will be in the position where she visually is. For example, when she is in the blue team, dashing to a north-east ally is considerably slower than dashing to a south-west ally.
@@ -379,7 +379,7 @@ Enemies struck by the waves take magic damage and are slowed by 10% for $1.25$ s
 
 ### V14.23
 - You and Me!
-  - **Bug Fixes:** Attempting to attach on an allied Neeko disguised as Jack in the Box no longer causes both the ability and Yuumi's movement to become invalid until Yuumi has died.
+  - **Bug Fixes:** Attempting to attach on an allied Neeko disguised as Shaco’s Jack in the Box no longer causes both the ability and Yuumi's movement to become invalid until Yuumi has died.
 
 ### V14.20
 - You and Me!

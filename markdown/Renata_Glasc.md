@@ -222,11 +222,11 @@ The burn will stop once the target scores a takedown against an enemy champion w
 
 ### V25.04
 - Hostile Takeover
-  - **Bug Fixes:** No longer sometimes bypasses Wind Wall.
+  - **Bug Fixes:** No longer sometimes bypasses Yasuo’s Wind Wall.
 
 ### V14.7
 - Bailout
-  - **Bug Fixes:** Champions within Lamb's Respite that are affected by Bailout and reach the threshold after scoring a champion takedown while still inside its area of effect no longer sometimes forcibly die.
+  - **Bug Fixes:** Champions within Kindred’s Lamb's Respite that are affected by Bailout and reach the threshold after scoring a champion takedown while still inside its area of effect no longer sometimes forcibly die.
 
 ### V14.4
 - Handshake

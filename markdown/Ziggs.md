@@ -336,12 +336,12 @@ The bomb explodes upon arrival to deal magic damage to enemies hit, reduced to 6
 - A prop of Ziggs' Hexplosive Bomb was crafted in an episode of YouTube series DIY Prop Shop.
   - This video can be viewed here.
     - There are also videos where the following are crafted:
-      - Moonfall (functional)
-      - Preparation (functional)
-      - Zenith Blade (functional)
-      - Highlander (functional)
-      - Hammer Shock (functional)
-      - Steel Tempest (functional)
+      - Diana’s Crescent Moonblade (functional)
+      - Katarina’s Daggers (functional)
+      - Leona’s Zenith Blade (functional)
+      - Master Yi’s Highlander' Ring Sword (functional)
+      - Poppy’s Hammer of Orlon (functional)
+      - Yasuo’s Last Breath' Sword (functional)
 - The icon for Satchel Charge is reused for the Teamfight Tactics item Demolitionist's Charge.
 
 ---

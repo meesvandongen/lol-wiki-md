@@ -240,7 +240,7 @@ At maximum range, the wave homes back to **Swain** and detonates upon the first 
 **Notes:**
 
 - *Demon Flare* counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
-- *Demon Flare* passes through champions. Effects like Wind Wall and Unbreakable will block the portion of the nova they intercept.
+- *Demon Flare* passes through champions. Effects like Yasuo’s Wind Wall and Braum’s Unbreakable will block the portion of the nova they intercept.
 - **Swain** can move during *Demonflare*’s cast time.
 - *Demonflare* will fire from wherever **Swain** is at the end of the cast time.
 

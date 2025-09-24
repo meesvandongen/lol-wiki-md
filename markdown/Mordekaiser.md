@@ -262,7 +262,7 @@ Units between realms see each other as spirits, considering each other dead and 
 - *Realm of Death* will cancel and go on cooldown after its cast time if:
   - The target is displacement immune, crowd control immune or protected by a spell shield.
     - Note that all of the above plus any cleanse effect are ineffective if they are applied **after** the target has been banished.
-  - The target is a clone or Glory in Death.
+  - The target is a clone or Sion’s Glory in Death.
 - If the target becomes untargetable, dies, is too far away or **Mordekaiser** loses sight of them due to nearsight during the cast time, this ability will cancel but does not go on cooldown.
 - If the target dies at around of the same time of the transition into the *Death Realm*, **Mordekaiser** will be sent to the *Death Realm* alone and will only gain their partial stats for the duration of *Death Realm*.
 - If **Mordekaiser** or the target cast another *Realm of Death*, the affected champions will remain stuck for the duration of the new circle.
@@ -284,34 +284,34 @@ Units between realms see each other as spirits, considering each other dead and 
 - While **Mordekaiser** has hold of his enemy's stats, that champion's circular portrait will appear as a pip next to his health bar, visible to all players.
 - *Realm of Death*’s interactions with other elements/abilities (*list is incomplete*):
   - Multiple *Death Realms* (possible through a hijacked *Realm of Death* or if multiple **Mordekaisers** are in the same match) spawned will exist in the same dimension, allowing champions to see and interact with champions bound to other circles. Champions are only affected by their boundaries and are not able to see the others.
-    - Devour can carry a target outside of their circle, but they will be displaced back inside once Regurgitated.
+    - Tahm Kench’s Devour can carry a target outside of their circle, but they will be displaced back inside once Regurgitated.
     - An active Cease and Desist on a target outside the perimeter will cause Vi to continue her charge until her circle ends. She can knock back and damage secondary targets multiple times.
   - Structures exist in all realms at the same time. Turrets will behave normally as if all units were in the same realm.
   - Hex-gates on Hextech Drake will not be present between realms.
   - Switching realms detaches all attached champions on either of the two champions entering the realm.
-    - Umbral Trespass will cause him to detach immediately when *Realm of Death* ends.
+    - Kayn’s Umbral Trespass will cause him to detach immediately when *Realm of Death* ends.
   - The allied health, resource, and ultimate indicators (champion portraits located on the screen) will not update between realms as the players have no vision of them.
-  - The Hextech Ultimatum, catching Spinning Axe, Timewinder and Parallel Convergence, Null Zone, Twisted Advance, Pix, Faerie Companion, Death from Below, Threaded Volley 2, Gravity Field, Satchel Charge, and Rift Scuttler Speed Shrine are exceptions and may still take effect between dimensions *if* the conditions are valid.
+  - Camille’s The Hextech Ultimatum, catching Draven’s Spinning Axe, Ekko’s Timewinder and Parallel Convergence, Malzahar’s Null Zone, Maokai’s Twisted Advance, Lulu’s Pix, Pyke’s Death from Below, Taliyah’s Worked Grounds, Viktor’s Gravity Field, Ziggs’ Satchel Charge, and Rift Scuttler Speed Shrine are exceptions and may still take effect between dimensions *if* the conditions are valid.
   - Any spawned terrain while in the *Death Realm* will remain inside until expired. They will not be destroyed.
-  - Lamb's Respite is one of many area of effect abilities that will not take presence between realms.
+  - Kindred’s Lamb's Respite is one of many area of effect abilities that will not take presence between realms.
   - If Lux switches realms during Final Spark's cast, the beam's VFX will stay in the dimension where the spell was initially cast, but it will only deal damage to enemies in the dimension she's in at the end of the cast.
-  - Void Shift is special cased to not resist the slow but instead resist the dimension swap after the cast completes.
-  - Golden Eclipse will only deal damage to enemies in the dimension she's in at the end of the cast.
-  - Paranoia only applies nearsight to enemy champions in the same dimension as him.
-  - Clockwork Windup will snap back to her the moment she switches realms.
+  - Malzahar’s Void Shift is special cased to not resist the slow but instead resist the dimension swap after the cast completes.
+  - Mel’s Golden Eclipse will only deal damage to enemies in the dimension she's in at the end of the cast.
+  - Nocturne’s Paranoia only applies nearsight to enemy champions in the same dimension as him.
+  - Orianna’s Ball will snap back to her the moment she switches realms.
   - If Pantheon leaves the *Death Realm* during Grand Starfall's shockwave, the spell's VFX will stay in the *Death Realm* but it will still deal damage to nearby enemies.
   - If Sion switches realms during Decimating Smash's charge, the spell's VFX will follow him, but it will only affect enemies in the dimension it was initially cast at.
   - The target of Devour will immediately leave Tahm Kench’s belly when he enters or leaves the *Death Realm*.
-  - Weaver's Wall is interrupted both for if she enters or leaves the *Death Realm*.
-  - Fear Beyond Death 2 cannot be recast while the target is in a different dimension than him. If the target is being reeled in however, then the execution at the end of the channel will take place regardless of the dimension either he or the target is in.
+  - Taliyah’s Weaver's Wall is interrupted both for if she enters or leaves the *Death Realm*.
+  - Urgot’s Fear Beyond Death cannot be recast while the target is in a different dimension than him. If the target is being reeled in however, then the execution at the end of the channel will take place regardless of the dimension either he or the target is in.
     - The fear upon a successful execution will occur in Urgot’s realm.
-  - Sovereign's Domination will spawn between realms. Harrowed Path will also take presence between realms.
-  - Sky Splitter will only affect targets in the same realm as it was cast.
-  - Bladecaller cannot call Feathers between dimensions.
-  - Eulogy of the Isles will take presence between realms.
+  - Viego’s Mist Wraiths will spawn between realms. Harrowed Path will also take presence between realms.
+  - Volibear’s Sky Splitter will only affect targets in the same realm as it was cast.
+  - Xayah’s Bladecaller cannot call Feathers between dimensions.
+  - Yorick’s Maiden will take presence between realms.
     - Other large pets do not take presence between realms.
   - If Yorick dies inside of *Death Realm* and he has a Maiden, the Maiden will not die with him.
-    - Eulogy of the Isles will still go on cooldown.
+    - Yorick’s Eulogy of the Isles will still go on cooldown.
   - Zed’s Shadows will take presence between realms.
   - Eye of the Herald and Teleport are disabled while in the *Death Realm*.
   - Controllable pets and decoys can still be commanded between realms.
@@ -359,12 +359,12 @@ Units between realms see each other as spirits, considering each other dead and 
 
 ### V14.15
 - Realm of Death
-  - **Bug Fixes:** Aurora’s Between Worlds’s is no longer usable by Aurora within the Realm of Death if created outside of it/before entering it.
-  - **Bug Fixes:** Aurora’s Between Worlds’s VFX are no longer visible across dimensions.
+  - **Bug Fixes:** Aurora’s Between Worlds’ is no longer usable by Aurora within the Realm of Death if created outside of it/before entering it.
+  - **Bug Fixes:** Aurora’s Between Worlds’ VFX are no longer visible across dimensions.
 
 ### V14.14
 - Realm of Death
-  - **Bug Fixes:** Background textures from Encore no longer incorrectly override *Death Realm* on-ground VFX.
+  - **Bug Fixes:** Background textures from Seraphine’s Encore no longer incorrectly override *Death Realm* on-ground VFX.
 
 ## Trivia
 
@@ -384,7 +384,7 @@ Units between realms see each other as spirits, considering each other dead and 
 - Children of the Grave used to apply the longest damage-over-time effect in the game (10 seconds).
 - Mordekaiser es #1 huehuehue' is the product of 'Brazil 5v5 tier list' by NA Summoner 'SKILLSHOT MASTER' and 'This is why we hate Mordekaiser' by 'McRooster'.
 - Mordekaiser's helmet resembled the M in Sodom (band) logo.
-- His Death's Grasp mirrors Apprehend: both abilities pull in their targets as well as passively grant their casters magic penetration and armor penetration, respectively.
+- His Death's Grasp mirrors Darius’ Apprehend: both abilities pull in their targets as well as passively grant their casters magic penetration and armor penetration, respectively.
 - Death's Grasp could be a reference to the item Deathfire Grasp, as both showcase a green claw.
 - The abilities reference metal songs or bands.
   - Obliterate, the Obliterate.

@@ -369,7 +369,7 @@ No additional notes.
 
 ### V14.14
 - Terrify
-  - **New Effect:** Missile now counts as a projectile that can be blocked by E, W, and W.
+  - **New Effect:** Missile now counts as a projectile that can be blocked by Braum’s E, Samira’s W, and Yasuo’s W.
 
 ### V14.4
 - Bountiful Harvest

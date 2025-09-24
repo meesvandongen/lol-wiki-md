@@ -203,7 +203,7 @@ The grenade's damage is increased by 35% any time an enemy dies by any means aft
 | **Physical Damage** | 60 / 95 / 130 / 165 / 200 (+ 50% AD) |
 | **Minion Damage** | 45 / 71.25 / 97.5 / 123.75 / 150 (+ $37.5$% AD) |
 
-Hitting a *marked* champion roots them for a duration and grants **Jhin** Every Moment Matters’s (ms) **bonus** movement speed.
+Hitting a *marked* champion roots them for a duration and grants **Jhin** Every Moment Matters’ (ms) **bonus** movement speed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -351,7 +351,7 @@ The fourth shot critically strikes for damage.
 
 ### V25.12
 - Deadly Flourish
-  - **UNDOCUMENTED / NEW EFFECT:** Now has projectile interactions under all circumstances. Previously, Wind Wall was exclusively special-cased to intercept it.
+  - **UNDOCUMENTED / NEW EFFECT:** Now has projectile interactions under all circumstances. Previously, Yasuo’s Wind Wall was exclusively special-cased to intercept it.
 
 ### V25.06
 - Whisper

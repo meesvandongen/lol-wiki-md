@@ -307,7 +307,7 @@ Additionally, **Ambessa** shields herself at the time of cast for 50 to 320 (+ 1
 - If **Ambessa** would blink inside the attack range of an enemy turret, including the Nexus Obelisk, *Public Execution* will instead attempt to position her outside of it.
 - **Ambessa** will reveal herself during the cast time if there is an enemy champion nearby.
 - **Ambessa** will search for enemies in the direction she is facing at the end of cast time.
-  - This direction can be changed by Encore.
+  - This direction can be changed by Seraphine’s Encore.
 - If **Ambessa** successfully seizes a target, any regular movement commands issued before doing so are discarded upon the lockout ending.
   - This does not affect movement orders issued during the lockout.
 - The following table refers for interactions while **Ambessa** is in cast time and during the lockout:
@@ -342,7 +342,7 @@ Additionally, **Ambessa** shields herself at the time of cast for 50 to 320 (+ 1
 
 ### V14.24
 - Drakehound's Step
-  - **Bug Fixes:** Dash pathfinding no longer ignores Emperor's Divide.
+  - **Bug Fixes:** Dash pathfinding no longer ignores Azir’s Emperor's Divide.
 - Repudiation
   - Base shield reduced to 50 to 320 from 85 to 350.
   - Shield bonus AD ratio reduced to 150% **bonus** AD from 175%.

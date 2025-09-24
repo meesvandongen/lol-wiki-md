@@ -320,7 +320,7 @@ If the target is an enemy and they are in range upon arrival, **Jax** deals phys
   - New **UNIQUE PASSIVE**: Taunts nearby Jax (both enemy and allied).
 - In the now-removed official League of Legends forums, the original icon of Relentless Assault was used to represent the "Off Topic Discussion" section.
 - The old icon art of Grandmaster's Might features a stunned soldier who was directly mirrored from the original icon for Time Bomb.
-- Grandmaster-at-Arms, The Darkin Blade, Night Hunter, and The Relentless Storm are the only abilities in *League of Legends* that have the same name as their champion's title.
+- Jax’s Grandmaster-at-Arms, Aatrox’s The Darkin Blade, Vayne’s Night Hunter, and Volibear’s The Relentless Storm are the only abilities in *League of Legends* that have the same name as their champion's title.
 - Jax's Series 2 Eternals make the following references:
   - *	Active: Jax enters Evasion...* is a reference to his ability description for Counter Strike.
 

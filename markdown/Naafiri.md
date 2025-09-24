@@ -330,7 +330,7 @@ If **Naafiri** scores a champion takedown within 7 seconds of cast, she triggers
 - We Are More
   - **Bug Fixes:** Move orders no longer persist on Packmates if the player issues a move order within a tiny radius of their current position, allowing the ordered Packmates to freely leave Naafiri's radius of influence and remain at their destination location indefinitely so long as the player does not issue a new move order (which would subsequently cause the Packmates to re-calculate their distance from Naafiri's radius of influence and return to her).
 - Hounds' Pursuit
-  - **Bug Fixes:** Naafiri and her Packmates no longer ignore collision with Emperor's Divide during their dash, which would previously allow them to bypass the displacement.
+  - **Bug Fixes:** Naafiri and her Packmates no longer ignore collision with Azir’s Emperor's Divide during their dash, which would previously allow them to bypass the displacement.
 
 ### V25.10
 - We Are More

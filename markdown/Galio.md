@@ -131,7 +131,7 @@ When the blasts meet, the gusts form a tornado that persists for 2 seconds, slow
 
 - Deals area damage on the gust and applies persistent area damage for the tornado.
 - Spell shield will block the gusts damage but not the tornado's.
-- Wind Wall and Unbreakable can block each windblast individually.
+- Yasuo’s Wind Wall and Braum’s Unbreakable can block each windblast individually.
   - The tornado will not form if only one windblast reaches the target location. Effect at cast time end
 
 ---

@@ -299,7 +299,7 @@ Upon hitting an enemy champion or reaching the end of its range, the shell explo
 
 ### V25.14
 - New Destiny
-  - **Bug Fixes:** Pellets no longer fail to hit Shepherd of Souls at maximum range.
+  - **Bug Fixes:** Pellets no longer fail to hit Yorick’s Mist Walkers at maximum range.
 
 ### V14.24
 - End of the Line
@@ -350,7 +350,7 @@ Upon hitting an enemy champion or reaching the end of its range, the shell explo
   - A side-by-side comparison can be seen here.
 - Graves was the second-to-last champion to have a "League Judgement" (they were discontinued after release; Varus was the last champion to receive one).
 - End of the Line is among a few abilities that were named after a quote of their champion. In this case, it references his "End of the Line" quote which he had before the patch he got the ability, V5.22.
-  - The others are Goes Where He Pleases and League of Draven.
+  - The others are Dr. Mundo’s Goes Where He Pleases and Draven’s League of Draven.
 - The icon for Collateral Damage is a reference to explosive hazard safety signs.
 - Graves' shotgun can be seen in the game's Mac version trailer.
 - Graves was the product of playerbase requests for a 'manly' ranged carry.

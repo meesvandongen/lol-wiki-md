@@ -154,8 +154,8 @@
 - **Orianna** cannot use Command: Protect while *The Ball* is in transit with *Command: Attack* but she may buffer Command: Dissonance and Command: Shockwave to cast once it has reached the location.
 - *The Ball* will remain at the target location until **Orianna** retrieves it or if she goes beyond its leash range.
   - *The Ball* will also never exceed its leash range regardless of target direction.
-- *The Ball* will drop to the ground upon colliding with W but not with E.
-  - Blade Whirl?
+- *The Ball* will drop to the ground upon colliding with Yasuo’s W but not with Braum’s E.
+  - Samira’s Blade Whirl?
 
 ---
 

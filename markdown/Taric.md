@@ -213,7 +213,7 @@
 
 ### V25.15
 - Bastion
-  - **Bug Fixes:** Tether no longer persists and functions without a range limitation on a linked ally after **Taric** successfully survives and exits Realm of Death.
+  - **Bug Fixes:** Tether no longer persists and functions without a range limitation on a linked ally after **Taric** successfully survives and exits Mordekaiser’s Realm of Death.
 
 ### V14.21
 - Bastion

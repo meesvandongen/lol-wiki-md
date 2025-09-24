@@ -213,7 +213,7 @@ Afterwards, the zone erupts to deal the same damage to enemy champions within an
 
 **Notes:**
 
-- *Equinox*’s silence is marked as non-dispellable, so it is not removed by most cleanses. It is however allowed to be removed by cleanses that **also** grant immunity to it, such as Ragnarok.
+- *Equinox*’s silence is marked as non-dispellable, so it is not removed by most cleanses. It is however allowed to be removed by cleanses that **also** grant immunity to it, such as Olaf’s Ragnarok.
 - Spell shield will not block the silence.
 
 ---

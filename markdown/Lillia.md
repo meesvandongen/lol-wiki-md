@@ -207,7 +207,7 @@
 - *Swirlseed*’s origin is determined from **Lillia**’s position at the start of cast, the rolling direction is determined from **Lillia**’s position at the end of cast (when the projectile is created, not when the seed starts rolling).
 - Spell shield does not prevent the seed from detonating thus striking nearby targets.
 - Projectile destroying effects will still make the rolling seed detonate upon colliding with them, but not when the initial arcing missile is destroyed.
-  - If Unbreakable blocks the initial projectile, it is destroyed and deals 0 damage to him, as well as not triggering the cone-shaped area of effect.
+  - If Braum’s Unbreakable blocks the initial projectile, it is destroyed and deals 0 damage to him, as well as not triggering the cone-shaped area of effect.
 - The spot at which the seed will collide with terrain is highlighted while it is rolling.
 
 ---

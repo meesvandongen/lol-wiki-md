@@ -173,7 +173,7 @@ After 1 second, enemy champions can destroy Seeds by stepping on them.
 - : **Zyra** tries to plant Seeds behind herself when she is walking through the river and there are no jungle path entrances near her.
 - **Zyra** tries to plant Seeds between herself and the enemy champion she has vision of (or is heading towards her) in a 45º angle to the left or to the right depending on where on lane she is standing.
 - **Zyra** tries to plant Seeds against the inner walls of epic monster pits (Dragon, Rift Herald, Baron Nashor)
-- **Zyra** has a hidden passive that grants her 10% increased size for 33 seconds (Estimated) after having Sunlight applied to her.
+- **Zyra** has a hidden passive that grants her 10% increased size for 33 seconds (Estimated) after having Leona’s Sunlight applied to her.
 
 ---
 
@@ -397,7 +397,7 @@ After 2 seconds, the thicket snaps upward to knock up enemies within for 1 secon
 - Rise of the Thorns (Zyra's first Innate) and Stranglethorns have a cyan hue in her 'Champion Spotlight'.
 - Rampant Growth might be referencing the eponymous card from Magic: The Gathering.
 - Enemies hit by Grasping Roots are applied the 'Rooted, literally' cosmetic debuff for the duration.
-- Deadly Spines’s tooltip describing Thorn spitters as 'shooting little friendliness pellets' references Undertale.
+- Deadly Spines’ tooltip describing Thorn spitters as 'shooting little friendliness pellets' references Undertale.
 - During development she was called *Izara*, *Xara*, *Xyra* or *Azalea*, like the flower.
 - Zyra's Series 1 Eternals make the following references:
   - *Little Shop of DPS* references the Little Shop of Horrors.

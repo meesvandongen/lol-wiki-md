@@ -109,7 +109,7 @@
   - Will trigger from Runaan's Hurricane additional bolts.
   - Will not apply life steal, but does apply on spell vamp and omnivamp.
   - Will apply spell effects.
-  - Will not trigger when basic attacking certain units (e.g Jack in the Box), however it will trigger when attacking them with Purge.
+  - Will not trigger when basic attacking certain units (e.g Shaco’s Jack in the Box), however it will trigger when attacking them with Purge.
   - Will consume Manaflow Band if it is available.
   - Will not consume Tear of the Goddess charges.
 - **Urgot**’s legs never change in orientation, with his body instead rotating on top of them; the leg that faces northeast will always face northeast. This does not affect **Urgot**’s facing direction for the purposes of abilities such as Petrifying Gaze.
@@ -201,7 +201,7 @@ Attacks with *Purge* deal ***modified** physical damage, with a minimum threshol
 - *Purge*’s attacks do not interact with **Urgot**’s basic attack timer.
   - After ending *Purge*, he can usually attack again immediately.
 - If **Urgot** is berserked or taunted, he will fire at the unit he is forced to attack.
-- *Purge* will fire while **Urgot** is dashing (e.g. while taking Dark Passage), with the exception of Disdain’s dash.
+- *Purge* will fire while **Urgot** is dashing (e.g. while taking Thresh’s Dark Passage), with the exception of Disdain’s dash.
 - Each shot counts as a separate hit for effects such as Electrocute, Muramana Shock, and Eclipse Ever Rising Moon.
 - *Purge* will apply Runaan's Hurricane on every shot at 100% of the listed damage.
   - On-hit damage applied by the bolts are still reduced by *Purge*.
@@ -339,8 +339,8 @@ Upon completing the channel, the target is execute. If the execution is successf
 - The target will die regardless of their **current** health once the recast's chains hit, even if they are healed.
   - If the target has invulnerability that persists for the duration of the channel, it will protect them from the execution.
     - Undying Rage will prevent Tryndamere from dying by the execute. In this case, the execute will bypass his minimum health threshold though and reduce him to 1 health.
-    - The effect will also not prevent the activation of resurrection effects, such as Guardian Angel or Rebirth.
-    - Post-death events such as Zombie State effects (e.g, Death Defied, Icathian Surprise, and Glory in Death) will be triggered.
+    - The effect will also not prevent the activation of resurrection effects, such as Guardian Angel or Anivia’s Rebirth.
+    - Post-death events such as Zombie State effects (e.g, Karthus’ Death Defied, Kog'Maw’s Icathian Surprise, and Sion’s Glory in Death) will be triggered.
     - Only the target's **current** health will count as **Urgot**’s damage in post-game statistics and spell vamp healing.
 - *Fear Beyond Death*’s initial cast will not perform the automatic recast from dealing enough damage to kill Sion.
 - *Fear Beyond Death*’s recast will be placed on a 5-second cooldown if the target is below the threshold and becomes targetable again after completing the dash from Hero's Entrance.
@@ -372,7 +372,7 @@ Upon completing the channel, the target is execute. If the execution is successf
 - Purge
   - **Removed:*** No longer applies spell effects.
 - Fear Beyond Death
-  - **Bug Fixes:** No longer unintentionally repeatedly displaces **Urgot** and Skarner in the direction of Mercy and over large distances, if Mercy is cast while **Urgot** simultaneously becomes affected by Impale.
+  - **Bug Fixes:** No longer unintentionally repeatedly displaces **Urgot** and Skarner in the direction of Mercy and over large distances, if Mercy is cast while **Urgot** simultaneously becomes affected by Skarner’s Impale.
     - Both users will now stay at their original location.
 
 ### V14.9
@@ -389,7 +389,7 @@ Upon completing the channel, the target is execute. If the execution is successf
 
 ### V13.7
 - Purge
-  - **Bug Fixes:** No longer continually triggers the on-hit healing of You and Me!.
+  - **Bug Fixes:** No longer continually triggers the on-hit healing of Yuumi’s You and Me!.
 
 ### V12.12
 - Disdain

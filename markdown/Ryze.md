@@ -244,12 +244,12 @@ Upon completion, **Ryze** and allied units within (See notes) will blink to the 
   - For channels that do not prevent the teleport, *Realm Warp* will specifically not apply its silence to the caster.
   - Cast times will not prevent the teleport.
   - The following channels will prevent the teleport:
-    - R
-    - R
-    - R
-    - R
-    - Q
-    - R
+    - Caitlyn’s R
+    - Galio’s R
+    - Kayn’s R
+    - Jhin’s R
+    - Warwick’s Q
+    - Xerath’s R
     - Recall / Empowered Recall
     - Teleport / Unleashed Teleport
 - The following table refers for interactions while **Ryze** is channeling:

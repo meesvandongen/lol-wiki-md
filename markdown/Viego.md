@@ -114,9 +114,9 @@
 - The current cooldowns of **Viego**’s abilities will **not** be reset between transformations.
   - Those of the possessed champion's abilities will be reset between transformations.
   - This does not apply to the following long-cooldown abilities. **Viego** specifically tracks their proper cooldowns which can be seen via a buff in his hotbar for each when applicable.
-    - Rebirth
-    - Shurima's Legacy
-    - Cell Division
+    - Anivia’s Rebirth
+    - Azir’s Shurima's Legacy
+    - Zac’s Cell Division
 - The passive cooldowns of items are shared between **Viego**’s and the possessed champion's.
   - This does not apply to Lifeline items.
 - Once *possession* ends, **Viego** returns to his normal state and certain effects gained from the possessed champion's abilities will be immediately removed.
@@ -133,7 +133,7 @@
   - While in a zombie state, *Heartbreaker* is disabled.
   - If **Viego** enters a zombie state while winding up on a *Mist Wraith*, the possession will still last its normal duration.
 - The *possession* will not end prematurely if **Viego** enters resurrection.
-- The *possession* will acquire the basic abilities of shapeshifting champions (e.g. Spider Form / Human Form, Transform Mercury Cannon / Transform Mercury Hammer, and Aspect of the Cougar) based on which form they died as.
+- The *possession* will acquire the basic abilities of shapeshifting champions (e.g. Elise’s Spider Form / Human Form, Jayce’s Transform Mercury Cannon / Transform Mercury Hammer, and Nidalee’s Aspect of the Cougar) based on which form they died as.
 - *Mist Wraiths* are considered clones and can only be targeted by **Viego**.
 - If **Viego** possesses an enemy champion who owns Dark Seal or Mejai's Soulstealer, he will gain their Glory stacks during the possession.
 - As Cull tracks its progress for each player even if they do not possess the item at the time, **Viego** may discharge stacks for the benefit of 1 gold each per minion kill, and if **Viego** killed 100 minions possessing Cull, no matter whether bought himself or acquired via a possessed champion's inventory, he receives the 350 gold payout and can no longer discharge stacks.
@@ -370,7 +370,7 @@ All targets hit are dealt 120%–240%@0–100 (@=critical strike chance) AD phys
 
 ### V25.07
 - Sovereign's Domination
-  - **Bug Fixes:** If Rebuttal is used during possession of her and a reflected ability kills an enemy champion, he is no longer prevented from attacking Mist Wraiths.
+  - **Bug Fixes:** If Mel’s Rebuttal is used during possession of her and a reflected ability kills an enemy champion, he is no longer prevented from attacking Mist Wraiths.
 
 ### V25.05
 - Sovereign's Domination
@@ -385,7 +385,7 @@ All targets hit are dealt 120%–240%@0–100 (@=critical strike chance) AD phys
   - Base attack damage reduced to 57 from 60.
 - Sovereign's Domination
   - **Bug Fixes:** Spirit Abjuration no longer persists on Viego after possession of Aurora ends.
-  - **Bug Fixes:** Using Swirlseed during possession no longer causes it to visibly bounce off of a wall when colliding with it instead of disappearing. (The real missile would still be properly destroyed.)
+  - **Bug Fixes:** Using Lillia’s Swirlseed during possession no longer causes it to visibly bounce off of a wall when colliding with it instead of disappearing. (The real missile would still be properly destroyed.)
 
 ### V25.S1.1
 - Sovereign's Domination

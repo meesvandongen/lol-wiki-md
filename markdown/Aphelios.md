@@ -440,7 +440,7 @@ The empowered attack will consume the marks from all targets, dealing 15 (+ 20% 
 
 **Notes:**
 
-- Crescendum’s outgoing basic attack can bypass W and E but cannot while returning.
+- Crescendum’s outgoing basic attack can bypass Yasuo’s W and Braum’s E but cannot while returning.
 - Triggered *Marks* apply on-hit effects, stack Energized and trigger Runaan's Hurricane, but no other on-attack effects.
 - The mark will not be triggered by Onslaught attacks.
 - The increased basic attack range is drawn for **Aphelios** to differentiate it from his normal attack range.
@@ -619,7 +619,7 @@ Healing from **Severum** in excess of **Aphelios' ** **maximum** health is conve
 - Aphelios has a game start ceremony that forces him in place.
 - Aphelios is the only champion in League of Legends who can obtain the highest amount of Lethality.
 - Aphelios' *Severum* attack has the highest missile speed on an attack out of any champion, at 92400.
-  - This is by far higher than the second one, which is Cultivation of Spirit attacks at 10000.
+  - This is by far higher than the second one, which is Yunara’s Cultivation of Spirit attacks at 10000.
 - Since Aphelios can hold two weapons at a time with The Hitman and the Seer, there are 10 different possible combinations of weapons he can have equipped. These are:
   - Calibrum and Severum
   - Calibrum and Gravitum

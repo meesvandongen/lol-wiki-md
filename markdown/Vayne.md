@@ -296,7 +296,7 @@ Scoring an enemy champion takedown within 3 seconds of damaging them will extend
 - Vayne's dance references gun fu, also known as the Gun Kata.
   - A side-by-side comparison can be seen here.
 - Silver Bolts references werewolf fiction, possibly inspired by silver's & other heavy metals' Oligodynamic effect.
-- Night Hunter, The Darkin Blade, Grandmaster-at-Arms, and The Relentless Storm are the only abilities in *League of Legends* that have the same name as their champion's title.
+- Vayne’s Night Hunter, Aatrox’s The Darkin Blade, Jax’s Grandmaster-at-Arms, and Volibear’s The Relentless Storm are the only abilities in *League of Legends* that have the same name as their champion's title.
 - As per her retconned lore, Vayne hunts and kills monsters, hybrids, shape-shifters, etc. not due to any ethical guidelines, but to satisfy her bloodlust, making her resemble , a fictional serial killer who mostly targets other morally deplorable murderers.
   - Similarly, Vayne & Dexter both developed killing urge after witnessing their respective parents being murdered (Vayne's father & mother; Dexter's ).
 - Vayne ,Warwick and Trundle are the only champions without damaging area-of-effect abilities.

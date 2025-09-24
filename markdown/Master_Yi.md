@@ -108,7 +108,7 @@ Basic attacks on-hit reduce *Alpha Strike*’s **current** cooldown by 1 second,
 - If the primary target is a champion, **Master Yi** will be automatically ordered to basic attack them after *Alpha Strike* ends.
   - **Master Yi** will not be able to buffer other abilities.
 - Only the first instance of damage counts as a hit for effects such as Conqueror, Electrocute and Eclipse Ever Rising Moon.
-- *Alpha Strike* does not interact with Permafrost and Press the Attack.
+- *Alpha Strike* does not interact with Sejuani’s Permafrost and Press the Attack.
 - Spell shield will only block a single instance of damage.
 - On-hit damage applied by *Alpha Strike* will be negated by dodge and block, but not while **Master Yi** is blinded.
   - *Alpha Strike*’s own damage will not be negated.
@@ -261,7 +261,7 @@ While active, scoring a champion takedown extends *Highlander*’s duration by 7
 
 ### V25.S1.1
 - Highlander
-  - **Bug Fixes:** Slow immunity no longer ignores Gravity Field.
+  - **Bug Fixes:** Slow immunity no longer ignores Viktor’s Gravity Field.
 
 ### V14.24
 - Alpha Strike
@@ -305,12 +305,12 @@ While active, scoring a champion takedown extends *Highlander*’s duration by 7
 - A functional real-life replica of Master Yi's Highlander' Ring Sword was crafted in an episode of YouTube series Man At Arms: Reforged.
   - This video can be viewed here.
     - There are also videos where the following are crafted:
-      - Moonfall (functional)
-      - Preparation (functional)
-      - Zenith Blade (functional)
-      - Hammer Shock (functional)
-      - Steel Tempest (functional)
-      - Short Fuse (prop)
+      - Diana’s Crescent Moonblade (functional)
+      - Katarina’s Daggers (functional)
+      - Leona’s Zenith Blade (functional)
+      - Poppy’s Hammer of Orlon (functional)
+      - Yasuo’s Last Breath' Sword (functional)
+      - Ziggs’ Hexplosive Bomb (prop)
 - Master Yi's Series 1 Eternals make the following references:
   - *Zen Health* alludes to the Buddhism Meditation of the Zen that has a health benefit to the person.
 

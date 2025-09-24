@@ -273,7 +273,7 @@ The blizzard increases in over $1.5$ seconds. At maximum size, *Glacial Storm* i
 - *Glacial Storm*’s slow leaves a trail that is visible even if the target is stealthed.
 - *Glacial Storm* deals 3 half ticks at 200 / 267 / 333 radius for a total of $1.5$ normal damage ticks before it starts dealing empowered damage at 400 radius.
 - Stasis via Zhonya's Hourglass doesn't interrupt *Glacial Storm*.
-  - Devour **does** interrupt (allied and enemy) *Glacial Storm*.
+  - Tahm Kench’s Devour **does** interrupt (allied and enemy) *Glacial Storm*.
 
 ---
 

@@ -154,7 +154,7 @@ If **Volibear** becomes immobilized or polymorphed by an enemy during *Thunderin
 - The windup for the attack completes even if the target becomes untargetable but the stun and damage do not apply.
 - The player's screen will flash red briefly and cue a sound effect when **Volibear** becomes immobilized while *Thundering Smash* is active.
 - *Thundering Smash*’s attack does not put **Volibear**’s basic attack on cooldown.
-  - This results in the same functionality as Shield of Daybreak, effectively being a double attack reset.
+  - This results in the same functionality as Leona’s Shield of Daybreak, effectively being a double attack reset.
 - If Thundering Smash's buff appears as the first on the buff bar, the empowered attack will fail against structures.
 
 ---
@@ -359,7 +359,7 @@ The bolt deals magic damage to enemies hit, capped at 650 against non-champions,
   - His other epithet *the Volibear* possibly also contains a variant of *valr*.
 - His Ursine tribe possibly references on real-world bear worship and the norse Berserker.
 - Volibear might have been inspired by the *Panserbjørne* (Danish/Norwegian: 'armored bears') from His Dark Materials by Philip Pullman.
-- The Relentless Storm, The Darkin Blade, Grandmaster-at-Arms, and Night Hunter are the only abilities in *League of Legends* that have the same name as their champion's title.
+- Volibear’s The Relentless Storm, Aatrox’s The Darkin Blade, Jax’s Grandmaster-at-Arms, and Vayne’s Night Hunter are the only abilities in *League of Legends* that have the same name as their champion's title.
 - Volibear's dance both before and after his visual update references Sam B's dance in America's Got Talent.
   - A side-by-side comparison from before his update can be seen here.
   - A side-by-side comparison from after his update can be seen here.

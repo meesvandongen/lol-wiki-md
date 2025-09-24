@@ -231,7 +231,7 @@ Once both blades have been placed, they fly toward each other regardless of dist
 - *Flawless Duet* will recast automatically at its end during Defiant Dance despite being disabled.
 - *Flawless Duet* will also recast automatically upon entering resurrection.
 - The outgoing blades will stop flight upon touching projectile blocking effects. The converging blades will instead be destroyed upon contact with such effects.
-  - The blades will not stun nor deal damage if they fail to converge (i.e Wind Wall).
+  - The blades will not stun nor deal damage if they fail to converge (i.e Yasuo’s Wind Wall).
 - Both of *Flawless Duet*’s casts will be buffered and cast when their cooldowns end if the player attempts to cast each within $0.3$ seconds of their cooldown ending.
 
 ---

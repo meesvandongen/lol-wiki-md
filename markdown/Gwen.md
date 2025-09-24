@@ -308,7 +308,7 @@ While inside the mist, **Gwen** becomes ghosted, gains 22 (+ 7% AP) **bonus** ar
 
 ### V25.16
 - Hallowed Mist
-  - **Bug Fixes:** Casting *Hallowed Mist* to nullify the displacement of Dark Procession spawning no longer causes **Gwen** to glitch inside it when attempting to move or dash away.
+  - **Bug Fixes:** Casting *Hallowed Mist* to nullify the displacement of Yorick’s Dark Procession spawning no longer causes **Gwen** to glitch inside it when attempting to move or dash away.
 
 ### V25.12
 - Stats

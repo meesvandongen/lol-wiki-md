@@ -228,7 +228,7 @@ While *Molten Shield* is active, enemies that deal damage to it take magic damag
 - *Molten Shield* does not deal damage to turrets when attacked by them.
 - *Molten Shield* has a forgiveness radius of 175 units.
 - Attacks that are dodged or miss against the shielded target will not cause the shield to deal damage, while blocked attacks still deal damage to the attacker.
-- The reaction damage does not trigger from Noxious Trap and Jack in the Box.
+- The reaction damage does not trigger from Teemo’s Noxious Trap and Shaco’s Jack in the Box.
 
 ---
 

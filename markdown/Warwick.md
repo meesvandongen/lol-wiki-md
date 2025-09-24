@@ -100,9 +100,9 @@ While below 50% **maximum** health, **Warwick** also heals for 100% of the post-
 - *Eternal Hunger* does not affect:
   - structures
   - wards (except effigies),
-  - Powder Keg
+  - Gangplank’s kegs
 - *Eternal Hunger* does affect:
-  - Prophet of an Elder God [https://www.youtube.com/watch?v=Sk43knTvpZ4&t=388s] Other units with modified health behaviour.
+  - Illaoi’s Tentacles [https://www.youtube.com/watch?v=Sk43knTvpZ4&t=388s] Other units with modified health behaviour.
 
 ---
 
@@ -161,7 +161,7 @@ While *Jaws of the Beast* is active, **Warwick** is displacement immune and clam
 - *Jaws of the Beast* is the only ability in the game that combines channeling with displacement immunity. Every interrupting crowd control effect that is not resisted by the displacement immunity will prematurely stop the dash.
   - The bite can still occur if cast before the crowd control application, but **Warwick** cannot start channeling.
   - Abilities that apply both stun and airborne at the same time cause **Warwick** to ignore the displacement, but prematurely stop the channel and the dash.
-  - The only exception to this is I.
+  - The only exception to this is Sion’s I.
 - **Warwick** will follow enemies that move via attachment effects but the lock-on will **not** be extended.
 - While *Jaws of the Beast* does not use Quick Casting by default, click-and-hold is comparable to the input required to use Bone Skewer or Comet Spear. It does not accept two-click input (e.g. First Cast and Recast) that abilities like Piercing Arrow or Decimating Smash use in Standard Casting.
 - **Warwick** will attempt to basic attack the target after a short delay.
@@ -246,7 +246,7 @@ The attack speed and movement speed bonuses granted by both passives are doubled
 
 **RECAST:** **Warwick** howls, ending *Primal Howl*’s effects and fearing nearby enemies for 1 second, slowing them by 90%.
 
-Starting *Infinite Duress’s* channel while *Primal Howl* is active will initiate the recast without ending the damage reduction buff prematurely.
+Starting *Infinite Duress’* channel while *Primal Howl* is active will initiate the recast without ending the damage reduction buff prematurely.
 
 **Notes:**
 

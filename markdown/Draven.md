@@ -99,7 +99,7 @@ When **Draven** kills an enemy champion, he consumes all of his *Adoration* stac
   - *League of Draven* grants over 300 gold gold.
   - *League of Draven* gets reduced.
 - None of the parts of *League of Draven* require actually using a Spinning Axe for a kill to get *Strike* or *Adoration* stacks, as well as to cash *Adoration* stacks.
-- *League of Draven* will trigger upon receiving an assist on an enemy executed by Death from Below.
+- *League of Draven* will trigger upon receiving an assist on an enemy executed by Pyke’s Death from Below.
 
 ---
 
@@ -310,7 +310,7 @@ No additional notes.
 - League of Draven and Hijack are the only abilities to interact with the chat interface.
 - League of Draven’s icon was directly cropped from his Champion Square, which was in turn directly edited from his Draven.
 - League of Draven is among a few abilities that were named after a quote of their champion. In this case, it references his "Welcome to the League of Draven" quote which he had before the patch he got the ability, V3.9.
-  - The others are Goes Where He Pleases and End of the Line.
+  - The others are Dr. Mundo’s Goes Where He Pleases and Graves’ End of the Line.
 - Draven was not played by David 'Phreak' Turley in his 'Champion Spotlight'.
 - When Draven is Recall or Teleport, he strikes a pose resembling Usain Bolt.
   - He points to his target location.

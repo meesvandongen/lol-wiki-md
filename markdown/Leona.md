@@ -302,12 +302,12 @@ Targets are also slowed by 80% for $1.75$ seconds, or stunned for the same durat
 - A functional real-life replica of Leona's Zenith Blade was crafted in an episode of YouTube series Man At Arms: Reforged.
   - This video can be viewed here.
     - There are also episodes where they crafted:
-      - Moonfall (functional)
-      - Preparation (functional)
-      - Highlander (functional)
-      - Hammer Shock (functional)
-      - Steel Tempest (functional)
-      - Short Fuse (prop)
+      - Diana’s Crescent Moonblade (functional)
+      - Katarina’s Daggers (functional)
+      - Master Yi’s Highlander' Ring Sword (functional)
+      - Poppy’s Hammer of Orlon (functional)
+      - Yasuo’s Last Breath' Sword (functional)
+      - Ziggs’ Hexplosive Bomb (prop)
 
 ---
 *This page was automatically generated from League of Legends Wiki data.*
