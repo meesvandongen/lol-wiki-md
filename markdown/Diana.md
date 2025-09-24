@@ -83,7 +83,7 @@
 | **Spell Effects** | spellaoe |
 | **Parry** | True |
 
-**INNATE:** **Diana** gains attack speed. After casting an ability, this bonus is tripled to 15×3 to 35×3 for 5 seconds.
+**INNATE:** **Diana** gains (attack speed) 15 to 35 **bonus** attack speed. After casting an ability, this bonus is tripled to 15×3 to 35×3 for 5 seconds.
 
 **INNATE - MOONSILVER BLADE:** **Diana**’s basic attacks generate a stack of *Moonsilver Blade* for 5 seconds, refreshing on subsequent attacks and stacking up to 2 times. At 2 stacks, **Diana** empowers her next basic attack to consume the stacks on-hit to additionally cleave nearby enemies, dealing them 20+5*(x-1) for 6 / then + 10*x for 5 / then + 15*x for 5 / then + 25*x (+ 50% AP) magic damage. *Moonsilver Blade* deals 260% damage against monsters.
 

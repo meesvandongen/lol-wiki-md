@@ -236,7 +236,7 @@ No additional notes.
 
 **RECAST:** **Draven** forces the axes to reverse direction, slowly coming to a stop before homing back to him, dealing the same damage to enemies hit.
 
-*Whirling Death* deals key=% damage, resetting upon reversing direction.
+*Whirling Death* deals 100×0.92^(x-1)% / 40% damage, resetting upon reversing direction.
 
 | Attribute | Value |
 |-----------|------:|

@@ -72,7 +72,7 @@
 | **Spell Effects** | proc |
 | **Parry** | True |
 
-**INNATE:** **Aurora**’s damaging basic attacks and abilities apply a stack of *Spirit Abjuration* to enemies for 4 seconds, refreshing on subsequent applications and stacking up to 3 times. The third stack against a target consumes them all to deal **bonus** magic damage equal to 1% (+ $2.7$% per 100 AP) of the target's **maximum** health, capped at 90+10*x against monsters.
+**INNATE:** **Aurora**’s damaging basic attacks and abilities apply a stack of *Spirit Abjuration* to enemies for 4 seconds, refreshing on subsequent applications and stacking up to 3 times. The third stack against a target consumes them all to deal **bonus** magic damage equal to 1% (+ $2.7$% per 100 AP) of the target's **maximum** health, capped at 100 / 270 against monsters.
 
 Upon consuming the stacks from a champion, **Aurora** additionally exorcises them, freeing a Spirit from the target that follows her for the same duration. For each active Spirit, **Aurora** is healed for 3 to 20 (+ 2% AP) every second. Subsequent exorcisms free further Spirits and refresh all active Spirits. **Aurora** may have up to 4 Spirits at a time, for a maximum heal per tick of 3×4 to 20×4 (+ 8% AP).
 
@@ -110,7 +110,7 @@ Upon consuming the stacks from a champion, **Aurora** additionally exorcises the
 
 *Twofold Hex* can be recast after $0.1$ seconds while at least one target is marked, and does so automatically at the end of the mark's duration.
 
-**RECAST:** **Aurora** expunges the curse from all marked targets, drawing the spiritual energy back to her as bolts that each deal magic damage to all enemies they pass through, reduced to 40% against minions and 50% against monsters and increased by key=%. Subsequent bolts against an enemy deal 20% damage.
+**RECAST:** **Aurora** expunges the curse from all marked targets, drawing the spiritual energy back to her as bolts that each deal magic damage to all enemies they pass through, reduced to 40% against minions and 50% against monsters and increased by 0 to 100*(1.5-1) for 11. Subsequent bolts against an enemy deal 20% damage.
 
 | Attribute | Value |
 |-----------|------:|
@@ -161,7 +161,7 @@ Upon consuming the stacks from a champion, **Aurora** additionally exorcises the
 |-----------|------:|
 | **Bonus Movement Speed** | 20 / 25 / 30 / 35 / 40% |
 
-Scoring a takedown against an enemy champion within 3 seconds of damaging them will ah *Across the Veil*’s cooldown.
+Scoring a takedown against an enemy champion within 3 seconds of damaging them will (ah) reset *Across the Veil*’s cooldown.
 
 **Notes:**
 

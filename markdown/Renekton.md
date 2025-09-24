@@ -160,7 +160,7 @@ Against champions, the healing is increased.
 | **Spell Effects** | Special |
 | **Parry** | True |
 
-**ACTIVE:** **Renekton** empowers his next basic attack within 7 seconds to have a $0.2$-second cast time ((Estimated)), have range and strike the target twice, dealing ***modified** physical damage and stunning them for $0.75$ seconds. Each strike applies on-hit effects and generates Fury. Hitting an enemy champion generates 10 **bonus** Fury.
+**ACTIVE:** **Renekton** empowers his next basic attack within 7 seconds to have a $0.2$-second cast time ((Estimated)), have (range) 175 range and strike the target twice, dealing ***modified** physical damage and stunning them for $0.75$ seconds. Each strike applies on-hit effects and generates Fury. Hitting an enemy champion generates 10 **bonus** Fury.
 
 | Attribute | Value |
 |-----------|------:|
@@ -222,7 +222,7 @@ If **Renekton** hits an enemy, he can recast *Slice and Dice* within the next 4 
 
 Both casts generate 2 Fury for each non-champion hit and 10 Fury for each champion hit, up to 30 total per cast.
 
-** *Dice*, the recast, deals **bonus** physical damage and inflicts arpen to enemies hit for 4 seconds.
+** *Dice*, the recast, deals **bonus** physical damage and inflicts (arpen) armor reduction to enemies hit for 4 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -253,7 +253,7 @@ Both casts generate 2 Fury for each non-champion hit and 10 Fury for each champi
 | **Spell Shield** | False |
 | **Spell Effects** | aoedot |
 
-**ACTIVE:** **Renekton** empowers himself for 15 seconds, gaining health, 20% increased size, range, and 20 Fury, as well as increasing *Cull the Meek’s* effect radius.
+**ACTIVE:** **Renekton** empowers himself for 15 seconds, gaining (health) **bonus** health, 20% increased size, (range) 25 **bonus** attack range, and 20 Fury, as well as increasing *Cull the Meek’s* effect radius.
 
 | Attribute | Value |
 |-----------|------:|

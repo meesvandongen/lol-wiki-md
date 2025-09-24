@@ -90,7 +90,7 @@
 | **Spell Effects** | proc |
 | **Parry** | Special |
 
-**INNATE:** **K'Sante**’s abilities mark enemies hit for 4 seconds. His basic attacks against marked enemies are empowered to consume the mark on-hit, dealing 12 (+ 1 to 2 of target's **maximum** health) **bonus** physical damage. The damage based on the target's health has a minimum of 10 + 5*x against minions and is capped at 15 + 5*x against monsters.
+**INNATE:** **K'Sante**’s abilities mark enemies hit for 4 seconds. His basic attacks against marked enemies are empowered to consume the mark on-hit, dealing 12 (+ 1 to 2 of target's **maximum** health) **bonus** physical damage. The damage based on the target's health has a minimum of 15 / 100 against minions and is capped at 20 / 105 against monsters.
 
 ** **K'Sante**’s basic attacks and ability damage, as well as *Dauntless Instinct*’s mark consumption, are empowered to deal **bonus** physical damage equal to 1% (+ 1% per 100 **bonus** armor) (+ 1% per 100 **bonus** magic resistance) of the target's **maximum** health.
 
@@ -171,7 +171,7 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 
 *Path Maker* can be recast within the duration, and does so automatically afterwards. *Path Maker*’s charge cannot be interrupted by crowd control.
 
-**RECAST:** **K'Sante** dashes in the direction he targeted at the time of cast, though not through terrain, dealing physical damage to enemies he passes through, carrying them alongside him, and stunning them for type=channel time seconds. This damage is capped against monsters.
+**RECAST:** **K'Sante** dashes in the direction he targeted at the time of cast, though not through terrain, dealing physical damage to enemies he passes through, carrying them alongside him, and stunning them for 0.5 / 0.62 / 0.75 / 0.88 / 1 / 1.12 / 1.25 / 1.38 / 1.5 / 1.62 / 1.75 seconds. This damage is capped against monsters.
 
 | Attribute | Value |
 |-----------|------:|
@@ -179,7 +179,7 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 |-----------|------:|
 | **Monster Damage Cap** | 180 / 260 / 340 / 420 / 500 |
 
-** *Path Maker* no longer applies its knock back and stun, but its damage reduction is increased to 75%, the dash deals true damage, and the dash speed is increased by 20%. Upon entering *All Out*, *Path Maker*’s cooldown is refreshed.
+** *Path Maker* no longer applies its knock back and stun, but its damage reduction is increased to 75%, the dash deals (true damage) 10 to 80 **bonus** true damage, and the dash speed is increased by 20%. Upon entering *All Out*, *Path Maker*’s cooldown is refreshed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -285,7 +285,7 @@ If there is valid map-generated terrain (Terrain that has an opposite (non-borde
 
 After **K'Sante** blinks, he enters *All Out* for 15 seconds.
 
-**ALL OUT:** **K'Sante** gains a health threshold equal to 65% **maximum** health which cannot be modified (By increases or decreases to maximum health) nor exceeded (By healing and health regeneration) by any means. Upon entering *All Out*, his **current** health is reduced to this threshold if it is above it. Additionally, his armor and mr are reduced by 85% **bonus** armor and 85% **bonus** magic resistance, respectively. In return, he gains **bonus** attack speed, lethality, and 20% omnivamp, and modifies his basic abilities which can be cast at no cost.
+**ALL OUT:** **K'Sante** gains a health threshold equal to 65% **maximum** health which cannot be modified (By increases or decreases to maximum health) nor exceeded (By healing and health regeneration) by any means. Upon entering *All Out*, his **current** health is reduced to this threshold if it is above it. Additionally, his (armor) **base** armor and (mr) **base** magic resistance are reduced by 85% **bonus** armor and 85% **bonus** magic resistance, respectively. In return, he gains **bonus** attack speed, (lethality) 50% **bonus**-armor penetration (Affects bonus armor only), and 20% omnivamp, and modifies his basic abilities which can be cast at no cost.
 
 Upon entering *All Out*, **K'Sante** is restored to 100% **maximum** mana. His mana then decays to 0 over the duration of the buff, after which the amount of he had prior to entering *All Out* (After paying All Out's mana cost) is restored.
 
@@ -349,7 +349,7 @@ Upon entering *All Out*, **K'Sante** is restored to 100% **maximum** mana. His m
 - Dauntless Instinct
   - Mark base damage reduced to 12 from 20.
 - Path Maker
-  - All Out bonus true damage reduced to key=% from key=%.
+  - All Out bonus true damage reduced to 10 to 80 from 10 to 100.
 
 ### V25.04
 - Ntofo Strikes
@@ -378,7 +378,7 @@ Upon entering *All Out*, **K'Sante** is restored to 100% **maximum** mana. His m
   - Damage armor ratio increased to 40% **bonus** armor from 35%.
   - Damage magic resistance ratio increased to 40% **bonus** magic resistance from 35%.
 - Path Maker
-  - Stun duration increased to type=channel time seconds from type=channel time.
+  - Stun duration increased to 0.5 / 0.62 / 0.75 / 0.88 / 1 / 1.12 / 1.25 / 1.38 / 1.5 / 1.62 / 1.75 seconds from 0.5 / 0.6 / 0.7 / 0.8 / 0.9 / 1 / 1.1 / 1.2 / 1.3 / 1.4 / 1.5.
 - Footwork
   - Base shield changed to 80 / 120 / 160 / 200 / 240 from 50 / 100 / 150 / 200 / 250.
   - Shield health ratio increased to 15% **bonus** health from 10%.

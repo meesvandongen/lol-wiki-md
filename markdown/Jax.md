@@ -94,7 +94,7 @@
 
 **INNATE:** **Jax**’s basic attacks generate a stack of *Relentless Assault* on-attack for $2.5$ seconds, refreshing on subsequent attacks and stacking up to 8 times. Stacks expire by one every $0.25$ seconds when the duration ends.
 
-**RELENTLESS ASSAULT:** For each stack, **Jax** gains , up to a maximum of key=%.
+**RELENTLESS ASSAULT:** For each stack, **Jax** gains 5%–12.5%@1–16 **bonus** attack speed, up to a maximum of 40%–100%@1–16.
 
 **GRANDMASTER AT ANGLING:** While out-of-combat with champions and idle in the river for 10 seconds, **Jax** will occasionally catch a fish, granting him 1 gold and 1 ability power for 5 seconds. He catches a fish at an average rate of one every 15 seconds. He also has a 5% chance to catch a rare fish that grants 10 gold and 10 ability power for 5 seconds.
 
@@ -156,7 +156,7 @@ If the target is an enemy and they are in range upon arrival, **Jax** deals phys
 | **Spell Effects** | spell |
 | **Parry** | True |
 
-**ACTIVE:** **Jax** empowers his next basic attack or *Leap Strike* against an enemy within 10 seconds to deal **bonus** magic damage, reduced to 50% against structures. If *Empower* is used on a basic attack, it will gain range and have an uncancellable windup.
+**ACTIVE:** **Jax** empowers his next basic attack or *Leap Strike* against an enemy within 10 seconds to deal **bonus** magic damage, reduced to 50% against structures. If *Empower* is used on a basic attack, it will gain (range) 50 **bonus** range and have an uncancellable windup.
 
 | Attribute | Value |
 |-----------|------:|
@@ -260,8 +260,8 @@ If the target is an enemy and they are in range upon arrival, **Jax** deals phys
 
 ### V25.12
 - Relentless Assault
-  - Bonus attack speed per stack increased to key=% from key=%.
-    - Maximum bonus attack speed increased to key=% from key=%.
+  - Bonus attack speed per stack increased to 5 to 5+1.5×5 for 6 from 3.5 to 3.5+1.5×5 for 6.
+    - Maximum bonus attack speed increased to 5×8 to (5+1.5×5)*8 for 6 from 3.5×8 to (3.5+1.5×5)*8 for 6.
 
 ### V25.11
 - Grandmaster-at-Arms

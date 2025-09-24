@@ -81,7 +81,7 @@
 | **Affects** | Self |
 | **Parry** | unknown |
 
-**INNATE:** Periodically, **Xerath** empowers his next basic attack to restore mana, doubled to 60 / 66 / 72 / 84 / 96 / 108 / 126 / 144 / 162 / 180 / 204 / 228 / 252 / 276 / 300 / 330 / 360 / 390 against enemy champions.
+**INNATE:** Periodically, **Xerath** empowers his next basic attack to restore (mana) 30 / 33 / 36 / 42 / 48 / 54 / 63 / 72 / 81 / 90 / 102 / 114 / 126 / 138 / 150 / 165 / 180 / 195 mana, doubled to 60 / 66 / 72 / 84 / 96 / 108 / 126 / 144 / 162 / 180 / 204 / 228 / 252 / 276 / 300 / 330 / 360 / 390 against enemy champions.
 
 *Mana Surge*’s cooldown is reduced by $3.5$ seconds whenever **Xerath** kills an enemy.
 
@@ -99,7 +99,7 @@
 
 | Attribute | Value |
 |-----------|------:|
-| **Range** | time 107.14 per 0.25 seconds (after an intial delay of 0 to 0.25). *This is capped at 1450 range.* units |
+| **Range** | 700 / 807.14 / 914.29 / 1021.43 / 1128.57 / 1235.71 / 1342.86 / 1450 107.14 per 0.25 seconds (after an intial delay of 0 to 0.25). *This is capped at 1450 range.* units |
 | **Cast Time** | none |
 | **Width** | 145 units |
 | **Cost** | 80 / 90 / 100 / 110 / 120 mana |
@@ -113,9 +113,9 @@
 | **Projectile** | False |
 | **Silence** | True |
 
-**ACTIVE:** **Xerath** charges while being slowed by key=%5% per 0.25 seconds channeled, capped at 40% for up to 3 seconds to increase *Arcanopulse*’s range over the first $1.5$ to $1.75$ seconds of the channel.
+**ACTIVE:** **Xerath** charges while being slowed by 0% / 10% / 15% / 20% / 25% / 30% / 35% / 40%5% per 0.25 seconds channeled, capped at 40% for up to 3 seconds to increase *Arcanopulse*’s range over the first $1.5$ to $1.75$ seconds of the channel.
 
-*Arcanopulse* can be recast within the duration. If the charge is interrupted or completes without reactivation, *Arcanopulse* is cancelled and refunds mana.
+*Arcanopulse* can be recast within the duration. If the charge is interrupted or completes without reactivation, *Arcanopulse* is cancelled and refunds (mana) half the mana cost.
 
 | Attribute | Value |
 |-----------|------:|
@@ -194,7 +194,7 @@ Enemies in the epicenter take $66.7$% increased damage and are slowed by a great
 | **Spell Effects** | Single target |
 | **Projectile** | True |
 
-**ACTIVE:** **Xerath** fires an orb of energy in the target direction that deals magic damage to the first enemy hit and stuns them for type=orb travel distance seconds.
+**ACTIVE:** **Xerath** fires an orb of energy in the target direction that deals magic damage to the first enemy hit and stuns them for 0.75–2.25@0–1050 (@=orb travel distance) seconds.
 
 | Attribute | Value |
 |-----------|------:|

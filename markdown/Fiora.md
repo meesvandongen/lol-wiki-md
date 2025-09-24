@@ -101,7 +101,7 @@
 
 **INNATE:** **Fiora** identifies the Vitals of nearby visible enemy champions, marked as an arc around them in North-, East-, South- or Westward direction. Vitals take $1.75$ seconds to become targetable and linger for $13.25$ seconds afterwards while **Fiora** remains near the target, otherwise the Vital will disappear. After a Vital ends, **Fiora** identifies a new one on her target.
 
-Dealing damage in the direction of a Vital will trigger it to deal **bonus** true damage equal to 3% (+ 4% per 100 **bonus** AD) of target's **maximum** health, heal **Fiora** for 35 to 100, and grant her type=[File:Grand Challenge.png ms that decays over $1.85$ seconds.
+Dealing damage in the direction of a Vital will trigger it to deal **bonus** true damage equal to 3% (+ 4% per 100 **bonus** AD) of target's **maximum** health, heal **Fiora** for 35 to 100, and grant her 20px (ms) **bonus** movement speed that decays over $1.85$ seconds.
 
 **Notes:**
 
@@ -137,7 +137,7 @@ Dealing damage in the direction of a Vital will trigger it to deal **bonus** tru
 | **Grounded** | True |
 | **Knockdown** | True |
 
-**ACTIVE:** **Fiora** dashes in the target direction, then stabs a nearby enemy. *Lunge* can hit [structures and wards. Stabbing a target reduces *Lunge*’s cooldown by 50%.
+**ACTIVE:** **Fiora** dashes in the target direction, then stabs a nearby enemy. *Lunge* can hit structures and wards. Stabbing a target reduces *Lunge*’s cooldown by 50%.
 
 The stab deals physical damage and applies on-hit effects.
 
@@ -242,13 +242,13 @@ The enemy champion struck is also slowed and crippled by 25% for 2 seconds. If *
 | **Spell Effects** | spell |
 | **Parry** | Special |
 
-**ACTIVE:** **Fiora** empowers her next two basic attacks on-attack within 4 seconds to gain range and **bonus** attack speed.
+**ACTIVE:** **Fiora** empowers her next two basic attacks on-attack within 4 seconds to gain (range) 25 **bonus** range and **bonus** attack speed.
 
 | Attribute | Value |
 |-----------|------:|
 | **Bonus Attack Speed** | 50 / 60 / 70 / 80 / 90% |
 
-The first attack slows the target by 30% for 1 second but cannot critically strike. The second attack will critically strike for critical damage modifiers, including to structures.
+The first attack slows the target by 30% for 1 second but cannot critically strike. The second attack will critically strike for (critical damage modifiers) ***modified** critical damage, including to structures.
 
 | Attribute | Value |
 |-----------|------:|
@@ -280,7 +280,7 @@ The first attack slows the target by 30% for 1 second but cannot critically stri
 | **Affects** | Self, Enemies |
 | **Spell Shield** | False |
 
-**PASSIVE:** *Duelist's Dance’s* ms is increased.
+**PASSIVE:** *Duelist's Dance’s* (ms) **bonus** movement speed is increased.
 
 | Attribute | Value |
 |-----------|------:|
@@ -288,7 +288,7 @@ The first attack slows the target by 30% for 1 second but cannot critically stri
 
 **ACTIVE:** **Fiora** challenges the target enemy champion for 8 seconds, highlighting all four of their Vitals after a $0.5$-second delay. While in effect, *Duelist's Dance* does not identify new Vitals on **Fiora**’s target.
 
-While near the target, **Fiora** gains *Duelist's Dance’s* ms.
+While near the target, **Fiora** gains *Duelist's Dance’s* (ms) **bonus** movement speed.
 
 If **Fiora** triggers at least one Vital before the target dies, or triggers all four, she creates a *Victory Zone* at their location for 5 seconds, which heals **Fiora** and all allies within the area every $0.25$ seconds.
 

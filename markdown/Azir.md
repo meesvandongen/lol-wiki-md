@@ -141,7 +141,7 @@
 
 **INNATE - DISC OF THE SUN:** **Azir** can select a marker to construct the Sun Disc above the ruins after a $0.5$-second cast time. The Sun Disc will activate after being assembled over 5 seconds.
 
-The Sun Disc functions the same as a standard inner turret but deals magic damage, gains 40% AP **bonus** attack damage, and grants its kill credit to **Azir**. The Sun Disc's health decays over 45 seconds and loses armor and magic resistance while **Azir** is not alive or is too far away.
+The Sun Disc functions the same as a standard inner turret but deals magic damage, gains 40% AP **bonus** attack damage, and grants its kill credit to **Azir**. The Sun Disc's health decays over 45 seconds and loses (armor) 100 armor and (magic resistance) 100 magic resistance while **Azir** is not alive or is too far away.
 
 ***Azir** cannot construct a Sun Disc with the marker while he is unable to cast abilities.*
 
@@ -213,7 +213,7 @@ Enemies hit by subsequent soldiers take no additional damage and are instead slo
 
 **Azir** periodically stocks a Sand Soldier, up to a maximum of 2.
 
-When **Azir** declares a basic attack against an enemy in a soldier's attack range, the Sand Soldier attacks in his stead, thrusting their spear in the target's direction to deal magic damage to enemies struck in a line, applying on-hit effects to the primary target, with on-hit damage reduced to 50% effectiveness, and triggering on-attack effects once. Targets hit beyond the closest take key=% damage. Subsequent Sand Soldiers against the same target deal 25% damage.
+When **Azir** declares a basic attack against an enemy in a soldier's attack range, the Sand Soldier attacks in his stead, thrusting their spear in the target's direction to deal magic damage to enemies struck in a line, applying on-hit effects to the primary target, with on-hit damage reduced to 50% effectiveness, and triggering on-attack effects once. Targets hit beyond the closest take 25%–100%@1–16 damage. Subsequent Sand Soldiers against the same target deal 25% damage.
 
 | Attribute | Value |
 |-----------|------:|

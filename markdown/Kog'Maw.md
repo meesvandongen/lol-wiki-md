@@ -90,7 +90,7 @@
 | **Spell Shield** | True |
 | **Spell Effects** | Area of effect |
 
-**INNATE:** Upon taking fatal damage, **Kog'Maw** enters a zombie state for 4 seconds, becoming ghosted and gaining ms that increases up to 50% over the duration. At the end of the duration, he explodes to deal true damage to nearby enemies.
+**INNATE:** Upon taking fatal damage, **Kog'Maw** enters a zombie state for 4 seconds, becoming ghosted and gaining (ms) 10% **bonus** movement speed that increases up to 50% over the duration. At the end of the duration, he explodes to deal (true damage) 140 to 650 true damage to nearby enemies.
 
 While under this state, **Kog'Maw** becomes invulnerable, untargetable, and immune to crowd control, but is also rendered unable to declare basic attacks, cast abilities, use summoner spells, and activate items.
 
@@ -128,7 +128,7 @@ While under this state, **Kog'Maw** becomes invulnerable, untargetable, and immu
 |-----------|------:|
 | **Bonus Attack Speed** | 10 / 15 / 20 / 25 / 30% |
 
-**ACTIVE:** **Kog'Maw** ejects a wad of spittle in the target direction that deals magic damage to the first enemy hit and reduces their armor penetration and magic penetration for 4 seconds.
+**ACTIVE:** **Kog'Maw** ejects a wad of spittle in the target direction that deals magic damage to the first enemy hit and reduces their (armor penetration) armor and (magic penetration) magic resistance for 4 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -158,7 +158,7 @@ No additional notes.
 | **Spell Effects** | Proc |
 | **Parry** | True |
 
-**ACTIVE:** **Kog'Maw** empowers his basic attacks for the next 8 seconds to gain range and deal **bonus** magic damage on-hit, capped at 100 against minions and monsters.
+**ACTIVE:** **Kog'Maw** empowers his basic attacks for the next 8 seconds to gain (range) **bonus** attack range and deal **bonus** magic damage on-hit, capped at 100 against minions and monsters.
 
 | Attribute | Value |
 |-----------|------:|
@@ -216,7 +216,7 @@ A field of ooze is created in its wake for 3 seconds, slowing enemies every $0.2
 | **Cast Time** | $0.25$ seconds |
 | **Target Range** | 1300 / 1425 / 1550 / 1675 / 1800 units |
 | **Effect Radius** | 240 units |
-| **Cost** | stacks Mana |
+| **Cost** | 40–400@0–9 (@=stacks) Mana |
 | **Cooldown** | 2 / 1.75 / 1.5 / 1.25 / 1 seconds |
 | **Targeting** | Location |
 | **Affects** | Enemies |
@@ -225,7 +225,7 @@ A field of ooze is created in its wake for 3 seconds, slowing enemies every $0.2
 | **Spell Effects** | Area of effect |
 | **Out of Range Behavior** | walk to location |
 
-**ACTIVE:** **Kog'Maw** spits a globule of acid into the that drops to the target location after $0.6$ seconds, granting sight of the area before dealing magic damage to enemies hit and revealing them for 2 seconds. *Living Artillery*’s damage is increased by type=target's **missing** health, or instead by 100% if the target is below 40% **maximum** health.
+**ACTIVE:** **Kog'Maw** spits a globule of acid into the that drops to the target location after $0.6$ seconds, granting sight of the area before dealing magic damage to enemies hit and revealing them for 2 seconds. *Living Artillery*’s damage is increased by 0%–50%@0–60 (@=target's **missing** health), or instead by 100% if the target is below 40% **maximum** health.
 
 | Attribute | Value |
 |-----------|------:|

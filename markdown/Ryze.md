@@ -79,7 +79,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Ryze** increases his mana by (10% per 100 AP).
+**INNATE:** **Ryze** increases his (mana) **maximum** mana by (10% per 100 AP).
 
 **Notes:**
 
@@ -115,13 +115,13 @@
 |-----------|------:|
 | **Magic Damage** | 75 / 95 / 115 / 135 / 155 (+ 55% AP) (+ 2% **bonus** mana) |
 
-If **Ryze** consumed 2 stacks, he gains ms for 2 seconds.
+If **Ryze** consumed 2 stacks, he gains (ms) **bonus** movement speed for 2 seconds.
 
 | Attribute | Value |
 |-----------|------:|
 | **Bonus Movement Speed** | 28 / 32 / 36 / 40 / 44% |
 
-** *Overload* deals type=[File:Realm Warp.png increased damage and spreads to surrounding *Fluxed* enemies.
+** *Overload* deals 20px increased damage and spreads to surrounding *Fluxed* enemies.
 
 **Notes:**
 
@@ -306,7 +306,7 @@ Upon completion, **Ryze** and allied units within (See notes) will blink to the 
 
 ## Trivia
 
-- His name comes from [Riot Games's CEO Brandon 'Ryze' Beck's alias.
+- His name comes from Riot Games's CEO Brandon 'Ryze' Beck's alias.
 - Ryze was one of the original playable characters in the the Summoner's Rift Battle Training tutorial, along with Ashe and Garen.
 - Ryze was the first champion to have 9 skins.
   - He was also the first to have 2 Harrowing ones (Ryze in 2010, Ryze in 2012).

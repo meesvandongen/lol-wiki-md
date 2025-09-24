@@ -94,7 +94,7 @@
 
 | Attribute | Value |
 |-----------|------:|
-| **Static Cooldown** | 50 (Chime spawn rate) / true (Meep spawn rate) |
+| **Static Cooldown** | 50 (Chime spawn rate) / 8@0; 7@20; 6@40; 5@55; 4@70 (@=number of Chimes) (Meep spawn rate) |
 | **Targeting** | Passive |
 | **Affects** | Enemies |
 | **Damage Type** | Magic |
@@ -103,14 +103,14 @@
 | **Projectile** | True |
 | **Parry** | False |
 
-**INNATE - ANCIENT CHIMES:** **Bard**’s presence causes sacred Chimes to appear at random locations on the map, lingering for up to 10 minutes. Collecting a Chime restores mana and grants **Bard** Experience, as well as ms out of combat for 20 seconds, which stacks up to 10 times. Each Chime collected beyond the first instead grants an additional 14% **bonus** movement speed, up to a total of 150% **bonus** movement speed. **Bard** empowers his Meeps each time he collects 5 Chimes.
+**INNATE - ANCIENT CHIMES:** **Bard**’s presence causes sacred Chimes to appear at random locations on the map, lingering for up to 10 minutes. Collecting a Chime restores (mana) 12% **maximum** mana and grants **Bard** (Experience) 20 + (*1 per minute after 5 minutes*) experience, as well as (ms) 24% **bonus** movement speed out of combat for 20 seconds, which stacks up to 10 times. Each Chime collected beyond the first instead grants an additional 14% **bonus** movement speed, up to a total of 150% **bonus** movement speed. **Bard** empowers his Meeps each time he collects 5 Chimes.
 
 **INNATE - MEEPS:** **Bard**’s presence attracts Meeps, which are small spirits that come to his side. While he has Meeps, his basic attacks are empowered to each consume a Meep on-attack to deal 35 (*+ 10 per 5 Chimes collected*) (+ 40% AP) **bonus** magic damage.
-- At 5 Chimes, Meeps slow damaged enemies by type = number of Chimes for 1 second.
+- At 5 Chimes, Meeps slow damaged enemies by 25%@5; 35%@25; 45%@45; 55%@60; 65%@75; 75%@85 (@=number of Chimes) for 1 second.
 - At 15 Chimes, Meeps deal the damage to enemies within 150 units of the primary target as well as those in a cone behind them.
 - At 35 Chimes, the cone's radius increases.
 
-**Bard** can have up to type = number of Chimes Meeps at a time.
+**Bard** can have up to 1@0; 2@10; 3@30; 4@50; 5@65; 6@80; 7@90; 8@95; 9@100 (@=number of Chimes) Meeps at a time.
 
 **Notes:**
 
@@ -193,7 +193,7 @@ If targeting an ally, walk in range of the target unit to cast |
 
 **ACTIVE:** **Bard** conjures a shrine at the target location that grants sight of its surroundings for 1 second and gathers power over 5 seconds. Up to 3 shrines may be active at a time. Shrines may last indefinitely until being consumed by a champion moving over them.
 
-If the champion is an ally or **Bard** himself, they are healed for an amount based on the shrine's power and gain ms decaying over $1.5$ seconds. The **bonus** movement speed can stack with subsequent shrines triggered. If the champion is an enemy, the shrine is destroyed.
+If the champion is an ally or **Bard** himself, they are healed for an amount based on the shrine's power and gain (ms) **bonus** movement speed decaying over $1.5$ seconds. The **bonus** movement speed can stack with subsequent shrines triggered. If the champion is an enemy, the shrine is destroyed.
 
 | Attribute | Value |
 |-----------|------:|

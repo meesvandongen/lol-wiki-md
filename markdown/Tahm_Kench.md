@@ -139,7 +139,7 @@
 |-----------|------:|
 | **Increased Damage Stored into Grey Health** | 42 / 44 / 46 / 48 / 50% |
 
-While *Thick Skin* is not on cooldown, and after 4 seconds without taking damage, **Tahm Kench** rapidly consumes his grey health to restore key=% of the amount, healing for 10% of his **maximum** health every .
+While *Thick Skin* is not on cooldown, and after 4 seconds without taking damage, **Tahm Kench** rapidly consumes his grey health to restore 45 to 100 of the amount, healing for 10% of his **maximum** health every .
 
 **ACTIVE:** **Tahm Kench** converts his current grey health into a shield that lasts for $2.5$ seconds.
 

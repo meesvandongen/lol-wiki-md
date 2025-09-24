@@ -212,7 +212,7 @@ Casting *Special Delivery* instantly resets *Valkyrie’s* cooldown.
 | **Spell Effects** | aoedot |
 | **Projectile** | False |
 
-**ACTIVE:** **Corki** sprays bullets in a cone toward his facing direction for 4 seconds, dealing physical damage every $0.25$ seconds to all enemies hit and applying a stack to them at the same tick rate for 2 seconds, refreshing with subsequent hits and stacking up to 4 times. Each stack reduces the target's lethality and magic penetration.
+**ACTIVE:** **Corki** sprays bullets in a cone toward his facing direction for 4 seconds, dealing physical damage every $0.25$ seconds to all enemies hit and applying a stack to them at the same tick rate for 2 seconds, refreshing with subsequent hits and stacking up to 4 times. Each stack reduces the target's (lethality) armor and (magic penetration) magic resistance.
 
 | Attribute | Value |
 |-----------|------:|

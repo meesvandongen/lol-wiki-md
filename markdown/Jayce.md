@@ -85,7 +85,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** Whenever **Jayce** switches between either ** or **, he gains ghosting and ms for $0.75$ seconds.
+**INNATE:** Whenever **Jayce** switches between either ** or **, he gains ghosting and (ms) 40 **bonus** movement speed for $0.75$ seconds.
 
 **Notes:**
 
@@ -185,7 +185,7 @@ If the bolt passes through *Acceleration Gate*, it becomes supercharged: increas
 | **Spell Effects** | Proc |
 | **Parry** | True |
 
-**ACTIVE:** **Jayce** empowers his next 3 basic attacks within 4 seconds to deal ***modified** physical damage and gain attack speed.
+**ACTIVE:** **Jayce** empowers his next 3 basic attacks within 4 seconds to deal ***modified** physical damage and gain (attack speed) 360% **bonus** attack speed.
 
 *Hyper Charge*’s **total** damage is affected by critical strike modifiers.
 
@@ -248,7 +248,7 @@ If the bolt passes through *Acceleration Gate*, it becomes supercharged: increas
 | **Affects** | Allies |
 | **Out of Range Behavior** | cast at max |
 
-**ACTIVE:** **Jayce** deploys an energy gate centered at the target location, lasting for 4 seconds and granting sight of its surroundings. **Jayce** and all allied champions can move through it to gain ms that decays over 3 seconds.
+**ACTIVE:** **Jayce** deploys an energy gate centered at the target location, lasting for 4 seconds and granting sight of its surroundings. **Jayce** and all allied champions can move through it to gain (ms) **bonus** movement speed that decays over 3 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -302,7 +302,7 @@ No additional notes.
 | **Affects** | Self |
 | **Parry** | True |
 
-**ACTIVE:** **Jayce** transforms into Transform Mercury Cannon.png, receiving access to its abilities, becoming ranged with 500 attack range, and empowering his next basic attack to reduce the target's armor penetration and magic penetration by key=% for 5 seconds.
+**ACTIVE:** **Jayce** transforms into Transform Mercury Cannon.png, receiving access to its abilities, becoming ranged with 500 attack range, and empowering his next basic attack to reduce the target's (armor penetration) armor and (magic penetration) magic resistance by 10%–25%@1–16 for 5 seconds.
 
 **Notes:**
 
@@ -324,7 +324,7 @@ No additional notes.
 | **Affects** | Self |
 | **Parry** | True |
 
-**ACTIVE:** **Jayce** transforms into Transform Mercury Hammer.png, receiving access to its abilities, becoming melee with 125 attack range, gaining 5–35@1–16 (+ $7.5$% **bonus** AD) armor and mr, and empowering his next basic attack to deal 25–130@1–16 (+ 30% **bonus** AD) **bonus** magic damage.
+**ACTIVE:** **Jayce** transforms into Transform Mercury Hammer.png, receiving access to its abilities, becoming melee with 125 attack range, gaining 5–35@1–16 (+ $7.5$% **bonus** AD) (armor) **bonus** armor and (mr) **bonus** magic resistance, and empowering his next basic attack to deal 25–130@1–16 (+ 30% **bonus** AD) **bonus** magic damage.
 
 **Jayce** begins the game with *Transform* but cannot increase its rank. Instead, his basic abilities each have 6 ranks.
 

@@ -27,7 +27,7 @@
 
 **INNATE:** When **Nunu** and **Willump** deal damage against an enemy champion, large monster or structure, they and a nearby allied champion gain *Call of the Freljord* for 4 seconds, prioritizing the ally with **highest** attack speed.
 
-**CALL OF THE FRELJORD:** Gain 20% **bonus** attack speed and ms. **Willump**’s basic attacks additionally deal 30% AD physical damage to secondary targets in a cone in front of him.
+**CALL OF THE FRELJORD:** Gain 20% **bonus** attack speed and (ms) 10% **bonus** movement speed. **Willump**’s basic attacks additionally deal 30% AD physical damage to secondary targets in a cone in front of him.
 
 **Nunu** and **Willump** cannot trigger *Call of the Freljord* from the same enemy again for a time. Successive triggers of *Call of the Freljord* while it is active will extend the duration by 4 seconds.
 
@@ -94,7 +94,7 @@ Against champions, he deals magic damage and the heal is reduced to 60%.
 | Attribute | Value |
 |-----------|------:|
 | **Cast Time** | none |
-| **Target Range** | charge time |
+| **Target Range** | 750–750 to 1750 for 5@0–5 (@=charge time) units |
 | **Speed** | 425 (Small snowball) / 435 – 594 (Medium snowball) / 595 (Big snowball) units/second |
 | **Cost** | 50 / 55 / 60 / 65 / 70 Mana |
 | **Cooldown** | 14 seconds |
@@ -109,13 +109,13 @@ Against champions, he deals magic damage and the heal is reduced to 60%.
 | **Grounded** | True |
 | **Silence** | True |
 | **Size Radius** | er 130 (Small snowball) / 260 (Medium snowball) / 390 (Big snowball) |
-| **Steer Speed** | 57.296@0; 57.2957×1.75@1; 57.2957×2.5@2; 57.2957×3.25@3 (@ |
+| **Steer Speed** | 57.3 |
 
 **ACTIVE:** **Willump** cleanses himself from all slows and channels for up to 10 seconds, becoming ghosted and slow-immune and creating a rolling . **Willump** automatically navigates his movement in the direction of the cursor and can steer the snowball at an increasing speed over time, which resets upon changing direction. The duo have their movement speed reduced by 50% for the first 1 second, but after a delay they start gaining every $0.25$ seconds, up to a cap (See notes.).
 
 The snowball increases in and power linearly over the duration. Its changes from *small* to *medium* after $2.5$ seconds, then to *large* after 5 seconds into the charge. *Biggest Snowball Ever!* can be recast after $0.5$ seconds during the channel, and does so automatically after the channel or if interrupted.
 
-The snowball explodes upon hitting an enemy champion, large pet, medium or large monster, or terrain, dealing magic damage to nearby enemies, increased by type=charge time, knocking them up for type=charge time seconds and subsequently stunning them for type=charge time seconds.
+The snowball explodes upon hitting an enemy champion, large pet, medium or large monster, or terrain, dealing magic damage to nearby enemies, increased by 0%–0 to 400 for 5%@0–5 (@=charge time), knocking them up for 0.5–0.5 to 0.75 for 5@0–5 (@=charge time) seconds and subsequently stunning them for 0–0 to 0.75 for 9@0–2 (@=charge time) seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -225,7 +225,7 @@ After 3 seconds from the first cast, *Snowbound* enemies near **Willump** take m
 | **Spell Effects** | spellaoe |
 | **Silence** | True |
 
-**ACTIVE:** **Nunu** and **Willump** channel a blizzard for up to 3 seconds, granting themselves a shield and slowing nearby enemies by type=channel time.
+**ACTIVE:** **Nunu** and **Willump** channel a blizzard for up to 3 seconds, granting themselves a shield and slowing nearby enemies by 0%–95%@0–3 (@=channel time).
 
 | Attribute | Value |
 |-----------|------:|
@@ -233,7 +233,7 @@ After 3 seconds from the first cast, *Snowbound* enemies near **Willump** take m
 
 *Absolute Zero* can be recast after $0.5$ seconds during the channel, and does so automatically when the channel ends by any means.
 
-**RECAST:** **Nunu** and **Willump** cause the blizzard to explode, dealing magic damage to nearby enemies, modified to key=%. Affected enemies will remain slowed for type=channel time seconds and any of the duo's remaining shield will decay over 3 seconds.
+**RECAST:** **Nunu** and **Willump** cause the blizzard to explode, dealing magic damage to nearby enemies, modified to 0 to 100. Affected enemies will remain slowed for 0–3@0–3 (@=channel time) seconds and any of the duo's remaining shield will decay over 3 seconds.
 
 | Attribute | Value |
 |-----------|------:|

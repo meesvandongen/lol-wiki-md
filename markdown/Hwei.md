@@ -316,11 +316,11 @@ If *Severing Bolt* hits only one enemy or immobilized enemies, it deals increase
 **Notes:**
 
 - *Severing Bolt*’s damage against immobilized or isolated enemies is increased based on both its rank and a target's **missing** health. The list below shows the total damage multiplier at various thresholds as a percentage of the base/non-increased damage.
-  - Rank 1: key=%
-  - Rank 2: key=%
-  - Rank 3: key=%
-  - Rank 4: key=%
-  - Rank 5: key=%
+  - Rank 1: 1×100 to 2.0×100 for 11
+  - Rank 2: 1×100 to (2.0+(3.5-2.0)*(1/4))*100 for 11
+  - Rank 3: 1×100 to (2.0+(3.5-2.0)*(2/4))*100 for 11
+  - Rank 4: 1×100 to (2.0+(3.5-2.0)*(3/4))*100 for 11
+  - Rank 5: 1×100 to 3.5×100 for 11
 
 ---
 

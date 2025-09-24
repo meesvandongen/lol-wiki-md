@@ -90,7 +90,7 @@
 - Ranking up an ability with any skill points beyond level 1 grants 5 Splinters, up to 85.
 - Killing a large minion grants 1 Splinter.
 
-Collecting a Splinter of Wrath from an enemy restores mana. Splinters of Wrath are brought to **Syndra** from enemies over $0.6$ seconds.
+Collecting a Splinter of Wrath from an enemy restores (mana) 20 / 25 / 30 / 35 / 40 / 48 / 56 / 64 / 72 / 80 / 95 / 110 / 125 / 140 / 155 / 175 / 195 / 215 mana. Splinters of Wrath are brought to **Syndra** from enemies over $0.6$ seconds.
 
 At 120 Splinters of Wrath, **Syndra** achieves *Transcendence*, increasing her ability power by 15%.
 
@@ -167,7 +167,7 @@ Walk in range of the target location to cast (recast) |
 |-----------|------:|
 | **Magic Damage** | 70 / 105 / 140 / 175 / 210 (+ 65% AP) |
 
-** Collecting 60 Splinters of Wrath enhances *Force of Will* to deal true damage (+ 2% per 100 AP) **bonus** true damage.
+** Collecting 60 Splinters of Wrath enhances *Force of Will* to deal (true damage) 12% (+ 2% per 100 AP) **bonus** true damage.
 
 | Attribute | Value |
 |-----------|------:|

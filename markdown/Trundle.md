@@ -93,7 +93,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** Whenever a nearby enemy dies, **Trundle** heals himself for key=% of the target's **maximum** health.
+**INNATE:** Whenever a nearby enemy dies, **Trundle** heals himself for 1.8 to 5.5 of the target's **maximum** health.
 
 **Notes:**
 
@@ -157,7 +157,7 @@ After using the empowered attack, **Trundle** gains **bonus** attack damage for 
 | **Affects** | Self |
 | **Out of Range Behavior** | cast at max |
 
-**ACTIVE:** **Trundle** coats the target location in ice for 8 seconds. While he is within the area, he gains **bonus** attack speed, ms, and 25% increased healing from all sources.
+**ACTIVE:** **Trundle** coats the target location in ice for 8 seconds. While he is within the area, he gains **bonus** attack speed, (ms) **bonus** movement speed, and 25% increased healing from all sources.
 
 | Attribute | Value |
 |-----------|------:|
@@ -218,7 +218,7 @@ After using the empowered attack, **Trundle** gains **bonus** attack damage for 
 | **Spell Effects** | dot |
 | **Call For Help** | True |
 
-**ACTIVE:** **Trundle** drains the life force out of the target enemy champion, dealing magic damage and healing himself for the same amount. He also steals 40% of their **current** armor penetration and magic penetration, and increases in by 18% while reducing the target's by $9.9$%.
+**ACTIVE:** **Trundle** drains the life force out of the target enemy champion, dealing magic damage and healing himself for the same amount. He also steals 40% of their **current** (armor penetration) armor and (magic penetration) magic resistance, and increases in by 18% while reducing the target's by $9.9$%.
 
 | Attribute | Value |
 |-----------|------:|

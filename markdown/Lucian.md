@@ -90,7 +90,7 @@
 | **Parry** | True |
 | **Call For Help** | True |
 
-**INNATE:** After casting an ability, **Lucian**’s next basic attack within $3.5$ seconds fires an additional shot on-attack after $0.25$ seconds, which deals key=% AD physical damage, increased to 100% AD against minions. He will shoot the same target, else another target within 50 units beyond his range automatically.
+**INNATE:** After casting an ability, **Lucian**’s next basic attack within $3.5$ seconds fires an additional shot on-attack after $0.25$ seconds, which deals 50 to 60 AD physical damage, increased to 100% AD against minions. He will shoot the same target, else another target within 50 units beyond his (range) basic attack range automatically.
 
 The second shot applies on-hit effects, triggers on-attack effects, and is affected by critical strike modifiers.
 
@@ -99,7 +99,7 @@ The second shot applies on-hit effects, triggers on-attack effects, and is affec
 **Notes:**
 
 - *Lightslinger* is triggered and consumed by the first attack, even if no target can be found upon firing the second attack.
-- The second attack, if the initial target was killed, will prioritize enemy champions regardless of having sight of them or not and enemy minions with health.
+- The second attack, if the initial target was killed, will prioritize enemy champions regardless of having sight of them or not and enemy minions with (health) low health.
 - **Lucian** can perform actions freely while firing *Lightslinger*’s second attack.
   - The second attack has special movement animations depending on the direction **Lucian** is moving while firing.
 - The second attack counts as a separate hit for effects such as Electrocute, Muramana Shock, and Eclipse Ever Rising Moon.

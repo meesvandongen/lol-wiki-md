@@ -81,7 +81,7 @@
 | **Range** | 525 units |
 | **Gold** | 5 |
 | **Experience** | 0 |
-| **Health** | 130 to 640 (+ 5 to 9 for 9 / 13 to 45 AP) |
+| **Health** | 130 to 640 (+ 5 to 9 for 9% / 13 to 45% AP) |
 | **Armor** | 10–then +10*x for 4@1–1 |
 | **Magic Resist** | 25–25+5*x for 8@1–1 |
 | **CC Resist** | Slow |
@@ -142,7 +142,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Heimerdinger** gains ms while near an allied turret or a *H-28G Evolution Turret* or *H-28Q Apex Turret* deployed by him.
+**INNATE:** **Heimerdinger** gains (ms) 20% **bonus** movement speed while near an allied turret or a *H-28G Evolution Turret* or *H-28Q Apex Turret* deployed by him.
 
 **Notes:**
 
@@ -446,8 +446,8 @@ Enemy champions can only be damaged once per cast, but can be slowed and stunned
 ### V13.15
 - UPGRADE!!!
   - H-28Q Apex Turret
-    - Base health changed to 725–1525@6–18 from 800+50*x.
-    - Health AP ratio changed to 50% AP at all levels from 25–25+17.5*x@1–1 (@=%) AP.
+    - Base health changed to 725–1525@6–18 from 850 / 1700.
+    - Health AP ratio changed to 50% AP at all levels from 25%–25+17.5*x%@1–1 AP.
     - Armor increased to 30–90@6–18 from 10–then +10*x for 4@1–1.
     - Magic resistance increased to 30–90@6–18 from 25–25+5*x for 8@1–1.
 
@@ -462,7 +462,7 @@ Enemy champions can only be damaged once per cast, but can be slowed and stunned
 ### V13.1b
 - H-28G Evolution Turret
   - Turret base health reduced to 130 to 640 from 175 to 700.
-  - Turret health AP ratio increased to 5 to 9 for 9 / 13 to 45 AP from 5–5+x*3.5@1–1 (@=%) AP.
+  - Turret health AP ratio increased to 5 to 9 for 9% / 13 to 45% AP from 5%–5+x*3.5%@1–1 AP.
 - Hextech Micro-Rockets
   - Initial rocket base damage reduced to 40 / 65 / 90 / 115 / 140 from 50 / 75 / 100 / 125 / 150.
   - Initial rocket AP ratio increased to 55% AP from 45% AP.

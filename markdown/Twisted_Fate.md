@@ -21,7 +21,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** Whenever **Twisted Fate** kills an enemy, he generates icononly=true goldtype=probability. He also has a chance equal to his critical strike chance to generate an additional type=probability gold.
+**INNATE:** Whenever **Twisted Fate** kills an enemy, he generates icononly=true gold1 / 2 / 3 / 4 / 5 / 6. He also has a chance equal to his critical strike chance to generate an additional 1 / 2 / 3 / 4 / 5 / 6 gold.
 
 *As you'd expect, **Twisted Fate** plays with loaded dice. His initial dice roll is weighted to have an increased chance of granting 6 gold, while his critical dice roll is weighted against him and has an increased chance of granting 1 gold.*
 
@@ -85,7 +85,7 @@ No additional notes.
 
 **RECAST:** **Twisted Fate** empowers his next basic attack within 6 seconds to have a $0.25$-second cast time, deal ***modified** magic damage, and apply an additional effect based on the card selected. This attack cannot critically strike but its damage is increased based on critical strike chance.
 
-**BLUE CARD BONUS:** Deals magic damage, increased by key=%, and restores mana.
+**BLUE CARD BONUS:** Deals magic damage, increased by 0%–57.5%@0–100 (@=critical strike chance), and restores mana.
 
 | Attribute | Value |
 |-----------|------:|
@@ -95,7 +95,7 @@ No additional notes.
 |-----------|------:|
 | **Mana Restored** | 70 / 90 / 110 / 130 / 150 |
 
-**RED CARD BONUS:** Deals magic damage to the target and surrounding enemies, increased by key=%. All targets hit are slowed for $2.5$ seconds.
+**RED CARD BONUS:** Deals magic damage to the target and surrounding enemies, increased by 0%–35%@0–100 (@=critical strike chance). All targets hit are slowed for $2.5$ seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -105,7 +105,7 @@ No additional notes.
 |-----------|------:|
 | **Slow** | 30 / 35 / 40 / 45 / 50% |
 
-**GOLD CARD BONUS:** Deals magic damage, increased by key=%, and stuns the target for a duration.
+**GOLD CARD BONUS:** Deals magic damage, increased by 0%–25%@0–100 (@=critical strike chance), and stuns the target for a duration.
 
 | Attribute | Value |
 |-----------|------:|
@@ -141,7 +141,7 @@ No additional notes.
 | **Projectile** | True |
 | **Parry** | Special |
 
-**PASSIVE:** **Twisted Fate** gains as. His basic attacks on-hit generate a stack of *Stacked Deck*, stacking up to 3 times. At 3 stacks, his next basic attack is empowered to consume them all to deal **bonus** magic damage, reduced to 50% against structures.
+**PASSIVE:** **Twisted Fate** gains (as) **bonus** attack speed. His basic attacks on-hit generate a stack of *Stacked Deck*, stacking up to 3 times. At 3 stacks, his next basic attack is empowered to consume them all to deal **bonus** magic damage, reduced to 50% against structures.
 
 **Twisted Fate** gains maximum stacks of *Stacked Deck* upon respawning.
 

@@ -109,9 +109,9 @@
 | Attribute | Value |
 |-----------|------:|
 | **Cast Time** | none |
-| **Target Range** | channel time |
+| **Target Range** | 250 / 297.5 / 345 / 392.5 / 440 / 487.5 / 535 / 582.5 / 630 / 677.5 / 725 units |
 | **Collision Radius** | 55 units |
-| **Speed** | channel time |
+| **Speed** | 1450 / 1459 / 1468 / 1477 / 1486 / 1495 / 1504 / 1513 / 1522 / 1531 / 1540 units/second |
 | **Cost** | 50 / 60 / 70 / 80 / 90 Mana |
 | **Cooldown** | 12 / 10.5 / 9 / 7.5 / 6 seconds |
 | **Cooldown Start** | post-effect |
@@ -126,9 +126,9 @@
 
 **ACTIVE:** **Vi** charges while being slowed by 15% for up to 4 seconds to increase *Vault Breaker*’s range, speed, and damage over the first $1.25$ seconds of the channel.
 
-*Vault Breaker* can be recast within the duration. If the charge completes without reactivation, *Vault Breaker* is cancelled, mana is refunded, and it is placed on cd. If the charge is interrupted, mana is refunded and it is placed on a cd.
+*Vault Breaker* can be recast within the duration. If the charge completes without reactivation, *Vault Breaker* is cancelled, (mana) 50% of the mana cost is refunded, and it is placed on (cd) full cooldown. If the charge is interrupted, (mana) 50% of the mana cost is refunded and it is placed on a (cd) 3-second cooldown.
 
-**RECAST:** **Vi** dashes in the target direction to deal physical damage to enemies within her path, increased by type=channel time, and pull all non-champions hit towards her.
+**RECAST:** **Vi** dashes in the target direction to deal physical damage to enemies within her path, increased by 0% / 15% / 30% / 45% / 60% / 75% / 90% / 105% / 120% / 135% / 150%, and pull all non-champions hit towards her.
 
 | Attribute | Value |
 |-----------|------:|
@@ -165,13 +165,13 @@ She stops upon hitting an enemy champion, knocking them back over $0.75$ seconds
 | **Spell Effects** | Proc |
 | **Parry** | Special |
 
-**PASSIVE:** **Vi**’s basic attacks on-hit and *Vault Breaker* apply a stack of *Denting Blows* to enemies hit for 4 seconds, refreshing on subsequent applications and stacking up to 3 times. The third stack consumes them all to deal **bonus** physical damage, capped at 300 against non-champions, and inflict armor penetration for 4 seconds.
+**PASSIVE:** **Vi**’s basic attacks on-hit and *Vault Breaker* apply a stack of *Denting Blows* to enemies hit for 4 seconds, refreshing on subsequent applications and stacking up to 3 times. The third stack consumes them all to deal **bonus** physical damage, capped at 300 against non-champions, and inflict (armor penetration) 20% armor reduction for 4 seconds.
 
 | Attribute | Value |
 |-----------|------:|
 | **Bonus Physical Damage** | 4 / 5 / 6 / 7 / 8% (+ $3.5$% per 100 **bonus** AD) of target's **maximum** health |
 
-After consuming *Denting Blows*, **Vi** gains as for 4 seconds, which refreshes on subsequent triggers.
+After consuming *Denting Blows*, **Vi** gains (as) **bonus** attack speed for 4 seconds, which refreshes on subsequent triggers.
 
 | Attribute | Value |
 |-----------|------:|
@@ -203,7 +203,7 @@ After consuming *Denting Blows*, **Vi** gains as for 4 seconds, which refreshes 
 | **Spell Effects** | Special |
 | **Parry** | True |
 
-**ACTIVE:** **Vi** empowers her next basic attack within 6 seconds to have an uncancellable windup, gain range and trigger a blast in the target's direction that deals ***modified** physical damage to enemies hit in a cone.
+**ACTIVE:** **Vi** empowers her next basic attack within 6 seconds to have an uncancellable windup, gain (range) 50 **bonus** range and trigger a blast in the target's direction that deals ***modified** physical damage to enemies hit in a cone.
 
 *Relentless Force* can critically strike for AD **bonus** physical damage against the primary target. Secondary targets take the same damage but do not count as being critically struck.
 

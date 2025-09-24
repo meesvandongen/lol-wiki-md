@@ -89,7 +89,7 @@
 | **Affects** | Allies |
 | **Silence** | True |
 
-**INNATE:** **Zilean** generates Experience (does not count towards his own level up.md)) every 5 seconds. *Time in a Bottle* is on cooldown when the game starts and becomes disabled when everyone on **Zilean**’s team including himself has reached level 18.
+**INNATE:** **Zilean** generates (Experience) 2@1; 3.5@6; 5@11; 6@16; 12@18 experience (does not count towards his own level up.md)) every 5 seconds. *Time in a Bottle* is on cooldown when the game starts and becomes disabled when everyone on **Zilean**’s team including himself has reached level 18.
 
 When he has stored enough to level up an allied champion and grant the same amount of experience to himself, he can select them (Default MB2/right-click) to channel for $1.2$ seconds after a $0.5$-second cast time. The channel is interrupted and disabled upon entering combat with enemy champions or taking damage from turrets, placing it on a 10-second cooldown. If **Zilean** interrupts it himself, it is placed on a 1-second cooldown, increased to 2 if he used a basic attack against a turret to do so.
 
@@ -172,7 +172,7 @@ The bomb detonates immediately if another bomb attaches itself to the same unit,
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**ACTIVE:** **Zilean** reduces the cd cooldowns of *Time Bomb* and *Time Warp* by 10 seconds each.
+**ACTIVE:** **Zilean** reduces the (cd) **remaining** cooldowns of *Time Bomb* and *Time Warp* by 10 seconds each.
 
 *Either Time Bomb or Time Warp must be on cooldown to cast this ability*.
 

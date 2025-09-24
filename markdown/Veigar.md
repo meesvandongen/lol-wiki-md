@@ -87,7 +87,7 @@
 
 **INNATE:** **Veigar** generates a stack of *Phenomenal Evil* for each enemy champion hit by his abilities, and 5 stacks whenever he scores an enemy champion takedown.
 
-**PHENOMENAL EVIL:** For each stack, **Veigar** gains AP.
+**PHENOMENAL EVIL:** For each stack, **Veigar** gains (AP) 1 ability power.
 
 **Notes:**
 
@@ -137,7 +137,7 @@ If this kills an enemy, it generates 1 stack of *Phenomenal Evil*, tripled again
 | **Target Range** | 950 units |
 | **Effect Radius** | $240$ units |
 | **Cost** | 60 / 65 / 70 / 75 / 80 mana |
-| **Cooldown** | [File:Phenomenal_Evil_Power.pngNumber of times that 50 Phenomenal Evil stacks are earned.* |
+| **Cooldown** | 20pxNumber of times that 50 Phenomenal Evil stacks are earned.* |
 | **Targeting** | Location |
 | **Affects** | Enemies |
 | **Damage Type** | Magic |
@@ -190,7 +190,7 @@ If this kills an enemy, it generates 1 stack of *Phenomenal Evil*, tripled again
 - An enemy can be affected by *Event Horizon* only once every $4.5$ seconds.
 - Units that negate the stun will still count as passing through the edges. They will become immune to the effects of *Event Horizon* for the period even after negating them.
 - Displacement immune enemies will still be stunned, but not knocked down.
-- **Veigar** marks enemy champions in a 390-radius from the zone's center in order to gain [kill/assist credit, lasting for the standard credit timer.
+- **Veigar** marks enemy champions in a 390-radius from the zone's center in order to gain kill/assist credit, lasting for the standard credit timer.
 - *Event Horizon* may fail to catch enemies that move very quickly through the boundary distance.
   - More modern area checks such as The Box or Yordle Snap Trap do not have this issue.
 
@@ -212,7 +212,7 @@ If this kills an enemy, it generates 1 stack of *Phenomenal Evil*, tripled again
 | **Projectile** | True |
 | **Call For Help** | True |
 
-**ACTIVE:** **Veigar** sends a primordial burst at the target enemy champion that deals magic damage, increased by type=target's **missing** health.
+**ACTIVE:** **Veigar** sends a primordial burst at the target enemy champion that deals magic damage, increased by 0% / 10% / 20% / 30% / 40% / 50% / 60% / 70% / 80% / 90% / 100%.
 
 | Attribute | Value |
 |-----------|------:|

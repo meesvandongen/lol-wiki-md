@@ -133,7 +133,7 @@
 
 **INNATE:** **Bel'Veth** attacks 36% faster than the median champion and her attack speed cap is modified to $9999.0$, but all sources of damage (including on-hit damage) dealt by her basic attacks are reduced to 75%. Her attack speed does not increase through growth (per level).
 
-**INNATE:** **Bel'Veth**’s ability casts each generate 2 stacks of *Death in Lavender*, lasting for 5 seconds, refreshing on basic attacks and subsequent casts, and stacking up to 6 times. While **Bel'Veth** has stacks, she becomes ghosted and gains . Her basic attacks each consume 1 stack.
+**INNATE:** **Bel'Veth**’s ability casts each generate 2 stacks of *Death in Lavender*, lasting for 5 seconds, refreshing on basic attacks and subsequent casts, and stacking up to 6 times. While **Bel'Veth** has stacks, she becomes ghosted and gains 20% / 40% **bonus** attack speed. Her basic attacks each consume 1 stack.
 
 **INNATE:** Whenever **Bel'Veth** scores a takedown against a champion, monster, or large minion within 3 seconds of damaging them, she generates a permanent stack of *Lavender*. Large minions and monsters generate 1 stack, champions and epic monsters generate 2 stacks.
 
@@ -255,13 +255,13 @@ If this hits an enemy champion, it resets *Void Surge’s* dash cooldown of the 
 | **Parry** | True |
 | **Call For Help** | True |
 
-**ACTIVE:** **Bel'Veth** enters a defensive stance for $1.5$ seconds, during which she is unable to move, but gains damage reduction and life steal (+ 100% life steal (Does not apply to the life steal gained from Royal Maelstrom)) life steal.
+**ACTIVE:** **Bel'Veth** enters a defensive stance for $1.5$ seconds, during which she is unable to move, but gains damage reduction and (life steal) 20% (+ 100% life steal (Does not apply to the life steal gained from Royal Maelstrom)) life steal.
 
 | Attribute | Value |
 |-----------|------:|
 | **Damage Reduction** | 35 / 40 / 45 / 50 / 55% |
 
-While active, she rapidly slashes at the nearest enemy with the lowest **current** health percentage for up to 6 (+ 1 per |Benefits from all sources of bonus attack speed) times over the duration. Each slash deals physical damage, increased by key=%, triggers on-attack effects, and applies on-hit effects and spell effects, with on-hit and spell effect damage reduced to key=% effectiveness.
+While active, she rapidly slashes at the nearest enemy with the lowest **current** health percentage for up to 6 (+ 1 per |Benefits from all sources of bonus attack speed) times over the duration. Each slash deals physical damage, increased by 0%–300%@0–100 (@=target's **missing** health), triggers on-attack effects, and applies on-hit effects and spell effects, with on-hit and spell effect damage reduced to 8%–32%@0–100 (@=target's **missing** health) effectiveness.
 
 | Attribute | Value |
 |-----------|------:|
@@ -323,7 +323,7 @@ While active, she rapidly slashes at the nearest enemy with the lowest **current
 
 **PASSIVE:** When **Bel'Veth** scores a takedown against an enemy champion or epic monster while alive, a *Void Coral* is spawned from their corpse for 15 seconds. Baron Nashor, the pit Rift Herald, and Voidgrub (once per spawn group) spawn an *Enhanced Void Coral*.
 
-**ACTIVE:** **Bel'Veth** dashes to the target *Void Coral* to consume it over the cast time, slowing nearby enemies by type=seconds elapsed for the duration. She then creates an explosion at the location to deal true damage to enemies within, capped at 1500 versus monsters, and assumes her **TRUE FORM** for 60 seconds.
+**ACTIVE:** **Bel'Veth** dashes to the target *Void Coral* to consume it over the cast time, slowing nearby enemies by 25% / 42% / 69% / 96% for the duration. She then creates an explosion at the location to deal true damage to enemies within, capped at 1500 versus monsters, and assumes her **TRUE FORM** for 60 seconds.
 
 **Bel'Veth** consumes all existing *Void Corals* at once, generating a stack of *Lavender* for each one consumed.
 
@@ -410,7 +410,7 @@ While active, she rapidly slashes at the nearest enemy with the lowest **current
 
 ### V14.9
 - Death in Lavender
-  - Bonus attack speed per *Lavender* stack reduced to 0.28 / 0.325 / 0.37 / 0.415 / 0.46 / 0.505 / 0.55 / 0.595 / 0.64 / 0.685 / 0.73 / 0.775 / 0.82 / 0.865 / 0.91 / 0.955 / 1 from 0.28 / 0.34 / 0.4 / 0.46 / 0.52 / 0.58 / 0.64 / 0.7 / 0.76 / 0.82 / 0.88 / 0.94 / 1. *Now scales until level 17 instead of 13.*
+  - Bonus attack speed per *Lavender* stack reduced to 0.28% / 0.33% / 0.37% / 0.42% / 0.46% / 0.51% / 0.55% / 0.59% / 0.64% / 0.69% / 0.73% / 0.78% / 0.82% / 0.86% / 0.91% / 0.95% / 1% from 0.28% / 0.34% / 0.4% / 0.46% / 0.52% / 0.58% / 0.64% / 0.7% / 0.76% / 0.82% / 0.88% / 0.94% / 1%. *Now scales until level 17 instead of 13.*
 - Void Surge
   - AD ratio reduced to 100% AD from 110% AD.
   - **Removed:*** No longer deals 140% damage to monsters.
@@ -428,14 +428,14 @@ While active, she rapidly slashes at the nearest enemy with the lowest **current
 
 ### V13.20
 - Death in Lavender
-  - Bonus attack speed from ability casts reduced to 20+(20/17)*(x-1)*(0.7025+0.0175*(x-1)) from 25 to 50.
+  - Bonus attack speed from ability casts reduced to 20% / 40% from 25 to 50.
 - Royal Maelstrom
   - Damage reduction reduced to 42 / 49 / 56 / 63 / 70% from 70% at all ranks.
   - Minimum base damage per hit reduced to 6 / 7 / 8 / 9 / 10 from 8 / 10 / 12 / 14 / 16.
     - Maximum base damage per hit reduced to 24 / 28 / 32 / 36 / 40 from 32 / 40 / 48 / 56 / 64.
   - Minimum AD ratio per hit increased to 8% AD from 6% AD.
     - Maximum AD ratio per hit increased to 32% AD from 24% AD.
-  - On-hit, on-attack, and spell modifier increased to key=% from key=%.
+  - On-hit, on-attack, and spell modifier increased to 8%–32%@0–100 (@=target's **missing** health) from 6%–24%@0–100 (@=target's **missing** health).
   - **New Effect:** Damage can now critically strike.
 - Endless Banquet
   - Bonus movement speed changed to 10 / 45 / 80 from 25 / 50 / 75.

@@ -103,7 +103,7 @@
 | **Spell Effects** | Proc |
 | **Parry** | True |
 
-**INNATE - THE BALL:** **Orianna** is accompanied by *The Ball*, which she commands with her abilities. *The Ball* incurs a cd global cooldown on all of her abilities when she casts any ability. Additionally, *The Ball* attaches to **Orianna** if she is near it, and snaps back to her if she moves too far away from it, which incurs a cd cooldown on *Command: Shockwave*.
+**INNATE - THE BALL:** **Orianna** is accompanied by *The Ball*, which she commands with her abilities. *The Ball* incurs a (cd) $0.01$-second global cooldown on all of her abilities when she casts any ability. Additionally, *The Ball* attaches to **Orianna** if she is near it, and snaps back to her if she moves too far away from it, which incurs a (cd) $0.75$-second cooldown on *Command: Shockwave*.
 
 **INNATE:** **Orianna**’s basic attacks generate a stack of *Clockwork Winding* for 4 seconds, refreshing on subsequent attacks and stacking up to 2 times. All stacks are lost when attacking a new enemy.
 
@@ -179,7 +179,7 @@
 |-----------|------:|
 | **Magic Damage** | 70 / 120 / 170 / 220 / 270 (+ 70% AP) |
 
-The pulse leaves behind an electric field that last 3 seconds, granting ms to **Orianna** and her allies when they move within. Enemies that move within the field are slowed by the same amount, decaying over 2 seconds after leaving.
+The pulse leaves behind an electric field that last 3 seconds, granting (ms) **bonus** movement speed to **Orianna** and her allies when they move within. Enemies that move within the field are slowed by the same amount, decaying over 2 seconds after leaving.
 
 | Attribute | Value |
 |-----------|------:|
@@ -208,7 +208,7 @@ The pulse leaves behind an electric field that last 3 seconds, granting ms to **
 | **Spell Effects** | aoe |
 | **Projectile** | True |
 
-**PASSIVE:** *The Ball* grants armor and mr to the unit it is attached to.
+**PASSIVE:** *The Ball* grants (armor) **bonus** armor and (mr) **bonus** magic resistance to the unit it is attached to.
 
 | Attribute | Value |
 |-----------|------:|

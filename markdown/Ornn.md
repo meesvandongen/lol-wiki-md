@@ -99,7 +99,7 @@
 
 Additionally, **Ornn** increases his **bonus** armor, **bonus** magic resistance and **bonus** health by 10% from all sources, further increased by 4% each time he upgrades a *Legendary* item into a **MASTERWORK** item, for a total increase of 30% to each stat after the maximum of 5 upgrades.
 
-**INNATE - TEMPER:** **Ornn**’s basic attacks against Brittle enemies knock them back a short distance. **Ornn**’s and allies' immobilizing effects against *Brittle* enemies will consume the debuff to deal **bonus** magic damage equal to key=% of the target's **maximum** health, capped at 250 against monsters, and cause the crowd control to last 30% longer (if applicable).
+**INNATE - TEMPER:** **Ornn**’s basic attacks against Brittle enemies knock them back a short distance. **Ornn**’s and allies' immobilizing effects against *Brittle* enemies will consume the debuff to deal **bonus** magic damage equal to 10 to 18 of the target's **maximum** health, capped at 250 against monsters, and cause the crowd control to last 30% longer (if applicable).
 
 ***Ornn** will prioritize upgrading the first Legendary item eligible for a **MASTERWORK** upgrade based on its position in the inventory, detecting each slot until an eligible item is found.*
 

@@ -24,9 +24,9 @@
 | **Spell Shield** | Special |
 | **Spell Effects** | proc |
 
-**INNATE:** **Renata**’s basic attacks are empowered to apply a mark that lasts 6 seconds, refreshes on subsequent hits and expires when attacking a new enemy. If the enemy was unmarked, the attack also deals **bonus** magic damage equal to key=% (+ 2% per 100 AP) of the target's **maximum** health.
+**INNATE:** **Renata**’s basic attacks are empowered to apply a mark that lasts 6 seconds, refreshes on subsequent hits and expires when attacking a new enemy. If the enemy was unmarked, the attack also deals **bonus** magic damage equal to 1% / 1.12% / 1.25% / 1.38% / 1.5% / 1.62% / 1.75% / 1.88% / 2% (+ 2% per 100 AP) of the target's **maximum** health.
 
-Allied champions' damaging attacks and abilities against a marked target will consume the mark to deal additional **bonus** magic damage equal to key=% (+ 2% per 100 AP) of the target's **maximum** health.
+Allied champions' damaging attacks and abilities against a marked target will consume the mark to deal additional **bonus** magic damage equal to 1% / 1.12% / 1.25% / 1.38% / 1.5% / 1.62% / 1.75% / 1.88% / 2% (+ 2% per 100 AP) of the target's **maximum** health.
 
 *Leverage*’s damage is capped at 150 against epic monsters.
 
@@ -99,7 +99,7 @@ If the root was applied, **Renata** forms a tether between her and the target fo
 | **Cooldown Start** | on-cast |
 | **Targeting** | Unit |
 
-**ACTIVE:** **Renata** infuses herself or the target allied champion with a chemtech formula for 5 seconds, granting the target **bonus** attack speed and **bonus** movement speed while they are facing nearby visible enemy champions or minions, with both of the bonuses increasing in effectiveness by key=%. *Bailout*’s duration resets whenever the target scores a takedown against an enemy champion within 6 seconds of damaging them.
+**ACTIVE:** **Renata** infuses herself or the target allied champion with a chemtech formula for 5 seconds, granting the target **bonus** attack speed and **bonus** movement speed while they are facing nearby visible enemy champions or minions, with both of the bonuses increasing in effectiveness by 0%–100%@0–5 (@=seconds elapsed). *Bailout*’s duration resets whenever the target scores a takedown against an enemy champion within 6 seconds of damaging them.
 
 | Attribute | Value |
 |-----------|------:|

@@ -88,7 +88,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Vladimir** gains ($3.3$% **bonus** health) as ap and (160% AP) as health. These two bonuses do not stack with each other.
+**INNATE:** **Vladimir** gains ($3.3$% **bonus** health) as (ap) ability power and (160% AP) as (health) **bonus** health. These two bonuses do not stack with each other.
 
 **Notes:**
 
@@ -160,7 +160,7 @@ Casting *Transfusion* during the surge consumes all *Crimson Rush* to deal 85% i
 | **Damage Type** | Magic |
 | **Spell Effects** | aoedot |
 
-**ACTIVE:** **Vladimir** sinks into a pool of blood, becoming untargetable and ghosted for 2 seconds. He also gains ms that decays exponentially over 1 second.
+**ACTIVE:** **Vladimir** sinks into a pool of blood, becoming untargetable and ghosted for 2 seconds. He also gains (ms) $37.5$% **bonus** movement speed that decays exponentially over 1 second.
 
 Enemies within the pool are dealt magic damage every $0.5$ seconds over the duration and are slowed by 40%. **Vladimir** heals himself for 30% of the pre-mitigation damage (Damage calculated before modifiers) dealt, reduced to 18% against minions.
 

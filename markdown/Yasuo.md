@@ -78,13 +78,13 @@
 
 **INNATE - INTENT:** **Yasuo**’s **total** critical strike chance is doubled from all other sources. Additionally,「 every 1% critical strike chance in excess of 100% is converted into $0.5$ **bonus** attack damage. ⟷ every 50% critical strike chance in excess of 100% is converted into 25 **bonus** attack damage. 」
 
-**INNATE - RESOLVE:** **Yasuo** generates a stack of Flow for every 59–46@1–13 units he travels by any means. At「 100 stacks ⟷ 59×100 to 46×100 for 3 units traveled 」and upon taking damage from an enemy champion or monster, **Yasuo** consumes all Flow to grant himself a shield for 125+((600-125)/17*(x-1)*(0.7025+0.0175*(x-1))) that lasts for 1 second.
+**INNATE - RESOLVE:** **Yasuo** generates a stack of Flow for every 59–46@1–13 units he travels by any means. At「 100 stacks ⟷ 59×100 to 46×100 for 3 units traveled 」and upon taking damage from an enemy champion or monster, **Yasuo** consumes all Flow to grant himself a shield for 125 / 600 that lasts for 1 second.
 
 **Notes:**
 
 - **Yasuo** gains the shield before the damage instance; the shield will mitigate the damage that triggered it.
 - **Yasuo** is able to reach 100% critical strike chance with *Way of the Wanderer*’s multiplier after obtaining a total of 50% critical strike chance.
-- **Yasuo**’s secondary resource bar will display the amount of shield stored as an equivalent percentage to his Flow stacks. (Each Flow stack will add 125/100+((600-125)/100/17*(x-1)*(0.7025+0.0175*(x-1))) to the bar)
+- **Yasuo**’s secondary resource bar will display the amount of shield stored as an equivalent percentage to his Flow stacks. (Each Flow stack will add 1.25 / 6 to the bar)
   - Upon taking damage, the bar will display his current shield strength.
 
 ---
@@ -98,7 +98,7 @@
 | **Effect Radius** | 215 (When used with Sweeping Blade) units |
 | **Width** | 80 (Thrust) / er 180 (Whirlwind missile) units |
 | **Speed** | 1200 (Whirlwind missile speed) units/second |
-| **Static Cooldown** | **bonus** attack speed |
+| **Static Cooldown** | 4 to 1.48 for 8–4/3@0–105 (@=**bonus** attack speed) |
 | **Targeting** | Direction / Auto |
 | **Affects** | Enemies |
 | **Damage Type** | Physical |
@@ -253,7 +253,7 @@ Upon arrival, he knocks up all nearby airborne enemy champions for 1 second, rev
 |-----------|------:|
 | **Physical Damage** | 200 / 350 / 500 (+ 150% **bonus** AD) |
 
-For the next 15 seconds, the damage dealt by **Yasuo**’s critical strikes ignores lethality.
+For the next 15 seconds, the damage dealt by **Yasuo**’s critical strikes ignores (lethality) 60% of the target's **bonus** armor.
 
 *A nearby airborne enemy champion is required to cast this ability. If **Yasuo** would blink inside the attack range of an enemy turret (excluding the Nexus Obelisk), Last Breath will instead attempt to position him outside of it.*
 

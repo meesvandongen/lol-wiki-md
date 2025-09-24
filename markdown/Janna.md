@@ -82,7 +82,7 @@
 | **Affects** | Self |
 | **Spell Effects** | proc |
 
-**INNATE:** **Janna** grants ms to nearby allied champions that are facing in the direction of her location.
+**INNATE:** **Janna** grants (ms) 6% **bonus** movement speed to nearby allied champions that are facing in the direction of her location.
 
 **Janna**’s basic attacks on-hit and Zephyr deal **bonus** magic damage equal to 30% of her **bonus** movement speed.
 
@@ -96,10 +96,10 @@
 
 | Attribute | Value |
 |-----------|------:|
-| **Range** | seconds charged |
+| **Range** | 1100 to 1000×1.76 units |
 | **Cast Time** | none |
 | **Width** | 240 units |
-| **Speed** | seconds charged |
+| **Speed** | (880 to 1408) units/second |
 | **Cost** | 90 / 95 / 100 / 105 / 110 mana |
 | **Cooldown** | 14 seconds |
 | **Cooldown Start** | on-cast |
@@ -123,7 +123,7 @@
 
 *Howling Gale* can be recast at any time within the duration, and does so automatically after the duration.
 
-**RECAST:** **Janna** launches the whirlwind in the direction she targeted over $1.25$ seconds, dealing magic damage to enemies hit and knocking them up for type=seconds charged seconds.
+**RECAST:** **Janna** launches the whirlwind in the direction she targeted over $1.25$ seconds, dealing magic damage to enemies hit and knocking them up for 0.5 to 1.25 seconds.
 
 **Notes:**
 
@@ -149,7 +149,7 @@
 | **Projectile** | True |
 | **Call For Help** | True |
 
-**PASSIVE:** **Janna** is ghosted and gains ms.
+**PASSIVE:** **Janna** is ghosted and gains (ms) **bonus** movement speed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -190,7 +190,7 @@
 |-----------|------:|
 | **Shield Strength** | 80 / 120 / 160 / 200 / 240 (+ 55% AP) |
 
-While the shield holds, the target gains attack damage.
+While the shield holds, the target gains (attack damage) **bonus** attack damage.
 
 | Attribute | Value |
 |-----------|------:|
@@ -257,7 +257,7 @@ While the shield holds, the target gains attack damage.
 
 ### V13.23
 - Tailwind
-  - Damage bonus movement speed ratio changed to 30% at all levels from 20@1; 25@6; 30@11; 35@16 (@=%).
+  - Damage bonus movement speed ratio changed to 30% at all levels from 20%@1; 25%@6; 30%@11; 35%@16.
 - Zephyr
   - Cooldown reduced to 8 / 7.5 / 7 / 6.5 / 6 seconds from 9 / 8.5 / 8 / 7.5 / 7.
   - Cast range reduced to 550 units from 675.
@@ -278,7 +278,7 @@ While the shield holds, the target gains attack damage.
 - Tailwind
   - **Removed:*** **Janna** no longer gains 6% **bonus** movement while moving towards allies.
     - Allied bonus movement speed unchanged.
-  - **New Effect:** Her basic attacks and Zephyr now deal **bonus** magic damage equal to 20@1; 25@6; 30@11; 35@16 (@=%) of her **bonus** movement speed.
+  - **New Effect:** Her basic attacks and Zephyr now deal **bonus** magic damage equal to 20%@1; 25%@6; 30%@11; 35%@16 of her **bonus** movement speed.
 - Howling Gale
   - Minimum base damage changed to 55 / 90 / 125 / 160 / 195 from 60 / 85 / 110 / 135 / 160.
   - Base damage per second reduced to 10 / 15 / 20 / 25 / 30 from 15 / 20 / 25 / 30 / 35.

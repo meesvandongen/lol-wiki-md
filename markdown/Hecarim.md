@@ -79,7 +79,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Hecarim** gains **bonus** attack damage equal to key=% of his **bonus** movement speed.
+**INNATE:** **Hecarim** gains **bonus** attack damage equal to 12%–24%@1–18 of his **bonus** movement speed.
 
 **Notes:**
 
@@ -96,7 +96,7 @@
 | **Cast Time** | none |
 | **Effect Radius** | 375 units |
 | **Cost** | 28 / 26 / 24 / 22 / 20 Mana |
-| **Cooldown** | 4-0.75*(x-1) seconds |
+| **Cooldown** | 4 / -8.75 seconds |
 | **Targeting** | Auto |
 | **Affects** | Self, Enemies |
 | **Damage Type** | Physical |
@@ -110,7 +110,7 @@
 | **Physical Damage** | 60 / 85 / 110 / 135 / 160 (+ 90% **bonus** AD) |
 | **Minion damage** | 36 / 51 / 66 / 81 / 96 (+ 54% **bonus** AD) |
 
-If this damages an enemy, **Hecarim** gains a stack of *Rampage* for 8 seconds, refreshing on subsequent damage and stacking up to 3 times. Each stack increases *Rampage*’s damage by 3% (+ 4% per 100 **bonus** AD) and reduces its cd by $0.75$ seconds, up to a 9% (+ 12% per 100 **bonus** AD) damage increase and a $2.25$-second reduction of the **base** cooldown at maximum stacks. Stacks expire by one every 1 second when the duration ends.
+If this damages an enemy, **Hecarim** gains a stack of *Rampage* for 8 seconds, refreshing on subsequent damage and stacking up to 3 times. Each stack increases *Rampage*’s damage by 3% (+ 4% per 100 **bonus** AD) and reduces its (cd) **base** cooldown by $0.75$ seconds, up to a 9% (+ 12% per 100 **bonus** AD) damage increase and a $2.25$-second reduction of the **base** cooldown at maximum stacks. Stacks expire by one every 1 second when the duration ends.
 
 **Notes:**
 
@@ -173,9 +173,9 @@ While active, **Hecarim** gains **bonus** armor and **bonus** magic resistance a
 | **Grounded** | Special |
 | **Knockdown** | Special |
 
-**ACTIVE:** **Hecarim** becomes ghosted and gains ms for 4 seconds.
+**ACTIVE:** **Hecarim** becomes ghosted and gains (ms) 25%–65%@0–3 (@=time active) **bonus total** movement speed for 4 seconds.
 
-During this time, **Hecarim** empowers his next basic attack to gain type=distance traveled range and cause him to dash in the target's direction, revealing them for 1 second. If the target remains nearby during the dash, the ghosting and **bonus** movement speed ends prematurely and **Hecarim** knocks them back type=distance traveled units, though not through terrain, stuns them for $0.25$ seconds, and deals them ***modified** physical damage, increased by type=distance traveled.
+During this time, **Hecarim** empowers his next basic attack to gain 50–250@0–1200 (@=distance traveled) (range) **bonus** range and cause him to dash in the target's direction, revealing them for 1 second. If the target remains nearby during the dash, the ghosting and **bonus** movement speed ends prematurely and **Hecarim** knocks them back 150–350@0–1200 (@=distance traveled) units, though not through terrain, stuns them for $0.25$ seconds, and deals them ***modified** physical damage, increased by 0%–100%@0–1200 (@=distance traveled).
 
 | Attribute | Value |
 |-----------|------:|
@@ -232,7 +232,7 @@ During this time, **Hecarim** empowers his next basic attack to gain type=distan
 |-----------|------:|
 | **Magic damage** | 150 / 200 / 250 / 300 / 350 (+ 100% AP) |
 
-Upon arrival, he fears nearby enemies for type=distance traveled seconds and slows them by type=distance from **Hecarim**.
+Upon arrival, he fears nearby enemies for 0.75–1.5@0–1000 (@=distance traveled) seconds and slows them by 0%–0 to 99%@0–0 (@=distance from **Hecarim**).
 
 *The wave of spectral riders travels independently of **Hecarim** and will always charge at the same distance.*
 
@@ -336,10 +336,10 @@ Upon arrival, he fears nearby enemies for type=distance traveled seconds and slo
 - Devastating Charge
   - Minimum bonus AD ratio reduced to 50% **bonus** AD from 55%.
     - Maximum bonus AD ratio reduced to 100% **bonus** AD from 110%.
-  - Knock back distance reduced to type=distance traveled units from type=distance traveled.
+  - Knock back distance reduced to 150–350@0–1200 (@=distance traveled) units from 250–450@0–1200 (@=distance traveled).
   - Cooldown changed to 18 seconds at all ranks from 20 / 19 / 18 / 17 / 16.
 - Onslaught of Shadows
-  - Fear duration reduced to type=distance traveled seconds from type=distance traveled.
+  - Fear duration reduced to 0.75–1.5@0–1000 (@=distance traveled) seconds from 0.75–2@0–1000 (@=distance traveled).
 
 ## Trivia
 

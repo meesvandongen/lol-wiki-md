@@ -22,7 +22,7 @@
 | **Affects** | Self |
 | **Parry** | Special |
 
-**INNATE:** After casting an ability, **Lee Sin**’s next 2 basic attacks within 3 seconds gain attack speed and restore energy.
+**INNATE:** After casting an ability, **Lee Sin**’s next 2 basic attacks within 3 seconds gain (attack speed) 40% **bonus** attack speed and restore energy.
 
 The first attack restores 20–40@1–13 energy and the second attack restores「 10–20@1–13 energy. ⟷ half of the previous amount. 」
 
@@ -49,7 +49,7 @@ The first attack restores 20–40@1–13 energy and the second attack restores�
 | **Grounded** | True |
 | **Knockdown** | True |
 
-**ACTIVE:** **Lee Sin** dashes to the nearby enemy marked by *Sonic Wave*. Upon arrival, he consumes the mark and deals physical damage, increased by key=%.
+**ACTIVE:** **Lee Sin** dashes to the nearby enemy marked by *Sonic Wave*. Upon arrival, he consumes the mark and deals physical damage, increased by 0%–100%@0–100 (@=target's **missing** health).
 
 | Attribute | Value |
 |-----------|------:|

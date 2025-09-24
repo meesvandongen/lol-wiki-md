@@ -132,7 +132,7 @@ No additional notes.
 |-----------|------:|
 | **Total Magic Damage** | 80 / 120 / 160 / 200 / 240 (+ 100% AD) (+ 90% AP) |
 
-** After the device hits, **Viktor** gains ms for $2.5$ seconds and the shield's strength is increased「 by 60%. ⟷ to 40×1.6 to 115×1.6 (+ 32% AP). 」
+** After the device hits, **Viktor** gains (ms) 30% **bonus** movement speed for $2.5$ seconds and the shield's strength is increased「 by 60%. ⟷ to 40×1.6 to 115×1.6 (+ 32% AP). 」
 
 **Notes:**
 

@@ -93,12 +93,12 @@
 | **Projectile** | False |
 | **Parry** | True |
 
-**PASSIVE - DOOM:** Periodically, **Vex** empowers her next basic ability to knock down and fear enemies hit for 0.75@1; 1@6; 1.25@9; 1.5@13 seconds, during which they are slowed by type=distance from **Vex**. If *Looming Darkness* triggers *Doom*, enemies hit will flee from the epicenter instead.
+**PASSIVE - DOOM:** Periodically, **Vex** empowers her next basic ability to knock down and fear enemies hit for 0.75@1; 1@6; 1.25@9; 1.5@13 seconds, during which they are slowed by 60%–99%@250–800 (@=distance from **Vex**). If *Looming Darkness* triggers *Doom*, enemies hit will flee from the epicenter instead.
 *Doom*’s cooldown resets upon respawning.
 
 **INNATE - GLOOM:** Nearby enemy champions and monsters that dash or blink will be marked with *Gloom* for 6 seconds. **Vex**’s next basic attack, which becomes non-projectile, or basic ability hit against an enemy with *Gloom* will detonate the mark. *Looming Darkness* will also inflict *Gloom*, but cannot detonate it.
 
-*Gloom*’s detonation deals 40 to 150 (+ 25% AP) **bonus** magic damage and refunds 25% of *Doom*’s cooldown. Against non-champions, this instead deals 40@1; 45@6; 50@9; 55@13; 60@16 (@=%) damage and refunds 10% of *Doom*’s cooldown.
+*Gloom*’s detonation deals 40 to 150 (+ 25% AP) **bonus** magic damage and refunds 25% of *Doom*’s cooldown. Against non-champions, this instead deals 40%@1; 45%@6; 50%@9; 55%@13; 60%@16 damage and refunds 10% of *Doom*’s cooldown.
 
 **Notes:**
 
@@ -189,7 +189,7 @@
 |-----------|------:|
 | **Cast Time** | $0.25$ seconds |
 | **Target Range** | 800 units |
-| **Effect Radius** | cast distance |
+| **Effect Radius** | 200–300@0–800 (@=cast distance) units |
 | **Speed** | 1300 units/second |
 | **Cost** | 70 / 80 / 90 / 100 / 110 mana |
 | **Cooldown** | 13 seconds |

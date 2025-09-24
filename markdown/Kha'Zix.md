@@ -128,7 +128,7 @@
 | **Spell Effects** | Single target |
 | **Call For Help** | True |
 
-**PASSIVE:** **Kha'Zix** gains range on his basic attacks and *Taste Their Fear*. 
+**PASSIVE:** **Kha'Zix** gains (range) 50 **bonus** range on his basic attacks and *Taste Their Fear*. 
 
 **EVOLVED BONUS:** If the target is Isolated, the cooldown is reduced by 45%.
 
@@ -315,7 +315,7 @@ No additional notes.
 
 **PASSIVE:** Each rank in *Void Assault* allows **Kha'Zix** to evolve one of his abilities, granting it additional effects. Evolving an ability causes him to enter a 2-second cast time. **Kha'Zix** cannot evolve while he is unable to cast abilities.
 
-**ACTIVE:** **Kha'Zix** gains Unseen Threat and becomes invisible for 1.25 seconds, during which he gains ms.
+**ACTIVE:** **Kha'Zix** gains Unseen Threat and becomes invisible for 1.25 seconds, during which he gains (ms) 40% **bonus** movement speed.
 
 After 2 seconds of leaving invisibility, and for the next 12 seconds, *Void Assault* can be recast at no additional cost.
 

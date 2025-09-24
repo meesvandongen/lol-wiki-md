@@ -88,7 +88,7 @@
 
 *Resonance* cannot affect the same target more than once every few seconds.
 
-**INNATE - STOLEN TIME:** Triggering *Resonance* against a champion grants **Ekko** key=% ms for 2–3@1–11 seconds.
+**INNATE - STOLEN TIME:** Triggering *Resonance* against a champion grants **Ekko** 50%–80%@1–16 (ms) **bonus** movement speed for 2–3@1–11 seconds.
 
 **Notes:**
 
@@ -159,7 +159,7 @@ Afterwards, the grenade contracts and homes back to **Ekko** at an increased spe
 | **Projectile** | False |
 | **Out of Range Behavior** | walk to location |
 
-**PASSIVE:** **Ekko**’s basic attacks deal **bonus** magic damage equal to 3% (+ 3% per 100 AP) of the target's **missing** health against enemies below health. The damage has a minimum threshold of 15 and is capped at 150 against minions and monsters.
+**PASSIVE:** **Ekko**’s basic attacks deal **bonus** magic damage equal to 3% (+ 3% per 100 AP) of the target's **missing** health against enemies below (health) 30% of their **maximum** health. The damage has a minimum threshold of 15 and is capped at 150 against minions and monsters.
 
 **ACTIVE:** **Ekko** creates an afterimage of himself that, after 2 seconds, bats a device to the target location and grants sight of the area for $2.5$ seconds. After travelling over $1.25$ seconds, the device expands into a chronosphere that is visible for $1.5$ seconds and which slows enemies within by 40%.
 
@@ -199,7 +199,7 @@ If **Ekko** enters the sphere within 2 seconds of its creation, it detonates to 
 | **Grounded** | True |
 | **Knockdown** | True |
 
-**ACTIVE:** **Ekko** dashes in the target direction, then empowers his next basic attack within 3 seconds to have a $0.25$-second cast time, gain range, cause him to blink within 125 (Estimated) range of the target, and deal **bonus** magic damage.
+**ACTIVE:** **Ekko** dashes in the target direction, then empowers his next basic attack within 3 seconds to have a $0.25$-second cast time, gain (range) 300 **bonus** range, cause him to blink within 125 (Estimated) range of the target, and deal **bonus** magic damage.
 
 | Attribute | Value |
 |-----------|------:|

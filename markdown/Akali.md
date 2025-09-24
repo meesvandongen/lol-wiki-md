@@ -88,7 +88,7 @@
 | **Spell Effects** | spell |
 | **Parry** | True |
 
-**INNATE:** When **Akali** damages an enemy champion with an ability, she creates a around them for 4 seconds, refreshing on subsequent damaging abilities against champions. For 2 seconds, she gains key=% **bonus** movement speed while moving away from the center of the ring. Only one may be active at a time.
+**INNATE:** When **Akali** damages an enemy champion with an ability, she creates a around them for 4 seconds, refreshing on subsequent damaging abilities against champions. For 2 seconds, she gains 30%–60%@1–16 **bonus** movement speed while moving away from the center of the ring. Only one may be active at a time.
 
 When **Akali** exits the ring, for 2 seconds, she regains the **bonus** movement speed while facing nearby enemy champions and becomes empowered with *Swinging Kama* for 4 seconds, during which she cannot create another ring.
 
@@ -153,7 +153,7 @@ When **Akali** exits the ring, for 2 seconds, she regains the **bonus** movement
 | **Targeting** | Direction |
 | **Affects** | Self, Enemies |
 
-**ACTIVE:** **Akali** restores 100 energy over $0.4$ seconds and gains ms that decays over 2 seconds. She also detonates a smoke bomb a fixed distance away in the target direction, creating a circular shroud that expands over the next 5 seconds into a ring. The shroud does not permeate terrain, and will expand toward nearby enemy champions. While the shroud is active, **Akali**’s **maximum** energy is increased by 100.
+**ACTIVE:** **Akali** restores 100 energy over $0.4$ seconds and gains (ms) **bonus** movement speed that decays over 2 seconds. She also detonates a smoke bomb a fixed distance away in the target direction, creating a circular shroud that expands over the next 5 seconds into a ring. The shroud does not permeate terrain, and will expand toward nearby enemy champions. While the shroud is active, **Akali**’s **maximum** energy is increased by 100.
 
 | Attribute | Value |
 |-----------|------:|
@@ -165,7 +165,7 @@ When **Akali** exits the ring, for 2 seconds, she regains the **bonus** movement
 
 Entering the shroud renders **Akali** invisible, unless she is dashing.
 
-Declaring a basic attack or casting an ability will break the invisibility and prevent **Akali** from entering it for type=minutes seconds, refreshing on subsequent attacks and casts.
+Declaring a basic attack or casting an ability will break the invisibility and prevent **Akali** from entering it for 1@1; 0.9@8; 0.825@11; 0.725@20; 0.625@30 (@=minutes) seconds, refreshing on subsequent attacks and casts.
 
 *The marked section of Twilight Shroud will linger for the mark's duration, even after the shroud ends.*
 
@@ -265,7 +265,7 @@ The shuriken *marks* and reveals the enemy or the last *smoke* section hit for 3
 
 *Perfect Execution* can be recast after a $2.5$-second static cooldown (Unaffected by ability haste) within 10 seconds of the first activation.
 
-**RECAST:** **Akali** dashes 800 (Estimated) units in the target direction, dealing magic damage to enemies she passes through, increased by key=%.
+**RECAST:** **Akali** dashes 800 (Estimated) units in the target direction, dealing magic damage to enemies she passes through, increased by 0%–200%@0–70 (@=target's **missing** health).
 
 | Attribute | Value |
 |-----------|------:|

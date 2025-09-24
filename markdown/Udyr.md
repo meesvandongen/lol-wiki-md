@@ -86,7 +86,7 @@
 | **Parry** | True |
 | **Cooldown (Unaffected by ability haste, but affected by ultimate haste)** | 50–20@1–16 |
 
-**INNATE - AWAKENED SPIRIT:** **Udyr** has no ultimate ability and instead has 4 basic abilities that each incur a cd when cast. Each ability grants a *Stance* that empowers his basic attacks, and switching *Stances* will replace the empowered attacks of the previous *Stance*.
+**INNATE - AWAKENED SPIRIT:** **Udyr** has no ultimate ability and instead has 4 basic abilities that each incur a (cd) $1.5$-second global cooldown (Affected by ability haste) when cast. Each ability grants a *Stance* that empowers his basic attacks, and switching *Stances* will replace the empowered attacks of the previous *Stance*.
 
 Periodically, after **Udyr** enters a *Stance*, he can cast it again at no cost after $0.25$ seconds and within the following 5 seconds to *Awaken* it, empowering the *Stance* with an additional effect and placing the effect on cooldown.
 If **Udyr** does not consume the *Awaken* cast within the duration and has not switched *Stances*, his current *Stance*’s respective ability incurs a $0.25$-second cooldown. *Awakened Spirit* is placed on full cooldown at the start of the game.
@@ -128,7 +128,7 @@ If **Udyr** does not consume the *Awaken* cast within the duration and has not s
 | **Projectile** | True |
 | **Parry** | True |
 
-**ACTIVE - STANCE:** **Udyr** enters *Claw Stance*, empowering his next two basic attacks to gain range **bonus** range and deal **bonus** physical damage, capped at 15 (+ 100% **bonus** AD) (+ 50% AP) against monsters.
+**ACTIVE - STANCE:** **Udyr** enters *Claw Stance*, empowering his next two basic attacks to gain (range) 50 **bonus** range and deal **bonus** physical damage, capped at 15 (+ 100% **bonus** AD) (+ 50% AP) against monsters.
 
 | Attribute | Value |
 |-----------|------:|
@@ -192,7 +192,7 @@ Additionally, **Udyr** grants himself a shield for 4 seconds.
 | Attribute | Value |
 |-----------|------:|
 | **Total Healing** | 20/2 to 150/2 (+ 22.5 / 30 / 37.5 / 45 / 52.5 / 60) (+ 32.5% AP) (+ 4% **maximum** health) |
-| **Heal per Tick** | 20/#expr: #var:w_sd/2 to 150/#expr: #var:w_sd/2 (+ 45/#expr: #var:w_sd/2 to 120/#expr: #var:w_sd/2 6) (+ 65/#expr: (+ 8/
+| **Heal per Tick** | (+ 45/#expr: #var:w_sd/2 to 120/#expr: #var:w_sd/2 6) (+ 65/#expr: (+ 8/
 \| Attribute \| Value \|
 \|-----------\|------:\|
 \| **Increased Life Steal** \| 30 / 32 / 34 / 36 / 38 / 40% \| |
@@ -236,7 +236,7 @@ Additionally, **Udyr** becomes ghosted and gains **bonus** movement speed for 4 
 |-----------|------:|
 | **Decayed Bonus Movement Speed** | 7.5 / 9.3 / 11.1 / 12.9 / 14.7 / 16.5% |
 
-**RECAST - AWAKEN:** **Udyr** gains range **bonus** attack range and an additional 30 to 40 **bonus** movement speed. He also gains immunity to crowd control for $1.5$ seconds.
+**RECAST - AWAKEN:** **Udyr** gains (range) 75 **bonus** attack range and an additional 30 to 40 **bonus** movement speed. He also gains immunity to crowd control for $1.5$ seconds.
 
 **Notes:**
 
@@ -253,7 +253,7 @@ Additionally, **Udyr** becomes ghosted and gains **bonus** movement speed for 4 
 |-----------|------:|
 | **Cast Time** | none |
 | **Effect Radius** | 370 (Storm and empowered attack radius, center to edge) / cr 1300 (Storm lock-on radius) units |
-| **Speed** | 109.5 / 109.676 / 109.853 / 111.471 / 120.294 / 129.118 / 137.941 / 146.765 / 155.588 / 164.412 / 173.235 / 182.059 / 190.882 / 199.706 / 208.529 / 217.353 / 232.353 / 250 units/second |
+| **Speed** | 109.5 / 109.68 / 109.85 / 111.47 / 120.29 / 129.12 / 137.94 / 146.76 / 155.59 / 164.41 / 173.24 / 182.06 / 190.88 / 199.71 / 208.53 / 217.35 / 232.35 / 250 units/second |
 | **Cost** | 40 to 23 Mana |
 | **Cooldown** | 6 (Starts on-cast, but recasting refreshes the cooldown) seconds |
 | **Cooldown Start** | on-cast |
@@ -267,7 +267,7 @@ Additionally, **Udyr** becomes ghosted and gains **bonus** movement speed for 4 
 
 **ACTIVE - STANCE:** **Udyr** enters *Storm Stance*, empowering his next two basic attacks to deal 10 to 40 (+ 35% AP) magic damage to nearby enemies.
 
-Additionally, **Udyr** summons a blizzard around himself for 4 seconds that deals magic damage every $0.5$ seconds to nearby enemies and slows them while they remain within. Minions take 50–80@1–16 (@=%) damage.
+Additionally, **Udyr** summons a blizzard around himself for 4 seconds that deals magic damage every $0.5$ seconds to nearby enemies and slows them while they remain within. Minions take 50%–80%@1–16 damage.
 
 | Attribute | Value |
 |-----------|------:|

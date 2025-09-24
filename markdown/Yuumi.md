@@ -145,7 +145,7 @@
 |-----------|------:|
 | **Enhanced Slow** | 50 / 53 / 56 / 59 / 62 / 65% |
 
-** *Prowling Projectile* always applies its enhanced slow against champions and hitting a champion grants her *Best Friend* **bonus** magic damage on-hit for 5 seconds, increased by 0–75@0–100 (@=*Anchor*’s critical strike chance).
+** *Prowling Projectile* always applies its enhanced slow against champions and hitting a champion grants her *Best Friend* **bonus** magic damage on-hit for 5 seconds, increased by 0%–75%@0–100 (@=*Anchor*’s critical strike chance).
 
 | Attribute | Value |
 |-----------|------:|
@@ -183,7 +183,7 @@ If targeting an ally with the recast, the ability will not cast |
 
 **ACTIVE:** **Yuumi** channels for $0.25$ seconds, then upon completion dashes to the target allied champion and attaches to them upon arrival, designating them as her *Anchor*. *You and Me!* can be recast after $0.5$ seconds of the attachment.
 
-**RECAST - CHANGE OF PLAN:** **Yuumi** detaches from her *Anchor* and dashes to the target allied champion to attach to them, refreshing the recast. She will detach automatically if her *Anchor* dies or under certain circumstances (See notes). If recast without a valid target, **Yuumi** will detach and dash 250-units in the target direction, placing *You and Me!* on a cd-second cooldown if it is not already on cooldown.
+**RECAST - CHANGE OF PLAN:** **Yuumi** detaches from her *Anchor* and dashes to the target allied champion to attach to them, refreshing the recast. She will detach automatically if her *Anchor* dies or under certain circumstances (See notes). If recast without a valid target, **Yuumi** will detach and dash 250-units in the target direction, placing *You and Me!* on a (cd) $0.25$-second cooldown if it is not already on cooldown.
 
 ***Yuumi** will be knocked down by any immobilizing or polymorphing crowd control during the dash.*
 
@@ -192,7 +192,7 @@ If targeting an ally with the recast, the ability will not cast |
 ** **Yuumi** gains heal and shield power and her *Best Friend* gains healing on-hit.
 
 
-*You and Me!* is placed on a cd cooldown if **Yuumi** becomes immobilized, grounded, or polymorphed.
+*You and Me!* is placed on a (cd) 5-second cooldown if **Yuumi** becomes immobilized, grounded, or polymorphed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -249,7 +249,7 @@ If targeting an ally with the recast, the ability will not cast |
 | **Targeting** | Auto |
 | **Affects** | Self / Allies |
 
-**ACTIVE:** **Yuumi** grants herself a shield and gains **bonus** attack speed for 3 seconds. She also gains ms while the shield holds.
+**ACTIVE:** **Yuumi** grants herself a shield and gains **bonus** attack speed for 3 seconds. She also gains (ms) 20% **bonus** movement speed while the shield holds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -259,7 +259,7 @@ If targeting an ally with the recast, the ability will not cast |
 |-----------|------:|
 | **Bonus Attack Speed** | 25 / 27.5 / 30 / 32.5 / 35% (+ 8% per 100 AP) |
 
-** *Zoomies* affects the *Anchor* instead of **Yuumi** and additionally restores mana to the *Anchor*, increased by 0–100@30–80 (@=*Anchor*’s **missing** mana).
+** *Zoomies* affects the *Anchor* instead of **Yuumi** and additionally restores mana to the *Anchor*, increased by 0%–100%@30–80 (@=*Anchor*’s **missing** mana).
 
 | Attribute | Value |
 |-----------|------:|

@@ -86,7 +86,7 @@
 **INNATE:** Enemy champions that die will leave behind a Soul Fragment for 16 seconds. **Swain**’s ravens will collect nearby dropped Soul Fragments, as well as the Soul Fragments out of champions hit by *Vision of Empire* or *Nevermove*’s recast. Once a raven has collected a Soul Fragment, it will fly towards **Swain** to grant it to him, while also granting sight of its surroundings during the travel.
 
 
-**SOUL FRAGMENT:** For each stack, **Swain** gains 15 **bonus** health permanently. Upon claiming the fragment, he will heal for key=% of his **maximum** health.
+**SOUL FRAGMENT:** For each stack, **Swain** gains 15 **bonus** health permanently. Upon claiming the fragment, he will heal for 3 to 6 of his **maximum** health.
 
 **Notes:**
 
@@ -179,7 +179,7 @@ Enemy champions hit are also revealed for 6 seconds and have a Soul Fragment col
 | **Target Range** | 850 units |
 | **Effect Radius** | 100 (Detonation radius) / Global (Recast range for rooted targets) |
 | **Width** | 180 units |
-| **Speed** | seconds / seconds |
+| **Speed** | 1125 to 1800 / 2000 to 2800 units/second |
 | **Cost** | 60 / 65 / 70 / 75 / 80 Mana |
 | **Cooldown** | 12 / 11.5 / 11 / 10.5 / 10 seconds |
 | **Cooldown Start** | on-cast |
@@ -325,7 +325,7 @@ After 2 seconds, **Swain** gains the ability to cast *Demonflare*, up to 100 tim
   - Base mana reduced to 400 from 468.
   - Base mana regeneration increased to 10 from 8.
 - Ravenous Flock
-  - Healing changed to key=% of his **maximum** health from key=%. *Now scales linearly instead of at breakpoints.*
+  - Healing changed to 3 to 6 of his **maximum** health from 3%–6%@1–16. *Now scales linearly instead of at breakpoints.*
 - Death's Hand
   - Mana cost reduced to 40 / 45 / 50 / 55 / 60 from 45 / 50 / 55 / 60 / 65.
   - Base damage changed to 60 / 85 / 110 / 135 / 160 from 65 / 85 / 105 / 125 / 145.
@@ -349,8 +349,8 @@ After 2 seconds, **Swain** gains the ability to cast *Demonflare*, up to 100 tim
   - Detonation base damage increased to 80 / 120 / 160 / 200 / 240 from 35 / 45 / 55 / 65 / 75.
   - Detonation AP ratio increased to 60% AP from 25% AP.
   - Incoming missile width increased to 180 from 170.
-  - Outgoing missile speed changed to type=seconds from type=seconds. *Time to reach maximum range increased to $0.585$ seconds from $0.562$.
-  - Incoming missile speed increased to type=seconds from type=seconds. *Time to reach maximum range reduced to $0.4$ seconds from $0.6$.
+  - Outgoing missile speed changed to 1125 to 1800 from 935–2735@0–0 (@=seconds). *Time to reach maximum range increased to $0.585$ seconds from $0.562$.
+  - Incoming missile speed increased to 2000 to 2800 from 600–2200@0–0 (@=seconds). *Time to reach maximum range reduced to $0.4$ seconds from $0.6$.
   - **Bug Fixes:** No longer displays root VFX on a rooted target if the target dies to its damage.
 - Demonic Ascension
   - Cooldown increased to 120 seconds at all ranks from 100 / 80 / 60.

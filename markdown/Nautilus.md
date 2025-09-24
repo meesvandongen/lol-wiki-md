@@ -84,7 +84,7 @@
 | **Spell Effects** | Proc |
 | **Parry** | True |
 
-**INNATE:** **Nautilus' **basic attacks are empowered to deal 14 to 116 **bonus** physical damage and root the target for changedisplay=true seconds.
+**INNATE:** **Nautilus' **basic attacks are empowered to deal 14 to 116 **bonus** physical damage and root the target for 0.75–1.5@1–16 seconds.
 
 This effect cannot occur on the same target more than once every few seconds.
 
@@ -124,7 +124,7 @@ If the anchor hits an enemy, it deals magic damage, reveals them for $1.15$ seco
 |-----------|------:|
 | **Magic Damage** | 85 / 130 / 175 / 220 / 265 (+ 90% AP) |
 
-If the anchor hits terrain, **Nautilus** dashes to that location and 50% of *Dredge Line*’s cooldown and mana are refunded.
+If the anchor hits terrain, **Nautilus** dashes to that location and 50% of *Dredge Line*’s cooldown and (mana) mana cost are refunded.
 
 ***Nautilus** is unable to move or attack while Dredge Line is in flight. He can cast any of his abilities during the dash.*
 

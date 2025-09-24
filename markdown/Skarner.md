@@ -156,7 +156,7 @@ Basic attacks reduce *Crystal Slash*’s **current** cooldown by $0.25$ seconds,
 | **Spell Effects** | proc |
 | **Parry** | True |
 
-**ACTIVE:** **Skarner** a boulder from the ground, empowering up to three of his next basic attacks within 5 seconds of each other. These attacks gain range, **bonus** attack speed, and deal **bonus** physical damage to the target and surrounding enemies, including structures.
+**ACTIVE:** **Skarner** a boulder from the ground, empowering up to three of his next basic attacks within 5 seconds of each other. These attacks gain (range) 25 **bonus** range, **bonus** attack speed, and deal **bonus** physical damage to the target and surrounding enemies, including structures.
 
 | Attribute | Value |
 |-----------|------:|
@@ -269,7 +269,7 @@ After $0.5$ seconds of the cast, **Skarner** gains the ability to use *Upheaval*
 **Notes:**
 
 - The shield is granted at the start of the cast time.
-- The shield ratio is equal to 0.08*( (+ 8% of his **bonus** health). Effect at cast time end
+- The shield ratio is equal to 0.08*(Skarner)*(x-1)*(0.7025+0.0175*(x-1))) (+ 8% of his **bonus** health). Effect at cast time end
 
 ---
 

@@ -87,7 +87,7 @@
 
 **INNATE:** **Ezreal** generates a stack of *Rising Spell Force* for each enemy hit by his abilities, lasting for 6 seconds, refreshing on subsequent hits, and stacking up to 5 times.
 
-**RISING SPELL FORCE:** For each stack, **Ezreal** gains as, up to a maximum of 50%.
+**RISING SPELL FORCE:** For each stack, **Ezreal** gains (as) 10% **bonus** attack speed, up to a maximum of 50%.
 
 **Notes:**
 
@@ -159,7 +159,7 @@ His next basic attack or ability against the target detonates the mark to deal t
 |-----------|------:|
 | **Bonus Magic Damage** | 80 / 135 / 190 / 245 / 300 (+ 100% **bonus** AD) (+ 70 / 75 / 80 / 85 / 90% AP) |
 
-If the mark was detonated with an ability, **Ezreal** restores mana plus the mana cost of that ability.
+If the mark was detonated with an ability, **Ezreal** restores (mana) 60 mana plus the mana cost of that ability.
 
 **Notes:**
 

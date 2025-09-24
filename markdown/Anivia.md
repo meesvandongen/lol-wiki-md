@@ -96,7 +96,7 @@
 
 **INNATE:** Periodically, upon taking fatal damage, **Anivia** enters resurrection for 6 seconds and restores all of her health.
 
-While under resurrection, **Anivia** is unable to act and gains -40@1; -25@5; -10@8; 5@12; 20@15 armor and mr.
+While under resurrection, **Anivia** is unable to act and gains -40@1; -25@5; -10@8; 5@12; 20@15 (armor) **bonus** armor and (mr) **bonus** magic resistance.
 
 If **Anivia** remains alive by the end of the duration, she is revived with her **current** health.
 
@@ -129,7 +129,7 @@ If **Anivia** remains alive by the end of the duration, she is revived with her 
 | **Spell Effects** | spellaoe |
 | **Projectile** | True |
 
-**ACTIVE:** **Anivia** launches a chunk of ice in the target direction that deals magic damage to enemies hit and slows them by changedisplay=true for 3 seconds.
+**ACTIVE:** **Anivia** launches a chunk of ice in the target direction that deals magic damage to enemies hit and slows them by 20%–20 to 40 for 3%@0–3 (@=[File:Glacial Storm.png) for 3 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -231,12 +231,12 @@ If **Anivia** remains alive by the end of the duration, she is revived with her 
 |-----------|------:|
 | **Cast Time** | none |
 | **Target Range** | 750 units |
-| **Effect Radius** | time active |
+| **Effect Radius** | 200 to 400 by 25 / 400 units |
 | **Tether Radius** | 1000 units |
 | **Cost** | 60 mana+35 / 45 / 55 per second |
 | **Cooldown** | 4 / 3.5 / 3 / 2.5 / 2 (Starts after storm disappears) seconds |
 | **Cooldown Start** | post-effect |
-| **Targeting** | Location / Auto |
+| **Targeting** | [Location / Auto |
 | **Affects** | Enemies |
 | **Damage Type** | Magic |
 | **Spell Shield** | False |

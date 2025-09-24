@@ -85,7 +85,7 @@
 
 **DANGER ZONE:** **Rumble**’s mech enters the *Danger Zone*, empowering his basic abilities.
 
-**OVERHEATED:** **Rumble**’s mech becomes *Overheated*, disabling his abilities as his Heat decays back down to 0 over 4 seconds. During this time, he gains and empowers his basic attacks to deal 5 to 40 (+ 25% AP) (+ 4% of the target's **maximum** health) **bonus** magic damage on-hit. The damage based on the target's health ratio is capped at 65+((150-65)/17)*(x-1)*(0.7025+0.0175*(x-1)) against monsters.
+**OVERHEATED:** **Rumble**’s mech becomes *Overheated*, disabling his abilities as his Heat decays back down to 0 over 4 seconds. During this time, he gains 50% / 130% **bonus** attack speed and empowers his basic attacks to deal 5 to 40 (+ 25% AP) (+ 4% of the target's **maximum** health) **bonus** magic damage on-hit. The damage based on the target's health ratio is capped at 65 / 150 against monsters.
 
 **Notes:**
 
@@ -130,7 +130,7 @@
 
 ** *Flamespitter*’s damage is increased by 50%.
 
-*Flamespitter*’s total damage based on the target's health is capped at 65+((300-65)/17)*(x-1)*(0.7025+0.0175*(x-1)) against monsters.
+*Flamespitter*’s total damage based on the target's health is capped at 65 / 300 against monsters.
 
 | Attribute | Value |
 |-----------|------:|
@@ -172,7 +172,7 @@
 |-----------|------:|
 | **Shield Strength** | 25 / 55 / 85 / 115 / 145 (+ 30% AP) (+ 4% of **maximum** health) |
 
-**Rumble** also gains ms for 1 to $1.32$ seconds. (See notes)
+**Rumble** also gains (ms) **bonus** movement speed for 1 to $1.32$ seconds. (See notes)
 
 | Attribute | Value |
 |-----------|------:|
@@ -212,7 +212,7 @@
 | **Spell Effects** | spell |
 | **Projectile** | True |
 
-**ACTIVE:** **Rumble** generates 20 Heat to shoot a harpoon in the target direction that deals magic damage to the first enemy hit, inflicting them with magic penetration for 4 seconds and slowing them for 2 seconds. These effects stack additively with multiple harpoons, refreshing their duration and stacking up to 2 times.
+**ACTIVE:** **Rumble** generates 20 Heat to shoot a harpoon in the target direction that deals magic damage to the first enemy hit, inflicting them with (magic penetration) magic resistance reduction for 4 seconds and slowing them for 2 seconds. These effects stack additively with multiple harpoons, refreshing their duration and stacking up to 2 times.
 
 | Attribute | Value |
 |-----------|------:|

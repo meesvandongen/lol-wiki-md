@@ -92,7 +92,7 @@
 
 **INNATE:** **Rell**’s basic attacks deal **bonus** magic damage on-hit equal to the sum of 5% of her **total** armor and 5% of her **total** magic resistance.
 
-**INNATE:** **Rell**’s basic attacks and abilities against non-minions apply a stack of *Break The Mold* for 5 seconds, refreshing on subsequent hits and stacking up to 5 times. Each stack reduces the target's ar and mr by 3% for a maximum of 15% reduction.
+**INNATE:** **Rell**’s basic attacks and abilities against non-minions apply a stack of *Break The Mold* for 5 seconds, refreshing on subsequent hits and stacking up to 5 times. Each stack reduces the target's (ar) armor and (mr) magic resistance by 3% for a maximum of 15% reduction.
 
 **Rell** gains **bonus** armor and **bonus** magic resistance equal to the sum resistances reduced from all afflicted enemies.
 
@@ -101,8 +101,8 @@
 **Notes:**
 
 - The attacks do not affect structures.
-- The first stack of *Break The Mold* that is applied to a target will snapshot the targets current ar and mr. All subsequent stacks will reduce the targets resistances based on the snapshotted amount, even if the target's total resistances change. This snapshot lasts until the debuff expires.
-  - For example, applying a stack of *Break The Mold* to a champion with 100 ar and mr will reduce their resistance by 3 and grant **Rell** the lost stats. If their resistances are then boosted to 500 before another stack is applied, the subsequent stack will only reduce their resistance by a further 3 despite 3% of 500 being 15.
+- The first stack of *Break The Mold* that is applied to a target will snapshot the targets current (ar) armor and (mr) magic resistance. All subsequent stacks will reduce the targets resistances based on the snapshotted amount, even if the target's total resistances change. This snapshot lasts until the debuff expires.
+  - For example, applying a stack of *Break The Mold* to a champion with 100 (ar) armor and (mr) magic resistance will reduce their resistance by 3 and grant **Rell** the lost stats. If their resistances are then boosted to 500 before another stack is applied, the subsequent stack will only reduce their resistance by a further 3 despite 3% of 500 being 15.
 
 ---
 
@@ -200,7 +200,7 @@ While **Rell** is **DISMOUNTED**, she can cast *Ferromancy: Mount Up*. Upon comp
 
 **PASSIVE:** While **Rell** is **DISMOUNTED**, she gains 15% **bonus** armor, 15% **bonus** magic resistance, 20% **bonus** attack speed, and 75 **bonus** attack range.
 
-**ACTIVE:** **Rell** becomes **MOUNTED**, gaining ms decaying over 2 seconds and empowering her next basic attack within $3.5$ seconds to have a $0.2$-second cast time, gain 100 **bonus** attack range and cause her to charge at the target's location, during which she also gains 40% **bonus** attack speed. Upon arrival or collision, she deals **bonus** magic damage, stuns the target for $0.6$ seconds, and flings them 150 units over herself, though not through terrain, over $0.4$ seconds.
+**ACTIVE:** **Rell** becomes **MOUNTED**, gaining (ms) 30% **bonus** movement speed decaying over 2 seconds and empowering her next basic attack within $3.5$ seconds to have a $0.2$-second cast time, gain 100 **bonus** attack range and cause her to charge at the target's location, during which she also gains 40% **bonus** attack speed. Upon arrival or collision, she deals **bonus** magic damage, stuns the target for $0.6$ seconds, and flings them 150 units over herself, though not through terrain, over $0.4$ seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -339,7 +339,7 @@ If cast without a valid target, or self-cast, *Full Tilt* will automatically tar
   - Base movement speed reduced to 315 from 330.
 - Break the Mold
   - Minimum resistance steal increased to 1 to 2 from 0.8 to 2.
-  - **New Effect:** Now deals on-hit magic damage equal to armor and mr.
+  - **New Effect:** Now deals on-hit magic damage equal to (armor) 5% **total** armor and (mr) 5% **total** magic resistance.
 - Shattering Strike
   - Stun duration reduced to $0.65$ seconds from $0.75$.
 - Ferromancy: Crash Down

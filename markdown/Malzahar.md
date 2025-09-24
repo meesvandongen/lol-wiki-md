@@ -87,12 +87,12 @@
 | **Range** | 100 units |
 | **Gold** | 2 |
 | **Experience** | 0 |
-| **Health** | 65+8*(x-1)*(0.7025+0.0175*(x-1)) |
-| **Armor** | 16+2*(x-1)*(0.7025+0.0175*(x-1)) |
-| **Magic Resist** | 8+1*(x-1)*(0.7025+0.0175*(x-1)) |
-| **Damage** | 5+3.5*(x-1)*(0.7025+0.0175*(x-1)) (+ 40% **bonus** AD) (+ 20% AP) |
+| **Health** | 65 / 201 |
+| **Armor** | 16 / 50 |
+| **Magic Resist** | 8 / 25 |
+| **Damage** | 5 / 64.5 (+ 40% **bonus** AD) (+ 20% AP) |
 | **Damage Type** | magic |
-| **Attack Speed** | 0.665*(1+0.02*(x-1)*(0.7025+0.0175*(x-1))) attack speed |
+| **Attack Speed** | 0.665 / 0.891 attack speed |
 | **Move Speed** | 400 |
 | **Control** | Prioritize attacking Nether Grasp’s target and enemies (champions have a higher priority than minions) infected by Malefic Visions, or the nearest target. |
 | **Targeting** | Minion, does not count towards the minion kill tracking score |
@@ -194,8 +194,8 @@
 
 | Attribute | Value |
 |-----------|------:|
-| **Magic Damage** | 5+3.5*(x-1)*(0.7025+0.0175*(x-1)) (+ 12 / 14 / 16 / 18 / 20) (+ 40% **bonus** AD) (+ 20% AP) |
-| **Minion Damage** | (5+3.5*(x-1)*(0.7025+0.0175*(x-1)))*3 (+ 36 / 42 / 48 / 54 / 60) (+ 120% **bonus** AD) (+ 60% AP) |
+| **Magic Damage** | 5 / 64.5 (+ 12 / 14 / 16 / 18 / 20) (+ 40% **bonus** AD) (+ 20% AP) |
+| **Minion Damage** | 15 / 193.5 (+ 36 / 42 / 48 / 54 / 60) (+ 120% **bonus** AD) (+ 60% AP) |
 
 *See [Pets](#Pets) for more details about Voidlings.*
 
@@ -223,14 +223,14 @@
 | **Projectile** | False |
 | **Call For Help** | True |
 
-**ACTIVE:** **Malzahar** infects the target enemy's mind, dealing magic damage every $0.25$ seconds over 4 seconds, which refreshes upon damaging them with *Call of the Void* or *Nether Grasp*. *Malefic Visions* executes minions if they would be damaged below health.
+**ACTIVE:** **Malzahar** infects the target enemy's mind, dealing magic damage every $0.25$ seconds over 4 seconds, which refreshes upon damaging them with *Call of the Void* or *Nether Grasp*. *Malefic Visions* executes minions if they would be damaged below (health) 10 / 12 / 14 / 16 / 18 / 20 / 22 / 24 / 26 / 28 / 30 health.
 
 | Attribute | Value |
 |-----------|------:|
 | **Total Magic Damage** | 80 / 115 / 150 / 185 / 220 (+ 80% AP) |
 | **Magic Damage Per Tick** | 5 / 7.1875 / 9.375 / 11.5625 / 13.75 (+ 5% AP) |
 
-If the target dies while infected, they spread *Malefic Visions* onto the closest nearby enemy and **Malzahar** restores mana.
+If the target dies while infected, they spread *Malefic Visions* onto the closest nearby enemy and **Malzahar** restores (mana) 2% of his **maximum** mana.
 
 **Notes:**
 

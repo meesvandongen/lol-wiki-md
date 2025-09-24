@@ -83,7 +83,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Shyvana** gains armor and mr, which are each increased by 5 for every elemental drake and Elder Dragon her team slays.
+**INNATE:** **Shyvana** gains (armor) 5 **bonus** armor and (mr) 5 **bonus** magic resistance, which are each increased by 5 for every elemental drake and Elder Dragon her team slays.
 
 Additionally, **Shyvana** deals 20% increased damage to Dragon.
 
@@ -109,7 +109,7 @@ Additionally, **Shyvana** deals 20% increased damage to Dragon.
 | **Spell Effects** | Special |
 | **Parry** | True |
 
-**ACTIVE:** **Shyvana** empowers her next basic attack within 6 seconds to gain range, deal 100% AD (+ 50% AP) physical damage, and cause her to strike again after $0.25$ seconds to deal **bonus** physical damage.
+**ACTIVE:** **Shyvana** empowers her next basic attack within 6 seconds to gain (range) 25 **bonus** range, deal 100% AD (+ 50% AP) physical damage, and cause her to strike again after $0.25$ seconds to deal **bonus** physical damage.
 
 The second strike applies on-hit effects, triggers on-attack effects, and can critically strike for damage if the triggering attack does.
 
@@ -156,7 +156,7 @@ Basic attacks reduce *Twin Bite*’s **current** cooldown by $0.5$ seconds on-hi
 | **Spell Effects** | aoedot |
 | **Parry** | unknown |
 
-**ACTIVE:** **Shyvana** surrounds herself in flames for 3 seconds, gaining ms and dealing magic damage every $0.5$ seconds to nearby enemies.
+**ACTIVE:** **Shyvana** surrounds herself in flames for 3 seconds, gaining (ms) decaying **bonus** movement speed and dealing magic damage every $0.5$ seconds to nearby enemies.
 
 | Attribute | Value |
 |-----------|------:|
@@ -254,7 +254,7 @@ During this time, **Shyvana**’s basic attacks deal **bonus** magic damage on-h
 |-----------|------:|
 | **Magic Damage** | 150 / 200 / 250 / 300 / 350 (+ 100% AP) |
 
-**DRAGON FORM**: **Shyvana** gains health, range, and increased size. Her abilities are also empowered to apply an additional effect. She maintains **DRAGON FORM** at a recurring cost of Fury, returning to **HUMAN FORM** once all Fury has been depleted.
+**DRAGON FORM**: **Shyvana** gains (health) **bonus** health, (range) **bonus** attack range, and increased size. Her abilities are also empowered to apply an additional effect. She maintains **DRAGON FORM** at a recurring cost of Fury, returning to **HUMAN FORM** once all Fury has been depleted.
 
 | Attribute | Value |
 |-----------|------:|

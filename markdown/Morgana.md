@@ -147,7 +147,7 @@ No additional notes.
 
 **PASSIVE:** *Tormented Shadow*’s **current** cooldown is reduced by 5% of its **total** cooldown whenever *Soul Siphon* triggers. Simultaneous triggers from multiple targets will stack the cooldown reduction.
 
-**ACTIVE:** **Morgana** torments the soil at the target location, causing the area to become desecrated for 5 seconds. Enemies within take magic damage on-cast and every $0.5$ seconds thereafter, increased by type=target's **missing** health. *Tormented Shadow* deals 170% damage against monsters.
+**ACTIVE:** **Morgana** torments the soil at the target location, causing the area to become desecrated for 5 seconds. Enemies within take magic damage on-cast and every $0.5$ seconds thereafter, increased by 0%–100%@0–100 (@=target's **missing** health). *Tormented Shadow* deals 170% damage against monsters.
 
 | Attribute | Value |
 |-----------|------:|
@@ -253,7 +253,7 @@ If a target does not break their tether by the end of its duration, they are dea
 - Tormented Shadow
   - Minimum base damage per tick increased to 7 / 14 / 21 / 28 / 35 from 6 / 11.5 / 17 / 22.5 / 28.
   - Minimum AP ratio per tick increased to 10% AP from 8.5% AP.
-  - Bonus damage reduced to type=target's **missing** health from type=target's **missing** health.
+  - Bonus damage reduced to 0%–100%@0–100 (@=target's **missing** health) from 0%–170%@0–100 (@=target's **missing** health).
     - Maximum base damage per tick reduced to 14 / 28 / 42 / 56 / 70 from 16.2 / 31.05 / 45.9 / 60.75 / 75.6.
     - Maximum AP ratio per tick reduced to 20% AP from 22.95% AP.
 

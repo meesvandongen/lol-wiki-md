@@ -98,7 +98,7 @@
 
 **INNATE:** **Mordekaiser** generates a stack for each enemy champion or large monster hit by his damaging basic attacks or basic abilities, lasting for 4 seconds, refreshing on subsequent hits, and stacking up to 3 times. At 3 stacks, he gains *Darkness Rise*.
 
-**DARKNESS RISE:** **Mordekaiser** gains ms and deals「 ⟷ 」to nearby enemies. Against monsters, the damage is capped at「 40 to 200 per second. ⟷ 40×0.125 to 200×0.125 per $0.125$ seconds. 」
+**DARKNESS RISE:** **Mordekaiser** gains (ms) 3 to 9 for **bonus** movement speed and deals「 5 (+ 30% AP) (+ 1 to 5 of target's **maximum** health) magic damage every second ⟷ 0.625 (+ 3.75% AP) (+ 1×0.125 to 5×0.125 of target's **maximum** health) magic damage every $0.125$ seconds 」to nearby enemies. Against monsters, the damage is capped at「 40 to 200 per second. ⟷ 40×0.125 to 200×0.125 per $0.125$ seconds. 」
 
 **Notes:**
 
@@ -116,9 +116,9 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Mordekaiser** shields himself for 25% of the damage dealt by his abilities, halved to $12.5$% against enemy minions and capped at health.
+**INNATE:** **Mordekaiser** shields himself for 25% of the damage dealt by his abilities, halved to $12.5$% against enemy minions and capped at (health) 25% **maximum** health.
 
-After a $1.5$ seconds delay, *Iron Man*’s shield decays at a rate of health per second down to a minimum of「 health ⟷ 25% **maximum** shield 」.
+After a $1.5$ seconds delay, *Iron Man*’s shield decays at a rate of (health) $1.5$% **base** health per second down to a minimum of「 (health) $6.25$% **maximum** health ⟷ 25% **maximum** shield 」.
 
 **Notes:**
 
@@ -178,7 +178,7 @@ After a $1.5$ seconds delay, *Iron Man*’s shield decays at a rate of health pe
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**PASSIVE:** **Mordekaiser** stores 45% of the post-mitigation (Damage calculated after modifiers) damage he deals and $7.5$% of the pre-mitigation (Damage calculated before modifiers) damage he takes,「 reduced by 75% for non-champion sources, ⟷ reduced to $11.25$% of damage dealt and $3.75$% of damage taken for non-champion sources, 」as *Potential Shield* on his secondary resource bar, up to health. The *Potential Shield* decays by 8 to 25 every second after not dealing or taking damage for 1 second. While *Indestructible* is not on cooldown, the *Potential Shield* will not decay below a minimum of 5% of his **maximum** health, and it will be set to that amount when it comes off cooldown if it was previously below it.
+**PASSIVE:** **Mordekaiser** stores 45% of the post-mitigation (Damage calculated after modifiers) damage he deals and $7.5$% of the pre-mitigation (Damage calculated before modifiers) damage he takes,「 reduced by 75% for non-champion sources, ⟷ reduced to $11.25$% of damage dealt and $3.75$% of damage taken for non-champion sources, 」as *Potential Shield* on his secondary resource bar, up to (health) 30% of his **maximum** health. The *Potential Shield* decays by 8 to 25 every second after not dealing or taking damage for 1 second. While *Indestructible* is not on cooldown, the *Potential Shield* will not decay below a minimum of 5% of his **maximum** health, and it will be set to that amount when it comes off cooldown if it was previously below it.
 
 **ACTIVE:** **Mordekaiser** consumes his *Potential Shield* to grant himself a shield for the same amount for 4 seconds. The shield decays exponentially over the duration. *Indestructible* can be recast after $0.5$ seconds while the shield is active.
 
@@ -212,7 +212,7 @@ No additional notes.
 | **Projectile** | False |
 | **Out of Range Behavior** | cast at max |
 
-**PASSIVE:** **Mordekaiser** gains mpen.
+**PASSIVE:** **Mordekaiser** gains (mpen) magic penetration.
 
 | Attribute | Value |
 |-----------|------:|
@@ -246,7 +246,7 @@ No additional notes.
 
 **ACTIVE:** **Mordekaiser** his mace towards the target enemy champion, slowing them by 75% and revealing them over the cast time, and then banishing (See notes) them with him to the *Death Realm* for 7 seconds. 
 
-**Mordekaiser** also consumes the target's soul for 7 seconds, healing himself for 10% of their **maximum** health and reducing their **current** ability power, **total** attack speed, **maximum** health, armor, magic resistance, and by 10% for the duration. Additionally, the target's **base** attack damage is reduced by 10% of their **current total** AD for the same duration. **Mordekaiser** gains the reduced stats of the target for himself for the same duration, and if the target dies while inside the *Death Realm*, he keeps their partial stats until they respawn.
+**Mordekaiser** also consumes the target's soul for 7 seconds, healing himself for 10% of their **maximum** health and reducing their **current** ability power, **total** attack speed, **maximum** health, (armor) armor, magic resistance, and by 10% for the duration. Additionally, the target's **base** attack damage is reduced by 10% of their **current total** AD for the same duration. **Mordekaiser** gains the reduced stats of the target for himself for the same duration, and if the target dies while inside the *Death Realm*, he keeps their partial stats until they respawn.
 
 Units between realms see each other as spirits, considering each other dead and negating any interactions (See notes) between each other. Only **Mordekaiser** and the target will enter the realm; other champions cannot follow them. Everything that occurs inside the *Death Realm* is hidden to units outside of it, and vice versa. All pets still inside the realm are killed at its end.
 

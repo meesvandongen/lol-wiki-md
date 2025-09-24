@@ -131,7 +131,7 @@ Basic attacks reduce *Umbra Blades' * cooldown by 1 second, increased to 3 again
 |-----------|------:|
 | **Physical damage** | 65 / 110 / 155 / 200 / 245 (+ 85% **bonus** AD) |
 
-While on the *Dusk Trail*, **Nocturne** is ghosted and gains **bonus** attack damage and ms.
+While on the *Dusk Trail*, **Nocturne** is ghosted and gains **bonus** attack damage and (ms) **bonus total** movement speed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -199,7 +199,7 @@ While on the *Dusk Trail*, **Nocturne** is ghosted and gains **bonus** attack da
 | **Projectile** | False |
 | **Call For Help** | True |
 
-**PASSIVE:** **Nocturne** gains ms while facing nearby feared targets.
+**PASSIVE:** **Nocturne** gains (ms) 90% **bonus** movement speed while facing nearby feared targets.
 
 **ACTIVE:** **Nocturne** torments the target, forming a tether between himself and the target for 2 seconds, during which the target takes magic damage every $0.5$ seconds over the duration.
 

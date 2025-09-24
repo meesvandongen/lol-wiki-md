@@ -23,7 +23,7 @@
 | **Affects** | Self |
 | **Projectile** | False |
 
-**INNATE:** **Dr. Mundo** health regeneration an additional「 0.4 to 0.65 for 6 / 0.75 to 1.25 for 6 / 1.4 / 1.55 / 1.7 / 1.9 / 2.1 / 2.3 of his **maximum** health every 5 seconds. ⟷ 0.4/10 to 0.65/10 for 6 / 0.75/10 to 1.25/10 for 6 / 1.4/10 / 1.55/10 / 1.7/10 / 1.9/10 / 2.1/10 / 2.3/10 of his **maximum** health every $0.5$ seconds. 」
+**INNATE:** **Dr. Mundo** (health regeneration) regenerates an additional「 0.4 to 0.65 for 6% / 0.75 to 1.25 for 6% / 1.4% / 1.55% / 1.7% / 1.9% / 2.1% / 2.3% of his **maximum** health every 5 seconds. ⟷ 0.4/10 to 0.65/10 for 6% / 0.75/10 to 1.25/10 for 6% / 1.4/10% / 1.55/10% / 1.7/10% / 1.9/10% / 2.1/10% / 2.3/10% of his **maximum** health every $0.5$ seconds. 」
 
 **PASSIVE:** Periodically, **Dr. Mundo** gains immunity to the next hostile immobilizing effect to affect him. Upon resisting one, **Dr. Mundo** pays a health cost equal to 4% of his **current** health and propels a canister that lands 525 units in the general direction of its source, remaining on the ground for 7 seconds.
 
@@ -145,7 +145,7 @@ If the bonesaw hits an enemy, **Dr. Mundo** heals for 50% of the health cost, in
 |-----------|------:|
 | **Bonus Attack Damage** | 2 / 2.2 / 2.4 / 2.6 / 2.8% **maximum** health |
 
-**ACTIVE:** **Dr. Mundo** empowers his next basic attack within 4 seconds to have an uncancellable windup, gain 50 **bonus** range, and deal **bonus** physical damage, increased by key=%. If the target dies or is a small monster, they are sent flying away in a line, though not through terrain, causing all enemies they pass through to take 100% AD physical damage plus *Blunt Force Trauma*’s minimum **bonus** damage.
+**ACTIVE:** **Dr. Mundo** empowers his next basic attack within 4 seconds to have an uncancellable windup, gain 50 **bonus** range, and deal **bonus** physical damage, increased by 0%–40%@0–70 (@=**Dr. Mundo's missing** health). If the target dies or is a small monster, they are sent flying away in a line, though not through terrain, causing all enemies they pass through to take 100% AD physical damage plus *Blunt Force Trauma*’s minimum **bonus** damage.
 
 | Attribute | Value |
 |-----------|------:|
@@ -187,7 +187,7 @@ If the bonesaw hits an enemy, **Dr. Mundo** heals for 50% of the health cost, in
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**ACTIVE:** **Dr. Mundo** injects himself with chemicals to become enhanced for 10 seconds, gaining increased health, ms, and **bonus** health regeneration.
+**ACTIVE:** **Dr. Mundo** injects himself with chemicals to become enhanced for 10 seconds, gaining increased (health) **base** health, (ms) **bonus** movement speed, and **bonus** health regeneration.
 
 | Attribute | Value |
 |-----------|------:|
@@ -246,7 +246,7 @@ At rank 3, *Maximum Dosage*’s increased **base** health and **bonus** health r
 ### V13.21
 - Blunt Force Trauma
   - Bonus attack damage reduced to 2 / 2.25 / 2.5 / 2.75 / 3% **maximum** health from 2 / 2.5 / 3 / 3.5 / 4%.
-  - Bonus damage amplifier reduced to key=% from key=%.
+  - Bonus damage amplifier reduced to 0%–40%@0–40 (@=**missing** health) from 0%–60%@0–40 (@=**missing** health).
     - Maximum bonus base damage reduced to 7 / 21 / 35 / 49 / 63 from 8 / 24 / 40 / 56 / 72.
     - Maximum bonus damage health ratio reduced to 9.8% **bonus** health from 11.2%.
 

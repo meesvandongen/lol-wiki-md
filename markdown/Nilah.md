@@ -114,9 +114,9 @@
 | **Parry** | Special |
 | **Call For Help** | True |
 
-**PASSIVE:** **Nilah** gains lethality armor penetration. Her basic attacks and *Formless Blade* heal her for key=% of the post-mitigation damage (Damage calculated after modifiers) dealt to champions, converting each heal instance beyond **maximum** health into a shield that lasts 6 seconds.
+**PASSIVE:** **Nilah** gains (lethality) 0%–33%@0–100 (@=critical strike chance) armor penetration. Her basic attacks and *Formless Blade* heal her for 0%–20%@0–100 (@=critical strike chance) of the post-mitigation damage (Damage calculated after modifiers) dealt to champions, converting each heal instance beyond **maximum** health into a shield that lasts 6 seconds.
 
-**ACTIVE:** **Nilah** cracks her whip-blade in a line in the target direction that deals physical damage to enemies hit, increased by key=%. *Formless Blade* can hit structures and applies life steal at 100% effectiveness to one target.
+**ACTIVE:** **Nilah** cracks her whip-blade in a line in the target direction that deals physical damage to enemies hit, increased by 0%–100%@0–100 (@=critical strike chance). *Formless Blade* can hit structures and applies life steal at 100% effectiveness to one target.
 
 | Attribute | Value |
 |-----------|------:|
@@ -125,7 +125,7 @@
 
 If *Formless Blade* is cast during *Slipstream*, **Nilah** leaves behind a wave that is sent towards her location at the end of the dash, dealing the same damage to enemies hit.
 
-If *Formless Blade* hits an enemy, **Nilah** empowers herself for 4 seconds: gaining range and attack speed, and causing her basic attacks to strike in a cone that deals 100% AD physical damage to enemies hit. Against secondary non-champion targets, this is reduced to 33% AD for minions, and additionally executes minions left below 20 health. On-hit effects are applied only to the primary target.
+If *Formless Blade* hits an enemy, **Nilah** empowers herself for 4 seconds: gaining (range) 125 **bonus** attack range and (attack speed) 10 to 60 **bonus** attack speed, and causing her basic attacks to strike in a cone that deals 100% AD physical damage to enemies hit. Against secondary non-champion targets, this is reduced to 33% AD for minions, and additionally executes minions left below 20 health. On-hit effects are applied only to the primary target.
 
 **Notes:**
 
@@ -234,7 +234,7 @@ Allied champions she touches (Being within collision range of them) will also be
 |-----------|------:|
 | **Maximum Total Physical Damage** | 185 / 325 / 465 (+ 140% **bonus** AD) |
 
-**Nilah** heals herself and nearby allied champions for key=% of the post-mitigation damage (Damage calculated after modifiers) dealt to champions, reduced to 10% against non-champions, converting each heal instance beyond **maximum** health into a shield that last 6 seconds.
+**Nilah** heals herself and nearby allied champions for 20%–50%@0–100 (@=critical strike chance) of the post-mitigation damage (Damage calculated after modifiers) dealt to champions, reduced to 10% against non-champions, converting each heal instance beyond **maximum** health into a shield that last 6 seconds.
 
 ***Nilah** is unable to basic attack and cast her other abilities during Apotheosis, but she is able to move.*
 
@@ -293,7 +293,7 @@ Allied champions she touches (Being within collision range of them) will also be
   - Selection radius increased to 120 units from 75.
 - Formless Blade
   - AD ratio reduced to 90 / 95 / 100 / 105 / 110% AD from 90 / 97.5 / 105 / 112.5 / 120% AD.
-  - Damage critical strike chance ratio reduced to key=% from key=%.
+  - Damage critical strike chance ratio reduced to 0%–100%@0–100 (@=critical strike chance) from 0%–120%@0–100 (@=critical strike chance).
   - Bonus attack speed increased to 10 to 60 from 10 to 50.
 
 ### V14.2

@@ -80,7 +80,7 @@
 
 **INNATE:** **Tryndamere** generates 5 Fury on his basic attacks, and 10 Fury on critical strikes and each time he kills an enemy. After 8 seconds without dealing or taking damage, **Tryndamere** loses 5 Fury per second.
 
-**Tryndamere** gains critical strike chance.
+**Tryndamere** gains (critical strike chance) 0%–50%@0–100 (@=Fury) critical strike chance.
 
 **Notes:**
 
@@ -254,7 +254,7 @@ Critical strikes on-hit reduce *Spinning Slash*’s **current** cooldown by $0.7
 
 ### V14.10
 - Battle Fury
-  - Critical strike chance increased to 0 / 5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50 from 0 / 4 / 8 / 12 / 16 / 20 / 24 / 28 / 32 / 36 / 40.
+  - Critical strike chance increased to 0%–50%@0–100 (@=Fury) from 0%–40%@0–100 (@=Fury).
 
 ### V14.6
 - Stats

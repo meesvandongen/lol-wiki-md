@@ -80,7 +80,7 @@
 | **Targeting** | Passive |
 | **Affects** | Allies |
 
-**INNATE:** **Nami**’s abilities grant ms (+ 25% AP) **bonus** movement speed to allied champions hit, decaying over $1.5$ seconds. The bonus is「 doubled ⟷ increased to 200 (+ 50% AP) 」from *Tidal Wave*.
+**INNATE:** **Nami**’s abilities grant (ms) 100 (+ 25% AP) **bonus** movement speed to allied champions hit, decaying over $1.5$ seconds. The bonus is「 doubled ⟷ increased to 200 (+ 50% AP) 」from *Tidal Wave*.
 
 **Notes:**
 
@@ -185,7 +185,7 @@
 |-----------|------:|
 | **Slow** | 15 / 20 / 25 / 30 / 35% (+ 5% per 100 AP) |
 
-Empowered abilities that apply area damage only deal key=% of the **bonus** damage to non-champions.
+Empowered abilities that apply area damage only deal 33 to 66 of the **bonus** damage to non-champions.
 
 **Notes:**
 
@@ -214,7 +214,7 @@ Empowered abilities that apply area damage only deal key=% of the **bonus** dama
 | **Spell Effects** | spellaoe |
 | **Projectile** | True |
 
-**ACTIVE:** **Nami** surges a tidal wave in the target direction, granting sight around its trajectory as it travels, dealing magic damage to enemies hit, knocking them up for $0.5$ (Estimated) seconds, and slowing them by 70% for type=distance traveled seconds.
+**ACTIVE:** **Nami** surges a tidal wave in the target direction, granting sight around its trajectory as it travels, dealing magic damage to enemies hit, knocking them up for $0.5$ (Estimated) seconds, and slowing them by 70% for 2 to 4 by 0.2 seconds.
 
 | Attribute | Value |
 |-----------|------:|

@@ -169,7 +169,7 @@ Enemies take 50% damage from a second bolt.
 |-----------|------:|
 | **Disable Duration** | 1.2 / 1.4 / 1.6 / 1.8 / 2 seconds |
 
-**SELF / ALLY CAST:** **Lulu** instantly casts erratic magic upon the target allied champion or herself, granting the target **bonus** attack speed and ms for a duration.
+**SELF / ALLY CAST:** **Lulu** instantly casts erratic magic upon the target allied champion or herself, granting the target **bonus** attack speed and (ms) 25% (+ 5% per 100 AP) **bonus** movement speed for a duration.
 
 | Attribute | Value |
 |-----------|------:|
@@ -244,7 +244,7 @@ Enemies take 50% damage from a second bolt.
 | **Affects** | Allies / Self, Enemies |
 | **Spell Shield** | True |
 
-**ACTIVE:** **Lulu** enlarges herself or the target allied champion, knocking up nearby enemies for 1 second. For the next 7 seconds, the target gains health and 40% increased size and slows nearby enemies, which lingers for $0.25$ seconds.
+**ACTIVE:** **Lulu** enlarges herself or the target allied champion, knocking up nearby enemies for 1 second. For the next 7 seconds, the target gains (health) **bonus** health and 40% increased size and slows nearby enemies, which lingers for $0.25$ seconds.
 
 | Attribute | Value |
 |-----------|------:|

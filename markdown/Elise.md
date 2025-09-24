@@ -99,11 +99,11 @@
 | **Magic Resist** | 50 / 70 / 90 / 110 |
 | **Damage** | 10 / 20 / 30 / 40 (+ 15% AP) |
 | **Damage Type** | magic |
-| **Attack Speed** | $0.665$ (+ [File:Skittering Frenzy.png) attack speed |
+| **Attack Speed** | $0.665$ (+ 20px) attack speed |
 | **Move Speed** | 350 |
 | **Control** | Prioritize **Elise**’s most recently attacked target. |
 | **Targeting** | Minion, does not count towards the minion kill tracking score |
-| **Spell Effects** | *Spiderlings' * basic attacks apply [spell effects as area damage. |
+| **Spell Effects** | *Spiderlings' * basic attacks apply spell effects as area damage. |
 | **On-Hit** | *Spiderlings' * attacks can be mitigated by block, dodge, and blind, as well as stopped by Disarm. |
 
 **Abilities:**
@@ -125,9 +125,9 @@
 | **Spell Effects** | Special |
 | **Parry** | Unknown |
 
-**INNATE - HUMAN FORM:** **Elise** gains one dormant *Spiderling* whenever she hits an enemy with an ability, storing once per cast and up to type = .
+**INNATE - HUMAN FORM:** **Elise** gains one dormant *Spiderling* whenever she hits an enemy with an ability, storing once per cast and up to 20px at a time. She stores the maximum number of *Spiderlings* when the game starts and upon respawning.
 
-**INNATE - SPIDER FORM:** **Elise**’s basic attacks deal type = [[File:Spider Form.png (+ 15% AP) **bonus** magic damage and heal her for type=[[File:Spider Form.png (+ 8% AP) on-hit.
+**INNATE - SPIDER FORM:** **Elise**’s basic attacks deal 20px (+ 15% AP) **bonus** magic damage and heal her for 20px (+ 8% AP) on-hit.
 
 *See [Pets](#Pets) for more details about Spiderlings.*
 
@@ -271,7 +271,7 @@ If there are active *Spiderlings* or *Volatile Spiderlings* nearby, they will da
 
 **ACTIVE:** **Elise** summons an untargetable venom-gorged spider that lasts for 3 seconds. The spider searches for nearby targets and crawls to them after a delay of $0.75$ seconds and otherwise crawls to the target location before doing so without incurring a delay, navigating its path upon encountering terrain.
 
-The spider gains ms based on its proximity to the detected target. When the spider comes into contact with an enemy, or upon expiring otherwise, it instantly explodes to deal magic damage to nearby enemies.
+The spider gains (ms) **bonus** movement speed based on its proximity to the detected target. When the spider comes into contact with an enemy, or upon expiring otherwise, it instantly explodes to deal magic damage to nearby enemies.
 
 | Attribute | Value |
 |-----------|------:|

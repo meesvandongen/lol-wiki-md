@@ -77,7 +77,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Olaf** gains **bonus** attack speed and life steal based on his **missing** health, up to 50+(50/17)*(x-1)*(0.7025+0.0175*(x-1)) **bonus** attack speed and 8+(17/17)*(x-1)*(0.7025+0.0175*(x-1)) life steal at 70% **missing** health.
+**INNATE:** **Olaf** gains **bonus** attack speed and life steal based on his **missing** health, up to 50% / 100% **bonus** attack speed and 8% / 25% life steal at 70% **missing** health.
 
 **Notes:**
 
@@ -105,7 +105,7 @@
 | **Projectile** | Special |
 | **Out of Range Behavior** | cast at max |
 
-**ACTIVE:** **Olaf** throws an axe to the target location that deals physical damage to enemies it passes through and slows them for type=distance traveled seconds. Enemy champions hit are also inflicted with armor penetration for 4 seconds.
+**ACTIVE:** **Olaf** throws an axe to the target location that deals physical damage to enemies it passes through and slows them for 1.5–2.5@400–1000 (@=distance traveled) seconds. Enemy champions hit are also inflicted with (armor penetration) 20% armor reduction for 4 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -187,7 +187,7 @@ He also grants himself a shield for $2.5$ seconds for an amount that is capped a
 |-----------|------:|
 | **True Damage** | 70 / 115 / 160 / 205 / 250 (+ 50% AD) |
 
-If *Reckless Swing* kills the target, **Olaf** heals himself equal to the health.
+If *Reckless Swing* kills the target, **Olaf** heals himself equal to the (health) health cost.
 
 Basic attacks reduce *Reckless Swing*’s cooldown by 1 second, increased to 2 against monsters.
 
@@ -211,7 +211,7 @@ Basic attacks reduce *Reckless Swing*’s cooldown by 1 second, increased to 2 a
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**PASSIVE:** **Olaf** gains armor and mr.
+**PASSIVE:** **Olaf** gains (armor) **bonus** armor and (mr) **bonus** magic resistance.
 
 | Attribute | Value |
 |-----------|------:|
@@ -279,7 +279,7 @@ Basic attacks reduce *Reckless Swing*’s cooldown by 1 second, increased to 2 a
 
 ### V13.7
 - Berserker Rage
-  - Maximum bonus attack speed reduced to 50+(50/17)*(x-1)*(0.7025+0.0175*(x-1)) from 60+(40/17)*(x-1)*(0.7025+0.0175*(x-1)).
+  - Maximum bonus attack speed reduced to 50% / 100% from 60% / 100%.
 - Undertow
   - Base damage reduced to 65 / 115 / 165 / 215 / 265 from 70 / 120 / 170 / 220 / 270.
 
@@ -292,7 +292,7 @@ Basic attacks reduce *Reckless Swing*’s cooldown by 1 second, increased to 2 a
   - Base health regeneration reduced to $6.5$ from $8.5$.
   - Health regeneration growth reduced $0.6$ to $0.9$.
 - Berserker Rage
-  - Maximum bonus attack speed increased to 60+(40/17)*(x-1)*(0.7025+0.0175*(x-1)) from 40+(60/17)*(x-1)*(0.7025+0.0175*(x-1)).
+  - Maximum bonus attack speed increased to 60% / 100% from 40% / 100%.
 - Undertow
   - Mana cost increased to 50 / 55 / 60 / 65 / 70 from 40 / 45 / 50 / 55 / 60.
   - Tooltip now clarifies the cooldown refund mechanic better.

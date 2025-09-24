@@ -118,7 +118,7 @@
 |-----------|------:|
 | **Slow** | 20 / 25 / 30 / 35 / 40% |
 
-**Malphite** also gains ms equal to the raw amount the target lost from the slow for the duration.
+**Malphite** also gains (ms) **bonus** movement speed equal to the raw amount the target lost from the slow for the duration.
 
 **Notes:**
 
@@ -146,7 +146,7 @@
 | **Spell Effects** | Proc |
 | **Parry** | unknown |
 
-**PASSIVE:** **Malphite** gains armor, tripled while Granite Shield is active.
+**PASSIVE:** **Malphite** gains (armor) **bonus** armor, tripled while Granite Shield is active.
 
 | Attribute | Value |
 |-----------|------:|

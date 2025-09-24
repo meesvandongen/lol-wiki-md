@@ -114,7 +114,7 @@
 | **Collision Radius** | 100 (Q3 dash collision radius) units |
 | **Width** | 80 (Thrust width) / 160 (Missile width) units |
 | **Speed** | 1500 (Dash speed and missile speed) units/second |
-| **Static Cooldown** | **bonus** attack speed |
+| **Static Cooldown** | 4 to 1.48 for 8–4/3@0–105 (@=**bonus** attack speed) |
 | **Targeting** | Direction |
 | **Affects** | Self, Enemies |
 | **Damage Type** | Physical |
@@ -164,10 +164,10 @@ If this hits at least one enemy, **Yone** generates a stack of *Gathering Storm*
 
 | Attribute | Value |
 |-----------|------:|
-| **Cast Time** | **bonus** attack speed |
+| **Cast Time** | 0.5–0.19@0–105 (@=**bonus** attack speed) seconds |
 | **Effect Radius** | 600 units |
 | **Angle** | er 80 (Estimated, see notes)° |
-| **Static Cooldown** | **bonus** attack speed |
+| **Static Cooldown** | 14 / 13.2 / 12.4 / 11.6 / 10.8 / 10 / 9.2 / 8.4 / 7.6 / 6.8 / 6 |
 | **Targeting** | Direction |
 | **Affects** | Self, Enemies |
 | **Damage Type** | Physical Magic |
@@ -220,7 +220,7 @@ If this hits an enemy, **Yone** grants himself a shield for 40 to 90 (+ 65% **bo
 
 **ACTIVE:** **Yone** dashes a fixed distance in the target direction, including through terrain, discarding his body and entering *Spirit Form* for 5 seconds. **Yone**’s body is untargetable and is sent the same distance behind the cast location, though not through terrain, and is reclaimed when *Soul Unbound* ends.
 
-**SPIRIT FORM:** **Yone** becomes ghosted and gains ms. His damaging basic attacks and abilities against enemy champions apply a mark that stores a portion of the post-mitigation damage (Damage calculated after modifiers) dealt to the target by his attacks and abilities.
+**SPIRIT FORM:** **Yone** becomes ghosted and gains (ms) 10%–30%@0–3 (@=seconds active) **bonus** movement speed. His damaging basic attacks and abilities against enemy champions apply a mark that stores a portion of the post-mitigation damage (Damage calculated after modifiers) dealt to the target by his attacks and abilities.
 
 | Attribute | Value |
 |-----------|------:|

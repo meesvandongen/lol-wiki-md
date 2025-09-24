@@ -141,7 +141,7 @@ When the blasts meet, the gusts form a tornado that persists for 2 seconds, slow
 | Attribute | Value |
 |-----------|------:|
 | **Cast Time** | none |
-| **Effect Radius** | channel time |
+| **Effect Radius** | 175 / 196.88 / 218.75 / 240.62 / 262.5 / 284.38 / 306.25 / 328.12 / 350 units |
 | **Cost** | 50 Mana |
 | **Cooldown** | 18 / 17 / 16 / 15 / 14 seconds |
 | **Cooldown Start** | on-cast |
@@ -172,7 +172,7 @@ When the blasts meet, the gusts form a tornado that persists for 2 seconds, slow
 
 *Shield of Durand* can be recast within the duration and does so automatically afterwards or if it is interrupted.
 
-**RECAST:** **Galio** refreshes the damage reduction for 2 seconds and deals magic damage to nearby enemy champions, increased by type=channel time, as well as taunts them for type=channel time seconds and, after a brief delay, sets their ms to a static 60 for the same duration but slightly longer.
+**RECAST:** **Galio** refreshes the damage reduction for 2 seconds and deals magic damage to nearby enemy champions, increased by 0% / 25% / 50% / 75% / 100% / 125% / 150% / 175% / 200%, as well as taunts them for 0.5 / 0.62 / 0.75 / 0.88 / 1 / 1.12 / 1.25 / 1.38 / 1.5 seconds and, after a brief delay, sets their (ms) movement speed to a static 60 for the same duration but slightly longer.
 
 | Attribute | Value |
 |-----------|------:|
@@ -183,7 +183,7 @@ When the blasts meet, the gusts form a tornado that persists for 2 seconds, slow
 
 - **Galio** is locked out of attacking and casting for $0.4$ seconds after recasting.
   - **Galio** may still buffer his actions during this time.
-- *Static movement speed* cannot be modified by movement speed or slow resist.
+- *Static movement speed* cannot be modified by (movement speed) **bonus** movement speed or slow resist.
   - This effect is negated only if the target is slow-immune.
 - The ability key does not need to be held down when buffered in other abilities except Winds of War.
 - The following table refers for interactions while **Galio** is channeling:

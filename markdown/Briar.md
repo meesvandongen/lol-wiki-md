@@ -84,7 +84,7 @@
 
 **INNATE:** **Briar**’s basic attacks and abilities inflict a bleed against enemies for 5 seconds, refreshing on subsequent applications, stacking up to 7 times and dealing 25% damage for stacks beyond the first. The bleed deals「 10 to 50 (+ 50% **bonus** AD) **total** physical damage over the duration, increased by 10×0.25 to 50×0.25 (+ 12.5% **bonus** AD) for each subsequent stack and up to a maximum of 10*#expr: 1+( (+ 50*#expr: 1+(. ⟷ 10/(5/0.5) to 50/(5/0.5) (+ 5% **bonus** AD) physical damage every $0.5$ seconds, increased by 10×0.25/(5/0.5) to 50×0.25/(5/0.5) (+ 1.25% **bonus** AD) for each subsequent stack and up to a maximum of 10*#expr: 1+( (+ 50***Briar** heals herself equal to 25% of the pre-mitigation damage (Damage calculated before modifiers) dealt. If a target dies while bleeding, she will heal herself equal to 125% of the remaining bleed dama 」.
 
-**Briar** has no health regeneration, but she increases healing from all sources by key=% (+ key=% per 100 **bonus** health).
+**Briar** has no (health regeneration) **base** health regeneration, but she increases healing from all sources by 0%–40%@0–100 (@=**missing** health) (+ 0%–2.5%@0–100 (@=**missing** health) per 100 **bonus** health).
 
 **Notes:**
 
@@ -98,7 +98,7 @@
 |-----------|------:|
 | **Cast Time** | none |
 | **Target Range** | 475 units |
-| **Speed** | distance |
+| **Speed** | 600 to 600+300 units/second |
 | **Cost** | 6% **current** Health |
 | **Cooldown** | 13 / 12 / 11 / 10 / 9 seconds |
 | **Queue Time** | $0.5$ seconds |
@@ -110,7 +110,7 @@
 | **Grounded** | True |
 | **Knockdown** | True |
 
-**ACTIVE:** **Briar** leaps to the target unit. If the target is an enemy, she deals physical damage, applies on-hit effects, triggers on-attack effects, stuns them for $0.85$ seconds, and reduces their armor penetration and magic penetration for 5 seconds.
+**ACTIVE:** **Briar** leaps to the target unit. If the target is an enemy, she deals physical damage, applies on-hit effects, triggers on-attack effects, stuns them for $0.85$ seconds, and reduces their (armor penetration) armor and (magic penetration) magic resistance for 5 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -201,7 +201,7 @@
 | **Spell Effects** | proc |
 | **Parry** | True |
 
-**ACTIVE:** **Briar** empowers her next basic attack within 5 seconds during *Blood Frenzy* to take a bite out of the target enemy, gaining range, dealing **bonus** physical damage and healing her for 5% of her **maximum** health plus a percentage of the post-mitigation damage (Damage calculated after modifiers) dealt.
+**ACTIVE:** **Briar** empowers her next basic attack within 5 seconds during *Blood Frenzy* to take a bite out of the target enemy, gaining (range) 50 **bonus** range, dealing **bonus** physical damage and healing her for 5% of her **maximum** health plus a percentage of the post-mitigation damage (Damage calculated after modifiers) dealt.
 
 | Attribute | Value |
 |-----------|------:|
@@ -309,7 +309,7 @@ If a target is hit, **Briar** cleanses herself from all crowd control and become
 |-----------|------:|
 | **Magic Damage** | 150 / 200 / 250 / 300 / 350 (+ 130% AP) |
 
-**HEMATOMANIA:** **Briar** gains all effects of *Blood Frenzy* as well as **bonus** armor and **bonus** magic resistance equal to 20% AD, life steal, and ms.
+**HEMATOMANIA:** **Briar** gains all effects of *Blood Frenzy* as well as **bonus** armor and **bonus** magic resistance equal to 20% AD, life steal, and (ms) **additional bonus** movement speed.
 
 | Attribute | Value |
 |-----------|------:|

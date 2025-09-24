@@ -88,11 +88,11 @@
 | **Parry** | Special |
 | **Call For Help** | True |
 
-**INNATE - DOUBLE BARREL:** **Graves**' basic attacks fire his shotgun to consume ammunition within 2 shells. He will reload (Graves is unable to declare basic attacks during this time.) over a few seconds immediately after expending all shells or withholding leftover shells for a while. The reload time is reduced by **Graves**' level and as, and can be interrupted by declaring an attack or casting an ability.
+**INNATE - DOUBLE BARREL:** **Graves**' basic attacks fire his shotgun to consume ammunition within 2 shells. He will reload (Graves is unable to declare basic attacks during this time.) over a few seconds immediately after expending all shells or withholding leftover shells for a while. The reload time is reduced by **Graves**' level and (as) **bonus** attack speed, and can be interrupted by declaring an attack or casting an ability.
 
-**INNATE - 12-GAUGE:** **Graves**' basic attack sprays 4 pellets in a cone, each colliding with the first enemy unit in their path, dealing 70% / 100.01% AD physical damage plus「 23.31% / 33.3% AD **additional** physical damage ⟷ about one-third of the damage 」for each subsequent pellet hitting the same target, up to 139.93% / 199.92% AD **total** physical damage against a single target. Pellets deal 25% reduced damage against structures.
+**INNATE - 12-GAUGE:** **Graves**' basic attack sprays 4 pellets in a cone, each colliding with the first enemy unit in their path, dealing 70% / 100% AD physical damage plus「 23.31% / 33.3% AD **additional** physical damage ⟷ about one-third of the damage 」for each subsequent pellet hitting the same target, up to 139.93% / 199.92% AD **total** physical damage against a single target. Pellets deal 25% reduced damage against structures.
 
-Critical strikes spray 6 pellets over a 25% wider cone, with each pellet dealing「 increased damage, ⟷ increased damage equal to 45% **bonus** critical damage, 」resulting in「 critical damage **total** damage ⟷ 100*(0.6895 + 0.01765*x*(0.595 + 0.0225*(x-1)))*(1+5×0.33302)*(1+(Graves (+ Infinity Edge 100*(0.6895 + 0.01765*x*(0.595 + 0.0225*(x-1)))*(1+5×0.33302)*(Infinity Edge) AD **total** physical damage 」if all pellets hit a single target.
+Critical strikes spray 6 pellets over a 25% wider cone, with each pellet dealing「 increased damage, ⟷ increased damage equal to 45% **bonus** critical damage, 」resulting in「 (critical damage) 178.312% (+ Infinity Edge 23.997%) **total** damage ⟷ 249.52% / 356.48% (+ Infinity Edge 33.58% / 47.97%) AD **total** physical damage 」if all pellets hit a single target.
 
 Pellets apply life steal at 100% effectiveness. Only the first pellet to hit each enemy applies on-hit effects.
 
@@ -111,7 +111,7 @@ Pellets apply life steal at 100% effectiveness. Only the first pellet to hit eac
   - Applies basic damage, while all additional pellets deal default damage.
   - Is reduced by Warden's Mail Rock Solid.
 - **Graves**' attack windup is based on such a low value that it will always take only 1 game tick (1/30th of a second), even at the lowest possible attack speed of $0.2$.
-- When **Graves** has his attack range increased by 35% to range via Rapid Firecannon Sharpshooter, it has special effects on the cone spread of his basic attack:
+- When **Graves** has his attack range increased by 35% to (range) $573.75$ via Rapid Firecannon Sharpshooter, it has special effects on the cone spread of his basic attack:
   - The reach of the individual missiles is also increased by 35% to cr $843.75$ / er $783.75$ (Effective to-edge reach).
   - The spread of the individual missiles is *decreased* by 35% (*angle × 1/1.35*) to $17. / $22..
 - Pellets will not hit wards nor jungle plants.
@@ -227,7 +227,7 @@ The canister creates a cloud of smoke for 4 seconds that applies nearsight of ou
 
 *Quickdraw*’s **current** cooldown is reduced by $0.5$ seconds for every pellet impacting an enemy.
 
-**TRUE GRIT:** For each stack, **Graves** gains armor. Subsequent casts of *Quickdraw* and attacks versus non-minions will refresh the duration of *True Grit*.
+**TRUE GRIT:** For each stack, **Graves** gains (armor) **bonus** armor. Subsequent casts of *Quickdraw* and attacks versus non-minions will refresh the duration of *True Grit*.
 
 | Attribute | Value |
 |-----------|------:|
@@ -331,7 +331,7 @@ Upon hitting an enemy champion or reaching the end of its range, the shell explo
   - Increased non-growth attack speed scaling for decreasing reload time by 35%.
   - Pellet critical strike bonus damage increased to 45% from 40%.
     - Bonus damage per pellet critical strike increased to ($33.75$% + Infinity Edge) from (30% + Infinity Edge).
-  - Relative **bonus** damage of critical attacks where all pellets hit increased to critical damage from critical damage.
+  - Relative **bonus** damage of critical attacks where all pellets hit increased to (critical damage) $78.3$% (+ Infinity Edge 30%) from (critical damage) $73.3$% (+ Infinity Edge $26.7$%).
     - Maximum critical strike damage increased to 249.52% / 356.48% (+Infinity Edge 41.98% / 59.97%) AD from 242.52% / 346.48% (+Infinity Edge 37.31% / 53.3%) AD.
 
 ### V14.7

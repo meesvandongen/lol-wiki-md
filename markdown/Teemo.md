@@ -110,7 +110,7 @@
 
 **INNATE:** **Teemo** gains invisibility after $1.5$ seconds without moving, taking damage, performing actions that break stealth, channeling, or being in stasis. **Teemo** will maintain stealth so long as he remains idle and is not displaced. While in brush, **Teemo** gains the stealth even while moving and can move without breaking stealth, but will lose the stealth in this case if he is knocked up.
 
-**INNATE - ELEMENT OF SURPRISE:** When **Teemo** breaks the stealth, he gains for 5 seconds.
+**INNATE - ELEMENT OF SURPRISE:** When **Teemo** breaks the stealth, he gains 20%@1; 40%@5; 60%@10; 80%@15 **bonus** attack speed for 5 seconds.
 
 **Notes:**
 
@@ -179,7 +179,7 @@ The duration of the blind is doubled against minions and monsters.
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**PASSIVE:** **Teemo** gains ms after 5 seconds without taking damage from enemy champions or turrets.
+**PASSIVE:** **Teemo** gains (ms) **bonus** movement speed after 5 seconds without taking damage from enemy champions or turrets.
 
 | Attribute | Value |
 |-----------|------:|
@@ -288,7 +288,7 @@ The mushroom will explode upon enemy contact, inflicting poison to nearby enemie
 | **Magic Damage per Tick** | 50 / 65.625 / 81.25 / 96.875 / 112.5 (+ 12.5% AP) |
 | **Total Magic Damage** | 200 / 262.5 / 325 / 387.5 / 450 (+ 50% AP) |
 
-A mushroom has health and can only be damaged by champion basic attacks (2 damage from ranged and 3 from melee).
+A mushroom has (health) 6 **maximum** health and can only be damaged by champion basic attacks (2 damage from ranged and 3 from melee).
 
 *See [Pets](#Pets) for more details about mushroom traps.*
 
@@ -297,7 +297,7 @@ A mushroom has health and can only be damaged by champion basic attacks (2 damag
 - The bounce can occur an indefinite amount of times while **Teemo** is alive. If **Teemo** dies before *Noxious Trap* bounces on another, the trap will disappear.
 - Rift Scuttler will not trigger *Noxious Trap*’s explosion if it is not being attacked.
 - Enemies who step on multiple *Noxious Traps* will only refresh the duration of the damage over time and slow.
-- *Noxious Trap*’s damage is determined when it detonates and not when planted, meaning if **Teemo**’s AP changes, the scaling is also altered to affect the active damage of all *Noxious Traps* so long as they do not explode.
+- *Noxious Trap*’s damage is determined when it detonates and not when planted, meaning if **Teemo**’s (AP) ability power changes, the scaling is also altered to affect the active damage of all *Noxious Traps* so long as they do not explode.
 - Spell shield will prevent the damage over time and slow for all units but will not prevent the detonation itself.
 
 ---

@@ -98,11 +98,11 @@
 | **Spell Effects** | Proc |
 | **Parry** | True |
 
-**INNATE - HEART OF THE HALF-BEAST:** **Sett** health regeneration「 an additional 0.075 / 0.25 / 0.5 / 1 health every $0.5$ seconds per 5% of his **missing** health. ⟷ up-to an additional 0.075×19 / 0.25×19 / 0.5×19 / 1×19 health per $0.5$ seconds, with the maximum reached at the threshold of 95% **missing** health. 」
+**INNATE - HEART OF THE HALF-BEAST:** **Sett** (health regeneration) regenerates「 an additional 0.075 / 0.25 / 0.5 / 1 health every $0.5$ seconds per 5% of his **missing** health. ⟷ up-to an additional 0.075×19 / 0.25×19 / 0.5×19 / 1×19 health per $0.5$ seconds, with the maximum reached at the threshold of 95% **missing** health. 」
 
 **INNATE - HEAVY HANDS:** **Sett**’s basic attacks alternate between his Left Punch and a Right Punch on-attack. **Sett** begins attacking with his Left Punch, and will reset back to it after 2 seconds of not performing a Right Punch.
 
-**Sett**’s Right Punch is empowered to gain range (unless *Knuckle Down* is active), attack at 8 times the Left Punch's attack speed, and deal 5 to 90 (+ 55% **bonus** AD) **bonus** physical damage.
+**Sett**’s Right Punch is empowered to gain (range) 50 **bonus** range (unless *Knuckle Down* is active), attack at 8 times the Left Punch's attack speed, and deal 5 to 90 (+ 55% **bonus** AD) **bonus** physical damage.
 
 **Notes:**
 
@@ -138,7 +138,7 @@
 | **Bonus Physical Damage** | 10 / 20 / 30 / 40 / 50 (+ 1% (+ 1 / 1.5 / 2 / 2.5 / 3% per 100 AD) of target's **maximum** health) |
 | **Total Bonus Physical Damage** | 20 / 40 / 60 / 80 / 100 (+ 2% (+ 2 / 3 / 4 / 5 / 6% per 100 AD) of target's **maximum** health) |
 
-For $1.5$ seconds, **Sett** also gains movement speed while facing visible enemy champions within 2000 units.
+For $1.5$ seconds, **Sett** also gains (movement speed) 30% **bonus** movement speed while facing visible enemy champions within 2000 units.
 
 *Knuckle Down resets *’Sett's** basic attack timer. The empowered attacks are guaranteed to be a Left Punch followed by a Right Punch, resetting **Sett**’s current Pit Grit state (if applicable) and ignoring the usual time-out period for a follow-up Right Punch.*
 

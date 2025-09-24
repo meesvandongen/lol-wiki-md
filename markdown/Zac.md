@@ -113,7 +113,7 @@
 - *Elastic Slingshot*: 1 chunk for each enemy champion hit
 - *Let's Bounce!*: 1 chunk for each bounce that hits an enemy champion, up to 4
 
-Both **Zac** and enemy champions can interact with a chunk by being within 50 units of it: an enemy will destroy it, while **Zac** will consume it to heal for key=% of his **maximum** health.
+Both **Zac** and enemy champions can interact with a chunk by being within 50 units of it: an enemy will destroy it, while **Zac** will consume it to heal for 4 to 8 of his **maximum** health.
 
 **INNATE - CELL DIVISION:** Periodically, upon taking fatal damage, **Zac** enters resurrection for 8@1; 7@6; 6@10; 5@13; 4@17 seconds, instantly restoring 50% of his **maximum** health and becoming untargetable and unable to act for the duration. **Zac** then splits into four uncontrollable *[bloblets](#Pets)* away from his location, though stopping at terrain. After $1.5$ seconds of the *bloblets* being untargetable, they start moving toward **Zac**’s location over the remaining duration (Regardless of distance). Any damage the *bloblets* receive, excluding damage dealt in excess of each *bloblet*’s **total maximum** health, is also redirected to **Zac** as true damage. While in resurrection, **Zac** cannot take damage from sources other than the redirected damage from his *bloblets*.
 
@@ -308,7 +308,7 @@ If the two targets are within 700 units of each other, they are instead slammed 
 |-----------|------:|
 | **Total Magic Damage** | 350 / 437.5 / 525 / 612.5 / 700 (+ 100% AP) |
 
-**Zac** can move during *Let's Bounce!*, gaining ghosting and ms, but becomes unable to declare basic attacks, *Stretching Strikes*, and *Elastic Slingshot*.
+**Zac** can move during *Let's Bounce!*, gaining ghosting and (ms) 20%–50%@0–3 (@=duration) **bonus** movement speed, but becomes unable to declare basic attacks, *Stretching Strikes*, and *Elastic Slingshot*.
 
 **Notes:**
 
@@ -339,7 +339,7 @@ If the two targets are within 700 units of each other, they are instead slammed 
 
 ### V14.13
 - Cell Division
-  - Heal changed to key=% **maximum** health from pp|type
+  - Heal changed to 4 to 8 **maximum** health from pp|type
 
 ### V14.9
 - Stats

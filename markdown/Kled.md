@@ -98,11 +98,11 @@
 | **Affects** | Self |
 | **Parry** | True |
 
-**INNATE:** **Kled** is only vulnerable to death while **DISMOUNTED**. **Kled** has health, which is not improved by sources of **bonus** health, as well as reduced **base** movement speed and increased attack range. Effects based on percentage health consider **Kled** and **Skaarl** combined **maximum** health, meaning that a **DISMOUNTED** **Kled** is never considered to be at *full* health.
+**INNATE:** **Kled** is only vulnerable to death while **DISMOUNTED**. **Kled** has (health) Kled*(x-1)*(0.7025+0.0175*(x-1)) **base** health, which is not improved by sources of **bonus** health, as well as reduced **base** movement speed and increased (attack range) **base** attack range. Effects based on percentage health consider **Kled** and **Skaarl** combined **maximum** health, meaning that a **DISMOUNTED** **Kled** is never considered to be at *full* health.
 
-**Kled** gains 70 to 155 ms while facing and after attacking (see notes) nearby visible enemy champions, but his basic attacks against them are reduced to 85@1; 90@6; 95@11; 100@16 (@=%) AD physical damage. He also gains **bonus** armor and **bonus** magic resistance equal to 4 (+ 1% of **bonus** health), increased by 30% for each nearby enemy champion, up to a maximum of 10 (+ 2.5% **bonus** health) resistances. Additionally, he gains the ability to restore **Skaarl** Courage to *mount* again.
+**Kled** gains 70 to 155 (ms) **bonus** movement speed while facing and after attacking (see notes) nearby visible enemy champions, but his basic attacks against them are reduced to 85%@1; 90%@6; 95%@11; 100%@16 AD physical damage. He also gains **bonus** armor and **bonus** magic resistance equal to 4 (+ 1% of **bonus** health), increased by 30% for each nearby enemy champion, up to a maximum of 10 (+ 2.5% **bonus** health) resistances. Additionally, he gains the ability to restore **Skaarl** Courage to *mount* again.
 
-**INNATE - COURAGE:** **Kled** gains 15 Courage after completing a basic attack against a champion and 5 Courage for minion kills and when basic attacking structures or epic monsters. He can also restore Courage from hitting enemies with *Pocket Pistol*. Upon reaching 100 Courage, **Skaarl** instantly restores key=% of her **maximum** health and reunites with **Kled** over $0.25$ seconds, after which he becomes **MOUNTED** and the duo become unable to declare basic attacks or cast their abilities for $0.25$ seconds. *Mounting up* resets the cooldowns of *Bear Trap on a Rope* and *Jousting*.
+**INNATE - COURAGE:** **Kled** gains 15 Courage after completing a basic attack against a champion and 5 Courage for minion kills and when basic attacking structures or epic monsters. He can also restore Courage from hitting enemies with *Pocket Pistol*. Upon reaching 100 Courage, **Skaarl** instantly restores 40%–70%@1–16 of her **maximum** health and reunites with **Kled** over $0.25$ seconds, after which he becomes **MOUNTED** and the duo become unable to declare basic attacks or cast their abilities for $0.25$ seconds. *Mounting up* resets the cooldowns of *Bear Trap on a Rope* and *Jousting*.
 
 While at the allied fountain, 25 Courage is generated every $0.25$ seconds. If reuniting outside of the fountain, **Skaarl** gets *Frayed Nerves*, which prevents **Kled** from gaining Courage for 30 seconds. Being within the fountain while **DISMOUNTED** removes *Frayed Nerves*.
 
@@ -130,11 +130,11 @@ While at the allied fountain, 25 Courage is generated every $0.25$ seconds. If r
 | **Affects** | Self |
 | **lunge range** | 200 (estimated) |
 
-**INNATE:** **Kled** rides his semi-trusty mount, **Skaarl**. While **MOUNTED**, all damage dealt to the duo is suffered by **Skaarl**, who has color=health **base** health; additional sources of health are applied to **Skaarl** **maximum** health. Effects based on percentage health consider **Kled** and **Skaarl** combined **maximum** health.
+**INNATE:** **Kled** rides his semi-trusty mount, **Skaarl**. While **MOUNTED**, all damage dealt to the duo is suffered by **Skaarl**, who has 400 / 1400 **base** health; additional sources of health are applied to **Skaarl** **maximum** health. Effects based on percentage health consider **Kled** and **Skaarl** combined **maximum** health.
 
-Being reduced below health causes **Skaarl** to flee, forcing **Kled** to be **DISMOUNTED**, with all damage in excess of **Skaarl** health being ignored. Upon dismounting, **Kled** lunges in the direction of the allied Nexus, though not through terrain, while cleansing himself of all crowd control and becoming unable to act, untargetable, and immune to crowd control for $0.5$ seconds. *Dismounting* resets the cooldown and charges of *Pocket Pistol*.
+Being reduced below (health) 0 health causes **Skaarl** to flee, forcing **Kled** to be **DISMOUNTED**, with all damage in excess of **Skaarl** health being ignored. Upon dismounting, **Kled** lunges in the direction of the allied Nexus, though not through terrain, while cleansing himself of all crowd control and becoming unable to act, untargetable, and immune to crowd control for $0.5$ seconds. *Dismounting* resets the cooldown and charges of *Pocket Pistol*.
 
-While **Kled** is **DISMOUNTED**, his **base** health and **base** movement speed are reduced; however, he gains **bonus** movement speed while moving toward enemy champions. Additionally, his attack range is increased and his attacks deal 85@1; 90@6; 95@11; 100@16 (@=%) damage to champions. *Bear Trap on a Rope* is replaced with *Pocket Pistol*, while *Jousting* and *Chaaaaaaaarge!!!* become unusable.
+While **Kled** is **DISMOUNTED**, his **base** health and **base** movement speed are reduced; however, he gains **bonus** movement speed while moving toward enemy champions. Additionally, his (attack range) **base** attack range is increased and his attacks deal 85%@1; 90%@6; 95%@11; 100%@16 damage to champions. *Bear Trap on a Rope* is replaced with *Pocket Pistol*, while *Jousting* and *Chaaaaaaaarge!!!* become unusable.
 
 While **MOUNTED**, healing and health regeneration will first replenish **Skaarl** health and will only apply to **Kled**’s health while **Skaarl** is at *full* health.
 
@@ -279,7 +279,7 @@ The tether's radius shrinks over its duration, and if it is not broken before th
 
 **PASSIVE:** **Kled** periodically gains *Violent Tendencies*, which starts expiring upon his next basic attack.
 
-**VIOLENT TENDENCIES:** **Kled** gains attack speed on his next 4 basic attacks within 4 seconds. The fourth attack deals **bonus** physical damage. The damage based on the target's health is capped at 200 against monsters.
+**VIOLENT TENDENCIES:** **Kled** gains (attack speed) 150% **bonus** attack speed on his next 4 basic attacks within 4 seconds. The fourth attack deals **bonus** physical damage. The damage based on the target's health is capped at 200 against monsters.
 
 *Violent Tendencies' * **current** cooldown is reduced by $0.5$ seconds on-hit, increased to $1.5$ against champions.
 
@@ -291,7 +291,7 @@ Against structures, the fourth attack deals modified **bonus** physical damage.
 
 | Attribute | Value |
 |-----------|------:|
-| **Structure Bonus Damage** | 62+1.75*(x-1)*(0.7025+0.0175*(x-1)) (+ 0 / 15 / 30 / 45 / 60) |
+| **Structure Bonus Damage** | 62 / 91.75 (+ 0 / 15 / 30 / 45 / 60) |
 
 **Notes:**
 
@@ -330,7 +330,7 @@ Against structures, the fourth attack deals modified **bonus** physical damage.
 |-----------|------:|
 | **Physical Damage** | 35 / 60 / 85 / 110 / 135 (+ 55% **bonus** AD) |
 
-Upon hitting an enemy champion or large monster, **Skaarl** dashes a fixed 200 (estimated) units through them, marking them for 3 seconds, during which they are revealed. After the dash ends, the duo gain ms for 1 second. *Jousting* can be recast after $0.5$ seconds of the first dash ending while the target is marked.
+Upon hitting an enemy champion or large monster, **Skaarl** dashes a fixed 200 (estimated) units through them, marking them for 3 seconds, during which they are revealed. After the dash ends, the duo gain (ms) 50% **bonus** movement speed for 1 second. *Jousting* can be recast after $0.5$ seconds of the first dash ending while the target is marked.
 
 **RECAST:** **Skaarl** consumes the mark to dash through the marked target, applying the same effects as the first cast though being able to dash through terrain.
 
@@ -397,16 +397,16 @@ This ability is unusable while *dismounted*.
 
 **ACTIVE:** **Kled** & **Skaarl** charge toward the target location, automatically navigating terrain along the way, during which they are ghosted, immune to crowd control and revealed to enemy champions in a er 1250 (estimated) radius. If the charge does not complete within 15 seconds, it will end prematurely. The charge is interrupted instantly if **Kled** *dismounts* during it.
 
-While charging, the duo gain a shield for every $0.25$ seconds of traveling, up to type=time traveling of the **maximum** shield amount over $2.25$ seconds. The shield lasts for $1.75 – 2$ (random) seconds upon finishing the charge. Additionally, the duo trails a directional draft in their wake, lasting 9 seconds. Allied units other than lane minions and Voidmite following the draft gain *Mr. Kled's Wild Ride*. After $0.5$ seconds of charging, the duo gain ms every $0.25$ seconds, up to over 3 seconds.
+While charging, the duo gain a shield for every $0.25$ seconds of traveling, up to 10% / 20% / 30% / 40% / 50% / 60% / 70% / 80% / 90% / 100% of the **maximum** shield amount over $2.25$ seconds. The shield lasts for $1.75 – 2$ (random) seconds upon finishing the charge. Additionally, the duo trails a directional draft in their wake, lasting 9 seconds. Allied units other than lane minions and Voidmite following the draft gain *Mr. Kled's Wild Ride*. After $0.5$ seconds of charging, the duo gain (ms) **bonus** movement speed every $0.25$ seconds, up to over 3 seconds.
 
 | Attribute | Value |
 |-----------|------:|
 | **Minimum Shield** | 20 / 25 / 30 / 35 / 40 (+ 30% **bonus** AD) |
 | **Maximum Shield** | 200 / 250 / 300 / 350 / 400 (+ 300% **bonus** AD) |
 
-**MR. KLED'S WILD RIDE:** While in champion combat, gain ms. After not being in champion combat for 3 seconds, if **Kled** is charging, gain ms up to **Kled's current** movement speed; otherwise gain up to .
+**MR. KLED'S WILD RIDE:** While in champion combat, gain (ms) 40% (estimated) **bonus** movement speed. After not being in champion combat for 3 seconds, if **Kled** is charging, gain (ms) **bonus** movement speed up to **Kled's current** movement speed; otherwise gain up to .
 
-**Kled** & **Skaarl** will dash toward the first visible enemy champion in range of the charge (see notes), revealing the target during the dash and colliding with the first visible enemy champion in their path to deal magic damage, increased by type=charge time, knocking them back 150 (Estimated) units and ending the charge.
+**Kled** & **Skaarl** will dash toward the first visible enemy champion in range of the charge (see notes), revealing the target during the dash and colliding with the first visible enemy champion in their path to deal magic damage, increased by 0%–200%@0–4 (@=charge time), knocking them back 150 (Estimated) units and ending the charge.
 
 | Attribute | Value |
 |-----------|------:|
@@ -493,12 +493,12 @@ This ability is unusable while *dismounted*.
   - **New Effect:** **Kled** now gains **bonus** armor and **bonus** magic resistance equal to 1% of **bonus** health, increased by 20% per nearby enemy champion within cr 1400 units, up to a maximum of 2% **bonus** health.
   - Courage from minion kills increased to 5 from 4.
   - **Removed:*** Champion takedowns within 3 seconds of damaging them no longer grants 20 Courage.
-  - Dismounted attack damage penalty reduced to 15@1; 10@6; 5@11; 0@16 (@=%) from 20% at all levels.
+  - Dismounted attack damage penalty reduced to 15%@1; 10%@6; 5%@11; 0%@16 from 20% at all levels.
   - Dismounted movement speed penalty reduced to 40 from 60.
   - Dismounted bonus movement speed toward champions reduced to 70 to 155 from 100 to 185.
   - Dismounted bonus movement speed range increased to 1200 units from 1000.
-  - **Skaarl** base health reduced to 400+(1000/17)*(x-1)*(0.7025+0.0175*(x-1)) from 400 to 1550. *Now uses stat growth instead of linear growth.*
-  - Remount health reduced to key=% of **Skaarl's maximum** health from key=%.
+  - **Skaarl** base health reduced to 400 / 1400 from 400 to 1550. *Now uses stat growth instead of linear growth.*
+  - Remount health reduced to 40%–70%@1–16 of **Skaarl's maximum** health from 45%–75%@1–16.
   - **New Effect:** Granted bonus movement speed while dismounted now updates on level-up.
   - **Bug Fixes:** Additional instances of damage applied by a spell that causes the dismount are now properly ignored upon dismounting instead of unintentionally affecting **Kled**.
   - **Bug Fixes:** Dismount dash and its accompanying lockout are now exactly $0.5$ seconds instead of lasting up to $0.25$ seconds more based on engine ticks (they are no longer "fuzzy").

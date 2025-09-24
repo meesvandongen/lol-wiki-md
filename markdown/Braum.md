@@ -86,7 +86,7 @@
 
 **INNATE:** **Braum**’s basic attacks and *Winter's Bite* each apply a stack of *Concussive Blows* to their target for 4 seconds, refreshing on subsequent applications and stacking up to 4 times. Once the first stack has been applied, any allied champion's basic attack applies an additional stack to the target on-hit.
 
-The fourth stack against a target consumes them all to deal 26 to 196 magic damage and stun them for changedisplay=true seconds.
+The fourth stack against a target consumes them all to deal 26 to 196 magic damage and stun them for 1.25–1.75@1–13 (@=his level) seconds.
 
 This effect cannot apply to the same target more than once every few seconds. During this immunity period, affected targets take「 **bonus** magic damage equal to 20% of the trigger damage ⟷ 26×0.2 to 196×0.2 **bonus** magic damage 」from **Braum**’s basic attacks.
 
@@ -138,7 +138,7 @@ No additional notes.
 | **Grounded** | True |
 | **Knockdown** | True |
 
-**ACTIVE:** **Braum** dashes to put himself between (150 units from his ally towards the closest enemy) the target ally and the closest visible enemy champion within 1500 units (from the ally's location), and upon arrival grants himself and the ally armor and mr for 3 seconds.
+**ACTIVE:** **Braum** dashes to put himself between (150 units from his ally towards the closest enemy) the target ally and the closest visible enemy champion within 1500 units (from the ally's location), and upon arrival grants himself and the ally (armor) **bonus** armor and (mr) **bonus** magic resistance for 3 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -193,7 +193,7 @@ No additional notes.
 |-----------|------:|
 | **Barrier Duration** | 3 / 3.25 / 3.5 / 3.75 / 4 seconds |
 
-While his shield is raised, **Braum** also gains ms and ghosting.
+While his shield is raised, **Braum** also gains (ms) 10% **bonus** movement speed and ghosting.
 
 **Notes:**
 

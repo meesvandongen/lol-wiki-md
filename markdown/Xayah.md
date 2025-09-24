@@ -102,7 +102,7 @@
 
 **INNATE:** Feathers shot by **Xayah** will linger and be planted in the ground at maximum range for 6 seconds.
 
-**INNATE:** **Xayah**’s ability casts generate 3 stacks of *Clean Cuts*, lasting for 8 seconds, refreshing on subsequent casts, and stacking up to 5 times. **Xayah**’s basic attacks are empowered to each consume a stack on-attack to instead shoot a Feather that deals the triggering attack's damage to the primary target and key=% AD physical damage to other enemies hit. The secondary target damage can critically strike for damage if the triggering attack does.
+**INNATE:** **Xayah**’s ability casts generate 3 stacks of *Clean Cuts*, lasting for 8 seconds, refreshing on subsequent casts, and stacking up to 5 times. **Xayah**’s basic attacks are empowered to each consume a stack on-attack to instead shoot a Feather that deals the triggering attack's damage to the primary target and 30%–50%@1–13 AD physical damage to other enemies hit. The secondary target damage can critically strike for damage if the triggering attack does.
 
 **INNATE - LOVER'S LEAP:** If either **Xayah** or Rakan is channeling Recall, the other may move nearby and channel their own to join alongside them. **Both** reach base at the time of which the initiator's Recall completes.
 
@@ -129,7 +129,7 @@
 | Attribute | Value |
 |-----------|------:|
 | **Range** | 1100 units |
-| **Cast Time** | **bonus** attack speed |
+| **Cast Time** | 0.25–0.1@0–0 (@=**bonus** attack speed) seconds |
 | **Width** | 100 (plus offset) units |
 | **Cost** | 50 Mana |
 | **Cooldown** | 10 / 9.5 / 9 / 8.5 / 8 seconds |
@@ -188,7 +188,7 @@ Targets hit after the first take 50% reduced damage.
 |-----------|------:|
 | **Bonus Attack Speed** | 35 / 40 / 45 / 50 / 55% |
 
-Whenever **Xayah** hits an enemy champion with the strike, she gains ms for $1.5$ seconds.
+Whenever **Xayah** hits an enemy champion with the strike, she gains (ms) 30% **bonus** movement speed for $1.5$ seconds.
 
 *If Rakan is nearby upon cast, he also becomes empowered, and gains the **bonus** movement speed at the same time as **Xayah**.*
 
@@ -223,14 +223,14 @@ Whenever **Xayah** hits an enemy champion with the strike, she gains ms for $1.5
 | **Spell Effects** | spellaoe |
 | **Projectile** | True |
 
-**ACTIVE:** **Xayah** recalls all planted Feathers to shoot back to her, each dealing physical damage to enemies hit, increased by key=%. *Bladecaller* deals 50% damage to minions.
+**ACTIVE:** **Xayah** recalls all planted Feathers to shoot back to her, each dealing physical damage to enemies hit, increased by 0%–75%@0–100 (@=critical strike chance). *Bladecaller* deals 50% damage to minions.
 
 | Attribute | Value |
 |-----------|------:|
 | **Physical Damage Per Feather** | 55 / 65 / 75 / 85 / 95 (+ 60% **bonus** AD) |
 | **Minion Damage Per Feather** | 27.5 / 32.5 / 37.5 / 42.5 / 47.5 (+ 30% **bonus** AD) |
 
-An enemy takes type=previous feathers hit damage from a Feather.
+An enemy takes 100 to 10 by 5 damage from a Feather.
 
 A target hit by at least three Feathers is rooted for $1.25$ seconds.
 
@@ -245,7 +245,7 @@ A target hit by at least three Feathers is rooted for $1.25$ seconds.
   - This formula is:
     - For feathers <=19: Damage of one feather×(n$0.05$×(n1)2×n) where n stands for the number of feathers hit.
     - For feathers >=20: Damage of one feather×(19$0.05$×(191)2×19+0.1×(n19)) where n stands for the number of feathers hit.
-  - For example, at rank 1 *Bladecaller* deals type=feathers hit.
+  - For example, at rank 1 *Bladecaller* deals 55*(x-0.05*(x-1)/2*x) for 19.
 - *Bladecaller* cannot be cast without a Feather on the ground.
 
 ---

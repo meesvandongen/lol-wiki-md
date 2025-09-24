@@ -78,9 +78,9 @@
 | **Range** | 125 units |
 | **Gold** | 3 |
 | **Experience** | 0 |
-| **Health** | 80+13*(x-1)*(0.7025+0.0175*(x-1)) |
-| **Armor** | 0+1.8*(x-1)*(0.7025+0.0175*(x-1)) |
-| **Magic Resist** | 0+1.8*(x-1)*(0.7025+0.0175*(x-1)) |
+| **Health** | 80 / 301 |
+| **Armor** | 0 / 30.6 |
+| **Magic Resist** | 0 / 30.6 |
 | **Damage** | 10 to 20 (+ 4% **bonus** AD) |
 | **Damage Type** | Physical |
 | **Attack Speed** | 100% of **Naafiri**’s attack speed |
@@ -151,7 +151,7 @@ Hitting champions or large monsters with abilities reduces the cooldown by 4 sec
 | **Spell Effects** | Area of effect |
 | **Projectile** | True |
 
-**ACTIVE:** **Naafiri** hurls a dagger in the target direction that deals physical damage to enemies hit and inflicts them with a bleed that deals **bonus** physical damage every $0.5$ seconds for 5 seconds. The bleed executes minions and non-epic monsters if they would be damaged below health. *Darkin Daggers* can be recast after $0.5$ seconds and within 4 seconds at no additional cost.
+**ACTIVE:** **Naafiri** hurls a dagger in the target direction that deals physical damage to enemies hit and inflicts them with a bleed that deals **bonus** physical damage every $0.5$ seconds for 5 seconds. The bleed executes minions and non-epic monsters if they would be damaged below (health) 30 / 34 / 38 / 42 / 46 / 50 / 54 / 58 / 62 / 66 / 70 health. *Darkin Daggers* can be recast after $0.5$ seconds and within 4 seconds at no additional cost.
 
 | Attribute | Value |
 |-----------|------:|
@@ -163,7 +163,7 @@ Hitting champions or large monsters with abilities reduces the cooldown by 4 sec
 | **Total Bleed Physical Damage** | 35 / 60 / 85 / 110 / 135 (+ 80% **bonus** AD) |
 | **Total Physical Damage** | 70 / 100 / 130 / 160 / 190 (+ 100% **bonus** AD) |
 
-If the dagger hits a target that is already bleeding, they are instead dealt the remaining bleed damage plus **additional bonus** physical damage, with the **base bonus** damage increased by key=% and the *scaling* for the **bonus** damage increased by key=%. If that target is also a champion or large monster, **Naafiri** heals herself.
+If the dagger hits a target that is already bleeding, they are instead dealt the remaining bleed damage plus **additional bonus** physical damage, with the **base bonus** damage increased by 0%–100%@0–100 (@=target's **missing** health) and the *scaling* for the **bonus** damage increased by 0%–250%@0–100 (@=target's **missing** health). If that target is also a champion or large monster, **Naafiri** heals herself.
 
 | Attribute | Value |
 |-----------|------:|
@@ -385,9 +385,9 @@ If **Naafiri** scores a champion takedown within 7 seconds of cast, she triggers
   - Maximum Packmates increased to 2@1; 3@9; 4@12; 5@15 from 2@1; 3@9.
   - Packmate base attack damage reduced to 10 to 20 from 12 to 32.
   - Packmate attack damage bonus AD ratio reduced to 4% **bonus** AD from 5%.
-  - Packmate health reduced to 80+13*(x-1)*(0.7025+0.0175*(x-1)) from 80+16*(x-1)*(0.7025+0.0175*(x-1)).
-  - Packmate resistances reduced to 0+1.8*(x-1)*(0.7025+0.0175*(x-1)) from 0+2*(x-1)*(0.7025+0.0175*(x-1)).
-  - Packmate incoming area damage modifier increased to 76–55@1–15 (@=%) from 76–50@1–14 (@=%).
+  - Packmate health reduced to 80 / 301 from 80 / 352.
+  - Packmate resistances reduced to 0 / 30.6 from 0 / 34.
+  - Packmate incoming area damage modifier increased to 76%–55%@1–15 from 76%–50%@1–14.
   - Packmate monster damage increased to 165% from 100%.
   - Packmate attack command duration reduced to 2 seconds from 3.
   - **Undocumented:** Packmate structure damage increased to 50% from 25%.

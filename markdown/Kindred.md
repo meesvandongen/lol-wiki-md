@@ -88,7 +88,7 @@
 
 **INNATE:** Both **Lamb** and **Wolf** mark targets to *hunt*. Scoring a takedown against a *hunted* target collects a stack of *Mark of the Kindred*. 
 
-**MARK OF THE KINDRED:** **Lamb** gains type=marks range on her basic attacks and *Mounting Dread*.
+**MARK OF THE KINDRED:** **Lamb** gains 75@4; 100@7; 125@10; 150@13; 175@16; 200@19; 225@22; 250@25 (@=marks) (range) **bonus** range on her basic attacks and *Mounting Dread*.
 
 **INNATE - LAMB:** **Lamb** is offered a selection of enemy champions to *hunt* if she has not been in combat with them in the last 6 seconds. Once selected, the mark is applied after an 8-second delay and thereafter it can be collected by **Kindred**. **Lamb** gains the ability to select a new target every 75 seconds. *Targets successfully hunted cannot be marked again for 4 minutes.*
 
@@ -135,7 +135,7 @@ The type of monster that **Wolf** can mark changes based on **Kindred**’s curr
 | **Grounded** | True |
 | **Knockdown** | True |
 
-**ACTIVE:** **Lamb** dashes toward the target location, gaining attack speed (+ 5% per mark) **bonus** attack speed for 4 seconds and firing an arrow at up to 3 nearby visible enemies that deals physical damage. Her current attack target within any proximity will be prioritized by one of the arrows.
+**ACTIVE:** **Lamb** dashes toward the target location, gaining (attack speed) 35% (+ 5% per mark) **bonus** attack speed for 4 seconds and firing an arrow at up to 3 nearby visible enemies that deals physical damage. Her current attack target within any proximity will be prioritized by one of the arrows.
 
 | Attribute | Value |
 |-----------|------:|
@@ -227,7 +227,7 @@ The third stack directs **Wolf** to pounce on the target, consuming all stacks t
 | **Additional Physical Damage** | 80 / 110 / 140 / 170 / 200 (+ 100% **bonus** AD) (+ 5% (+ $0.5$% per Mark) of target's **missing** health) |
 | **Enhanced damage below threshold** | 80 / 110 / 140 / 170 / 200 (+ 100% **bonus** AD) critical strike (+ $7.5$% (+ Infinity Edge 2%) (+ $0.75$% (+ Infinity Edge $0.2$%) per Mark) of target's **missing** health) |
 
-The **missing** health portion of the **additional** damage will critically strike for damage if the target is below type=critical strike chance of their **maximum** health and cannot critically strike otherwise. The **base** damage of the pounce can independently critically strike for damage.
+The **missing** health portion of the **additional** damage will critically strike for damage if the target is below 25%–75%@0–100 (@=critical strike chance) of their **maximum** health and cannot critically strike otherwise. The **base** damage of the pounce can independently critically strike for damage.
 
 **Notes:**
 
@@ -252,7 +252,7 @@ The **missing** health portion of the **additional** damage will critically stri
 | **Targeting** | Auto |
 | **Affects** | Self, Allies, Enemies |
 
-**ACTIVE:** **Lamb** blesses the ground underneath herself and enters a cast time, creating a sacred zone at her location at the time of cast that lasts for 4 seconds. **All** units (Ally, enemy, or neutral) inside the zone gain a minimum health threshold equal to health, and will also become invulnerable while remaining in the area when they reach or are at the threshold, during which they also cannot be healed, but can still health regeneration.
+**ACTIVE:** **Lamb** blesses the ground underneath herself and enters a cast time, creating a sacred zone at her location at the time of cast that lasts for 4 seconds. **All** units (Ally, enemy, or neutral) inside the zone gain a minimum health threshold equal to (health) 10% of their **maximum** health, and will also become invulnerable while remaining in the area when they reach or are at the threshold, during which they also cannot be healed, but can still (health regeneration) regenerate health.
 
 All targetable units within the zone are healed when the blessing ends.
 

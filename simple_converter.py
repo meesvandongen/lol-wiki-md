@@ -894,6 +894,78 @@ class SimpleLoLConverter:
         
         return abilities
     
+    def _resolve_simple_data_templates(self, text: str, champion_name: Optional[str] = None) -> str:
+        """Resolve a few simple data-bearing templates to numeric literals to enable formula evaluation.
+        - {{ccd|Champion|crit_base}} -> champion critical damage percent (e.g., 175)
+        - {{cid|ItemName|field}} -> item field numeric (e.g., Infinity Edge critdamage)
+        Only resolves when a numeric value can be found; otherwise leaves the template intact.
+        """
+        if not text or ('{{ccd' not in text and '{{cid' not in text):
+            return text
+
+        out = text
+
+        # Resolve ccd (Champion Constant Data) for crit_base
+        def _ccd_repl(m: re.Match) -> str:
+            champ = (m.group(1) or '').strip()
+            key = (m.group(2) or '').strip().lower()
+            # Prefer provided champion name context
+            target = champion_name or champ
+            val: Optional[float] = None
+            try:
+                if key in ('crit_base', 'critical_base', 'critdamage', 'crit_damage'):
+                    # Use our advanced stats default: 175% normally, 160% for Yasuo/Yone
+                    low = (target or '').strip().lower()
+                    val = 160.0 if low in ('yasuo', 'yone') else 175.0
+            except Exception:
+                val = None
+            return str(val) if val is not None else m.group(0)
+
+        out = re.sub(r"\{\{\s*ccd\s*\|\s*([^|}]+)\s*\|\s*([^|}]+)\s*\}\}", _ccd_repl, out, flags=re.IGNORECASE)
+
+        # Resolve cid (Cargo Item Data) for simple numeric fields
+        def _cid_repl(m: re.Match) -> str:
+            name = (m.group(1) or '').strip()
+            field = (m.group(2) or '').strip()
+            field_l = field.lower()
+            data = None
+            try:
+                data = self._load_item_module_data(name)
+            except Exception:
+                data = None
+            val: Optional[float] = None
+            if isinstance(data, dict):
+                # direct field
+                if field_l in data and isinstance(data[field_l], (int, float)):
+                    try:
+                        val = float(data[field_l])
+                    except Exception:
+                        val = None
+                # sometimes stats nested under 'stats'
+                if val is None and isinstance(data.get('stats'), dict):
+                    st = data['stats']
+                    if field_l in st and isinstance(st[field_l], (int, float)):
+                        try:
+                            val = float(st[field_l])
+                        except Exception:
+                            val = None
+            # One-off fallback for common field if module lacks it
+            if val is None and name.lower() == 'infinity edge' and field_l in ('critdamage','crit_damage','critdmg','critdmg_bonus'):
+                # Modern IE crit damage bonus typically around 45%; use 45 as a pragmatic default
+                val = 45.0
+            return str(val) if val is not None else m.group(0)
+
+        out = re.sub(r"\{\{\s*cid\s*\|\s*([^|}]+)\s*\|\s*([^|}]+)\s*\}\}", _cid_repl, out, flags=re.IGNORECASE)
+        return out
+
+    def _convert_wiki_to_markdown_ctx(self, text: str, champion_name: Optional[str]) -> str:
+        """Context-aware conversion: first resolve simple data templates with champion context, then run main converter."""
+        if not text:
+            return ""
+        # Resolve simple data-bearing templates before formula conversion
+        s = self._resolve_simple_data_templates(text, champion_name)
+        return self._convert_wiki_to_markdown(s)
+
     def _get_ability_data(self, champion_name: str, ability_key: str) -> Optional[Dict[str, Any]]:
         """Get ability data from template files."""
         # Try direct path first
@@ -1040,11 +1112,13 @@ class SimpleLoLConverter:
             if dst_key == 'notes':
                 ability_data[dst_key] = self._format_notes(val, vars_map)
             else:
-                ability_data[dst_key] = self._convert_wiki_to_markdown(val)
+                ability_data[dst_key] = self._convert_wiki_to_markdown_ctx(val, champion_name)
 
         # Collect any free-floating {{st|...}} blocks not tied to a parameter line
         # Resolve vars in full content before scanning for free st blocks
         content_resolved = self._resolve_vars(content, vars_map)
+        # Pre-resolve simple data templates so nested st/ap/pp can evaluate better
+        content_resolved = self._resolve_simple_data_templates(content_resolved, champion_name)
         extra_st = self._collect_free_st_blocks(content_resolved)
         if extra_st:
             # Render them to markdown tables now
@@ -1445,7 +1519,38 @@ class SimpleLoLConverter:
                     rest = rest[1:]
                 # Split on top-level pipes to get args; ignore key=value args
                 parts = self._split_top_level_pipes(rest)
-                pos_args = [p.strip() for p in parts if p.strip() and '=' not in p]
+                # Determine positional args vs named using top-level '=' only (ignore '=' inside nested templates)
+                pos_args: List[str] = []
+                for seg in parts:
+                    seg_s = seg.strip()
+                    if not seg_s:
+                        continue
+                    depth_eq = 0
+                    has_top_eq = False
+                    i2 = 0
+                    L2 = len(seg_s)
+                    while i2 < L2:
+                        if i2 + 1 < L2 and seg_s[i2] == '{' and seg_s[i2+1] == '{':
+                            depth_eq += 1
+                            i2 += 2
+                            continue
+                        if i2 + 1 < L2 and seg_s[i2] == '}' and seg_s[i2+1] == '}':
+                            depth_eq = max(0, depth_eq - 1)
+                            i2 += 2
+                            continue
+                        if seg_s[i2] == '=' and depth_eq == 0:
+                            has_top_eq = True
+                            break
+                        i2 += 1
+                    if not has_top_eq:
+                        pos_args.append(seg_s)
+                # Special rule: sti with exactly two unnamed args -> (first) second
+                if name_lc == 'sti' and len(pos_args) == 2:
+                    left = self._convert_wiki_to_markdown_ctx(pos_args[0], getattr(self, '_current_page_basename', None)) if pos_args[0] else ''
+                    right = self._convert_wiki_to_markdown_ctx(pos_args[1], getattr(self, '_current_page_basename', None)) if pos_args[1] else ''
+                    out.append(f"({left}) {right}")
+                    i = t
+                    continue
                 display = ''
                 if pos_args:
                     if name_lc in ('ai', 'ais', 'cais'):
@@ -2413,6 +2518,34 @@ class SimpleLoLConverter:
                     break
 
         # Try to parse canonical 'start to end for n' form
+        # Helper: rounding with default=2 decimals; clamp to 100 when key='%' and within a rounding epsilon
+        def _round_value(v: float) -> float:
+            if round_param:
+                rp = round_param.lower()
+                try:
+                    if rp == 'abs':
+                        v = abs(v)
+                        # fall-through to no-decimal adjustment
+                    elif rp == 'ceil':
+                        return float(math.ceil(v))
+                    elif rp == 'floor':
+                        return float(math.floor(v))
+                    elif rp == 'trunc':
+                        return float(int(v))
+                    else:
+                        nd = int(float(rp))
+                        v = float(f"{v:.{nd}f}")
+                except Exception:
+                    pass
+            else:
+                # default to 2 decimals like Lua default
+                v = float(f"{v:.2f}")
+            # Clamp near-100 for percentages to avoid 100.01%
+            if key_suffix and '%' in key_suffix:
+                if 99.995 <= v <= 100.05:
+                    v = 100.0
+            return v
+
         m = re.match(r'^(-?\d+(?:\.\d+)?)\s*to\s*(-?\d+(?:\.\d+)?)\s*for\s*(\d+)$', values_spec, flags=re.IGNORECASE)
         values: List[str] = []
         values_num: List[Optional[float]] = []
@@ -2426,8 +2559,10 @@ class SimpleLoLConverter:
             else:
                 step = (end - start) / (count - 1)
                 seq = [start + i * step for i in range(count)]
-            values_num = seq
-            values = [self._pp_num_fmt(x) + (key_suffix if key_suffix else '') for x in seq]
+            # Apply rounding policy to sequence
+            seq_r = [_round_value(x) for x in seq]
+            values_num = seq_r
+            values = [self._pp_num_fmt(x) + (key_suffix if key_suffix else '') for x in seq_r]
             if levels_spec:
                 levels = self._pp_parse_levels(levels_spec)
         else:
@@ -2438,7 +2573,7 @@ class SimpleLoLConverter:
                 values_num = []
                 for s in seq_raw:
                     if re.match(r'^-?\d+(?:\.\d+)?$', s):
-                        f = float(s)
+                        f = _round_value(float(s))
                         values.append(self._pp_num_fmt(f) + (key_suffix if key_suffix else ''))
                         values_num.append(f)
                     else:
@@ -2480,8 +2615,8 @@ class SimpleLoLConverter:
                     except Exception:
                         return v
                 if v1 is not None and v18 is not None:
-                    a = _apply_round(v1)
-                    b = _apply_round(v18)
+                    a = _round_value(v1)
+                    b = _round_value(v18)
                     # If equal after rounding, show single value; else show range
                     if abs(a - b) < 1e-9:
                         values = [self._pp_num_fmt(a) + (key_suffix if key_suffix else '')]

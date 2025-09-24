@@ -79,7 +79,7 @@
 
 **INNATE:** Periodically, **Poppy**’s next basic attack is empowered to throw her buckler, gaining 350 **bonus** range and dealing 20 to 180 **bonus** magic damage. After it hits, the buckler then falls to a location near the target over 1 second, landing and remaining there for up to 4 seconds.
 
-**Poppy** can move over the buckler to retrieve it, gaining a shield for health for 3 seconds. If the buckler kills the target, or if the target is already dead when the buckler hits it, the buckler will bounce back to **Poppy** instead of falling. Enemy champions can move over the buckler to destroy it.
+**Poppy** can move over the buckler to retrieve it, gaining a shield for (health) 11 to 20 of her **maximum** health for 3 seconds. If the buckler kills the target, or if the target is already dead when the buckler hits it, the buckler will bounce back to **Poppy** instead of falling. Enemy champions can move over the buckler to destroy it.
 
 **Notes:**
 
@@ -145,9 +145,9 @@ The impact creates a field for 1 second that slows enemies within, which then ru
 | **Spell Shield** | True |
 | **Spell Effects** | aoe |
 
-**PASSIVE - STUBBORN TO A FAULT:** **Poppy** increases her armor and mr by 12%, doubled to 24% while she is below 40% **maximum** health.
+**PASSIVE - STUBBORN TO A FAULT:** **Poppy** increases her (armor) **total** armor and (mr) **total** magic resistance by 12%, doubled to 24% while she is below 40% **maximum** health.
 
-**ACTIVE:** **Poppy** gains ms and creates an aura around herself for 2 seconds, causing all enemies who attempt to dash into or within it to be dealt magic damage and knocked up for $0.5$ seconds. If a target was successfully interrupted, they become grounded and slowed by 25% for 2 seconds.
+**ACTIVE:** **Poppy** gains (ms) 40% **bonus** movement speed and creates an aura around herself for 2 seconds, causing all enemies who attempt to dash into or within it to be dealt magic damage and knocked up for $0.5$ seconds. If a target was successfully interrupted, they become grounded and slowed by 25% for 2 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -216,7 +216,7 @@ If the target hits terrain, she stops to deal the same physical damage again and
 
 | Attribute | Value |
 |-----------|------:|
-| **Range** | 500 (Uncharged range) / channel time units |
+| **Range** | 500 (Uncharged range) / cr 850 / 1025 / 1200 units |
 | **Cast Time** | $0.25$ (Uncharged release) / $0.35$ (Charged release) seconds |
 | **Effect Radius** | 180 (Uncharged radius around Poppy) / 225 (Eruption radius upon missile collision) units |
 | **Width** | 180 (Both uncharged area and shockwave missile width) units |
@@ -246,7 +246,7 @@ If *Keeper's Verdict* was charged for at least $0.5$ seconds, it deals 100% incr
 |-----------|------:|
 | **Increased Damage** | 200 / 300 / 400 (+ 90% **bonus** AD) |
 
-If the charge is interrupted or completes without reactivation, *Keeper's Verdict* is cancelled and the ability is put on a cd cooldown.
+If the charge is interrupted or completes without reactivation, *Keeper's Verdict* is cancelled and the ability is put on a (cd) 15-second cooldown.
 
 **Notes:**
 
@@ -280,7 +280,7 @@ If the charge is interrupted or completes without reactivation, *Keeper's Verdic
 - Stats
   - Health growth increased to 110 from 104.
 - Iron Ambassador
-  - Shield health ratio changed to key=% **maximum** health from key=%. *Now scales with each level.*
+  - Shield health ratio changed to 11 to 20 **maximum** health from 13%–18%@1–13. *Now scales with each level.*
 - Heroic Charge
   - Base damage per hit reduced to 40 / 60 / 80 / 100 / 120 from 50 / 70 / 90 / 110 / 130.
   - Bonus AD ratio per hit increased to 60% **bonus** AD from 50%.

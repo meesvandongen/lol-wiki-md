@@ -116,7 +116,7 @@
 | **Spell Effects** | proc |
 | **Parry** | Special |
 
-**INNATE:** **Zed**’s basic attacks against targets below 50% **maximum** health are empowered to deal key=% of the target's **maximum** health as **bonus** magic damage.
+**INNATE:** **Zed**’s basic attacks against targets below 50% **maximum** health are empowered to deal 6%@1; 8%@7; 10%@17 of the target's **maximum** health as **bonus** magic damage.
 
 Against monsters, *Contempt for the Weak* deals 200% damage, capped at 300.
 
@@ -288,7 +288,7 @@ Enemies hit by a *Shadow*’s slash are slowed for $1.5$ seconds, with multiple 
 
 **RECAST:** **Zed** and the *Shadow* blink to swap places.
 
-*If the target dies or is 1950 or more units away before the dash begins, Death Mark is cancelled, causing the ability to go on a cd cooldown, **Zed** to reappear at the cast location, and the Shadow he spawned to disappear.*
+*If the target dies or is 1950 or more units away before the dash begins, Death Mark is cancelled, causing the ability to go on a (cd) $0.5$-second cooldown, **Zed** to reappear at the cast location, and the Shadow he spawned to disappear.*
 
 **Notes:**
 

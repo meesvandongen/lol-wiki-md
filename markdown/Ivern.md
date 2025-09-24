@@ -120,7 +120,7 @@
 | **Affects** | Monsters |
 | **Silence** | True |
 
-**INNATE:** **Ivern** cannot attack nor damage non-epic monsters. Instead, targeting a jungle camp initiates a $2.5$ second channel that will plant a grove upon the camp. Placing a grove costs health and mana. The channel cannot be cancelled in the first $0.15$ seconds and in the last $0.5$ seconds.
+**INNATE:** **Ivern** cannot attack nor damage non-epic monsters. Instead, targeting a jungle camp initiates a $2.5$ second channel that will plant a grove upon the camp. Placing a grove costs (health) (15-(x-1)*0.882)/100*(Ivern*(x-1)*(0.7025+0.0175*(x-1)))|formula = (15% - 0.882% per level after 1) of base health and (mana) (20-(x-1)*1.175)/100*(Ivern*(x-1)*(0.7025+0.0175*(x-1)))|formula = (20% - 1.175% per level after 1) of base mana. The channel cannot be cancelled in the first $0.15$ seconds and in the last $0.5$ seconds.
 
 **Ivern** cannot place a grove while he is unable to cast abilities.
 

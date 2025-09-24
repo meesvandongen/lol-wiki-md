@@ -212,7 +212,7 @@ If the target was an enemy champion or epic monster, a radius is marked around *
 | **Spell Shield** | True |
 | **Spell Effects** | spellaoe |
 
-**ACTIVE:** **Rakan** breaks into a captivating sprint for 4 seconds, gaining ghosting and ms for the duration. During this time, he deals magic damage to enemies he collides with and charms and slows them by 75% for a duration. This cannot affect the same enemy more than once.
+**ACTIVE:** **Rakan** breaks into a captivating sprint for 4 seconds, gaining ghosting and (ms) 75% **bonus** movement speed for the duration. During this time, he deals magic damage to enemies he collides with and charms and slows them by 75% for a duration. This cannot affect the same enemy more than once.
 
 | Attribute | Value |
 |-----------|------:|

@@ -236,7 +236,7 @@ At maximum range, the daggers linger for $0.7$ seconds before homing back to **T
 | **Spell Effects** | spellaoe |
 | **Projectile** | True |
 
-**ACTIVE:** **Talon** disperses a of blades around him that deals physical damage to enemies hit and lingers at maximum range for up to $2.5$ seconds, during which he gains invisibility and ms.
+**ACTIVE:** **Talon** disperses a of blades around him that deals physical damage to enemies hit and lingers at maximum range for up to $2.5$ seconds, during which he gains invisibility and (ms) **bonus** movement speed.
 
 | Attribute | Value |
 |-----------|------:|

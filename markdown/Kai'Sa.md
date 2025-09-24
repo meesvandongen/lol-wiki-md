@@ -96,7 +96,7 @@
 
 **INNATE - PLASMA:** **Kai'Sa**’s basic attacks on-hit and *Void Seeker* apply stacks of Plasma to enemies for 4 seconds, refreshing on subsequent applications and stacking up to 5 times. Basic attacks each apply 1 stack and *Void Seeker* applies 2 stacks, increased to 3 if it is evolved. Her and nearby allies' immobilizing effects and polymorphs against enemy champions will also apply a stack of Plasma.
 
-**INNATE - CAUSTIC WOUNDS:** Plasma stacks applied by **Kai'Sa**’s basic attacks or *Void Seeker* deal 4 to 24 (+ 1 to 6 per Plasma stack before application) (+ 12–24@0–4 (@=Plasma stacks before application) AP) **bonus** magic damage. The fifth stack against a target consumes them all to deal **additional bonus** magic damage equal to 15% (+ 6% per 100 AP) of the target's **missing** health, capped at 400 against monsters.
+**INNATE - CAUSTIC WOUNDS:** Plasma stacks applied by **Kai'Sa**’s basic attacks or *Void Seeker* deal 4 to 24 (+ 1 to 6 per Plasma stack before application) (+ 12%–24%@0–4 (@=Plasma stacks before application) AP) **bonus** magic damage. The fifth stack against a target consumes them all to deal **additional bonus** magic damage equal to 15% (+ 6% per 100 AP) of the target's **missing** health, capped at 400 against monsters.
 
 **Notes:**
 
@@ -131,7 +131,7 @@
 | **Spell Effects** | Special |
 | **Projectile** | True |
 
-**ACTIVE:** **Kai'Sa** releases a swarm of 6 missiles that evenly distributes among nearby visible enemies, each one hitting their target after $0.4$ seconds to deal physical damage. Minions below health take double damage.
+**ACTIVE:** **Kai'Sa** releases a swarm of 6 missiles that evenly distributes among nearby visible enemies, each one hitting their target after $0.4$ seconds to deal physical damage. Minions below (health) 35% health take double damage.
 
 | Attribute | Value |
 |-----------|------:|
@@ -144,7 +144,7 @@ Non-minions take 25% damage from missiles beyond their first.
 | **Reduced Damage Per Missile** | 10 / 13.75 / 17.5 / 21.25 / 25 (+ 13.75% **bonus** AD) (+ 5% AP) |
 | **Total Single-Target Damage** | 90 / 123.75 / 157.5 / 191.25 / 225 (+ 123.75% **bonus** AD) (+ 45% AP) |
 
-** Requires「 ⟷ 」 from items| from items and stat growthto upgrade – *Icathian Rain* instead fires 12 missiles.
+** Requires「 100-Kai'Sa attack damage from items ⟷ 100 attack damage from items and stat growth 」to upgrade – *Icathian Rain* instead fires 12 missiles.
 
 | Attribute | Value |
 |-----------|------:|
@@ -197,21 +197,21 @@ No additional notes.
 
 | Attribute | Value |
 |-----------|------:|
-| **Cast Time** | **bonus** attack speed |
+| **Cast Time** | 1.2–0.6@0–100 (@=**bonus** attack speed) seconds |
 | **Cost** | 30 Mana |
 | **Cooldown** | 16 / 14.5 / 13 / 11.5 / 10 seconds |
 | **Targeting** | Auto |
 | **Affects** | Self |
 | **Attack Missile Speed** | 2500 |
 
-**ACTIVE:** **Kai'Sa** charges up over the cast time, during which she is still able to move, becoming ghosted and gaining ms for the duration, with the effectiveness increased by type=**bonus** attack speed.
+**ACTIVE:** **Kai'Sa** charges up over the cast time, during which she is still able to move, becoming ghosted and gaining (ms) for the duration, with the effectiveness increased by 0%–100%@0–100 (@=**bonus** attack speed).
 
 | Attribute | Value |
 |-----------|------:|
 | **Minimum Movement Speed** | 55 / 60 / 65 / 70 / 75% |
 | **Maximum Movement Speed** | 110 / 120 / 130 / 140 / 150% |
 
-After completing the charge, she gains as for 4 seconds, during which her attacks have a lower windup of (0.1/% and an increased missile speed.
+After completing the charge, she gains (as) **bonus** attack speed for 4 seconds, during which her attacks have a lower windup of (0.1/% and an increased missile speed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -219,7 +219,7 @@ After completing the charge, she gains as for 4 seconds, during which her attack
 
 *Supercharge*’s **current** cooldown is reduced by $0.5$ seconds on-attack.
 
-** Requires「 ⟷ 」 from items| from items and stat growthto upgrade – *Supercharge* grants invisibility at the start of the cast time for $0.5$ seconds.
+** Requires「 (as) 100-Kai'Sa attack speed from items ⟷ 100% attack speed from items and stat growth 」to upgrade – *Supercharge* grants invisibility at the start of the cast time for $0.5$ seconds.
 
 **Notes:**
 
@@ -282,7 +282,7 @@ After completing the charge, she gains as for 4 seconds, during which her attack
   - Plasma base damage changed to 4 to 24 from 5 to 23.
   - Plasma base damage per stack reduced to 1 to 6 from 1 to 12.
     - Maximum plasma base damage reduced to 8 to 48 from 9 to 71.
-  - Plasma AP ratio reduced to 12–24@0–4 (@=Plasma stacks before application) AP from 15–25@0–4 (@=Plasma stacks before application) AP.
+  - Plasma AP ratio reduced to 12%–24%@0–4 (@=Plasma stacks before application) AP from 15%–25%@0–4 (@=Plasma stacks before application) AP.
 
 ### V14.19
 - General

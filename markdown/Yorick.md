@@ -71,12 +71,12 @@
 | **Range** | 125 units |
 | **Gold** | 2 |
 | **Experience** | 0 |
-| **Health** | 110+(190/17)*(x-1)*(0.7025+0.0175*(x-1)) (+ 15% of **Yorick**’s **bonus** health) |
+| **Health** | 110 / 300 (+ 15% of **Yorick**’s **bonus** health) |
 | **Armor** | 0 |
 | **Magic Resist** | 0 |
-| **Damage** | 15+(85/17)*(x-1)*(0.7025+0.0175*(x-1)) (+ 20% of **Yorick**’s **bonus** AD) |
+| **Damage** | 15 / 100 (+ 20% of **Yorick**’s **bonus** AD) |
 | **Damage Type** | Physical |
-| **Attack Speed** | 0.5+0.5*(0.08+((0.8-0.08)/17)*(x-1)*(0.7025+0.0175*(x-1))) attack speed |
+| **Attack Speed** | 0.54 / 0.9 attack speed |
 | **Move Speed** | 325 (Higher when within er 1600 range of **Yorick**) |
 | **Control** | Autonomous |
 | **Targeting** | Minion, does not count towards creep score |
@@ -86,7 +86,7 @@
 **Abilities:**
 
 - **Endless March:** *Mist Walkers* remain near **Yorick** (preferably 200 units behind him) until they enter combat in a lane, whereupon they proceed along the lane and attack any enemy in their path.
-- **Ravenous:** While in a 1500-radius of Mourning Mist’s mark, *Mist Walkers* benefit from the ability's movement speed, and have the ability to leap to *marked* enemy champions and large monsters, dealing 100% of their AD upon arrival. While *Mist Walkers* are targeting a unit due to this effect, an exclamation mark indicator will be visible over their head. If *Mist Walkers* are attacking a jungle monster when Yorick casts Recall, they will continue attacking it until his channel completes, after which they withdraw to him, or they die.
+- **Ravenous:** While in a 1500-radius of Mourning Mist’s mark, *Mist Walkers* benefit from the ability's (movement speed) **bonus** movement speed, and have the ability to leap to *marked* enemy champions and large monsters, dealing 100% of their AD upon arrival. While *Mist Walkers* are targeting a unit due to this effect, an exclamation mark indicator will be visible over their head. If *Mist Walkers* are attacking a jungle monster when Yorick casts Recall, they will continue attacking it until his channel completes, after which they withdraw to him, or they die.
 
 While *Mist Walkers* are within a er 1600-radius of **Yorick**, they gain 60 movement speed and benefit from **Yorick**’s flat movement speed bonuses.
 Phase Rush is a percentual exception.
@@ -189,7 +189,7 @@ While the *Maiden of the Mist* is within a er 2000-radius of **Yorick**, she gai
 | **Spell Effects** | spell |
 | **Parry** | True |
 
-**ACTIVE:** **Yorick** empowers his next basic attack within 5 seconds to have an uncancellable windup, gain range, deal **bonus** physical damage, and heal him. The heal is reduced by 50% against non-champions.
+**ACTIVE:** **Yorick** empowers his next basic attack within 5 seconds to have an uncancellable windup, gain (range) 50 **bonus** range, deal **bonus** physical damage, and heal him. The heal is reduced by 50% against non-champions.
 
 | Attribute | Value |
 |-----------|------:|
@@ -274,10 +274,10 @@ While there are at least 3 *graves* nearby and *Last Rites* is active or on cool
 |-----------|------:|
 | **Capped Monster Damage** | 50 / 75 / 100 / 125 / 150 (+ 100% AP) |
 
-**CURSED:** The target is revealed, has armor penetration, and continually raises a Mist Walker from each nearby *grave*, up to a maximum of 4.
+**CURSED:** The target is revealed, has (armor penetration) reduced armor, and continually raises a Mist Walker from each nearby *grave*, up to a maximum of 4.
 
 
-**Yorick**, Mist Walkers and the **Maiden of the Mist** gain ms while facing nearby *Cursed* enemies. Mist Walkers will leap to nearby *Cursed* enemy champions and large monsters, attacking them upon arrival.
+**Yorick**, Mist Walkers and the **Maiden of the Mist** gain (ms) **bonus** movement speed while facing nearby *Cursed* enemies. Mist Walkers will leap to nearby *Cursed* enemy champions and large monsters, attacking them upon arrival.
 
 | Attribute | Value |
 |-----------|------:|
@@ -337,7 +337,7 @@ While there are at least 3 *graves* nearby and *Last Rites* is active or on cool
 
 ### V25.12
 - Shepherd of Souls
-  - Mist Walker bonus attack speed changed to round=ceil **bonus** attack speed from 100% of Yorick's **bonus** attack speed.
+  - Mist Walker bonus attack speed changed to 8% / 80% **bonus** attack speed from 100% of Yorick's **bonus** attack speed.
 - Last Rites
   - Base damage reduced to 30 / 50 / 70 / 90 / 110 from 30 / 55 / 80 / 105 / 130.
 
@@ -383,7 +383,7 @@ While there are at least 3 *graves* nearby and *Last Rites* is active or on cool
 ### V25.07#April 2nd Hotfix|V25.07
 - Shepherd of Souls
   - Mist Walker monster damage reduced to 60% from 100%.
-  - Mist Walker base attack damage increased to 15+(85/17)*(x-1)*(0.7025+0.0175*(x-1)) from 15+(60/17)*(x-1)*(0.7025+0.0175*(x-1)).
+  - Mist Walker base attack damage increased to 15 / 100 from 15 / 75.
 - Last Rites
   - Heal health ratio increased to 6 / 7 / 8 / 9 / 10% **missing** health from 4 / 5 / 6 / 7 / 8%.
 
@@ -393,9 +393,9 @@ While there are at least 3 *graves* nearby and *Last Rites* is active or on cool
 - Shepherd of Souls
   - Nearby deaths per grave reduced to 8@1; 7@3; 6@5; 5@7; 4@9; 3@11; 2@13 from 12@1; 6@7; 2@13.
     - Changed to every 5th on ARAM.
-  - Mist Walker base attack damage changed to 15+(60/17)*(x-1)*(0.7025+0.0175*(x-1)) from 4 / 5 / 6 / 7 / 8 / 9 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 50 / 60 / 70 / 80 / 901 per level up to 7, +5 per level up to 13, +10 per level up to 18. *Now uses stat growth.*
+  - Mist Walker base attack damage changed to 15 / 75 from 4 / 5 / 6 / 7 / 8 / 9 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 50 / 60 / 70 / 80 / 901 per level up to 7, +5 per level up to 13, +10 per level up to 18. *Now uses stat growth.*
   - Mist Walker AD ratio reduced to 20% of Yorick's **bonus** AD from 20% of Yorick's **total** AD.
-  - Mist Walker base health increased to 110+(190/17)*(x-1)*(0.7025+0.0175*(x-1)) from 110 to 212. *Now uses stat growth.*
+  - Mist Walker base health increased to 110 / 300 from 110 to 212. *Now uses stat growth.*
   - Mist Walker health ratio reduced to 15% of Yorick's **bonus** health from 20% of Yorick's **maximum** health.
   - Mist Walker base attack speed reduced to $0.5$ at all levels from 0.5+0.5×0.08×1 to 0.5+0.5×0.08×18. *Attack speed ratio unchanged at $0.5$.*
   - **New Effect:** Mist Walker attack speed now scales with 100% of Yorick's **bonus** attack speed.
@@ -404,7 +404,7 @@ While there are at least 3 *graves* nearby and *Last Rites* is active or on cool
   - **New Effect:** Mist Walkers now receive 40% damage from lane minions.
   - **Removed:*** Mist Walkers are no longer instantly killed by single-target champion spells. *Still instantly killed by turret attacks.*
   - **New Effect:** Mist Walkers now receive 200% damage from melee champion basic attacks.
-  - Mist Walker incoming area damage modifier changed to 66 / 64 / 62 / 60 / 58 / 56 / 54 / 52 / 50 / 48 / 46 / 44 / 42 / 40 from 50% at all levels.
+  - Mist Walker incoming area damage modifier changed to 66% / 64% / 62% / 60% / 58% / 56% / 54% / 52% / 50% / 48% / 46% / 44% / 42% / 40% from 50% at all levels.
   - **New Effect:** Pinging the ability now displays in chat the number of Mist Walkers alive near (Within 1600 units) **Yorick** and overall on the map.
   - **New Effect:** When Yorick casts Recall, Mist Walkers no longer stop attacking jungle monsters and withdraw to him.
   - **Bug Fixes:** Mist Walker leaps via Mourning Mist now target units instead of locations. Previously this caused them to sometimes fail to reach their target over terrain.

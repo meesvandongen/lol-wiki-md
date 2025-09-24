@@ -83,7 +83,7 @@
 
 While near his team's summoning platform, **Kayn** can choose a form (By clicking on the portrait in the HUD) to enter transformation over 6 seconds, becoming invulnerable, untargetable, and unable to act for the duration. At the end of the transformation he is restored to full health and mana. **Kayn** cannot choose a form if he is unable to cast abilities. The transformation will grant a passive bonus and permanently empower some of **Kayn**’s abilities based on the form chosen. He gains a one-time Homeguard once the transformation is complete.
 
-**SHADOW ASSASSIN BONUS:** Upon entering combat with enemy champions, **Kayn** becomes empowered for 3 seconds to deal key=% of post-mitigation (Damage calculated after modifiers) physical and magic damage dealt against enemy champions as **bonus** magic damage. This effect cannot trigger again until **Kayn** has been out of combat with champions for over 8 seconds, with the timer being reset if he recasts *Umbral Trespass*.
+**SHADOW ASSASSIN BONUS:** Upon entering combat with enemy champions, **Kayn** becomes empowered for 3 seconds to deal 25 to 45 of post-mitigation (Damage calculated after modifiers) physical and magic damage dealt against enemy champions as **bonus** magic damage. This effect cannot trigger again until **Kayn** has been out of combat with champions for over 8 seconds, with the timer being reset if he recasts *Umbral Trespass*.
 
 **DARKIN BONUS:** **Rhaast** heals for 25% (+ $0.5$% per 100 **bonus** health) of the post-mitigation (Damage calculated after modifiers) physical damage that he deals to enemy champions with his abilities.
 
@@ -94,7 +94,7 @@ While near his team's summoning platform, **Kayn** can choose a form (By clickin
 - Entering transformation will not destroy in-flight projectiles. ; The Orb System The experience is depicted as orbs that drop upon the ground. Melee champions drop red orbs that grant progress towards Rhaast, while ranged champions drop blue orbs that grant progress for Shadow Assassin. Orbs will remain on the ground until automatically collected by **Kayn** regardless of range once he leaves combat. The orbs will be collected even if **Kayn** dies. The experience bar above his portrait gauges his current progression, the color reflects the form with greater progress. **Kayn** can transform by interacting with his portrait, and can wait 4 minutes until the other form becomes available, reduced by 5 seconds for each collected orb of their type after that.
 - *Melee* orbs grant 2 points per hit and 6 points per takedown.
 - *Ranged* orbs grant 3 points per hit and 7 points per takedown.
-- The amount of points received per orb is multiplied by type=minutes.
+- The amount of points received per orb is multiplied by 3–then + (10-3)/8*x*1.15@0–0 (@=minutes).
 - The bar gets filled up completely at 500 points.
 - If the two forms are within 8% of each other, the last champion range type hit will determine the winner. If both types are hit at the same time, the trasformation will default to Rhaast.
 - Each side's bar has a bucket system, starting at 60 points.
@@ -143,7 +143,7 @@ Both instances of *Reaping Slash* deal 40 **bonus** physical damage against mini
 | **Capped Monster Damage per Hit** | 200 / 250 / 300 / 350 / 400 |
 | **Total Capped Monster Damage** | 400 / 500 / 600 / 700 / 800 |
 
-*Reaping Slash's dash speed scales with **Kayn**’s ms.*
+*Reaping Slash's dash speed scales with **Kayn**’s (ms) **total** movement speed.*
 
 **Notes:**
 
@@ -202,7 +202,7 @@ Both instances of *Reaping Slash* deal 40 **bonus** physical damage against mini
 | **Affects** | Self |
 | **Grounded** | True |
 
-**ACTIVE:** **Kayn** gains ms, ghosting and the ability to ignore terrain collision for a duration. If he has been in combat with enemy champions within the last 3 seconds, *Shadow Step* will instead last $1.5$ seconds.
+**ACTIVE:** **Kayn** gains (ms) 40% **bonus total** movement speed, ghosting and the ability to ignore terrain collision for a duration. If he has been in combat with enemy champions within the last 3 seconds, *Shadow Step* will instead last $1.5$ seconds.
 
 | Attribute | Value |
 |-----------|------:|

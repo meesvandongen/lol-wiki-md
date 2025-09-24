@@ -83,7 +83,7 @@
 | **Parry** | True |
 
 **INNATE:** **Smolder** generates a stack of *Dragon Practice* each time he hits an enemy champion with an ability, or whenever *Super Scorcher Breath* kills a minion or monster. His basic abilities deal **bonus** magic damage based on stacks.
-- *Q*: Deals **bonus** magic damage equal to key=% (+ Infinity Edge key=%*0.4 for 11)|critical damage (based on critical strike chance) of *Dragon Practice* stacks.
+- *Q*: Deals **bonus** magic damage equal to 40 to 40×1.75 for 11 (+ Infinity Edge 0 to 40.0×0.4 for 11) (based on critical strike chance) of *Dragon Practice* stacks.
 - *W*: Explosions deal **bonus** magic damage equal to 55% of *Dragon Practice* stacks.
 - *E*: Attacks each deal **bonus** magic damage equal to 12% of *Dragon Practice* stacks.
 
@@ -115,7 +115,7 @@
 | **Projectile** | True |
 | **Parry** | Special |
 
-**ACTIVE:** **Smolder** spits a fireball at the target enemy that deals physical damage, increased by key=% (+ Infinity Edge key=%) (based on critical strike chance); applies on-hit effects; applies life steal at 50% effectiveness; and triggers on-attack effects. If *Super Scorcher Breath* kills at least one target, **Smolder** restores 15 mana.
+**ACTIVE:** **Smolder** spits a fireball at the target enemy that deals physical damage, increased by 0 to (1.75-1)*100 for 11 (+ Infinity Edge 0 to 0.4×100 for 11) (based on critical strike chance); applies on-hit effects; applies life steal at 50% effectiveness; and triggers on-attack effects. If *Super Scorcher Breath* kills at least one target, **Smolder** restores 15 mana.
 
 | Attribute | Value |
 |-----------|------:|
@@ -297,7 +297,7 @@ No additional notes.
 
 ### V25.10
 - Dragon Practice
-  - Super Scorcher Breath stack ratio increased to key=% from key=%.
+  - Super Scorcher Breath stack ratio increased to 40 to 40×1.75 for 11 from 30 to 30×1.75 for 11.
   - Flap, Flap, Flap stack ratio increased to 12% from 10%.
 - Super Scorcher Breath
   - Tier 3 burn Dragon Practice stack ratio increased to $0.5$% per 100 Dragon Practice stacks from $0.4$%.
@@ -321,7 +321,7 @@ No additional notes.
 
 ### V14.23
 - Dragon Practice
-  - Super Scorcher Breath Dragon Practice stack ratio reduced to key=% from key=%.
+  - Super Scorcher Breath Dragon Practice stack ratio reduced to 30 to 30×1.75 for 11 from 40 to 40×1.75 for 11.
   - Flap, Flap, Flap Dragon Practice stack ratio reduced to 10% from 20%.
 - Super Scorcher Breath
   - **New Effect:** Now refunds 15 mana if this ability kills at least one target.
@@ -374,10 +374,10 @@ No additional notes.
 - Stats
   - Base attack damage increased to 60 from 57.
 - Dragon Practice
-  - Super Scorcher Breath bonus damage increased to key=% of Dragon Practice stacks from key=%.
+  - Super Scorcher Breath bonus damage increased to 40%–70%@0–100 (@=critical strike chance) of Dragon Practice stacks from 40%–52%@0–100 (@=critical strike chance).
 - Super Scorcher Breath
   - Mana cost changed to 25 at all ranks from 23 / 26 / 29 / 32 / 35.
-  - Critical strike chance ratio increased to key=% from key=%.
+  - Critical strike chance ratio increased to 0%–75%@0–100 (@=critical strike chance) from 0%–50%@0–100 (@=critical strike chance).
 
 ## Trivia
 

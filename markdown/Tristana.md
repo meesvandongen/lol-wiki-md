@@ -87,7 +87,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Tristana**’s basic attacks, *Explosive Charge* and *Buster Shot* gain attack range, for a total of 550 to 700.
+**INNATE:** **Tristana**’s basic attacks, *Explosive Charge* and *Buster Shot* gain (attack range) 0 to 150 **bonus** range, for a total of 550 to 700.
 
 **Notes:**
 
@@ -106,7 +106,7 @@
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**ACTIVE:** **Tristana** empowers her cannon, gaining as for 7 seconds.
+**ACTIVE:** **Tristana** empowers her cannon, gaining (as) **bonus** attack speed for 7 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -189,7 +189,7 @@ Scoring an enemy champion takedown or detonating *Explosive Charge* at maximum s
 |-----------|------:|
 | **Minimum Physical Damage** | 60 / 70 / 80 / 90 / 100 (+ 100 / 110 / 120 / 130 / 140% **bonus** AD) (+ 50% AP) |
 
-**Tristana**’s basic attacks on-hit and abilities against the target increase *Explosive Charge*’s damage by 25%, stacking up to 4 times for a maximum 100% increase, upon which the charge also detonates instantly. The charge's **total** damage is additionally increased by key=% Infinity Edge (+ key=%.
+**Tristana**’s basic attacks on-hit and abilities against the target increase *Explosive Charge*’s damage by 25%, stacking up to 4 times for a maximum 100% increase, upon which the charge also detonates instantly. The charge's **total** damage is additionally increased by 0%–75%@0–100 (@=critical strike chance) Infinity Edge (+ 0%–40%@0–100 (@=critical strike chance).
 
 | Attribute | Value |
 |-----------|------:|
@@ -315,7 +315,7 @@ Scoring an enemy champion takedown or detonating *Explosive Charge* at maximum s
   - Bonus bomb damage per stack reduced to 25% from 30%.
     - Maximum bonus bomb damage reduced to 100% from 120%.
   - Bomb bonus AD ratio changed to 100 / 110 / 120 / 130 / 140% **bonus** AD from 50 / 75 / 100 / 125 / 150%.
-  - Bomb critical strike chance ratio increased to key=% from key=%.
+  - Bomb critical strike chance ratio increased to 0%–75%@0–100 (@=critical strike chance) from 0%–33.3%@0–100 (@=critical strike chance).
   - **New Effect:** Bomb critical strike chance ratio now scales with 100% **bonus** critical strike damage.
 - Buster Shot
   - Base damage reduced to 275 / 325 / 375 from 300 / 400 / 500.
@@ -357,7 +357,7 @@ Scoring an enemy champion takedown or detonating *Explosive Charge* at maximum s
 
 - Rocket Jump is a reference to rocket jumping in FPS Arena games (like Quake) which allows oneself mobility by using a RPG or any other rocket launcher to accelerates one's jump.
 - Buster Shot is a reference to the attack used by Megaman.
-- Tristana has the fifth longest possible basic attack range in the game with range at level 18, right after Kog'Maw when he uses his Bio-Arcane Barrage, which grants him a 710 attack range, Switcheroo! at rank 5, which grants her a 725 attack range, Twitch when he uses Spray and Pray which grants him a total of 850 attack range, and Seraphine when she have full stacks(20 stacks) of her passive, Stage Presence, granting her a grand total of 1025 attack range(25 per note). This does not count champions that can have theoretically infinite range with stacking.
+- Tristana has the fifth longest possible basic attack range in the game with (range) 700 units at level 18, right after Kog'Maw when he uses his Bio-Arcane Barrage, which grants him a 710 attack range, Switcheroo! at rank 5, which grants her a 725 attack range, Twitch when he uses Spray and Pray which grants him a total of 850 attack range, and Seraphine when she have full stacks(20 stacks) of her passive, Stage Presence, granting her a grand total of 1025 attack range(25 per note). This does not count champions that can have theoretically infinite range with stacking.
 - Her dance references a typical soldier's stationary marching while singing a military cadence.
   - A side-by-side comparison can be seen here.
 - **Tristana** can attack the Baron Nashor over the back wall once she hits Level 15 due to the extra attack range she gains from Draw a Bead.

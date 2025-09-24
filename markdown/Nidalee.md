@@ -113,7 +113,7 @@
 | **Targeting** | Passive |
 | **Affects** | Enemies, Self |
 
-**INNATE - PROWL:** While in brush, **Nidalee** gains ghosting and ms, increased to 30% while facing a visible enemy champion within 1400 range. The bonuses persist for 2 seconds after leaving brush.
+**INNATE - PROWL:** While in brush, **Nidalee** gains ghosting and (ms) 10% **bonus** movement speed, increased to 30% while facing a visible enemy champion within 1400 range. The bonuses persist for 2 seconds after leaving brush.
 
 **INNATE - HUNT:** Hitting monsters or enemy champions with *Javelin Toss* or *Bushwhack* when **Nidalee** is nearby grants her ghosting and 10% **bonus** movement speed for 4 seconds and applies a *Hunted* mark to the target for the same duration, during which they are revealed as well as grant sight of a 300-unit radius around them. The **bonus** movement speed is increased to 30% while facing a *Hunted* target. Additionally, the first cast of both *Takedown* and *Pounce* against a *Hunted* target is enhanced.
 
@@ -139,7 +139,7 @@ The **bonus** movement speed from *Prowl* and *Hunt* can stack, but cannot excee
 | **Spell Effects** | Special |
 | **Parry** | unknown |
 
-**ACTIVE:** **Nidalee** empowers her next basic attack within 10 seconds to have an uncancellable windup, gain range and deal ***modified** magic damage that is increased by an amount for every 1% of the target's **missing** health.
+**ACTIVE:** **Nidalee** empowers her next basic attack within 10 seconds to have an uncancellable windup, gain (range) 75 **bonus** range and deal ***modified** magic damage that is increased by an amount for every 1% of the target's **missing** health.
 
 *Takedown* can critically strike for AD **bonus** magic damage.
 
@@ -202,7 +202,7 @@ The **bonus** movement speed from *Prowl* and *Hunt* can stack, but cannot excee
 | **Spell Effects** | Single target |
 | **Projectile** | True |
 
-**ACTIVE:** **Nidalee** hurls a javelin in the target direction that deals magic damage to the first enemy hit, increased by type=distance traveled.
+**ACTIVE:** **Nidalee** hurls a javelin in the target direction that deals magic damage to the first enemy hit, increased by 0%–225%@525–1300 (@=distance traveled).
 
 | Attribute | Value |
 |-----------|------:|
@@ -241,7 +241,7 @@ The **bonus** movement speed from *Prowl* and *Hunt* can stack, but cannot excee
 | **Magic Damage Per Tick** | 10 / 20 / 30 / 40 / 50 (+ 5% AP) |
 | **Total Magic Damage** | 40 / 80 / 120 / 160 / 200 (+ 20% AP) |
 
-Traps have health and can only be damaged by champion basic attacks (2 hit points from ranged and 3 hit points from melee). Up to a maximum of 4–10@1–16 traps may be active at once.
+Traps have (health) 6 **maximum** health and can only be damaged by champion basic attacks (2 hit points from ranged and 3 hit points from melee). Up to a maximum of 4–10@1–16 traps may be active at once.
 
 *See [Pets](#Pets) for more details about traps.*
 
@@ -340,7 +340,7 @@ Traps have health and can only be damaged by champion basic attacks (2 hit point
 | **Targeting** | Unit |
 | **Affects** | Self, Allies |
 
-**ACTIVE:** **Nidalee** revitalizes herself or the target allied champion, granting the target **bonus** attack speed for 7 seconds and healing them for an amount that is increased by label1=target's **missing** health.
+**ACTIVE:** **Nidalee** revitalizes herself or the target allied champion, granting the target **bonus** attack speed for 7 seconds and healing them for an amount that is increased by 0%–100%@0–95 (@=Heal increase).
 
 | Attribute | Value |
 |-----------|------:|
@@ -368,9 +368,9 @@ Traps have health and can only be damaged by champion basic attacks (2 hit point
 
 **ACTIVE:** **Nidalee** switches between her **HUMAN FORM** and **COUGAR FORM**.
 
-**COUGAR FORM:** **Nidalee** transforms into a cougar, gaining melee attacks with range and access to her cougar abilities.
+**COUGAR FORM:** **Nidalee** transforms into a cougar, gaining melee attacks with (range) 125 range and access to her cougar abilities.
 
-**HUMAN FORM:** **Nidalee** transforms into a human, gaining ranged attacks with range and access to her human abilities. While in this form, applying a *Hunted* mark will reset *Aspect of the Cougar*’s cooldown.
+**HUMAN FORM:** **Nidalee** transforms into a human, gaining ranged attacks with (range) 525 range and access to her human abilities. While in this form, applying a *Hunted* mark will reset *Aspect of the Cougar*’s cooldown.
 
 **Nidalee** begins with one rank in *Aspect of the Cougar* and can increase it at levels 6, 11, and 16. **COUGAR FORM'S** abilities scale based on *Aspect of the Cougar*’s rank.
 
@@ -392,7 +392,7 @@ No additional notes.
 
 ### V25.13
 - Javelin Toss
-  - Damage modifier increased to type=distance traveled from type=distance traveled.
+  - Damage modifier increased to 0%–225%@525–1300 (@=distance traveled) from 0%–200%@525–1300 (@=distance traveled).
     - Maximum base damage increased to 227.5 / 292.5 / 357.5 / 422.5 / 487.5 from 210 / 270 / 330 / 390 / 450.
     - Maximum AP ratio increased to 162.5% AP from 150% AP.
 

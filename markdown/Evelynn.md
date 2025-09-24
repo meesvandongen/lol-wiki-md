@@ -96,7 +96,7 @@
 
 **INNATE:** **Evelynn** shrouds herself in *Demon Shade* after not performing actions that break stealth for 4 seconds. Attacking or casting abilities ends *Demon Shade* immediately and places it on a 4-second static cooldown (Unaffected by ability haste), reduced to $1.25$ seconds from casting *Last Caress*. Taking damage from champions or turrets interrupts *Demon Shade* and places it on a $1.5$-second static cooldown (Unaffected by ability haste).
 
-**DEMON SHADE:** While below health, **Evelynn** heals herself for 15 to 150 every second. From level.md) 6 onward, *Demon Shade* also grants camouflage.
+**DEMON SHADE:** While below (health) 250 to 590 (+ 250% AP) health, **Evelynn** heals herself for 15 to 150 every second. From level.md) 6 onward, *Demon Shade* also grants camouflage.
 
 **Notes:**
 
@@ -191,13 +191,13 @@
 
 **Evelynn**’s next basic attack or ability against the *accursed* target *expunges* them, slowing them by 45% for $0.75$ seconds.
 
-*Expunging* a target will refund *Allure*’s mana. If the target is *cursed* for at least $2.5$ seconds, the *expunge* also charms them for a few seconds and the duration of the slow is increased to last for this time, as well as applying additional effects based on the target type.
+*Expunging* a target will refund *Allure*’s (mana) mana cost. If the target is *cursed* for at least $2.5$ seconds, the *expunge* also charms them for a few seconds and the duration of the slow is increased to last for this time, as well as applying additional effects based on the target type.
 
 | Attribute | Value |
 |-----------|------:|
 | **Disable Duration** | 1.25 / 1.5 / 1.75 / 2 / 2.25 seconds |
 
-Against champions, the *expunge* also inflicts magic penetration for 4 seconds.
+Against champions, the *expunge* also inflicts (magic penetration) magic resistance reduction for 4 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -219,10 +219,10 @@ Against monsters, the *expunge* deals **bonus** magic damage and increases the d
 
 - The mark fully forming signifies the $2.5$ seconds have elapsed, meaning the charm will be applied on the triggering attack or ability.
   - An enemy champion cursed by *Allure* is alarmed of her presence and after the mark has fully formed, an arrow will appear next to them pointing towards **Evelynn**’s direction. This is visible to both teams.
-- The magic penetration will be applied to the attack or ability that triggers it.
+- The (magic penetration) magic resistance reduction will be applied to the attack or ability that triggers it.
 - *Allure*’s mark application on a target cannot be blocked by spell shield.
   - The expunge will not occur if the ability is blocked by a spell shield. The mark does not trigger and will remain on the target in this case.
-- The magic penetration debuff is applied independently of the Charm debuff when the matured mark is expunged, meaning a target can still have their magic resistance reduced while they are resisting applications of CC debuffs (e.g. Black Shield).
+- The (magic penetration) magic resistance reduction debuff is applied independently of the Charm debuff when the matured mark is expunged, meaning a target can still have their magic resistance reduced while they are resisting applications of CC debuffs (e.g. Black Shield).
 - If the target becomes untargetable, dies, or is too far away or no longer in sight during the cast time, this ability will cancel but still go on cooldown and pay its cost.
   - *Allure* will restart its cooldown whenever the mark debuff is removed.
 
@@ -283,7 +283,7 @@ Against monsters, the *expunge* deals **bonus** magic damage and increases the d
 |-----------|------:|
 | **Magic Damage** | 60 / 90 / 120 / 150 / 180 (+ 3% (+ $1.5$% per 100 AP) of target's **maximum** health) |
 
-**Evelynn** also gains ms for 2 seconds.
+**Evelynn** also gains (ms) **bonus** movement speed for 2 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -320,7 +320,7 @@ Gaining *Demon Shade* resets *Whiplash*’s cooldown and *empowers* its next cas
 |-----------|------:|
 | **Magic Damage** | 125 / 187.5 / 250 / 312.5 / 375 (+ 75% AP) |
 
-*Last Caress* is empowered to deal 240% damage against enemies below health.
+*Last Caress* is empowered to deal 240% damage against enemies below (health) 30% of their **maximum** health.
 
 | Attribute | Value |
 |-----------|------:|

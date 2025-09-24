@@ -144,7 +144,7 @@ The Tentacle grants sight of nearby Control Ward.
 
 **INNATE:** Periodically, **Illaoi** spawns a Tentacle on the nearest terrain perpendicular to her location, if no other Tentacles are already nearby it. Tentacles fully spawn after a 2 second delay and are untargetable in the meantime.
 
-Tentacles are commanded to attack by **Illaoi**’s abilities, dealing 9 to 162 (+ 110% AD) (+ 40% AP) physical damage to all enemies struck, increased by 0 / 10 to 30.
+Tentacles are commanded to attack by **Illaoi**’s abilities, dealing 9 to 162 (+ 110% AD) (+ 40% AP) physical damage to all enemies struck, increased by 0% / 10 to 30%.
 Each enemy individually reduces the slam damage by 50% for every slam they were hit by in the last $0.66$ seconds, capped at 75% less damage.
 
 Each Tentacle also heals **Illaoi** for 5% of her **missing** health if it hits at least one enemy champion.
@@ -214,7 +214,7 @@ Each Tentacle also heals **Illaoi** for 5% of her **missing** health if it hits 
 | **Grounded** | Special |
 | **Knockdown** | Special |
 
-**ACTIVE:** **Illaoi**’s next basic attack within 6 seconds gains range and causes her to leap to the target's location if they're beyond her normal basic attack range.
+**ACTIVE:** **Illaoi**’s next basic attack within 6 seconds gains (range) 225 **bonus** range and causes her to leap to the target's location if they're beyond her normal basic attack range.
 
 The attack deals **bonus** physical damage, with a minimum threshold, and capped at 300 against non-champions, and commands all Tentacles in range to attack the target. The minimum **bonus** damage can also be applied against turrets.
 
@@ -290,7 +290,7 @@ The attack deals **bonus** physical damage, with a minimum threshold, and capped
 
 **ACTIVE:** **Illaoi** launches a tendril in the target direction that stops at the first enemy hit, pulling their Spirit out in front of **Illaoi** over $0.75$ seconds if they are a champion. The target is tethered to the Spirit for 7 seconds (Timer starts when the target is hit), revealing them in addition to granting sight of the area around them while the tether remains.
 
-The Spirit spawns with the target's **current** health, armor and mr, and redirects a portion of the pre-mitigation damage (Damage calculated before modifiers) received to the tethered champion.
+The Spirit spawns with the target's **current** (health) health, armor and (mr) magic resist, and redirects a portion of the pre-mitigation damage (Damage calculated before modifiers) received to the tethered champion.
 
 | Attribute | Value |
 |-----------|------:|
@@ -475,7 +475,7 @@ For the duration, *Harsh Lesson’s* cooldown is halved, all Tentacles awakened 
 
 ## Trivia
 
-- Illaoi has the 2nd highest experience **base** attack damage (153), behind Mega Gnar.
+- Illaoi has the 2nd highest (experience) level 18 **base** attack damage (153), behind Mega Gnar.
 - She is the only champion who can summon an enemy unit (Vessel).
 
 ---

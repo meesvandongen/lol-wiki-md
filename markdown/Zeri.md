@@ -92,7 +92,7 @@
 
 At full charge, **Zeri**’s next attack is empowered to consume all charge to deal 75 to 160 (+ 110% AP) (+ 1 to 11 of target's **maximum** health) magic damage. The damage based on the target's health ratio is capped at 300 against monsters.
 
-While not at full charge, **Zeri**’s attacks deal 10+(15/17)*(x-1)*(0.7025+0.0175*(x-1)) (+ 3% AP) magic damage, and execute targets below 6×10 to 6×25 (+ 18% AP) health. Each attack consumes 10 charge if she has enough already.
+While not at full charge, **Zeri**’s attacks deal 10 / 25 (+ 3% AP) magic damage, and execute targets below 6×10 to 6×25 (+ 18% AP) health. Each attack consumes 10 charge if she has enough already.
 
 **Notes:**
 
@@ -173,7 +173,7 @@ While not at full charge, **Zeri**’s attacks deal 10+(15/17)*(x-1)*(0.7025+0.0
 | Attribute | Value |
 |-----------|------:|
 | **Range** | cr 1200 (Initial missile) / er -50 – 1550 (1600 units total empowered length) |
-| **Cast Time** | **bonus** attack speed |
+| **Cast Time** | 0.55–0.3@0–0 (@=**bonus** attack speed) seconds |
 | **Width** | 80 (Initial missile) / er 200 (Laser beam width) units |
 | **Speed** | 2500 (Initial missile) units/second |
 | **Cost** | 50 / 60 / 70 / 80 / 90 Mana |
@@ -225,7 +225,7 @@ If the pulse hits terrain, it transforms into a laser in a line that grants sigh
 
 **ACTIVE:** **Zeri** dashes in the target direction. She will dash farther across terrain if *Spark Surge* was cast within 50 units of any, gaining unobstructed vision of the surrounding 800 units and revealing herself while there are enemy champions within 1500 units of her.
 
-Afterwards, she gains *Lightning Rounds* for 5 seconds, empowering *Burst Fire* to deal **bonus** magic damage to the first enemy hit, increased by 0 / 8.5 / 17 / 25.5 / 34 / 42.5 / 51 / 59.5 / 68 / 76.5 / 85, and pierce through enemies. Targets after the first take modified damage which does not apply on-hit effects or life steal nor trigger on-attack effects, but is affected by critical strike modifiers.
+Afterwards, she gains *Lightning Rounds* for 5 seconds, empowering *Burst Fire* to deal **bonus** magic damage to the first enemy hit, increased by 0%–85%@0–100 (@=critical strike chance), and pierce through enemies. Targets after the first take modified damage which does not apply on-hit effects or life steal nor trigger on-attack effects, but is affected by critical strike modifiers.
 
 | Attribute | Value |
 |-----------|------:|
@@ -303,8 +303,8 @@ During *Overcharged*, **Zeri** can generate stacks of *Hypercharged* from enemy 
 
 ### V14.18
 - Living Battery
-  - Charged attack base damage changed 75 to 160 from 90+(110/17)*(x-1)*(0.7025+0.0175*(x-1)). *Formula changed.*
-  - Charged attack health ratio changed to 1 to 11 of target's **maximum** health from 1+(14/17)*(x-1)*(0.7025+0.0175*(x-1)). *Formula changed.*
+  - Charged attack base damage changed 75 to 160 from 90 / 200. *Formula changed.*
+  - Charged attack health ratio changed to 1 to 11 of target's **maximum** health from 1% / 15%. *Formula changed.*
 
 ### V14.8
 - Stats
@@ -340,7 +340,7 @@ During *Overcharged*, **Zeri** can generate stacks of *Hypercharged* from enemy 
 - Burst Fire
   - **Removed:*** No longer triggers Spellblade.
 - Spark Surge
-  - Critical strike chance ratio increased to 0 / 8.5 / 17 / 25.5 / 34 / 42.5 / 51 / 59.5 / 68 / 76.5 / 85 from 0 / 6.5 / 13 / 19.5 / 26 / 32.5 / 39 / 45.5 / 52 / 58.5 / 65.
+  - Critical strike chance ratio increased to 0%–85%@0–100 (@=critical strike chance) from 0%–65%@0–100 (@=critical strike chance).
 
 ### V13.7
 - Stats

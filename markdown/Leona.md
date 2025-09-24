@@ -107,7 +107,7 @@ Allied champions' damaging attacks and abilities against a marked target will co
 | **Spell Effects** | spell |
 | **Parry** | unknown |
 
-**ACTIVE:** **Leona** illuminates her shield, empowering her next basic attack within 6 seconds to have an uncancellable windup, gain range, deal **bonus** magic damage and stun the target for 1 second.
+**ACTIVE:** **Leona** illuminates her shield, empowering her next basic attack within 6 seconds to have an uncancellable windup, gain (range) 50 **bonus** range, deal **bonus** magic damage and stun the target for 1 second.
 
 | Attribute | Value |
 |-----------|------:|

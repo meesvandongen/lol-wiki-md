@@ -94,7 +94,7 @@
 
 **INNATE:** Whenever **Viego** scores an enemy champion takedown while alive and within 3 seconds of damaging them, a *Mist Wraith* spawns from that champion's corpse for 8 seconds. **Viego** can basic attack a *Mist Wraith* to consume it: causing him to blink to its location after winding up for 1 second, during which he is untargetable (except to turrets) and unable to act. He then gains *Possession* and heals himself for 2% (+ $2.5$% per 100 **bonus** AD) (+ 2% per 100 AP) (+ 5% per 100% **bonus** attack speed) of the target's **maximum** health.
 
-**POSSESSION:** For 10 seconds, **Viego** assumes the enemy champion's form and gains their basic attacks, basic abilities, items, and base stats (based on **Viego**’s level.md)). He also gains a free cast of *Heartbreaker*, which is initially placed on a cd cooldown, and 10% **bonus** movement speed while facing enemy champions within 2500 units.
+**POSSESSION:** For 10 seconds, **Viego** assumes the enemy champion's form and gains their basic attacks, basic abilities, items, and base stats (based on **Viego**’s level.md)). He also gains a free cast of *Heartbreaker*, which is initially placed on a (cd) $1.5$-second cooldown, and 10% **bonus** movement speed while facing enemy champions within 2500 units.
 
 **Viego** cannot use item actives, consumable items, nor the shop during *Possession*. Casting *Heartbreaker* or attacking a *Mist Wraith* ends *Possession* immediately.
 
@@ -207,7 +207,7 @@ The second strike applies on-hit effects and can critically strike for damage.
 | Attribute | Value |
 |-----------|------:|
 | **Cast Time** | none |
-| **Target Range** | 300 (Dash distance) / channel time units |
+| **Target Range** | 300 (Dash distance) / cr 500–900@0–1 (@=channel time) units |
 | **Width** | 120 (Mist missile width) units |
 | **Speed** | 1000 (Dash speed) / 1300 (Missile speed) units/second |
 | **Cooldown** | 8 (Starts when the channel ends) seconds |
@@ -227,7 +227,7 @@ The second strike applies on-hit effects and can critically strike for damage.
 
 *Spectral Maw* can be recast within the duration. If the charge completes without reactivation, *Spectral Maw* is cancelled and placed on full cooldown. If the charge is interrupted, it will be placed on a 3-second cooldown.
 
-**RECAST:** **Viego** hurls a blast of mist in the target direction and dashes a fixed distance in the same direction, though not through terrain. The mist deals magic damage to the first enemy hit and stuns them for type=channel time seconds.
+**RECAST:** **Viego** hurls a blast of mist in the target direction and dashes a fixed distance in the same direction, though not through terrain. The mist deals magic damage to the first enemy hit and stuns them for 0.25–1.25@0–1 (@=channel time) seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -314,9 +314,9 @@ Declaring a basic attack or casting an ability will break the camouflage and rem
 |-----------|------:|
 | **Physical Damage** | 12 / 14 / 16 / 18 / 20% (+ 5% per 100 **bonus** AD) of target's **missing** health |
 
-All targets hit are dealt key=% AD physical damage.
+All targets hit are dealt 120%–240%@0–100 (@=critical strike chance) AD physical damage.
 
-*If a Possession is discarded, Heartbreaker will be placed on a cd cooldown if it is not already on cooldown.*
+*If a Possession is discarded, Heartbreaker will be placed on a (cd) $1.5$-second cooldown if it is not already on cooldown.*
 
 **Notes:**
 
@@ -346,7 +346,7 @@ All targets hit are dealt key=% AD physical damage.
   - **Bug Fixes:** After possessing Kled, no longer illegally permanently retains his dismounted bonus resistances buff while not possessing him.
 - Blade of the Ruined King
   - Base damage increased to 25 / 40 / 55 / 70 / 85 from 15 / 30 / 45 / 60 / 75.
-  - Critical strike chance ratio reduced to key=% from key=%.
+  - Critical strike chance ratio reduced to 0%–75%@0–100 (@=critical strike chance) from 0%–100%@0–100 (@=critical strike chance).
   - **Removed:*** Active no longer deals 15 **bonus** physical damage to monsters.
   - Healing against minions increased to 100% from 50%.
   - Healing against monsters reduced to 125% from 145%.

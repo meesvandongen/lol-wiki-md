@@ -111,7 +111,7 @@
 | **Affects** | Self |
 | **Parry** | Special |
 
-**INNATE:** Periodically, **Maokai** empowers his next basic attack to have an uncancellable windup and heal him for 4 / 4.2 / 4.4 / 4.6 / 4.8 / 5 / 5.65 / 6.3 / 6.95 / 7.6 / 8.25 / 8.9 / 9.55 / 10.2 / 10.85 / 11.5 / 12.15 / 12.8 **maximum** health after a $0.25$ (Reduced by attack speed.)-second delay.
+**INNATE:** Periodically, **Maokai** empowers his next basic attack to have an uncancellable windup and heal him for 4% / 4.2% / 4.4% / 4.6% / 4.8% / 5% / 5.65% / 6.3% / 6.95% / 7.6% / 8.25% / 8.9% / 9.55% / 10.2% / 10.85% / 11.5% / 12.15% / 12.8% **maximum** health after a $0.25$ (Reduced by attack speed.)-second delay.
 
 Each time **Maokai** casts an ability, hits at least one enemy champion or epic monster with *Sapling Toss*, or is struck by an enemy's ability, *Sap Magic*’s cooldown is reduced by 4 seconds, modified to $1.5$ if he is hit by a large monster's basic attack or ability.
 
@@ -281,7 +281,7 @@ A *Sapling* placed in a brush becomes empowered: lasting 30 (+ $1.5$% **bonus** 
 |-----------|------:|
 | **Bonus Movement Speed** | 40 / 45 / 50 / 55 / 60% |
 
-Each bramble deals magic damage to enemies hit and roots them for type=distance traveled seconds.
+Each bramble deals magic damage to enemies hit and roots them for 0.75 to 2.25 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -328,14 +328,14 @@ Each bramble deals magic damage to enemies hit and roots them for type=distance 
 - Bramble Smash
   - Base damage reduced to 65 / 115 / 165 / 215 / 265 from 70 / 120 / 170 / 220 / 270.
 - Nature's Grasp
-  - Root duration reduced to type=distance traveled seconds from type=distance traveled.
+  - Root duration reduced to 0.75 to 2.25 seconds from 0.8 to 2.6.
 
 ### V14.3
 - Stats
   - Base mana regeneration reduced to 6 from $7.2$.
 - Sap Magic
   - **Removed:*** Heal no longer has a base value of 4–9 to 34 for 6@1–17.
-  - Heal health ratio increased to 4 / 4.2 / 4.4 / 4.6 / 4.8 / 5 / 5.65 / 6.3 / 6.95 / 7.6 / 8.25 / 8.9 / 9.55 / 10.2 / 10.85 / 11.5 / 12.15 / 12.8 from 4@1; 5.33@6; 6.66@9; 8@11; 9.33@13; 10.66@15; 12@17 (@=%).
+  - Heal health ratio increased to 4% / 4.2% / 4.4% / 4.6% / 4.8% / 5% / 5.65% / 6.3% / 6.95% / 7.6% / 8.25% / 8.9% / 9.55% / 10.2% / 10.85% / 11.5% / 12.15% / 12.8% from 4%@1; 5.33%@6; 6.66%@9; 8%@11; 9.33%@13; 10.66%@15; 12%@17.
 - Bramble Smash
   - Cooldown reduced to 7 / 6.5 / 6 / 5.5 / 5 seconds from 8 / 7.25 / 6.5 / 5.75 / 5.
   - Mana cost reduced to 40 from 60.
@@ -372,7 +372,7 @@ Each bramble deals magic damage to enemies hit and roots them for type=distance 
 
 ### V12.23
 - Sap Magic
-  - Heal health ratio increased to 4@1; 5.33@6; 6.66@9; 8@11; 9.33@13; 10.66@15; 12@17 (@=%) **maximum** health from 4@1; 5@6; 6@9; 7@11; 8@13; 9@15; 10@17 (@=%).
+  - Heal health ratio increased to 4%@1; 5.33%@6; 6.66%@9; 8%@11; 9.33%@13; 10.66%@15; 12%@17 **maximum** health from 4%@1; 5%@6; 6%@9; 7%@11; 8%@13; 9%@15; 10%@17.
 - Bramble Smash
   - Base damage increased to 70 / 120 / 170 / 220 / 270 from 65 / 110 / 155 / 200 / 245.
   - Bonus monster damage increased to 120 / 140 / 160 / 180 / 200 from 80 / 100 / 120 / 140 / 160.

@@ -86,9 +86,9 @@
 
 **INNATE:** **Caitlyn**’s basic attacks generate a stack of *Count* on-attack, doubled if she is within brush. At 5 stacks, or 4 while in *brush*, her next basic attack consumes all stacks on-attack to become a *Headshot*.
 
-**HEADSHOT:** **Caitlyn**’s basic attack is empowered to have an uncancellable windup and deal key=% (+ |(100% total critical damage x 85% critical strike chance) critical strike chance) AD **bonus** physical damage, increased to key=% (+ |(100% total critical damage x 85% critical strike chance) critical strike chance) AD against non-champions.
+**HEADSHOT:** **Caitlyn**’s basic attack is empowered to have an uncancellable windup and deal 60%–120%@1–13 (+ critical strike chance) AD **bonus** physical damage, increased to 110%–120%@1–13 (+ critical strike chance) AD against non-champions.
 
-Enemies that step over a *Yordle Snap Trap* or are hit by *90 Caliber Net* can grant an additional *Headshot* against them at range within $1.8$ seconds, without consuming stacks. Each method grants only one *Headshot* at a time.
+Enemies that step over a *Yordle Snap Trap* or are hit by *90 Caliber Net* can grant an additional *Headshot* against them at (range) 1300 range within $1.8$ seconds, without consuming stacks. Each method grants only one *Headshot* at a time.
 
 **Notes:**
 
@@ -241,7 +241,7 @@ The next enemy champion that springs the trap is rooted for $1.5$ seconds and re
 
 *Ace in the Hole* is placed on a 5-second cooldown if canceled.
 
-Once **Caitlyn** completes the channel, she fires a homing bullet toward the target that deals physical damage to the first enemy champion it hits, increased by 0 / 5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50.
+Once **Caitlyn** completes the channel, she fires a homing bullet toward the target that deals physical damage to the first enemy champion it hits, increased by 0%–50%@0–100 (@=critical strike chance).
 
 | Attribute | Value |
 |-----------|------:|
@@ -320,7 +320,7 @@ Once **Caitlyn** completes the channel, she fires a homing bullet toward the tar
   - Cooldown increased to 90 seconds at all ranks from 90 / 75 / 60.
   - Base damage reduced to 300 / 500 / 700 from 300 / 525 / 750.
   - AD ratio reduced to 170% **bonus** AD from 200%.
-  - Critical strike chance ratio increased to 0 / 5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50 from 0 / 3.5 / 7 / 10.5 / 14 / 17.5 / 21 / 24.5 / 28 / 31.5 / 35.
+  - Critical strike chance ratio increased to 0%–50%@0–100 (@=critical strike chance) from 0%–35%@0–100 (@=critical strike chance).
 
 ### V13.18
 - Headshot
@@ -334,7 +334,7 @@ Once **Caitlyn** completes the channel, she fires a homing bullet toward the tar
 - Caitlyn's accent is a Received Pronunciation spoken in south of England.
 - Caitlyn's rifle can be seen in the trailer for the game's Mac version.
   - A Yordle Snap Trap can be seen shortly after.
-- Caitlyn has the longest base basic attack range in the game at range.
+- Caitlyn has the longest base basic attack range in the game at (range) 650 units.
   - Her dance and taunts resemble several rifle moves in modern Color guard corps.
 - Headshots actually fires at the target's head; this is most noticeable with tall targets like Baron Nashor or Enemy Turrets.
 - When Caitlyn and Vi are on the same team, they are granted the cosmetic buff On the Case. This buff gives them extra gold gold when they score a takedown together.

@@ -158,7 +158,7 @@ Against champions and large monsters hit, **Darius** heals for health. Enemies h
 | **Spell Effects** | Special |
 | **Parry** | True |
 
-**ACTIVE:** **Darius** empowers his next basic attack within 4 seconds to have an uncancellable windup, gain range, deal **bonus** physical damage and slow the target by 90% for 1 second. This damage is affected by critical strike modifiers.
+**ACTIVE:** **Darius** empowers his next basic attack within 4 seconds to have an uncancellable windup, gain (range) 25 **bonus** range, deal **bonus** physical damage and slow the target by 90% for 1 second. This damage is affected by critical strike modifiers.
 
 | Attribute | Value |
 |-----------|------:|
@@ -192,7 +192,7 @@ If this attack kills the target, half of *Crippling Strike*’s cooldown is redu
 | **Spell Shield** | True |
 | **Projectile** | False |
 
-**PASSIVE:** **Darius** gains armor penetration.
+**PASSIVE:** **Darius** gains (armor penetration) armor penetration.
 
 | Attribute | Value |
 |-----------|------:|
@@ -233,7 +233,7 @@ If this attack kills the target, half of *Crippling Strike*’s cooldown is redu
 | **Grounded** | True |
 | **Knockdown** | False |
 
-**ACTIVE:** **Darius** attempts to execute the target enemy champion, leaping towards them to deal true damage, increased by type=target's [File:Hemorrhage.png, and granting sight of the area around them for $2.5$ seconds from the start of the cast time.
+**ACTIVE:** **Darius** attempts to execute the target enemy champion, leaping towards them to deal true damage, increased by 20px]] Hemorrhage stacks, and granting sight of the area around them for $2.5$ seconds from the start of the cast time.
 
 | Attribute | Value |
 |-----------|------:|
@@ -263,7 +263,7 @@ At rank 3, *Noxian Guillotine* has no mana cost and recast timer.
 
 ### V25.14
 - Decimate
-  - Heal increased to changedisplay=true **missing** health from changedisplay=true.
+  - Heal increased to 17%–51%@1–2 (@=enemies hit by the *blade*) **missing** health from 15%–45%@1–2 (@=enemies hit by the *blade*).
 - Crippling Strike
   - **Bug Fixes:** Now properly rolls for a critical strike only once instead of twice.
 
@@ -305,7 +305,7 @@ At rank 3, *Noxian Guillotine* has no mana cost and recast timer.
 ### V14.2
 - Decimate
   - Mana cost reduced to 25 / 30 / 35 / 40 / 45 from 30 / 35 / 40 / 45 / 50.
-  - Heal increased to changedisplay=true **missing** health from changedisplay=true.
+  - Heal increased to 15%–45%@1–2 (@=enemies hit by the *blade*) **missing** health from 13%–39%@1–2 (@=enemies hit by the *blade*).
 - Apprehend
   - Armor penetration increased to 20 / 25 / 30 / 35 / 40% from 15 / 20 / 25 / 30 / 35%.
 
@@ -321,7 +321,7 @@ At rank 3, *Noxian Guillotine* has no mana cost and recast timer.
 - Darius is 6 feet 5 inches (1.96 meters) tall and weighs 266 lbs (121 kilograms).
 - Darius was the first champion to have an autonomous Recall / Teleport animation.
   - He and his brother Draven are the first related champions to be released back to back.
-- Darius was the first champion to receive [Chroma packs for 2 of his skins, namely Darius and Darius.
+- Darius was the first champion to receive Chroma packs for 2 of his skins, namely Darius and Darius.
 - Tahm Kench says Darius' strength is 'waning' and that he could 'help him slow time's regress'.
   - This and the strands of gray hair on his head suggest Darius either is of advanced age or ages prematurely after years of exertion & combat stress.
 - *Darius* is Latin transliteration, through Greek Δαρεῖος, of Old Persian ** "Upholder of Good".

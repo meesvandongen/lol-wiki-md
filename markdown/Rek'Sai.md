@@ -88,7 +88,7 @@
 
 **INNATE:** **Rek'Sai** basic attacks and ability hits generate 25 Fury. After 8 seconds of being out of combat, she loses 20 Fury per second. Fury gain is reduced「 by 80% ⟷ to 5 per hit 」against minions, wards, and plants. *Prey Seeker* will not generate Fury against non-champions.
 
-When **Rek'Sai** becomes **, she consumes her current Fury over 3 seconds to heal for up to 10–20@1–16 (@=%) **maximum** health at 100 Fury, stopping once fully consumed or she reaches health. If she starts generating Fury while **BURROWED**, the consumption occurs after 5 seconds.
+When **Rek'Sai** becomes **, she consumes her current Fury over 3 seconds to heal for up to 10%–20%@1–16 **maximum** health at 100 Fury, stopping once fully consumed or she reaches (health) full health. If she starts generating Fury while **BURROWED**, the consumption occurs after 5 seconds.
 
 **Notes:**
 
@@ -322,7 +322,7 @@ No additional notes.
   - She will dash through the target's previous location without dealing damage if the target moves beyond 1750 units (Estimated).
 - If the target moves 1000 (Estimated) or more units away right before being struck, they will not be dealt the damage.
   - In this case, the target is displaced in the moment when **Rek'Sai** starts to dash through and prepares to strike them.
-- *Void Rush* will be cancelled and placed on a cd if the target dies or moves too far away during the cast time or while **Rek'Sai** is vanished, or if they are no longer in sight during the cast time.
+- *Void Rush* will be cancelled and placed on a (cd) 5-second cooldown if the target dies or moves too far away during the cast time or while **Rek'Sai** is vanished, or if they are no longer in sight during the cast time.
   - If the ability is cancelled while **Rek'Sai** is vanished, she will reappear and emerge from the ground without performing the dash once the $0.9$-second delay has elapsed.
   - If the ability is cancelled from losing sight of the target, **Rek'Sai** will not vanish into the ground after the cast time (but still becoming untargetable) and will remain in place while unable to act for $0.5$ seconds.
   - The ability will **not** be cancelled if the target becomes untargetable during the cast time or while **Rek'Sai** is vanished.
@@ -392,7 +392,7 @@ No additional notes.
 - Fury of the Xer'Sai
   - Fury generation modifier against minions, wards, and jungle plants reduced to 20% from 50%.
     - Fury generated against minions, wards, and jungle plants reduced to 5 from $12.5$.
-  - Maximum heal reduced to 10–20@1–16 (@=%) **maximum** health from 12–20@1–16 (@=%).
+  - Maximum heal reduced to 10%–20%@1–16 **maximum** health from 12%–20%@1–16.
 - Queen's Wrath
   - **Bug Fixes:** Now properly generates rune and item stacks (such as Conqueror, Eclipse, etc).
 
@@ -435,7 +435,7 @@ No additional notes.
   - Health regeneration growth reduced to $0.5$ from $0.65$.
   - Base movement speed increased to 340 from 335.
 - Fury of the Xer'Sai
-  - Maximum heal health ratio increased to 12–20@1–16 (@=%) **maximum** health from 2–10@1–16 (@=%).
+  - Maximum heal health ratio increased to 12%–20%@1–16 **maximum** health from 2%–10%@1–16.
   - **Removed:*** No longer has a maximum base heal of 10.
   - **New Effect:** Fury generation is now reduced by 50% against minions, wards, and jungle plants.
 - Queen's Wrath

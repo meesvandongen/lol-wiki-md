@@ -226,7 +226,7 @@ If both **Kalista**’s and the *Oathsworn*’s *Soul-Mark* are applied to the s
 **Notes:**
 
 - The damage is dealt on-attack of **Kalista**’s basic attack if she applies the second mark. If the *Oathsworn* does so instead, the damage is dealt on-hit of their basic attack.
-- *Soul-Marked*’s bonus damage is credited to **Kalista** and will benefit from both her magic penetration and spell effects.
+- *Soul-Marked*’s bonus damage is credited to **Kalista** and will benefit from both her (magic penetration) magic penetration and spell effects.
   - If her The Black Spear ally scores a kill using *Soul-Marked*’s bonus damage they will get a message stating 'Kill Secured' in place of the usual gold pop-up (the gold itself is credited to **Kalista**).
 - The *Sentinel*’s sight reveal on enemy champions is accredited for assists and potentially kills (if they die shortly after being spotted).
   - It does not reveal stealthed targets.
@@ -307,7 +307,7 @@ If *Rend* kills at least one target, the cooldown is reset and **Kalista** resto
 
 While held, the *Oathsworn* is vanished and may select (Default MB1 / left-click) a target location to dash to with displacement immunity, ending *Fate's Call*’s invocation and reappearing at the location. If the invocation ends without the *Oathsworn* selecting a target location, they will automatically do so at maximum range from **Kalista**’s facing direction.
 
-The *Oathsworn*’s dash stops upon colliding with an enemy champion. Upon the dash ending by collision or arriving to the targeted location, the *Oathsworn* knocks back all nearby enemies and keeps them airborne for a set duration, while simultaneously landing to their attack range from the closest target hit (See notes).
+The *Oathsworn*’s dash stops upon colliding with an enemy champion. Upon the dash ending by collision or arriving to the targeted location, the *Oathsworn* knocks back all nearby enemies and keeps them airborne for a set duration, while simultaneously landing to their (attack range) **base** attack range from the closest target hit (See notes).
 
 | Attribute | Value |
 |-----------|------:|
@@ -357,7 +357,7 @@ The *Oathsworn*’s dash stops upon colliding with an enemy champion. Upon the d
 
 **BASIC ATTACK:** **Kalista**’s basic attack windup is uncancellable except by casting *Rend*, although she can input a new attack command to change her target during the windup.
 
-Additionally, **Kalista**’s attack windup is only reduced by $0.75$% (Compared to the standard 1% per 1%) per as.
+Additionally, **Kalista**’s attack windup is only reduced by $0.75$% (Compared to the standard 1% per 1%) per (as) 1% **bonus** attack speed.
 
 **Notes:**
 

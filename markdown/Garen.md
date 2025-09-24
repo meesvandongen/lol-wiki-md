@@ -85,7 +85,7 @@
 | **Affects** | Self |
 | **Spell Effects** | Heal |
 
-**INNATE:** **Garen** health regeneration an additional「 ⟷ 」
+**INNATE:** **Garen** (health regeneration) regenerates an additional「 1.5+0.2*(x-1) for 6% / then + 0.8*x for 7 / then + 0.4*x of his **maximum** health every 5 seconds. ⟷ (1.5+0.2*(x-1))/10 for 6 / then + 0.8/10*x for 7 / then + 0.4/10*x of his **maximum** health every $0.5$ seconds. 」
 
 *Perseverance* is lost for 8 seconds (Not a cooldown, unaffected by ability haste) if **Garen** takes damage from champions, epic monsters, or turrets, or if he is hit by an enemy ability or affected by an enemy summoner spell, refreshing on subsequent damage and hits taken from them.
 
@@ -110,7 +110,7 @@
 | **Parry** | True |
 | **Knockdown** | False |
 
-**ACTIVE:** **Garen** cleanses himself of all slows and gains ms for a duration.
+**ACTIVE:** **Garen** cleanses himself of all slows and gains (ms) 35% **bonus** movement speed for a duration.
 
 | Attribute | Value |
 |-----------|------:|
@@ -149,7 +149,7 @@ Additionally, **Garen** empowers his next basic attack within $4.5$ seconds to h
 
 **PASSIVE:** Whenever **Garen** kills an enemy, he generates a stack of *Courage*, stacking up to 150 times.
 
-**COURAGE:** For each stack, **Garen** gains armor and mr, up to a maximum of 30 **bonus** resistances each.
+**COURAGE:** For each stack, **Garen** gains (armor) $0.2$ **bonus** armor and (mr) $0.2$ **bonus** magic resistance, up to a maximum of 30 **bonus** resistances each.
 
 **ACTIVE:** **Garen** reduces incoming damage for 4 seconds. For the first $0.75$ seconds, **Garen** additionally grants himself a shield and 60% tenacity.
 
@@ -201,7 +201,7 @@ Additionally, **Garen** empowers his next basic attack within $4.5$ seconds to h
 |-----------|------:|
 | **Physical Damage Per Spin** | 4 / 7 / 10 / 13 / 16 (+ 38 / 41 / 44 / 47 / 50% AD) |
 
-Enemy champions hit 6 times by *Judgment* are inflicted with armor penetration for 6 seconds, with the duration refreshing upon the 7th hit and every 6th hit thereafter.
+Enemy champions hit 6 times by *Judgment* are inflicted with (armor penetration) 25% armor reduction for 6 seconds, with the duration refreshing upon the 7th hit and every 6th hit thereafter.
 
 *Judgment* deals 25% increased damage against the nearest enemy hit.
 

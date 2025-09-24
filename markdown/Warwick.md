@@ -185,19 +185,19 @@ While *Jaws of the Beast* is active, **Warwick** is displacement immune and clam
 | **Affects** | Self / Enemies |
 | **Spell Shield** | False |
 
-**PASSIVE:** **Warwick** gains **bonus** attack speed for $1.25$ seconds upon damaging a target to or while they are below health with a basic attack or ability damage, refreshing with subsequent damaging basic attacks or ability damage to enemies below the threshold. If **Warwick** does not have the **bonus** attack speed already, he also gains it upon initiating an attack windup against an enemy below the threshold.
+**PASSIVE:** **Warwick** gains **bonus** attack speed for $1.25$ seconds upon damaging a target to or while they are below (health) 50% of their **maximum** health with a basic attack or ability damage, refreshing with subsequent damaging basic attacks or ability damage to enemies below the threshold. If **Warwick** does not have the **bonus** attack speed already, he also gains it upon initiating an attack windup against an enemy below the threshold.
 
 | Attribute | Value |
 |-----------|------:|
 | **Bonus Attack Speed** | 70 / 80 / 90 / 100 / 110% |
 
-**PASSIVE:** **Warwick** senses all enemy champions on the map who are damaged below health by him or an allied source, marking them with *Blood Hunt* until they health regeneration or heal above this threshold again. He sees trails leading toward them and gains ms while following a trail. This bonus is lost for $0.5$ seconds upon entering champion combat, but will build up again over $3.5$ seconds.
+**PASSIVE:** **Warwick** senses all enemy champions on the map who are damaged below (health) 50% of their **maximum** health by him or an allied source, marking them with *Blood Hunt* until they (health regeneration) regenerate or heal above this threshold again. He sees trails leading toward them and gains (ms) **bonus** movement speed while following a trail. This bonus is lost for $0.5$ seconds upon entering champion combat, but will build up again over $3.5$ seconds.
 
 | Attribute | Value |
 |-----------|------:|
 | **Bonus Movement Speed** | 35 / 42.5 / 50 / 57.5 / 65% |
 
-The attack speed and movement speed bonuses granted by both passives are doubled against enemies who are below health.
+The attack speed and movement speed bonuses granted by both passives are doubled against enemies who are below (health) 25% of their **maximum** health.
 
 | Attribute | Value |
 |-----------|------:|
@@ -207,7 +207,7 @@ The attack speed and movement speed bonuses granted by both passives are doubled
 |-----------|------:|
 | **Increased Movement Speed** | 70 / 85 / 100 / 115 / 130% |
 
-**ACTIVE:** **Warwick** senses the nearest enemy champion in the area at the start of the cast time, marking them with *Blood Hunt* for 8 seconds, gaining both passive bonuses against them regardless of their health.
+**ACTIVE:** **Warwick** senses the nearest enemy champion in the area at the start of the cast time, marking them with *Blood Hunt* for 8 seconds, gaining both passive bonuses against them regardless of their (health) **current** health.
 
 *Blood Hunt*’s cooldown is reduced by 30% if no enemy champions are found within range.
 

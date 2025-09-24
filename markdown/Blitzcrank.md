@@ -80,7 +80,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** Periodically, when damaged to health, **Blitzcrank** generates a shield equal to mana, lasting for up to 10 seconds.
+**INNATE:** Periodically, when damaged to (health) 30% **maximum** health, **Blitzcrank** generates a shield equal to (mana) 35% of **maximum** mana, lasting for up to 10 seconds.
 
 **Notes:**
 
@@ -148,7 +148,7 @@
 | **Spell Effects** | proc |
 | **Parry** | True |
 
-**ACTIVE:** **Blitzcrank** shifts into overdrive, gaining **bonus** attack speed for 5 seconds and ms that decays to 10% over the first $2.9$ seconds.
+**ACTIVE:** **Blitzcrank** shifts into overdrive, gaining **bonus** attack speed for 5 seconds and (ms) **bonus** movement speed that decays to 10% over the first $2.9$ seconds.
 
 | Attribute | Value |
 |-----------|------:|

@@ -120,7 +120,7 @@
 | **Spell Shield** | False |
 | **Parry** | Special |
 
-**INNATE - WEAKENED SOUL**: **Senna**’s basic attacks on-hit and abilities mark enemy champions hit for 4 seconds. Subsequent attacks or ability hits against marked targets will consume the mark to grant **Senna** a stack of Mist and deal **bonus** physical damage equal to 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9 / 10 of target's **current** health, rendering the target immune to being marked again for a few seconds. This damage applies life steal at 100% effectiveness.
+**INNATE - WEAKENED SOUL**: **Senna**’s basic attacks on-hit and abilities mark enemy champions hit for 4 seconds. Subsequent attacks or ability hits against marked targets will consume the mark to grant **Senna** a stack of Mist and deal **bonus** physical damage equal to 1% / 2% / 3% / 4% / 5% / 6% / 7% / 8% / 9% / 10% of target's **current** health, rendering the target immune to being marked again for a few seconds. This damage applies life steal at 100% effectiveness.
 
 **INNATE:** Enemies that die near **Senna** may spawn a *Mist Wraith* from their corpse. A *Mist Wraith* lasts 8 seconds and **Senna** can basic attack or hit it with *Piercing Darkness* or *Dawning Shadow* to kill it instantly, granting her 8 gold and a stack of Mist.
 - Enemy champions and large monsters will spawn a *Mist Wraith*.
@@ -129,9 +129,9 @@
 - Large minions that **Senna** does not kill will always spawn a *Mist Wraith*, while lesser minions and lesser monsters that **Senna** does not kill have a 28% chance to spawn one.
 - Lesser minions executed by an allied champion's Support Quest item have a $8.4$% chance to spawn a *Mist Wraith*.
 
-**MIST**: For each stack of Mist, **Senna** gains attack damage. For every 20 stacks, she also gains attack range and critical strike chance. Additionally, every in excess of 100% is converted into $0.35$% life steal.
+**MIST**: For each stack of Mist, **Senna** gains (attack damage) $0.75$ **bonus** attack damage. For every 20 stacks, she also gains (attack range) 20 **bonus** attack range and (critical strike chance) 10% critical strike chance. Additionally, every in excess of 100% is converted into $0.35$% life steal.
 
-**INNATE - RELIC CANNON**: **Senna**’s basic attacks on-hit deal 20% AD **bonus** physical damage and grant her key=% of the target's movement speed as ms for $0.5$ seconds. This damage applies life steal at 100% effectiveness.
+**INNATE - RELIC CANNON**: **Senna**’s basic attacks on-hit deal 20% AD **bonus** physical damage and grant her 10%@1; 15%@6; 20%@9 of the target's movement speed as (ms) **bonus** movement speed for $0.5$ seconds. This damage applies life steal at 100% effectiveness.
 
 **Notes:**
 
@@ -152,8 +152,8 @@
 - Attacking a *Mist Wraith* will not consume Energized.
 - Excluding (Due to lack of available metric) the range increase and the bonus shielding on Dawning Shadow, one stack of Mist is worth (+8 gold from *Mist Wraith* pickup ( total)), if the critical chance is converted to life steal.
   - $0.75 AD$ is worth .
-  - critical chance critical strike chance is worth .
-    - life steal life steal is worth $.
+  - (critical chance) $0.5$% critical strike chance is worth .
+    - (life steal) $0.175%$ life steal is worth $.
 - The bonus on-hit damage applies an additional stack of Black Cleaver Carve to offset **Senna**’s low attack speed. This interaction is inconsistent.
 - Critical strike chance gained from Yun Tal Wildarrows Practice Makes Lethal does not interact with the life steal conversion.
 
@@ -275,7 +275,7 @@ Allied champions who enter the mist gain *Wraith Form* for a duration equal to t
 
 **WRAITH FORM:** Gain camouflage. Enemies will have obscured vision of camouflaged *Wraiths* moving outside of the mist. *Wraith Form* can be regained if lost by breaking the camouflage after $1.75$ seconds without performing actions that break stealth. *Wraith Form* ends immediately upon **Senna**’s death.
 
-**Senna** and allies camouflaged by *Curse of the Black Mist* also gain ms (+ 5% per 100 AP) **bonus** movement speed.
+**Senna** and allies camouflaged by *Curse of the Black Mist* also gain (ms) 20% (+ 5% per 100 AP) **bonus** movement speed.
 
 **Notes:**
 

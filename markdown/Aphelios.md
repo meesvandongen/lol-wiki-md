@@ -97,7 +97,7 @@
 - Silence
 - Slow
 - Root |
-| **Damage** | 31–100@1–13 (+ 40–60@1–13 (@=%) **bonus** AD) (+ 50% AP) |
+| **Damage** | 31–100@1–13 (+ 40%–60%@1–13 **bonus** AD) (+ 50% AP) |
 | **Damage Type** | Physical |
 | **Attack Speed** | $0.64$ base, $0.64$ ratio attack speed |
 | **Move Speed** | 0 |
@@ -109,7 +109,7 @@
 **Abilities:**
 
 - **Weapon Replication:** - Uses a copy of **Aphelios**' current off-hand weapon to fire at targets.
-- **Stat Modifier:** - Attacks benefit from **Aphelios**' attack speed and critical chance.
+- **Stat Modifier:** - Attacks benefit from **Aphelios**' (attack speed) attack speed and (critical chance) critical strike chance.
 - **Critical Strike Modifier:** - Attacks are able to critically strike.
 - **Passive Protection:** - Gains untargetability while inactive. This is lost after becoming active.
 
@@ -170,7 +170,7 @@
 | **Spell Shield** | True |
 | **Spell Effects** | Spellaoe |
 
-** **Aphelios** expunges all enemies with *Gravitum*’s slow debuff, dealing 50–140@1–13 (+ 32–50@1–13 (@=%) **bonus** AD) (+ 70% AP) magic damage and rooting them for 1 second.
+** **Aphelios** expunges all enemies with *Gravitum*’s slow debuff, dealing 50–140@1–13 (+ 32%–50%@1–13 **bonus** AD) (+ 70% AP) magic damage and rooting them for 1 second.
 
 *Binding Eclipse also empowers in-flight Gravitum projectiles to instantly affect their targets upon applying the slow successively.*
 
@@ -201,7 +201,7 @@
 | **Parry** | Special |
 | **Call For Help** | True |
 
-**ACTIVE:** **Aphelios** unleashes a wave of energy in a cone in the target direction, dealing 25–65@1–13 (+ 56–80@1–13 (@=%) **bonus** AD) (+ 70% AP) physical damage to all enemies hit and locking onto each of them. After $0.25$ seconds, **Aphelios** then fires a volley of attacks at each locked-on target from his current off-hand weapon, dealing 100% AD physical damage and applying on-hit effects. The damage is affected by critical strike modifiers. There is no range limit for locked-on targets.
+**ACTIVE:** **Aphelios** unleashes a wave of energy in a cone in the target direction, dealing 25–65@1–13 (+ 56%–80%@1–13 **bonus** AD) (+ 70% AP) physical damage to all enemies hit and locking onto each of them. After $0.25$ seconds, **Aphelios** then fires a volley of attacks at each locked-on target from his current off-hand weapon, dealing 100% AD physical damage and applying on-hit effects. The damage is affected by critical strike modifiers. There is no range limit for locked-on targets.
 
 **Notes:**
 
@@ -227,7 +227,7 @@
 | **Width** | 120 units |
 | **Speed** | 1850 units/second |
 | **Cost** | 10 Moonlight + 60 Mana |
-| **Cooldown** | 10 / 9.667 / 9.333 / 9 / 8.667 / 8.333 / 8 seconds |
+| **Cooldown** | 10 / 9.67 / 9.33 / 9 / 8.67 / 8.33 / 8 seconds |
 | **Queue Time** | $0.5$ seconds |
 | **Targeting** | Direction |
 | **Affects** | Enemies |
@@ -236,7 +236,7 @@
 | **Spell Effects** | spell |
 | **Projectile** | True |
 
-**ACTIVE:** **Aphelios** fires a bolt of energy in the target direction that deals 70 / 85 / 100 / 115 / 130 / 145 / 160 (+ 42 / 45 / 48 / 51 / 54 / 57 / 60 **bonus** AD) (+ 100% AP) physical damage to the first enemy hit.
+**ACTIVE:** **Aphelios** fires a bolt of energy in the target direction that deals 70 / 85 / 100 / 115 / 130 / 145 / 160 (+ 42% / 45% / 48% / 51% / 54% / 57% / 60% **bonus** AD) (+ 100% AP) physical damage to the first enemy hit.
 
 **Notes:**
 
@@ -266,9 +266,9 @@
 | **Parry** | True |
 | **Call For Help** | True |
 
-**ACTIVE:** **Aphelios** enters an onslaught for $1.75$ seconds, gaining ms (+ 10% per 100 AP) **bonus** movement speed and automatically performing up to 6 (+ 2 per 100% **bonus** attack speed) attacks over the duration against the nearest visible enemy, prioritizing enemy champions.
+**ACTIVE:** **Aphelios** enters an onslaught for $1.75$ seconds, gaining (ms) 25% (+ 10% per 100 AP) **bonus** movement speed and automatically performing up to 6 (+ 2 per 100% **bonus** attack speed) attacks over the duration against the nearest visible enemy, prioritizing enemy champions.
 
-Attacks alternate between *Severum* and his current off-hand weapon, each dealing 10–40@1–13 (+ 22–40@1–13 (@=%) **bonus** AD) physical damage, affected by critical strike modifiers, and applying on-hit effects, with on-hit damage reduced to 25% effectiveness.
+Attacks alternate between *Severum* and his current off-hand weapon, each dealing 10–40@1–13 (+ 22%–40%@1–13 **bonus** AD) physical damage, affected by critical strike modifiers, and applying on-hit effects, with on-hit damage reduced to 25% effectiveness.
 
 ***Aphelios** cannot cast Phase nor Moonlight Vigil during Onslaught, but he is still able to move. He cannot perform attacks while unable to declare basic attacks.*
 
@@ -308,7 +308,7 @@ Attacks alternate between *Severum* and his current off-hand weapon, each dealin
 
 **ACTIVE:** **Aphelios** deploys a lunar sentry at the target location that arms after $0.35$ seconds, lasting for up to 20 seconds, during which it is inactive and untargetable. The sentry activates if an enemy is within range of it, reducing its duration to 4 seconds and becoming targetable. Sentries have 6 health and take 3 damage per ranged basic attack and 4 damage per hit by abilities. Turret attacks destroy sentries instantly.
 
-The sentry grants sight of its surroundings and autonomously attacks the nearest visible enemy in range with a replica of **Aphelios** current off-hand weapon, dealing 35–125@1–13 (+ 42–60@1–13 (@=%) **bonus** AD) (+ 50% AP) physical damage per hit. The sentry can critically strike for damage and benefits from both **Aphelios** attack speed and critical chance at 100% effectiveness.
+The sentry grants sight of its surroundings and autonomously attacks the nearest visible enemy in range with a replica of **Aphelios** current off-hand weapon, dealing 35–125@1–13 (+ 42%–60%@1–13 **bonus** AD) (+ 50% AP) physical damage per hit. The sentry can critically strike for damage and benefits from both **Aphelios** (attack speed) attack speed and (critical chance) critical strike chance at 100% effectiveness.
 
 *See [Pets](#Pets) for more details about the sentry.*
 
@@ -396,7 +396,7 @@ After $0.3$ seconds of the illumination, attacks based on **Aphelios' ** current
  Applies an empowered mark that deals 50–110@6–16 **bonus** physical damage per *mark* consumed.
  Heals **Aphelios** for 250–450@6–16 if at least one enemy champion is hit.
  Increases the initial slow to 99% and empowers *Binding Eclipse* to root targets affected by the enhanced slow for $1.35$ seconds.
- The initial blast deals 50–150@6–16 (+ 25% **bonus** AD) **bonus** physical damage.「 Performs *Infernum*’s attacks and *Infernum*’s bolts in a 400-radius circle: primary targets are dealt *Infernum*’s primary damage; secondary targets are dealt 90% of *Infernum*’s regular bolt damage; both are modified by *Moonlight Vigil*’s critical damage modifier. ⟷ 」Enemy champions will take damage from overlapping areas.
+ The initial blast deals 50–150@6–16 (+ 25% **bonus** AD) **bonus** physical damage.「 The attack instead deals 110% AD physical damage against locked-on targets, and causes an explosion of bolts in a 400-radius circle that deals 110×0.75×0.9 to 110×0.9 for 2 AD physical damage to targets hit. ⟷ Performs *Infernum*’s attacks and *Infernum*’s bolts in a 400-radius circle: primary targets are dealt *Infernum*’s primary damage; secondary targets are dealt 90% of *Infernum*’s regular bolt damage; both are modified by *Moonlight Vigil*’s critical damage modifier. 」Enemy champions will take damage from overlapping areas.
  Generates 5 additional spectral *Chakrams* that return to **Aphelios** from the first enemy champion hit, for a total of 6, on top of those from other targets hit.
 
 **Notes:**
@@ -434,7 +434,7 @@ After $0.3$ seconds of the illumination, attacks based on **Aphelios' ** current
 | **Parry** | True |
 | **Attack Missile Speed** | 3000 |
 
-**Aphelios** gains range while **Calibrum** is his main weapon. Enemies damaged by **Calibrum** through an ability are marked for $4.5$ seconds, during which they are revealed. **Aphelios' ** next basic attack against a marked target uses the current off-hand weapon and has range, increased missile speed, and a brief cast time that lasts shorter based on **Aphelios' ** proximity to the target.
+**Aphelios** gains (range) 100 **bonus** attack range while **Calibrum** is his main weapon. Enemies damaged by **Calibrum** through an ability are marked for $4.5$ seconds, during which they are revealed. **Aphelios' ** next basic attack against a marked target uses the current off-hand weapon and has (range) 1800 range, increased missile speed, and a brief cast time that lasts shorter based on **Aphelios' ** proximity to the target.
 
 The empowered attack will consume the marks from all targets, dealing 15 (+ 20% **bonus** AD) **bonus** physical damage to the main target for each mark consumed. If **Calibrum** is the current off-hand weapon, the main weapon is used for the attack instead.
 
@@ -468,7 +468,7 @@ Basic attacks with **Crescendum** hurl the blade at the target, which lingers fo
 
 Whenever **Aphelios** casts an ability that would require him to throw **Crescendum**, he instead fires a spectral *Chakram* at the target that similarly returns to him. **Aphelios** accumulates the *Chakrams* he catches, up to 20, which last for 5 seconds or until **Crescendum** is depleted of *Moonlight*. *Chakram* duration is refreshed when **Aphelios** catches a new one or attacks a champion with **Crescendum**.
 
-Attacks with **Crescendum** are empowered to deal 0 / then + 15 / then + 13.5 / then + 12 / then + 10.5 / then + 9 / then + 7.5 / then + 6 / then + 5*x AD **bonus** physical damage and have a lower windup of 10.67%, further decreased to 6.67% when critically striking. The **bonus** damage from *Chakrams* is affected by critical strike modifiers.
+Attacks with **Crescendum** are empowered to deal 0% / then + 15 / then + 13.5 / then + 12 / then + 10.5 / then + 9 / then + 7.5 / then + 6 / then + 5*x AD **bonus** physical damage and have a lower windup of 10.67%, further decreased to 6.67% when critically striking. The **bonus** damage from *Chakrams* is affected by critical strike modifiers.
 
 **Notes:**
 
@@ -516,7 +516,7 @@ Basic attacks with **Gravitum** slow enemies by 30% for $2.5$ seconds, decaying 
 | **Parry** | Special |
 | **Attack Missile Speed** | 1700 |
 
-Basic attacks with **Infernum** shoot a fire bolt that upon arrival splits into a cone of 4 lesser bolts behind the target, dealing damage to enemies they pass through. The fire bolt deals 110% AD physical damage to the primary target. Secondary targets hit by any bolt are dealt key=% of the triggering attack's damage, reduced to key=% against minions.
+Basic attacks with **Infernum** shoot a fire bolt that upon arrival splits into a cone of 4 lesser bolts behind the target, dealing damage to enemies they pass through. The fire bolt deals 110% AD physical damage to the primary target. Secondary targets hit by any bolt are dealt 75%@1; 100%@9 of the triggering attack's damage, reduced to 23%@1; 30%@9 against minions.
 
 Critical strikes instead spray 6 missiles in a 50% wider cone. Secondary targets hit count as being critically struck.
 
@@ -541,7 +541,7 @@ Critical strikes instead spray 6 missiles in a 50% wider cone. Secondary targets
 | **Projectile** | False |
 | **Parry** | True |
 
-Basic attacks with **Severum** are non-projectile and have an uncancellable windup. **Severum**’s attacks heal **Aphelios** for key=% of the post-mitigation damage (Damage calculated after modifiers) dealt, increased to 5 to 17.75 for attacks from abilities.
+Basic attacks with **Severum** are non-projectile and have an uncancellable windup. **Severum**’s attacks heal **Aphelios** for 2 to 7.1 of the post-mitigation damage (Damage calculated after modifiers) dealt, increased to 5 to 17.75 for attacks from abilities.
 
 Healing from **Severum** in excess of **Aphelios' ** **maximum** health is converted into a shield for an amount of up to 10–20 to 140 for 13@1–18 (+ 6% **maximum** health), lingering for up to 30 seconds.
 
@@ -557,7 +557,7 @@ Healing from **Severum** in excess of **Aphelios' ** **maximum** health is conve
 - Stats
   - Base attack speed increased to $0.665$ from $0.64$.
 - Moonshot
-  - Base damage increased to 70 / 85 / 100 / 115 / 130 / 145 / 160 from 60 / 76.667 / 93.333 / 110 / 126.667 / 143.333 / 160.
+  - Base damage increased to 70 / 85 / 100 / 115 / 130 / 145 / 160 from 60 / 76.67 / 93.33 / 110 / 126.67 / 143.33 / 160.
 - Onslaught
   - Base bonus movement speed increased to 25% from 20%.
 
@@ -577,13 +577,13 @@ Healing from **Severum** in excess of **Aphelios' ** **maximum** health is conve
 
 ### V14.14
 - Onslaught
-  - Bonus AD ratio increased to 22–40@1–13 (@=%) **bonus** AD from 20–35@1–13 (@=%).
+  - Bonus AD ratio increased to 22%–40%@1–13 **bonus** AD from 20%–35%@1–13.
 - Binding Eclipse
   - Base damage increased to 50–140@1–13 from 50–110@1–13.
-  - Bonus AD ratio increased to 32–50@1–13 (@=%) **bonus** AD from 26–35@1–13 (@=%).
+  - Bonus AD ratio increased to 32%–50%@1–13 **bonus** AD from 26%–35%@1–13.
 - Sentry
   - Base damage increased to 35–125@1–13 from 31–100@1–13.
-  - Bonus AD ratio increased to 42–60@1–13 (@=%) **bonus** AD from 40–60@1–13 (@=%).
+  - Bonus AD ratio increased to 42%–60%@1–13 **bonus** AD from 40%–60%@1–13.
 
 ### V14.1#January 12th Hotfix|V14.1
 - Stats
@@ -601,7 +601,7 @@ Healing from **Severum** in excess of **Aphelios' ** **maximum** health is conve
 - Gravitum
   - Slow duration reduced to $2.5$ seconds from $3.5$.
 - Severum
-  - Basic attacks heal reduced to key=% from key=%.
+  - Basic attacks heal reduced to 2 to 7.1 from 2.5 to 9.
   - Abilities heal reduced to 5 to 17.75 from 8.33 to 30.
 - Sentry
   - Turret attack speed reduced to $0.64$ from $0.8$.

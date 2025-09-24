@@ -153,7 +153,7 @@
 | **Total Magic Damage** | 20 / 30 / 40 / 50 / 60 (+ 30% AP) |
 | **Magic Damage per Tick** | 3.33 / 5 / 6.67 / 8.33 / 10 (+ 5% AP) |
 
-**ACTIVE:** **Fizz** empowers his next basic attack within 4 seconds to have an uncancellable windup, gain range, and deal **bonus** magic damage.
+**ACTIVE:** **Fizz** empowers his next basic attack within 4 seconds to have an uncancellable windup, gain (range) 50 **bonus** range, and deal **bonus** magic damage.
 
 | Attribute | Value |
 |-----------|------:|

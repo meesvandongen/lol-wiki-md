@@ -131,7 +131,7 @@ Releasing the ability within $0.35$ seconds causes **Pantheon** to instead thrus
 
 *Comet Spear*’s total damage is reduced to 90% against monsters and to 70% against minions.
 
-If the charge is interrupted or completes without reactivation, *Comet Spear* is cancelled and the ability is put on full cooldown but refunds mana.
+If the charge is interrupted or completes without reactivation, *Comet Spear* is cancelled and the ability is put on full cooldown but refunds (mana) half the mana cost.
 
 ** *Comet Spear* deals 20 to 240 (+ 115% **bonus** AD) **bonus** physical damage, affected by the previous damage reductions. Consumes the stacks upon recasting.
 
@@ -253,7 +253,7 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
 
 **ACTIVE:** **Pantheon** channels for 2 seconds, then leaps high into the air, vanishing and becoming immune to crowd control until he reappears. While in the air, **Pantheon** channels again for $2.25$ seconds and grants sight around the target location $0.5$ seconds into the channel.
 
-After $0.8$ (Estimated) seconds into the channel, **Pantheon** prepares for landing by hurling his spear to the target location over $0.2$ (Estimated) seconds that deals type=[File:Comet Spear.png (+ 115% **bonus** AD) (+ 50% AP) physical damage to enemies near its landing point and slows them by 50% for 2 seconds.
+After $0.8$ (Estimated) seconds into the channel, **Pantheon** prepares for landing by hurling his spear to the target location over $0.2$ (Estimated) seconds that deals 20px (+ 115% **bonus** AD) (+ 50% AP) physical damage to enemies near its landing point and slows them by 50% for 2 seconds.
 
 Over the remaining $1.25$ (Estimated) seconds, **Pantheon** crashes down after $0.55$ (Estimated) seconds and creates a shockwave alongside himself that travels toward the target location over $0.7$ (Estimated) seconds, dealing magic damage to enemies hit, reduced by up to 50% for those hit at the edge of the area. Upon completion of the channel, **Pantheon** reappears at the target location and gains maximum stacks of *Mortal Will*.
 
@@ -262,7 +262,7 @@ Over the remaining $1.25$ (Estimated) seconds, **Pantheon** crashes down after $
 | **Magic Damage** | 300 / 400 / 500 / 600 / 700 (+ 100% AP) |
 | **Reduced Damage** | 150 / 200 / 250 / 300 / 350 (+ 50% AP) |
 
-*Grand Starfall* is placed on a cd cooldown if the first channel is canceled.
+*Grand Starfall* is placed on a (cd) 30-second cooldown if the first channel is canceled.
 
 **Notes:**
 
@@ -271,7 +271,7 @@ Over the remaining $1.25$ (Estimated) seconds, **Pantheon** crashes down after $
 - During the second channel, **Pantheon** gains a minimum health threshold of 1.
   - **Pantheon** will instantly die upon reappearing if he reaches this threshold.
 - Abilities that target **Pantheon** will redirect to the last location.
-- [Pinging the ability will inform allies in chat which visible enemy champions are in range of *Grand Starfall*.
+- Pinging the ability will inform allies in chat which visible enemy champions are in range of *Grand Starfall*.
 - **Pantheon** is considered to be in his original casting position even after leaping, but he will blink to the target location the moment the second channel completes.
 - Using *Grand Starfall* will inform allies with a ping.
 - If Pantheon leaves the Death Realm during *Grand Starfall*’s shockwave, its hitbox will become invisible but it will still deal damage.

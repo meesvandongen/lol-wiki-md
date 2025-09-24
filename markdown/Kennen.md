@@ -184,7 +184,7 @@ No additional notes.
 | **Spell Shield** | True |
 | **Spell Effects** | spellaoe |
 
-**ACTIVE:** **Kennen** turns into lightning for 2 seconds, becoming unable to declare basic attacks but gaining ghosting and ms. He deals magic damage to enemies he passes through, reduced to 65% against non-champions, and restores 40 energy upon damaging at least one enemy.
+**ACTIVE:** **Kennen** turns into lightning for 2 seconds, becoming unable to declare basic attacks but gaining ghosting and (ms) 100% **bonus** movement speed. He deals magic damage to enemies he passes through, reduced to 65% against non-champions, and restores 40 energy upon damaging at least one enemy.
 
 | Attribute | Value |
 |-----------|------:|
@@ -221,7 +221,7 @@ No additional notes.
 | **Spell Shield** | True |
 | **Spell Effects** | aoedot |
 
-**ACTIVE:** **Kennen** summons a storm around himself for 3 seconds, gaining armor and mr for the duration.
+**ACTIVE:** **Kennen** summons a storm around himself for 3 seconds, gaining (armor) **bonus** armor and (mr) **bonus** magic resistance for the duration.
 
 | Attribute | Value |
 |-----------|------:|

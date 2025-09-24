@@ -97,22 +97,22 @@
 
 The additional shot applies on-hit effects, triggers on-attack effects, and can critically strike「 for bonus damage. ⟷ 100% base damage + 30% **bonus** critical damage. 」
 
-**INNATE:** **Akshan**’s basic attacks on-hit and ability hits apply a stack of *Dirty Fighting* to enemies for 5 seconds, refreshing on subsequent applications and stacking up to 3 times. The third stack against a target consumes them all to deal them 15@1; 40@6; 80@11; 150@16 (+ 60% AP) **bonus** magic damage; if the target is a champion, **Akshan** will also gain a 40+(240/17)*(x-1)*(0.7025+0.0175*(x-1)) (+ 35% **bonus** AD) shield for 2 seconds. The shield may be gained only once every few seconds.
+**INNATE:** **Akshan**’s basic attacks on-hit and ability hits apply a stack of *Dirty Fighting* to enemies for 5 seconds, refreshing on subsequent applications and stacking up to 3 times. The third stack against a target consumes them all to deal them 15@1; 40@6; 80@11; 150@16 (+ 60% AP) **bonus** magic damage; if the target is a champion, **Akshan** will also gain a 40 / 280 (+ 35% **bonus** AD) shield for 2 seconds. The shield may be gained only once every few seconds.
 
 **Notes:**
 
-- If the first shot has killed its target, **Akshan** will automatically acquire another enemy within 200 units beyond his range, else he can do so by issuing an attack order (Default right-click/MB2) to a different target.
+- If the first shot has killed its target, **Akshan** will automatically acquire another enemy within 200 units beyond his (range) basic attack range, else he can do so by issuing an attack order (Default right-click/MB2) to a different target.
 - Applies basic damage for the second shot and proc damage for the bonus damage.
 - The second shot:
   - Is treated as a basic attack.
-  - critical strike independently from the first shot.
+  - (critical strike) Critically strikes independently from the first shot.
   - Can be cancelled by inputting a different command right after using the first shot.
   - Counts as a separate hit for effects such as Electrocute, Muramana Shock, and Eclipse Ever Rising Moon.
   - Starts the attack windup's cooldown after it is used, rather than when the first shot is.
 - The attack speed scaling on the movement speed buff includes the bonus attack speed gained from **Akshan**’s innate attack speed growth.
   - At level 18, at minimum it grants $ decaying movement speed.
 - Changing targets for the second shot will also acquire the new target.
-- The second shot, if the first shot's target was killed, will prioritize visible enemy champions, then minions on health.
+- The second shot, if the first shot's target was killed, will prioritize visible enemy champions, then minions on (health) low health.
 - This ability's damage is calculated based on the caster's current stats and changes dynamically.
 
 ---
@@ -136,7 +136,7 @@ The additional shot applies on-hit effects, triggers on-attack effects, and can 
 | **Spell Effects** | spellaoe |
 | **Projectile** | True |
 
-**ACTIVE:** **Akshan** throws a boomerang in the target direction that briefly grants sight around its trajectory and deals physical damage to enemies hit, revealing them for 1 second and extending its range each time it hits a target. If this hits an enemy champion, **Akshan** gains ms (+ 5% per 100 AP) **bonus** movement speed that decays over 1 second.
+**ACTIVE:** **Akshan** throws a boomerang in the target direction that briefly grants sight around its trajectory and deals physical damage to enemies hit, revealing them for 1 second and extending its range each time it hits a target. If this hits an enemy champion, **Akshan** gains (ms) 20% (+ 5% per 100 AP) **bonus** movement speed that decays over 1 second.
 
 | Attribute | Value |
 |-----------|------:|
@@ -305,9 +305,9 @@ Scoring an enemy champion takedown reduces *Heroic Swing*’s **current** cooldo
 |-----------|------:|
 | **Bullet Storing Interval Time** | 0.625 / 0.5729 / 0.5208 / 0.4688 / 0.4167 seconds |
 
-*Comeuppance* can be recast after $0.5$ seconds during the channel, and does so automatically afterwards. *Comeuppance* is placed on a cd cooldown if the channel is cancelled.
+*Comeuppance* can be recast after $0.5$ seconds during the channel, and does so automatically afterwards. *Comeuppance* is placed on a (cd) 5-second cooldown if the channel is cancelled.
 
-**RECAST:** **Akshan** fires all stored bullets at the target, each briefly granting sight around their trajectory and dealing physical damage to the first enemy hit, increased by 50% of critical chance and critical damage bonuses as well as by key=%. The shots can hit structures.
+**RECAST:** **Akshan** fires all stored bullets at the target, each briefly granting sight around their trajectory and dealing physical damage to the first enemy hit, increased by 50% of critical chance and critical damage bonuses as well as by 0%–200%@0–100 (@=target's **missing** health). The shots can hit structures.
 
 | Attribute | Value |
 |-----------|------:|
@@ -408,7 +408,7 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 - Comeuppance
   - Minimum base damage per bullet increased to 25 / 35 / 45 from 20 / 25 / 30.
   - Minimum AD ratio per bullet increased to 15% AD from 10% AD.
-  - Bonus damage reduced to key=% from key=%.
+  - Bonus damage reduced to 0%–200%@0–100 (@=target's **missing** health) from 0%–300%@0–100 (@=target's **missing** health).
     - Maximum base damage per bullet changed to 75 / 105 / 135 from 80 / 100 / 120.
     - Maximum AD ratio per bullet increased to 45% AD from 40% AD.
 
@@ -435,7 +435,7 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 ### V13.10
 - Dirty Fighting
   - **New Effect:** Bonus damage now scales with 60% AP.
-  - Base shield reduced to 40+(240/17)*(x-1)*(0.7025+0.0175*(x-1)) from 40 to 280. *Uses level growth instead of linear interpolation*.
+  - Base shield reduced to 40 / 280 from 40 to 280. *Uses level growth instead of linear interpolation*.
 - Avengerang
   - **New Effect:** Bonus movement speed now scales with 5% per 100 AP.
 - Heroic Swing

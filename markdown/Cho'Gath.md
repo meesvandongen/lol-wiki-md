@@ -79,7 +79,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** Whenever **Cho'Gath** kills an enemy, it heals for 18 to 52 and restores mana.
+**INNATE:** Whenever **Cho'Gath** kills an enemy, it heals for 18 to 52 and restores (mana) 4.72 to 9.48 mana.
 
 **Notes:**
 
@@ -161,7 +161,7 @@ Enemy champions and Rift Scuttler hit are also silenced for a duration.
 |-----------|------:|
 | **Range** | cr 650 (From an offset 25 units in front of Cho'Gath) |
 | **Cast Time** | none |
-| **Width** | bonus size |
+| **Width** | 340–500@0–0 (@=bonus size) units |
 | **Speed** | 1475 units/second |
 | **Cost** | 30 mana |
 | **Cooldown** | 8 / 7 / 6 / 5 / 4 seconds |
@@ -174,7 +174,7 @@ Enemy champions and Rift Scuttler hit are also silenced for a duration.
 | **Projectile** | True |
 | **Parry** | False |
 
-**ACTIVE:** **Cho'Gath** empowers its next 3 basic attacks within 6 seconds to gain range and launch a blast of spikes on-attack in the target's direction. Enemies struck are dealt magic damage and slowed by an amount that decays over $1.5$ seconds. The damage based on the target's health ratio is capped at 200 against monsters.
+**ACTIVE:** **Cho'Gath** empowers its next 3 basic attacks within 6 seconds to gain (range) 50 **bonus** range and launch a blast of spikes on-attack in the target's direction. Enemies struck are dealt magic damage and slowed by an amount that decays over $1.5$ seconds. The damage based on the target's health ratio is capped at 200 against monsters.
 
 | Attribute | Value |
 |-----------|------:|
@@ -228,7 +228,7 @@ The width of the blast of spikes increases based on **Cho'Gath**’s character m
 
 If the target is killed, **Cho'Gath** gains a stack of *Feast*. Only 6 stacks can be gained from non-epic monsters or minions.
 
-Each stack of *Feast* increases the cast range of the ability by $2.5$, for a maximum increase of 25 at 10 stacks, and grants **Cho'Gath** health as well as range and increased size, capping at range and 100% increased size.
+Each stack of *Feast* increases the cast range of the ability by $2.5$, for a maximum increase of 25 at 10 stacks, and grants **Cho'Gath** (health) **bonus** health as well as (range) **bonus** attack range and increased size, capping at (range) 75 **bonus** attack range and 100% increased size.
 
 | Attribute | Value |
 |-----------|------:|

@@ -88,7 +88,7 @@
 
 **INNATE:** Whenever **Volibear** damages at least one enemy with a basic attack or ability, he generates a stack of *The Relentless Storm* for 6 seconds, refreshing on subsequent damage and stacking up to 5 times. At 5 stacks, **Volibear** gains *Lightning Claws*.
 
-**THE RELENTLESS STORM:** For each stack, **Volibear** gains attack speed, up to 25% (+ 15% per 100 AP).
+**THE RELENTLESS STORM:** For each stack, **Volibear** gains (attack speed) 5% (+ 3% per 100 AP) **bonus** attack speed, up to 25% (+ 15% per 100 AP).
 
 **LIGHTNING CLAWS:** **Volibear**’s claws ignite with lightning, empowering his basic attacks on-hit to deal 10+1*x for 3 / then + 2*x for 3 / then + 3*x for 7 / then + 4*x (+ 50% AP) **bonus** magic damage to the target and the nearest visible enemy within 450 units of the target, chaining up to 4 subsequent targets.
 

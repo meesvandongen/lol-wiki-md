@@ -79,7 +79,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** Periodically, after casting an ability, **Gragas** heals himself for health.
+**INNATE:** Periodically, after casting an ability, **Gragas** heals himself for (health) $5.5$% of his **maximum** health.
 
 **Notes:**
 
@@ -157,7 +157,7 @@
 |-----------|------:|
 | **Damage Reduction** | 10 / 12 / 14 / 16 / 18% (+ 4% per 100 AP) |
 
-Upon completing the channel, **Gragas** empowers his next basic attack within 5 seconds to have an uncancellable windup, gain range and deal **bonus** magic damage to the target and nearby enemies, reduced to 50% against structures and capped at 300 against monsters.
+Upon completing the channel, **Gragas** empowers his next basic attack within 5 seconds to have an uncancellable windup, gain (range) 50 **bonus** range and deal **bonus** magic damage to the target and nearby enemies, reduced to 50% against structures and capped at 300 against monsters.
 
 | Attribute | Value |
 |-----------|------:|

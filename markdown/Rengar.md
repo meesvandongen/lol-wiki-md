@@ -84,7 +84,7 @@
 | **Grounded** | Special |
 | **Knockdown** | True |
 
-**INNATE:** **Rengar** generates 1 Ferocity upon casting a basic ability or using *Savagery’s* first attack. At 4 Ferocity, his next basic ability consumes them all to become empowered with an additional effect and grant him an additional cast along with ms for $1.5$ seconds. All Ferocity is lost after 10 seconds of not dealing or taking damage, excluding damage dealt by persistent or proc effects.
+**INNATE:** **Rengar** generates 1 Ferocity upon casting a basic ability or using *Savagery’s* first attack. At 4 Ferocity, his next basic ability consumes them all to become empowered with an additional effect and grant him an additional cast along with (ms) 30%–50%@1–13 **bonus** movement speed for $1.5$ seconds. All Ferocity is lost after 10 seconds of not dealing or taking damage, excluding damage dealt by persistent or proc effects.
 
 Reaching 4 Ferocity with *Savagery* or *Bola Strike* locks the empowered version of the ability from being cast for $0.1$ seconds. Similarly, consuming all Ferocity with an empowered ability locks the unempowered version of the ability from being cast for $0.1$ seconds if it is not already on cooldown, increased to $0.25$ seconds for *Battle Roar*.
 
@@ -94,7 +94,7 @@ Reaching 4 Ferocity with *Savagery* or *Bola Strike* locks the empowered version
 
 ***Rengar** can cast any of his abilities during the dash.*
 
-**INNATE - BONETOOTH NECKLACE:** Scoring a takedown against an enemy champion within 3 seconds of damaging them grants **Rengar** a *Trophy*, once per unique champion and up to 5. An additional *Trophy* is made available through the event *The Hunt is On!* with the *Head of Kha'Zix*. *Trophies* grant **bonus** attack damage equal to type=[File:Bonetooth Necklace.png **bonus** AD.
+**INNATE - BONETOOTH NECKLACE:** Scoring a takedown against an enemy champion within 3 seconds of damaging them grants **Rengar** a *Trophy*, once per unique champion and up to 5. An additional *Trophy* is made available through the event *The Hunt is On!* with the *Head of Kha'Zix*. *Trophies* grant **bonus** attack damage equal to 20px **bonus** AD.
 
 **Notes:**
 
@@ -102,7 +102,7 @@ Reaching 4 Ferocity with *Savagery* or *Bola Strike* locks the empowered version
 - While grounded or rooted, **Rengar** loses the enhanced attack range from *Unseen Predator*.
 - **Rengar** will only leap to a target if his basic attack timer has been refreshed (if not so he will not automatically attempt to path towards his target, despite them being within leap range).
 - Only Flash and Hexflash instantly end *Unseen Predator*. Other effects (i.e Teleport) will still cause the buff to linger upon leaving brush.
-- **Rengar** can freely use any abilities, [summoner spells, or item actives while leaping.
+- **Rengar** can freely use any abilities, summoner spells, or item actives while leaping.
   - Using a dash or blink ability will interrupt the leap.
 - The attack from the leap will:
   - *Not* go off if the dash was interrupted.
@@ -139,13 +139,13 @@ Reaching 4 Ferocity with *Savagery* or *Bola Strike* locks the empowered version
 
 **ACTIVE:** **Rengar** empowers his next two basic attacks within 3 seconds to gain 40% **bonus** attack speed. 
 
-His first attack has an uncancellable windup, gains range, and deals **bonus** physical damage. The attack will critically strike for (critical strike chance + ) AD **bonus** physical damage. Against structures, *Savagery*’s damage is reduced by 40% and can also critically strike.
+His first attack has an uncancellable windup, gains (range) 25 **bonus** range, and deals **bonus** physical damage. The attack will critically strike for (critical strike chance + ) AD **bonus** physical damage. Against structures, *Savagery*’s damage is reduced by 40% and can also critically strike.
 
 | Attribute | Value |
 |-----------|------:|
 | **Bonus Physical Damage** | 30 / 60 / 90 / 120 / 150 (+ 0 / 3.75 / 7.5 / 11.25 / 15% AD) |
 
-**FEROCITY BONUS:** *Savagery*’s damage is modified to deal 30 to 135 for 8 / 145 to 235 (+ 30% AD) **bonus** physical damage. **Rengar** gains key=% **bonus** attack speed for 5 seconds.
+**FEROCITY BONUS:** *Savagery*’s damage is modified to deal 30 to 135 for 8 / 145 to 235 (+ 30% AD) **bonus** physical damage. **Rengar** gains 50 to 101 **bonus** attack speed for 5 seconds.
 
 *Savagery resets **Rengar**’s basic attack timer. Casting Savagery does not break stealth.*
 
@@ -155,7 +155,7 @@ His first attack has an uncancellable windup, gains range, and deals **bonus** p
 - The critical strike modifier scales up to 75% of the critical damage champions usually have, based on **Rengar**’s critical strike chance.
 - *Savagery*’s empowered attack is not consumed against jungle plants.
 - The enhanced attack applies other on-hit effects as well as life steal as normal (the bonus damage cannot).
-- Against structures, the damage is calculated differently when the user has sources of critical damage. If the Basic attack damage against structures is:
+- Against structures, the damage is calculated differently when the user has sources of (critical damage) **bonus** critical damage. If the Basic attack damage against structures is:
   - Physical and Infinity Edge is not equipped: **Basic attack** + *Savagery* bonus * 0.6.
   - Physical and Infinity Edge is equipped: **Basic attack** + (*Savagery* bonus - Infinity Edge * AD) * 0.6. Infinity Edge's bonus is subtracted from the calculations.
   - Magic and Infinity Edge is not equipped: (**Basic attack** + *Savagery* bonus * 0.6) * 1.75. The damage is increased by the total critical damage modifier.
@@ -252,7 +252,7 @@ His first attack has an uncancellable windup, gains range, and deals **bonus** p
 
 **PASSIVE:** **Rengar** also gains *Unseen Predator* while camouflaged from any source.
 
-**ACTIVE:** **Rengar** prowls for a duration, gaining ms. After a 2-second delay, he also becomes camouflaged and gains Unseen Predator.
+**ACTIVE:** **Rengar** prowls for a duration, gaining (ms) **bonus** movement speed. After a 2-second delay, he also becomes camouflaged and gains Unseen Predator.
 
 | Attribute | Value |
 |-----------|------:|
@@ -264,7 +264,7 @@ During this time, **Rengar** will detect the nearest enemy champion in range, re
 
 The nearest detected enemy within 1600 range is also marked, alerting all of their allies within 1200 range about **Rengar**’s presence.
 
-**Rengar**’s next basic attack within range Rengar range against any enemy or with *Unseen Predator* to the marked enemy deals 100% AD **bonus** physical damage, then inflicts armor penetration for 4 seconds.
+**Rengar**’s next basic attack within range Rengar range against any enemy or with *Unseen Predator* to the marked enemy deals 100% AD **bonus** physical damage, then inflicts (armor penetration) armor reduction for 4 seconds.
 
 | Attribute | Value |
 |-----------|------:|

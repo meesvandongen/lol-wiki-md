@@ -24,7 +24,7 @@
 | **Spell Effects** | Proc |
 | **Parry** | True |
 
-**INNATE:** **Miss Fortune**’s basic attacks are empowered to apply a mark that expires upon attacking a new enemy. If the enemy was unmarked, this also deals key=% AD **bonus** physical damage, halved to key=% AD against minions.
+**INNATE:** **Miss Fortune**’s basic attacks are empowered to apply a mark that expires upon attacking a new enemy. If the enemy was unmarked, this also deals 50%–100%@1–13 AD **bonus** physical damage, halved to 50/2 to 100/2 for 6 AD against minions.
 
 **Notes:**
 
@@ -91,7 +91,7 @@
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**PASSIVE:** **Miss Fortune** gains ms after 4 seconds without taking non-persistent damage. This bonus is increased after another 3 seconds, and is granted instantly whenever *Strut* is cast or upon respawning.
+**PASSIVE:** **Miss Fortune** gains (ms) **bonus** movement speed after 4 seconds without taking non-persistent damage. This bonus is increased after another 3 seconds, and is granted instantly whenever *Strut* is cast or upon respawning.
 
 | Attribute | Value |
 |-----------|------:|
@@ -101,7 +101,7 @@
 |-----------|------:|
 | **Increased Bonus Movement Speed** | 60 / 70 / 80 / 90 / 100 |
 
-**ACTIVE:** **Miss Fortune** gains as for 4 seconds.
+**ACTIVE:** **Miss Fortune** gains (as) **bonus** attack speed for 4 seconds.
 
 | Attribute | Value |
 |-----------|------:|

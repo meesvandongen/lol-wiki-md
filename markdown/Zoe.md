@@ -112,7 +112,7 @@
 | **Spell Effects** | Area of effect |
 | **Projectile** | True |
 
-**ACTIVE:** **Zoe** shoots a star in the target direction that explodes upon hitting an enemy, dealing magic damage to nearby enemies hit. The **total** damage is increased by type=distance traveled.
+**ACTIVE:** **Zoe** shoots a star in the target direction that explodes upon hitting an enemy, dealing magic damage to nearby enemies hit. The **total** damage is increased by 0%@800; 25%@950; 50%@1350; 75%@1650; 100%@1950; 125%@2250; 150%@2550 (@=distance traveled).
 
 | Attribute | Value |
 |-----------|------:|
@@ -147,7 +147,7 @@ The star lingers at maximum range for 1 second, during which *Paddle Star!* can 
 | **Spell Effects** | spell |
 | **Projectile** | True |
 
-**PASSIVE - WHEEEEE:** Whenever **Zoe** casts *Spell Thief* or a summoner spell, she gains ms for a duration, and summons three bolts that orbit her for the next 10 seconds.
+**PASSIVE - WHEEEEE:** Whenever **Zoe** casts *Spell Thief* or a summoner spell, she gains (ms) **bonus** movement speed for a duration, and summons three bolts that orbit her for the next 10 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -209,7 +209,7 @@ If **Zoe** is not affected by complete crowd control, she shoots one bolt at a t
 
 **ACTIVE:** **Zoe** kicks a bubble in the target direction that bursts upon the first enemy hit, otherwise lingering at maximum range over 1 second, then becoming a trap for 5 seconds that bursts upon contact with an enemy. The bubble can move through terrain only once, but travels the entire distance as **bonus** range, and will fall short if it would enter terrain again.
 
-The burst deals magic damage to the target and inflicts them with drowsy for $1.4$ seconds, which gradually slows them until they fall asleep for $2.25$ seconds. While the target is asleep, they are inflicted with magic penetration.
+The burst deals magic damage to the target and inflicts them with drowsy for $1.4$ seconds, which gradually slows them until they fall asleep for $2.25$ seconds. While the target is asleep, they are inflicted with (magic penetration) 30% magic resistance reduction.
 
 | Attribute | Value |
 |-----------|------:|

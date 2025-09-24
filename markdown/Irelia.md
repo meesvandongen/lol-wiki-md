@@ -84,7 +84,7 @@
 
 **INNATE:** **Irelia** generates a stack of *Ionian Fervor* for each enemy champion hit by her abilities, or if she hits at least one non-champion, lasting for 6 seconds, refreshing on basic attacks and ability hits against enemy champions, large monsters, and structures, and stacking up to 4 times.
 
-**IONIAN FERVOR:** For each stack, **Irelia** gains , up to a maximum of 10×4 to 25×4. At maximum stacks, **Irelia**’s basic attacks are empowered to deal 10 to 61 (+ 20% **bonus** AD) **bonus** magic damage on-hit, reduced to「 50% ⟷ 10×0.5 to 61×0.5 (+ 10% **bonus** AD) 」against structures.
+**IONIAN FERVOR:** For each stack, **Irelia** gains 10 to 25 **bonus** attack speed, up to a maximum of 10×4 to 25×4. At maximum stacks, **Irelia**’s basic attacks are empowered to deal 10 to 61 (+ 20% **bonus** AD) **bonus** magic damage on-hit, reduced to「 50% ⟷ 10×0.5 to 61×0.5 (+ 10% **bonus** AD) 」against structures.
 
 **INNATE - UNSTEADY:** Enemy champions and large monsters hit by *Flawless Duet* and *Vanguard's Edge’s* initial barrage are marked as *Unsteady* for 5 seconds. The mark can be consumed by *Bladesurge*.
 
@@ -170,7 +170,7 @@
 
 *Defiant Dance* can be recast within the duration, and does so automatically afterwards. *Defiant Dance*’s charge cannot be interrupted by crowd control.
 
-**RECAST:** **Irelia** swipes her blades in the target direction, dealing physical damage to enemies around her and within a line, increased by key=%. She also retains the damage reduction for $0.5$ seconds.
+**RECAST:** **Irelia** swipes her blades in the target direction, dealing physical damage to enemies around her and within a line, increased by 0% / 20% / 40% / 60% / 80% / 100% / 120% / 140% / 160% / 180% / 200%. She also retains the damage reduction for $0.5$ seconds.
 
 | Attribute | Value |
 |-----------|------:|

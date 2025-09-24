@@ -25,7 +25,7 @@
 | **Spell Effects** | proc |
 | **Parry** | unknown |
 
-**INNATE:** **Xin Zhao**’s basic attacks on-hit and *Wind Becomes Lightning’s* first slash hit and thrust on at least one enemy hit each generate a stack of *Determination*, stacking up to 3 times. The third stack consumes them all to deal 15 / 30 / 45 / 60 AD **bonus** physical damage on-attack and heal **Xin Zhao** for 3 to 4 of his **maximum** health (+ 65% AP) on-hit.
+**INNATE:** **Xin Zhao**’s basic attacks on-hit and *Wind Becomes Lightning’s* first slash hit and thrust on at least one enemy hit each generate a stack of *Determination*, stacking up to 3 times. The third stack consumes them all to deal 15%–60%@1–16 AD **bonus** physical damage on-attack and heal **Xin Zhao** for 3 to 4 of his **maximum** health (+ 65% AP) on-hit.
 
 **INNATE - CHALLENGE:** *Wind Becomes Lightning* and, if *Crescent Guard* has been learned, **Xin Zhao**’s basic attacks and *Audacious Charge*, apply a Challenged mark to certain enemies hit for 3 seconds. Only one enemy can be marked as Challenged at a time; applying the mark to a new target removes it from the previous one. *Audacious Charge* and *Crescent Guard* have interactions against Challenged targets.
 
@@ -111,7 +111,7 @@ The third attack knocks up the target for $0.75$ seconds.
 | **Spell Effects** | Area of effect |
 | **Projectile** | False |
 
-**ACTIVE:** **Xin Zhao** unleashes 4 slashes (First slash happens on-cast instantly, while the remaining 3 are applied every 0.05 seconds thereafter) in an arc over the first $0.15$ seconds of the cast time, each dealing physical damage to enemies within. After the remaining cast time, he then thrusts his spear in a line in the target direction, dealing physical damage to enemies hit, increased by key=%, and slowing them by 50% for $1.5$ seconds. *Wind Becomes Lightning* deals 50 / 53.333 / 56.667 / 60 / 63.333 / 66.667 / 70 / 73.333 / 76.667 / 80 / 83.333 / 86.667 / 90 / 93.333 / 96.667 / 100 damage to minions.
+**ACTIVE:** **Xin Zhao** unleashes 4 slashes (First slash happens on-cast instantly, while the remaining 3 are applied every 0.05 seconds thereafter) in an arc over the first $0.15$ seconds of the cast time, each dealing physical damage to enemies within. After the remaining cast time, he then thrusts his spear in a line in the target direction, dealing physical damage to enemies hit, increased by 0%–33.3%@0–100 (@=critical strike chance), and slowing them by 50% for $1.5$ seconds. *Wind Becomes Lightning* deals 50% / 53.33% / 56.67% / 60% / 63.33% / 66.67% / 70% / 73.33% / 76.67% / 80% / 83.33% / 86.67% / 90% / 93.33% / 96.67% / 100% damage to minions.
 
 The farthest champion or large monster hit within the thrust's area is also marked as *Challenged* and is revealed for 3 seconds.
 

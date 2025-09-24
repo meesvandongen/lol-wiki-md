@@ -100,7 +100,7 @@
 
 **Thresh** automatically collects *Souls* near him or a placed *Dark Passage*.
 
-**SOUL:** For each stack, **Thresh** gains ap and armor.
+**SOUL:** For each stack, **Thresh** gains (ap) 1 ability power and (armor) 1 **bonus** armor.
 
 **Notes:**
 

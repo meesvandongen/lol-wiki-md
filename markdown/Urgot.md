@@ -96,7 +96,7 @@
 
 **INNATE:** **Urgot**’s legs each conceal a shotgun that covers an arc, together forming a full circle of cover around him. Each shotgun can fire once before incurring a unique cooldown.
 
-**Urgot**’s next basic attack on-hit within the arc of a shotgun will cause it to fire in a cone, dealing key=% AD (+ changedisplay=true of target's **maximum** health) physical damage to enemies hit, capped at 100 to 360 against monsters.
+**Urgot**’s next basic attack on-hit within the arc of a shotgun will cause it to fire in a cone, dealing 40%@1; 52%@6; 64%@9; 76%@11; 88%@13; 100%@15 AD (+ 2%–6%@1–13 of target's **maximum** health) physical damage to enemies hit, capped at 100 to 360 against monsters.
 
 **Notes:**
 
@@ -174,7 +174,7 @@
 
  Additionally, at maximum rank, *Purge* lasts indefinitely and becomes a toggled ability.
 
-**ACTIVE:** **Urgot** equips his machine gun for 4 seconds, granting ghosting to minions and non-epic monsters around him and autonomously firing at the nearest enemy at a **fixed** attack speed, prioritizing *marked* enemy champions and refreshing the *mark* with every attack. While firing, **Urgot** is able to move and gains 40% slow resist, but his **base** movement speed is reduced by 125.
+**ACTIVE:** **Urgot** equips his machine gun for 4 seconds, granting ghosting to minions and non-epic monsters around him and autonomously firing at the nearest enemy at a **fixed** (attack speed) $3.0$ attack speed, prioritizing *marked* enemy champions and refreshing the *mark* with every attack. While firing, **Urgot** is able to move and gains 40% slow resist, but his **base** movement speed is reduced by 125.
 
 Attacks with *Purge* deal ***modified** physical damage, with a minimum threshold of 50 against monsters and minions, and cannot critically strike. Each attack applies on-hit effects, with on-hit damage reduced to 50% effectiveness, and triggers on-attack effects. **Urgot** cannot perform attacks while unable to declare basic attacks.
 
@@ -275,13 +275,13 @@ After the cast time, **Urgot** dashes in the target direction, though not throug
 | **Call For Help** | Special |
 | **Silence** | False |
 
-**ACTIVE:** **Urgot** fires a chem-drill in the target direction that impales the first enemy champion hit, dealing physical damage and leashing the target for 4 seconds, during which they are revealed and slowed by type=target's **missing** health.
+**ACTIVE:** **Urgot** fires a chem-drill in the target direction that impales the first enemy champion hit, dealing physical damage and leashing the target for 4 seconds, during which they are revealed and slowed by 0%–75%@0–75 (@=target's **missing** health).
 
 | Attribute | Value |
 |-----------|------:|
 | **Physical Damage** | 100 / 162.5 / 225 / 287.5 / 350 (+ 50% **bonus** AD) |
 
-*Fear Beyond Death* can be recast if the leashed target is below health, and does so automatically if the chem-drill would kill the target (Damage instance does not reduce their health below 1 in this case), the ability is cast again while the target was above the threshold and is then brought within it, or the target is within the threshold at the end of the duration.
+*Fear Beyond Death* can be recast if the leashed target is below (health) 25% of their **maximum** health, and does so automatically if the chem-drill would kill the target (Damage instance does not reduce their health below 1 in this case), the ability is cast again while the target was above the threshold and is then brought within it, or the target is within the threshold at the end of the duration.
 
 **RECAST - MERCY:** **Urgot** launches chains at the leashed target, then channels for $1.5$ seconds once they latch on. During this time, he reels them toward him, suppressing them, revealing them, rendering them untargetable, and preventing them from taking damage from other sources (Negates application of damage from any source that is not the execution). If the target is near **Urgot** when the chains connect, they are pushed up to 1000 (Estimated) units away based on their proximity to him. This channel cannot be interrupted by crowd control.
 

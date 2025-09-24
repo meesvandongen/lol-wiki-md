@@ -78,7 +78,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** Whenever **Jinx** scores a takedown against an enemy champion, epic monster, turret, or inhibitor within 3 seconds of damaging them, she gains ms decaying over 6 seconds.
+**INNATE:** Whenever **Jinx** scores a takedown against an enemy champion, epic monster, turret, or inhibitor within 3 seconds of damaging them, she gains (ms) 175% **bonus** movement speed decaying over 6 seconds.
 
 Additionally, she is allowed to exceed the attack speed cap (normally 3.003 attacks per second) and gains a stack of *Get Excited!* for the same duration, stacking up to 5 times. Only takedowns against enemy champions can grant stacks beyond the first.
 
@@ -117,7 +117,7 @@ Additionally, she is allowed to exceed the attack speed cap (normally 3.003 atta
 | **Attack Speed per Subsequent Stack** | 7.5 / 13.75 / 20 / 26.25 / 32.5% |
 | **Maximum Attack Speed** | 30 / 55 / 80 / 105 / 130% |
 
-**FISHBONES:** Basic attacks with *Fishbones* cost mana on-attack to deal 110% AD ***modified** physical damage to the target and nearby enemies. The damage is affected by critical strike modifiers. While *Fishbones* is equipped, **Jinx** gains range but loses 10% of her **bonus** attack speed.
+**FISHBONES:** Basic attacks with *Fishbones* cost mana on-attack to deal 110% AD ***modified** physical damage to the target and nearby enemies. The damage is affected by critical strike modifiers. While *Fishbones* is equipped, **Jinx** gains (range) **bonus** range but loses 10% of her **bonus** attack speed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -232,7 +232,7 @@ Each *Chomper* explodes on contact with an enemy champion, knocking them down an
 
 **ACTIVE:** **Jinx** fires a massive rocket in the target direction, briefly granting sight of its surroundings (Cannot grant sight into brush nor through terrain) and exploding upon colliding with an enemy champion. The explosion deals physical damage to nearby (centered on the initial target) enemies and grants sight of the area (Can grant sight into brush and through terrain) for 2 seconds.
 
-*Super Mega Death Rocket!* deals type=distance traveled damage. This does not affect the **bonus** damage based on the target's **missing** health.
+*Super Mega Death Rocket!* deals 10%–100%@0–1500 (@=distance traveled) damage. This does not affect the **bonus** damage based on the target's **missing** health.
 
 | Attribute | Value |
 |-----------|------:|

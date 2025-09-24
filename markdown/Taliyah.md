@@ -78,7 +78,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** While near terrain, **Taliyah** gains ms **bonus** movement speed, which builds up over 1 second while in range for at least $0.4$ seconds, and decays at the same rate (See notes) once out of range for at least 3 seconds.
+**INNATE:** While near terrain, **Taliyah** gains (ms) 10%@1; 15%@9; 25%@12; 40%@15 **bonus** movement speed, which builds up over 1 second while in range for at least $0.4$ seconds, and decays at the same rate (See notes) once out of range for at least 3 seconds.
 
 If **Taliyah** is casting an ability or enters champion combat, *Rock Surfing* cannot occur again for a few seconds.
 
@@ -119,7 +119,7 @@ If **Taliyah** is casting an ability or enters champion combat, *Rock Surfing* c
 
 **Taliyah** can move and cast other abilities while launching *Stone Shards*, and is unable to basic attack until she launches the third *Stone Shard*.
 
-Casting *Threaded Volley* creates an area of Worked Ground at **Taliyah**’s cast location that has a radius of 400 units and lasts 30 seconds. While on Worked Ground, *Threaded Volley*’s cast consumes the area to become empowered with a new effect, costing 10 mana and having cd reduced cooldown, though not below $0.75$ seconds.
+Casting *Threaded Volley* creates an area of Worked Ground at **Taliyah**’s cast location that has a radius of 400 units and lasts 30 seconds. While on Worked Ground, *Threaded Volley*’s cast consumes the area to become empowered with a new effect, costing 10 mana and having (cd) 50% reduced cooldown, though not below $0.75$ seconds.
 
 **EMPOWERED ACTIVE:** **Taliyah** hurls a *Boulder* that explodes upon the first enemy hit, dealing 180% damage to them and normal damage to nearby enemies, slowing all targets hit for $1.5$ seconds, and revealing them for $0.5$ seconds. Monsters hit are also stunned for 3 seconds.
 
@@ -197,7 +197,7 @@ Enemies that dash or are knocked over a stone will detonate it, taking magic dam
 |-----------|------:|
 | **Detonation Magic Damage** | 25 / 40 / 55 / 70 / 85 (+ 30% AP) |
 
-An enemy can detonate up to 4 stones, but the damage is reduced by changedisplay=true. *Unraveled Earth* can affect targets only once per cast; the stones will still detonate but not apply their effects.
+An enemy can detonate up to 4 stones, but the damage is reduced by 0% / 25% / 50% / 75%. *Unraveled Earth* can affect targets only once per cast; the stones will still detonate but not apply their effects.
 
 | Attribute | Value |
 |-----------|------:|
@@ -243,7 +243,7 @@ An enemy can detonate up to 4 stones, but the damage is reduced by changedisplay
 
 Once the wall has fully formed, **Taliyah** can recast to destroy the wall instantly.
 
-*Weaver's Wall* is placed on a cd static cooldown (Unaffected by ability haste) upon taking champion or turret damage.
+*Weaver's Wall* is placed on a (cd) 3-second static cooldown (Unaffected by ability haste) upon taking champion or turret damage.
 
 **Notes:**
 

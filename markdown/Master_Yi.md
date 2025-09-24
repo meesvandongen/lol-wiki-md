@@ -132,7 +132,7 @@ Basic attacks on-hit reduce *Alpha Strike*’s **current** cooldown by 1 second,
 | **Affects** | Self |
 | **Silence** | True |
 
-**ACTIVE:** **Master Yi** channels for up to 4 seconds, healing himself every $0.5$ seconds, increased by type=**missing** health.
+**ACTIVE:** **Master Yi** channels for up to 4 seconds, healing himself every $0.5$ seconds, increased by 0%–100%@0–100 (@=**missing** health).
 
 | Attribute | Value |
 |-----------|------:|
@@ -204,7 +204,7 @@ While channeling, **Master Yi** gains 70% damage reduction for the first $0.5$ s
 
 **PASSIVE:** Scoring a champion takedown reduces the **current** cooldowns of **Master Yi**’s basic abilities by 70%.
 
-**ACTIVE:** **Master Yi** cleanses himself from all slows and cripples. For the next 7 seconds, he gains ghosting, **bonus** attack speed, ms, slow immunity, and cripple immunity.
+**ACTIVE:** **Master Yi** cleanses himself from all slows and cripples. For the next 7 seconds, he gains ghosting, **bonus** attack speed, (ms) **bonus** movement speed, slow immunity, and cripple immunity.
 
 | Attribute | Value |
 |-----------|------:|

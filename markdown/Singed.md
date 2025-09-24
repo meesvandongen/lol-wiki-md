@@ -94,7 +94,7 @@
 
 **INNATE:** Whenever **Singed** moves near a champion, he gains a stack of *Noxious Slipstream* for 2 seconds, refreshing on subsequent passes and stacking up to 25 times.
 
-**NOXIOUS SLIPSTREAM:** For each stack, **Singed** gains ms, up to a maximum of 625%.
+**NOXIOUS SLIPSTREAM:** For each stack, **Singed** gains (ms) 25% **bonus** movement speed, up to a maximum of 625%.
 
 This effect cannot occur on the same target more than once every few seconds.
 
@@ -215,7 +215,7 @@ If the target lands on *Mega Adhesive’s* area of effect after the displacement
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**ACTIVE:** **Singed** empowers himself for 25 seconds with ap, armor, mr, ms, **bonus** health regeneration, and **bonus** mana regeneration.
+**ACTIVE:** **Singed** empowers himself for 25 seconds with (ap) ability power, (armor) **bonus** armor, (mr) **bonus** magic resistance, (ms) **bonus** movement speed, **bonus** health regeneration, and **bonus** mana regeneration.
 
 | Attribute | Value |
 |-----------|------:|

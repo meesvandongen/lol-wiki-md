@@ -210,7 +210,7 @@ If the tether is not broken by the end of its duration, the target is dealt the 
 
 ** *Focused Resolve*’s root duration is increased. 
 
-**Karma** heals for health once on-cast, and again once the tether lasts its full duration or the target dies while tethered.
+**Karma** heals for (health) 17% (+ 1% per 100 AP) of her **missing** health once on-cast, and again once the tether lasts its full duration or the target dies while tethered.
 
 | Attribute | Value |
 |-----------|------:|
@@ -236,7 +236,7 @@ If the tether is not broken by the end of its duration, the target is dealt the 
 
 ** *Inspire* grants a bonus amount of shielding.
 
-*Inspire* spreads to surrounding allied champions, granting them a shield for $2.5$ seconds and ms for 2 seconds.
+*Inspire* spreads to surrounding allied champions, granting them a shield for $2.5$ seconds and (ms) 15% **bonus** movement speed for 2 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -266,7 +266,7 @@ If the tether is not broken by the end of its duration, the target is dealt the 
 | **Targeting** | Unit |
 | **Affects** | Allies |
 
-**ACTIVE:** **Karma** grants a shield to herself or the target allied champion for $2.5$ seconds as well as ms for 2 seconds.
+**ACTIVE:** **Karma** grants a shield to herself or the target allied champion for $2.5$ seconds as well as (ms) 40% **bonus** movement speed for 2 seconds.
 
 | Attribute | Value |
 |-----------|------:|

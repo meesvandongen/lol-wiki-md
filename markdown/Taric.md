@@ -87,7 +87,7 @@
 | **Spell Effects** | proc |
 | **Parry** | Special |
 
-**INNATE:** After casting an ability, **Taric** empowers his next two basic attacks within 5 seconds to each gain as, deal 25 to 93 (+ 15% **bonus** armor) **bonus** magic damage, and reduce the **remaining** cooldowns of his basic abilities by 1–2@0–0 (@=ability haste)
+**INNATE:** After casting an ability, **Taric** empowers his next two basic attacks within 5 seconds to each gain (as) 100% **total** attack speed, deal 25 to 93 (+ 15% **bonus** armor) **bonus** magic damage, and reduce the **remaining** cooldowns of his basic abilities by 1–2@0–0 (@=ability haste)
  seconds.
 
 **Notes:**
@@ -136,7 +136,7 @@
 | **Targeting** | Unit |
 | **Affects** | Self, Allies |
 
-**PASSIVE:** **Taric** gains armor and forms a tether between him and the ally bound by *Bastion*. While the tether persists, the ally also gains the **bonus** armor and **Taric**’s abilities are mimicked to them, though the effects do not stack.
+**PASSIVE:** **Taric** gains (armor) **bonus** armor and forms a tether between him and the ally bound by *Bastion*. While the tether persists, the ally also gains the **bonus** armor and **Taric**’s abilities are mimicked to them, though the effects do not stack.
 
 | Attribute | Value |
 |-----------|------:|

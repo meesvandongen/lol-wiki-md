@@ -83,7 +83,7 @@
 | **Spell Effects** | periodic |
 | **Parry** | Unknown |
 
-**INNATE:** **Milio**’s ability hits on himself and allied champions grant an enchantment for 4 seconds, which causes the next basic attack or ability hit against enemies to deal 7@1; 11@6; 15@9 (@=%) of enchanted target's AD **bonus** magic damage and apply a burn that deals「 10 to 50 (+ 20% of **Milio**’s AP) magic damage over $1.5$ seconds. ⟷ 10/6 to 50/6 (+ 3.33% of **Milio**’s AP) magic damage every $0.25$ seconds over $1.5$ seconds. 」
+**INNATE:** **Milio**’s ability hits on himself and allied champions grant an enchantment for 4 seconds, which causes the next basic attack or ability hit against enemies to deal 7%@1; 11%@6; 15%@9 of enchanted target's AD **bonus** magic damage and apply a burn that deals「 10 to 50 (+ 20% of **Milio**’s AP) magic damage over $1.5$ seconds. ⟷ 10/6 to 50/6 (+ 3.33% of **Milio**’s AP) magic damage every $0.25$ seconds over $1.5$ seconds. 」
 
 **Notes:**
 
@@ -161,7 +161,7 @@ No additional notes.
 
 *Cozy Campfire* can be recast after $0.5$ seconds within the duration.
 
-**RECAST:** **Milio** commands the fuemigo to follow the target allied champion to within cr 150-units, placing the recast on a cd-second static (Unaffected by ability haste) cooldown.
+**RECAST:** **Milio** commands the fuemigo to follow the target allied champion to within cr 150-units, placing the recast on a (cd) $0.5$-second static (Unaffected by ability haste) cooldown.
 
 ***Milio** counts as an allied champion for this ability. Cozy Campfire may grant Fired Up! upon being summoned and at most once every 3 seconds thereafter.*
 
@@ -248,7 +248,7 @@ No additional notes.
 
 ### V14.14
 - Fired Up!
-  - AD ratio reduced to 7@1; 11@6; 15@9 (@=%) of enchanted target's AD from 15% of enchanted target's AD at all levels.
+  - AD ratio reduced to 7%@1; 11%@6; 15%@9 of enchanted target's AD from 15% of enchanted target's AD at all levels.
   - Base damage reduced to 10 to 50 from 15 to 50.
 - Ultra Mega Fire Kick
   - **New Effect:** Now refunds 50% of its mana cost if either the missile or the area of effect hits at least one enemy champion.

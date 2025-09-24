@@ -127,14 +127,14 @@
 |-----------|------:|
 | **Slow** | 25 / 30 / 35 / 40 / 45% |
 
-Once it arrives, **Shen** empowers his next 3 basic attacks within 8 seconds to gain range and deal **bonus** magic damage. Against structures, only the flat damage portion is applied.
+Once it arrives, **Shen** empowers his next 3 basic attacks within 8 seconds to gain (range) 75 **bonus** range and deal **bonus** magic damage. Against structures, only the flat damage portion is applied.
 
 | Attribute | Value |
 |-----------|------:|
 | **Bonus Magic Damage** | 10–40@1–16 (+ 2 / 2.5 / 3 / 3.5 / 4% (+ $1.5$% per 100 AP) of target's **maximum** health) |
 | **Total Magic Damage** | 10×3 to 40×3 for 6 (+ 6 / 7.5 / 9 / 10.5 / 12% (+ $4.5$% per 100 AP) of target's **maximum** health) |
 
-If the Spirit Blade hits at least one enemy champion during the travel, the attacks are further enhanced to deal **increased bonus** magic damage and additionally grant **Shen** as.
+If the Spirit Blade hits at least one enemy champion during the travel, the attacks are further enhanced to deal **increased bonus** magic damage and additionally grant **Shen** (as) 50% **bonus** attack speed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -198,7 +198,7 @@ Empowered attacks against monsters deal 100% **bonus** damage, but their **total
 | **Grounded** | True |
 | **Knockdown** | True |
 
-**PASSIVE:** Dealing damage with *Twilight Assault* or *Shadow Dash* restores energy.
+**PASSIVE:** Dealing damage with *Twilight Assault* or *Shadow Dash* restores (energy) 30@1; 40@4; 50@12 energy.
 
 **ACTIVE:** **Shen** dashes to the target location, dealing physical damage to enemy champions and monsters he passes through and taunting them for $1.5$ seconds.
 
@@ -230,7 +230,7 @@ Empowered attacks against monsters deal 100% **bonus** damage, but their **total
 | **Grounded** | True |
 | **Silence** | True |
 
-**ACTIVE:** **Shen** focuses his will, channeling for 3 seconds and granting the target allied champion a shield for 5 seconds at the time of cast, increased by type=target's **missing** health.
+**ACTIVE:** **Shen** focuses his will, channeling for 3 seconds and granting the target allied champion a shield for 5 seconds at the time of cast, increased by 0%–60%@0–60 (@=target's **missing** health).
 
 | Attribute | Value |
 |-----------|------:|

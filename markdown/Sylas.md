@@ -179,7 +179,7 @@ After a $0.6$-second delay, the chains' intersection explodes to deal magic dama
 |-----------|------:|
 | **Magic Damage** | 75 / 110 / 145 / 180 / 215 (+ 60% AP) |
 
-If this damages a champion, **Sylas** is also healed, increased by type=his **missing** health.
+If this damages a champion, **Sylas** is also healed, increased by 0%–100%@0–60 (@=his **missing** health).
 
 | Attribute | Value |
 |-----------|------:|

@@ -200,7 +200,7 @@ The initial hit against each enemy before the bead's expansion deals magic damag
 |-----------|------:|
 | **Total Expanded Damage** | 5 / 20 / 35 / 50 / 65 (+ 40% AD) (+ 25% AP) |
 
-*Arc of Judgment* deals 50@1; 75@9; 100@13 (@=%) damage against minions and executes them if they would be killed by 6 more damage instances from the linger effect.
+*Arc of Judgment* deals 50%@1; 75%@9; 100%@13 damage against minions and executes them if they would be killed by 6 more damage instances from the linger effect.
 
 **Notes:**
 
@@ -405,7 +405,7 @@ No additional notes.
 - Arc of Judgment - W
   - **ACTIVE:** **Yunara** launches a spinning prayer bead in the target direction that briefly grants sight of its surroundings (Cannot see through terrain nor brush) as it travels. The bead slows down significantly while colliding with an enemy, lingering as it travels and resetting its remaining duration; upon reaching maximum range, it will expand and linger in place for 1 second regardless of enemies hit.
   - The initial hit against each enemy before the bead's expansion deals 5 / 30 / 55 / 80 / 105 (+ 85% AD) (+ 50% AP) magic damage and slows them by 99% decaying over $1.5$ seconds. While lingering, the bead deals 1.25 / 5 / 8.75 / 12.5 / 16.25 (+ 10% AD) (+ 6.25% AP) magic damage to nearby enemies every $0.25$ seconds.
-  - *Arc of Judgment* deals 50@1; 75@9; 100@13 (@=%) damage against minions and executes them if they would be killed by 6 more damage instances from the linger effect.
+  - *Arc of Judgment* deals 50%@1; 75%@9; 100%@13 damage against minions and executes them if they would be killed by 6 more damage instances from the linger effect.
   - **COST:** 60 mana.
   - **COOLDOWN:** 10 seconds.
   - **CAST TIME:** 0.45–0.225@0–100 (@=**bonus** attack speed), **EFFECT RADIUS:** 150 (Expansion), **RANGE:** 1150, **WIDTH:** 120, **SPEED:** 1150.

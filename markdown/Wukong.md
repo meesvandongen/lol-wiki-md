@@ -109,7 +109,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Wukong** gains armor and health regeneration an additional「 $0.35$% of his **maximum** health every 5 seconds. ⟷ $0.035$% of his **maximum** health every $0.5$ seconds. 」
+**INNATE:** **Wukong** gains armor and (health regeneration) regenerates an additional「 $0.35$% of his **maximum** health every 5 seconds. ⟷ $0.035$% of his **maximum** health every $0.5$ seconds. 」
 
 Whenever **Wukong** or his *clone* damage an enemy champion or monster, he generates a stack of *Strength of Stone* for 5 seconds, refreshing on subsequent hits and stacking up to 5 times. Stacks expire by one every second when the duration ends.
 
@@ -137,7 +137,7 @@ No additional notes.
 | **Spell Effects** | spell |
 | **Parry** | True |
 
-**ACTIVE:** **Wukong** empowers his next basic attack within 5 seconds to have an uncancellable windup, gain range, deal **bonus** physical damage, and inflict armor penetration for 3 seconds.
+**ACTIVE:** **Wukong** empowers his next basic attack within 5 seconds to have an uncancellable windup, gain (range) **bonus** range, deal **bonus** physical damage, and inflict (armor penetration) armor reduction for 3 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -265,7 +265,7 @@ Upon arrival, **Wukong** gains **bonus** attack speed for 5 seconds.
 | **Spell Shield** | Special |
 | **Spell Effects** | aoedot |
 
-**ACTIVE:** **Wukong** spins his staff around for up to 2 seconds, becoming ghosted and gaining ms. The staff deals physical damage every $0.25$ seconds to enemies hit, and can knock them up once for $0.6$ seconds. *Cyclone* will not knock up enemies who were already hit by either **Wukong** or his *clone* within the same cast.
+**ACTIVE:** **Wukong** spins his staff around for up to 2 seconds, becoming ghosted and gaining (ms) 20% **bonus** movement speed. The staff deals physical damage every $0.25$ seconds to enemies hit, and can knock them up once for $0.6$ seconds. *Cyclone* will not knock up enemies who were already hit by either **Wukong** or his *clone* within the same cast.
 
 | Attribute | Value |
 |-----------|------:|

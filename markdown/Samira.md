@@ -105,7 +105,7 @@
 
 **INNATE:** **Samira**’s damaging basic attacks and abilities against at least one enemy champion unique from the previous damaging hit made against champions generate a stack of *Style* for 6 seconds, refreshing on subsequent unique or non-unique hits and stacking up to 6 times.
 
-**STYLE:** For each stack, **Samira** gains ms, up to a maximum of 16.5–21@1–16 (@=%). At maximum stacks, **Samira** can cast *Inferno Trigger*.
+**STYLE:** For each stack, **Samira** gains (ms) 2.75%–3.5%@1–16 **bonus** movement speed, up to a maximum of 16.5%–21%@1–16. At maximum stacks, **Samira** can cast *Inferno Trigger*.
 
 **INNATE:** **Samira**’s basic attacks against targets within er 200 units of her use her blade, becoming non-projectile. Blade attacks, *Blade Whirl*, *Wild Rush*, and the slash and explosives of *Flair* deal 2 to 19 (+ 3.5 to 10.5 AD) **bonus** magic damage, increased by 0 to 100 by 10.
 
@@ -376,7 +376,7 @@ If cast within 1200 units of a visible enemy champion, **Samira** will turn to f
 - General
   - **Bug Fixes:** Restored champion kill VO.
 - Daredevil Impulse
-  - Bonus movement speed per stack increased to 2.75–3.5@1–16 (@=%) from 2–3.5@1–16 (@=%).
+  - Bonus movement speed per stack increased to 2.75%–3.5%@1–16 from 2%–3.5%@1–16.
     - Maximum bonus movement speed increased to 2.75×6 to 3.5×6 for 4 from 2×6 to 3.5×6 for 4.
 - Flair
   - Base damage increased to 5 / 10 / 15 / 20 / 25 from 0 / 5 / 10 / 15 / 20.

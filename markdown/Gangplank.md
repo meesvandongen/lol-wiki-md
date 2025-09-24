@@ -105,7 +105,7 @@
 
 **INNATE:** Periodically, **Gangplank** empowers his next basic attack to set the target on fire, dealing them「 50 to 250 (+ 100% **bonus** AD) (+ 2 per 1% critical strike chance) **bonus** true damage over $2.5$ seconds. ⟷ 50/10 to 250/10 (+ 10% **bonus** AD) (+ $0.2$ per 1% critical strike chance) **bonus** true damage every $0.25$ seconds over $2.5$ seconds. 」Turrets are dealt 50% damage.
 
-If **Gangplank** successfully hits a target with *Trial by Fire*, he gains ms for 2 seconds. Every time a *Powder Keg* explodes, the cooldown for *Trial by Fire* resets and **Gangplank** gains its **bonus** movement speed.
+If **Gangplank** successfully hits a target with *Trial by Fire*, he gains (ms) 15 to 30 **bonus** movement speed for 2 seconds. Every time a *Powder Keg* explodes, the cooldown for *Trial by Fire* resets and **Gangplank** gains its **bonus** movement speed.
 
 *Trial by Fire cannot be applied with Parrrley nor Powder Keg.*
 
@@ -215,7 +215,7 @@ If *Parrrley* kills the target, **Gangplank** plunders gold gold and *Silver Ser
 
 Kegs can be basic attacked by enemies or **Gangplank** (including his *Parrrley*), dealing 1 damage to it. When an enemy destroys it, it is safely defused. When **Gangplank** destroys it, it explodes and also triggers a chain reaction that explodes other nearby connected kegs with a -delay between explosions. The explosions also grant sight of their radiuses for 2 seconds.
 
-Enemies caught in an explosion are dealt the triggering attack's damage and slowed for 2 seconds. Against champions, the explosion also deals **bonus** physical damage. Each enemy can only be hit once per chain and the damage dealt ignores armor penetration.
+Enemies caught in an explosion are dealt the triggering attack's damage and slowed for 2 seconds. Against champions, the explosion also deals **bonus** physical damage. Each enemy can only be hit once per chain and the damage dealt ignores (armor penetration) 40% of the target's armor.
 
 | Attribute | Value |
 |-----------|------:|

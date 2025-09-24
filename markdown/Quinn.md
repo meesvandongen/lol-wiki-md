@@ -97,7 +97,7 @@
 |-----------|------:|
 | **Effect Radius** | 525 units |
 | **Cooldown Start** | post-effect |
-| **Static Cooldown** | critical strike chance (Starts after the mark expired or was consumed or overwritten by another mark.) |
+| **Static Cooldown** | 8 / 1.45 (Starts after the mark expired or was consumed or overwritten by another mark.) |
 | **Targeting** | Passive |
 | **Affects** | Self |
 | **Damage Type** | Physical |
@@ -107,7 +107,7 @@
 
 **INNATE:** **Quinn**’s *Blinding Assault* against the primary target, *Vault*, and *Skystrike* mark enemies hit with *Vulnerable* for 4 seconds, during which they are revealed. **Valor** will periodically mark a nearby visible enemy if no *Vulnerable* targets exist for 1 second.
 
-**Quinn**’s basic attacks against *Vulnerable* targets are empowered to consume the mark to deal 10 to 95 (+ key=% AD) **bonus** physical damage.
+**Quinn**’s basic attacks against *Vulnerable* targets are empowered to consume the mark to deal 10 to 95 (+ 16 to 50 AD) **bonus** physical damage.
 
 While *Behind Enemy Lines* is active, *Harrier* is disabled and all *Vulnerable* marks are removed.
 
@@ -167,7 +167,7 @@ The primary target is nearsighted for $1.75$ seconds if they are a champion, and
 | **Affects** | Self |
 | **Spell Shield** | False |
 
-**PASSIVE:** Whenever **Quinn** uses a basic attack on-attack against a *Vulnerable* target or consumes their mark, she gains **bonus** attack speed and ms for 2 seconds.
+**PASSIVE:** Whenever **Quinn** uses a basic attack on-attack against a *Vulnerable* target or consumes their mark, she gains **bonus** attack speed and (ms) **bonus** movement speed for 2 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -238,7 +238,7 @@ The primary target is nearsighted for $1.75$ seconds if they are a champion, and
 | **Grounded** | True |
 | **Silence** | True |
 
-**ACTIVE:** **Quinn** channels for 2 seconds, signaling **Valor** to pair up. Upon completion, he picks her up and they unite, increasing her ms, granting her ghosting, and allowing her to cast *Skystrike*. *Behind Enemy Lines* can be recast after $0.5$ seconds during the channel.
+**ACTIVE:** **Quinn** channels for 2 seconds, signaling **Valor** to pair up. Upon completion, he picks her up and they unite, increasing her (ms) **total** movement speed (Increases base movement as well as bonus movement speed), granting her ghosting, and allowing her to cast *Skystrike*. *Behind Enemy Lines* can be recast after $0.5$ seconds during the channel.
 
 | Attribute | Value |
 |-----------|------:|

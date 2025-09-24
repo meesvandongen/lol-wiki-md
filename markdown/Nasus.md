@@ -85,7 +85,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Nasus** gains life steal.
+**INNATE:** **Nasus** gains (life steal) 12%–24%@1–13 life steal.
 
 **Notes:**
 
@@ -108,7 +108,7 @@
 | **Spell Effects** | spell |
 | **Parry** | True |
 
-**ACTIVE:** **Nasus** empowers his next basic attack within 10 seconds to have an uncancellable windup, gain range, and deal **bonus** physical damage. *Siphoning Strike*’s **base** damage is affected by critical strike modifiers.
+**ACTIVE:** **Nasus** empowers his next basic attack within 10 seconds to have an uncancellable windup, gain (range) 50 **bonus** range, and deal **bonus** physical damage. *Siphoning Strike*’s **base** damage is affected by critical strike modifiers.
 
 | Attribute | Value |
 |-----------|------:|
@@ -185,7 +185,7 @@ If *Siphoning Strike* kills the target, **Nasus** permanently gains 3 stacks, in
 |-----------|------:|
 | **Magic Damage** | 50 / 80 / 110 / 140 / 170 (+ 60% AP) |
 
-The fire then remains for 5 seconds, dealing magic damage each second to enemies within and inflicting them with armor penetration, lingering for 1 second.
+The fire then remains for 5 seconds, dealing magic damage each second to enemies within and inflicting them with (armor penetration) armor reduction, lingering for 1 second.
 
 | Attribute | Value |
 |-----------|------:|
@@ -216,7 +216,7 @@ The fire then remains for 5 seconds, dealing magic damage each second to enemies
 | **Damage Type** | Magic |
 | **Spell Effects** | aoedot |
 
-**ACTIVE:** **Nasus** empowers himself for 15 seconds, gaining health, armor, mr, increased size, and range for the duration.
+**ACTIVE:** **Nasus** empowers himself for 15 seconds, gaining (health) **bonus** health, (armor) **bonus** armor, (mr) **bonus** magic resistance, increased size, and (range) 50 **bonus** attack range for the duration.
 
 | Attribute | Value |
 |-----------|------:|
@@ -247,7 +247,7 @@ While **Nasus** is empowered, he deals magic damage every $0.5$ seconds to nearb
 
 ### V25.S1.3
 - Soul Eater
-  - Life steal increased to key=% from key=%.
+  - Life steal increased to 12%–24%@1–13 from 9%–21%@1–13.
 
 ### V14.24
 - Spirit Fire
@@ -255,7 +255,7 @@ While **Nasus** is empowered, he deals magic damage every $0.5$ seconds to nearb
 
 ### V14.21
 - Soul Eater
-  - Life steal reduced to key=% from key=%.
+  - Life steal reduced to 9%–21%@1–13 from 12%–24%@1–13.
 - Siphoning Strike
   - Base damage reduced to 35 / 55 / 75 / 95 / 115 from 40 / 60 / 80 / 100 / 120.
 
@@ -278,13 +278,13 @@ While **Nasus** is empowered, he deals magic damage every $0.5$ seconds to nearb
 
 ### V14.7
 - Soul Eater
-  - Life steal increased to key=% from key=%.
+  - Life steal increased to 12%–24%@1–13 from 11%–21%@1–13.
 - Siphoning Strike
   - Base damage increased to 40 / 60 / 80 / 100 / 120 from 30 / 50 / 70 / 90 / 110.
 
 ### V13.12
 - Soul Eater
-  - Life steal increased to key=% from key=%.
+  - Life steal increased to 11%–21%@1–13 from 9%–19%@1–13.
 - Fury of the Sands
   - Cooldown reduced to 120 / 100 / 80 seconds from 120 at all ranks.
 

@@ -222,7 +222,7 @@ If *Ice Shard* hits an enemy, it will shatter, increasing its width and maximum 
 
 **ENEMY CAST:** **Lissandra** freezes the target enemy champion, knocking them down and stunning them for $1.5$ seconds.
 
-**SELF CAST:** **Lissandra** instantly entombs herself in ice, entering stasis for $2.5$ seconds and healing herself every $0.25$ seconds over the duration. The healing is increased by type=**missing** health at the time of cast.
+**SELF CAST:** **Lissandra** instantly entombs herself in ice, entering stasis for $2.5$ seconds and healing herself every $0.25$ seconds over the duration. The healing is increased by 0%–100%@0–100 (@=**missing** health at the time of cast).
 
 | Attribute | Value |
 |-----------|------:|
@@ -307,7 +307,7 @@ If *Ice Shard* hits an enemy, it will shatter, increasing its width and maximum 
   - **New Effect:** Missile now casts from the position of post-cast instead of pre-cast.
 - Frozen Tomb
   - Tick interval reduced to 0.25 seconds per tick from 0.5 seconds per tick.
-  - Bonus heal increased to type=**missing** health at the time of cast from type=**missing** health at the time of cast. *Formula change.*
+  - Bonus heal increased to 0%–100%@0–70 (@=**missing** health at the time of cast) from 0%–100%@0–100 (@=**missing** health at the time of cast). *Formula change.*
   - Minimum base heal increased to 100 / 150 / 200 from 90 / 140 / 190.
   - Minimum heal AP ratio increased to 55% AP from 25% AP.
   - Updated logic slightly around stopping dashes.

@@ -118,7 +118,7 @@
 | **Grounded** | False |
 | **Silence** | True |
 
-**ACTIVE:** **Rammus** channels for up to 6 seconds to roll into a ball, gaining ms per second over the duration, up to a maximum of key=%. 
+**ACTIVE:** **Rammus** channels for up to 6 seconds to roll into a ball, gaining (ms) 150/6 to 235/6 **bonus total** movement speed per second over the duration, up to a maximum of 150 to 235. 
 
 *Powerball* can be recast after 1 second within the duration, and does so automatically afterwards or upon casting *Defensive Ball Curl*.
 
@@ -164,7 +164,7 @@
 | **Spell Shield** | False |
 | **Spell Effects** | aoe |
 
-**ACTIVE:** **Rammus** enters a defensive stance for 7 seconds, gaining armor and mr. While active, enemies that use a basic attack on-hit against **Rammus** are dealt 15 (+ 10% **total** armor) (+ 10% **total** magic resistance) magic damage.
+**ACTIVE:** **Rammus** enters a defensive stance for 7 seconds, gaining (armor) **bonus** armor and (mr) **bonus** magic resistance. While active, enemies that use a basic attack on-hit against **Rammus** are dealt 15 (+ 10% **total** armor) (+ 10% **total** magic resistance) magic damage.
 
 | Attribute | Value |
 |-----------|------:|

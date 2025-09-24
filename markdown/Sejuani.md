@@ -87,7 +87,7 @@
 
 **INNATE - FROST ARMOR:** **Sejuani** gains *Frost Armor*, which lingers for 3 seconds after taking damage from enemy champions, turrets, or large monsters. She restores it after 12 to 6 seconds without taking damage from them.
 
-**FROST ARMOR:** **Sejuani** gains slow immunity, cripple immunity, armor, and mr.
+**FROST ARMOR:** **Sejuani** gains slow immunity, cripple immunity, (armor) 10 (+ 75% **bonus** armor) **bonus** armor, and (mr) 10 (+ 75% **bonus** magic resistance) **bonus** magic resistance.
 
 **Notes:**
 

@@ -109,7 +109,7 @@
 | **Spell Effects** | spell |
 | **Parry** | True |
 
-**ACTIVE:** **Camille** empowers her next basic attack within 4 seconds to have an uncancellable windup, gain range, deal **bonus** physical damage and grant her movement speed for 1 second. This attack cannot critically strike.
+**ACTIVE:** **Camille** empowers her next basic attack within 4 seconds to have an uncancellable windup, gain (range) 50 **bonus** range, deal **bonus** physical damage and grant her (movement speed) **bonus** movement speed for 1 second. This attack cannot critically strike.
 
 | Attribute | Value |
 |-----------|------:|
@@ -121,7 +121,7 @@
 
 After $0.25$ seconds, *Precision Protocol* can then be recast within the next $3.5$ seconds at no additional cost.
 
-**RECAST:** **Camille** mimics the first cast's effects. If *Precision Protocol* is recast after $1.5$ seconds of the first attack, then the **bonus** damage is doubled, and key=% of the attack's **total** damage will be dealt as true damage.
+**RECAST:** **Camille** mimics the first cast's effects. If *Precision Protocol* is recast after $1.5$ seconds of the first attack, then the **bonus** damage is doubled, and 40% / 44% / 48% / 52% / 56% / 60% / 64% / 68% / 72% / 76% / 80% / 84% / 88% / 92% / 96% / 100% of the attack's **total** damage will be dealt as true damage.
 
 | Attribute | Value |
 |-----------|------:|

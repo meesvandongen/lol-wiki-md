@@ -87,7 +87,7 @@
 | **Spell Effects** | Proc |
 | **Parry** | True |
 
-**INNATE:** **Riven**’s ability casts generate a stack of *Charge* for 6 seconds, refreshing on subsequent casts and stacking up to 3 times. **Riven**’s basic attacks are empowered to each consume a stack to deal **bonus** physical damage equal to key=% AD, reduced to「 50% ⟷ 」against structures.
+**INNATE:** **Riven**’s ability casts generate a stack of *Charge* for 6 seconds, refreshing on subsequent casts and stacking up to 3 times. **Riven**’s basic attacks are empowered to each consume a stack to deal **bonus** physical damage equal to 30 to 50 AD, reduced to「 50% ⟷ (30 to 50)*0.5 AD 」against structures.
 
 The **bonus** damage is affected by critical strike modifiers and applies life steal at 100% effectiveness.
 
@@ -205,7 +205,7 @@ The **bonus** damage is affected by critical strike modifiers and applies life s
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**ACTIVE:** **Riven** empowers her blade for 15 seconds, gaining 25% AD ad, range, and increased range on *Broken Wings* and *Ki Burst*.
+**ACTIVE:** **Riven** empowers her blade for 15 seconds, gaining 25% AD (ad) **bonus** attack damage, (range) 75 **bonus** attack range, and increased range on *Broken Wings* and *Ki Burst*.
 
  After $0.5$ seconds, she can cast *Wind Slash* within the duration.
 
@@ -234,7 +234,7 @@ The **bonus** damage is affected by critical strike modifiers and applies life s
 | **Spell Effects** | aoe |
 | **Projectile** | True |
 
-**ACTIVE:** **Riven** unleashes a wave of energy in a cone in the target direction that deals physical damage to enemies hit, increased by type= target's **missing** health.
+**ACTIVE:** **Riven** unleashes a wave of energy in a cone in the target direction that deals physical damage to enemies hit, increased by 0%–200%@0–75 (@=target's **missing** health).
 
 | Attribute | Value |
 |-----------|------:|
@@ -260,7 +260,7 @@ The **bonus** damage is affected by critical strike modifiers and applies life s
 
 ### V25.14
 - Runic Blade
-  - AD ratio reduced to key=% from key=%. *Formula is now also fully linear and no longer features a breakpoint at level 18.*
+  - AD ratio reduced to 30 to 50 from 30 +1.75*(x-1) for 17% / then +2. *Formula is now also fully linear and no longer features a breakpoint at level 18.*
 - Broken Wings
   - The third cast's displacement no longer prematurely ends when the affected enemy collides with a wall during it.
   - Occasionally, the third cast's knockback distance will be greatly increased.
@@ -309,7 +309,7 @@ The **bonus** damage is affected by critical strike modifiers and applies life s
 
 ### V13.4
 - Runic Blade
-  - AD ratio increased to key=% AD from key=% AD. *Now scales linearly.*
+  - AD ratio increased to 30 to 58% / 60% AD from 30%–60%@1–18 AD. *Now scales linearly.*
   - **New Effect:** Now applies bonus damage against structures at 50% effectiveness.
   - **New Effect:** Stacks now display on health bar for the player.
 

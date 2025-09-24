@@ -93,7 +93,7 @@ While under this state, **Karthus** becomes untargetable and immune to crowd con
 
 - *Death Defied*’s untargetability does not destroy in-flight projectiles.
 - **Karthus** cannot be executed by the Aspect of the Dragon during *Death Defied*.
-- At the start of *Death Defied*, **Karthus** is set to health.
+- At the start of *Death Defied*, **Karthus** is set to (health) 1 health.
   - **Karthus** can still regenerate his health over the duration, but he will always die at the end of it.
 - After *Death Defied* ends, the corpse of **Karthus** will retain unit collision despite being dead on the ground.
 - **Karthus' ** mana bar drains over the duration of *Death Defied* as an indicator of his time remaining in this state.
@@ -153,7 +153,7 @@ During *Death Defied*, target at maximum range (clamped) |
 |-----------|------:|
 | **Wall Length** | 800 / 900 / 1000 / 1100 / 1200 |
 
-Enemies that touch the wall are inflicted with magic penetration and become slowed for 5 seconds, decaying over the duration. This can affect enemies only once per cast.
+Enemies that touch the wall are inflicted with (magic penetration) 25% magic resistance reduction and become slowed for 5 seconds, decaying over the duration. This can affect enemies only once per cast.
 
 | Attribute | Value |
 |-----------|------:|

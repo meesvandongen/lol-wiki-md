@@ -91,7 +91,7 @@
 
 **INNATE:** Whenever **Ambessa** casts an ability, she generates a stack of *Medarda Maxim* after the ability's respective lockout for 4 seconds, refreshing with subsequent casts and stacking up to 3 times. Basic attacks consume one stack each to become empowered.
 
-**MEDARDA MAXIM:** **Ambessa**’s next basic attack on-attack is empowered to have an uncancellable windup, gain 75 **bonus** range and 50% **bonus** attack speed, and deal 5 to 30 (+ 30% **bonus** AD) **bonus** physical damage and restore energy.
+**MEDARDA MAXIM:** **Ambessa**’s next basic attack on-attack is empowered to have an uncancellable windup, gain 75 **bonus** range and 50% **bonus** attack speed, and deal 5 to 30 (+ 30% **bonus** AD) **bonus** physical damage and restore (energy) 40 to 70 energy.
 
 **Notes:**
 
@@ -369,7 +369,7 @@ Additionally, **Ambessa** shields herself at the time of cast for 50 to 320 (+ 1
 - Drakehound's Step - Innate
   - **INNATE:** During the lockout of **Ambessa**’s abilities, inputting an attack or movement command (Default MB2/right click) causes her to dash to or towards (If inputted outside of the maximum dash range, she will dash the maximum distance towards the target/location) the target or location, respectively, after the lockout ends. This dash cannot pass through terrain. **Ambessa** cannot dash while immobilized or grounded.
   - **INNATE:** Whenever **Ambessa** casts an ability, she generates a stack of *Medarda Maxim* after the ability's respective lockout for 4 seconds, refreshing with subsequent casts and stacking up to 3 times.
-  - **MEDARDA MAXIM:** **Ambessa**’s next basic attack on-attack is empowered to have an uncancellable windup, gain 75 **bonus** range and 50% **bonus** attack speed, and consume a stack to deal 5 to 30 (+ 30% **bonus** AD) **bonus** physical damage and restore energy.
+  - **MEDARDA MAXIM:** **Ambessa**’s next basic attack on-attack is empowered to have an uncancellable windup, gain 75 **bonus** range and 50% **bonus** attack speed, and consume a stack to deal 5 to 30 (+ 30% **bonus** AD) **bonus** physical damage and restore (energy) 40 to 70 energy.
   - **TARGET RANGE:** 175 (Minimum dash distance) / 350 (Maximum dash distance), **SPEED:** 770@1; 830@6; 890@11; 950@16 + 100% movement speed.
 - Cunning Sweep - Q1
   - **ACTIVE:** **Ambessa** enters a $0.225$-second lockout, at the end of which she slashes with her twin drakehounds in a cone in the target direction, dealing 20 / 30 / 40 / 50 / 60 (+ 30% **bonus** AD) (+ 1 / 1.5 / 2 / 2.5 / 3% (+ $1.5$% per 100 **bonus** AD) of the target's **maximum** health) physical damage to enemies hit. The damage is doubled against enemies hit by the outer edge.

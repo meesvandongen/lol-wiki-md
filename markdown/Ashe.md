@@ -90,9 +90,9 @@
 
 **INNATE:** **Ashe**’s basic attacks deal **bonus** physical damage equal to critical strike chance. Critical strikes do not deal any additional damage.
 
-**INNATE - FROST SHOT:** **Ashe**’s basic attacks and ability hits apply *Frost* to enemies for 2 seconds, which slows them by key=% for the duration.
+**INNATE - FROST SHOT:** **Ashe**’s basic attacks and ability hits apply *Frost* to enemies for 2 seconds, which slows them by 20 to 30 for the duration.
 
-**INNATE - CRITICAL SLOW:** **Ashe**’s critical strikes double *Frost*’s slow strength to key=%, decaying over the first second of the duration to its normal strength.
+**INNATE - CRITICAL SLOW:** **Ashe**’s critical strikes double *Frost*’s slow strength to 20×2 to 30×2, decaying over the first second of the duration to its normal strength.
 
 **Notes:**
 
@@ -118,7 +118,7 @@
 
 **PASSIVE:** While *Ranger's Focus* is inactive, **Ashe**’s basic attacks on-attack generate a stack of *Focus* for 4 seconds, refreshing on subsequent attacks and stacking up to 4 times. Stacks expire by one every second when the duration ends.
 
-**ACTIVE:** For 6 seconds, **Ashe** gains as and empowers her basic attacks to fire a flurry of five arrows that deal ***modified** physical damage. The flurries apply life steal and Frost Shot per arrow, but apply on-hit effects only once.
+**ACTIVE:** For 6 seconds, **Ashe** gains (as) **bonus** attack speed and empowers her basic attacks to fire a flurry of five arrows that deal ***modified** physical damage. The flurries apply life steal and Frost Shot per arrow, but apply on-hit effects only once.
 
 | Attribute | Value |
 |-----------|------:|
@@ -234,7 +234,7 @@ Enemies can intercept multiple arrows but do not take damage from any beyond the
 | **Spell Effects** | aoe |
 | **Projectile** | True |
 
-**ACTIVE:** **Ashe** fires a massive arrow of ice in the target direction, granting sight of the area (Cannot grant sight through terrain and can only grant sight into brush when the missile flies through that brush) it flies through each for 1 second. The arrow shatters upon hitting an enemy champion, dealing them magic damage, stunning them for type=distance traveled seconds, and granting sight of the area around them for 1 second.
+**ACTIVE:** **Ashe** fires a massive arrow of ice in the target direction, granting sight of the area (Cannot grant sight through terrain and can only grant sight into brush when the missile flies through that brush) it flies through each for 1 second. The arrow shatters upon hitting an enemy champion, dealing them magic damage, stunning them for 1–3.5@0–2800 (@=distance traveled) seconds, and granting sight of the area around them for 1 second.
 
 | Attribute | Value |
 |-----------|------:|
@@ -288,8 +288,8 @@ Enemies surrounding the primary target are dealt the same damage and afflicted w
 
 ### V25.S1.1
 - Frost Shot
-  - **New Effect:** **Ashe**’s basic attacks deal bonus damage equal to (75% + Infinity Edge) critical strike chance. Additionally, her basic attacks and ability hits apply *Frost* to enemies for 2 seconds, which slows them by key=% for the duration.
-  - **OLD EFFECT:** **Ashe**’s basic attack and ability hits apply *Frost* to enemies for 2 seconds, which slows them by key=% for the duration. Basic attacks against enemies affected by *Frost* are modified to deal 115% (+ (75% + Infinity Edge) critical strike chance) damage.
+  - **New Effect:** **Ashe**’s basic attacks deal bonus damage equal to (75% + Infinity Edge) critical strike chance. Additionally, her basic attacks and ability hits apply *Frost* to enemies for 2 seconds, which slows them by 20 to 30 for the duration.
+  - **OLD EFFECT:** **Ashe**’s basic attack and ability hits apply *Frost* to enemies for 2 seconds, which slows them by 20 to 30 for the duration. Basic attacks against enemies affected by *Frost* are modified to deal 115% (+ (75% + Infinity Edge) critical strike chance) damage.
 - Ranger's Focus
   - Bonus attack speed increased to 25 / 35 / 45 / 55 / 65% from 25 / 32.5 / 40 / 47.5 / 55%.
   - Damage per flurry increased to 110 / 115 / 120 / 125 / 130% AD from 105 / 110 / 115 / 120 / 125% AD.

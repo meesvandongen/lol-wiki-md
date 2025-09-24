@@ -88,7 +88,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Soraka** gains ms while facing nearby allied champions that are below 40% of their **maximum** health.
+**INNATE:** **Soraka** gains (ms) 90% **bonus** movement speed while facing nearby allied champions that are below 40% of their **maximum** health.
 
 **Notes:**
 
@@ -113,7 +113,7 @@
 | **Projectile** | True |
 | **Out of Range Behavior** | walk to location |
 
-**ACTIVE:** **Soraka** calls down a star upon the target location that grants sight of the area before landing after type=target range seconds, dealing magic damage to enemies hit and slowing them by 30% for $1.5$ seconds.
+**ACTIVE:** **Soraka** calls down a star upon the target location that grants sight of the area before landing after 0.25–1@50–800 (@=target range) seconds, dealing magic damage to enemies hit and slowing them by 30% for $1.5$ seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -121,7 +121,7 @@
 
 If this hits at least one enemy champion, star dust returns to **Soraka**, granting her *Rejuvenation* for $2.5$ seconds. While **Soraka** has *Rejuvenation*, casting *Astral Infusion* will also grant *Rejuvenation* to the target for the same duration.
 
-**REJUVENATION**: Heal every $0.2$ seconds and gain ms that decays over the duration.
+**REJUVENATION**: Heal every $0.2$ seconds and gain (ms) **bonus** movement speed that decays over the duration.
 
 | Attribute | Value |
 |-----------|------:|
@@ -171,7 +171,7 @@ If cast while under *Rejuvenation*, the health cost will be reduced by a percent
 **Notes:**
 
 - *Astral Infusion* can also be targeted on allied decoys.
-- *Astral Infusion* can be cast even if **Soraka** doesn't have the sufficient amount of health to pay for the health cost while above health.
+- *Astral Infusion* can be cast even if **Soraka** doesn't have the sufficient amount of health to pay for the health cost while above (health) 5% of her **maximum** health.
   - As with all abilities with health costs, *Astral Infusion* will not reduce **Soraka**’s health below 1.
 - Spirit Visage will only increase the health donated to allies if the target ally possesses it, although owning it *will* boost the heal that **Soraka** receives from Starcall and Wish.
 - *Astral Infusion*’s effects occur before the cast time.

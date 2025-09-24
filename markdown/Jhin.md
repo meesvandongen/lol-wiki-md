@@ -114,9 +114,9 @@
 
 **INNATE - DEATH IN 4 ACTS:** **Jhin**’s basic attacks consume ammunition within 4 rounds. He will reload (Jhin is unable to declare basic attacks during this time.) over $2.5$ seconds immediately after expending all rounds or withholding leftover rounds after 10 seconds of being out of combat and not being affected by crowd control. The latter reload can be interrupted by declaring an attack or casting an ability.
 
-**Jhin**’s final round attack has an uncancellable windup, always critically strikes, including against structures, and deals **bonus** physical damage equal to key=% of the target's **missing** health. The damage based on the target's health is capped at 800 against monsters.
+**Jhin**’s final round attack has an uncancellable windup, always critically strikes, including against structures, and deals **bonus** physical damage equal to 15%–25%@1–11 of the target's **missing** health. The damage based on the target's health is capped at 800 against monsters.
 
-**INNATE - EVERY MOMENT MATTERS:** **Jhin** gains ad equal to key=%「 (+ $0.35$% per 1% critical strike chance) (+ $0.3$% per 1% **bonus** attack speed) ⟷ (+ 35% critical strike chance) (+ 30% **bonus** attack speed) 」AD.
+**INNATE - EVERY MOMENT MATTERS:** **Jhin** gains (ad) **bonus** attack damage equal to 4% / 5% / 6% / 7% / 8% / 9% / 10% / 11% / 12% / 14% / 16% / 20% / 24% / 28% / 32% / 36% / 40% / 44%「 (+ $0.35$% per 1% critical strike chance) (+ $0.3$% per 1% **bonus** attack speed) ⟷ (+ 35% critical strike chance) (+ 30% **bonus** attack speed) 」AD.
 
 Additionally, critical strikes against enemies grant **Jhin** 14% (+ $0.4$% per 1% **bonus** attack speed) **bonus** movement speed for 2 seconds.
 
@@ -203,7 +203,7 @@ The grenade's damage is increased by 35% any time an enemy dies by any means aft
 | **Physical Damage** | 60 / 95 / 130 / 165 / 200 (+ 50% AD) |
 | **Minion Damage** | 45 / 71.25 / 97.5 / 123.75 / 150 (+ $37.5$% AD) |
 
-Hitting a *marked* champion roots them for a duration and grants **Jhin** Every Moment Matters’s ms.
+Hitting a *marked* champion roots them for a duration and grants **Jhin** Every Moment Matters’s (ms) **bonus** movement speed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -285,7 +285,7 @@ Hitting a *marked* champion roots them for a duration and grants **Jhin** Every 
 
 **ACTIVE:** **Jhin** channels for up to 10 seconds, transforming his weapon into a cannon and gaining the ability to recast *Curtain Call* 4 times within the duration.
 
-**RECAST:** After $0.2$ seconds into the cast time, **Jhin** fires a round in the target direction that grants sight around its trajectory for $0.5$ seconds and deals physical damage to enemies hit, increased by type=target's **missing** health. The bullet stops upon hitting an enemy champion, slowing them by 80% for $0.5$ seconds and revealing them for 2 seconds. Each cast has a static cooldown (Unaffected by ability haste) of 1 second.
+**RECAST:** After $0.2$ seconds into the cast time, **Jhin** fires a round in the target direction that grants sight around its trajectory for $0.5$ seconds and deals physical damage to enemies hit, increased by 0%–300%@0–100 (@=target's **missing** health). The bullet stops upon hitting an enemy champion, slowing them by 80% for $0.5$ seconds and revealing them for 2 seconds. Each cast has a static cooldown (Unaffected by ability haste) of 1 second.
 
 | Attribute | Value |
 |-----------|------:|

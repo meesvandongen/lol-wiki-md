@@ -91,7 +91,7 @@
 
 **INNATE:** Scoring a champion takedown within 3 seconds of damaging them will reduce the **current** cooldowns of **Katarina**’s abilities by 15 seconds.
 
-**INNATE - SINISTER STEEL:** Whenever **Katarina** retrieves a Dagger, she slashes around herself to deal 68 / 72 / 77 / 82 / 89 / 96 / 103 / 112 / 121 / 131 / 142 / 154 / 166 / 180 / 194 / 208 / 224 / 240 (+ 60% **bonus** AD) (+ key=% AP) magic damage to nearby enemies, apply on-hit effects to enemy champions hit, and reduce *Shunpo*’s **current** cooldown by key=% of its **total** cooldown.
+**INNATE - SINISTER STEEL:** Whenever **Katarina** retrieves a Dagger, she slashes around herself to deal 68 / 72 / 77 / 82 / 89 / 96 / 103 / 112 / 121 / 131 / 142 / 154 / 166 / 180 / 194 / 208 / 224 / 240 (+ 60% **bonus** AD) (+ 70%–100%@1–16 AP) magic damage to nearby enemies, apply on-hit effects to enemy champions hit, and reduce *Shunpo*’s **current** cooldown by 78%–96%@1–16 of its **total** cooldown.
 
 Daggers grant sight of their radius and will disappear after being on the ground for 4 seconds.
 
@@ -146,7 +146,7 @@ The Dagger lands after striking the first target, about 350 units (slightly rand
 | **Targeting** | Auto |
 | **Affects** | Self |
 
-**ACTIVE:** **Katarina** tosses a Dagger into the above her current location and gains ms that decays until it lands after $1.25$ seconds, becoming ghosted for the same duration.
+**ACTIVE:** **Katarina** tosses a Dagger into the above her current location and gains (ms) **bonus** movement speed that decays until it lands after $1.25$ seconds, becoming ghosted for the same duration.
 
 | Attribute | Value |
 |-----------|------:|
@@ -292,7 +292,7 @@ Each dagger deals physical damage and magic damage, applies on-hit effects, with
 
 ### V13.7
 - Voracity
-  - AP ratio increased to key=% AP from key=% AP.
+  - AP ratio increased to 70%–100%@1–16 AP from 65%–95%@1–16 AP.
 - Death Lotus
   - Physical damage changed to 16% (+ 50% per 100% **bonus** attack speed) **bonus** AD from 18% (+ 30% per 100% **bonus** attack speed) **bonus** AD.
     - *Note:* The reduction of the base ratio evens out at 10% **bonus** attack speed, and **Katarina** has $10.82$% **bonus** attack speed at level 6 from level growth alone, hence this is always an increase.
@@ -304,7 +304,7 @@ Each dagger deals physical damage and magic damage, applies on-hit effects, with
 
 ### V12.12#June_30th_Hotfix|V12.12
 - Voracity
-  - AP ratio increased to key=% AP from key=% AP.
+  - AP ratio increased to 65%–95%@1–16 AP from 55%–88%@1–16 AP.
 - Bouncing Blade
   - Base damage increased to 80 / 110 / 140 / 170 / 200 from 75 / 105 / 135 / 165 / 195.
   - AP ratio increased to 35% AP from 30% AP.

@@ -92,7 +92,7 @@
 
 **INNATE:** **Twitch**’s basic attacks on-hit apply a stack of *Deadly Venom* for 6 seconds, refreshing on subsequent applications and stacking up to 6 times.
 
-**DEADLY VENOM:** For each stack, the target is dealt「 true damage (+ 3% AP) true damage per second over the duration, ⟷ true damage (+ 18% AP) **total** true damage over the duration, 」for a maximum of「 1×6 to 5×6 for 5 (+ 18% AP) true damage with each tick. ⟷ 1×6×6 to 5×6×6 for 5 (+ 108% AP) **total** true damage over the duration. 」This effect is considered a poison.
+**DEADLY VENOM:** For each stack, the target is dealt「 (true damage) 1–5@1–17 (+ 3% AP) true damage per second over the duration, ⟷ (true damage) 1×6 to 5×6 for 5 (+ 18% AP) **total** true damage over the duration, 」for a maximum of「 1×6 to 5×6 for 5 (+ 18% AP) true damage with each tick. ⟷ 1×6×6 to 5×6×6 for 5 (+ 108% AP) **total** true damage over the duration. 」This effect is considered a poison.
 
 **Notes:**
 
@@ -120,7 +120,7 @@
 |-----------|------:|
 | **Stealth Duration** | 10 / 11 / 12 / 13 / 14 seconds |
 
-During this time, **Twitch** gains ms, increased to 30% while facing enemy champions within a 1000-unit radius who cannot see him.
+During this time, **Twitch** gains (ms) 10% **bonus** movement speed, increased to 30% while facing enemy champions within a 1000-unit radius who cannot see him.
 
 Upon breaking stealth, **Twitch** gains **bonus** attack speed for 6 seconds.
 
@@ -216,7 +216,7 @@ The area then becomes contaminated for 3 seconds, applying a *Deadly Venom* stac
 |-----------|------:|
 | **Range** | 1100 (bolt travel distance, further increased by Rapid Firecannon) units |
 | **Cast Time** | none |
-| **Target Range** | er Twitch's range |
+| **Target Range** | er Twitch's (range) attack range |
 | **Width** | 120 (bolt width) units |
 | **Speed** | 5000 units/second |
 | **Cost** | 100 Mana |
@@ -230,13 +230,13 @@ The area then becomes contaminated for 3 seconds, applying a *Deadly Venom* stac
 | **Parry** | True |
 | **Call For Help** | True |
 
-**ACTIVE:** **Twitch** gains **bonus** attack damage and range for 6 seconds, during which his basic attacks are replaced by *bolts* that travel slightly further than his attack range in a straight line, dealing damage to every enemy unit (non-champions and champions, wards and plants, turrets and structures) hit.
+**ACTIVE:** **Twitch** gains **bonus** attack damage and (range) 300 **bonus** attack range for 6 seconds, during which his basic attacks are replaced by *bolts* that travel slightly further than his attack range in a straight line, dealing damage to every enemy unit (non-champions and champions, wards and plants, turrets and structures) hit.
 
 | Attribute | Value |
 |-----------|------:|
 | **Bonus Attack Damage** | 30 / 37.5 / 45 / 52.5 / 60 |
 
-The *bolts* deal key=% of the triggering attack's damage, apply on-hit effects, and can critically strike for damage.
+The *bolts* deal 100% / -70% of the triggering attack's damage, apply on-hit effects, and can critically strike for damage.
 
 **Notes:**
 
@@ -248,7 +248,7 @@ The *bolts* deal key=% of the triggering attack's damage, apply on-hit effects, 
 - If **Twitch** is blinded before winding up the attack, the hits will *miss* against **all** targets.
 - Runaan's Hurricane Wind's Fury interacts with *Spray and Pray*’s **bonus** attack range but not with the modified missile effect (the secondary bolts will not have pass-through effects).
 - Whenever the *bolts* penetrate a target, a small elongated cloud appears at the location, which's VFX and SFX **can** be seen and heard inside the Fog of War.
-- The *bolts** travel distance scales with the full value of **Twitch**’s range increases such as Rapid Firecannon, but not with increases (which only increase his effective attack range, thereby the target range).
+- The *bolts** travel distance scales with the full value of **Twitch**’s (range) attack range increases such as Rapid Firecannon, but not with increases (which only increase his effective attack range, thereby the target range).
 - (Outdated as of V10.13, now can hit everything with edge range, except for turrets) The cr center of a unit must be within the maximum travel distance of the *bolt* missile, and in front of the spawn location (**Twitch**’s cr center) for the *bolt* to be able to hit them.
   - Other than this condition, the *bolt* missile has to only touch (pass within its half width of 60 units) the er edge of the unit's radius.
   - This is standard behaviour for *linear skillshots*.

@@ -93,7 +93,7 @@
 
 **ABLAZE:** While afflicted with *Ablaze*, the target is dealt magic damage equal to「 2% of their **maximum** health over 4 seconds. ⟷ 0.167% of their **maximum** health every $0.25$ seconds over 4 seconds. 」Each stack of *Ablaze* deals damage to the target individually and applies their damage ticks dependent on the time they were applied, even if the duration of all the stacks are refreshed. *Ablaze* deals 260% damage per tick to monsters; this damage is capped at「 40/4 to (40/4)*3 per tick against non-epic monsters and 80/4 to (80/4)*3 per tick against epic monsters. ⟷ a total of 40×4 to 40×4×3 against non-epic monsters and 80×4 to 80×4×3 against epic monsters. 」
 
-Upon applying 3 stacks of *Ablaze* to a large monster or enemy champion, the fire becomes unstable, causing it form a fiery around the target that grants sight within its radius and, after 2 seconds, consumes their stacks to explode. All enemies within the detonation are applied a stack of *Ablaze* and dealt magic damage equal to key=% (+ 2% per 100 AP) of their **maximum** health, capped at 270 to 525 against monsters.
+Upon applying 3 stacks of *Ablaze* to a large monster or enemy champion, the fire becomes unstable, causing it form a fiery around the target that grants sight within its radius and, after 2 seconds, consumes their stacks to explode. All enemies within the detonation are applied a stack of *Ablaze* and dealt magic damage equal to 8%–12%@1–17 (+ 2% per 100 AP) of their **maximum** health, capped at 270 to 525 against monsters.
 
 **Brand** cannot stack *Ablaze* more than once on enemies that have had a explode from them in the last 4 seconds.
 
@@ -286,7 +286,7 @@ Upon applying 3 stacks of *Ablaze* to a large monster or enemy champion, the fir
 - Stats
   - Base mana regeneration reduced to 9 from $10.65$.
 - Blaze
-  - Explosion base damage reduced to 8 / 8.25 / 8.5 / 8.75 / 9 / 9.25 / 9.5 / 9.75 / 10 / 10.25 / 10.5 / 10.75 / 11 / 11.25 / 11.5 / 11.75 / 12 of target's **maximum** health from 9 / 9.25 / 9.5 / 9.75 / 10 / 10.25 / 10.5 / 10.75 / 11 / 11.25 / 11.5 / 11.75 / 12 / 12.25 / 12.5 / 12.75 / 13.
+  - Explosion base damage reduced to 8% / 8.25% / 8.5% / 8.75% / 9% / 9.25% / 9.5% / 9.75% / 10% / 10.25% / 10.5% / 10.75% / 11% / 11.25% / 11.5% / 11.75% / 12% of target's **maximum** health from 9% / 9.25% / 9.5% / 9.75% / 10% / 10.25% / 10.5% / 10.75% / 11% / 11.25% / 11.5% / 11.75% / 12% / 12.25% / 12.5% / 12.75% / 13%.
 - Sear
   - Mana cost increased to 70 from 50.
 

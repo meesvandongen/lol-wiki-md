@@ -138,7 +138,7 @@ He also gains a shield that absorbs magic damage for $1.5$ seconds.
 
 **PASSIVE:** **Kassadin**’s basic attacks deal 20 (+ 10% AP) **bonus** magic damage on-hit.
 
-**ACTIVE:** **Kassadin** empowers his next basic attack within 5 seconds to have an uncancellable windup, gain range, deal increased **bonus** magic damage, and restore mana, with the restoration amount quintupled against champions.
+**ACTIVE:** **Kassadin** empowers his next basic attack within 5 seconds to have an uncancellable windup, gain (range) 50 **bonus** range, deal increased **bonus** magic damage, and restore mana, with the restoration amount quintupled against champions.
 
 | Attribute | Value |
 |-----------|------:|
@@ -203,7 +203,7 @@ He also gains a shield that absorbs magic damage for $1.5$ seconds.
 | **Cast Time** | $0.25$ seconds |
 | **Target Range** | 500 (Maximum range, has no minimum range) units |
 | **Effect Radius** | 270 units |
-| **Cost** | 40×2^(x-1) 2 ^ Stacks Mana |
+| **Cost** | 40 / 5242880 2 ^ Stacks Mana |
 | **Cooldown** | 5 / 4.25 / 3.5 / 2.75 / 2 seconds |
 | **Targeting** | Location |
 | **Affects** | Enemies |

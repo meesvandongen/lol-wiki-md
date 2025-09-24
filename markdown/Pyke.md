@@ -87,7 +87,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Pyke**’s health cannot increase except through growth (per level), instead he gains「 1 **bonus** attack damage per 14 **bonus** health. ⟷ **bonus** attack damage equal to $7.143$% of **bonus** health. 」
+**INNATE:** **Pyke**’s (health) **maximum** health cannot increase except through growth (per level), instead he gains「 1 **bonus** attack damage per 14 **bonus** health. ⟷ **bonus** attack damage equal to $7.143$% of **bonus** health. 」
 
 **INNATE:** **Pyke** gains 1 **bonus** movement speed while in the river.
 
@@ -99,7 +99,7 @@ While **Pyke** is not visible to enemies, he rapidly consumes his grey health to
 
 - Game elements that increase health based on the champion's health (e.g Overgrowth) will increase the health before getting converted by *Gift of the Drowned Ones*, thus granting increased bonus AD.
 - Spirit Visage and Grievous Wounds take effect after *Gift of the Drowned Ones*’s healing cap. ***Pyke**’s *grey health* does not have a time limit, and will stay on his health bar until **Pyke** leaves enemy vision or dies.
-- Since **Pyke**’s **maximum** health cannot be increased, *Gift of the Drowned Ones* reaches the upper cap of 55% of **maximum** health at (0.6*( **bonus** attack damage.
+- Since **Pyke**’s **maximum** health cannot be increased, *Gift of the Drowned Ones* reaches the upper cap of 55% of **maximum** health at (0.6*(Pyke*(x-1)*(0.7025+0.0175*(x-1)))-80)/8|color=ad **bonus** attack damage.
 - Untargetable champions count towards **Pyke**’s modified *grey health* storing.
 - Amount of attack damage granted from list of items that grants health, converted with *Gift of the Drowned Ones*:
 
@@ -110,7 +110,7 @@ While **Pyke** is not visible to enemies, he rapidly consumes his grey health to
 | Attribute | Value |
 |-----------|------:|
 | **Cast Time** | $0.25$ (Quick-release) seconds |
-| **Target Range** | channel time |
+| **Target Range** | 400–400 to 1100 for 7@0–0 (@=channel time) units |
 | **Effect Radius** | 550 (Pull range) units |
 | **Width** | 140 (Harpoon missile) / 200 (Thrust hitbox) units |
 | **Cost** | 70 / 75 / 80 / 85 / 90 Mana |
@@ -135,7 +135,7 @@ While **Pyke** is not visible to enemies, he rapidly consumes his grey health to
 
 Releasing the ability within $0.4$ seconds causes **Pyke** to instead thrust his blade in the target direction, dealing the same damage to the closest enemy champion, or closest enemy otherwise.
 
-If the charge is interrupted or completes without reactivation, *Bone Skewer* is cancelled and the ability is put on cd cooldown but refunds mana. *Bone Skewer*’s mana cost is also refunded if it hits an enemy champion.
+If the charge is interrupted or completes without reactivation, *Bone Skewer* is cancelled and the ability is put on (cd) full cooldown but refunds (mana) 75% of the mana cost. *Bone Skewer*’s mana cost is also refunded if it hits an enemy champion.
 
 **Notes:**
 
@@ -159,7 +159,7 @@ If the charge is interrupted or completes without reactivation, *Bone Skewer* is
 | **Affects** | Self |
 | **Detection Radius** | 600 |
 
-**ACTIVE:** **Pyke** submerges into water for 5 seconds, entering camouflage and gaining ms that decays over the duration. Attacking or casting abilities ends *Ghostwater Dive* immediately.
+**ACTIVE:** **Pyke** submerges into water for 5 seconds, entering camouflage and gaining (ms) 45% (+ 2% per 1 Lethality) **bonus** movement speed that decays over the duration. Attacking or casting abilities ends *Ghostwater Dive* immediately.
 
 *Enemy champions within 1500 units of **Pyke** are alerted of his presence and whether he can execute them with Death from Below.*
 

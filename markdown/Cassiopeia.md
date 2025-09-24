@@ -78,14 +78,14 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Cassiopeia** gains 4 to 72 ms, but she cannot purchase Boots items.
+**INNATE:** **Cassiopeia** gains 4 to 72 (ms) **bonus** movement speed, but she cannot purchase Boots items.
 
 **BLESSING OF NOXUS BONUS:** *Serpentine Grace*’s **bonus** movement speed is increased by 1 to 18, for a total of 4+1 to 72+18.
 
 **Notes:**
 
 - The movement speed from *Serpentine Grace* is worth 48 gold per level, up to a maximum of 864 gold at level 18.
-- Without other movement speed modifiers taken into account, *Serpentine Grace* grants **Cassiopeia** a total of 4+ ms.
+- Without other movement speed modifiers taken into account, *Serpentine Grace* grants **Cassiopeia** a total of 4+Cassiopeia|color=ms (ms) movement speed.
 - As Magical Footwear grants boots, the rune will be replaced with Cash Back.
 
 ---
@@ -113,7 +113,7 @@
 | **Total Magic Damage** | 75 / 110 / 145 / 180 / 215 (+ 65% AP) |
 | **Magic Damage Per Tick** | 10.71 / 15.71 / 20.71 / 25.71 / 30.71 (+ 9.29% AP) |
 
-If *Noxious Blast* hits an enemy champion, **Cassiopeia** gains ms that decays over 3 seconds.
+If *Noxious Blast* hits an enemy champion, **Cassiopeia** gains (ms) **bonus** movement speed that decays over 3 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -193,7 +193,7 @@ Enemies within the clouds are poisoned to take magic damage every 0.263 seconds 
 | **Projectile** | True |
 | **Call For Help** | True |
 
-**ACTIVE:** **Cassiopeia** launches her fangs at the target enemy that deal 52 to 120 (+ 10% AP) magic damage. If this kills the target, *Twin Fang*’s mana is refunded.
+**ACTIVE:** **Cassiopeia** launches her fangs at the target enemy that deal 52 to 120 (+ 10% AP) magic damage. If this kills the target, *Twin Fang*’s (mana) mana cost is refunded.
 
 Against a poisoned target, *Twin Fang* deals **bonus** magic damage and heals **Cassiopeia**. The heal is reduced by 75% against minions and small and medium monsters.
 

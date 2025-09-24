@@ -79,7 +79,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** When **Varus** kills an enemy, he gains attack speed as well as **bonus** attack damage and ability power equal to 10% **bonus** attack speed for 5–11@1–16 seconds.
+**INNATE:** When **Varus** kills an enemy, he gains (attack speed) 10 to 20 **bonus** attack speed as well as **bonus** attack damage and ability power equal to 10% **bonus** attack speed for 5–11@1–16 seconds.
 
 This is increased to 50% **bonus** attack speed and **bonus** attack damage and ability power equal to 25% **bonus** attack speed upon scoring a champion takedown.
 
@@ -96,7 +96,7 @@ While *Living Vengeance*’s bonus is active, **Varus' **attack speed cap is inc
 
 | Attribute | Value |
 |-----------|------:|
-| **Range** | time70+(116.66 per 0.25 seconds). *This is capped at 1.5 seconds.* units |
+| **Range** | 895 to 159570+(116.66 per 0.25 seconds). *This is capped at 1.5 seconds.* units |
 | **Cast Time** | none |
 | **Width** | 140 units |
 | **Speed** | 1900 (Missile speed) units/second |
@@ -113,9 +113,9 @@ While *Living Vengeance*’s bonus is active, **Varus' **attack speed cap is inc
 
 **ACTIVE:** **Varus** charges while being slowed by 20% for up to 4 seconds to increase *Piercing Arrow*’s range over the first $1.5$ seconds and its effects over the first $1.25$ seconds of the channel.
 
-*Piercing Arrow* can be recast within the duration. If the charge completes without reactivation, *Piercing Arrow* is cancelled and refunds mana.
+*Piercing Arrow* can be recast within the duration. If the charge completes without reactivation, *Piercing Arrow* is cancelled and refunds (mana) 50% of the mana cost.
 
-**RECAST:** **Varus** fires a piercing arrow in the target direction that deals physical damage to enemies hit. The damage of the arrow as well as any detonated *Blight* stacks are both increased by type=channel time, and the arrow's damage is reduced by type=number of enemies hit.
+**RECAST:** **Varus** fires a piercing arrow in the target direction that deals physical damage to enemies hit. The damage of the arrow as well as any detonated *Blight* stacks are both increased by 0% / 10% / 20% / 30% / 40% / 50%, and the arrow's damage is reduced by 0 to 60 for 5%–67%@0–5 (@=number of enemies hit).
 
 | Attribute | Value |
 |-----------|------:|
@@ -157,9 +157,9 @@ While *Living Vengeance*’s bonus is active, **Varus' **attack speed cap is inc
 |-----------|------:|
 | **Bonus Magic Damage** | 6 / 14 / 22 / 30 / 38 (+ 35% AP) |
 
-**BLIGHT:** For each stack consumed, the target is dealt **bonus** magic damage. If the stacks were consumed with *Piercing Arrow*, this damage is increased by 0 / 5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50, for a total cap of 360 at maximum stacks.
+**BLIGHT:** For each stack consumed, the target is dealt **bonus** magic damage. If the stacks were consumed with *Piercing Arrow*, this damage is increased by 0% / 5% / 10% / 15% / 20% / 25% / 30% / 35% / 40% / 45% / 50%, for a total cap of 360 at maximum stacks.
 
-Additionally, each stack consumed against a champion or epic monster reduces the of **Varus' ** basic abilities by 13% of each of their **total** cooldowns, up to a 39% cooldown reduction per target. If the stacks were consumed with **Piercing Arrow**, the cooldown reduction is increased by 0 / 5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50 cooldown reduction per target from consuming maximum stacks against them.
+Additionally, each stack consumed against a champion or epic monster reduces the of **Varus' ** basic abilities by 13% of each of their **total** cooldowns, up to a 39% cooldown reduction per target. If the stacks were consumed with **Piercing Arrow**, the cooldown reduction is increased by 0% / 5% / 10% / 15% / 20% / 25% / 30% / 35% / 40% / 45% / 50% cooldown reduction per target from consuming maximum stacks against them.
 
 | Attribute | Value |
 |-----------|------:|
@@ -171,7 +171,7 @@ Additionally, each stack consumed against a champion or epic monster reduces the
 | ** Maximum Bonus Magic Damage per Stack |
 | **4.5 / 5.25 / 6 / 6.75 / 7.5% (+ 2.25% per 100 AP) of the target's **maximum** health** | Maximum Bonus Magic Damage at Max Stacks** | 13.5 / 15.75 / 18 / 20.25 / 22.5% (+ 6.75% per 100 AP) of the target's **maximum** health |
 
-**ACTIVE:** **Varus**' next *Piercing Arrow* within $5.5$ seconds is empowered to deal **additional bonus** magic damage, increased by 0 / 5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50.
+**ACTIVE:** **Varus**' next *Piercing Arrow* within $5.5$ seconds is empowered to deal **additional bonus** magic damage, increased by 0% / 5% / 10% / 15% / 20% / 25% / 30% / 35% / 40% / 45% / 50%.
 
 | Attribute | Value |
 |-----------|------:|
@@ -195,7 +195,7 @@ If **Varus** does not cast *Piercing Arrow*, *Blighted Quiver* can be recast aft
 
 **Notes:**
 
-- The monster damage cap is also increased by 0 / 5 / 10 / 15 / 20 / 25 / 30 / 35 / 40 / 45 / 50*.
+- The monster damage cap is also increased by 0% / 5% / 10% / 15% / 20% / 25% / 30% / 35% / 40% / 45% / 50%*.
 - Spell shield will not block the on-hit damage but will block the consumption damage if the target is hit by his abilities.
 - *Blighted Quiver* will not apply stacks nor deal on-hit damage if blocked by blind, block or dodge effects.
   - The consumption damage will not be blocked.

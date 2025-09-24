@@ -91,7 +91,7 @@
 
 **INNATE:** **Vel'Koz**’s abilities apply a stack of *Deconstruction* to enemies hit for 7 seconds, refreshing on basic attacks and subsequent applications and stacking up to 3 times.
 
-The third stack consumes them all to deal true damage (+ 60% AP) **bonus** true damage.
+The third stack consumes them all to deal (true damage) 35 to 180 (+ 60% AP) **bonus** true damage.
 
 **Notes:**
 
@@ -132,7 +132,7 @@ The third stack consumes them all to deal true damage (+ 60% AP) **bonus** true 
 
 **RECAST:** **Vel'Koz** splits the bolt in two over $0.25$ seconds (Estimated), each part firing perpendicularly in opposite directions and applying the same effects to enemies hit.
 
-Whenever *Plasma Fission* kills an enemy, **Vel'Koz** restores mana.
+Whenever *Plasma Fission* kills an enemy, **Vel'Koz** restores (mana) mana.
 
 | Attribute | Value |
 |-----------|------:|

@@ -163,7 +163,7 @@ Enemies hit are dealt *Edge of Ixtal*’s damage, reduced to 75% against subsequ
 | **Physical Damage** | 70 / 100 / 130 / 160 / 190 (+ 90% **bonus** AD) |
 | **Reduced Damage** | 67.5 / 86.25 / 105 / 123.75 / 142.5 (+ 67.5% **bonus** AD) |
 
-**BRUSH:** The blade creates a grass field around **Qiyana** that lasts for up to 3 seconds, granting her invisibility and ms until she attacks, casts an ability other than *Terrashape*, or exits the field.
+**BRUSH:** The blade creates a grass field around **Qiyana** that lasts for up to 3 seconds, granting her invisibility and (ms) 20% **bonus** movement speed until she attacks, casts an ability other than *Terrashape*, or exits the field.
 
 **RIVER:** The blast roots enemies hit for $0.5$ seconds, then slows them by 20% for 1 second.
 
@@ -199,7 +199,7 @@ Enemies hit are dealt *Edge of Ixtal*’s damage, reduced to 75% against subsequ
 | **Grounded** | True |
 | **Knockdown** | True |
 
-**PASSIVE:** While holding an Element, **Qiyana** gains as, range and **bonus** magic damage on her basic attacks on-hit and basic abilities. While out-of-combat and moving near the Element currently being held, she gains ms.
+**PASSIVE:** While holding an Element, **Qiyana** gains (as) **bonus** attack speed, (range) 25 **bonus** attack range and **bonus** magic damage on her basic attacks on-hit and basic abilities. While out-of-combat and moving near the Element currently being held, she gains (ms) **bonus** movement speed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -283,7 +283,7 @@ Once *Terrashape* has been learned, **Qiyana** is automatically given the Terras
 
 **ACTIVE:** **Qiyana** sweeps a windblast in the target direction that knocks back enemies hit by 375 units (estimated), though not through terrain, and stops upon hitting **TERRAIN**.
 
-The windblast creates a cascading shockwave across any **RIVER** or **BRUSH** it passes through, as well as around the borders of **TERRAIN** it reaches, dealing physical damage to enemies hit, stunning them for changedisplay=true seconds, and briefly granting sight of the area along its path. The damage based on the target's health ratio is capped against monsters.
+The windblast creates a cascading shockwave across any **RIVER** or **BRUSH** it passes through, as well as around the borders of **TERRAIN** it reaches, dealing physical damage to enemies hit, stunning them for 0.5–1@0–0 (@=proximity) seconds, and briefly granting sight of the area along its path. The damage based on the target's health ratio is capped against monsters.
 
 | Attribute | Value |
 |-----------|------:|

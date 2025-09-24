@@ -148,7 +148,7 @@ While any amount of *Notes* are active, **Seraphine**’s next basic attack is e
 |-----------|------:|
 | **Magic Damage** | 60 / 85 / 110 / 135 / 160 (+ 50% AP) |
 
-Against champions, the damage is increased by key=%.
+Against champions, the damage is increased by 0%–75%@0–75 (@=target's **missing** health).
 
 | Attribute | Value |
 |-----------|------:|
@@ -177,7 +177,7 @@ Against champions, the damage is increased by key=%.
 | **Affects** | Self, Allies |
 | **Projectile** | Special |
 
-**ACTIVE:** **Seraphine** grants a shield to herself and nearby allied champions for $2.5$ seconds. For the same duration, she also gains ms and grants allies 8% (+ 0.8% per 100 AP) **bonus** movement speed.
+**ACTIVE:** **Seraphine** grants a shield to herself and nearby allied champions for $2.5$ seconds. For the same duration, she also gains (ms) 20% (+ 2% per 100 AP) decaying **bonus** movement speed and grants allies 8% (+ 0.8% per 100 AP) **bonus** movement speed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -308,7 +308,7 @@ Enemies that are immobilized or grounded are also stunned for the same duration.
 
 ### V25.05
 - High Note
-  - Bonus champion damage increased to key=% from key=%.
+  - Bonus champion damage increased to 0%–75%@0–75 (@=target's **missing** health) from 0%–60%@0–75 (@=target's **missing** health).
 
 ### V25.S1.1
 - Seraphine
@@ -348,7 +348,7 @@ Enemies that are immobilized or grounded are also stunned for the same duration.
   - Cooldown changed to 8 / 7.5 / 7 / 6.5 / 6 seconds from 10 / 8.75 / 7.5 / 6.25 / 5.
   - Mana cost changed to 60 / 70 / 80 / 90 / 100 from 65 / 70 / 75 / 80 / 85.
   - Base damage increased to 60 / 85 / 110 / 135 / 160 from 55 / 80 / 105 / 130 / 155.
-  - Bonus damage increased to key=% from key=%.
+  - Bonus damage increased to 0%–60%@0–75 (@=target's **missing** health) from 0%–50%@0–75 (@=target's **missing** health).
   - **Removed:*** Bonus damage no longer affects non-champions.
   - **Removed:*** No longer prevents minions from dying to other minions while in flight.
 - Surround Sound

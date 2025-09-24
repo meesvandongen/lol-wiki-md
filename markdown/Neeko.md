@@ -149,7 +149,7 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
       - However, critical strikes from non-champions will always deal basic damage.
   - The projectile or non-projectile quality of their attack and projectile speed, if applicable
     - When striking critically as a non-champion with a projectile attack, the attack projectile is invisible and hits near-instantly, but can still be intercepted by Wind Wall and similar abilities.
-  - attack range of the unit's base form
+  - (attack range) **Base** attack range of the unit's base form
     - For example, in the case of Gnar, she will adopt attack range.
   - Damage dealt to champions (physical damage, magic damage) ratio for the purposes of Adaptive Defenses.
   - Size (including modifiers and base unit size) at the time of disguising
@@ -280,7 +280,7 @@ Each bloom deals **bonus** magic damage against monsters.
 | **Projectile** | False |
 | **Parry** | True |
 
-**PASSIVE:** **Neeko**’s basic attacks on-hit generate a stack of *Shapesplitter*, which refreshes on subsequent attacks and stacks up to 2 times. At 2 stacks, her next basic attack on-attack consumes them all to become non-projectile, deal **bonus** magic damage and grant her ms for 1 second. This attack deals 75 **bonus** magic damage against monsters.
+**PASSIVE:** **Neeko**’s basic attacks on-hit generate a stack of *Shapesplitter*, which refreshes on subsequent attacks and stacks up to 2 times. At 2 stacks, her next basic attack on-attack consumes them all to become non-projectile, deal **bonus** magic damage and grant her (ms) **bonus** movement speed for 1 second. This attack deals 75 **bonus** magic damage against monsters.
 
 | Attribute | Value |
 |-----------|------:|

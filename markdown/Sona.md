@@ -96,7 +96,7 @@
 
  **ACCELERANDO:** For each stack, **Sona** gains $0.5$ basic ability haste, up to 60 at maximum stacks.
 
-**INNATE - MELODY:** Whenever **Sona** casts a basic ability, her other basic abilities incur a cd global cooldown and she generates a unique aura for 3 seconds that empowers herself and nearby allied champions.
+**INNATE - MELODY:** Whenever **Sona** casts a basic ability, her other basic abilities incur a (cd) $0.5$-second global cooldown and she generates a unique aura for 3 seconds that empowers herself and nearby allied champions.
 
 **INNATE - POWER CHORD:** **Sona**’s basic abilities generate a stack of *Power Chord*, stacking up to 3 times. At 3 stacks, her next basic attack is empowered to consume them all to have an uncancellable windup, deal 20 to 90 for 8 / 90 to 240 (+ 20% AP) **bonus** magic damage, and apply an additional effect based on the last basic ability she cast:
 - *Hymn of Valor* - **STACCATO:** **Bonus** damage is modified to 20×1.5 to 90×1.5 for 8 / 90×1.5 to 240×1.5 (+ 30% AP).
@@ -203,7 +203,7 @@
 | **Targeting** | Auto |
 | **Affects** | Self, Allies |
 
-**ACTIVE:** **Sona** gains ms for 7 seconds. If she takes damage during this time, the duration ends prematurely once or if 3 seconds have elapsed.
+**ACTIVE:** **Sona** gains (ms) 20% (+ 2% per 100 AP) **bonus** movement speed for 7 seconds. If she takes damage during this time, the duration ends prematurely once or if 3 seconds have elapsed.
 
 ** Tagged allied champions gain **bonus** movement speed for 3 seconds.
 

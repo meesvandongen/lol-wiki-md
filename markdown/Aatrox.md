@@ -90,7 +90,7 @@
 | **Spell Effects** | proc |
 | **Parry** | True |
 
-**INNATE:** Periodically, **Aatrox** empowers his next basic attack to gain range and deal **bonus** magic damage equal to key=% of the target's **maximum** health, capped at 100 against monsters. *Deathbringer Stance*’s damage applies life steal at 100% effectiveness.
+**INNATE:** Periodically, **Aatrox** empowers his next basic attack to gain (range) 50 **bonus** range and deal **bonus** magic damage equal to 4 to 8 of the target's **maximum** health, capped at 100 against monsters. *Deathbringer Stance*’s damage applies life steal at 100% effectiveness.
 
 **Aatrox** heals for 100% of the post-mitigation **bonus** damage (Damage calculated after modifiers) dealt, reduced to 25% against minions.
 

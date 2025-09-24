@@ -85,7 +85,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Sivir**’s basic attacks and ability hits against enemy champions grant her ms decaying over $1.5$ seconds, refreshing on subsequent hits.
+**INNATE:** **Sivir**’s basic attacks and ability hits against enemy champions grant her (ms) 55@1; 60@6; 65@11; 70@16; 75@18 **bonus** movement speed decaying over $1.5$ seconds, refreshing on subsequent hits.
 
 **Notes:**
 
@@ -97,7 +97,7 @@
 
 | Attribute | Value |
 |-----------|------:|
-| **Cast Time** | **bonus** attack speed |
+| **Cast Time** | 0.25–0.1@0–120 (@=**bonus** attack speed) seconds |
 | **Target Range** | 1250 units |
 | **Width** | 180 (Outgoing missile) / 200 (Returning missile) units |
 | **Speed** | 1450 (Outgoing missile) / 1200 (Returning missile) units/second |
@@ -111,13 +111,13 @@
 | **Spell Effects** | AoE |
 | **Projectile** | True |
 
-**ACTIVE:** **Sivir** hurls her crossblade in the target direction, dealing physical damage to enemies within its path, increased by key=%.
+**ACTIVE:** **Sivir** hurls her crossblade in the target direction, dealing physical damage to enemies within its path, increased by 0%–50%@0–100 (@=critical strike chance).
 
 | Attribute | Value |
 |-----------|------:|
 | **Physical Damage** | 60 / 85 / 110 / 135 / 160 (+ 100% **bonus** AD) (+ 60% AP) |
 
-*Boomerang Blade*’s damage is reduced by key=%. Upon reaching maximum range, the crossblade returns to her, resetting the damage modifier and dealing the same damage to enemies on its way back.
+*Boomerang Blade*’s damage is reduced by 0%–60%@0–4 (@=non-champions hit). Upon reaching maximum range, the crossblade returns to her, resetting the damage modifier and dealing the same damage to enemies on its way back.
 
 | Attribute | Value |
 |-----------|------:|
@@ -166,12 +166,12 @@
 | Attribute | Value |
 |-----------|------:|
 | **Bounce Damage** | 40 / 42.5 / 45 / 47.5 / 50% AD |
-| **Bounce Critical Damage** | 40*% AD |
+| **Bounce Critical Damage** | 70 / 74.375 / 78.75 / 83.125 / 87.5% AD |
 
 | Attribute | Value |
 |-----------|------:|
 | **Minion Bounce Damage** | 26 / 27.625 / 29.25 / 30.875 / 32.5% AD |
-| **Minion Bounce Critical Damage** | (40×0.65)*% AD |
+| **Minion Bounce Critical Damage** | 45.5 / 48.3438 / 51.1875 / 54.0312 / 56.875% AD |
 
 Bounces occur only up to 8 times and can target each enemy up to one additional time per empowered attack. They prioritize the nearest new target, then the nearest target if no new targets are available.
 

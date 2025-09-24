@@ -57,7 +57,7 @@ This effect cannot occur on the same target more than once every few seconds.
 | **Grounded** | False |
 | **Knockdown** | True |
 
-**ACTIVE:** **Jarvan IV** extends his lance in the target direction, dealing physical damage to enemies hit and inflicting them with armor penetration for 3 seconds.
+**ACTIVE:** **Jarvan IV** extends his lance in the target direction, dealing physical damage to enemies hit and inflicting them with (armor penetration) armor reduction for 3 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -127,7 +127,7 @@ If the lance connects with a deployed *Demacian Standard*, **Jarvan IV** dashes 
 | **Spell Effects** | Aoe |
 | **Out of Range Behavior** | cast at max |
 
-**PASSIVE:** **Jarvan IV** gains attack speed.
+**PASSIVE:** **Jarvan IV** gains (attack speed) **bonus** attack speed.
 
 | Attribute | Value |
 |-----------|------:|

@@ -93,13 +93,13 @@
 
 **INNATE:** **Kayle** ascends through four forms that each grant additional bonuses. She ascends upon spending a skill point at experience 1, 6, 11, and 16.
 
-**LEVEL 1 - ZEALOUS:** **Kayle**’s basic attacks on-attack generate a stack of *Zeal* for 5 seconds, refreshing on subsequent attacks and stacking up to 5 times. For each stack, she gains attack speed, up to a maximum of attack speed (+ 5% per 100 AP). At max stacks, she becomes *Exalted*, gaining ms.
+**LEVEL 1 - ZEALOUS:** **Kayle**’s basic attacks on-attack generate a stack of *Zeal* for 5 seconds, refreshing on subsequent attacks and stacking up to 5 times. For each stack, she gains (attack speed) 6% (+ 1% per 100 AP) **bonus** attack speed, up to a maximum of (attack speed) 30% (+ 5% per 100 AP). At max stacks, she becomes *Exalted*, gaining (ms) 10% **bonus** movement speed.
 
-**LEVEL 6 - ARISEN:** **Kayle** becomes ranged and gains range for a total of range.
+**LEVEL 6 - ARISEN:** **Kayle** becomes ranged and gains (range) 350 **bonus** attack range for a total of (range) 525.
 
 **LEVEL 11 - AFLAME:** **Kayle** gains 10% bonus size. While **Kayle** is *Exalted*, her basic attacks on-attack also launch a *wave* of fire forward that deals 20–41@11–18 (+ 10% **bonus** AD) (+ 25% AP) magic damage to all enemies it passes through. The *wave* is affected by critical strike modifiers.
 
-**LEVEL 16 - TRANSCENDENT:** **Kayle** gains an additional range for a total of range, and permanently gains the full effects of *Zealous*.
+**LEVEL 16 - TRANSCENDENT:** **Kayle** gains an additional (range) 100 **bonus** attack range for a total of (range) 625, and permanently gains the full effects of *Zealous*.
 
 **Notes:**
 
@@ -108,7 +108,7 @@
 - If **Kayle** is in her attack animation after the stacks expire, she gains another $0.5$ seconds to refresh/stack **Zeal**.
 - Each stack grants **bonus** attack speed based on **Kayle's ** ability power at the time the stack is generated and will not update if it is changed.
   - For example, if a stack is generated while she has 0 ability power, it'll grant 6% attack speed. If she acquired 100 ability power afterward, the next stack will grant 7%. The 2 stacks grant a total of 13% (6% + 7%) **bonus** attack speed and not 14% (7% + 7%). **Arisen**
-- Basic attacks within range will still use **Kayle**’s melee basic attack animations and do not utilize projectiles.
+- Basic attacks within (range) 175 units will still use **Kayle**’s melee basic attack animations and do not utilize projectiles.
   - They are still classified as ranged attacks.
   - Due to this fact, projectile-blocking effects cannot intercept basic attacks while **Kayle**’s target is within her "melee" range. **Aflame**
 - On becoming **AFLAME**, **Kayle**’s bonus grows linearly over 1 second.
@@ -170,7 +170,7 @@
 |-----------|------:|
 | **Slow** | 26 / 32 / 38 / 44 / 50% |
 
-The sword expands upon hitting an enemy, targets struck in the area are dealt magic damage, slowed for 2 seconds, and inflicted with 15% **reduced** armor and magic resistance for 4 seconds.
+The sword expands upon hitting an enemy, targets struck in the area are dealt magic damage, slowed for 2 seconds, and inflicted with 15% **reduced** (armor) armor and (magic resistance) magic resistance for 4 seconds.
 
 **Notes:**
 
@@ -178,8 +178,8 @@ The sword expands upon hitting an enemy, targets struck in the area are dealt ma
   - As implied by the previous point, the portal is created at the start of the cast time and **Kayle** does not have to be alive for it to launch the sword.
   - The portal does not follow **Kayle**’s movements, using Flash or getting displaced won't change its position nor direction either.
 - The cast time can be calculated by dividing **Kayle**’s *windup percent* value ($0.193555$) with her current total attack speed.
-  - *Radiant Blast*’s cast time is at base attack speed, is at most at the minimum attack speed of attack speed, and is at the attack speed cap of attack speed. The cast time can be further decreased with effects that allows the player to bypass the attack speed cap.
-  - Additionally, it should be noted that due to action only taking place on whole game ticks, the cast time can only be changed in fractions of $0.033$ seconds. This also means that the lowest possible cast time is $0.033$ seconds, requiring at least attack speed.
+  - *Radiant Blast*’s cast time is at base attack speed, is at most at the minimum attack speed of (attack speed) 0.2, and is at the attack speed cap of (attack speed) 3.003. The cast time can be further decreased with effects that allows the player to bypass the attack speed cap.
+  - Additionally, it should be noted that due to action only taking place on whole game ticks, the cast time can only be changed in fractions of $0.033$ seconds. This also means that the lowest possible cast time is $0.033$ seconds, requiring at least (attack speed) 5.8652 attack speed.
   - Important to note that in patch V9.17, *Radiant Blast*’s cast time was changed to be a flat $0.25$ seconds, rather than scaling with the attack windup time. In patch V10.4, this was undocumentedly changed back. Whether the change to scale with windup time again was intentional or not is unknown.
 - The resistance reduction is applied after the damage has been dealt.
 - The expansion consists of 5 hitboxes, forming a cross-like shape centered 100 units ahead from the impact in its direction. Their technical details can be seen below and visualized on the image to the right.
@@ -249,7 +249,7 @@ If cast without a valid target, or self-cast, *Celestial Blessing* will automati
 |-----------|------:|
 | **Passive Damage** | 15 / 20 / 25 / 30 / 35 (+ 10% **bonus** AD) (+ 20% AP) |
 
-**ACTIVE:** **Kayle** kindles her blade, empowering her next basic attack within 6 seconds to have an uncancellable windup and deal additional **bonus** magic damage on-hit that is capped at 400 against monsters. If **Kayle** is not yet *Arisen*, this attack becomes ranged with range.
+**ACTIVE:** **Kayle** kindles her blade, empowering her next basic attack within 6 seconds to have an uncancellable windup and deal additional **bonus** magic damage on-hit that is capped at 400 against monsters. If **Kayle** is not yet *Arisen*, this attack becomes ranged with (range) 525 range.
 
 | Attribute | Value |
 |-----------|------:|
@@ -273,7 +273,7 @@ If cast without a valid target, or self-cast, *Celestial Blessing* will automati
   - Dodge: Dodging will always negate all damage.
 - : All parry interactions are marked for retesting because of patch V11.1 changes. **Interactions & Other**
 - While the active's effect is up, a circle is visible to **Kayle**, indicating her range, however, this circle only takes into account Divine Ascent’s effect on her range, not other sources such as Rapid Firecannon.
-  - The increased range (with the item's effect included) will be range prior to ascending to **TRANSCENDENT**, after which it's range.
+  - The increased range (with the item's effect included) will be (range) 675 prior to ascending to **TRANSCENDENT**, after which it's (range) 725.
 - To clarify the description, *Starfire Spellblade* can behave both as a ranged and melee attack based on how far the target is prior to **Kayle** ascending to Arisen, after which the attack will be always using ranged standards.
   - If the target is 200 units away or closer, the attack will be considered melee. This also uses her melee animations, not utilizing projectiles even after ascending.
   - If the target is over 200 units, the attack will be considered ranged.
@@ -321,9 +321,9 @@ After $2.5$ seconds, she rains the swords down around the target, dealing magic 
 - It's recommended to avoid both of the afformentioned interactions, as they render the usage of *Divine Judgment* useless in many cases. **Interactions & Other**
 - While the target is invulnerable, a number indicator will appear beneath them whenever they would receive damage to show the amount that was entirely mitigated. This is calculated pre-mitigation, meaning before resistances and reductions are taken into account.
 - Rapid Firecannon Energized effect behaves strangely with the set basic attack range:
-  - If the ability is cast while the effect is ready, the range goes from range to range over 4 stat updates (A stat update occurs every 0.264 seconds.) (400 -> 390 -> 387 -> 385). When the cast completes, the proper range needs 2 updates to set in (range - range while **ARISEN**; range - range while **TRANSCENDED**).
-  - Gaining the effect during the cast will cause the range to cycle between range and range until the cast finishes, then the proper range is set after 1 update.
-  - Selling the item during the cast causes the range to be set to range. Range values are outdated because of patch V11.18 changes to **Kayle**.
+  - If the ability is cast while the effect is ready, the range goes from (range) 400 to (range) 385 over 4 stat updates (A stat update occurs every 0.264 seconds.) (400 -> 390 -> 387 -> 385). When the cast completes, the proper range needs 2 updates to set in ((range) 660 - (range) 675 while **ARISEN**; (range) 710 - (range) 725 while **TRANSCENDED**).
+  - Gaining the effect during the cast will cause the range to cycle between (range) 525 and (range) 550 until the cast finishes, then the proper range is set after 1 update.
+  - Selling the item during the cast causes the range to be set to (range) 250. Range values are outdated because of patch V11.18 changes to **Kayle**.
 - The invulnerability can be tracked on the HUD via a buff called **Intervention**.
 
 ---

@@ -56,7 +56,7 @@
 
 ### Passive: Mega Gnar
 
-**INNATE:** **Gnar** gains the following increases to his **base** statistics: ( base + growth **base** health, ( base + growth **base** attack damage, ( base + growth **base** armor, and ( base + growth **base** magic resistance. **Gnar**’s **base** stats **including** these bonuses are provided at the top of Gnar's gameplay article, and will appear separately as **Mega Gnar** on list articles.*
+**INNATE:** **Gnar** gains the following increases to his **base** statistics: (Mega Gnar)+(Mega Gnar-Gnar)*(x-1)*(0.7025+0.0175*(x-1))|formula= base + growth **base** health, (Mega Gnar)+(Mega Gnar-Gnar)*(x-1)*(0.7025+0.0175*(x-1))|formula= base + growth **base** attack damage, (Mega Gnar)+(Mega Gnar-Gnar)*(x-1)*(0.7025+0.0175*(x-1))|formula= base + growth **base** armor, and (Mega Gnar)+(Mega Gnar-Gnar)*(x-1)*(0.7025+0.0175*(x-1))|formula= base + growth **base** magic resistance. **Gnar**’s **base** stats **including** these bonuses are provided at the top of Gnar's gameplay article, and will appear separately as **Mega Gnar** on list articles.*
 
 **Gnar** restores health equal to the amount gained when transforming into **Mega Gnar**, but will only retain his **current** percentage health when returning to **Mini** form. This is unaffected by healing modifiers.
 
@@ -64,12 +64,12 @@
 
 ### Passive: Mini Gnar
 
-**INNATE:** **Gnar** gains ms, range, attack speed, as well as attack speed growth.
+**INNATE:** **Gnar** gains (ms) **bonus** movement speed, (range) **bonus** attack range, attack speed, as well as attack speed growth.
 
 | Attribute | Value |
 |-----------|------:|
 | **Bonus Movespeed** | 0+1*(x-1) for 15 / then +2*x |
-| **Total Movespeed** | || Attribute | Value |
+| **Total Movespeed** | Gnar || Attribute | Value |
 |-----------|------:|
 | **Bonus Range** | 225 to 325 |
 
@@ -86,7 +86,7 @@
 
 At maximum *Rage*, **Gnar**’s abilities switch to Mega Gnar’s abilities, for 4 seconds and until transforming back to his *Mini Gnar* form, with the exception of *Hop*, which switches after the transformation. Casting any of them during this time also causes **Gnar** to transform into Mega Gnar instantly, else he will transform automatically after the 4 seconds have elapsed.
 
-**Gnar**’s Mega Gnar form lasts for 15 seconds, with his *Rage* bar depleting as an indication of remaining time. *Rage cannot be generated while in this form.* Afterwards, **Gnar** returns to Gnar, retaining his health and becoming too *tired* to generate *Rage* for 15 seconds.
+**Gnar**’s Mega Gnar form lasts for 15 seconds, with his *Rage* bar depleting as an indication of remaining time. *Rage cannot be generated while in this form.* Afterwards, **Gnar** returns to Gnar, retaining his (health) **current** percentage health and becoming too *tired* to generate *Rage* for 15 seconds.
 
 **Gnar** gains different stat bonuses based on whether he is in *Mini* or *Mega* form. Both of **Gnar**’s forms share their ability cooldowns.
 
@@ -99,7 +99,7 @@ At maximum *Rage*, **Gnar**’s abilities switch to Mega Gnar’s abilities, for
 - When returning to Gnar, **Gnar** will only retain his current health percentage, not current health total.
 - **Gnar**’s abilities share cooldowns across forms.
 - The final stats, after Rage Gene being applied, can be seen on **Mini Gnar**’s and **Mega Gnar**’s respective data template, in the front page.
-  - **Mini Gnar** gains key=%-Mega Gnar)*(x-1)*(0.7025+0.0175*(x-1))|attack speed **bonus** attack speed.
+  - **Mini Gnar** gains 5.5+(Gnar)*(x-1)*(0.7025+0.0175*(x-1))|formula=5.5 base + growth **bonus** attack speed.
 - The *Rage* bar is **white** when under 60 range, **yellow** when equal to or above 60 rage, and **red** at 100 rage.
 - If **Gnar** transforms into Mega Gnar while on enemy's sight and later goes back to Mini while on the fog of war, enemies will see Mega Gnar’s icon both in the scoreboard and minimap, even if they regain vision of **Gnar**. This will stay this way until **Gnar**’s Mega Gnar form ends while on enemy's sight.
 
@@ -169,7 +169,7 @@ Catching the boomerang while it is returning back refunds 40% of the ability's *
 |-----------|------:|
 | **Slow** | 30 / 35 / 40 / 45 / 50% |
 
-After $0.3$ seconds, **Gnar** can pick up the boulder by moving within 90 units of it, refunding 70% of the ability's cooldown.
+After $0.3$ seconds, **Gnar** can pick up the boulder by moving within 90 units of it, refunding 70% of the ability's (cooldown) **total** cooldown.
 
 **Notes:**
 
@@ -191,13 +191,13 @@ After $0.3$ seconds, **Gnar** can pick up the boulder by moving within 90 units 
 
 **PASSIVE:** **Gnar**’s basic attacks on-hit and ability hits apply a stack of *Hyper* to enemies for $3.5$ seconds, refreshing on subsequent applications and stacking up to 3 times.
 
-The third stack against a target consumes them all to deal **bonus** magic damage, capped at 300 against monsters, and grant **Gnar** type = [File:GNAR!.png ms that decays over 3 seconds.
+The third stack against a target consumes them all to deal **bonus** magic damage, capped at 300 against monsters, and grant **Gnar** 20px (ms) **bonus** movement speed that decays over 3 seconds.
 
 | Attribute | Value |
 |-----------|------:|
 | **Bonus Magic Damage** | 0 / 10 / 20 / 30 / 40 (+ 6 / 8 / 10 / 12 / 14% of target's **maximum** health) (+ 100% AP) |
 
-**Gnar** gains *Hyper*’s ms when he leaves Mega Gnar form.
+**Gnar** gains *Hyper*’s (ms) **bonus** movement speed when he leaves Mega Gnar form.
 
 **Notes:**
 
@@ -262,7 +262,7 @@ If **Gnar** lands on a unit he will bounce 500 units further in the same directi
 |-----------|------:|
 | **Physical Damage** | 50 / 85 / 120 / 155 / 190 (+ 6% **maximum** health) |
 
-If *Hop* is used to transform, it will not grant as. Instead, after bouncing **Gnar** will send out a shockwave as per *Crunch* where he lands (Only after bouncing. This is not intended. See details section.).
+If *Hop* is used to transform, it will not grant (as) **bonus** attack speed. Instead, after bouncing **Gnar** will send out a shockwave as per *Crunch* where he lands (Only after bouncing. This is not intended. See details section.).
 
 **Gnar** will not bounce if he is immobilized during the first leap.
 
@@ -276,7 +276,7 @@ If *Hop* is used to transform, it will not grant as. Instead, after bouncing **G
 - Sleep does not count for preventing the bounce.
 - If circumstances allow it, *Crunch*’s shockwave from using it to transform can hit the target **Gnar** bounced off of.
 - If *Hop* is used to transform, the area of effect is missing at the first landing location, whether he bounces off a target or not.
-  - This interaction broke in [V9.13.
+  - This interaction broke in V9.13.
 
 ---
 
@@ -325,7 +325,7 @@ If *Hop* is used to transform, it will not grant as. Instead, after bouncing **G
 | **Spell Effects** | Area of effect |
 | **Projectile** | False |
 
-** *Hyper’s* ms is increased.
+** *Hyper’s* (ms) **bonus** movement speed is increased.
 
 | Attribute | Value |
 |-----------|------:|
@@ -432,7 +432,7 @@ Enemies that collide with terrain take 50% increased damage immediately and are 
     - Boulder Toss' projectile is shaped like the Riot Games Inc. logo.
 - Gnar's Series 2 Eternals make the following references:
   - *Clobberin' Time* is a reference to the eponymous quote by Thing (comics), a member of the Fantastic Four.
-- Mega Gnar has the highest experience **base** attack damage ().
+- Mega Gnar has the highest (experience) level 18 **base** attack damage ().
 - Although patch V7.16 made it so the portrait of the selected skin would be used in the central portion of the in-game UI, transforming into Mega Gnar always uses his base portrait for all skins.
 - Hop has the shortest ability name at 3 characters long.
   - For contrast, Life Form Disintegration Ray is the longest ability name at 28 characters long, exceeding Hop by 25 characters.

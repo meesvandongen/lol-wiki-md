@@ -87,7 +87,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** **Vayne** gains ms while facing a nearby visible enemy champion, increased to 90 while under the effects of *Final Hour*.
+**INNATE:** **Vayne** gains (ms) 30 **bonus** movement speed while facing a nearby visible enemy champion, increased to 90 while under the effects of *Final Hour*.
 
 **Notes:**
 

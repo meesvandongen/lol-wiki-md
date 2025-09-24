@@ -101,7 +101,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** Periodically, when **LeBlanc** is damaged to health, she creates a clone of herself, after which they both instantly become invisible for 1 second.
+**INNATE:** Periodically, when **LeBlanc** is damaged to (health) 40% **maximum** health, she creates a clone of herself, after which they both instantly become invisible for 1 second.
 
 The clone can cast basic attacks with no effect and lasts 8 seconds. Upon spawning, it starts moving up to 1900 units toward a random direction in front of **LeBlanc**’s movement, determined at the moment of its spawning.
 
