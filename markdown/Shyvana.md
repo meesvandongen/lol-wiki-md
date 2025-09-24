@@ -125,7 +125,7 @@ After consuming the empowered attack, her next two basic attacks within 5 second
 
 Basic attacks reduce *Twin Bite*’s **current** cooldown by $0.5$ seconds on-hit.
 
-** **Shyvana** attacks enemies in a cone in front of her and additionally applies the second strike to enemies surrounding the primary target. Both the attack and the strike occur at the same time and each of them apply *Twin Bite*’s respective effects to all targets hit, with the exception of the second strike not triggering on-attack effects for secondary targets struck. The attack is affected by critical strike modifiers, applies on-hit effects to all enemies hit, and triggers on-attack effects for every target hit. Additionally, *Twin Bite*’s empowered attack has an uncancellable windup.
+**DRAGON FORM BONUS:** **Shyvana** attacks enemies in a cone in front of her and additionally applies the second strike to enemies surrounding the primary target. Both the attack and the strike occur at the same time and each of them apply *Twin Bite*’s respective effects to all targets hit, with the exception of the second strike not triggering on-attack effects for secondary targets struck. The attack is affected by critical strike modifiers, applies on-hit effects to all enemies hit, and triggers on-attack effects for every target hit. Additionally, *Twin Bite*’s empowered attack has an uncancellable windup.
 
 *Twin Bite resets *’Shyvana's** basic attack timer.*
 
@@ -173,7 +173,7 @@ During this time, **Shyvana**’s basic attacks deal **bonus** magic damage on-h
 |-----------|------:|
 | **Bonus Magic Damage** | 5 / 7 / 9 / 11 / 13 (+ 5% **bonus** AD) |
 
-** *Burnout*’s radius increases, scaling with *Dragon's Descent’s* rank.
+**DRAGON FORM BONUS:** *Burnout*’s radius increases, scaling with *Dragon's Descent’s* rank.
 
 **Notes:**
 
@@ -209,7 +209,7 @@ During this time, **Shyvana**’s basic attacks deal **bonus** magic damage on-h
 
 **Shyvana**’s basic attacks against marked enemies are empowered to deal **bonus** magic damage on-hit equal to 3% (+ 1% per 100 **bonus** AD) of the target's **maximum** health, capped at 150 against monsters.
 
-** The fireball explodes upon hitting an enemy champion or reaching the target location, dealing increased magic damage and creating a scorched field for 4 seconds. Enemies within the field are marked once and dealt 20–50@6–18 (+ 7.5% **bonus** AD) (+ 10% AP) magic damage every $0.5$ seconds.
+**DRAGON FORM BONUS:** The fireball explodes upon hitting an enemy champion or reaching the target location, dealing increased magic damage and creating a scorched field for 4 seconds. Enemies within the field are marked once and dealt 20–50@6–18 (+ 7.5% **bonus** AD) (+ 10% AP) magic damage every $0.5$ seconds.
 
 | Attribute | Value |
 |-----------|------:|

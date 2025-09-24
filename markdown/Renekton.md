@@ -136,7 +136,7 @@ Against champions, the healing is increased.
 
 **Renekton** generates $2.5$ Fury for each non-champion hit and 10 Fury for each champion hit, up to 30 total per cast.
 
-** *Cull the Meek* has increased damage, tripled **total** healing, and a quadrupled healing cap.
+**REIGN OF ANGER BONUS:** *Cull the Meek* has increased damage, tripled **total** healing, and a quadrupled healing cap.
 
 ***Renekton** cannot basic attack nor cast Slice and Dice or Dominus for $0.25$ seconds after Cull the Meek's activation.*
 
@@ -169,7 +169,7 @@ Against champions, the healing is increased.
 
 *Ruthless Predator*’s first strike can critically strike for AD **bonus** physical damage.
 
-** **Renekton** instead strikes 3 times, completely destroying damage-mitigating shields on the target upon the first strike if they are not a monster, as well as increasing the stun duration to $1.5$ seconds.
+**REIGN OF ANGER BONUS:** **Renekton** instead strikes 3 times, completely destroying damage-mitigating shields on the target upon the first strike if they are not a monster, as well as increasing the stun duration to $1.5$ seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -222,7 +222,7 @@ If **Renekton** hits an enemy, he can recast *Slice and Dice* within the next 4 
 
 Both casts generate 2 Fury for each non-champion hit and 10 Fury for each champion hit, up to 30 total per cast.
 
-** *Dice*, the recast, deals **bonus** physical damage and inflicts (arpen) armor reduction to enemies hit for 4 seconds.
+**REIGN OF ANGER BONUS:** *Dice*, the recast, deals **bonus** physical damage and inflicts (arpen) armor reduction to enemies hit for 4 seconds.
 
 | Attribute | Value |
 |-----------|------:|

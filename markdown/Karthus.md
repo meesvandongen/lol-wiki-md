@@ -294,7 +294,7 @@ No additional notes.
 - During development he was called *Lich*.
 - Requiem old.png was likely named after Requiem Mass referencing Karthus' singing for/about the dead.
 - His Karthus made a cameo in Fright Night (2011 film) along with Fiddlesticks.
-- A glass case reading **'PRESS can be seen in the game's Mac Version launch trailer.
+- A glass case reading **PRESS R TO WIN*’* can be seen in the game's Mac Version launch trailer.
 - Before 2016, Karthus had been disabled for every single Ultra Rapid Fire edition (most likely to prevent 'Spam R to Win' abuse cases).
 - For a brief time in Season 2015, Karthus had a bug where he could remain in Death Defied indefinitely while alive and held an 87% win rate.
 

@@ -205,7 +205,7 @@ Up to 3 *H-28G Evolution Turrets* can be deployed at a time, with those deployed
 | **Parry** | True |
 | **Call For Help** | True |
 
-** **Heimerdinger** deploys a *H-28Q Apex Turret* at the target location, which lasts for 8 seconds.
+**UPGRADE!!! - ACTIVE:** **Heimerdinger** deploys a *H-28Q Apex Turret* at the target location, which lasts for 8 seconds.
 
 *H-28Q Apex Turret* scales with *UPGRADE!!!’s* rank.
 
@@ -277,7 +277,7 @@ Enemies can be hit by multiple rockets, but receive less damage from ones beyond
 | **Projectile** | True |
 | **Out of Range Behavior** | cast at max |
 
-** **Heimerdinger** unleashes 4 waves of 5 rockets in quick succession that converge upon the target location. Each rocket deals magic damage to the first enemy hit.
+**UPGRADE!!! - ACTIVE:** **Heimerdinger** unleashes 4 waves of 5 rockets in quick succession that converge upon the target location. Each rocket deals magic damage to the first enemy hit.
 
 | Attribute | Value |
 |-----------|------:|
@@ -358,7 +358,7 @@ No additional notes.
 | **Projectile** | True |
 | **Out of Range Behavior** | cast at max |
 
-** **Heimerdinger** hurls a massive grenade at the target location that bounces a fixed distance (300 range per bounce, 600 in total) 3 times in the cast direction. The grenade explodes upon landing each time to deal magic damage to nearby enemies and slow them by 35% for 2 seconds. Enemies hit at the center of the grenade's impact are additionally stunned for $1.5$ seconds.
+**UPGRADE!!! - ACTIVE:** **Heimerdinger** hurls a massive grenade at the target location that bounces a fixed distance (300 range per bounce, 600 in total) 3 times in the cast direction. The grenade explodes upon landing each time to deal magic damage to nearby enemies and slow them by 35% for 2 seconds. Enemies hit at the center of the grenade's impact are additionally stunned for $1.5$ seconds.
 
 | Attribute | Value |
 |-----------|------:|

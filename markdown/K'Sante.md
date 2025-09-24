@@ -92,7 +92,7 @@
 
 **INNATE:** **K'Sante**’s abilities mark enemies hit for 4 seconds. His basic attacks against marked enemies are empowered to consume the mark on-hit, dealing 12 (+ 1 to 2 of target's **maximum** health) **bonus** physical damage. The damage based on the target's health has a minimum of 15 / 100 against minions and is capped at 20 / 105 against monsters.
 
-** **K'Sante**’s basic attacks and ability damage, as well as *Dauntless Instinct*’s mark consumption, are empowered to deal **bonus** physical damage equal to 1% (+ 1% per 100 **bonus** armor) (+ 1% per 100 **bonus** magic resistance) of the target's **maximum** health.
+**ALL OUT BONUS:** **K'Sante**’s basic attacks and ability damage, as well as *Dauntless Instinct*’s mark consumption, are empowered to deal **bonus** physical damage equal to 1% (+ 1% per 100 **bonus** armor) (+ 1% per 100 **bonus** magic resistance) of the target's **maximum** health.
 
 **Notes:**
 
@@ -133,7 +133,7 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 
 **EMPOWERED ACTIVE:** **K'Sante** fires a shockwave in the target direction that applies the same effects to enemies hit, but also pulls them towards him over $0.65$ seconds and stuns them for $0.8$ seconds.
 
-** *Ntofo Strikes' * cooldown is reduced by 33%, with a minimum total cooldown of $1.33$ seconds. Upon entering *All Out*, *Ntofo Strikes' * stacks are reset. *Ntofo Strikes' * cooldown is reset if **K'Sante** had 2 stacks before entering *All Out*.
+**ALL OUT BONUS:** *Ntofo Strikes' * cooldown is reduced by 33%, with a minimum total cooldown of $1.33$ seconds. Upon entering *All Out*, *Ntofo Strikes' * stacks are reset. *Ntofo Strikes' * cooldown is reset if **K'Sante** had 2 stacks before entering *All Out*.
 
 *Ntofo Strikes resets **K'Sante**’s basic attack timer.*
 
@@ -179,7 +179,7 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 |-----------|------:|
 | **Monster Damage Cap** | 180 / 260 / 340 / 420 / 500 |
 
-** *Path Maker* no longer applies its knock back and stun, but its damage reduction is increased to 75%, the dash deals (true damage) 10 to 80 **bonus** true damage, and the dash speed is increased by 20%. Upon entering *All Out*, *Path Maker*’s cooldown is refreshed.
+**ALL OUT BONUS:** *Path Maker* no longer applies its knock back and stun, but its damage reduction is increased to 75%, the dash deals (true damage) 10 to 80 **bonus** true damage, and the dash speed is increased by 20%. Upon entering *All Out*, *Path Maker*’s cooldown is refreshed.
 
 | Attribute | Value |
 |-----------|------:|
@@ -237,7 +237,7 @@ If targeting an ally, walk in range of the target unit to cast |
 
 *Footwork* can also be cast on allies with increased range and speed, and the ability to dash through terrain. If the target ally is a champion, they receive the shield as well.
 
-** *Footwork*’s dash speed is increased, and its cooldown is reduced by 50%.
+**ALL OUT BONUS:** *Footwork*’s dash speed is increased, and its cooldown is reduced by 50%.
 
 ***K'Sante** can cast any of his abilities during the dash.*
 

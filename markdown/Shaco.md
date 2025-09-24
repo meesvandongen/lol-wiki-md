@@ -189,7 +189,7 @@ After breaking the invisibility, **Shaco** empowers his next basic attack within
 |-----------|------:|
 | **Bonus Physical Damage** | 25 / 35 / 45 / 55 / 65 (+ 60% **bonus** AD) |
 
-** The attack will critically strike for damage, increased to if a critical strike was rolled (See notes).
+**BACKSTAB BONUS:** The attack will critically strike for damage, increased to if a critical strike was rolled (See notes).
 
 **Notes:**
 
@@ -289,7 +289,7 @@ Once sprung, the *box* will remain for 5 seconds, during which it will automatic
 |-----------|------:|
 | **Slow** | 20 / 22.5 / 25 / 27.5 / 30% |
 
-** The dagger deals an additional 15 to 50 (+ 10% AP) **bonus** magic damage, increased to 15×1.5 to 50×1.5 (+ 15% AP) if the target is **below** 30% of their **maximum** health.
+**BACKSTAB BONUS:** The dagger deals an additional 15 to 50 (+ 10% AP) **bonus** magic damage, increased to 15×1.5 to 50×1.5 (+ 15% AP) if the target is **below** 30% of their **maximum** health.
 
 **Notes:**
 

@@ -134,7 +134,7 @@ Upon applying 3 stacks of *Ablaze* to a large monster or enemy champion, the fir
 |-----------|------:|
 | **Magic Damage** | 70 / 100 / 130 / 160 / 190 (+ 65% AP) |
 
-** The target is stunned for $1.75$ seconds.
+**ABLAZE BONUS:** The target is stunned for $1.75$ seconds.
 
 **Notes:**
 
@@ -165,7 +165,7 @@ Upon applying 3 stacks of *Ablaze* to a large monster or enemy champion, the fir
 |-----------|------:|
 | **Magic Damage** | 75 / 120 / 165 / 210 / 255 (+ 60% AP) |
 
-** The target takes 25% increased damage.
+**ABLAZE BONUS:** The target takes 25% increased damage.
 
 | Attribute | Value |
 |-----------|------:|
@@ -201,7 +201,7 @@ Upon applying 3 stacks of *Ablaze* to a large monster or enemy champion, the fir
 |-----------|------:|
 | **Magic Damage** | 55 / 80 / 105 / 130 / 155 (+ 60% AP) |
 
-** *Conflagration*’s spread range is doubled.
+**ABLAZE BONUS:** *Conflagration*’s spread range is doubled.
 
 **Notes:**
 
@@ -237,7 +237,7 @@ Upon applying 3 stacks of *Ablaze* to a large monster or enemy champion, the fir
 
 *Pyroclasm* prioritizes *Ablaze* enemy champions, then other enemy champions, then any valid bounce target, then **Brand**.
 
-** The target is slowed for $0.25$ seconds. This can affect the same enemy more than once.
+**ABLAZE BONUS:** The target is slowed for $0.25$ seconds. This can affect the same enemy more than once.
 
 | Attribute | Value |
 |-----------|------:|

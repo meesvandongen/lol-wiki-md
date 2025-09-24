@@ -360,7 +360,7 @@ If **Skarner**’s attached target collides with terrain, the charge ends, detac
 - If a target would be on the other of a wall, they are moved to the same as **Skarner**.
 - During *Impale*, **Skarner** always faces in the direction of the nearest attached target. Effect at cast time end
 - The following table refers for interactions while **Skarner** is in cast time:
-- The following table refers for interactions while **Skarner** is performing *Impale*:
+- The following table refers for interactions while **Skarner** is performing *Impale*: and are disabled, but can be buffered. is usable.|items=true|consume=true|spells=true,false,true,false,false|interrupts=death
 
 ---
 

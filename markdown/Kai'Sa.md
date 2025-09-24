@@ -144,7 +144,7 @@ Non-minions take 25% damage from missiles beyond their first.
 | **Reduced Damage Per Missile** | 10 / 13.75 / 17.5 / 21.25 / 25 (+ 13.75% **bonus** AD) (+ 5% AP) |
 | **Total Single-Target Damage** | 90 / 123.75 / 157.5 / 191.25 / 225 (+ 123.75% **bonus** AD) (+ 45% AP) |
 
-** Requires「 100-Kai'Sa attack damage from items ⟷ 100 attack damage from items and stat growth 」to upgrade – *Icathian Rain* instead fires 12 missiles.
+**EVOLUTION:** Requires「 100-Kai'Sa attack damage from items ⟷ 100 attack damage from items and stat growth 」to upgrade – *Icathian Rain* instead fires 12 missiles.
 
 | Attribute | Value |
 |-----------|------:|
@@ -185,7 +185,7 @@ Non-minions take 25% damage from missiles beyond their first.
 |-----------|------:|
 | **Magic Damage** | 30 / 55 / 80 / 105 / 130 (+ 130% AD) (+ 45% AP) |
 
-** Requires 100 ability power from items to upgrade – *Void Seeker* applies 3 Plasma instead and refunds 75% of its cooldown if it hits an enemy champion.
+**EVOLUTION:** Requires 100 ability power from items to upgrade – *Void Seeker* applies 3 Plasma instead and refunds 75% of its cooldown if it hits an enemy champion.
 
 **Notes:**
 
@@ -219,7 +219,7 @@ After completing the charge, she gains (as) **bonus** attack speed for 4 seconds
 
 *Supercharge*’s **current** cooldown is reduced by $0.5$ seconds on-attack.
 
-** Requires「 (as) 100-Kai'Sa attack speed from items ⟷ 100% attack speed from items and stat growth 」to upgrade – *Supercharge* grants invisibility at the start of the cast time for $0.5$ seconds.
+**EVOLUTION:** Requires「 (as) 100-Kai'Sa attack speed from items ⟷ 100% attack speed from items and stat growth 」to upgrade – *Supercharge* grants invisibility at the start of the cast time for $0.5$ seconds.
 
 **Notes:**
 

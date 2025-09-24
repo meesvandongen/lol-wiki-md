@@ -260,7 +260,7 @@ While channeling, **Lucian** is ghosted and may still move.
 - *The Culling* creates the shots at an offset of 35 units to the front plus 35 units towards each of **Lucian** (sides alternating, first shot fired from **Lucian**’s right gun), unlike the missiles of most abilities.
 - The damage dealt by each bullet of *The Culling* is calculated when the bullet reaches a target, just like single missile abilities.
 - Spell shield only blocks one instance of damage.
-- The following table refers for interactions while **Lucian** is channeling:
+- The following table refers for interactions while **Lucian** is channeling: is usable. and are disabled. This ability recasts to end channel.|move=true|items=true,true,interrupts,true,true|attack=false|spells=true,true,true,false,false
 
 ---
 

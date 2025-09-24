@@ -170,7 +170,7 @@
 | **Spell Shield** | True |
 | **Spell Effects** | Spellaoe |
 
-** **Aphelios** expunges all enemies with *Gravitum*’s slow debuff, dealing 50–140@1–13 (+ 32%–50%@1–13 **bonus** AD) (+ 70% AP) magic damage and rooting them for 1 second.
+**GRAVITUM - ACTIVE:** **Aphelios** expunges all enemies with *Gravitum*’s slow debuff, dealing 50–140@1–13 (+ 32%–50%@1–13 **bonus** AD) (+ 70% AP) magic damage and rooting them for 1 second.
 
 *Binding Eclipse also empowers in-flight Gravitum projectiles to instantly affect their targets upon applying the slow successively.*
 

@@ -268,7 +268,7 @@ Enemies she dashes through are dealt the same damage, knocked aside by 350 units
 - Displacement immunity will not resist the application of the stun.
 - The following table refers for interactions while **Vi** is dashing and has grabbed the target:
   - Flash cannot be used during the grab.
-  - This lockout is removed as soon as the grab ends, after which the the target's remaining airborne time will be $0.25$ seconds.
+  - This lockout is removed as soon as the grab ends, after which the the target's remaining airborne time will be $0.25$ seconds. is usable. is disabled.|items=false|consume=false|spells=true,true,false,false,true|interrupts=death
 
 ---
 

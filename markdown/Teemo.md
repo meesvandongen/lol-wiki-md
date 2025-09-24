@@ -213,7 +213,7 @@ The duration of the blind is doubled against minions and monsters.
 **PASSIVE:** **Teemo**’s basic attacks are empowered to deal **bonus** magic damage on-hit and inflict poison.
 
 
-** The target takes magic damage every second over 4 seconds. Subsequent inflictions refresh the duration.
+**POISON:** The target takes magic damage every second over 4 seconds. Subsequent inflictions refresh the duration.
 
 | Attribute | Value |
 |-----------|------:|
@@ -281,7 +281,7 @@ The mushroom will explode upon enemy contact, inflicting poison to nearby enemie
 |-----------|------:|
 | **Slow** | 30 / 35 / 40 / 45 / 50% |
 
-** The target takes magic damage every second over 4 seconds. Subsequent inflictions refresh the duration.
+**POISON:** The target takes magic damage every second over 4 seconds. Subsequent inflictions refresh the duration.
 
 | Attribute | Value |
 |-----------|------:|

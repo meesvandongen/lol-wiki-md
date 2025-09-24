@@ -127,7 +127,7 @@ At 120 Splinters of Wrath, **Syndra** achieves *Transcendence*, increasing her a
 |-----------|------:|
 | **Magic Damage** | 75 / 110 / 145 / 180 / 215 (+ 60% AP) |
 
-** Collecting 40 Splinters of Wrath causes **Syndra** to periodically stock a *Dark Sphere* charge, up to a maximum of 2.
+**TRANSCENDENT BONUS:** Collecting 40 Splinters of Wrath causes **Syndra** to periodically stock a *Dark Sphere* charge, up to a maximum of 2.
 
 **Notes:**
 
@@ -167,7 +167,7 @@ Walk in range of the target location to cast (recast) |
 |-----------|------:|
 | **Magic Damage** | 70 / 105 / 140 / 175 / 210 (+ 65% AP) |
 
-** Collecting 60 Splinters of Wrath enhances *Force of Will* to deal (true damage) 12% (+ 2% per 100 AP) **bonus** true damage.
+**TRANSCENDENT BONUS:** Collecting 60 Splinters of Wrath enhances *Force of Will* to deal (true damage) 12% (+ 2% per 100 AP) **bonus** true damage.
 
 | Attribute | Value |
 |-----------|------:|
@@ -219,7 +219,7 @@ Walk in range of the target location to cast (recast) |
 
 *Dark Spheres* can be knocked back for 950 units and up to 1200 units away from **Syndra** based on proximity, knocking back enemies they hit over 70 units, though not through terrain. Targets hit are also stunned for $1.25$ seconds, during which they are also revealed, and dealt *Scatter the Weak*’s damage if they were not damaged by the initial cast.
 
-** Collecting 80 Splinters of Wrath enhances *Scatter the Weak* to have an increased scatter angle and slow enemies hit by 70% for $1.25$ seconds starting after the knock back ends or if the target was hit by a pushed *Dark Sphere*, after the stun has ended.
+**TRANSCENDENT BONUS:** Collecting 80 Splinters of Wrath enhances *Scatter the Weak* to have an increased scatter angle and slow enemies hit by 70% for $1.25$ seconds starting after the knock back ends or if the target was hit by a pushed *Dark Sphere*, after the stun has ended.
 
 **Notes:**
 
@@ -266,7 +266,7 @@ Walk in range of the target location to cast (recast) |
 
 The *Dark Spheres* will then remain on the ground for 6 seconds.
 
-** Collecting 100 Splinters of Wrath enhances *Unleashed Power* to execute the target if it would damage them to below 15% of their **maximum** health.
+**TRANSCENDENT BONUS:** Collecting 100 Splinters of Wrath enhances *Unleashed Power* to execute the target if it would damage them to below 15% of their **maximum** health.
 
 **Scaling:**
 | Attribute | Value |

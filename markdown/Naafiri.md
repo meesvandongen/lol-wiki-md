@@ -304,12 +304,12 @@ If **Naafiri** scores a champion takedown within 7 seconds of cast, she triggers
 **Notes:**
 
 - *Hounds' Pursuit*’s theoretical **total** physical damage from *Packmates* **only**, assuming **Naafiri** has the maximum number of them active and *Hounds' Pursuit* is always ranked at the earliest experience permitted (ranks 1 / 2 / 3 at levels 6 / 11 / 16):
-  - **LEVELS 6–8:** #expr: (+ #expr:&emsp;/&emsp;**icononly=true** #expr: (+ #expr:.
-  - **LEVELS 9–10:** #expr: (+ #expr:&emsp;/&emsp;**icononly=true** #expr: (+ #expr:.
-  - **LEVEL 11:** (#expr: (+ #expr:&emsp;/&emsp;**icononly=true** (#expr: (+ #expr:.
-  - **LEVELS 12–14:** (#expr: (+ #expr:&emsp;/&emsp;**icononly=true** (#expr: (+ #expr:.
-  - **LEVEL 15:** (#expr: (+ #expr:&emsp;/&emsp;**icononly=true** (#expr: (+ #expr:.
-  - **LEVELS 16–18:** #expr: (+ #expr:&emsp;/&emsp;**icononly=true** #expr: (+ #expr:.
+  - **LEVELS 6–8:** #expr: (+ * #expr: (+ #expr:.
+  - **LEVELS 9–10:** #expr: (+ * #expr: (+ #expr:.
+  - **LEVEL 11:** (#expr: (+ * (#expr: (+ #expr:.
+  - **LEVELS 12–14:** (#expr: (+ * (#expr: (+ #expr:.
+  - **LEVEL 15:** (#expr: (+ * (#expr: (+ #expr:.
+  - **LEVELS 16–18:** #expr: (+ * #expr: (+ #expr:.
 - **Naafiri** marks the enemy champion targeted by *Hounds' Pursuit* in order to gain assist credit on them, lasting for the standard credit timer.
 - Spell shield will block **Naafiri**’s collision damage but cannot prevent collision damage from *Packmates*.
 - **Naafiri** will track the target if they change locations, up to a maximum distance.

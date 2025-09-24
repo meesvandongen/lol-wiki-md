@@ -161,7 +161,7 @@ Whenever **Aatrox** hits at least one enemy champion or large monster with a bas
   - **Aatrox**’s facing-direction, for effects such as Petrifying Gaze, is the direction he is moving, and not the direction the model is facing.
 - All damage modifiers stack multiplicatively.
 - There's a small period of time in which Aatrox can't declare basic attacks after casting *The Darkin Blade*.
-- This ability's damage is calculated based on the caster's current stats and changes dynamically. Effect at cast time end
+- This ability's damage is calculated based on the caster's current stats and changes dynamically. Effect at cast time end can be cast. Other abilities are disabled.|interrupts=death
 
 ---
 

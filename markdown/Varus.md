@@ -133,7 +133,7 @@ While *Living Vengeance*’s bonus is active, **Varus' **attack speed cap is inc
 - The indicator for the range of the spell will be displayed for the entire channel.
 - *Piercing Arrow* will cast from wherever **Varus** is at the end of the channel.
 - At maximum damage charge, all damage caused by *Piercing Arrow* will trigger cosmetic critical strike text.
-- The following table refers for interactions while **Varus** is channeling:
+- The following table refers for interactions while **Varus** is channeling: is usable during the first $0.85$ seconds, otherwise, it's disabled. and are disabled. This ability recasts to end channel.|items=false|consume=Disabled, but can still use trinkets.|spells=true, true, false, false, recasts
 
 ---
 
@@ -159,7 +159,7 @@ While *Living Vengeance*’s bonus is active, **Varus' **attack speed cap is inc
 
 **BLIGHT:** For each stack consumed, the target is dealt **bonus** magic damage. If the stacks were consumed with *Piercing Arrow*, this damage is increased by 0% / 5% / 10% / 15% / 20% / 25% / 30% / 35% / 40% / 45% / 50%, for a total cap of 360 at maximum stacks.
 
-Additionally, each stack consumed against a champion or epic monster reduces the of **Varus' ** basic abilities by 13% of each of their **total** cooldowns, up to a 39% cooldown reduction per target. If the stacks were consumed with **Piercing Arrow**, the cooldown reduction is increased by 0% / 5% / 10% / 15% / 20% / 25% / 30% / 35% / 40% / 45% / 50% cooldown reduction per target from consuming maximum stacks against them.
+Additionally, each stack consumed against a champion or epic monster reduces the of **Varus' ** basic abilities by 13% of each of their **total** cooldowns, up to a 39% cooldown reduction per target. If the stacks were consumed with **, the cooldown reduction is increased by 0% / 5% / 10% / 15% / 20% / 25% / 30% / 35% / 40% / 45% / 50% cooldown reduction per target from consuming maximum stacks against them.
 
 | Attribute | Value |
 |-----------|------:|

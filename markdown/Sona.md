@@ -140,7 +140,7 @@
 |-----------|------:|
 | **Magic Damage** | 50 / 85 / 120 / 155 / 190 (+ 40% AP) |
 
-** **Sona** and tagged allied champions deal **bonus** magic damage on their next basic attack within 5 seconds.
+**MELODY BONUS:** **Sona** and tagged allied champions deal **bonus** magic damage on their next basic attack within 5 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -149,7 +149,7 @@
 **Notes:**
 
 - Sight of the targets' area is granted on-cast.
-- The ** empowerment given to tagged allies respects enchantment redirection.
+- The **MELODY** empowerment given to tagged allies respects enchantment redirection.
 - The empowered attack will trigger but not be consumed against wards.
 
 ---
@@ -173,7 +173,7 @@
 |-----------|------:|
 | **Heal** | 30 / 45 / 60 / 75 / 90 (+ 30% AP) |
 
-** **Sona** and tagged allied champions are granted a shield for $1.5$ seconds.
+**MELODY BONUS:** **Sona** and tagged allied champions are granted a shield for $1.5$ seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -205,7 +205,7 @@
 
 **ACTIVE:** **Sona** gains (ms) 20% (+ 2% per 100 AP) **bonus** movement speed for 7 seconds. If she takes damage during this time, the duration ends prematurely once or if 3 seconds have elapsed.
 
-** Tagged allied champions gain **bonus** movement speed for 3 seconds.
+**MELODY BONUS:** Tagged allied champions gain **bonus** movement speed for 3 seconds.
 
 | Attribute | Value |
 |-----------|------:|

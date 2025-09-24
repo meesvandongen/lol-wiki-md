@@ -431,9 +431,9 @@ No additional notes.
 - Transcend One's Self - R
   - **PASSIVE:** *Arc of Ruin’s* base damage and *Untouchable Shadow’s* dash speed scale with *Transcend One's Self*’s rank.
   - **ACTIVE:** **Yunara** enters *Transcendent State* for 15 seconds, during which each of her basic abilities is empowered:
-    - ** Automatically becomes active at no cost, with the duration increased to *Transcendent State*’s.
-    - ** Upgraded into *Arc of Ruin*, which has no cost and has its **remaining** cooldown reduced by 80% upon both entering and exiting the state.
-    - ** Upgraded into *Untouchable Shadow*, which has no cost and has its cooldown reset upon both entering and exiting the state.
+    - **CULTIVATION OF SPIRIT:** Automatically becomes active at no cost, with the duration increased to *Transcendent State*’s.
+    - **ARC OF JUDGMENT:** Upgraded into *Arc of Ruin*, which has no cost and has its **remaining** cooldown reduced by 80% upon both entering and exiting the state.
+    - ***KANMEI'S STEPS:*** Upgraded into *Untouchable Shadow*, which has no cost and has its cooldown reset upon both entering and exiting the state.
   - **COST:** 100 mana.
   - **COOLDOWN:** 100 / 90 / 80 seconds.
   - **CAST TIME:** None.

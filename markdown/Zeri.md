@@ -242,7 +242,7 @@ Afterwards, she gains *Lightning Rounds* for 5 seconds, empowering *Burst Fire* 
 **Notes:**
 
 - *Spark Surge*’s extended dash travels based on the thickness of the terrain, up to a maximum distance.
-- The following table refers for interactions while **Zeri** is dashing:
+- The following table refers for interactions while **Zeri** is dashing: is disabled. and are usable.|items=true,,,interrupts|consume=true|spells=true,interrupts,true,true|interrupts=death
 
 ---
 

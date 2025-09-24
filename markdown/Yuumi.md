@@ -135,7 +135,7 @@
 |-----------|------:|
 | **Magic Damage** | 60 / 95 / 130 / 165 / 200 / 235 (+ 20% AP) |
 
-** **Yuumi** channels for up to $1.35$ seconds to steer the missile at a slower speed. After being in flight for the same duration, the missile accelerates in its current direction to deal increased damage and apply a stronger slow against champions that decays to 20% over 2 seconds.
+**ATTACHED BONUS:** **Yuumi** channels for up to $1.35$ seconds to steer the missile at a slower speed. After being in flight for the same duration, the missile accelerates in its current direction to deal increased damage and apply a stronger slow against champions that decays to 20% over 2 seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -145,7 +145,7 @@
 |-----------|------:|
 | **Enhanced Slow** | 50 / 53 / 56 / 59 / 62 / 65% |
 
-** *Prowling Projectile* always applies its enhanced slow against champions and hitting a champion grants her *Best Friend* **bonus** magic damage on-hit for 5 seconds, increased by 0%–75%@0–100 (@=*Anchor*’s critical strike chance).
+**BEST FRIEND BONUS:** *Prowling Projectile* always applies its enhanced slow against champions and hitting a champion grants her *Best Friend* **bonus** magic damage on-hit for 5 seconds, increased by 0%–75%@0–100 (@=*Anchor*’s critical strike chance).
 
 | Attribute | Value |
 |-----------|------:|
@@ -156,8 +156,8 @@
 - *Prowling Projectile* is able to turn clockwise or counter-clockwise at a rate of 90° per $0.5$ seconds. The missile can turn a maximum of 243° in both directions combined before accelerating.
 - *Prowling Projectile* can be buffered $0.5$ seconds before it comes off cooldown.
 - *Prowling Projectile* is slower when attached (before the acceleration). If **Yuumi** unattaches after using it, the missile will go back to its normal speed, without losing the acceleration later. This results in the fastest and longest ranged version of this ability.
-- The **'s empowerment respects enchantment redirection.
-- The following table refers for interactions while **Yuumi** is channeling:
+- The **BEST FRIEND**'s empowerment respects enchantment redirection.
+- The following table refers for interactions while **Yuumi** is channeling: and interrupt. is usable.|attack=N/A|items=true|consume=true|spells=true|interrupt=true
 
 ---
 
@@ -189,7 +189,7 @@ If targeting an ally with the recast, the ability will not cast |
 
 **Yuumi** starts with a skill point in *You and Me!* and *Prowling Projectile* instead has 6 ranks.
 
-** **Yuumi** gains heal and shield power and her *Best Friend* gains healing on-hit.
+**BEST FRIEND BONUS:** **Yuumi** gains heal and shield power and her *Best Friend* gains healing on-hit.
 
 
 *You and Me!* is placed on a (cd) 5-second cooldown if **Yuumi** becomes immobilized, grounded, or polymorphed.
@@ -259,7 +259,7 @@ If targeting an ally with the recast, the ability will not cast |
 |-----------|------:|
 | **Bonus Attack Speed** | 25 / 27.5 / 30 / 32.5 / 35% (+ 8% per 100 AP) |
 
-** *Zoomies* affects the *Anchor* instead of **Yuumi** and additionally restores mana to the *Anchor*, increased by 0%–100%@30–80 (@=*Anchor*’s **missing** mana).
+**ATTACHED BONUS:** *Zoomies* affects the *Anchor* instead of **Yuumi** and additionally restores mana to the *Anchor*, increased by 0%–100%@30–80 (@=*Anchor*’s **missing** mana).
 
 | Attribute | Value |
 |-----------|------:|
@@ -311,9 +311,9 @@ Enemies struck by the waves take magic damage and are slowed by 10% for $1.25$ s
 | **Reduced Damage per Hit** | 18.75 / 25 / 31.25 / 37.5 / 43.75 (+ 6.25% AP) |
 | **Total Magic Damage** | 150 / 200 / 250 / 300 / 350 (+ 50% AP) |
 
-** **Yuumi** can steer the direction of the waves if initially cast while attached. *Detaching* causes her to lose this bonus for the duration. Additionally, *Feline Friendship* can trigger from also hitting allied champions.
+**ATTACHED BONUS:** **Yuumi** can steer the direction of the waves if initially cast while attached. *Detaching* causes her to lose this bonus for the duration. Additionally, *Feline Friendship* can trigger from also hitting allied champions.
 
-** *Final Chapter*’s heal to the *Best Friend* is increased by 30%.
+**BEST FRIEND BONUS:** *Final Chapter*’s heal to the *Best Friend* is increased by 30%.
 
 | Attribute | Value |
 |-----------|------:|
@@ -329,7 +329,7 @@ Enemies struck by the waves take magic damage and are slowed by 10% for $1.25$ s
 - **Yuumi**’s facing direction during the channel is considered to be in *Final Chapter*’s target direction.
   - Using Hexflash during the channel will always cause **Yuumi** to blink in the target direction of *Final Chapter*.
 - Feline Friendship will not be triggered if **Yuumi** and her anchor aren't missing health **after** the wave hit.
-- The following table refers for interactions while **Yuumi** is channeling:
+- The following table refers for interactions while **Yuumi** is channeling: is disabled. and are usable.|attack=false|move=true|items=true,,,false|spells=true, true, true, false, true, true, true, true
 
 ---
 

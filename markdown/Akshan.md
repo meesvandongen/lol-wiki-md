@@ -270,8 +270,8 @@ Scoring an enemy champion takedown reduces *Heroic Swing*’s **current** cooldo
   - This particle can be attacked by minions.
 - This ability's damage is calculated based on the caster's current stats and changes dynamically.
 - Hook range including lollipop against walls, automated attacks range while swinging, final dash distance and speed.
-- The following table refers for interactions while the hook is attached or in flight:
-- The following table refers for interactions while **Akshan** is swinging:
+- The following table refers for interactions while the hook is attached or in flight: and are disabled. is usable.|items=false|consume=false|spells=false,interrupts,false,false,false|interrupts=death,root,ground
+- The following table refers for interactions while **Akshan** is swinging: and are disabled. is usable.|items=true,true,interrupts,interrupts,true,interrupts,true|consume=true|spells=true,interrupts,false,false,true|interrupts=death,root
 
 ---
 
@@ -340,9 +340,9 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 \|projectile = true
 \|callforhelp = false
 \|notes 
-- *Comeuppance* refreshes the duration of **Dirty Fighting** stacks on the target every $0.25$ seconds.
+- *Comeuppance* refreshes the duration of ** stacks on the target every $0.25$ seconds.
 - A kill threshold will appear on the health bar of the target locked onto during the channel, which increases each time **Akshan** stores a bullet. If the target's **current** health falls below the threshold, their health bar will be framed in red.
-  - The indicator factors the bonus damage applied by *Dirty Fighting* as well as damage modifiers and the target's resistances.
+  - The indicator factors the bonus damage applied by as well as damage modifiers and the target's resistances.
   - It also factors the projected increase in the target's **missing** health, from which each consecutive bullet scales more.
   - It updates dynamically over the channel's duration, reacting to fluctuations of the target's health and damage mitigations.
 - The true sight will linger for 2 seconds after the channel has ended.
@@ -352,13 +352,13 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 - Damage to structures **does** scale with their **missing** health.
 - This ability's damage is calculated based on the caster's current stats and changes dynamically.
 - The following table refers for interactions while **Akshan** is channel:
-
+ and are disabled. is usable.\|attack=false\|items=false\|consume=false\|spells=true,true,false,false,interrupts\|interrupts=death,silence
 \|flavorsound = *"Here comes the 'uppance!"*
 
 \|blurbicon = Comeuppance.png
-\|blurb = **ACTIVE:** **Akshan** locks onto the target enemy champion and begins channel power into his gun to store bullets, true sight them as well as sight himself. *Comeuppance* will recast after the channel, or can recast early.
+\|blurb = **ACTIVE:** locks onto the target enemy champion and begins channel power into his gun to store bullets, true sight them as well as sight himself. *Comeuppance* will recast after the channel, or can recast early.
 \|blurb2 = **RECAST:** Akshan fires the stored bullets at the target, each dealing physical damage to the first enemy hit, increased by their **missing** health.
-\|blurb3 = **Akshan** can move normally and cast **Heroic Swing** while channeling and firing *Comeuppance*.
+\|blurb3 = **Akshan** can move normally and cast ** while channeling and firing *Comeuppance*.
 \|blurb4 = *Comeuppance* applies and can hit turrets. |
 
 **Notes:**
@@ -374,7 +374,7 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 - *Comeuppance* will cancel if the target becomes untargetable or dies during the channel.
 - Damage to structures **does** scale with their **missing** health.
 - This ability's damage is calculated based on the caster's current stats and changes dynamically.
-- The following table refers for interactions while **Akshan** is channeling:
+- The following table refers for interactions while **Akshan** is channeling: and are disabled. is usable.|attack=false|items=false|consume=false|spells=true,true,false,false,interrupts|interrupts=death,silence
 
 ---
 

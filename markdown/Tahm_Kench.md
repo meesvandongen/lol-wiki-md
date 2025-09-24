@@ -61,7 +61,7 @@
 |-----------|------:|
 | **Heal** | 10 / 15 / 20 / 25 / 30 (+ 5 / 5.5 / 6 / 6.5 / 7% of **missing** health) |
 
-** The target is stunned for $1.5$ seconds. *Devour* can be cast during *Tongue Lash* at no cost to pull the target to **Tahm Kench** before swallowing them.
+**AN ACQUIRED TASTE BONUS:** The target is stunned for $1.5$ seconds. *Devour* can be cast during *Tongue Lash* at no cost to pull the target to **Tahm Kench** before swallowing them.
 
 ***Tahm Kench** is unable to move, attack, or cast Abyssal Dive or Devour on a different target while his tongue is in flight. Tongue Lash's range and travel speed can be increased by **Tahm Kench**’s size.*
 
@@ -175,7 +175,7 @@ If the target is an ally, they become unable to act and are granted a shield, wh
 
 After 1 second, **Tahm Kench** can cast *Regurgitate* while a target is inside of his belly, and automatically does so after the duration. The swallowed ally can also input a movement command (RMB) to force **Tahm Kench** to cast *Regurgitate* in a target direction of their choice, unless they are immobilized.
 
-** The target is suppressed during *Devour*’s cast time and while attached. **Tahm Kench** will also be grounded and slowed by 40% under those same conditions.
+**AN ACQUIRED TASTE BONUS:** The target is suppressed during *Devour*’s cast time and while attached. **Tahm Kench** will also be grounded and slowed by 40% under those same conditions.
 
 *If **Tahm Kench** is performing Abyssal Dive, Regurgitate will not automatically cast until after he finishes.*
 
@@ -202,7 +202,7 @@ After 1 second, **Tahm Kench** can cast *Regurgitate* while a target is inside o
 - The swallowed target is not considered to be vanished. They are instead hidden below the visible map plane, to maintain ongoing effects such as Senna’s Curse of the Black Mist.
 - During *Devour*’s attachment and Regurgitate’s displacement, the swallowed target's camera is locked and centered on their champion.
   - This does not affect **Tahm Kench**.
-- The following table refers for interactions while the target is unable to act:
+- The following table refers for interactions while the target is unable to act: * unless movement commands are otherwise restricted. If an enemy, movement commands are disabled.|cast=false|items=false|consume=false|spells=false|interrupts=death
 
 ---
 

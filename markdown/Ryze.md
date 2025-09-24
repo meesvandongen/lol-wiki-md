@@ -121,7 +121,7 @@ If **Ryze** consumed 2 stacks, he gains (ms) **bonus** movement speed for 2 seco
 |-----------|------:|
 | **Bonus Movement Speed** | 28 / 32 / 36 / 40 / 44% |
 
-** *Overload* deals 20px increased damage and spreads to surrounding *Fluxed* enemies.
+**FLUX BONUS:** *Overload* deals 20px increased damage and spreads to surrounding *Fluxed* enemies.
 
 **Notes:**
 
@@ -153,7 +153,7 @@ If **Ryze** consumed 2 stacks, he gains (ms) **bonus** movement speed for 2 seco
 |-----------|------:|
 | **Magic Damage** | 60 / 90 / 120 / 150 / 180 (+ 70% AP) (+ 4% **bonus** mana) |
 
-** The target is rooted instead of slowed.
+**FLUX BONUS:** The target is rooted instead of slowed.
 
 **Notes:**
 
@@ -189,7 +189,7 @@ The target and surrounding enemies are also marked with *Flux* for 4 seconds. **
 |-----------|------:|
 | **Magic Damage** | 60 / 90 / 120 / 150 / 180 (+ 50% AP) (+ 2% **bonus** mana) |
 
-** *Spell Flux* spreads farther.
+**FLUX BONUS:** *Spell Flux* spreads farther.
 
 **Notes:**
 

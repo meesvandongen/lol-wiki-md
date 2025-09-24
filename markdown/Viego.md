@@ -238,7 +238,7 @@ The second strike applies on-hit effects and can critically strike for damage.
 **Notes:**
 
 - The reduced cooldown from the charge will not occur if *Spectral Maw*’s cooldown is already below 3 seconds.
-- The following table refers for interactions while **Viego** is channeling:
+- The following table refers for interactions while **Viego** is channeling: is usable. and are disabled.|items=false|consume=Disabled, but can still use trinkets.|spells=true, true, false, false, recasts|interrupts=death, silence, ground, root
 
 ---
 

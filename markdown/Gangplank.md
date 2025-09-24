@@ -298,7 +298,7 @@ Where:
 
 **Gangplank** can purchase upgrades for his ship in the store at the cost of 500 *Silver Serpents* each, which improve *Cannon Barrage*:
 
-** A large cannonball lands in the center of the barrage after the first cluster of waves occur, dealing a cluster's worth of true damage to enemies within the impact and slowing them by 75% for 1 second.
+**DEATH'S DAUGHTER:** A large cannonball lands in the center of the barrage after the first cluster of waves occur, dealing a cluster's worth of true damage to enemies within the impact and slowing them by 75% for 1 second.
 
 | Attribute | Value |
 |-----------|------:|
@@ -308,7 +308,7 @@ Where:
 |-----------|------:|
 | **Total Mixed Damage with Death's Daughter** | 600 / 825 / 1050 / 1275 / 1500 (+ 150% AP) |
 
-** *Cannon Barrage* fires「 6 additional waves ⟷ 2 additional clusters 」 over its duration; 18 waves of cannonballs are called down in clusters of 3 every $1.33$ seconds.
+**FIRE AT WILL:** *Cannon Barrage* fires「 6 additional waves ⟷ 2 additional clusters 」 over its duration; 18 waves of cannonballs are called down in clusters of 3 every $1.33$ seconds.
 
 | Attribute | Value |
 |-----------|------:|
@@ -318,7 +318,7 @@ Where:
 |-----------|------:|
 | **Maximum Mixed Total Damage with Fire at Will and Death's Daughter** | 840 / 1155 / 1470 / 1785 / 2100 (+ 210% AP) |
 
-** *Cannon Barrage* grants **Gangplank** and all allies within the area 40% **bonus** movement speed, lingering for 2 seconds.
+**RAISE MORALE:** *Cannon Barrage* grants **Gangplank** and all allies within the area 40% **bonus** movement speed, lingering for 2 seconds.
 
 **Notes:**
 

@@ -132,7 +132,7 @@
 | **Spell Effects** | spellaoe |
 | **Projectile** | True |
 
-** *Inner Flame* deals increased damage, and fires a larger bolt that also explodes at maximum range.
+**MANTRA BONUS:** *Inner Flame* deals increased damage, and fires a larger bolt that also explodes at maximum range.
 
 | Attribute | Value |
 |-----------|------:|
@@ -208,7 +208,7 @@ If the tether is not broken by the end of its duration, the target is dealt the 
 | **Projectile** | False |
 | **Call For Help** | True |
 
-** *Focused Resolve*’s root duration is increased. 
+**MANTRA BONUS:** *Focused Resolve*’s root duration is increased. 
 
 **Karma** heals for (health) 17% (+ 1% per 100 AP) of her **missing** health once on-cast, and again once the tether lasts its full duration or the target dies while tethered.
 
@@ -234,7 +234,7 @@ If the tether is not broken by the end of its duration, the target is dealt the 
 | **Targeting** | Unit |
 | **Affects** | Allies |
 
-** *Inspire* grants a bonus amount of shielding.
+**MANTRA - ACTIVE:** *Inspire* grants a bonus amount of shielding.
 
 *Inspire* spreads to surrounding allied champions, granting them a shield for $2.5$ seconds and (ms) 15% **bonus** movement speed for 2 seconds.
 

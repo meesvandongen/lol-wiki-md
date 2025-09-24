@@ -143,17 +143,19 @@ The **bonus** movement speed from *Prowl* and *Hunt* can stack, but cannot excee
 
 *Takedown* can critically strike for AD **bonus** magic damage.
 
-- ***
+- **TAKEDOWN SCALES WITH ASPECT OF THE COUGAR’S RANK**
+
 | Attribute | Value |
 |-----------|------:|
 | **Minimum Magic Damage** | 5 / 30 / 55 / 80 (+ 75% AD) (+ 40% AP) |
 | **Maximum Magic Damage** | (5 to 80)*(1+(1 to 1.75)) 4 (+ 150 / 168.75 / 187.5 / 206.25% AD) (+ 80 / 90 / 100 / 110% AP) |
+
 | Attribute | Value |
 |-----------|------:|
 | **Increased Damage Modifier** | 1 / 1.25 / 1.5 / 1.75% |
 | **Maximum Increased Damage** | 100 / 125 / 150 / 175% |
 
-*** Hitting a *Hunted* target increases *Takedown*’s damage by 30%.
+**HUNT BONUS:** Hitting a *Hunted* target increases *Takedown*’s damage by 30%.
 
 | Attribute | Value |
 |-----------|------:|
@@ -161,17 +163,6 @@ The **bonus** movement speed from *Prowl* and *Hunt* can stack, but cannot excee
 | ***Prowl*-Enhanced Maximum Damage** | (5 to 80)*(1+(1 to 1.75))*1.3 4 (+ 195 / 219.375 / 243.75 / 268.125% AD) (+ 104 / 117 / 130 / 143% AP) |
 
 *Takedown resets **Nidalee**’s basic attack timer. Other damage converted to magic damage by Takedown are not increased by Takedown's respective effects. **Nidalee** loses Takedown's empowered attack immediately when she switches to Human Form.*
-
-**Scaling:**
-| Attribute | Value |
-|-----------|------:|
-| **Minimum Magic Damage** | 5 / 30 / 55 / 80 (+ 75% AD) (+ 40% AP) |
-| **Maximum Magic Damage** | (5 to 80)*(1+(1 to 1.75)) 4 (+ 150 / 168.75 / 187.5 / 206.25% AD) (+ 80 / 90 / 100 / 110% AP) |
-
-| Attribute | Value |
-|-----------|------:|
-| **Increased Damage Modifier** | 1 / 1.25 / 1.5 / 1.75% |
-| **Maximum Increased Damage** | 100 / 125 / 150 / 175% |
 
 **Notes:**
 
@@ -270,7 +261,8 @@ Traps have (health) 6 **maximum** health and can only be damaged by champion bas
 
 **PASSIVE:** Killing an enemy while in *Cougar Form* or using *Pounce's Hunt* bonus reduces *Pounce*’s **current** cooldown to a minimum value.
 
-- ***
+- **POUNCE SCALES WITH ASPECT OF THE COUGAR’S RANK**
+
 | Attribute | Value |
 |-----------|------:|
 | **Reduced Cooldown** | 3 / 2.5 / 2 / 1.5 seconds (Affected by ability haste) |
@@ -281,14 +273,9 @@ Traps have (health) 6 **maximum** health and can only be damaged by champion bas
 |-----------|------:|
 | **Magic Damage** | 55 / 100 / 145 / 190 (+ 50% **bonus** AD) (+ 30% AP) |
 
-*** **Nidalee** can perform *Pounce* from an increased range on a *Hunted* enemy closest to the cursor. She will leap to the front of the target.
+**HUNTED BONUS:** **Nidalee** can perform *Pounce* from an increased range on a *Hunted* enemy closest to the cursor. She will leap to the front of the target.
 
 *Takedown and Aspect of the Cougar can be cast during the dash.*
-
-**Scaling:**
-| Attribute | Value |
-|-----------|------:|
-| **Reduced Cooldown** | 3 / 2.5 / 2 / 1.5 seconds (Affected by ability haste) |
 
 **Notes:**
 
@@ -313,12 +300,8 @@ Traps have (health) 6 **maximum** health and can only be damaged by champion bas
 
 **ACTIVE:** **Nidalee** slashes in an arc in the target direction, dealing magic damage to enemies hit.
 
-- ***
-| Attribute | Value |
-|-----------|------:|
-| **Magic Damage** | 70 / 130 / 190 / 250 (+ 70% **bonus** AD) (+ 55% AP) |
+- **SWIPE SCALES WITH ASPECT OF THE COUGAR’S RANK**
 
-**Scaling:**
 | Attribute | Value |
 |-----------|------:|
 | **Magic Damage** | 70 / 130 / 190 / 250 (+ 70% **bonus** AD) (+ 55% AP) |

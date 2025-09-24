@@ -85,7 +85,7 @@
 | **Targeting** | Passive |
 | **Affects** | Self |
 
-**INNATE:** Whenever **Jayce** switches between either ** or **, he gains ghosting and (ms) 40 **bonus** movement speed for $0.75$ seconds.
+**INNATE:** Whenever **Jayce** switches between either **HAMMER STANCE** or **CANNON STANCE**, he gains ghosting and (ms) 40 **bonus** movement speed for $0.75$ seconds.
 
 **Notes:**
 

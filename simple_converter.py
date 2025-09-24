@@ -1674,13 +1674,52 @@ class SimpleLoLConverter:
         text = self._convert_ft_blocks(text)
         # Skill tabs: {{st|Label1|Value1|Label2|Value2|...}} -> table (brace-aware)
         text = self._convert_st_blocks(text)
-        # Small bold caps: uppercase the display text and make it bold
-        def _sbc_repl(m: re.Match) -> str:
-            inner = m.group(1)
-            # Take first arg before any extra pipes
-            display = inner.split('|', 1)[0].strip()
-            return f"**{display.upper()}**"
-        text = re.sub(r'\{\{sbc\|([^}]+)\}\}', _sbc_repl, text)
+        # Small bold caps: brace-aware, allow nested templates and wiki italics.
+        # We recursively convert the inner content, strip inline italics to avoid
+        # mixing '*' with outer bold, then uppercase and wrap in **...**.
+        def _convert_sbc_blocks(s: str) -> str:
+            out: List[str] = []
+            i = 0
+            n = len(s)
+            while i < n:
+                j = s.find('{{sbc|', i)
+                if j == -1:
+                    out.append(s[i:])
+                    break
+                out.append(s[i:j])
+                k = j + 6  # position after '{{sbc|'
+                depth = 1
+                buf: List[str] = []
+                while k < n:
+                    if k + 1 < n and s[k] == '{' and s[k+1] == '{':
+                        depth += 1
+                        buf.append(s[k:k+2])
+                        k += 2
+                        continue
+                    if k + 1 < n and s[k] == '}' and s[k+1] == '}':
+                        depth -= 1
+                        if depth == 0:
+                            k += 2
+                            break
+                        buf.append(s[k:k+2])
+                        k += 2
+                        continue
+                    buf.append(s[k])
+                    k += 1
+                inner = ''.join(buf)
+                # inner starts with the remainder after 'sbc|', may contain pipes for other args
+                parts = self._split_top_level_pipes(inner)
+                raw_disp = parts[0] if parts else ''
+                # Recursively convert nested templates and wiki markup within the sbc content
+                disp_md = self._convert_wiki_to_markdown(raw_disp) if raw_disp else ''
+                # Remove inline italics/bold markers inside sbc content to avoid '**' + '*' conflicts
+                # Keep math ('$') and links intact.
+                if disp_md:
+                    disp_md = disp_md.replace('*', '')
+                out.append(f"**{(disp_md or '').upper()}**")
+                i = k
+            return ''.join(out)
+        text = _convert_sbc_blocks(text)
 
         # Fix double bold markers
         text = re.sub(r'\*\*\*\*([^*]+):\*\*', r'**\1:**', text)  # ****text:** -> **text:**
@@ -1692,52 +1731,9 @@ class SimpleLoLConverter:
         text = re.sub(r'\[\[([^|\]]+)(?:\|([^]]*))?\]\]', self._convert_link, text)
 
         # Convert champion/ability references
-        text = re.sub(r'\{\{ci\|([^}|]+)(?:\|[^}]*)?\}\}', r'**\1**', text)
-        # cis: champion info possessive (e.g., {{cis|Lulu}} -> **Lulu**’s or **Lulu**’)
-        def _cis_repl(m: re.Match) -> str:
-            name = (m.group(1) or '').strip()
-            name_md = self._convert_wiki_to_markdown(name)
-            # Determine correct suffix outside bold: ’s vs ’
-            suffix = self._make_possessive(name_md)[len(name_md):]
-            return f"**{name_md}**{suffix}"
-        text = re.sub(r'\{\{cis\|([^}|]+)(?:\|[^}]*)?\}\}', _cis_repl, text)
-        # ai template: {{ai|Ability|Champion}} or {{ai|Ability|Champion|Display}}
-        # Prefer 3rd arg (Display) when present, else 1st arg (Ability). Keep italics, drop linking.
-        def _ai_repl(m: re.Match) -> str:
-            full = m.group(0)
-            # Capture up to 3 args loosely to allow pipes
-            inner = full[2:-2]  # strip '{{' '}}'
-            parts = inner.split('|')
-            # parts[0] == 'ai'
-            args = parts[1:]
-            ability = args[0].strip() if len(args) >= 1 else ''
-            display = args[2].strip() if len(args) >= 3 and args[2].strip() else ability
-            return f"*{display}*"
-        text = re.sub(r'\{\{ai\|[^}]+\}\}', _ai_repl, text)
-        # ais template: like ai but possessive; render italic with trailing ’s
-        def _ais_repl(m: re.Match) -> str:
-            full = m.group(0)
-            inner = full[2:-2]
-            parts = inner.split('|')
-            args = parts[1:]
-            ability = args[0].strip() if len(args) >= 1 else ''
-            display = args[2].strip() if len(args) >= 3 and args[2].strip() else ability
-            disp_md = self._convert_wiki_to_markdown(display) if display else ''
-            suffix = self._make_possessive(disp_md)[len(disp_md):] if disp_md else ''
-            return f"*{disp_md}*{suffix}"
-        text = re.sub(r'\{\{ais\|[^}]+\}\}', _ais_repl, text)
-        # cais: champion ability possessive with champion label; render italic with trailing ’s using 1st arg as display when present
-        def _cais_repl(m: re.Match) -> str:
-            full = m.group(0)
-            inner = full[2:-2]
-            parts = inner.split('|')
-            args = parts[1:]
-            ability = args[0].strip() if len(args) >= 1 else ''
-            display = args[2].strip() if len(args) >= 3 and args[2].strip() else ability
-            disp_md = self._convert_wiki_to_markdown(display) if display else ''
-            suffix = self._make_possessive(disp_md)[len(disp_md):] if disp_md else ''
-            return f"*{disp_md}*{suffix}"
-        text = re.sub(r'\{\{cais\|[^}]+\}\}', _cais_repl, text)
+        # Note: icon/link wrappers (ci/cis/ai/ais/cais/ri/ii/etc.) are handled earlier by
+        # the brace-aware _unwrap_icon_like_templates, which outputs plain text and
+        # adds possessive suffixes without italics/bold. Avoid reintroducing emphasis here.
         # bi: buff information; keep the most relevant text (prefer last non-empty arg, else first)
         def _bi_repl(m: re.Match) -> str:
             full = m.group(0)
@@ -1758,11 +1754,6 @@ class SimpleLoLConverter:
             return arg
         text = re.sub(r'\{\{ui\|[^}]+\}\}', _ui_repl, text)
         text = re.sub(r'\{\{tip\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text)
-        text = re.sub(r'\{\{ri\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text)  # Rune references
-        text = re.sub(r'\{\{ii\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text)  # Item references
-        # TFT item template: {{TFT Item|Name}} -> *Name*
-        # The surrounding text already mentions Teamfight Tactics item, so postfix is redundant
-        text = re.sub(r'\{\{TFT Item\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text)
 
         # High-frequency templates from audit: provide safe text-only mappings
         # LoR card/link templates -> keep display text
@@ -1786,10 +1777,7 @@ class SimpleLoLConverter:
             disp = args[1] if len(args) >= 2 and args[1] else args[0]
             return disp
         text = re.sub(r'\{\{tip\|([^}]+)\}\}', _tip_fallback, text, flags=re.IGNORECASE)
-        # Items (plural) -> italicize like ii
-        text = re.sub(r'\{\{iis\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
-        # Styled italic (linked variant) -> italicize content
-        text = re.sub(r'\{\{stil\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+        # Items and styled-italic variants are handled upstream; do not italicize here.
         # Gold-related templates -> append unit
         text = re.sub(r'\{\{g\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1 gold', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{\s*g\s*\}\}', 'gold', text, flags=re.IGNORECASE)
@@ -1799,8 +1787,7 @@ class SimpleLoLConverter:
         text = re.sub(r'\{\{degree(?:\|[^}]*)?\}\}', '°', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{plus(?:\|[^}]*)?\}\}', '+', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{tftt\}\}', 'Teamfight Tactics', text, flags=re.IGNORECASE)
-        # Mastery icon shortcodes (mi6) -> keep label only
-        text = re.sub(r'\{\{mi6\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+        # Mastery icon labels handled upstream; no italics here.
         # Structural/maintenance templates -> drop
         text = re.sub(r'\{\{(?:references|lol navigation|champions|champion categories|doc|fairuse|section top)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{(?:rune header|rune footer)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
@@ -1822,12 +1809,9 @@ class SimpleLoLConverter:
         text = re.sub(r'\{\{cc[dsib]?\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
         # TFT helper templates (icons/names/categories) -> keep primary text
         text = re.sub(r'\{\{tft[inc]?\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-        # Wild Rift wrappers
+        # Wild Rift wrappers -> keep content plain (wr handled above already)
         text = re.sub(r'\{\{wr\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
-        text = re.sub(r'\{\{wri\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
-        # Unit/item plural wrappers
-        text = re.sub(r'\{\{uis\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
-        text = re.sub(r'\{\{items\|([^}|]+)(?:\|[^}]*)?\}\}', r'*\1*', text, flags=re.IGNORECASE)
+        # Unit/item plural wrappers handled upstream; no italics here.
         # Generic wrappers: keep or drop
         text = re.sub(r'\{\{(?:builds|grouped ability|map changes|recipe/item|recipe|link|text)\|([^}|]+)(?:\|[^}]*)?\}\}', r'\1', text, flags=re.IGNORECASE)
         text = re.sub(r'\{\{(?:icononly|image|clear|width|alttext|documentation|border|class|iconclass|iconstyle|labelclass|labelstyle|style|display|label|height|pagename|variant|nolink)\b[^}]*\}\}', '', text, flags=re.IGNORECASE)
@@ -3636,11 +3620,14 @@ class SimpleLoLConverter:
                         if norm:
                             printed_descs.add(norm)
                     if lev:
-                        # If it's a table block (from st), it may contain one or more concatenated tables
-                        if lev.lstrip().startswith('|'):
+                        # Handle possible mix of prose + one or more st-rendered tables in a single leveling value
+                        lev_lines = lev.splitlines()
+                        has_table = any(re.match(r'^\s*\|', ln) for ln in lev_lines)
+                        if lev.lstrip().startswith('|') and has_table and not any(ln.strip() and not ln.lstrip().startswith('|') for ln in lev_lines):
+                            # Pure table block(s): may contain one or more concatenated tables
                             blocks: List[str] = []
                             current: List[str] = []
-                            for ln in lev.splitlines():
+                            for ln in lev_lines:
                                 if re.match(r'^\s*\|\s*Attribute\s*\|\s*Value\s*\|\s*$', ln):
                                     if current:
                                         blocks.append('\n'.join(current).strip())
@@ -3657,9 +3644,38 @@ class SimpleLoLConverter:
                                 lines.append(tbl)
                                 lines.append("")
                         else:
-                            # Non-table: render as a bullet list line
-                            lines.append(f"- {lev}")
-                            lines.append("")
+                            # Mixed or pure prose: emit prose first, then any tables with a blank line separating
+                            prose_parts: List[str] = []
+                            table_blocks: List[str] = []
+                            current: List[str] = []
+                            collecting_table = False
+                            for ln in lev_lines:
+                                if re.match(r'^\s*\|\s*Attribute\s*\|\s*Value\s*\|\s*$', ln):
+                                    # starting a new table block
+                                    if collecting_table and current:
+                                        table_blocks.append('\n'.join(current).strip())
+                                        current = []
+                                    collecting_table = True
+                                    current.append(ln)
+                                elif collecting_table:
+                                    current.append(ln)
+                                else:
+                                    if ln.strip():
+                                        prose_parts.append(ln.strip())
+                            if collecting_table and current:
+                                table_blocks.append('\n'.join(current).strip())
+
+                            if prose_parts:
+                                # Render leveling prose as a single bullet line
+                                lines.append(f"- {' '.join(prose_parts)}")
+                                lines.append("")
+                            for tbl in table_blocks:
+                                tkey = tbl.strip()
+                                if tkey:
+                                    rendered_tables.add(tkey)
+                                # Ensure a blank line already exists after prose; just append tables
+                                lines.append(tbl)
+                                lines.append("")
                 
                 # Any extra scaling tables not tied to a specific description
                 if ability.get('extra_scaling'):

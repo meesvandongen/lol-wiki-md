@@ -116,7 +116,7 @@ Basic attacks on-hit reduce *Alpha Strike*’s **current** cooldown by 1 second,
   - If he is striking multiple targets the damage will be dealt immediately when *dying*, and if he *dies* before the bounce from the last target, *Alpha Strike* will deal reduced damage only to all units he already bounced from.
 - If **Master Yi** enters resurrection during *Alpha Strike* and he is only focusing one target, the ability will deal the reduced damage strikes as normal and the final tick of damage after being *resurrected*.
   - If he is striking multiple targets, *Alpha Strike* will *sometimes* deal the reduced damage from repeated bounces and the main damage after being *resurrected*, and *sometimes* only the reduced damage, unrelated to the number of targets available.
-- The following table refers for interactions while **Master Yi** is performing *Alpha Strike*:
+- The following table refers for interactions while **Master Yi** is performing *Alpha Strike*: and are usable. is disabled.|items=false|consume=false|spells=true,false,false,false,false|interrupts=death
 
 ---
 

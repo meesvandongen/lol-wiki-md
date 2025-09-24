@@ -193,7 +193,7 @@ No additional notes.
   - Both allies and enemies can see an indicator at the targeted location of where **Twisted Fate** will appear.
 - The following table refers for interactions while **Twisted Fate** is channeling:
   - Item actives with cast times as well as Titanic Hydra are disabled during the channel.
-    - Trying to cast a disabled item active will buffer it to cast at the completion of the channel.
+    - Trying to cast a disabled item active will buffer it to cast at the completion of the channel. is usable. is disabled.|items=true,,interrupts|spells=false|interrupts=death, ground, root, silence
 
 ---
 

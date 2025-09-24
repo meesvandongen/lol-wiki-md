@@ -132,7 +132,7 @@ No additional notes.
 |-----------|------:|
 | **Total Magic Damage** | 80 / 120 / 160 / 200 / 240 (+ 100% AD) (+ 90% AP) |
 
-** After the device hits, **Viktor** gains (ms) 30% **bonus** movement speed for $2.5$ seconds and the shield's strength is increased「 by 60%. ⟷ to 40×1.6 to 115×1.6 (+ 32% AP). 」
+**AUGMENT: TURBOCHARGE —** After the device hits, **Viktor** gains (ms) 30% **bonus** movement speed for $2.5$ seconds and the shield's strength is increased「 by 60%. ⟷ to 40×1.6 to 115×1.6 (+ 32% AP). 」
 
 **Notes:**
 
@@ -166,7 +166,7 @@ No additional notes.
 
 The field applies a stack to enemies within every $0.25$ seconds, stacking up to 5 times. The fifth stack consumes them all to knock down and stun the target for $1.5$ seconds. The knockdown and stun can be triggered only once per cast per enemy.
 
-** **Viktor**’s other abilities, excluding *Arcane Storm’s* persistent damage, slow enemies hit by 20% for 1 second.
+**AUGMENT: MAGNETIZE —** **Viktor**’s other abilities, excluding *Arcane Storm’s* persistent damage, slow enemies hit by 20% for 1 second.
 
 **Notes:**
 
@@ -206,7 +206,7 @@ The field applies a stack to enemies within every $0.25$ seconds, stacking up to
 |-----------|------:|
 | **Magic Damage** | 70 / 110 / 150 / 190 / 230 (+ 50% AP) |
 
-** The path explodes along the beam's wake after 1 second, dealing magic damage to enemies hit.
+**AUGMENT: AFTERSHOCK —** The path explodes along the beam's wake after 1 second, dealing magic damage to enemies hit.
 
 | Attribute | Value |
 |-----------|------:|
@@ -262,7 +262,7 @@ The singularity then remains active for $6.5$ seconds, dealing magic damage to e
 
 **RECAST:** **Viktor** directs the singularity to the target location, or to follow the target enemy champion or himself.
 
-** The singularity moves 25% faster. Additionally, whenever an enemy champion is taken down after being damaged by *Arcane Storm*, the singularity increases in by 40% and extends its duration by 3 seconds. The singularity radius can be increased up to 6 times and its duration can be extended only up to the original duration.
+**AUGMENT: PERFECT STORM —** The singularity moves 25% faster. Additionally, whenever an enemy champion is taken down after being damaged by *Arcane Storm*, the singularity increases in by 40% and extends its duration by 3 seconds. The singularity radius can be increased up to 6 times and its duration can be extended only up to the original duration.
 
 *Arcane Storm's recast can be used while affected by cast-inhibiting crowd control.*
 

@@ -218,7 +218,7 @@ If *Decimating Smash* was charged for at least 1 second, **Sion** instead slams 
 - Forced movement without a stun component (or the stun being cleansed previously) will not stop **Sion** from starting or continuing to channel. Its direction will not change with **Sion**’s travel, however the location will update with him.
   - The location of the indicator updates at the *beginning* of the ability, at *1 second* and at *release*.
 - The indicator of the ability is slightly shorter at its front than the hitbox of the ability is for Sion, Sion and related skins and chromas, while on Sion, the indicator is slightly thinner at the front than the hitbox is, instead.
-- The following table refers for interactions while **Sion** is channeling:
+- The following table refers for interactions while **Sion** is channeling: and its are usable. and are disabled. This ability recasts to end channel.|items=false|consume=false|spells=true, false, false, false, recasts
 
 ---
 
@@ -393,7 +393,7 @@ Enemies, including turrets, hit by the slam are dealt the same damage and are sl
 - Moving the cursor onto HUD elements (e.g mini map.md) / champion portraits) does *not* jeopardize the cast and steering of *Unstoppable Onslaught*. The targeting will act as if the ground was targeted below the display element.
 - The distance between **Sion**’s center and the center of the ground *slam* scales slightly with movement speed. This is suspected because running into a wall within half a second of *charge* time after starting at multiple thousands of movement speed shows a considerable difference, however this could also be due to a bug.
 - The *leap* appears to always have the same speed regardless of **Sion**’s, at roughly 750.
-- The following table refers for interactions while **Sion** is channeling:
+- The following table refers for interactions while **Sion** is channeling: and its are usable. and are disabled. This ability recasts to end channel.|items=false|consume=false|spells=false|interrupts=death
 - If *Unstoppable Onslaught*’s channel is interrupted despite the immunity to crowd control or Decimating Smash is cast within $0.25$ seconds after starting the charge, it will also initiate the leap. If the channel ends due to collision or death, there is no leap and the effect occurs immediately.
 
 ---

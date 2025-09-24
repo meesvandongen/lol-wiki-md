@@ -133,7 +133,7 @@ Releasing the ability within $0.35$ seconds causes **Pantheon** to instead thrus
 
 If the charge is interrupted or completes without reactivation, *Comet Spear* is cancelled and the ability is put on full cooldown but refunds (mana) half the mana cost.
 
-** *Comet Spear* deals 20 to 240 (+ 115% **bonus** AD) **bonus** physical damage, affected by the previous damage reductions. Consumes the stacks upon recasting.
+**MORTAL WILL:** *Comet Spear* deals 20 to 240 (+ 115% **bonus** AD) **bonus** physical damage, affected by the previous damage reductions. Consumes the stacks upon recasting.
 
 **Notes:**
 
@@ -168,7 +168,7 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
 |-----------|------:|
 | **Physical Damage** | 6 / 6.5 / 7 / 7.5 / 8% of target's **maximum** health (+ $1.5$% per 100 AP) (+ $0.4$% per 100 **Pantheon**’s **bonus** health) |
 
-** **Pantheon** empowers his next basic attack within 4 seconds to have a $0.375$-second cast time and strike the target 3 times over a brief period, dealing 120/3 to 165/3 AD physical damage per hit, up to 120 to 165 AD. Each hit is affected by critical strike modifiers and applies on-hit effects.
+**MORTAL WILL:** **Pantheon** empowers his next basic attack within 4 seconds to have a $0.375$-second cast time and strike the target 3 times over a brief period, dealing 120/3 to 165/3 AD physical damage per hit, up to 120 to 165 AD. Each hit is affected by critical strike modifiers and applies on-hit effects.
 
 *Empowered Shield Vault resets **Pantheon**’s basic attack timer. **Pantheon** will attempt to basic attack the target at the end of the leap.*
 
@@ -213,7 +213,7 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
 |-----------|------:|
 | **Physical Damage** | 55 / 105 / 155 / 205 / 255 (+ 150% **bonus** AD) |
 
-** After recasting, **Pantheon** gains 5 to 30 (+ $2.5$% **bonus** health) **bonus** armor and **bonus** magic resistance for 4 seconds as well as 60% **bonus** movement speed for $1.5$ seconds.
+**MORTAL WILL:** After recasting, **Pantheon** gains 5 to 30 (+ $2.5$% **bonus** health) **bonus** armor and **bonus** magic resistance for 4 seconds as well as 60% **bonus** movement speed for $1.5$ seconds.
 
 **Notes:**
 

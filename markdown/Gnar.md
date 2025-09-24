@@ -325,13 +325,13 @@ If *Hop* is used to transform, it will not grant (as) **bonus** attack speed. In
 | **Spell Effects** | Area of effect |
 | **Projectile** | False |
 
-** *Hyper’s* (ms) **bonus** movement speed is increased.
+**GNAR - PASSIVE:** *Hyper’s* (ms) **bonus** movement speed is increased.
 
 | Attribute | Value |
 |-----------|------:|
 | **Hyper Bonus Movement Speed** | 40 / 50 / 60 / 70 / 80% |
 
-** **Gnar** thrusts in the target direction, knocking away nearby enemies up to 590 units in that direction, though not through terrain, and afterwards dealing them physical damage, as well as slowing them by 45% after a $0.4$-second delay for a duration.
+**MEGA GNAR - ACTIVE:** **Gnar** thrusts in the target direction, knocking away nearby enemies up to 590 units in that direction, though not through terrain, and afterwards dealing them physical damage, as well as slowing them by 45% after a $0.4$-second delay for a duration.
 
 | Attribute | Value |
 |-----------|------:|

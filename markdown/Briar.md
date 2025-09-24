@@ -185,7 +185,7 @@
 - The following table refers for interactions while **Briar** is in her frenzy:
   - While in the frenzy, **Briar** cannot control her movement nor declare who she attacks. She will automatically acquire a nearby enemy as her attack target based on a priority system, becoming *forced* to basic attack the target and consequently move into her attack range of them to do so.
     - Disarming crowd control as well as any other lockout that would disable basic attacking will disable the forced attacks.
-    - Forced action crowd control will cause her forced attacks to be either overridden or disabled, depending on the actions being forced by the debuff.
+    - Forced action crowd control will cause her forced attacks to be either overridden or disabled, depending on the actions being forced by the debuff. * can only be cast on targets within its radius. ** interrupts the frenzy. ** can be cast during the frenzy without interrupting it.|items=true|consume=true|spells=true,true,false,false|interrupts=death
 
 ---
 
@@ -344,7 +344,7 @@ While in the empowered frenzy, **Briar** prioritizes attacking the marked target
 - The disrupt is 'wrapped' into a status effect that says the target is Silenced for $0.3$ seconds, but it does not actually *silence*. It however makes sure that the *disrupt* is prevented by immunity to silences. Effect at cast time start
 - The following table refers for interactions while **Briar** is in either the first or second cast time:
 - The following table refers for interactions while **Briar** is dashing:
-- The following table refers for interactions while **Briar** is in *Hematomania*:
+- The following table refers for interactions while **Briar** is in *Hematomania*: * can only be cast on targets within its radius. ** interrupts the frenzy. ** is disabled.|items=true|consume=true|spells=true,true,false,false|interrupts=death
 
 ---
 

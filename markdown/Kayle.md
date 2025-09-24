@@ -255,7 +255,7 @@ If cast without a valid target, or self-cast, *Celestial Blessing* will automati
 |-----------|------:|
 | **Bonus Magic Damage** | 8 / 8.5 / 9 / 9.5 / 10% (+ $1.5$% per 100 AP) of target's **missing** health |
 
-** The attack explodes upon the target, dealing its damage to surrounding enemies and applying on-hit effects. This is affected by critical strike modifiers.
+**AFLAME BONUS:** The attack explodes upon the target, dealing its damage to surrounding enemies and applying on-hit effects. This is affected by critical strike modifiers.
 
 *Starfire Spellblade resets **Kayle**’s basic attack timer. Starfire Spellblade does not deal bonus damage against structures.*
 

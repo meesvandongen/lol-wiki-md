@@ -119,7 +119,7 @@ This effect cannot occur on the same target more than once every few seconds.
 
 **TOGGLE:** **Singed** continually creates a toxic cloud in his wake that lingers for $3.25$ seconds. The cloud inflicts poison to enemies within.
 
-** The target takes magic damage every $0.25$ seconds over 2 seconds as well as upon being hit if not currently affected. Subsequent inflictions refresh the duration.
+**POISON:** The target takes magic damage every $0.25$ seconds over 2 seconds as well as upon being hit if not currently affected. Subsequent inflictions refresh the duration.
 
 | Attribute | Value |
 |-----------|------:|

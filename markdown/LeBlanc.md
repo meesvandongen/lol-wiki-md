@@ -242,7 +242,7 @@ If the tether is not broken by the end of its duration, it fractures to deal mag
 
 **ACTIVE:** **LeBlanc** casts a mimicked version of her most recently used basic ability, applying the same effects and dealing ***modified** magic damage.
 
-** The orb deals modified damage, while the mark consumption deals double that amount.
+**MIMIC: SIGIL OF MALICE:** The orb deals modified damage, while the mark consumption deals double that amount.
 
 | Attribute | Value |
 |-----------|------:|
@@ -250,13 +250,13 @@ If the tether is not broken by the end of its duration, it fractures to deal mag
 | **Mark Magic Damage** | 140 / 210 / 280 / 350 / 420 (+ 80% AP) |
 | **Total Magic Damage** | 210 / 315 / 420 / 525 / 630 (+ 120% AP) |
 
-** Deals modified damage.
+**MIMIC: DISTORTION:** Deals modified damage.
 
 | Attribute | Value |
 |-----------|------:|
 | **Magic Damage** | 150 / 225 / 300 / 375 / 450 (+ 75% AP) |
 
-** The tether's application deals modified damage, while its fracturing deals double that amount.
+**MIMIC: ETHEREAL CHAINS:** The tether's application deals modified damage, while its fracturing deals double that amount.
 
 | Attribute | Value |
 |-----------|------:|

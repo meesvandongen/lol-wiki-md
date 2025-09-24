@@ -272,7 +272,7 @@ Non-epic monsters take 50% damage from *Tactical Sweep*.
 - Displacement immunity will not resist the application of the stun.
 - If Tactical Sweep is cast during *Wall Dive*’s dash on its opposite direction, the target wil be knockback further and to a different direction.
 - The following table refers for interactions while **Camille** is bound to terrain:
-  - When **Camille** is interrupted, she will automatically cast *Wall Dive*. The only exception is if she was interrupted by casting Flash or Recall, in which case *Wall Dive* cancels.
+  - When **Camille** is interrupted, she will automatically cast *Wall Dive*. The only exception is if she was interrupted by casting Flash or Recall, in which case *Wall Dive* cancels. and are usable. is disabled.|items=interrupts|consume=Interrupts|spells=false,interrupts,false,interrupts,false
 
 ---
 

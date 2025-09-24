@@ -146,7 +146,7 @@
   - Rammus acts as if he were ghosted for the duration of *Powerball*.
 - *Powerball* is not a movement channel, and so will not be interrupted by root and ground.
 - Displacement immunity will also resist the application of the stun.
-- The following table refers for interactions while **Rammus** is channeling:
+- The following table refers for interactions while **Rammus** is channeling: interrupts. is disabled. modifies this ability. This ability recasts to end channel.|items=interrupts,true,,false|spells=true,true,interrupts,interrupts,interrupts
 
 ---
 

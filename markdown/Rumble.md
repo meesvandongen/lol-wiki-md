@@ -128,7 +128,7 @@
 | **Minion Damage per Tick** | 3.5 / 4.958 / 6.417 / 7.875 / 9.333 (+ 5.833% AP) (+ 0.35 / 0.379 / 0.408 / 0.437 / 0.467% of target's **maximum** health) |
 | **Maximum Minion Damage** | 52.5 / 74.38 / 96.25 / 118.13 / 140 (+ 87.5% AP) (+ 5.25 / 5.69 / 6.13 / 6.56 / 7% of target's **maximum** health) |
 
-** *Flamespitter*’s damage is increased by 50%.
+**DANGER ZONE BONUS:** *Flamespitter*’s damage is increased by 50%.
 
 *Flamespitter*’s total damage based on the target's health is capped at 65 / 300 against monsters.
 
@@ -178,7 +178,7 @@
 |-----------|------:|
 | **Bonus Movement Speed** | 10 / 15 / 20 / 25 / 30% |
 
-** *Scrap Shield*’s shield strength and **bonus** movement speed are increased in effectiveness by 50%.
+**DANGER ZONE BONUS:** *Scrap Shield*’s shield strength and **bonus** movement speed are increased in effectiveness by 50%.
 
 | Attribute | Value |
 |-----------|------:|
@@ -231,7 +231,7 @@
 
 **Rumble** periodically stocks an *Electro Harpoon* charge, up to a maximum of 2.
 
-** *Electro Harpoon*’s effects are increased by 50%.
+**DANGER ZONE BONUS:** *Electro Harpoon*’s effects are increased by 50%.
 
 | Attribute | Value |
 |-----------|------:|

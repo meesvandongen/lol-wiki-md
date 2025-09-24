@@ -278,7 +278,7 @@ If the two targets are within 700 units of each other, they are instead slammed 
   - The knock up will occasionally end early if the targeted location was slightly away from **Zac**.
 - Displacement immunity will also resist the application of the stun.
 - The following table refers for interactions while **Zac** is channeling:
-  - Recall is disabled for the first $0.9$ seconds and otherwise interrupts the channel if used.
+  - Recall is disabled for the first $0.9$ seconds and otherwise interrupts the channel if used. and interrupt. initiates the recast and is buffered to cast itself at the end of the dash.|items=interrupts,true,,false|spells=true,false,false,interrupts,recasts|interrupts = silence, death, root, ground
 
 ---
 
@@ -315,7 +315,7 @@ If the two targets are within 700 units of each other, they are instead slammed 
 - Spell shield only blocks a single instance of damage.
 - Entering stasis will end *Let's Bounce!* prematurely.
 - While *Let's Bounce!* is active **Zac** consumes *Chunks* within cr 300 range.
-- The following table refers for interactions while **Zac** is performing *Let's Bounce!*:
+- The following table refers for interactions while **Zac** is performing *Let's Bounce!*: and are disabled. is usable.|items=true|consume=true|spells=true,true,true,false,true|interrupts=death
 
 ---
 

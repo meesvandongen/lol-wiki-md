@@ -88,7 +88,7 @@
 
 **INNATE:** **Rek'Sai** basic attacks and ability hits generate 25 Fury. After 8 seconds of being out of combat, she loses 20 Fury per second. Fury gain is reduced「 by 80% ⟷ to 5 per hit 」against minions, wards, and plants. *Prey Seeker* will not generate Fury against non-champions.
 
-When **Rek'Sai** becomes **, she consumes her current Fury over 3 seconds to heal for up to 10%–20%@1–16 **maximum** health at 100 Fury, stopping once fully consumed or she reaches (health) full health. If she starts generating Fury while **BURROWED**, the consumption occurs after 5 seconds.
+When **Rek'Sai** becomes **BURROWED**, she consumes her current Fury over 3 seconds to heal for up to 10%–20%@1–16 **maximum** health at 100 Fury, stopping once fully consumed or she reaches (health) full health. If she starts generating Fury while **BURROWED**, the consumption occurs after 5 seconds.
 
 **Notes:**
 
@@ -241,7 +241,7 @@ Once *Burrow* has been learned, **Rek'Sai** automatically becomes **BURROWED** u
 
 **Rek'Sai** can have up to 8 *Tunnels* active on the map at once, but deploying beyond the maximum destroys the oldest one. Enemy champions can destroy a *Tunnel* by standing on either entrance for $1.5$ seconds, granting them 5 gold upon successfully destroying the *Tunnel*.
 
-If **Rek'Sai** attempts to enter a *Tunnel* while **, she will automatically *Burrow* and dash to the *Tunnel*’s selected entrance over $0.6$ seconds before entering it, and automatically *Unburrow* after exiting the *Tunnel*. This does not place *Burrow* on cooldown nor trigger *Fury of the Xer'Sai*, but does trigger other *Burrow* effects and *Unburrow*. If *Burrow* is on cooldown at the time of interacting with the *Tunnel*, the cooldown will be reset.
+If **Rek'Sai** attempts to enter a *Tunnel* while **UN-BURROWED**, she will automatically *Burrow* and dash to the *Tunnel*’s selected entrance over $0.6$ seconds before entering it, and automatically *Unburrow* after exiting the *Tunnel*. This does not place *Burrow* on cooldown nor trigger *Fury of the Xer'Sai*, but does trigger other *Burrow* effects and *Unburrow*. If *Burrow* is on cooldown at the time of interacting with the *Tunnel*, the cooldown will be reset.
 
 ***Rek'Sai** cannot enter a tunnel while immobilized, grounded, or silenced.*
 
@@ -314,7 +314,7 @@ No additional notes.
 |-----------|------:|
 | **Physical Damage** | 150 / 200 / 250 / 300 / 350 (+ 100% **bonus** AD) (+ 15 / 17.5 / 20 / 22.5 / 25% of target's **maximum** health) |
 
-*If cast while in ** form, **Rek'Sai** will automatically Unburrow at the end of Void Rush's cast time, placing Burrow on a 1-second cooldown without triggering Unburrow's effects. If Burrow is already on cooldown, its remaining cooldown is set to 1 second.*
+*If cast while in **BURROWED** form, **Rek'Sai** will automatically Unburrow at the end of Void Rush's cast time, placing Burrow on a 1-second cooldown without triggering Unburrow's effects. If Burrow is already on cooldown, its remaining cooldown is set to 1 second.*
 
 **Notes:**
 

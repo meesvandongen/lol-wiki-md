@@ -166,7 +166,7 @@ While *Jaws of the Beast* is active, **Warwick** is displacement immune and clam
 - While *Jaws of the Beast* does not use Quick Casting by default, click-and-hold is comparable to the input required to use Bone Skewer or Comet Spear. It does not accept two-click input (e.g. First Cast and Recast) that abilities like Piercing Arrow or Decimating Smash use in Standard Casting.
 - **Warwick** will attempt to basic attack the target after a short delay.
 - The following table refers for interactions while **Warwick** is channeling:
-  - Flash, Teleport, Hexflash, and Recall are disabled during the first $0.4$ seconds of the channel. **Known Issues**
+  - Flash, Teleport, Hexflash, and Recall are disabled during the first $0.4$ seconds of the channel. is usable. and are disabled.|move=false|spells=true,interrupts,interrupts,interrupts,interrupts|items=interrupts,true,interrupts,false,interrupts,melee|consume=true **Known Issues**
 - *Jaws of the Beast* will also refund its cooldown if it kills the target after being held for exactly its bite delay.
 - The ability may briefly cast on a dead target, with the ability going on cooldown.
 
