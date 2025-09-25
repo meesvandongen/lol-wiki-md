@@ -226,7 +226,8 @@ If the tether is not broken by the end of its duration, it fractures to deal mag
 - Both the initial and the delayed damage can detonate Sigil of Malice.
 - *Ethereal Chains* and Mimic: Ethereal Chains are separate debuffs, and can both be tethered to the same target without overriding each other. The root duration for either one are unchanged.
 - Spell shield will block the tether's application and initial damage but not the aftereffects of one already applied.
-- The tether remains for a minimum of $0.25$ seconds regardless of distance. - This ability will cast from wherever the caster is at the end of the cast time.
+- The tether remains for a minimum of $0.25$ seconds regardless of distance.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

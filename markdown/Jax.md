@@ -252,7 +252,8 @@ If the target is an enemy and they are in range upon arrival, **Jax** deals phys
 - Spell shield will only block the bonus damage from the third attack if it is empowered.
 - The empowered attack will trigger but not be consumed nor apply its effects against wards.
   - Stacks will still be generated when attacking them.
-- - This ability will cast from wherever the caster is at the end of the cast time.
+
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

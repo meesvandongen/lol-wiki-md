@@ -206,7 +206,8 @@ Additionally, **Malphite**’s basic attacks on-hit for the next 5 seconds are e
 
 **Notes:**
 
-- The cripple stacks multiplicatively with other sources of attack speed reductions. - This ability will cast from wherever the caster is at the end of the cast time.
+- The cripple stacks multiplicatively with other sources of attack speed reductions.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

@@ -205,7 +205,8 @@ If she hits at least one enemy champion, she will dash 225 units behind the last
 
 - **Leona** will be ordered to basic attack the target.
 - Spell shield will block *Zenith Blade*’s effects, and prevent **Leona** from dashing to the target. <!--
-- **Leona** will fail to root or dash to the target if it becomes untargetable after being struck or is not within 3000 range.--> - This ability will cast from wherever the caster is at the end of the cast time.
+- **Leona** will fail to root or dash to the target if it becomes untargetable after being struck or is not within 3000 range.-->
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

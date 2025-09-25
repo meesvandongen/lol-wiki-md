@@ -114,7 +114,8 @@
 
 **Notes:**
 
-- Spell shield will block the initial impact from *Inner Flame*. - This ability will cast from wherever the caster is at the end of the cast time.
+- Spell shield will block the initial impact from *Inner Flame*.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Inner Flame*’s effect radius is centered around the location of the missile as it collides.
 
 ---

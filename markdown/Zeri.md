@@ -201,7 +201,8 @@ If the pulse hits terrain, it transforms into a laser in a line that grants sigh
 
 - Applies spell damage for the pulse and area damage for the laser.
 - The pulse missile is blocked by projectile-interception effects but not the laser.
-- *Ultrashock Laser* interacts with player-generated terrain. - This ability will cast from wherever the caster is at the start of the cast time.
+- *Ultrashock Laser* interacts with player-generated terrain.
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 
@@ -285,7 +286,9 @@ During *Overcharged*, **Zeri** can generate stacks of *Hypercharged* from enemy 
 - *Lightning Crash*’s and *Spark Surge’s* empowerments to *Burst Fire* can combine together.
 - *Burst Fire* electricity chain will not chain across structures.
 - If **Zeri** enters resurrection during *Overcharge*, she will lose all stacks of the effect but *Overcharge* will not end prematurely.
-  - She cannot gain stacks again after reviving while the buff is active. - This ability will cast from wherever the caster is at the end of the cast time.
+  - She cannot gain stacks again after reviving while the buff is active.
+
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

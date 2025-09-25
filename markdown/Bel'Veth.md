@@ -373,7 +373,8 @@ While active, she rapidly slashes at the nearest enemy with the lowest **current
 - **Bel'Veth** gains the **bonus** health and heal from *Endless Banquet* at the start of the cast time.
 - **Bel'Veth** will be able to consume the target *Void Coral* even if her dash is interrupted.
   - She dashes at the start of the cast time.
-- A *Void Coral* will **not** spawn when scoring a takedown against a summoned Rift Herald. - This ability will cast from wherever the caster is at the start of the cast time.
+- A *Void Coral* will **not** spawn when scoring a takedown against a summoned Rift Herald.
+- This ability will cast from wherever the caster is at the start of the cast time.
 - The following table refers for interactions while **Bel'Veth** is in cast time:
   - Movement summoner spells can be buffered to cast after the cast time completes if permitted.
   - She is locked out of movement and attack actions for $0.5$ seconds after the cast time completes and no buffering of them is permitted for the entirety of her lockout.

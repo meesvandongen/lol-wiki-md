@@ -137,7 +137,8 @@ Enemies revealed by *Yordle Snap Trap* always take full damage from *Piltover Pe
 **Notes:**
 
 - Upon *Piltover Peacemaker* dealing damage to an enemy, **Caitlyn**’s attack timer is forcibly reset.
-- Enemies hit while protected by a spell shield will still be considered a target for calculating damage for subsequent hits. - This ability will cast from wherever the caster is at the start of the cast time.
+- Enemies hit while protected by a spell shield will still be considered a target for calculating damage for subsequent hits.
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

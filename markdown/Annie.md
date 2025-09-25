@@ -191,7 +191,8 @@ If this kills the target, *Disintegrate*’s cooldown is reduced by 50% and its 
 
 **Notes:**
 
-- *Incinerate* can hit targets behind **Annie**, provided their radius intersects with the cone hitbox. - This ability will cast from wherever the caster is at the end of the cast time.
+- *Incinerate* can hit targets behind **Annie**, provided their radius intersects with the cone hitbox.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

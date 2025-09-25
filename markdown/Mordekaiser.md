@@ -227,7 +227,8 @@ After a $1.5$ seconds delay, *Iron Man*’s shield decays at a rate of (health) 
 
 **Notes:**
 
-- *Death's Grasp* will still pull even if **Mordekaiser** dies. - This ability will cast from wherever the caster is at the start of the cast time.
+- *Death's Grasp* will still pull even if **Mordekaiser** dies.
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

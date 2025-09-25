@@ -83,7 +83,9 @@ If the root was applied, **Renata** forms a tether between her and the target fo
   - Her facing direction is locked towards the target direction of the hook.
 - While the target is hooked, **Renata**’s facing direction is considered to be in their direction and not in the one she is moving.
 - The movement speed reduction stacks additively with other movement speed bonuses.
-  - It is a negative bonus, not a slow, and is thus not reduced by slow resist. - This ability will cast from wherever the caster is at the start of the cast time.
+  - It is a negative bonus, not a slow, and is thus not reduced by slow resist.
+
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 
@@ -163,7 +165,8 @@ The burn will stop once the target scores a takedown against an enemy champion w
 
 **Notes:**
 
-- Spell shield will block either the rockets while they are in-flight or their explosion. - This ability will cast from wherever the caster is at the start of the cast time.
+- Spell shield will block either the rockets while they are in-flight or their explosion.
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 
@@ -198,7 +201,9 @@ The burn will stop once the target scores a takedown against an enemy champion w
 
 **Notes:**
 
-:*See Berserk for specific details on Berserk.* - This ability will cast from wherever the caster is at the end of the cast time.
+:*See Berserk for specific details on Berserk.*
+
+- This ability will cast from wherever the caster is at the end of the cast time.
 - Typically, any enemies killed that directly result from *Berserk* are credited to **Renata Glasc**.
 
 ---

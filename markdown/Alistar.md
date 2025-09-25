@@ -137,7 +137,8 @@ At 7 stacks, **Alistar** consumes them all to heal himself for 5% of his **maxim
 **Notes:**
 
 - *Pulverize* can be buffered during Headbutt to cast with reduced cast time when the dash ends.
-- Displacement immunity will also resist the application of the stun. - This ability will cast from wherever the caster is at the end of the cast time.
+- Displacement immunity will also resist the application of the stun.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

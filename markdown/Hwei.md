@@ -413,7 +413,8 @@ Each explosion also leaves a lava fissure in its wake. A fissure lasts for $2.5$
 - Applies area damage for the explosions and deals persistent area damage for the lava.
 - The shockwaves can only hit each enemy once.
 - Enemies will take damage over time for each lava fissure they are standing in.
-- Spell shield will block an explosion but not the persistent lava damage. - This ability will cast from wherever the caster is at the start of the cast time.
+- Spell shield will block an explosion but not the persistent lava damage.
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 
@@ -513,7 +514,8 @@ At the end of the duration or when the target dies, the aura explodes to deal ma
 **Notes:**
 
 - Applies persistent area damage for the aura and deals area damage for the explosion.
-- Spell shield can block the aura, explosion, and the application of the first *Despair* stack. - This ability will cast from wherever the caster is at the end of the cast time.
+- Spell shield can block the aura, explosion, and the application of the first *Despair* stack.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

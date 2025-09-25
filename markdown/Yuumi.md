@@ -245,7 +245,6 @@ If targeting an ally with the recast, the ability will not cast |
 - If **Yuumi** is on the blue team, she will remain attached on the southwest side; if **Yuumi** is on the red team, she will remain on the northeast. While channeling Final Chapter, she will be behind her *Anchor*.
 - The player's screen will briefly flash red if **Yuumi** is affected by a immobilizing or grounding effect, or if she forcibly detaches from her *Anchor*.
 - The *Anchor*’s health bar will have a different frame to indicate the *attached* status:
-
 - The following table refers for interactions while **Yuumi** is channeling:
 
 #### Channel Behavior (channel)

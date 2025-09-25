@@ -253,7 +253,9 @@ Enemies surrounding the primary target take 80% damage. The **bonus** damage bas
 - The bonus damage based on missing health is based on each unit's own missing health and not the primary target's.
 - Unlike similar spells, *Super Mega Death Rocket* will not increase it's damage when ranked up while the missile is in flight.
   - This is because the base damage is fixed at a multiple of the damage the rocket initially started with.
-  - The **bonus** AD ratio will still update when AD is gained or lost between the cast and hit of the missile. - This ability will cast from wherever the caster is at the start of the cast time.
+  - The **bonus** AD ratio will still update when AD is gained or lost between the cast and hit of the missile.
+
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

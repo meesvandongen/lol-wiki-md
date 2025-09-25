@@ -125,7 +125,8 @@
 
 **Notes:**
 
-- *Death's Hand* will still cast and deal damage if **Swain** dies during the cast time. - This ability will cast from wherever the caster is at the end of the cast time.
+- *Death's Hand* will still cast and deal damage if **Swain** dies during the cast time.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - The total damage to a single target will be split evenly among each bolt that hits, meaning that hitting with more bolts will deal less damage per hit (but more overall damage).
 - Spell shield will block all bolts.
 
@@ -209,7 +210,9 @@ At maximum range, the wave homes back to **Swain** and detonates upon the first 
   - If the recast is blocked, the target will also prevent a Soul Fragment being collected from them.
 - If the root is not applied to or is removed from all champions, the recast does not become available.
 - The pull will interrupt channels at the very beginning, but does not keep the target stunned for the rest of the movement.
-  - Channels can be started successfully during the pull, provided the previous crowd control does not prevent them still. - This ability will cast from wherever the caster is at the start of the cast time.
+  - Channels can be started successfully during the pull, provided the previous crowd control does not prevent them still.
+
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

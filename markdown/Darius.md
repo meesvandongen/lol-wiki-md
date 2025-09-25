@@ -211,7 +211,8 @@ If this attack kills the target, half of *Crippling Strike*’s cooldown is redu
   - The rebound's forced movement's duration is roughly $0.5$ seconds, finishing before the airborne duration ends.
   - : There is no stun applied for the same duration of the airborne, meaning brittle cannot extend the disable duration. It will not increase the slow duration in most situations because of the negative tenacity falling off before the slow is applied.
 - After the pull, **Darius** will attempt to basic attack the closest pulled target, prioritizing enemy champions.
-- The armor penetration stacks multiplicatively with other forms of percentage armor penetration. - This ability will cast from wherever the caster is at the end of the cast time.
+- The armor penetration stacks multiplicatively with other forms of percentage armor penetration.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 #### Channel Behavior (cast)
 

@@ -147,6 +147,7 @@
 **Notes:**
 
 - This ability will cast from wherever the caster is at the end of the cast time.
+
   - *Mistral Bolt* will fire from wherever **Vex** is at the end of the cast time, towards the originally targeted location or 1200 units in the originally targeted direction if cast beyond that.
 
 ---

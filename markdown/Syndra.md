@@ -227,7 +227,8 @@ Walk in range of the target location to cast (recast) |
 - *Spheres* spawned at close range of the ability are more likely to be hit.
 - Enemies and spheres will be knocked into the direction directly away from **Syndra**, and the knock back has no dispersion.
 - *Scatter the Weak* will knock back *Spheres* even farther if they are inside terrain, up until they reach open space. If the terrain they're inside in cannot be surpassed, the *Spheres* will be knocked in the opposite direction.
-- *Scatter the Weak* will delay the expiration of a *Sphere* until after it finishes being knocked back. - This ability will cast from wherever the caster is at the end of the cast time.
+- *Scatter the Weak* will delay the expiration of a *Sphere* until after it finishes being knocked back.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - Once *Scatter the Weak* has been learned, an arrow directly in front of every Dark Sphere will appear to signify the direction the *sphere* will be knocked towards, each one corresponding to **Syndra**’s position. This is only visible to **Syndra**.
 
 ---

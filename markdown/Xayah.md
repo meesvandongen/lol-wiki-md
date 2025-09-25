@@ -162,7 +162,8 @@ Targets hit after the first take 50% reduced damage.
 - **Xayah** is unable to declare basic attacks for a set duration during the cast time of *Double Daggers*. The lock out duration is reduced by 「 $0.007$ seconds per every 1% **bonus** attack speed ⟷ 1 second per every 140% **bonus** attack speed 」.
 - The Feathers will stop upon being intercepted by projectile-blocking effects.
 - As the feathers are forming, they will deal damage in a small area around **Xayah**’s before firing.
-- Spell shield will only block a single instance of damage. - This ability will cast from wherever the caster is at the end of the cast time.
+- Spell shield will only block a single instance of damage.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

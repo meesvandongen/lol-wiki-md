@@ -71,7 +71,8 @@ If the lance connects with a deployed *Demacian Standard*, **Jarvan IV** dashes 
 
 **Notes:**
 
-- The armor reduction is applied after the damage. The damage dealt does not benefit from it in this case. - This ability will cast from wherever the caster is at the end of the cast time.
+- The armor reduction is applied after the damage. The damage dealt does not benefit from it in this case.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Dragon Strike* will still pull **Jarvan IV** to Demacian Standard even if he is immobilized or grounded.
 - Flash will interrupt the dash to a Demacian Standard but **Jarvan IV** will still knock up and damage enemies he comes in contact with at the new location.
   - Casting *Flash* right before the *dash* begins will cause **Jarvan IV** to be pulled to the flag from the new position.

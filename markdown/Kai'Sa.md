@@ -190,7 +190,9 @@ Non-minions take 25% damage from missiles beyond their first.
 
 **Notes:**
 
-- This ability will cast from wherever the caster is at the end of the cast time. Size of area revealed around target
+- This ability will cast from wherever the caster is at the end of the cast time.
+
+Size of area revealed around target
 
 ---
 

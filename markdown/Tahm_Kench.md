@@ -73,7 +73,9 @@
 - Devour can be 'queued' at any point during *Tongue Lash* (including the wind-up animation) and will not go on cooldown if **Tahm Kench** fails to hit a valid target with *Tongue Lash*.
 - All three An Acquired Taste stacks will be consumed even if *Tongue Lash*’s stun is negated.
 - An Acquired Taste is applied in a separate damage instance from *Tongue Lash*.
-  - This causes effects like Bone Plating and Bloodletter's Curse Vile Decay to be applied twice. - This ability will cast from wherever the caster is at the start of the cast time.
+  - This causes effects like Bone Plating and Bloodletter's Curse Vile Decay to be applied twice.
+
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 #### Channel Behavior (cast)
 

@@ -147,7 +147,8 @@ Whenever *Plasma Fission* kills an enemy, **Vel'Koz** restores (mana) mana.
   - This also ensures **Vel'Koz** does not lose *Plasma Fission*’s restoration effect.
 - An enemy cannot be hit by multiple bolts even when having blocked one with a spell shield.
 - The split occurs at a location 55 units in front of the primary bolt's final location.
-- *Plasma Fission* can reach a maximum 1595 units diagonally (ignoring the split missile's width and enemy hitbox radius), reaching this distance after a total of about ~$1.65$ seconds.* This ability will cast from wherever the caster is at the end of the cast time.
+- *Plasma Fission* can reach a maximum 1595 units diagonally (ignoring the split missile's width and enemy hitbox radius), reaching this distance after a total of about ~$1.65$ seconds.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -222,7 +223,8 @@ If *Tectonic Disruption* is cast in close proximity of **Vel'Koz**, the anomaly 
 - While the effect is fully prevented by blocking the missile (e.g. with Unbreakable and Wind Wall), the missile may not be destroyed *visually*.
 - The area of effect indicator appears at the end of the cast time.
   - It will persist even if the cast cancels (e.g. **Vel'Koz** dies before cast time completes) despite the projectile not firing.
-- Displacement immunity will also resist the application of the stun. - This ability will cast from wherever the caster is at the start of the cast time.
+- Displacement immunity will also resist the application of the stun.
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

@@ -249,7 +249,6 @@ Each stack of *Feast* increases the cast range of the ability by $2.5$, for a ma
 - The name of the bonus health buff is *"Feast"*.
 - The bonus attack range and increase cap at respectively 75/((60 to 100)/13) and 100/((60 to 100)/10) stacks, with the last stack being effective as the decimal part of the value (no decimal meaning 100% as effective).
 - Each stack of *Feast* increases the damage by 8 / 12 / 16.
-
 - If an enemy champion has health below the amount of true damage *Feast* deals, they will be marked for execution. This indicator does not consider shields or invulnerability.
 - Consuming any additional Voidgrub from the same spawn group will be tracked as a "monster eaten" for *Feast*’s buff, but will neither grant any bonuses nor count towards the 6-stack limit.
 - While not on cooldown, *Feast*’s ability icon on the HUD can be pinged to announce its damage to monsters in the ally chat. <!--

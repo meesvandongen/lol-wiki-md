@@ -160,7 +160,9 @@ Against monsters, *Contempt for the Weak* deals 200% damage, capped at 300.
 
 - *Shurikens* blocked by spell shield still count as being hit for the reduced pass-through damage.
 - If **Zed** buffers an attack command during *Razor Shuriken*’s cast time the attack will perform slower than if **Zed** had attacked after the cast time.
-  - The same does not happen if **Zed** recasts Living Shadow during *Razor Shuriken*’s cast time. - This ability will cast from wherever the caster is at the end of the cast time.
+  - The same does not happen if **Zed** recasts Living Shadow during *Razor Shuriken*’s cast time.
+
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -312,7 +314,6 @@ Enemies hit by a *Shadow*’s slash are slowed for $1.5$ seconds, with multiple 
   - These *shadows* have a tracking distance of 2200 and a dash speed of 1750.
 - *Death Mark* does not cancel if the target enters a zombie state before the dash begins.
 - If the mark's post-mitigation damage (Damage calculated after modifiers) is higher than the target's **current** health, a *spinning shuriken* will appear above the victim. This does not necessarily mean the target will die, as it does not consider shields or forms of damage modifiers that are not respected by this predictive calculation.
-
 - This following table refers for interactions while **Zed** is performing *Death Mark*:
 
 ---

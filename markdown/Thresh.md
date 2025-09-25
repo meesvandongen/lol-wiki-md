@@ -147,7 +147,9 @@ While the target is stunned, **Thresh** tugs his hook towards him twice, once af
 **Notes:**
 
 - **Thresh** will track the target if they change locations.
-  - He will dash to the target's previous location if the target is too far away or moves beyond 2000 (Estimated) units. - This ability will cast from wherever the caster is at the end of the cast time.
+  - He will dash to the target's previous location if the target is too far away or moves beyond 2000 (Estimated) units.
+
+- This ability will cast from wherever the caster is at the end of the cast time.
 - The pull that occurs with each of **Thresh**’s tugs is a non-airborne displacement that displaces the target toward him. **Thresh** will only tug if the target remains stunned and he has not casted *Deathly Leap*.
   - **Thresh** will not tug his hook at all if the stun was not applied to the target.
   - These displacements will not be resisted by displacement immunity or crowd control immunity.

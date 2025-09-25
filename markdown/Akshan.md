@@ -158,7 +158,8 @@ Once the boomerang has passed its original range and has not hit a target in the
 
 **Notes:**
 
-- Spell shield will only block a single hit. They do not prevent the initial throw from extending its range. - This ability will cast from wherever the caster is at the end of the cast time.
+- Spell shield will only block a single hit. They do not prevent the initial throw from extending its range.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - This ability's damage is calculated based on the caster's current stats and changes dynamically.
 
 ---

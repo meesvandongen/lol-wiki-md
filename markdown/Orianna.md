@@ -259,7 +259,9 @@ The pulse leaves behind an electric field that last 3 seconds, granting (ms) **b
 
 **Notes:**
 
-- *Command: Shockwave* tosses enemies a set distance (those on the edge of the flinging area will be tossed to the center while those close to the middle will go over *The Ball* towards the edge) and can send them through walls. - This ability will cast from wherever the caster is at the end of the cast time.
+- *Command: Shockwave* tosses enemies a set distance (those on the edge of the flinging area will be tossed to the center while those close to the middle will go over *The Ball* towards the edge) and can send them through walls.
+- This ability will cast from wherever the caster is at the end of the cast time.
+
   - *Command: Shockwave* will cast from wherever the unit the *The Ball* is attached to is at the end of the cast time, even if the unit exceeds max tether range.
 - Displacement immunity will not resist the application of the stun.
 

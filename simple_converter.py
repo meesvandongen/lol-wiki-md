@@ -1745,6 +1745,13 @@ class SimpleLoLConverter:
         if vars_map:
             notes_text = self._resolve_vars(notes_text, vars_map)
 
+        # EARLY: expand external info templates (cast time start/end, energized, spellblade, etc.)
+        # before list parsing so any leading '*' inside their bodies becomes a proper bullet line.
+        try:
+            notes_text = self._expand_external_info_templates(notes_text)
+        except Exception:
+            pass
+
         # Run custom template expansion so that {{ct|...}} becomes a rendered block prior to list parsing
         try:
             notes_text = self._expand_custom_templates(notes_text, champion_name)
@@ -1833,7 +1840,18 @@ class SimpleLoLConverter:
         # Drop trailing blank line(s)
         while cleaned and cleaned[-1] == '':
             cleaned.pop()
-        return '\n'.join([ln for ln in cleaned if ln is not None]) if cleaned else "No additional notes."
+        # Remove single blank lines between consecutive bullet lines (tighten list) while preserving
+        # intentional blank lines before blocks/headings.
+        tightened: List[str] = []
+        for i, ln in enumerate(cleaned):
+            if ln == '' and i > 0 and i + 1 < len(cleaned):
+                prev_ln = cleaned[i-1]
+                next_ln = cleaned[i+1]
+                if prev_ln.startswith('- ') and next_ln.startswith('- '):
+                    # skip this blank to keep bullets contiguous
+                    continue
+            tightened.append(ln)
+        return '\n'.join([ln for ln in tightened if ln is not None]) if tightened else "No additional notes."
 
     def _extract_vardefines(self, text: str) -> Dict[str, str]:
         """Extract {{#vardefine:name|value}} variables from a template page content.
@@ -2465,23 +2483,7 @@ class SimpleLoLConverter:
         text = re.sub(r'\*\*\s*New:\*', '**New:**', text, flags=re.IGNORECASE)
         text = re.sub(r'\*\*\s*Removed:\*', '**Removed:**', text, flags=re.IGNORECASE)
         text = re.sub(r'\*\*\s*Changed:\*', '**Changed:**', text, flags=re.IGNORECASE)
-        # Ensure cast time start/end inserted notes begin on their own bullet if appended after a sentence.
-        # Pattern: period (or exclamation/question) followed by space, dash space, 'This ability will cast from'
-        text = re.sub(r'([.!?])\s+-\s+(This ability will cast from)', r'\1\n- \2', text)
-        # If a bullet already captured the sentence before injection (e.g., "... return to Ahri. - This ability will cast ...")
-        # split it into two bullets. Pattern: '- <sentence ending with period> - This ability will cast from'
-        # Second pass (bullet lines): ensure any remaining inline pattern inside an existing bullet is split.
-        # Example: "- If Ahri dies ... return to Ahri. - This ability will cast from her current position ..."
-        text = re.sub(r'(?m)^(-\s+[^\n]*?[.!?])\s+-\s+(This ability will cast from)', r'\1\n- \2', text)
-        # Third pass: handle case where punctuation is immediately followed by space then dash (already mostly covered, but be explicit for period variant)
-        text = re.sub(r'(?m)^(-\s+[^\n]*?\.)\s+-\s+(This ability will cast from)', r'\1\n- \2', text)
-        # Fourth pass: conservative split if pattern still remained (avoid duplicates by ensuring not already on its own line)
-        def _split_cast_inline(m: re.Match) -> str:
-            first = m.group(1).rstrip()
-            second = m.group(2).rstrip()
-            # If first already ends with two spaces + newline inserted earlier, skip
-            return f"{first}\n- {second}"
-        text = re.sub(r'(?m)^(-\s+[^\n]*?\.)(?:\s+-\s+)(This ability will cast from[^\n]*)', _split_cast_inline, text)
+        # (Removed legacy bullet splitting for cast time notes; handled earlier by expanding templates before list parsing.)
 
         # Clean up extra whitespace while preserving indentation at line starts (for nested lists)
         # Collapse 2+ spaces that are NOT immediately after a newline into a single space
@@ -4518,9 +4520,7 @@ class SimpleLoLConverter:
         # Generic cleanup (avoid champion-specific hacks)
         # Remove stray asterisks after normalized labels like '**Bug Fix:**' followed by an extra '*'
         md = re.sub(r'(\*\*\s*(?:Bug Fix|Undocumented|New Effect):\s*\*\*)\*', r'\1', md)
-        # Safety net: split any lingering inline cast-time insertion inside a single bullet
-        # Pattern: '- <sentence ending with .!? >. - This ability will cast from ...' -> two bullets
-        md = re.sub(r'(?m)^(-\s+[^\n]*?[.!?])\s+-\s+(This ability will cast from[^\n]*)', r'\1\n- \2', md)
+    # (Removed cast-time bullet safety net; ordering fix in _format_notes makes it unnecessary.)
         # Remove stray single quotes flanking emphasis markers or emphasized spans
         # Cases like: ' **Name**' -> **Name** and **Name**' -> **Name**
         md = re.sub(r"(?m)^\s*'\s*(\*{1,3}[^\n]+\*{1,3})", r"\1", md)

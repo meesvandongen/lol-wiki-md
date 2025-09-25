@@ -125,7 +125,8 @@
 **Notes:**
 
 - Even if the target spell shields the bolt, they may still be damaged by the explosion. *Moonlight* is not applied to the protected target if blocked.
-- The bolt consists of two projectiles with slightly different trajectories. - This ability will cast from wherever the caster is at the end of the cast time.
+- The bolt consists of two projectiles with slightly different trajectories.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -247,7 +248,9 @@ If an enemy champion is pulled in, she calls down a beam of moonlight to strike 
 - Clones count as champions for increasing this ability's damage.
 - *Moonfall*’s additional damage is not capped at 4 champions.
 - The beam of moonlight does not crash down if champions hit blocked the initial effect with spell shield.
-  - Enemy champions protected by *spell shield* do not count towards the damage increase. - This ability will cast from wherever the caster is at the end of the cast time.
+  - Enemy champions protected by *spell shield* do not count towards the damage increase.
+
+- This ability will cast from wherever the caster is at the end of the cast time.
 - A lunar phase of the moon will appear above **Diana** while she is casting *Moonfall*, each phase is based on the number of enemy champions pulled:
  New_Moon_Moonfall_(1_Enemy_Champion).png|**NEW MOON:** **1** Enemy Champion Pulled Waning_Crescent_Moonfall_(2_Enemy_Champions).png|**WANING CRESCENT:** **2** Enemy Champions Pulled Third_Quarter_Moonfall_(3_Enemy_Champions).png|**THIRD QUARTER:** **3** Enemy Champions Pulled Waning_Gibbous_Moonfall_(4_Enemy_Champions).png|**WANING GIBBOUS:** **4** Enemy Champions Pulled Full_Moon_Moonfall_(5_Enemy_Champions).png|**FULL MOON:** **5** Enemy Champions Pulled
 

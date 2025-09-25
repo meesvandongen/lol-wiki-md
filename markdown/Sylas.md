@@ -224,7 +224,8 @@ If this damages a champion, **Sylas** is also healed, increased by 0%–100%@0�
 **Abduct* counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - **Sylas** will not dash to his target if the chains are blocked by spell shield.
 - The target will be revealed for 2 seconds if the dash is interrupted.
-- *Abduct* will still apply the knock up if the target is untargetable by the end of the dash. - This ability will cast from wherever the caster is at the start of the cast time.
+- *Abduct* will still apply the knock up if the target is untargetable by the end of the dash.
+- This ability will cast from wherever the caster is at the start of the cast time.
 - **Sylas** is unable to perform actions while dashing to the target, and becomes able to again after $0.05$ seconds of the dash ending.
 - **Sylas** will not dash to the target hit if he is channeling or dashing from a Hijacked ability.
   - *Abduct* will not apply the knock up when this happens.

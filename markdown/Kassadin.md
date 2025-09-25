@@ -192,7 +192,8 @@ He also gains a shield that absorbs magic damage for $1.5$ seconds.
 
 **Notes:**
 
-- Untargetable champions do not reduce *Force Pulse*’s cooldown upon ability activations. *Toggle abilities and transformation abilities do not count as ability activations and **will not** reduce *Force Pulse*’s cooldown. - This ability will cast from wherever the caster is at the end of the cast time.
+- Untargetable champions do not reduce *Force Pulse*’s cooldown upon ability activations. *Toggle abilities and transformation abilities do not count as ability activations and **will not** reduce *Force Pulse*’s cooldown.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

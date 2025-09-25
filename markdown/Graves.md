@@ -168,7 +168,8 @@ After 2 seconds, or upon colliding with terrain, the round detonates to deal phy
 
 - Spell shields can only block one instance of the ability's damage.
 - Wind Wall will destroy the projectile entirely and mitigate all effects, including the trail on the ground.
-- Unbreakable is considered to be terrain for the purposes of the projectile, triggering its second effect. - This ability will cast from wherever the caster is at the end of the cast time.
+- Unbreakable is considered to be terrain for the purposes of the projectile, triggering its second effect.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -205,7 +206,8 @@ The canister creates a cloud of smoke for 4 seconds that applies nearsight of ou
 - Spell shields will block the instance of damage and slow, but will not mitigate the persistent area of effect.
 - Crowd control immunity and cleanses have no effect on the user's sight radius reduction despite the nearsight being resisted / removed. Loss of allied vision will still be affected.
   - Removing or resisting the nearsight will prevent it from being reapplied while staying inside the area (leaving and coming back inside will not).
-- The nearsight debuff applies to non-champions but it does not inherently stop them from performing actions that require sight, such as basic attacking. - This ability will cast from wherever the caster is at the end of the cast time.
+- The nearsight debuff applies to non-champions but it does not inherently stop them from performing actions that require sight, such as basic attacking.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -287,7 +289,8 @@ Upon hitting an enemy champion or reaching the end of its range, the shell explo
 - The explosion cone is anchored on the location of the shell missile when it collided with a champion, or otherwise its maximum cast range.
 - The cone damage is always located 150 units behind, based off its direction
 - *Collateral Damage* is not disabled while grounded or rooted, but **Graves** will not dash after the cast time while affected by them.
-- **Graves** will not dash after the cast time if he is airborne. - This ability will cast from wherever the caster is at the end of the cast time.
+- **Graves** will not dash after the cast time if he is airborne.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

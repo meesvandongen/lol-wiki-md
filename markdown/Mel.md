@@ -146,7 +146,9 @@ The bolts momentarily grant sight during their travel, while the explosions gran
     - This means that the distribution area is not random.
     - The order of bolts however, which will determine the order of individual areas to be affected per explosion, *is* random.
       - **Mel** launching the missiles in the same arcing motion for every *Radiant Volley* cast does not correlate with which missile is being fired at the time.
-    - Note that the combined area of effect may not always be the maximum possible; this drawback diminishes with a higher number of bolts. - This ability will cast from wherever the caster is at the end of the cast time.
+    - Note that the combined area of effect may not always be the maximum possible; this drawback diminishes with a higher number of bolts.
+
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -249,7 +251,8 @@ Both the orb and the field of *Solar Snare* deal 50% damage against minions.
 
 - Spell shield will only block the orb (root portion).
 - The initial impact of *Solar Snare* deals area damage, while the lingering damage over time deals persistent area damage.
-- The slow debuff lasts for the same duration as its tick rate ($0.125$ seconds). - This ability will cast from wherever the caster is at the end of the cast time.
+- The slow debuff lasts for the same duration as its tick rate ($0.125$ seconds).
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

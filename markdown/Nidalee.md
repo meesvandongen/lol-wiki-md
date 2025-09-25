@@ -310,6 +310,7 @@ Traps have (health) 6 **maximum** health and can only be damaged by champion bas
 **Notes:**
 
 - This ability will cast from wherever the caster is at the start of the cast time.
+
   - The visual effects will be seen from her position if she moves however.
 
 ---

@@ -125,7 +125,8 @@ If this kills an enemy, it generates 1 stack of *Phenomenal Evil*, tripled again
 
 - Killing two enemy champions with *Baleful Strike* grants .
 - *Baleful Strike* will only grant stacks of Phenomenal Evil from its bolt, and not any additional effect that would kill other units from the same cast.
-- The stacks are added immediately on enemy kill (on next game tick). **If the first target was killed, the second hit may deal 1 damage more on enemies further along the missile's flight path. - This ability will cast from wherever the caster is at the end of the cast time.
+- The stacks are added immediately on enemy kill (on next game tick). **If the first target was killed, the second hit may deal 1 damage more on enemies further along the missile's flight path.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

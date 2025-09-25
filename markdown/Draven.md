@@ -249,7 +249,8 @@ Catching a *Spinning Axe* resets *Blood Rush*’s cooldown.
 **Notes:**
 
 - *Whirling Death*’s projectile has an icon on the mini-map while it is in flight. It can be seen by only **Draven** and his allies.
-- Spell shield will block one instance of damage. - This ability will cast from wherever the caster is at the end of the cast time.
+- Spell shield will block one instance of damage.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

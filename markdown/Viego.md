@@ -195,7 +195,8 @@ The second strike applies on-hit effects and can critically strike for damage.
 - The mark will not be applied to the primary target struck by *Heartbreaker*, but it can triggered from it.
 - The second strike rolls critical strike chance independently from the primary attack.
 - The ability's cast time respects the attack speed floor and cap.
-- Applies area damage for the thrust, basic damage for the second strike, and proc damage for the bonus damage on-hit.* This ability will cast from wherever the caster is at the end of the cast time.
+- Applies area damage for the thrust, basic damage for the second strike, and proc damage for the bonus damage on-hit.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - **Viego** will not perform the second strike if the first attack was dodged, blocked, and missed.
 - If the second strike hits a dead unit, **Viego** will still heal based on the post-mitigation damage that he would deal with it.
 - The attacks do not deal the **bonus** damage against structures.

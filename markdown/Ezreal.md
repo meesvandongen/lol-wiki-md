@@ -127,7 +127,8 @@ If *Mystic Shot* successfully hits an enemy, the **current** cooldowns of **Ezre
 
 - *Mystic Shot* deals basic damage, but also triggers spell effects by also being tagged as spell damage.
 - *Mystic Shot* benefits from life steal, omnivamp, and physical vamp, but not spell vamp.
-- Even if the ability is blocked by spell shield it will still trigger the cooldown reduction. - This ability will cast from wherever the caster is at the end of the cast time.
+- Even if the ability is blocked by spell shield it will still trigger the cooldown reduction.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Mystic Shot* will be buffered and cast when the cooldown ends if the player attempts to cast it within $0.05$ seconds of the cooldown ending.
 
 ---
@@ -168,7 +169,8 @@ If the mark was detonated with an ability, **Ezreal** restores (mana) 60 mana pl
   - It also triggers Sudden Impact and applies Elixir of Sorcery.
   - It does not trigger Cheap Shot, however, as proc damage doesn't trigger Cheap Shot.
 - Block and Dodge prevents the mark from being triggered by a basic attack.
-- Spell shield prevents the mark from being triggered by an ability. If the mark is triggered by a basic attack, spell shield will prevent *Essence Flux*’s damage. - This ability will cast from wherever the caster is at the end of the cast time.
+- Spell shield prevents the mark from being triggered by an ability. If the mark is triggered by a basic attack, spell shield will prevent *Essence Flux*’s damage.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -242,7 +244,8 @@ Minions and non-epic monsters take 50% reduced damage.
 
 **Notes:**
 
-- *Trueshot Barrage*’s projectile has an icon on the mini-map while it is in flight. It can be seen by only **Ezreal** and his allies. - This ability will cast from wherever the caster is at the start of the cast time.
+- *Trueshot Barrage*’s projectile has an icon on the mini-map while it is in flight. It can be seen by only **Ezreal** and his allies.
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

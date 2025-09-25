@@ -184,7 +184,8 @@ After the cast time, he unleashes a massive blast in an area in the target direc
 - The trapezoid and the rectangle both register the edge of enemies' hitbox.
 - The shield is granted at the start of the cast time and will decay afterwards.
   - The buff for the shield is named *Down But Not Out*.
-- **Sett** does not store *Grit* from damage that was mitigated by shields. - This ability will cast from wherever the caster is at the end of the cast time.
+- **Sett** does not store *Grit* from damage that was mitigated by shields.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - **Sett** will turn towards the target direction at the start of the cast time.
 - **Sett** will glow when attaining 90% *Grit*. Casting *Haymaker* at this amount has a different visual and audio effect.
 
@@ -222,7 +223,8 @@ If *Facebreaker* affects at least one enemy on each side, all enemies are stunne
 - If *Facebreaker* does not hit an enemy, Haymaker is also unable to be cast for $0.25$ seconds after the cast time.
 - Targets will be pulled towards **Sett**’s location in a straight line and rebound to 150 units from him back in the same line.
 - The spell indicator is slightly shorter than the actual hitbox' rectangle length, and slightly wider than the width (note that the effects are edge-range from the hitbox rectangle).
-- Targets protected by spell shields don't count toward the requirement to stun. - This ability will cast from wherever the caster is at the end of the cast time.
+- Targets protected by spell shields don't count toward the requirement to stun.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 #### Channel Behavior (cast)
 

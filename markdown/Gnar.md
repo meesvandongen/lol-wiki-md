@@ -139,7 +139,8 @@ Catching the boomerang while it is returning back refunds 40% of the ability's *
 **Notes:**
 
 - The boomerang return direction is determined at the apex of its flight by **Gnar**’s current position and which direction **Gnar** is heading at the time.
-- Since the cooldown between the two is shared, *Mini Gnar* may pick up a boulder (refunding 70% of the maximum cooldown time of *Boomerang Throw*) and/or *Mega Gnar* may catch a boomerang (refunding 40% of the maximum cooldown time of *Boulder Toss*). - This ability will cast from wherever the caster is at the start of the cast time.
+- Since the cooldown between the two is shared, *Mini Gnar* may pick up a boulder (refunding 70% of the maximum cooldown time of *Boomerang Throw*) and/or *Mega Gnar* may catch a boomerang (refunding 40% of the maximum cooldown time of *Boulder Toss*).
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 
@@ -174,7 +175,8 @@ After $0.3$ seconds, **Gnar** can pick up the boulder by moving within 90 units 
 **Notes:**
 
 - Since the cooldown between the two is shared *Mini Gnar* may pick up a boulder (refunding 70% of the maximum cooldown time of *Boomerang Throw*) and/or *Mega Gnar* may catch a boomerang (refunding 40% of the maximum cooldown time of *Boulder Toss*).
-- The Boulder will still drop to the ground if colliding with Wind Wall or Unbreakable. - This ability will cast from wherever the caster is at the start of the cast time.
+- The Boulder will still drop to the ground if colliding with Wind Wall or Unbreakable.
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 
@@ -229,7 +231,8 @@ The third stack against a target consumes them all to deal **bonus** magic damag
 
 **Notes:**
 
-- **Gnar** is locked out of moving and casting movement abilities for $0.25$ seconds after the cast time. - This ability will cast from wherever the caster is at the end of the cast time.
+- **Gnar** is locked out of moving and casting movement abilities for $0.25$ seconds after the cast time.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 #### Channel Behavior (cast)
 
@@ -356,7 +359,8 @@ Enemies that collide with terrain take 50% increased damage immediately and are 
 **Notes:**
 
 - **Gnar** is locked out of moving and casting movement abilities for $0.175$ seconds (Estimated) after the cast time.
-- *GNAR!* can interact with player-generated terrain. - This ability will cast from wherever the caster is at the end of the cast time.
+- *GNAR!* can interact with player-generated terrain.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 #### Channel Behavior (cast)
 

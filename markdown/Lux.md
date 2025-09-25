@@ -129,7 +129,8 @@
 
 **Notes:**
 
-- Targets immune to the root still count towards *Light Binding*’s two-target limit. - This ability will cast from wherever the caster is at the end of the cast time.
+- Targets immune to the root still count towards *Light Binding*’s two-target limit.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Light Binding* spawns an additional missile at the same location and vector as the main missile. This additional "Dummy" missile has the same visual effects as the main missile and gets destroyed when it hits a single enemy, thereby making the surviving VFX of the single missile weaker in intensity.
   - This hacky solution also causes Lux Q to count as two skillshots for things such as "skillshots dodged" Eternals.
 
@@ -168,7 +169,8 @@
   - At the return location, this behaviour is overridden by an additional center check with the same diameter as the missile width.
 - If **Lux** dies before her wand returns it will fizzle upon reaching maximum range.
 - There is an additional circle check at the end of the missile's length that allows it to hit the edge of an ally's radius. This is intended.
-- **Lux**’s wand decelerates on the way out and accelerates on the way back. - This ability will cast from wherever the caster is at the start of the cast time.
+- **Lux**’s wand decelerates on the way out and accelerates on the way back.
+- This ability will cast from wherever the caster is at the start of the cast time.
 - *Prismatic Barrier* is destroyed by Wind Wall and Blade Whirl but not Unbreakable.
 
 ---
@@ -241,7 +243,8 @@ The slow lingers for 1 second after leaving the area. Enemies hit by *Lucent Sin
 
 **Notes:**
 
-- *Final Spark* grants sight of its surroundings during the cast time and for $0.5$ seconds afterwards. - This ability will cast from wherever the caster is at the start of the cast time.
+- *Final Spark* grants sight of its surroundings during the cast time and for $0.5$ seconds afterwards.
+- This ability will cast from wherever the caster is at the start of the cast time.
 - The ability will not preserve the caster's facing direction when using Flash and similar effects.
 
 #### Channel Behavior (cast)

@@ -148,7 +148,8 @@ While on the *Dusk Trail*, **Nocturne** is ghosted and gains **bonus** attack da
   - It is observed from seasons ago that this is intentionally hard-coded into the ability to avoid the projectile increasing its own damage. This feature is somewhat deprecated as it also limits chain-casting *Duskbringer*.
 - *Duskbringer's Dusk Trail* will expose the path of affected units until its duration ends. It is a form of obscured vision; the trail indirectly reveals the location of enemy units even in the fog of war, including those shrouded by stealth.
 - Spell shield will block the damage and also prevents the *Dusk Trail* from following the target.
-- The formed *Dusk Trail* does not disappear if *Duskbringer* is intercepted by Wind Wall or Unbreakable. - This ability will cast from wherever the caster is at the start of the cast time.
+- The formed *Dusk Trail* does not disappear if *Duskbringer* is intercepted by Wind Wall or Unbreakable.
+- This ability will cast from wherever the caster is at the start of the cast time.
 - The **bonus** movement speed stacks multiplicatively with other sources of movement speed boosts.
 
 ---

@@ -137,7 +137,9 @@ The farthest champion or large monster hit within the thrust's area is also mark
 **Notes:**
 
 - The self-reveal has not been fully tested for complete confirmation. Is the ability invisible when hitting minions and there is no enemy champion nearby? Is the tip of the ability enough to reveal him? Whether it can hit a minion or not? Just if he's around the exit of the fog of war, and even if he points towards the inside of the fog of war? [https://youtu.be/GvLedSeuQ0s]
-- Spell shield will block both the slashes and the thrust. - This ability will cast from wherever the caster is at the end of the cast time.
+- Spell shield will block both the slashes and the thrust.
+- This ability will cast from wherever the caster is at the end of the cast time.
+
   - The thrust will occur from wherever **Xin Zhao** is at the end of the cast time.
   - The slashes will occur from wherever **Xin Zhao** is at the time during the first $0.15$ seconds.
 - The first strike's hitbox includes a er 275 radius 160° cone in front of **Xin Zhao** and an additional cr 125 radius around him.
@@ -218,7 +220,8 @@ For the next 4 seconds, **Xin Zhao** is invulnerable against enemy champions far
 
 **Notes:**
 
-- Pets, traps, ground AoEs, DoTs, and delayed-damage abilities (e.g. Death Mark, Explosive Charge, Hemoplague) will not damage **Xin Zhao** if the enemy champion source is outside the circle when the damage applies. - This ability will cast from wherever the caster is at the end of the cast time.
+- Pets, traps, ground AoEs, DoTs, and delayed-damage abilities (e.g. Death Mark, Explosive Charge, Hemoplague) will not damage **Xin Zhao** if the enemy champion source is outside the circle when the damage applies.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - Displacement immunity will also resist the application of the stun.
 
 ---

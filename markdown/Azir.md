@@ -307,7 +307,8 @@ Upon finishing their charge, the soldiers stand as a wall for 5 seconds, acting 
 - The soldier units are spawned only 175 units behind **Azir**, but do not control the knock back directly. Each comes with a missile that travels the same path and conveys the damage and knockback effect.
   - The furthest area (from 325 to 175 units behind **Azir**) is covered by a separate set of missiles with the same effects.
   - All of the soldiers and their missiles will end the charge prematurely when one encounters Wind Wall / Unbreakable / Blade Whirl / Rebuttal or upon colliding with terrain that they cannot charge through.
-- The charge starts at $0.25$ seconds into the cast time. - This ability will cast from wherever the caster is at the start of the cast time.
+- The charge starts at $0.25$ seconds into the cast time.
+- This ability will cast from wherever the caster is at the start of the cast time.
 - When the dash of the soldiers comes to a halt, all not-yet-affected enemies on top of the soldiers' landing locations (125 radius) are also knocked back.
 - *Emperor's Divide* will not be canceled if **Azir** dies during the cast time.
 - While the soldiers are charging forward, the wall is not impassable terrain.

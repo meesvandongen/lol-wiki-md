@@ -247,7 +247,8 @@ After the duration or when the target dies, the Black Mist spreads out of the ta
 
 **Notes:**
 
-- *Last Embrace* will not root the primary target if they are untargetable. - This ability will cast from wherever the caster is at the end of the cast time.
+- *Last Embrace* will not root the primary target if they are untargetable.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

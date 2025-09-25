@@ -243,7 +243,8 @@ The **bonus** damage is affected by critical strike modifiers and applies life s
 
 **Notes:**
 
-- *Wind Slash* counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive. - This ability will cast from wherever the caster is at the end of the cast time.
+- *Wind Slash* counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Wind Slash*’s wave is made up of three individual missiles spread in a cone.
   - Each enemy can be damaged by only one missile.
 - If *Wind Slash* hits an enemy while *Riven* is not visible, it will briefly grant sight of the area around her to enemies.

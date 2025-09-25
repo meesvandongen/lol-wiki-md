@@ -288,7 +288,8 @@ Upon impact, the tendril roots into the ground from which it seeks out nearby en
 - A tendril that roots into the ground will only seek nearby enemy champions that were already in the area.
 - *Chain of Corruption* will not infect crowd control immune targets or those protected by spell shields (but will still seek them).
 - **Varus** will turn to face the target direction at the start of the cast.
-- The tendril cannot seek enemy champions that are untargetable, and will also stop seeking a target if it becomes untargetable (fails to apply its effects if they remain in the area). - This ability will cast from wherever the caster is at the end of the cast time.
+- The tendril cannot seek enemy champions that are untargetable, and will also stop seeking a target if it becomes untargetable (fails to apply its effects if they remain in the area).
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Chain of Corruption* can generate *Blight* stacks for **Varus** to detonate with any ability, even if *Blighted Quiver* has not been learned. The **base** detonation damage per *Blight* stack scales with *Blighted Quiver*’s rank, which has a value at rank 0 of $2.5$% of the target's **maximum** health per stack detonated.
 
 ---

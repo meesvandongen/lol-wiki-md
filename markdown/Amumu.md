@@ -140,7 +140,8 @@
 - Immobilizing effects will not prevent **Amumu** from commencing the dash.
 - *Bandage Toss* does not fizzle on **Amumu**’s death, and can still stun and damage enemies.
 - **Amumu** is still able to dash even if *Bandage Toss* is blocked by spell shield.
-- **Amumu** will be ordered to basic attack the target upon completion of the dash. - This ability will cast from wherever the caster is at the end of the cast time.
+- **Amumu** will be ordered to basic attack the target upon completion of the dash.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -204,7 +205,9 @@
 - A basic attack's basic damage and each on-hit effect are all separate damage instances, and may be reduced each if they deal physical damage.
 - *Tantrum*’s cooldown reduction will trigger multiple times for effects such as Double Strike and Guinsoo's Rageblade *Phantom Hit*.
   - The cooldown will be reduced, even if the incoming attack is blocked.
-  - The cooldown will not be reduced, if the incoming attack misses due to the enemy being blinded. - This ability will cast from wherever the caster is at the end of the cast time.
+  - The cooldown will not be reduced, if the incoming attack misses due to the enemy being blinded.
+
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

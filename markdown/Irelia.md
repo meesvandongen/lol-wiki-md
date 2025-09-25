@@ -185,7 +185,9 @@
 - Quick Casting utilizes hold-and-release for the two casts.
 - *Defiant Dance* reaches 100% physical damage reduction at AP.
 - *Defiant Dance* reaches 100% magic damage reduction at AP.
-- *Defiant Dance* will also recast automatically upon entering resurrection. - This ability will cast from wherever the caster is at the end of the cast time.
+- *Defiant Dance* will also recast automatically upon entering resurrection.
+- This ability will cast from wherever the caster is at the end of the cast time.
+
   - This refers to the recast.
 - The following table refers for interactions while **Irelia** is channeling:
 
@@ -278,7 +280,8 @@ After expanding, the blades drop on the ground, knocking all enemy units away fr
 
 **Notes:**
 
-- Enemies that cross the perimeter are **not** marked *Unsteady*. - This ability will cast from wherever the caster is at the end of the cast time.
+- Enemies that cross the perimeter are **not** marked *Unsteady*.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - In addition to its projectile, *Vanguard's Edge* will check for enemy champions within a cr 90-unit radius area from the projectile's origin point.
   - The projectile interacts with projectile-blocking effects but the area check doesn't.
 - The blades will still expand if the champion hit by the blades is protected by a spell shield.

@@ -134,7 +134,8 @@ If *Steel Tempest* is cast during *Sweeping Blade*, it will instead affect enemi
   - Spell vamp will only grant healing from the damage dealt to secondary targets, and healing is reduced to 33% effectiveness, accordingly.
   - Life steal will heal based on the damage dealt to the first target hit.
 - The whirlwind is a missile and can therefore be intercepted.
-- *Steel Tempest* will only draw minion aggro if the first target is a champion. - This ability will cast from wherever the caster is at the end of the cast time.
+- *Steel Tempest* will only draw minion aggro if the first target is a champion.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - Each parry has different interactions with this ability, whether it's the first target of *Steel Tempest* or the secondary one. In either case **Yasuo** still gains a stack of *Gathering Storm* and his whirlwind knock-up cannot be negated by parries:
   - Dodge: both first target and secondary target **do not** take damage.
   - Block: first target **does not** take damage, secondary target **does** take damage.

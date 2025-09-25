@@ -142,6 +142,7 @@ Enemies take 50% damage from a second bolt.
 **Notes:**
 
 - This ability will cast from wherever the caster is at the end of the cast time.
+
   - *Pix* fires his bolt from wherever he is when **Lulu** casts *Glitterlance*. **Lulu**’s bolt will fire from wherever she is at the end of the cast time.
     - Depending on cursor position both bolts can either crossfire, fire in parallel, or in opposite directions.
 

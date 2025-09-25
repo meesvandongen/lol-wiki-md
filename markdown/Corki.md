@@ -274,7 +274,8 @@ Every third missile **Corki** fires is a *Big One*, dealing 100% increased damag
 - Once **Corki** has learned the ability:
   - He receives a buff that counts a cycle of the number of times *Missile Barrage* has been used since the last *Big One*.
   - An indicator becomes visible below his health bar that tracks the number of missiles in reserve and whether a *Big One* is available. They are spent from left to right (default, for left-to-right locales).
-- **Corki** retains progress towards a *Big One* when he dies. - This ability will cast from wherever the caster is at the start of the cast time.
+- **Corki** retains progress towards a *Big One* when he dies.
+- This ability will cast from wherever the caster is at the start of the cast time.
 - *Missile Barrage*’s effect radius is centered around the location of the missile as it collides.
 - Malignance damage from *Missile Barrage* does not count toward Eclipse passive.
 

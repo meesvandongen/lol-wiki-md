@@ -177,7 +177,8 @@ The fissure stops at maximum range or 200 units behind the first enemy champion 
 
 - The fissure will move an 200 units beyond the first champion it hits, not exceeding the maximum range of the ability. *It can still damage additional targets.*
 - If launched in a wall, pillar will try to appear on the other of the wall, if it cannot the pillar will be destroyed.
-- Spell shield will not prevent the knock aside from the magma pillar forming. - This ability will cast from wherever the caster is at the start of the cast time.
+- Spell shield will not prevent the knock aside from the magma pillar forming.
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 
@@ -332,7 +333,8 @@ Each pass applies Brittle to targets for 3 seconds and can affect enemies only o
 - *Call of the Forge God* cannot be recast while grounded or rooted.
 - Brittle enemies without Tenacity of their own will be stunned for a total of $1.3$ seconds.
 - Spell shields may only block one pass.
-- **Ornn** becomes locked out of all actions during the recast's dash and for $0.5$ seconds afterwards. - This ability will cast from wherever the caster is at the start of the cast time.
+- **Ornn** becomes locked out of all actions during the recast's dash and for $0.5$ seconds afterwards.
+- This ability will cast from wherever the caster is at the start of the cast time.
 - Displacement immunity will also resist the application of the stun.
 
 ---

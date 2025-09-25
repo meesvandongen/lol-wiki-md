@@ -131,7 +131,8 @@
 
 **Notes:**
 
-- Due to the cast time effectively rounding up to full game ticks, at undesturbed game tick interval times the technical minimum cast time is reached at $99.8$% **bonus** attack speed. - This ability will cast from wherever the caster is at the end of the cast time.
+- Due to the cast time effectively rounding up to full game ticks, at undesturbed game tick interval times the technical minimum cast time is reached at $99.8$% **bonus** attack speed.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - The damage reduction per unit hit resets back to full damage upon changing direction.
 - *Boomerang Blade* will still return to **Sivir** even if she dies before it changes direction.
 - Spell shield only blocks one instance of damage.

@@ -102,7 +102,6 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
 - *Inherent Glamour*’s cooldown only prevents **Neeko** from activating disguises; she can still store and remove *Sho'Ma* while the passive is on cooldown.
 - When disguising while storing *Sho'Ma* from a unit, **Neeko** continues to store *Sho'Ma* from that unit.
 - **Neeko** cannot store *Sho'Ma* from Dark Procession and Powder Keg.
-
 - After successfully storing *Sho'Ma*, Neeko celebrates by clapping.
   - This animation is forced and overrides all other animations except Pop Blossom’s landing animation.
 - If **Neeko** attempts to activate a disguise while near the trap, ward, or jungle plant she stored *Sho'Ma* from, she will leap to that unit's exact position over 1 second, though not through terrain, and then become disguised. If she does so for a monster and is near its respective jungle camp, she will leap to that monster's usual position in the camp.
@@ -315,7 +314,6 @@ Additionally, the clone stops ongoing movement in order to play the casting anim
 
 - The empowered attack will not trigger against wards and jungle plants.
 - Using a basic attack breaks the stealth at the start of the attack windup.
-
 - Once spawned with a disguise, the clone cannot lose the disguise.
 - When mimicking the animation of *Blooming Burst* and *Tangle-Barbs* while disguised, the clone will play the disguise unit's first and third ability animation respectively.
 - When mimicking the animation of *Blooming Burst*, the clone will turn toward *Blooming Burst*’s target location unless it was ordered to move within the last $0.5$ (estimated) seconds, in which case it will not change its facing direction.
@@ -410,7 +408,11 @@ When the cast time ends, she lands to emit a burst of energy that deals magic da
   - The wind up has no special interactions.
 - The highlighted area is fixed around **Neeko**.
 - **Neeko**’s most recent Shapesplitter clone disappears when *Pop Blossom*’s cast time starts.
-  - This may be a remnant of when it would spawn multiple clones during the development of her V13.9 gameplay update, intended to reduce visual clutter. - This ability will cast from wherever the caster is at the end of the cast time. **Interactions:**
+  - This may be a remnant of when it would spawn multiple clones during the development of her V13.9 gameplay update, intended to reduce visual clutter.
+
+- This ability will cast from wherever the caster is at the end of the cast time.
+
+**Interactions:**
 - On-cast effects are applied on activation.
 - *Pop Blossom* can start its cast time during stasis.
 

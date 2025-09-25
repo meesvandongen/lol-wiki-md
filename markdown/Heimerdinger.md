@@ -257,7 +257,8 @@ Enemies can be hit by multiple rockets, but receive less damage from ones beyond
 **Notes:**
 
 - If casting beyond 1000 units based off current Heimerdinger's position, every rockets towards Heimerdinger's position extended towards cast position by 1100 units
-- *Hextech Micro-Rockets' * direction-targeting allows for custom spread. - This ability will cast from wherever the caster is at the end of the cast time.
+- *Hextech Micro-Rockets' * direction-targeting allows for custom spread.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

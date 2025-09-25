@@ -217,7 +217,8 @@ While on the hunt, **Naafiri** gains 20% AD **bonus** attack damage and grants h
 **Notes:**
 
 - While *The Call of the Pack* is active, it increases *We Are More’s* summon cap to 4@1; 5@9; 6@12; 7@15.
-- The order of additional *Packmates* that despawn is predetermined, most likely their internal spawn IDs. The ability does not consider which *Packmates* are the closest or healthiest. - This ability will cast from wherever the caster is at the end of the cast time.
+- The order of additional *Packmates* that despawn is predetermined, most likely their internal spawn IDs. The ability does not consider which *Packmates* are the closest or healthiest.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

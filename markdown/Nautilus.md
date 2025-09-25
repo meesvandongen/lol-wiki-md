@@ -137,7 +137,8 @@ If the anchor hits terrain, **Nautilus** dashes to that location and 50% of *Dre
 - *Dredge Line* will not interrupt any movement commands **Nautilus** was issued pre-cast so long as their directions somewhat correlate (this is intentional to smooth out traveling/escaping).
 - Spell shield will block the ability but **Nautilus** will still dash partway to the target.
 - The anchor projectile will stop if **Nautilus** dies while the projectile is traveling. Enemies hit will still be dealt damage. The drag and root are not applied if **Nautilus** did not initiate the dash.
-- Displacement immunity will not resist the application of the stun. - This ability will cast from wherever the caster is at the start of the cast time.
+- Displacement immunity will not resist the application of the stun.
+- This ability will cast from wherever the caster is at the start of the cast time.
 - The following table refers for interactions during *Dredge Line*’s cast time.
 
 #### Channel Behavior (cast)

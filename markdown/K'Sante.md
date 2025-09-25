@@ -339,7 +339,6 @@ Upon entering *All Out*, **K'Sante** is restored to 100% **maximum** mana. His m
   - For **K'Sante**, his camera centers on him at the start of the cast time, then once again at the end of the cast time at the location of his blink behind the target, and it is not locked.
 - *All Out*’s granted untargetability from the vanish during the target's pull of over 2000 units does not destroy in-flight projectiles.
 - The following table refers for interactions while **K'Sante** is in cast time:
-
 - The following table refers for interactions while **K'Sante** is performing *All Out*’s cast:
 
 ---
