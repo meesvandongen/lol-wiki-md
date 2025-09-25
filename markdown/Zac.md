@@ -194,7 +194,7 @@ If the two targets are within 700 units of each other, they are instead slammed 
 - The second *Stretching Strike* does not trigger when attacking Illaoi’s tentacles, Gangplank’s kegs.
   - Does it trigger against blind, dodge, block, stealthed trap, farsight ward?
 - If the tethered target is untargetable during the second *Stretching Strike* via basic attack, they are completely unaffected by the ability.
-- Displacement immunity will also resist the application of the stun. Effect at cast time end
+- Displacement immunity will also resist the application of the stun. - This ability will cast from wherever the caster is at the end of the cast time.
 - If the target becomes untargetable, dies, or is too far away during the empowered attack's cast time, it is cancelled but not consumed.
 
 #### Channel Behavior (cast)

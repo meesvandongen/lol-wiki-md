@@ -136,7 +136,7 @@ If cast during *Audacity’s* dash towards an enemy champion and the target is w
 
 **Notes:**
 
-- If cast during Audacity and the target uses a dash or blink or is no longer in vision, *Edge of Ixtal* will at the target's last location prior to them starting the dash or blink or being in vision. Effect at cast time end
+- If cast during Audacity and the target uses a dash or blink or is no longer in vision, *Edge of Ixtal* will at the target's last location prior to them starting the dash or blink or being in vision. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -176,7 +176,7 @@ Enemies hit are dealt *Edge of Ixtal*’s damage, reduced to 75% against subsequ
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - Using a basic attack breaks the stealth at the start of the attack windup.
 
 ---
@@ -299,7 +299,7 @@ The windblast creates a cascading shockwave across any **RIVER** or **BRUSH** it
 - The windblast needs only to reach near terrain to trigger the terrain shockwave.
 - The shockwave grants sight along each part of its path for $0.75$ seconds.
 - Artificial terrain (e.g, Anivia’s Crystallize, Taliyah’s Weaver's Wall, Trundle’s Pillar of Ice) touching map terrain will be treated as a single piece of terrain, even when bridging two pieces of map terrain together; the shockwave will wrap around all connecting terrain. The shockwave's path is determined once it initially spreads; any expired terrain will be treated as if it were still there.
-- Projectile-intercepting effects will block the windblast but not the shockwave. Effect at cast time end
+- Projectile-intercepting effects will block the windblast but not the shockwave. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

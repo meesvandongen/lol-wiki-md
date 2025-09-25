@@ -125,7 +125,7 @@ If the bolt passes through *Acceleration Gate*, it becomes supercharged: increas
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - Upon touching Acceleration Gate, the enhanced missile gains its remaining range equal to [ 1600 units - travelled distance of the standard missile ].
   - This means that the range of the enhanced *Shock Blast* is always the same, regardless of how early or late it interacted with *Acceleration Gate*.
   - Supercharging the *Shock Blast* as soon as possible, however, will improve its average speed significantly.

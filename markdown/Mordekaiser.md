@@ -155,7 +155,7 @@ After a $1.5$ seconds delay, *Iron Man*’s shield decays at a rate of (health) 
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - The ability will cast to wherever the caster's cursor was at the start of cast time.
   - The visual effect of *Obliterate* is formed in the original direction of the cast, while **Mordekaiser**’s mace appears to slam in his facing direction. Neither of these portray the spell's effect accurately if **Mordekaiser**’s location changes during the cast time.
 - Applies spell damage if it hits one target and area damage to multiple targets.
@@ -227,7 +227,7 @@ Effect at cast time end
 
 **Notes:**
 
-- *Death's Grasp* will still pull even if **Mordekaiser** dies. Effect at cast time start
+- *Death's Grasp* will still pull even if **Mordekaiser** dies. - This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

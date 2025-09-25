@@ -140,7 +140,7 @@ If the charge is interrupted or completes without reactivation, *Bone Skewer* is
 **Notes:**
 
 - Only the charged version of *Bone Skewer* will be intercepted.
-- The pull can fling an enemy behind **Pyke** if the harpoon hits at close range. Effect at cast time end
+- The pull can fling an enemy behind **Pyke** if the harpoon hits at close range. - This ability will cast from wherever the caster is at the end of the cast time.
 - The following table refers for interactions while **Pyke** is channeling:
 
 #### Channel Behavior (charge)

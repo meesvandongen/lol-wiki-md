@@ -186,7 +186,7 @@ Isolated targets hit by *Evolved Spike Racks* are slowed by 60% instead.
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Evolved Spike Racks** effect radius is centered around the location of the missile as it collides.
 - Spell shield will not block the reveal.
 
@@ -224,7 +224,7 @@ Effect at cast time end
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Void Spike*’s effect radius is centered around the location of the missile as it collides.
 
 ---

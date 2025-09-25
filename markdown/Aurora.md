@@ -129,7 +129,7 @@ Upon consuming the stacks from a champion, **Aurora** additionally exorcises the
 - The marked targets do not need to be visible in order for **Aurora** to recast *Twofold Hex*.
   - They do however need to be targetable; if all marked targets are untargetable, *Twofold Hex*’s recast is disabled.
 - Once **Aurora** has successfully recast *Twofold Hex*, she will not be able to recast it again for the duration regardless of any number of marked enemies still remaining.
-  - If all enemies marked by *Twofold Hex* are untargetable when **Aurora** manually recasts *Twofold Hex*, the ability will be consumed but evidently without effect. It will however automatically recast again at the end of the marks' duration to expunge any remaining marks. Effect at cast time end
+  - If all enemies marked by *Twofold Hex* are untargetable when **Aurora** manually recasts *Twofold Hex*, the ability will be consumed but evidently without effect. It will however automatically recast again at the end of the marks' duration to expunge any remaining marks. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -209,7 +209,7 @@ Scoring a takedown against an enemy champion within 3 seconds of damaging them w
 - **Aurora** is locked out of using all abilities, summoner spells, and item actives during the dash.
 - While grounded or rooted, *The Weirding* can be cast but **Aurora** will not dash.
   - Similarly, if **Aurora** is affected by ground or root during the cast time, she will not dash afterwards.
-    - This only applies to ground and root. Immobilizing effects will not prevent the dash afterwards. Effect at cast time end
+    - This only applies to ground and root. Immobilizing effects will not prevent the dash afterwards. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

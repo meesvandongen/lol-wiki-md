@@ -210,7 +210,7 @@ An enemy can detonate up to 4 stones, but the damage is reduced by 0% / 25% / 50
 - *Unraveled Earth* fires 6 rows of stones: the first row has 2 stones, and the rest have 4 each.
   - The stones spawn in rows that cascade in $0.17$ second intervals.
 - *Unraveled Earth* will not detonate if the target dashes over the stones while being untargetable.
-- *Unraveled Earth* will not detonate against enemies that blink onto the stones. Effect at cast time start
+- *Unraveled Earth* will not detonate against enemies that blink onto the stones. - This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

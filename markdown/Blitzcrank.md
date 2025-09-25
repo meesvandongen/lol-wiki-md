@@ -130,7 +130,7 @@
     - This can occasionally fail.
 - If **Blitzcrank** is being moved (e.g. Airborne, Kinematics or Fate's Call) during the grab, the target will be pulled towards **Blitzcrank**s old location.
 - **Blitzcrank** will be ordered to basic attack the target once the target arrives.
-- If the target dies to *Rocket Grab*’s damage, they will not be pulled. Effect at cast time end
+- If the target dies to *Rocket Grab*’s damage, they will not be pulled. - This ability will cast from wherever the caster is at the end of the cast time.
 
 #### Channel Behavior (cast)
 
@@ -235,7 +235,7 @@ When *Overdrive* ends, **Blitzcrank** is slowed by 30% for $1.5$ seconds.
 - The lightning bolts deal default damage while the static field applies area damage.
 - Even if *Static Field* is blocked by a spell shield, it will still destroy any existing damage shields on the target.
 - The visual effects will appear from wherever **Blitzcrank** is at the end of the cast time.
-- Effect at cast time start
+- - This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

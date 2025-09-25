@@ -158,7 +158,7 @@ Enemies near **Maokai** are also stunned for $0.5$ seconds and knocked back up t
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Bramble Smash*’s damage based on the target's health ratio is capped at 9999 against non-champions.
 - Displacement immunity will also resist the application of the stun.
 
@@ -291,7 +291,7 @@ Each bramble deals magic damage to enemies hit and roots them for 0.75 to 2.25 s
 **Notes:**
 
 - The brambles are made up of 4 missiles each which trail 100 units behind one another. The front missile carries the visual effect. When colliding with a champion, all missiles of one bramble are destroyed simultaneously.
-  - Missiles destroyed by other means such as Samira’s Blade Whirl may not destroy their fellows from the same branch, resulting in one or more invisible missiles that may still collide. Effect at cast time start
+  - Missiles destroyed by other means such as Samira’s Blade Whirl may not destroy their fellows from the same branch, resulting in one or more invisible missiles that may still collide. - This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

@@ -152,7 +152,7 @@ The primary target is nearsighted for $1.75$ seconds if they are a champion, and
 
 **Notes:**
 
-- *Blinding Assault*’s nearsight will persist through death. Effect at cast time start
+- *Blinding Assault*’s nearsight will persist through death. - This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

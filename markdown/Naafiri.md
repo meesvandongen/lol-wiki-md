@@ -183,7 +183,7 @@ If the dagger hits a target that is already bleeding, they are instead dealt the
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Darkin Daggers* calculates its additional damage based on missing health before applying the remaining bleed damage.
 - *Darkin Daggers' * execute against minions considers both the damage of the initial hit of the dagger and any bleed tick for putting the target under the threshold.
 
@@ -217,7 +217,7 @@ While on the hunt, **Naafiri** gains 20% AD **bonus** attack damage and grants h
 **Notes:**
 
 - While *The Call of the Pack* is active, it increases *We Are More’s* summon cap to 4@1; 5@9; 6@12; 7@15.
-- The order of additional *Packmates* that despawn is predetermined, most likely their internal spawn IDs. The ability does not consider which *Packmates* are the closest or healthiest. Effect at cast time end
+- The order of additional *Packmates* that despawn is predetermined, most likely their internal spawn IDs. The ability does not consider which *Packmates* are the closest or healthiest. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

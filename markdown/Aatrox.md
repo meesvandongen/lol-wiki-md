@@ -161,7 +161,7 @@ Whenever **Aatrox** hits at least one enemy champion or large monster with a bas
   - **Aatrox**’s facing-direction, for effects such as Petrifying Gaze, is the direction he is moving, and not the direction the model is facing.
 - All damage modifiers stack multiplicatively.
 - There's a small period of time in which Aatrox can't declare basic attacks after casting *The Darkin Blade*.
-- This ability's damage is calculated based on the caster's current stats and changes dynamically. Effect at cast time end
+- This ability's damage is calculated based on the caster's current stats and changes dynamically. - This ability will cast from wherever the caster is at the end of the cast time.
 
 #### Channel Behavior (cast)
 
@@ -213,7 +213,7 @@ If the tether is not broken by the end of its duration, the target is dealt the 
 - The location that the target is dragged to is not at the target's original location, but slightly closer towards **Aatrox**’s position when the zone expires.
 
 - Spell shield will block the chain's application and initial damage but not the aftereffects of one already applied.
-- This ability's damage is calculated based on the caster's current stats and changes dynamically. Effect at cast time end
+- This ability's damage is calculated based on the caster's current stats and changes dynamically. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

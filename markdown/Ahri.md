@@ -134,7 +134,8 @@ Additionally, whenever **Ahri** scores a champion takedown within 3 seconds of d
 - *Orb of Deception* will hit additional units around the return point in a small circle when the orb turns around.
   - This applies both to the initial and return missile's damage, but the initial missile only deals damage if the unit was not hit by it already.
 - Each pass of the projectile can only damage an enemy once.
-- If **Ahri** dies while the orb is out, the orb will visually disappear but continue to deal damage and return to **Ahri**. Effect at cast time end
+- If **Ahri** dies while the orb is out, the orb will visually disappear but continue to deal damage and return to **Ahri**.
+- This ability will cast from wherever the caster is at the end of the cast time.
 - This ability's damage is calculated based on the caster's current stats and changes dynamically.
 
 ---
@@ -212,7 +213,8 @@ Flames prioritize enemy champions hit by *Charm*, then enemy champions, then min
 **Notes:**
 
 - *Charm* is able to slow targets otherwise immune to slows upon charming them.
-- This ability's damage is calculated based on the caster's stats at the time of its application. Effect at cast time end
+- This ability's damage is calculated based on the caster's stats at the time of its application.
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

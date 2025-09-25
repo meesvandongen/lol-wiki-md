@@ -2465,6 +2465,23 @@ class SimpleLoLConverter:
         text = re.sub(r'\*\*\s*New:\*', '**New:**', text, flags=re.IGNORECASE)
         text = re.sub(r'\*\*\s*Removed:\*', '**Removed:**', text, flags=re.IGNORECASE)
         text = re.sub(r'\*\*\s*Changed:\*', '**Changed:**', text, flags=re.IGNORECASE)
+        # Ensure cast time start/end inserted notes begin on their own bullet if appended after a sentence.
+        # Pattern: period (or exclamation/question) followed by space, dash space, 'This ability will cast from'
+        text = re.sub(r'([.!?])\s+-\s+(This ability will cast from)', r'\1\n- \2', text)
+        # If a bullet already captured the sentence before injection (e.g., "... return to Ahri. - This ability will cast ...")
+        # split it into two bullets. Pattern: '- <sentence ending with period> - This ability will cast from'
+        # Second pass (bullet lines): ensure any remaining inline pattern inside an existing bullet is split.
+        # Example: "- If Ahri dies ... return to Ahri. - This ability will cast from her current position ..."
+        text = re.sub(r'(?m)^(-\s+[^\n]*?[.!?])\s+-\s+(This ability will cast from)', r'\1\n- \2', text)
+        # Third pass: handle case where punctuation is immediately followed by space then dash (already mostly covered, but be explicit for period variant)
+        text = re.sub(r'(?m)^(-\s+[^\n]*?\.)\s+-\s+(This ability will cast from)', r'\1\n- \2', text)
+        # Fourth pass: conservative split if pattern still remained (avoid duplicates by ensuring not already on its own line)
+        def _split_cast_inline(m: re.Match) -> str:
+            first = m.group(1).rstrip()
+            second = m.group(2).rstrip()
+            # If first already ends with two spaces + newline inserted earlier, skip
+            return f"{first}\n- {second}"
+        text = re.sub(r'(?m)^(-\s+[^\n]*?\.)(?:\s+-\s+)(This ability will cast from[^\n]*)', _split_cast_inline, text)
 
         # Clean up extra whitespace while preserving indentation at line starts (for nested lists)
         # Collapse 2+ spaces that are NOT immediately after a newline into a single space
@@ -2656,8 +2673,21 @@ class SimpleLoLConverter:
             if norm in template_dir_variants:
                 body = load_template_body(norm)
                 if body:
+                    # Ensure the inserted body starts on a fresh (blank) line so that leading
+                    # list markers (*) are recognized. If previous chunk ends with non-newline
+                    # and body begins with '*', add two newlines; otherwise at least one.
+                    if out:
+                        if not out[-1].endswith('\n'):
+                            out.append('\n')
+                        # If previous line has text and body starts with a bullet, add an extra blank line
+                        if body.lstrip().startswith('*'):
+                            # Ensure exactly one blank line separation
+                            if not out[-1].endswith('\n\n'):
+                                out.append('\n')
                     out.append(body)
-                # If no body, drop silently to avoid leaving raw template
+                    if not body.endswith('\n'):
+                        out.append('\n')
+                # If no body, we drop the template silently.
                 i = t
                 continue
             # Not one of our targets: keep original template markup
@@ -4488,6 +4518,9 @@ class SimpleLoLConverter:
         # Generic cleanup (avoid champion-specific hacks)
         # Remove stray asterisks after normalized labels like '**Bug Fix:**' followed by an extra '*'
         md = re.sub(r'(\*\*\s*(?:Bug Fix|Undocumented|New Effect):\s*\*\*)\*', r'\1', md)
+        # Safety net: split any lingering inline cast-time insertion inside a single bullet
+        # Pattern: '- <sentence ending with .!? >. - This ability will cast from ...' -> two bullets
+        md = re.sub(r'(?m)^(-\s+[^\n]*?[.!?])\s+-\s+(This ability will cast from[^\n]*)', r'\1\n- \2', md)
         # Remove stray single quotes flanking emphasis markers or emphasized spans
         # Cases like: ' **Name**' -> **Name** and **Name**' -> **Name**
         md = re.sub(r"(?m)^\s*'\s*(\*{1,3}[^\n]+\*{1,3})", r"\1", md)

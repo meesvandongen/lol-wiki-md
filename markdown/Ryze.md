@@ -127,7 +127,7 @@ If **Ryze** consumed 2 stacks, he gains (ms) **bonus** movement speed for 2 seco
 
 - *Overload* can be buffered $0.5$ seconds before it comes off cooldown.
 - *Overload* can be buffered while casting either Spell Flux or Rune Prison to cast immediately after the previous spell's cast time.
-- Applies spell damage to the primary target and area damage to secondary targets affected by Flux. Effect at cast time start
+- Applies spell damage to the primary target and area damage to secondary targets affected by Flux. - This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

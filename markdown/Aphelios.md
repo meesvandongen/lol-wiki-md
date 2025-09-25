@@ -205,7 +205,7 @@
 
 **Notes:**
 
-- The volley applies area damage and the follow up attacks from the off-hand weapon deal basic damage. Effect at cast time start *The hitbox also includes a very small portion behind **Aphelios**' character model.
+- The volley applies area damage and the follow up attacks from the off-hand weapon deal basic damage. - This ability will cast from wherever the caster is at the start of the cast time. *The hitbox also includes a very small portion behind **Aphelios**' character model.
 - *Duskwave*’s name is modified based on **Aphelios**' off-hand weapon:
   - Precision Duskwave
   - Resurgent Duskwave
@@ -240,7 +240,7 @@
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Moonshot*’s name is modified based on **Aphelios**' off-hand weapon:
   - Resurgent Moonshot
   - Binding Moonshot
@@ -411,7 +411,7 @@ After $0.3$ seconds of the illumination, attacks based on **Aphelios' ** current
 - Spell shield will block *Moonlight Vigil*’s initial detonation damage but does not prevent the attacks from locking-on.
 - All attacks from *Moonlight Vigil* critically strike independently from each other.
   - This includes Infernum’s bolts, which also critically strike independently from the primary attack's damage.
-- Changing weapons while *Moonlight Vigil* is in flight does not change the effect it has when it hits. Effect at cast time start
+- Changing weapons while *Moonlight Vigil* is in flight does not change the effect it has when it hits. - This ability will cast from wherever the caster is at the start of the cast time.
 - *Moonlight Vigil*’s effect radius is centered around the location of the missile as it collides.
 - With Severum, the extra flat heal is given only once, not per target. However, all damage done by *Moonlight Vigil* with it also heals him from *Severum's * own passive effect.
 - With Infernum, 14 fire bolts splash from each target hit (18 for critical strikes). Bolts do not activate if *Moonlight Vigil*’s initial damage kills the target.

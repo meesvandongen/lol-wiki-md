@@ -214,7 +214,7 @@ Enemies in the epicenter take $66.7$% increased damage and are slowed by a great
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

@@ -137,7 +137,7 @@ If the anchor hits terrain, **Nautilus** dashes to that location and 50% of *Dre
 - *Dredge Line* will not interrupt any movement commands **Nautilus** was issued pre-cast so long as their directions somewhat correlate (this is intentional to smooth out traveling/escaping).
 - Spell shield will block the ability but **Nautilus** will still dash partway to the target.
 - The anchor projectile will stop if **Nautilus** dies while the projectile is traveling. Enemies hit will still be dealt damage. The drag and root are not applied if **Nautilus** did not initiate the dash.
-- Displacement immunity will not resist the application of the stun. Effect at cast time start
+- Displacement immunity will not resist the application of the stun. - This ability will cast from wherever the caster is at the start of the cast time.
 - The following table refers for interactions during *Dredge Line*’s cast time.
 
 #### Channel Behavior (cast)
@@ -224,7 +224,7 @@ The first hit against monsters deals **bonus** magic damage.
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - The first wave is centered around **Nautilus**, while the second and third wave are centered at an offset of 25 units in front of **Nautilus** at the original cast location.
   - Because of this, there are a zone each in which you can be hit by only 1 wave, or all 3 waves, respectively, without moving.
 - The first wave happens at 0 seconds after the cast time ends, the second wave at $0.297$ seconds and the third wave at $0.561$ seconds.

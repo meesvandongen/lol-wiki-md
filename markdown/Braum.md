@@ -121,7 +121,7 @@ This effect cannot apply to the same target more than once every few seconds. Du
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -264,7 +264,7 @@ A field of ice is created along the fissure's path, lasting for 4 seconds and sl
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 #### Channel Behavior (cast)
 

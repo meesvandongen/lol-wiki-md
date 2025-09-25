@@ -212,7 +212,7 @@ Hitting a *marked* champion roots them for a duration and grants **Jhin** Every 
 **Notes:**
 
 - Applies spell damage to the enemy champion and area damage to all other enemy units.
-- The *Caught Out* mark only appears if *Deadly Flourish* can potentially root the target, and will not if the ability's cooldown is longer than 4 seconds or isn't ranked up. Effect at cast time start
+- The *Caught Out* mark only appears if *Deadly Flourish* can potentially root the target, and will not if the ability's cooldown is longer than 4 seconds or isn't ranked up. - This ability will cast from wherever the caster is at the start of the cast time.
 - The ability will not preserve the caster's facing direction when using Flash and similar effects.
 - Uniquely, *Deadly Flourish* is special-cased to be intercepted by valid counters because it looks like a blockable missile, even though it functionally is not a missile.
 - While disguised as a non-champion, Neeko cannot be affected by *Deadly Flourish*.
@@ -308,7 +308,7 @@ The fourth shot critically strikes for damage.
 - **Jhin** will turn to face in the target direction whenever he uses a recast.
 - **Jhin** gains a wider field of view during *Curtain Call*.
 - The reveal debuff is named *Caught Out*.
-  - This debuff is shared between Captive Audience and *Curtain Call*. Effect at cast time end
+  - This debuff is shared between Captive Audience and *Curtain Call*. - This ability will cast from wherever the caster is at the end of the cast time.
 
 - The following table refers for interactions while **Jhin** is channeling:
 

@@ -222,7 +222,7 @@ Empowered abilities that apply area damage only deal 33 to 66 of the **bonus** d
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - Surging Tides will trigger immediately on **Nami** on-cast.
 - The wave travels over .
 

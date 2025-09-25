@@ -123,7 +123,7 @@ If the target was an enemy champion or epic monster, a radius is marked around *
 
 - The trigger radius is slightly smaller than the heal radius.
 - Spell shield will not prevent the marked area from being formed.
-- The heal can activate immediately after the projectile hits the target, before the healing return animation completes. Effect at cast time end
+- The heal can activate immediately after the projectile hits the target, before the healing return animation completes. - This ability will cast from wherever the caster is at the end of the cast time.
 - The heal will trigger and affect **Rakan** even if he is untargetable.
 
 ---

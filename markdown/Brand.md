@@ -139,7 +139,7 @@ Upon applying 3 stacks of *Ablaze* to a large monster or enemy champion, the fir
 **Notes:**
 
 - With an ability haste value of ((8 to 6)/(4-0.25+1100/1600)-1)*100 to ((8 to 6)/(4-0.25-1100/1600)-1)*100 based on the ranges of applications from the target, it is possible to apply the stun without having to use other abilities. *Sear* will apply before the duration of the pre-applied Blaze times out.
-  - The needed ability haste value if you remained at the same range from the target for both casts would be ((8 to 6)/(4-0.25)-1)*100. Effect at cast time end
+  - The needed ability haste value if you remained at the same range from the target for both casts would be ((8 to 6)/(4-0.25)-1)*100. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

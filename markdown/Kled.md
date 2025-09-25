@@ -198,7 +198,7 @@ The tether's radius shrinks over its duration, and if it is not broken before th
 
 **Notes:**
 
-- Applies spell damage to enemy champions, large monsters and large pets, while applying area damage to all other enemy units. Effect at cast time end
+- Applies spell damage to enemy champions, large monsters and large pets, while applying area damage to all other enemy units. - This ability will cast from wherever the caster is at the end of the cast time.
   - The visual effect of *Bear Trap on a Rope* will appear at **Kled**’s height at the end of cast time and may not portray its projectile accurately if **Kled** is *dismounting* at the end of cast time.
     - Is the same true if **Kled** is airborne?
 - In addition to its projectile, *Bear Trap on a Rope* will check for enemy champions, large monsters and large pets within a 60-unit center-to-edge radius area from the projectile's origin point.
@@ -254,7 +254,7 @@ The tether's radius shrinks over its duration, and if it is not broken before th
 
 - Applies spell damage to champions and area damage to non-champions.
 - The backwards dash from *Pocket Pistol* can pass terrain.
-- *Pocket Pistol* can be cast while grounded or rooted but **Kled** will not dash backwards. Effect at cast time end
+- *Pocket Pistol* can be cast while grounded or rooted but **Kled** will not dash backwards. - This ability will cast from wherever the caster is at the end of the cast time.
 - In addition to its projectiles, *Pocket Pistol* will check for enemy champions within a 55-unit center-to-edge radius area from the projectiles' origin point.
   - The projectiles interact with projectile-blocking effects but the area check doesn't.
 - Black Cleaver will specifically apply a stack for every pellet hit.

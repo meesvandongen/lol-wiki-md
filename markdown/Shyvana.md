@@ -219,7 +219,7 @@ During this time, **Shyvana**’s basic attacks deal **bonus** magic damage on-h
 
 - The fireball applies area damage and the on-hit effect against marked targets deals proc damage.
   - In *Dragon Form*, the fiery explosion applies area damage and the burning scorch deals persistent area damage to all enemies within the area of effect.
-- In *Dragon Form*, both areas of effect will be centered on the first champion struck, not at the location the missile collided with them. Effect at cast time end
+- In *Dragon Form*, both areas of effect will be centered on the first champion struck, not at the location the missile collided with them. - This ability will cast from wherever the caster is at the end of the cast time.
 - In *Dragon Form*, the visual mark will not be applied to non-champions, but the debuff will still be applied for gameplay purposes.
 - Magic damage on-hit can be dodged by dodging effects.
 - : Magic damage on-hit's interactions with blocking and blinding effects.

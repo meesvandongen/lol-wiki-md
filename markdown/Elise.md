@@ -312,7 +312,7 @@ The spider prioritizes the nearest enemy if it detects one before reaching the t
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Cocoon* deals no damage and thus does **not** trigger turret aggro, or effects such as Elixir of Sorcery and Sudden Impact’s activation.
 - *Cocoon* will activate combat status despite not dealing any damage.
 

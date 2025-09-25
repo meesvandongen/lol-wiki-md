@@ -190,7 +190,7 @@ Both instances of *Reaping Slash* deal 40 **bonus** physical damage against mini
 **Notes:**
 
 - The *shadow* is considered an allied champion and can interact with effects such as World Atlas and Runic Compass Quest and local reward from structures.
-- *Blade's Reach*’s indicator is visible to enemies while cast inside terrain and towards enemy champions. Effect at cast time start
+- *Blade's Reach*’s indicator is visible to enemies while cast inside terrain and towards enemy champions. - This ability will cast from wherever the caster is at the start of the cast time.
 
 #### Channel Behavior (cast)
 

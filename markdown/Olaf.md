@@ -132,7 +132,7 @@ The axe remains in place for a duration equal to *Undertow*’s cooldown, granti
   - The axe will land approximately 50 units further than *Undertow*’s target range if cast below maximum range.
 - Projectile-intercepting effects (e.g. Wind Wall, Unbreakable) cannot destroy the axe, they will instead cause it to stop prematurely and remain on the ground upon collision.
 - The timer for how long an axe stays on the ground does not begin until it has landed, thus it is possible to throw another axe before retrieving the first.
-- **Olaf** cannot pick up an enemy **Olaf**’s axe on the ground. Effect at cast time start
+- **Olaf** cannot pick up an enemy **Olaf**’s axe on the ground. - This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

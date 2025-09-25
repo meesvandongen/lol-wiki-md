@@ -247,7 +247,7 @@ After the cast time, **Urgot** dashes in the target direction, though not throug
 - **Urgot** turns around when tossing an enemy over him, always facing his victim.
 - The target will be flung to the location behind **Urgot** over $0.5$ seconds given that they do not move nor are moved from the position at which they collided with him while stunned.
 - *Disdain* prevents Purge from firing for $1.25$ seconds.
-- The range indicator length is 475 units, but the dash only moves **Urgot** 450 units. Effect at cast time end
+- The range indicator length is 475 units, but the dash only moves **Urgot** 450 units. - This ability will cast from wherever the caster is at the end of the cast time.
 - The shield is granted at the start of the cast time while the dash begins after.
 - The fling will occur after $0.25$ seconds regardless of how far away the target is.
 - Displacement immunity will not resist the application of the stun.
@@ -299,7 +299,7 @@ Upon completing the channel, the target is execute. If the execution is successf
 - While *Fear Beyond Death* is not on cooldown, all enemy champions will have an execution indicator on their health bar, and a visual indicator if below the execution threshold.
 - *Mercy*’s granted untargetability does not destroy in-flight projectiles for the target.
 - **Urgot** will place himself onto the ground and interrupts displacements affecting him upon starting the channel.
-  - If the displacement effect is a *knock up* with no debuff source, the *airborne* status is not removed and he spends significantly less time in the air. Effect at cast time start
+  - If the displacement effect is a *knock up* with no debuff source, the *airborne* status is not removed and he spends significantly less time in the air. - This ability will cast from wherever the caster is at the start of the cast time.
 - *Fear Beyond Death* prevents Purge from firing for $0.8$ seconds.
   - The recast prevents Purge from firing for $1.5$ seconds.
 - If **Urgot** is in cast time or is dashing while the chains are in transit, *Mercy*’s forced movement will be deferred (the debuff will continuously refresh) until the cast or dash is complete. The target will still be *untargetable*, prevented from taking damage from other sources, and *suppressed* during this time.

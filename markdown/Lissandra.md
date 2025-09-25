@@ -129,7 +129,7 @@ If *Ice Shard* hits an enemy, it will shatter, increasing its width and maximum 
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Ice Shard* picks a location 950 units away in the direction of the cast for the shattered missile to end up at.
 - The initial *Ice Shard* missile has a range of 700 units which it arrives at after . If it hasn't collided with an enemy in this path when it does, it checks for enemies in a cr 100 radius around the point 25 units in front of it.
   - Colliding or hitting an enemy in either fashion creates a new "shattered" missile with the same speed but greater width that continues to travel along the same line to the designated point 950 units from the cast's original position, originating at the location at which the initial missile collided at.

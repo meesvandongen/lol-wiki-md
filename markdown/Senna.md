@@ -247,7 +247,7 @@ After the duration or when the target dies, the Black Mist spreads out of the ta
 
 **Notes:**
 
-- *Last Embrace* will not root the primary target if they are untargetable. Effect at cast time end
+- *Last Embrace* will not root the primary target if they are untargetable. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -329,7 +329,7 @@ The broad wave grants a shield to **Senna** and allied champions hit for 3 secon
 
 **Notes:**
 
-Effect at cast time start
+- This ability will cast from wherever the caster is at the start of the cast time.
 - **Senna** reveals herself during the cast time.
 
 ---

@@ -137,7 +137,7 @@ Enemies revealed by *Yordle Snap Trap* always take full damage from *Piltover Pe
 **Notes:**
 
 - Upon *Piltover Peacemaker* dealing damage to an enemy, **Caitlyn**’s attack timer is forcibly reset.
-- Enemies hit while protected by a spell shield will still be considered a target for calculating damage for subsequent hits. Effect at cast time start
+- Enemies hit while protected by a spell shield will still be considered a target for calculating damage for subsequent hits. - This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 
@@ -209,7 +209,7 @@ The next enemy champion that springs the trap is rooted for $1.5$ seconds and re
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - The recoil can be used to pass through terrain.
 - If **Caitlyn** buffers Piltover Peacemaker during *90 Caliber Net's* cast time, Piltover Peacemaker will start after the cast time.
   - If **Caitlyn** buffers an ability or basic attack during this ability's cast time, the buffered ability or basic attack will instead start after the dash ends.

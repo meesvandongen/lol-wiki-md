@@ -140,7 +140,7 @@ Afterwards, the grenade contracts and homes back to **Ekko** at an increased spe
 
 **Notes:**
 
-- Spell shield will block only a single instance of damage. Effect at cast time end
+- Spell shield will block only a single instance of damage. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

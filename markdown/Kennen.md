@@ -125,7 +125,7 @@ The third stack against a target consumes them all to stun them for $1.25$ secon
 
 **Notes:**
 
-Effect at cast time start
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 

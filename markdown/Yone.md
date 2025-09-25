@@ -155,7 +155,7 @@ If this hits at least one enemy, **Yone** generates a stack of *Gathering Storm*
 - *Mortal Steel* is disabled while grounded or rooted if **Yone** has two stacks of *Gathering Storm*.
 - While at two stacks, a range indicator will be shown for the effective range of the whirlwind.
 - The dash can cross terrain.
-- If Yone gets knocked back during the 3rd cast, the dash will only damage and knockup around Yone's current position then will stop colliding, making Yone play *Mortal Steel*’s dash winddown animation while still visually dashing. Effect at cast time end
+- If Yone gets knocked back during the 3rd cast, the dash will only damage and knockup around Yone's current position then will stop colliding, making Yone play *Mortal Steel*’s dash winddown animation while still visually dashing. - This ability will cast from wherever the caster is at the end of the cast time.
   - **Yone** will always cast *Mortal Steel* in his facing direction, and he will turn to face the target direction at the start of the cast time. While at two stacks, **Yone** will always cast it in the target direction.
 
 ---
@@ -191,7 +191,7 @@ If this hits an enemy, **Yone** grants himself a shield for 40 to 90 (+ 65% **bo
   - This behaviour is common with missiles, however some cone spells such as this one also do it.
 - *Spirit Cleave* will not benefit from the bonus attack speed gained by Hail of Blades.
 - Spell shield does not prevent **Yone** from receiving and/or increasing the shield.
-- The shield's amount will also increase for each clone hit. Effect at cast time end
+- The shield's amount will also increase for each clone hit. - This ability will cast from wherever the caster is at the end of the cast time.
   - *Spirit Cleave* will not preserve the caster's initial facing direction when using Flash and similar effects.
     - It will cast in the caster's new facing direction at the end of the cast time.
 - While casting *Spirit Cleave*, **Yone**’s facing direction cannot be shifted by displacements (eg. Vault, Last Breath).
@@ -311,7 +311,7 @@ After $0.3$ seconds (From the end of the cast time), a gust rushes along the sam
 - If *Fate Sealed*’s maximum range is inside terrain, enemies will not be pulled through walls.
 - *Fate Sealed* pulls targets to the location **Yone** *would* blink to, and not towards his current position by the end of the cast time.
 - *Fate Sealed* **can** hit targets whose center is behind **Yone**, if their radius overlaps with the rectangle hitbox in front of him.
-- Enemies are pulled with 3000 speed. Effect at cast time end
+- Enemies are pulled with 3000 speed. - This ability will cast from wherever the caster is at the end of the cast time.
 - *Fate Sealed* will not stun enemies that are displacement immune.
 - **Yone** can blink up to 1200 units + enemy size, if the last enemy champion's radius intersects with the maximum range slightly.
 - The mixed damage is applied in two instances, and the magic damage will be dealt first within the same game tick.

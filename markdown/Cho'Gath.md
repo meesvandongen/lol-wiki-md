@@ -151,7 +151,7 @@ Enemy champions and Rift Scuttler hit are also silenced for a duration.
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Feral Scream* uses edge range for enemy targets only; Its range is *center-to-edge*.
 
 ---

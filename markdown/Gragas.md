@@ -131,7 +131,7 @@
 - The cask ignores unit and terrain collision therefore it will only stop once it reaches the target location.
   - On arrival the cask will begin to glow ever brighter as it ferments until it turns bright red.
 - *Barrel Roll* has an internal cooldown while traveling so that **Gragas** may only make it explode on arrival.
-- The charge-up countdown will only start once the cask stops rolling. Effect at cast time end
+- The charge-up countdown will only start once the cask stops rolling. - This ability will cast from wherever the caster is at the end of the cast time.
 - The ability will not preserve the caster's facing direction when using Flash and similar effects.
 
 ---
@@ -248,7 +248,7 @@ Upon completing the channel, **Gragas** empowers his next basic attack within 5 
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

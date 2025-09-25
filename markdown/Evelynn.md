@@ -167,7 +167,7 @@
   1. The last non-champion **Evelynn** hit
   1. The lowest-health champion
   1. The lowest-health non-champion
-- The dart applies spell damage and the spikes deal area damage. Effect at cast time start
+- The dart applies spell damage and the spikes deal area damage. - This ability will cast from wherever the caster is at the start of the cast time.
 - Recasts can be buffered up to $0.5$ seconds before becoming castable at a maximum range of approximately 500 units.
 
 ---

@@ -240,7 +240,7 @@ The next instance of non-persistent damage that the sleeping target takes from c
 - At the end of the path of the initial missile, before continuing with the short bounce, *Sleepy Trouble Bubble* checks for targets in a er 100 radius to immediately collide with.
   - This "lollipop" is one of only a few that is larger than the ability's missile width.
 - *Sleepy Trouble Bubble* can still be collided with during the short bounce between end of initial missile and the trap being formed.
-  - This seems to use a er very small or negative collision radius, rather than normal missile collision. Effect at cast time end
+  - This seems to use a er very small or negative collision radius, rather than normal missile collision. - This ability will cast from wherever the caster is at the end of the cast time.
   - The missile's maximum range location, or end position, is determined at the start of the cast and as such will always be fired to the same spot regardless of where **Zoe** is at the end of the cast time.
     - An applicable example of this can be seen in an interaction with her Portal Jump. If *Sleepy Trouble Bubble* is cast right before she blinks back to *Portal Jump*’s original cast position, the range of the missile will be extended for it to fire to the same end position as if she had not blinked back. This interaction occurs in this manner due to the missile's behavior as explained prior and the fact that **Zoe** blinks back with *Portal Jump* before the cast time of *Sleepy Trouble Bubble* finishes, causing the cast time to finish from *Portal Jump*’s original cast position.
   - This will still count as damage dealt by **Zoe** in the damage recap.

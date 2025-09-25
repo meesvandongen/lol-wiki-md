@@ -248,7 +248,7 @@ Enemies that are immobilized or grounded are also stunned for the same duration.
     - The stun will apply as normal; it does not consider if the target is slowed.
   - The root will be overridden by the stun if the target is hit by *Beat Drop* again while they were rooted by it.
 - A quarter note will appear next to an enemy champion while they are slowed and two quarter notes tied will appear if they are immobilized or grounded.
-  - This indicates if *Beat Drop* will apply an additional crowd control effect if it strikes the target. Effect at cast time end
+  - This indicates if *Beat Drop* will apply an additional crowd control effect if it strikes the target. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -287,7 +287,7 @@ Enemies that are immobilized or grounded are also stunned for the same duration.
   - **Seraphine** cannot buffer casts during the first cast time, but she may do so during the second cast time.
 - Clones also count for *Encore*’s extension.
 - *Encore* will not extend on enemy champions that are untargetable, but will do so for allied champions.
-- If *Encore*’s projectile is negated via spell shield, this will also prevent it from resetting its travel distance. Effect at cast time end
+- If *Encore*’s projectile is negated via spell shield, this will also prevent it from resetting its travel distance. - This ability will cast from wherever the caster is at the end of the cast time.
   - *Encore* fires from **Seraphine**’s location at the end of the initial cast time.
 - There is no limit as to how many times the wave can extend.
 - Each *Encore* cast cannot extend from the same champion more than once.

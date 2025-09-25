@@ -256,7 +256,7 @@
   - This also applies vice versa; a non-empowered *Electro Harpoon* cast will reduce the enhanced slow and shred applied by previous, empowered *Electro Harpoon* casts back to the non-enhanced values, for all stacks.
 - A buff with the magic resistance reduction tooltip is applied to minions and pets, but their magic resistance is unaffected by *Electro Harpoon*.
 - Each *Electro Harpoon* cast triggers Spellblade and reduces Force Pulse’s cooldown.
-- *Electro Harpoon*’s missile will fail to fire if **Rumble** is suppressed during the cast time. Effect at cast time end
+- *Electro Harpoon*’s missile will fail to fire if **Rumble** is suppressed during the cast time. - This ability will cast from wherever the caster is at the end of the cast time.
 - **Rumble** stocks an *Electro Harpoon* charge before the ability is even learned.
 
 ---

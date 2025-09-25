@@ -333,7 +333,7 @@ If the target is a minion or non-epic monster, they are also stunned for $0.75$ 
 
 - Minions or monsters that are flung away are immune to minion damage and take their damage once they are stopped if they would die to *Roar of the Slayer*’s damage, by either colliding with terrain, reaching the end of their trajectory, or having their displacement interrupted.
 - Unlike the intial single-target projectile, a thrown minion or monster is not blocked by Wind Wall or Unbreakable.
-- Gaining or losing AP, or upgrading the ability while its projectile is traveling will change its damage for every future hit. This applies to both the intial single-target projectile, as well as the minion-projectile. Effect at cast time end
+- Gaining or losing AP, or upgrading the ability while its projectile is traveling will change its damage for every future hit. This applies to both the intial single-target projectile, as well as the minion-projectile. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

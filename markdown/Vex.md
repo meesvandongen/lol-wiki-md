@@ -146,7 +146,7 @@
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
   - *Mistral Bolt* will fire from wherever **Vex** is at the end of the cast time, towards the originally targeted location or 1200 units in the originally targeted direction if cast beyond that.
 
 ---
@@ -260,7 +260,7 @@ If **Vex** scores a takedown against *Shadow Surge*’s marked target within 6 s
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - **Vex**’s dash will track the target if they change locations.
   - She will not stop tracking the target until she reaches them, as there is no maximum tracking distance.
 - *Shadow Surge* grants sight of the area along its path for $0.4 (Estimated$) seconds each.

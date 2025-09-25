@@ -175,7 +175,7 @@ Enemies hit are marked for 6 seconds.
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
   - Like most missiles, it will not collide with enemies whose center is beyond the maximum range (not behind **Lucian**), but this determines only the center and timing of the explosion.
 - *Ardent Blaze* will cast from wherever **Lucian** is at the end of the cast time.
 - **Lucian** will not gain *Ardent Blaze*’s bonus movement speed if attacks on marked targets are dodged, blocked, or if missed while the attacker is blinded.

@@ -237,7 +237,7 @@ After $0.5$ seconds of the cast, **Skarner** gains the ability to use *Upheaval*
 
 ;General
 - While *Upheaval* can deal damage to structures, the missile can't directly hit them. They have to be within the radius of the explosion.
-- Spell shield will not prevent the explosion from occurring.Effect at cast time end
+- Spell shield will not prevent the explosion from occurring.* This ability will cast from wherever the caster is at the end of the cast time.
   - The direction of cast will be updated to go toward the cast location.
 - The slow applied by *Shattered Earth* is a generic slow debuff. ;Known Issues
 - If *Upheaval* hits an enemy while a new instance of *Shattered Earth* is active, *Shattered Earth*’s effects are immediately lost.
@@ -271,7 +271,7 @@ After $0.5$ seconds of the cast, **Skarner** gains the ability to use *Upheaval*
 **Notes:**
 
 - The shield is granted at the start of the cast time.
-- The shield ratio is equal to 0.08*(Skarner)*(x-1)*(0.7025+0.0175*(x-1))) (+ 8% of his **bonus** health). Effect at cast time end
+- The shield ratio is equal to 0.08*(Skarner)*(x-1)*(0.7025+0.0175*(x-1))) (+ 8% of his **bonus** health). - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -361,7 +361,7 @@ If **Skarner**’s attached target collides with terrain, the charge ends, detac
     - If all targets remove the suppression, *Impale* ends prematurely and is cancelled for **Skarner**.
 - If a target would be inside of terrain at the end of the effect, they are moved to the nearest valid space.
 - If a target would be on the other of a wall, they are moved to the same as **Skarner**.
-- During *Impale*, **Skarner** always faces in the direction of the nearest attached target. Effect at cast time end
+- During *Impale*, **Skarner** always faces in the direction of the nearest attached target. - This ability will cast from wherever the caster is at the end of the cast time.
 - The following table refers for interactions while **Skarner** is in cast time:
 
 - The following table refers for interactions while **Skarner** is performing *Impale*: and are disabled, but can be buffered. is usable.|items=true|consume=true|spells=true,false,true,false,false|interrupts=death

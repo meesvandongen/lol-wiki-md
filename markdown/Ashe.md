@@ -182,7 +182,7 @@ Enemies can intercept multiple arrows but do not take damage from any beyond the
 
 - The missiles are spawned in a straight horizontal line 75 units in front of **Ashe**, with a total width of 75/100/100/123/123 units.
   - Between each missile spawn location is a distance of $12.5$ units, except for the two outermost ones at the last two ranks (which are $11.5$ units from the closest other one), and the two centermost missiles at ranks 2 and 4 (which have 20 units between them and 15 units to the next missile, respectively).
-  - This inconsistent behaviour of spawn locations means the angle between each missile can vary off of $4.625$ slighty. Effect at cast time end
+  - This inconsistent behaviour of spawn locations means the angle between each missile can vary off of $4.625$ slighty. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -244,7 +244,7 @@ Enemies surrounding the primary target are dealt the same damage and afflicted w
 
 **Notes:**
 
-- *Enchanted Crystal Arrow*’s projectile has an icon on the mini-map while it is in flight. It can be seen by only **Ashe** and her allies. Effect at cast time start
+- *Enchanted Crystal Arrow*’s projectile has an icon on the mini-map while it is in flight. It can be seen by only **Ashe** and her allies. - This ability will cast from wherever the caster is at the start of the cast time.
 - The effect will be centered on the first champion struck, not at the location the missile collided with them.
 
 ---

@@ -111,7 +111,7 @@ While the target is marked, **Lee Sin** can cast *Resonating Strike*.
 
 **Notes:**
 
-Effect at cast time start
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 ---
 
@@ -228,7 +228,7 @@ If *Tempest* hits an enemy, **Lee Sin** can cast *Cripple* within the next 3 sec
 **Notes:**
 
 - *Tempest*’s sight reveal only reveals the affected targets, but visually also lights up the Fog of War in a 400 radius.
-- *Tempest*’s sight reveal is not removed when *Lee Sin* casts *Cripple* (unlike Sonic Wave’s). Effect at cast time end
+- *Tempest*’s sight reveal is not removed when *Lee Sin* casts *Cripple* (unlike Sonic Wave’s). - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

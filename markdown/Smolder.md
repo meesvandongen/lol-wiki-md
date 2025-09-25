@@ -278,7 +278,7 @@
 
 **Notes:**
 
-Effect at cast time start
+- This ability will cast from wherever the caster is at the start of the cast time.
 
 #### Channel Behavior (cast)
 

@@ -228,7 +228,7 @@ His first attack has an uncancellable windup, gains (range) 25 **bonus** range, 
 
 **Notes:**
 
-- If **Rengar** casts Savagery and/or Battle Roar during *Bola Strike*’s cast time, he will buffer them and cast them when *Bola Strike* completes. Effect at cast time end
+- If **Rengar** casts Savagery and/or Battle Roar during *Bola Strike*’s cast time, he will buffer them and cast them when *Bola Strike* completes. - This ability will cast from wherever the caster is at the end of the cast time.
 - *Bola Strike*’s end point will not move in relation to **Rengar** if he moves during the cast time.
 
 ---

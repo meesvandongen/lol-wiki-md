@@ -193,7 +193,7 @@ If *Flair* is cast during *Wild Rush*, **Samira** deploys explosives in her wake
 - The slash and explosives roll their critical strike against each target individually.
 - The shot and the slash do not count as different abilities for stacking Style.
 - **Samira**’s next attack after using *Flair* will occasionally come out faster.
-- **Samira** can use Wild Rush during *Flair*’s cast time. Effect at cast time end
+- **Samira** can use Wild Rush during *Flair*’s cast time. - This ability will cast from wherever the caster is at the end of the cast time.
   - *Flair* will fire or slash from wherever **Samira** is at the end of the cast time.
     - **Samira** will always slash in her facing direction, and she will turn to face the target direction only once at the start of the cast time.
 - Only the shot will be destroyed by projectile-intercepting effects.

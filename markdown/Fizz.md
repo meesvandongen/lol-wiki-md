@@ -308,7 +308,7 @@ Enemy champions can intercept the lure while it is in flight, which attaches to 
 
 - *Chum the Waters* will not attach the lure to an enemy champion if they have a spell shield as well as against an enemy Malzahar with his Void Shift active (mitigation effect is consumed in both cases).
   - The area of effect for the eruption will be at the target's location at the time of the attachment being blocked; the target will intercept the lure without getting attached to it.
-- *Chum the Waters' * lure missile will stop its movement upon colliding with Samira’s Blade Whirl or Yasuo’s Wind Wall specifically, creating the area of effect for the eruption prematurely without destroying the missile. Collision with Mel’s Rebuttal will destroy it altogether, however. Effect at cast time end
+- *Chum the Waters' * lure missile will stop its movement upon colliding with Samira’s Blade Whirl or Yasuo’s Wind Wall specifically, creating the area of effect for the eruption prematurely without destroying the missile. Collision with Mel’s Rebuttal will destroy it altogether, however. - This ability will cast from wherever the caster is at the end of the cast time.
   - The targeted area does not change unless the ability was cast beyond maximum range.
 - If the lure attaches to an enemy champion, a countdown will appear at their position to signify when the shark is about to emerge. The countdown begins from 4, and ticks down by one every $0.5$ seconds.
 

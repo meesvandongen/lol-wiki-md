@@ -127,7 +127,7 @@ The impact creates a field for 1 second that slows enemies within, which then ru
 
 **Notes:**
 
-- Spell shields will block only a single instance of damage. Effect at cast time end
+- Spell shields will block only a single instance of damage. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

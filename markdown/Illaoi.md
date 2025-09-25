@@ -189,7 +189,7 @@ Each Tentacle also heals **Illaoi** for 5% of her **missing** health if it hits 
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
   - *Tentacle Smash*’s hitbox is fixed in front of **Illaoi**, while the indicator on the ground is fixed to the targeted direction.
 - Conqueror will pre-emptively amplify *Tentacle Smash*’s damage by the generated *Conqueror* stack.
   - Only *Tentacle Smash* or also I attacks?
@@ -335,7 +335,7 @@ Enemies made a Vessel continuously spawn a Tentacle near themselves, when possib
   - The slowing missile will not be fired if the target is already untargetable when the Spirit dies.
 - The spirit pull is not considered a crowd control effect and will not be blocked by crowd control immunity, with the exception of Morgana’s E.
 - The projectile tentacle model is linked to **Illaoi**’s model animation and size. However gameplay wise it is not, thus the actual hitbox being different than the position, width and length of the visible model. [https://www.youtube.com/watch?v=uH8C8ByFH0Q]
-  - The model will stop mid-air / vanish if **Illaoi** goes into stasis, sleep or airborne, however the actual hitbox will continue its trajectory unseen. [https://www.youtube.com/watch?v=PoLVkhvhY-c] Effect at cast time end
+  - The model will stop mid-air / vanish if **Illaoi** goes into stasis, sleep or airborne, however the actual hitbox will continue its trajectory unseen. [https://www.youtube.com/watch?v=PoLVkhvhY-c] - This ability will cast from wherever the caster is at the end of the cast time.
   - And will fire towards the same pointed location.
 - If the target's health is reduced to 0 while their Spirit is being pulled out, and they do not die (i.e because of resurrection), then the Spirit will still spawn with 0 health, making it invulnerable. The target will successively become a Vessel when the Spirit's lifetime expires. [https://www.youtube.com/watch?v=cWhlnIZgSwQ]
   - If some effect regenerates the champion's health while they are *resurrecting*, and before the Spirit spawns, then the same will not apply. [https://www.youtube.com/watch?v=h5555ttplNY] [https://www.youtube.com/watch?v=oV7pBhM88Eg]
@@ -389,7 +389,7 @@ For the duration, *Harsh Lesson’s* cooldown is halved, all Tentacles awakened 
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - **Illaoi** spawns the ***Tentacle*** 700 range away from her, unless there's a natural wall blocking the way making the ***Tentacle*** spawn on it, with an angle relative to the direction she's facing.
   - 1+ champions: one Tentacle at 0 degrees. (towards **Illaoi**’s facing direction)
   - 2+ champions: one Tentacle at 60 degrees.

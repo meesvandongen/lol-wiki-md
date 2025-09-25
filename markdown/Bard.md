@@ -173,7 +173,7 @@ After *Cosmic Binding* hits an enemy, the bolt continues behind them for 300 uni
 - The stun will apply even if the first target becomes untargetable.
 - *Cosmic Binding* can interact with player-generated terrain.
 - The stun is still applied even if the first or second target dies to the ability itself or before the projectile can bind them.
-- *Cosmic Binding* does not grant sight of enemies hit, but a hit can be seen and heard to indicate that at least one enemy is there. Effect at cast time end
+- *Cosmic Binding* does not grant sight of enemies hit, but a hit can be seen and heard to indicate that at least one enemy is there. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

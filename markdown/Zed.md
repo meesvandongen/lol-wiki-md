@@ -160,7 +160,7 @@ Against monsters, *Contempt for the Weak* deals 200% damage, capped at 300.
 
 - *Shurikens* blocked by spell shield still count as being hit for the reduced pass-through damage.
 - If **Zed** buffers an attack command during *Razor Shuriken*’s cast time the attack will perform slower than if **Zed** had attacked after the cast time.
-  - The same does not happen if **Zed** recasts Living Shadow during *Razor Shuriken*’s cast time. Effect at cast time end
+  - The same does not happen if **Zed** recasts Living Shadow during *Razor Shuriken*’s cast time. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

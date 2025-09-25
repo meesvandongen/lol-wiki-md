@@ -268,7 +268,7 @@ Each bloom deals **bonus** magic damage against monsters.
 
 **Notes:**
 
-Effect at cast time start
+- This ability will cast from wherever the caster is at the start of the cast time.
 - Spell shield blocks an instance of damage but does not prevent subsequent *Blooms*.
 
 ---
@@ -374,7 +374,7 @@ If the spiral hits at least one enemy, it grows in and its speed and root durati
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -410,7 +410,7 @@ When the cast time ends, she lands to emit a burst of energy that deals magic da
   - The wind up has no special interactions.
 - The highlighted area is fixed around **Neeko**.
 - **Neeko**’s most recent Shapesplitter clone disappears when *Pop Blossom*’s cast time starts.
-  - This may be a remnant of when it would spawn multiple clones during the development of her V13.9 gameplay update, intended to reduce visual clutter. Effect at cast time end **Interactions:**
+  - This may be a remnant of when it would spawn multiple clones during the development of her V13.9 gameplay update, intended to reduce visual clutter. - This ability will cast from wherever the caster is at the end of the cast time. **Interactions:**
 - On-cast effects are applied on activation.
 - *Pop Blossom* can start its cast time during stasis.
 

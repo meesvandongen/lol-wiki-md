@@ -149,7 +149,7 @@ If **Gwen** has any *Snippy* stacks, she consumes them to snip an additional tim
 
 - Subsequent basic attacks on-hit also refresh the duration of *Snippy* stacks.
 - The amount of *Snippy* stacks **Gwen** has is indicated below her health bar.
-- Spell shield blocks only one snip. Effect at cast time end
+- Spell shield blocks only one snip. - This ability will cast from wherever the caster is at the end of the cast time.
 - The first snip happens at $0.13$ seconds (Measured, should be 0.1 seconds rounded up to 0.132 seconds), the last one at the end of the cast time.
   - Bonus snips from *Snippy* stacks each happen at $0.45$, $0.4$, $0.35$ and $0.23$ seconds into the cast time.
 

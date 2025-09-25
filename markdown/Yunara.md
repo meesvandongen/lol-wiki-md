@@ -205,7 +205,7 @@ The initial hit against each enemy before the bead's expansion deals magic damag
 **Notes:**
 
 - Applies area damage for the initial hit and persistent area damage for the lingering effect.
-- Spell shield can block either the initial hit or one damage tick of the lingering effect.Effect at cast time end
+- Spell shield can block either the initial hit or one damage tick of the lingering effect.* This ability will cast from wherever the caster is at the end of the cast time.
 - *Arc of Judgment* can hit an enemy more than once with the initial damage as well with the lingering effect (both while not expanded and while expanded).
   - The bead can hit an enemy multiple times if they collide with it again while it is in flight.
 
@@ -232,7 +232,7 @@ The initial hit against each enemy before the bead's expansion deals magic damag
 
 **Notes:**
 
-- *Arc of Ruin* grants sight of its surroundings during the cast time and for $0.3$ seconds (Estimated) afterwards.Effect at cast time end
+- *Arc of Ruin* grants sight of its surroundings during the cast time and for $0.3$ seconds (Estimated) afterwards.* This ability will cast from wherever the caster is at the end of the cast time.
 - *Arc of Ruin* does not trigger ultimate *cast* effects, such as Experimental Hexplate Overdrive, Zeke's Convergence Frostfire Tempest and possessive=true increased movement speed. This is intended.
 
 ---

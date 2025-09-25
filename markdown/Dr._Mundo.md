@@ -78,7 +78,7 @@ If the bonesaw hits an enemy, **Dr. Mundo** heals for 50% of the health cost, in
 
 **Notes:**
 
-Effect at cast time start
+- This ability will cast from wherever the caster is at the start of the cast time.
 - Spell shield blocking the ability's effects on the enemy does not prevent **Dr. Mundo** from receiving the health cost refund.
 
 ---

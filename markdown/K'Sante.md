@@ -139,7 +139,7 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - If *Ntofo Strikes* hits no more than one enemy champion, **K'Sante** will be ordered an attack command against them.
 - The basic attack reset is not considered one for Hail of Blades.
 - Temporary increases/decreases in bonus resistances will count for reducing/increasing *Ntofo Strikes** cooldown.

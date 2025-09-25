@@ -137,7 +137,7 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
 
 **Notes:**
 
-- Only the ranged version of *Comet Spear* can be intercepted. Effect at cast time end
+- Only the ranged version of *Comet Spear* can be intercepted. - This ability will cast from wherever the caster is at the end of the cast time.
 - The following table refers for interactions while **Pantheon** is channeling:
   - Item actives that interrupt and those with cast times as well as Titanic Hydra, Hexflash, and Recall will cause *Comet Spear* to recast automatically and the active or spell to buffer to cast afterwards.
     - Teleport will cancel the channel entirely.
@@ -225,7 +225,7 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
 **Notes:**
 
 *The initial cast count as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive. **Detonating the ability manually is not.
-- **Pantheon** retains his invulnerability during the recast's cast time. Effect at cast time start** **Pantheon** will slam from wherever he was at the start of the recast's cast time.
+- **Pantheon** retains his invulnerability during the recast's cast time. - This ability will cast from wherever the caster is at the start of the cast time.** **Pantheon** will slam from wherever he was at the start of the recast's cast time.
 - Spell shield will only block the slam's damage.
 - The following table refers for interactions while **Pantheon** is channeling:
 

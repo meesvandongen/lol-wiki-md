@@ -123,7 +123,7 @@ When **Rek'Sai** becomes **BURROWED**, she consumes her current Fury over 3 seco
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - *Prey Seeker*’s effect radius is centered around the location of the missile as it collides.
 
 ---

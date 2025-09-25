@@ -184,7 +184,7 @@ If *Pierce* kills the target, the spear continues onward to transfer all of the 
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 

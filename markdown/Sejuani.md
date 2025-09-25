@@ -168,7 +168,7 @@ After the cast time, **Sejuani** lashes out with her flail in a line in the same
 
 **Notes:**
 
-- Spell shields will block only a single instance of damage - either the swing or the lash. Effect at cast time end
+- Spell shields will block only a single instance of damage - either the swing or the lash. - This ability will cast from wherever the caster is at the end of the cast time.
   - Both swings will strike in the cast direction, but the second swing will do so from **Sejuani**’s location at the end of the cast time.
 
 ---
@@ -250,7 +250,7 @@ The enemy hit by the bola is not affected by the storm's effects.
 **Notes:**
 
 - Applies spell damage to the primary target and area damage to secondary targets in the ice storm.
-- Spell shields will block only a single instance of damage. Effect at cast time end
+- Spell shields will block only a single instance of damage. - This ability will cast from wherever the caster is at the end of the cast time.
 - Both areas of effect will be centered on the first champion struck, not at the location the missile collided with them.
 
 ---

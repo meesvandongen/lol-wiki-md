@@ -261,7 +261,7 @@ If *Grasping Roots* hits a Seed, it sprouts into a *[Vine Lasher](#Pets)*, which
 
 **Notes:**
 
-Effect at cast time end
+- This ability will cast from wherever the caster is at the end of the cast time.
 - **Zyra** will be locked out of actions for $0.15$ seconds after casting *Grasping Roots*.
 - Each *[Vine Lasher](#Pets)* will generate 2 stacks of Conqueror and 1 stack of each of Phase Rush and Electrocute.
 

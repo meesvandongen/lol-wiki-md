@@ -192,7 +192,7 @@ Hitting a non-epic monster reduces *Rootcaller*’s cooldown by 50%.
 
 **Notes:**
 
-Effect at cast time start
+- This ability will cast from wherever the caster is at the start of the cast time.
 - Daisy dashes to rooted monsters, and enemy champions if within 1200 units (approximately) when *Rootcaller* hits.
   - She does not dash to enemy minions.
   - Daisy can not dash if she's more than 1200 units (approximately) from the target hit. She will not dash even if she later walks in range.

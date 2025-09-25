@@ -136,7 +136,7 @@ When **Akali** exits the ring, for 2 seconds, she regains the **bonus** movement
 
 - *Five Point Strike* will hit enemies after only 0.25×0.75 to 0.175×0.75 for 4 seconds (75% of cast time) into the cast time.
   - Due to any actions only starting on integer game ticks, the effective cast time rounds up to 0.264@1; 0.231@6; 0.231@11; 0.198@16 and the hit will occur at 0.198@1; 0.198@6; 0.165@11; 0.132@16 seconds into it.
-- This ability's damage is calculated based on the caster's stats at the time of its initial application and does not change dynamically. Effect at cast time end
+- This ability's damage is calculated based on the caster's stats at the time of its initial application and does not change dynamically. - This ability will cast from wherever the caster is at the end of the cast time.
 
 ---
 
@@ -228,7 +228,7 @@ The shuriken *marks* and reveals the enemy or the last *smoke* section hit for 3
   - The recast does.
 - *Shuriken Flip* cannot be recast if the target is untargetable or is in another realm.
 - **Akali** will be ordered to basic attack the target after the recast's dash ends.
-- **Akali** will dash backwards up-to 400 units in a straight line. This dash can cross terrain if the end point is beyond it. If she would end the dash inside terrain, she will instead look for a location in either direction left or right that is outside of terrain and dash there. If there is no such location, she will dash only up to the wall at her normal speed, ending the dash early. Effect at cast time end
+- **Akali** will dash backwards up-to 400 units in a straight line. This dash can cross terrain if the end point is beyond it. If she would end the dash inside terrain, she will instead look for a location in either direction left or right that is outside of terrain and dash there. If there is no such location, she will dash only up to the wall at her normal speed, ending the dash early. - This ability will cast from wherever the caster is at the end of the cast time.
   - The shuriken missile will fire from wherever **Akali** is at the end of the cast time (usually mid-dash), but always towards and reaching the location that was 825 units in front of her at the start of cast. The only exception is if she moves via Flash, in which case the range of the missile is decreased relative to the distance she blinked.
 - Killing an enemy with the shuriken will still mark the last area of the shroud hit.
 - Attempting to cast Five Point Strike during either dash will buffer it to cast as soon as the dash ends.

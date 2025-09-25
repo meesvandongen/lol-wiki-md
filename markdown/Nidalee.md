@@ -202,7 +202,7 @@ The **bonus** movement speed from *Prowl* and *Hunt* can stack, but cannot excee
 
 **Notes:**
 
-Effect at cast time start
+- This ability will cast from wherever the caster is at the start of the cast time.
 - The damage amplification is based on the distance from **Nidalee**’s location at the *end* of the cast time to the struck target's center at the time of collision.
   - The damage increase is very slightly higher than the spear's travel distance due to edge range behaviour of collisions and the distance being measured as the radius from the picked "origin" location at the end of the cast time, rather than just along the vector of the cast.
   - The damage increase does not have distinct thresholds based on the distance the spear travelled.
@@ -309,7 +309,7 @@ Traps have (health) 6 **maximum** health and can only be damaged by champion bas
 
 **Notes:**
 
-Effect at cast time start
+- This ability will cast from wherever the caster is at the start of the cast time.
   - The visual effects will be seen from her position if she moves however.
 
 ---
