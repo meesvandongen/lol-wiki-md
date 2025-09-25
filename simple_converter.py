@@ -2048,6 +2048,11 @@ class SimpleLoLConverter:
         # Evaluate simple arithmetic: {{#expr: ... }} -> computed value
         # This is done early so nested uses like {{as|{{#expr:175+40}}% AD}} resolve correctly
         text = self._evaluate_expr_templates(text)
+        # Expand selected external info templates (e.g., Spellblade info, Energized info, etc.)
+        # by loading their extracted includeonly content from the template dump directory.
+        # We do this early so that list markers (*) are processed by list conversion later
+        # and nested templates (tip, sbc, fd, etc.) are still available for downstream handlers.
+        text = self._expand_external_info_templates(text)
 
         # NOTE: Do NOT try to handle bold/italic with naive regex; we run a robust apostrophe parser later.
 
@@ -2553,6 +2558,111 @@ class SimpleLoLConverter:
             if remaining > 0:
                 out.append("'" * remaining)
             i = j
+        return ''.join(out)
+
+    def _expand_external_info_templates(self, text: str) -> str:
+        """Expand specific info-style templates by inlining their extracted includeonly content.
+
+        Supported template names (case/space/underscore insensitive):
+          - Spellblade info
+          - Energized info
+          - Diminishing gold info
+          - Effect at cast time start
+          - Effect at cast time end
+
+        For each occurrence of {{Template Name}} we look for a corresponding
+        extracted file at: wiki_root / 'Template' / CanonicalName / 'page.txt'
+        where CanonicalName matches the exact capitalization used by the
+        extracted dump (we attempt a few common variants). We then extract the
+        <includeonly>...</includeonly> segment (or fall back to whole file) and
+        substitute it inline. The inserted raw wikitext still flows through the
+        remaining conversion pipeline (lists, templates, etc.).
+        """
+        if not text or '{{' not in text:
+            return text
+
+        # Map normalized template key -> list of possible directory names
+        template_dir_variants: Dict[str, List[str]] = {
+            'spellblade info': ['Spellblade_info'],
+            'energized info': ['Energized_info'],
+            'diminishing gold info': ['Diminishing_gold_info'],
+            'effect at cast time start': ['Effect_at_cast_time_start'],
+            'effect at cast time end': ['Effect_at_cast_time_end'],
+        }
+
+        # Preload contents lazily and cache per instance run to avoid repeated disk hits
+        cache: Dict[str, str] = {}
+
+        def load_template_body(norm_key: str) -> Optional[str]:
+            if norm_key in cache:
+                return cache[norm_key]
+            dirs = template_dir_variants.get(norm_key)
+            if not dirs:
+                cache[norm_key] = ''
+                return ''
+            body: Optional[str] = None
+            for variant in dirs:
+                path = self.wiki_root / 'Template' / variant / 'page.txt'
+                if path.exists():
+                    try:
+                        raw = path.read_text(encoding='utf-8', errors='ignore')
+                    except Exception:
+                        continue
+                    m = re.search(r'<includeonly>([\s\S]*?)</includeonly>', raw, flags=re.IGNORECASE)
+                    if m:
+                        body = m.group(1).strip()
+                    else:
+                        body = raw.strip()
+                    break
+            cache[norm_key] = body or ''
+            return cache[norm_key]
+
+        # Brace-aware scan replacing only our target templates with their bodies
+        out: List[str] = []
+        i = 0
+        s = text
+        n = len(s)
+        while i < n:
+            j = s.find('{{', i)
+            if j == -1:
+                out.append(s[i:])
+                break
+            out.append(s[i:j])
+            # Parse template name token
+            k = j + 2
+            while k < n and s[k].isspace():
+                k += 1
+            name_start = k
+            while k < n and s[k] not in '|}':
+                k += 1
+            name_raw = s[name_start:k].strip()
+            # Walk to balanced end
+            t = j
+            depth = 0
+            while t < n - 1:
+                if s[t:t+2] == '{{':
+                    depth += 1
+                    t += 2
+                    continue
+                if s[t:t+2] == '}}':
+                    depth -= 1
+                    t += 2
+                    if depth == 0:
+                        break
+                    continue
+                t += 1
+            tpl = s[j:t] if t <= n else s[j:]
+            norm = name_raw.lower().replace('_', ' ').strip()
+            if norm in template_dir_variants:
+                body = load_template_body(norm)
+                if body:
+                    out.append(body)
+                # If no body, drop silently to avoid leaving raw template
+                i = t
+                continue
+            # Not one of our targets: keep original template markup
+            out.append(tpl)
+            i = t
         return ''.join(out)
 
     def _evaluate_expr_templates(self, text: str) -> str:
