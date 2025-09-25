@@ -75,6 +75,12 @@
 - An Acquired Taste is applied in a separate damage instance from *Tongue Lash*.
   - This causes effects like Bone Plating and Bloodletter's Curse Vile Decay to be applied twice. Effect at cast time start
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
+
 ---
 
 ### W: Abyssal Dive
@@ -115,7 +121,31 @@
 
 - **Tahm Kench** is vanished (but does not become untargetable) during the $0.15$ seconds delay.
 - The following table refers for interactions while **Tahm Kench** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death, ground, root, silence |
 - The following table refers for interactions while **Tahm Kench** is unable to act:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
 
 ---
 
@@ -203,6 +233,14 @@ After 1 second, **Tahm Kench** can cast *Regurgitate* while a target is inside o
 - During *Devour*’s attachment and Regurgitate’s displacement, the swallowed target's camera is locked and centered on their champion.
   - This does not affect **Tahm Kench**.
 - The following table refers for interactions while the target is unable to act: * unless movement commands are otherwise restricted. If an enemy, movement commands are disabled.|cast=false|items=false|consume=false|spells=false|interrupts=death
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
 
 ---
 

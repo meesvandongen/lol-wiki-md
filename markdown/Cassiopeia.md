@@ -244,6 +244,7 @@ Against a poisoned target, *Twin Fang* deals **bonus** magic damage and heals **
 
 **Notes:**
 
+Effect at cast time end
 - **Cassiopeia** will turn to face the target direction over the cast time.
   - *Petrifying Gaze*’s target direction will change if **Cassiopeia**’s facing direction changes during the cast time (i.e. through knockbacks).
     - The visual effect will not follow changes in **Cassiopeia**’s facing direction and may not portray *Petrifying Gaze*’s target direction accurately.

@@ -140,6 +140,12 @@ If the anchor hits terrain, **Nautilus** dashes to that location and 50% of *Dre
 - Displacement immunity will not resist the application of the stun. Effect at cast time start
 - The following table refers for interactions during *Dredge Line*’s cast time.
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
+
 ---
 
 ### W: Titan's Wrath
@@ -218,6 +224,7 @@ The first hit against monsters deals **bonus** magic damage.
 
 **Notes:**
 
+Effect at cast time end
 - The first wave is centered around **Nautilus**, while the second and third wave are centered at an offset of 25 units in front of **Nautilus** at the original cast location.
   - Because of this, there are a zone each in which you can be hit by only 1 wave, or all 3 waves, respectively, without moving.
 - The first wave happens at 0 seconds after the cast time ends, the second wave at $0.297$ seconds and the third wave at $0.561$ seconds.

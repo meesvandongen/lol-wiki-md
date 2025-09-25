@@ -171,6 +171,7 @@ Satchel Charge Turret Explosion Indicator.png The explosion also execute enemy t
 
 **Notes:**
 
+*The initial cast counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive. **Detonating the ability manually does not.
 - Deals area damage to non-turrets and raw damage to turrets.
 - *Satchel Charge*’s distance increases with proximity to the charge, resulting in being knocked straight up when aligned directly on top of it.
 - **Ziggs** will not *dash* from *Satchel Charge*’s detonation while Teleport but he will while Recall.

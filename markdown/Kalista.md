@@ -184,7 +184,7 @@ If *Pierce* kills the target, the spear continues onward to transfer all of the 
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
 
 ---
 

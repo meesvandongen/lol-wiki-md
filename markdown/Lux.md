@@ -242,7 +242,13 @@ The slow lingers for 1 second after leaving the area. Enemies hit by *Lucent Sin
 **Notes:**
 
 - *Final Spark* grants sight of its surroundings during the cast time and for $0.5$ seconds afterwards. Effect at cast time start
-- The ability will not preserve the caster's facing direction when using Flash and similar effects. can only be recast if it is present. and are disabled.
+- The ability will not preserve the caster's facing direction when using Flash and similar effects.
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Abilities** | Lucent Singularity can only be recast if it is present. Light Binding and Prismatic Barrier are disabled. |
 
 ---
 

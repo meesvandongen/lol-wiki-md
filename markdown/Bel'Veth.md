@@ -231,6 +231,7 @@ If this hits an enemy champion, it resets *Void Surge’s* dash cooldown of the 
 
 **Notes:**
 
+Effect at cast time start
 - *Above and Below* can reset the cooldown of each dash from Void Surge.
   - More than one cooldown can be reset if enemy champions were hit within multiple directions.
   - The cooldowns that get reset are based on the relative direction to **Bel'Veth** at the end of the cast

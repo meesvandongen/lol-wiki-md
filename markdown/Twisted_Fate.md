@@ -60,7 +60,7 @@
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
 
 ---
 
@@ -187,13 +187,25 @@ No additional notes.
 
 **Notes:**
 
+*Both casts count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - **Twisted Fate** cannot recast *Destiny* while grounded or rooted.
 - The nearsight from Paranoia will overpower the reveal from *Destiny* regardless of which one was cast first (enemy champions can still be revealed by *Destiny* after *Paranoia* ends if durations permit).
 - Using the recast will inform allies with a ping.
   - Both allies and enemies can see an indicator at the targeted location of where **Twisted Fate** will appear.
 - The following table refers for interactions while **Twisted Fate** is channeling:
   - Item actives with cast times as well as Titanic Hydra are disabled during the channel.
-    - Trying to cast a disabled item active will buffer it to cast at the completion of the channel. is usable. is disabled.|items=true,,interrupts|spells=false|interrupts=death, ground, root, silence
+    - Trying to cast a disabled item active will buffer it to cast at the completion of the channel.
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Pick a Card is usable. Wild Cards is disabled. |
+| **Items** | Allowed / Interrupts |
+| **Summoner Spells** | Disabled |
+| **Interrupted by** | death, ground, root, silence |
 
 ---
 

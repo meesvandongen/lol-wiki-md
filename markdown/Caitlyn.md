@@ -209,6 +209,7 @@ The next enemy champion that springs the trap is rooted for $1.5$ seconds and re
 
 **Notes:**
 
+Effect at cast time end
 - The recoil can be used to pass through terrain.
 - If **Caitlyn** buffers Piltover Peacemaker during *90 Caliber Net's* cast time, Piltover Peacemaker will start after the cast time.
   - If **Caitlyn** buffers an ability or basic attack during this ability's cast time, the buffered ability or basic attack will instead start after the dash ends.
@@ -264,6 +265,16 @@ Once **Caitlyn** completes the channel, she fires a homing bullet toward the tar
 - If the target dies after the bullet has been fired, the shot will continue towards their corpse and may still hit other enemy champions.
 - The bullet has a sight radius of 1500 attached to it. ** This excludes losing sight of the target.
 - The following table refers for interactions while **Caitlyn** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 

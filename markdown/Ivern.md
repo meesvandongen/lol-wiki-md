@@ -142,6 +142,16 @@ If the camp's large monster has already been slain prior to planting a grove, **
 - Non-epic monsters can attack **Ivern** if his allies enter combat with the monster and he manages to recieve aggro.
   - **Ivern** can be attacked by Voidmite without being able to damage them back.
 
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Abilities** | Interrupts |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Interrupts |
+| **Interrupted by** | death, silence |
+| **Damage** | true |
+
 ---
 
 ### Q: Rootcaller
@@ -182,6 +192,7 @@ Hitting a non-epic monster reduces *Rootcaller*’s cooldown by 50%.
 
 **Notes:**
 
+Effect at cast time start
 - Daisy dashes to rooted monsters, and enemy champions if within 1200 units (approximately) when *Rootcaller* hits.
   - She does not dash to enemy minions.
   - Daisy can not dash if she's more than 1200 units (approximately) from the target hit. She will not dash even if she later walks in range.

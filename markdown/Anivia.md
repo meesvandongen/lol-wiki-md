@@ -150,6 +150,7 @@ If **Anivia** remains alive by the end of the duration, she is revived with her 
 
 **Notes:**
 
+*The initial cast and the manual recast count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
   - If the ability is not manually recasted, the secondary effect will trigger without being considered as an ability activation.
 - *Flash Frost* can only proc Conqueror once even if it damages the same target twice.
 - *Flash Frost* will fire from wherever **Anivia** was at the start of the cast time.
@@ -270,6 +271,7 @@ The blizzard increases in over $1.5$ seconds. At maximum size, *Glacial Storm* i
 
 **Notes:**
 
+*Toggle abilities do not count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - *Glacial Storm*’s slow leaves a trail that is visible even if the target is stealthed.
 - *Glacial Storm* deals 3 half ticks at 200 / 267 / 333 radius for a total of $1.5$ normal damage ticks before it starts dealing empowered damage at 400 radius.
 - Stasis via Zhonya's Hourglass doesn't interrupt *Glacial Storm*.

@@ -958,12 +958,524 @@ class SimpleLoLConverter:
         out = re.sub(r"\{\{\s*cid\s*\|\s*([^|}]+)\s*\|\s*([^|}]+)\s*\}\}", _cid_repl, out, flags=re.IGNORECASE)
         return out
 
+    # ---------------- Custom Table/Structural Template Expansion (Quote, Channel Type) ----------------
+    def _expand_custom_templates(self, text: str, champion_name: Optional[str]) -> str:
+        """Apply lightweight expansions for select high-value templates BEFORE general wiki->markdown conversion.
+        Currently implemented:
+          - {{Quote|text|author|source}}
+          - {{ct|type|attack=...|move=...|cast=...|items=...|spells=...|consume=...|interrupts=...|damage=...}}
+                    - Item Haste tabber ({{Item haste table}} or <tabber> with Item Haste section)
+        The expansion is deliberately conservative: if parsing fails, the original template is left intact so the
+        downstream generic cleaner can remove or simplify it without throwing exceptions.
+        """
+        if not text or '{{' not in text:
+            return text
+        # Order matters: expand Quote first (simple) then channel type (may contain nested templates preserved verbatim)
+        text = self._expand_quote_templates(text)
+        text = self._expand_channel_type_templates(text)
+        text = self._expand_item_haste_tabber(text)
+        # Light-weight ward icononly mapping (convert {{ii|Item|icononly=yes}} -> Item) prior to generic stripping
+        if '{{ii|' in text.lower():
+            text = re.sub(r"\{\{ii\|([^|}]+)\|icononly=yes[^}]*\}\}", lambda m: m.group(1).strip(), text, flags=re.IGNORECASE)
+        return text
+
+    def _expand_quote_templates(self, text: str) -> str:
+        """Convert {{Quote|text|author|source}} to Markdown blockquote.
+        Handles up to 3 positional args; nested templates inside params are preserved for later passes.
+        """
+        if 'Quote' not in text and 'quote' not in text:
+            return text
+        out: list[str] = []
+        i = 0
+        n = len(text)
+        while i < n:
+            j = text.lower().find('{{quote', i)
+            if j == -1:
+                out.append(text[i:])
+                break
+            # append preceding slice
+            out.append(text[i:j])
+            block = self._extract_balanced_braces(text, j)
+            if not block:
+                # fail-safe: append remainder and break
+                out.append(text[j:])
+                break
+            # Parse inside
+            inner = block[2:-2]  # strip {{ }}
+            # remove template name (case-insensitive) + optional whitespace + leading pipe
+            m = re.match(r'(?i)quote\s*\|?(.*)$', inner, flags=re.DOTALL)
+            if not m:
+                out.append(block)
+                i = j + len(block)
+                continue
+            args_raw = m.group(1)
+            parts = self._split_top_level_pipes(args_raw)
+            # Positional: ignore key=value segments (robustness)
+            pos: list[str] = []
+            for seg in parts:
+                seg_s = seg.strip()
+                if not seg_s:
+                    continue
+                # treat as positional if no top-level '='
+                depth = 0
+                has_eq = False
+                for ch in seg_s:
+                    if ch == '{':
+                        depth += 1
+                    elif ch == '}':
+                        depth = max(0, depth - 1)
+                    elif ch == '=' and depth == 0:
+                        has_eq = True
+                        break
+                if not has_eq:
+                    pos.append(seg_s)
+            quote_text = pos[0].strip() if len(pos) >= 1 else ''
+            author = pos[1].strip() if len(pos) >= 2 else ''
+            source = pos[2].strip() if len(pos) >= 3 else ''
+            if not quote_text:
+                # nothing meaningful; keep original
+                out.append(block)
+                i = j + len(block)
+                continue
+            # Assemble Markdown blockquote
+            # Avoid adding smart quotes if already wrapped in any quote chars
+            qt = quote_text
+            lines = [f"> {qt}" ] if qt else []  # Avoid additional punctuation; user text may contain period
+            attrib_line = ''
+            if author:
+                if source:
+                    attrib_line = f"> — {author}, *{source}*"
+                else:
+                    attrib_line = f"> — {author}"
+            elif source:  # source w/o author (rare) -> treat as source only
+                attrib_line = f"> — *{source}*"
+            if attrib_line:
+                lines.append(attrib_line)
+            md_block = '\n'.join(lines)
+            # Ensure a blank line before if previous output doesn't end with newline (except at start)
+            if out and not out[-1].endswith('\n'):
+                md_block = '\n' + md_block
+            out.append(md_block)
+            i = j + len(block)
+        return ''.join(out)
+
+    def _expand_channel_type_templates(self, text: str) -> str:
+        """Convert {{ct|...}} (channel type behavior) templates into a mini-markdown table.
+        The template shape: {{ct|type|attack=false|move=true|cast=...|items=interrupts,true,,false|spells=true,true,interrupts|consume=true|interrupts=Silence,Death|damage=...}}
+        Unrecognized / malformed instances are left unchanged.
+        """
+        # Quick exit
+        if '{{ct' not in text.lower() and '{{channel type' not in text.lower():
+            return text
+        out: list[str] = []
+        i = 0
+        n = len(text)
+        name_pattern = re.compile(r'(?i)^(ct|channel[_ ]type|ctable)')
+        while i < n:
+            j = text.lower().find('{{ct', i)
+            j2 = text.lower().find('{{channel type', i)
+            # pick earliest occurrence
+            candidates = [pos for pos in [j, j2] if pos != -1]
+            if not candidates:
+                out.append(text[i:])
+                break
+            j = min(candidates)
+            out.append(text[i:j])
+            block = self._extract_balanced_braces(text, j)
+            if not block:
+                out.append(text[j:])
+                break
+            inner = block[2:-2]
+            # Split at first '|' after template name to isolate remaining params
+            # Extract name token
+            mname = re.match(r'\s*([^|]+)\|?(.*)$', inner, flags=re.DOTALL)
+            if not mname:
+                out.append(block)
+                i = j + len(block)
+                continue
+            raw_name = mname.group(1).strip().lower().replace('_', ' ')
+            if not name_pattern.match(raw_name):
+                # Not a ct variant
+                out.append(block)
+                i = j + len(block)
+                continue
+            rest = mname.group(2)
+            parts = self._split_top_level_pipes(rest)
+            pos: list[str] = []
+            named: dict[str, str] = {}
+            for seg in parts:
+                seg_s = seg.strip()
+                if not seg_s:
+                    continue
+                # detect k=v at top level
+                depth = 0
+                eq_index = -1
+                for idx, ch in enumerate(seg_s):
+                    if ch == '{':
+                        depth += 1
+                    elif ch == '}':
+                        depth = max(0, depth - 1)
+                    elif ch == '=' and depth == 0:
+                        eq_index = idx
+                        break
+                if eq_index != -1:
+                    k = seg_s[:eq_index].strip().lower()
+                    v = seg_s[eq_index + 1:].strip()
+                    named[k] = v
+                else:
+                    pos.append(seg_s)
+            if not pos:
+                out.append(block)
+                i = j + len(block)
+                continue
+            ctype = pos[0].strip().lower()
+            # Helper to tokenize comma-separated values (top-level only)
+            def _tokens(val: str) -> list[str]:
+                # Split on commas not inside nested templates (rare) – simple depth counter
+                toks: list[str] = []
+                buf: list[str] = []
+                depth = 0
+                for ch in val:
+                    if ch == '{':
+                        depth += 1
+                    elif ch == '}':
+                        depth = max(0, depth - 1)
+                    if ch == ',' and depth == 0:
+                        tok = ''.join(buf).strip()
+                        if tok:
+                            toks.append(tok)
+                        buf = []
+                    else:
+                        buf.append(ch)
+                last = ''.join(buf).strip()
+                if last:
+                    toks.append(last)
+                return toks
+            # Normalization map for simple boolean/keyword tokens
+            def _classify_basic(val: str) -> str:
+                v = val.strip().lower()
+                if v in ('true', 'yes', 'allowed', 'allow'):
+                    return 'allowed'
+                if v in ('false', 'no', 'disabled', 'disable'):
+                    return 'disabled'
+                if v.startswith('interrupt'):
+                    return 'interrupts'
+                if v.startswith('recast') or v == 'recasts':
+                    return 'recasts'
+                return 'other'
+            def _reduce_simple(tokens: list[str]) -> tuple[list[str], list[str], list[str], list[str]]:
+                allowed: list[str] = []
+                disabled: list[str] = []
+                interrupts: list[str] = []
+                others: list[str] = []
+                for t in tokens:
+                    cls = _classify_basic(t)
+                    if cls == 'allowed':
+                        allowed.append(t)
+                    elif cls == 'disabled':
+                        disabled.append(t)
+                    elif cls == 'interrupts':
+                        interrupts.append(t)
+                    else:
+                        others.append(t)
+                return allowed, disabled, interrupts, others
+            # Build rows
+            rows: list[tuple[str, str]] = []
+            notes: list[str] = []
+            def add_row(label: str, value: str):
+                rows.append((label, value if value else ''))
+            # Attack / movement / abilities
+            for key, label in [('attack', 'Attacking'), ('move', 'Movement'), ('cast', 'Abilities')]:
+                if key in named:
+                    toks = _tokens(named[key])
+                    allowed, disabled, interrupts, others = _reduce_simple(toks)
+                    state_parts: list[str] = []
+                    if interrupts:
+                        state_parts.append('Interrupts')
+                    if allowed and not disabled:
+                        state_parts.append('Allowed')
+                    if disabled and not allowed:
+                        state_parts.append('Disabled')
+                    if allowed and disabled:
+                        state_parts.append('Partially Allowed')
+                    if key != 'cast':  # treat recast/meta tokens for attack/move only; cast narrative stays inline
+                        if recasts := [t for t in others if _classify_basic(t) == 'recasts']:
+                            state_parts.extend(['Recasts'] * len(recasts))
+                            others = [t for t in others if t not in recasts]
+                        if others:
+                            notes.append(' '.join(others))
+                    add_row(label, ' / '.join(state_parts) if state_parts else (named[key] or ''))
+            # Items / Summoner Spells token breakdown
+            def _complex_block(param: str, base_label: str):
+                if param not in named:
+                    return
+                toks = _tokens(named[param])
+                # Preserve order of appearance while mapping semantic tokens
+                seen: set[str] = set()
+                seq: list[str] = []
+                for t in toks:
+                    tt = t.strip()
+                    if not tt:
+                        continue
+                    cls = _classify_basic(tt)
+                    if cls == 'allowed':
+                        label = 'Allowed'
+                    elif cls == 'disabled':
+                        label = 'Disabled'
+                    elif cls == 'interrupts':
+                        label = 'Interrupts'
+                    elif cls == 'recasts':
+                        label = 'Recasts'
+                    else:
+                        # keep raw (converted later by markdown ctx)
+                        label = self._convert_wiki_to_markdown_ctx(tt, None)
+                    low = label.lower()
+                    if low not in seen:
+                        seen.add(low)
+                        seq.append(label)
+                if seq:
+                    add_row(base_label, ' / '.join(seq))
+            _complex_block('items', 'Items')
+            _complex_block('spells', 'Summoner Spells')
+            # Consumables
+            if 'consume' in named:
+                toks = _tokens(named['consume'])
+                allowed, disabled, interrupts, others = _reduce_simple(toks)
+                if allowed and not disabled:
+                    add_row('Consumables', 'Usable')
+                elif disabled and not allowed:
+                    add_row('Consumables', 'Disabled')
+                elif allowed and disabled:
+                    add_row('Consumables', 'Partially Usable')
+                if interrupts:
+                    add_row('Consumables', 'Interrupts')
+                if others:
+                    notes.append(' '.join(others))
+            if 'interrupts' in named:
+                add_row('Interrupted by', named['interrupts'])
+            if 'damage' in named:
+                add_row('Damage', named['damage'])
+            # Do not duplicate cast narrative into notes; Abilities cell already conveys it.
+            # Assemble markdown table
+            if not rows:
+                out.append(block)
+                i = j + len(block)
+                continue
+            header = f"#### Channel Behavior ({ctype})"
+            table_lines = ["| Aspect | State / Notes |", "|--------|---------------|"]
+            # Deduplicate notes while preserving order
+            dedup_notes: list[str] = []
+            seen_notes: set[str] = set()
+            for ntext in notes:
+                key = ntext.strip().lower()
+                if key and key not in seen_notes:
+                    dedup_notes.append(ntext.strip())
+                    seen_notes.add(key)
+            for label, val in rows:
+                safe_val = val.replace('\n', ' ').strip()
+                # Convert any nested templates inside cells now to markdown (context-less)
+                safe_val = self._convert_wiki_to_markdown_ctx(safe_val, None)
+                table_lines.append(f"| **{label}** | {safe_val} |")
+            if dedup_notes and any(n for n in dedup_notes if n.lower() not in {r[1].lower() for r in rows}):
+                note_text = ' '.join(dedup_notes).strip()
+                if note_text:
+                    note_text = self._convert_wiki_to_markdown_ctx(note_text, None)
+                    table_lines.append(f"| **Notes** | {note_text} |")
+            table_md = '\n'.join([header, *table_lines])
+            # Ensure blank line separation
+            if out and not out[-1].endswith('\n\n'):
+                if not out[-1].endswith('\n'):
+                    table_md = '\n' + table_md
+                table_md = '\n' + table_md
+            out.append(table_md)
+            i = j + len(block)
+        return ''.join(out)
+
+    # ---------------- Item Haste Tabber ----------------
+    def _expand_item_haste_tabber(self, text: str) -> str:
+        """Parse the Item Haste tabber (three wikitext tables) into Markdown subsections.
+        Detection:
+          - '{{Item haste table' template (balanced braces)
+          - <tabber> block containing 'Item Haste' header text and wikitext tables
+        Limitations: best-effort; if parsing fails, original markup is preserved.
+        """
+        lowered = text.lower()
+        if 'item haste' not in lowered or ('<tabber>' not in lowered and '{{item haste table' not in lowered):
+            return text
+        # Strategy: iterate over <tabber> blocks first
+        out_parts: list[str] = []
+        i = 0
+        n = len(text)
+        changed = False
+        while i < n:
+            tab_start = text.lower().find('<tabber>', i)
+            if tab_start == -1:
+                out_parts.append(text[i:])
+                break
+            tab_end = text.lower().find('</tabber>', tab_start)
+            if tab_end == -1:
+                # unmatched; append rest
+                out_parts.append(text[i:])
+                break
+            block = text[tab_start: tab_end + 9]
+            inner = block[8:-9]  # between <tabber> and </tabber>
+            if 'item haste' not in block.lower():
+                # keep as-is
+                out_parts.append(text[i:tab_end + 9])
+                i = tab_end + 9
+                continue
+            rendered = self._render_item_haste_tabber(inner)
+            if rendered:
+                # Ensure separation
+                if out_parts and not out_parts[-1].endswith('\n'):
+                    out_parts.append('\n')
+                out_parts.append(rendered)
+                changed = True
+            else:
+                out_parts.append(block)
+            i = tab_end + 9
+        result = ''.join(out_parts)
+        return result if changed else text
+
+    def _render_item_haste_tabber(self, tab_inner: str) -> Optional[str]:
+        """Render the inner portion of an Item Haste <tabber> block into markdown.
+        Splits on '|-|' to get individual labeled chunks, extracts the first wikitext table per chunk.
+        """
+        # Split segments
+        chunks = re.split(r'\|\-\|', tab_inner)
+        sections: list[tuple[str, str]] = []  # (title, table_md)
+        for chunk in chunks:
+            if not chunk.strip():
+                continue
+            # Title pattern: Some Title= followed by newline/table
+            m = re.match(r'\s*([^=\n]{2,80})=(.*)$', chunk, flags=re.DOTALL)
+            if not m:
+                continue
+            title = m.group(1).strip()
+            body = m.group(2)
+            # Find first wikitext table
+            tbl_start = body.find('{|')
+            if tbl_start == -1:
+                continue
+            tbl_end = body.find('|}', tbl_start)
+            if tbl_end == -1:
+                continue
+            table_text = body[tbl_start: tbl_end + 2]
+            md_table = self._wikitext_table_to_md(table_text)
+            if md_table:
+                sections.append((title, md_table))
+        if not sections:
+            return None
+        # Normalize known section titles (fallback to provided)
+        lines: list[str] = []
+        title_map = {
+            'item haste': 'Item Haste',
+            'equivalent cdr': 'Equivalent CDR',
+            'item cooldowns': 'Item Cooldowns',
+        }
+        for title, tbl in sections:
+            key = title.lower()
+            disp = title_map.get(key, title)
+            lines.append(f"### {disp}\n\n{tbl}\n")
+        return '\n'.join(lines).strip()
+
+    def _wikitext_table_to_md(self, table_text: str) -> Optional[str]:
+        """Convert a single wikitext table ({| ... |}) to a Markdown table.
+        Basic support: header row beginning with '!' cells, data rows with '|' or '|-'.
+        Strips most style attributes. Returns None on failure.
+        """
+        try:
+            lines = table_text.splitlines()
+            # Strip outer table markers until first line starting with '{|'
+            # Already guaranteed pattern by caller
+            rows: list[list[str]] = []
+            header: list[str] = []
+            cur_row: list[str] = []
+            def flush():
+                nonlocal cur_row
+                if cur_row:
+                    rows.append(cur_row)
+                cur_row = []
+            for raw in lines:
+                line = raw.strip()
+                if not line:
+                    continue
+                if line.startswith('{|'):
+                    continue
+                if line.startswith('|}'):
+                    flush()
+                    break
+                if line.startswith('|-'):
+                    flush()
+                    continue
+                # Header cells
+                if line.startswith('!'):
+                    # possible combined header row; split by '!!'
+                    cells = [c.strip() for c in re.split(r'!!', line.lstrip('!'))]
+                    clean_cells = [self._clean_wikitext_cell(c) for c in cells if c]
+                    if not header:
+                        header = clean_cells
+                    else:
+                        # additional header row -> treat as data
+                        if clean_cells:
+                            rows.append(clean_cells)
+                    continue
+                # Data cells: may use '||'
+                if line.startswith('|'):
+                    # remove leading '|'
+                    content = line[1:]
+                    cells = [c.strip() for c in re.split(r'\|\|', content)]
+                    clean_cells = [self._clean_wikitext_cell(c) for c in cells]
+                    cur_row.extend(clean_cells)
+                    continue
+            # If last row not flushed
+            flush()
+            if not header and rows:
+                # Use first row as header if none defined
+                header = rows.pop(0)
+            if not header:
+                return None
+            # Normalize column lengths
+            col_count = len(header)
+            norm_rows = [r[:col_count] + [''] * (col_count - len(r)) if len(r) < col_count else r[:col_count] for r in rows]
+            # Build markdown
+            md_lines = [
+                '| ' + ' | '.join(self._escape_md_cell(h) for h in header) + ' |',
+                '| ' + ' | '.join(['---'] * col_count) + ' |'
+            ]
+            for r in norm_rows:
+                md_lines.append('| ' + ' | '.join(self._escape_md_cell(c) for c in r) + ' |')
+            return '\n'.join(md_lines)
+        except Exception:
+            return None
+
+    def _clean_wikitext_cell(self, cell: str) -> str:
+        # Remove style / scope / align fragments and leading parameters separated by '|'
+        # Keep only the last part after style specs
+        # Example: 'style="text-align:center;" 80 {{#expr: 10+5}}' -> '80 15'
+        # Split by '|' only if looks like style tokens present
+        if re.search(r'\bstyle=|scope=|align=', cell, flags=re.IGNORECASE):
+            bits = [b.strip() for b in cell.split('|') if b.strip()]
+            if bits:
+                cell = bits[-1]
+        # Evaluate expr if present
+        if '{{#expr:' in cell.lower():
+            cell = self._evaluate_expr_templates(cell)
+        # Strip remaining curly braces for simple templates (non-nested) except math we already handle later
+        cell = re.sub(r'\{\{([^{}]+)\}\}', lambda m: m.group(1).split('|')[-1], cell)
+        return cell.strip()
+
+    def _escape_md_cell(self, text_cell: str) -> str:
+        return text_cell.replace('|', '\\|')
+
     def _convert_wiki_to_markdown_ctx(self, text: str, champion_name: Optional[str]) -> str:
         """Context-aware conversion: first resolve simple data templates with champion context, then run main converter."""
         if not text:
             return ""
         # Resolve simple data-bearing templates before formula conversion
         s = self._resolve_simple_data_templates(text, champion_name)
+        # Expand select structural templates (Quote, Channel Type) prior to generic stripping
+        s = self._expand_custom_templates(s, champion_name)
         return self._convert_wiki_to_markdown(s)
 
     def _get_ability_data(self, champion_name: str, ability_key: str) -> Optional[Dict[str, Any]]:
@@ -1110,7 +1622,7 @@ class SimpleLoLConverter:
             # First, resolve any {{#var:...}} with values from #vardefine
             val = self._resolve_vars(raw_val.strip(), vars_map)
             if dst_key == 'notes':
-                ability_data[dst_key] = self._format_notes(val, vars_map)
+                ability_data[dst_key] = self._format_notes(val, vars_map, champion_name)
             else:
                 ability_data[dst_key] = self._convert_wiki_to_markdown_ctx(val, champion_name)
 
@@ -1216,8 +1728,13 @@ class SimpleLoLConverter:
             i = k
         return inners
     
-    def _format_notes(self, notes_text: str, vars_map: Optional[Dict[str, str]] = None) -> str:
-        """Format notes section preserving list structure. Optionally resolve {{#var:...}} using vars_map.
+    def _format_notes(self, notes_text: str, vars_map: Optional[Dict[str, str]] = None, champion_name: Optional[str] = None) -> str:
+        """Format notes section preserving list structure and expanding select structural templates.
+        Enhancements vs previous version:
+          - Runs custom template expansion (Quote, Channel Type, Item Haste, ward icononly) inside notes so
+            channel-type (ct) tables render properly instead of leaking raw template markup.
+          - Treats block lines starting with '#### ' (headers) or '|' (markdown tables) as standalone lines
+            rather than merging them into the preceding bullet.
         Supports MediaWiki list markers '*', '#', and mixed sequences like '*#' with multi-level indentation.
         The list type for each line is determined by the last marker in the prefix (e.g., '*#' -> ordered sublist).
         """
@@ -1228,12 +1745,55 @@ class SimpleLoLConverter:
         if vars_map:
             notes_text = self._resolve_vars(notes_text, vars_map)
 
+        # Run custom template expansion so that {{ct|...}} becomes a rendered block prior to list parsing
+        try:
+            notes_text = self._expand_custom_templates(notes_text, champion_name)
+        except Exception:
+            # Fail-safe: keep original notes_text if expansion raises
+            pass
+
         out_lines: List[str] = []
+        last_kind: str = 'none'  # 'bullet' | 'block' | 'blank' | 'heading'
+        in_block_sequence = False
         for raw in notes_text.split('\n'):
             s = raw.rstrip('\r')
             if not s.strip():
+                # Blank line resets block sequence but we don't emit multiple blanks
+                if out_lines and out_lines[-1] != '':
+                    out_lines.append('')
+                last_kind = 'blank'
+                in_block_sequence = False
                 continue
-            # Match any combination of '*' and '#' at start followed by at least one space
+            is_block_line = (
+                s.startswith('#### ') or
+                s.startswith('| Aspect ') or
+                (s.startswith('|') and '|' in s and s.count('|') >= 2)
+            )
+            if is_block_line:
+                if s.startswith('#### '):
+                    # Heading: ensure exactly one blank line before if previous was bullet (handled by previous logic)
+                    if last_kind == 'bullet' and out_lines and out_lines[-1] != '':
+                        out_lines.append('')
+                    out_lines.append(s)
+                    # Always ensure a blank line AFTER heading unless next added line is already blank
+                    if not (out_lines and out_lines[-1] == ''):
+                        out_lines.append('')
+                    last_kind = 'heading'
+                    in_block_sequence = False
+                else:
+                    # Table or other block line
+                    # If transitioning from bullet list (not already in block sequence) insert a single blank line
+                    if last_kind in ('bullet', 'heading') and out_lines and out_lines[-1] != '':
+                        # heading already added a blank line, so only add if prior not blank
+                        out_lines.append('')
+                    # Avoid accumulating multiple blank lines before table
+                    if out_lines and out_lines[-1] == '' and len(out_lines) >= 2 and out_lines[-2] == '':
+                        out_lines.pop()  # remove extra blank
+                    out_lines.append(s)
+                    last_kind = 'block'
+                    in_block_sequence = True
+                continue
+            # Non-block line: treat as bullet or continuation
             m = re.match(r'^(?P<prefix>[\*\#]+)\s+(?P<body>.*)$', s)
             if m:
                 prefix = m.group('prefix')
@@ -1241,18 +1801,39 @@ class SimpleLoLConverter:
                 if not body:
                     continue
                 level = len(prefix)
-                marker = prefix[-1]  # decide '-' vs '1.' by last symbol (handles '*#')
+                marker = prefix[-1]
                 indent = '  ' * (level - 1)
                 bullet = '- ' if marker == '*' else '1. '
-                item_md = self._convert_wiki_to_markdown(body)
+                item_md = self._convert_wiki_to_markdown_ctx(body, champion_name)
                 out_lines.append(f"{indent}{bullet}{item_md}")
+                last_kind = 'bullet'
+                in_block_sequence = False
             else:
-                # Continuation of previous bullet: append inline
-                cont = self._convert_wiki_to_markdown(s.strip())
-                if out_lines and cont:
+                # Continuation of previous bullet only if last was bullet
+                cont = self._convert_wiki_to_markdown_ctx(s.strip(), champion_name)
+                if last_kind == 'bullet' and out_lines and cont:
                     out_lines[-1] += f" {cont}"
+                else:
+                    # Standalone text line (treat like bullet but no marker)
+                    out_lines.append(self._convert_wiki_to_markdown_ctx(s.strip(), champion_name))
+                    last_kind = 'bullet'
+                    in_block_sequence = False
 
-        return '\n'.join(out_lines) if out_lines else "No additional notes."
+        # Collapse any accidental double blanks (defensive)
+        cleaned: List[str] = []
+        prev_blank = False
+        for ln in out_lines:
+            if not ln.strip():
+                if not prev_blank:
+                    cleaned.append('')
+                prev_blank = True
+            else:
+                cleaned.append(ln)
+                prev_blank = False
+        # Drop trailing blank line(s)
+        while cleaned and cleaned[-1] == '':
+            cleaned.pop()
+        return '\n'.join([ln for ln in cleaned if ln is not None]) if cleaned else "No additional notes."
 
     def _extract_vardefines(self, text: str) -> Dict[str, str]:
         """Extract {{#vardefine:name|value}} variables from a template page content.
@@ -3021,7 +3602,7 @@ class SimpleLoLConverter:
         if info.get('notes'):
             lines.append("## Notes")
             lines.append("")
-            notes_md = self._format_notes(info.get('notes', ''))
+            notes_md = self._format_notes(info.get('notes', ''), champion_name=None)
             for ln in notes_md.splitlines():
                 if ln.strip():
                     lines.append(ln if ln.strip().startswith('- ') else f"- {ln.strip()}")
@@ -3206,7 +3787,7 @@ class SimpleLoLConverter:
         m = re.search(r'==\s*Notes\s*==([\s\S]*?)(?==\s*[A-Z][^=]+=|\Z)', content, flags=re.IGNORECASE)
         if m:
             raw = m.group(1)
-            notes = self._format_notes(raw)
+            notes = self._format_notes(raw, champion_name=None)
             data['notes'] = [ln for ln in notes.split('\n') if ln.strip()]
         # Patch History: either explicit section or embedded Scroll box
         ph_match = re.search(r'==\s*Patch History\s*==([\s\S]*?)(?==\s*[A-Z][^=]+=|\Z)', content, flags=re.IGNORECASE)

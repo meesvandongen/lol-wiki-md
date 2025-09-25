@@ -155,6 +155,7 @@ After a $1.5$ seconds delay, *Iron Man*’s shield decays at a rate of (health) 
 
 **Notes:**
 
+Effect at cast time end
 - The ability will cast to wherever the caster's cursor was at the start of cast time.
   - The visual effect of *Obliterate* is formed in the original direction of the cast, while **Mordekaiser**’s mace appears to slam in his facing direction. Neither of these portray the spell's effect accurately if **Mordekaiser**’s location changes during the cast time.
 - Applies spell damage if it hits one target and area damage to multiple targets.
@@ -190,7 +191,7 @@ After a $1.5$ seconds delay, *Iron Man*’s shield decays at a rate of (health) 
 
 **Notes:**
 
-No additional notes.
+*Both casts count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 
 ---
 
@@ -253,6 +254,7 @@ Units between realms see each other as spirits, considering each other dead and 
 *If one of the two affected champions leave the Death Realm, because of having died or having it dispelled, the other will do so as well.*
 
 **Notes:**
+
 
 - The *Realm of Death* is a battlefield that exists outside of the normal realm in an alternate "dimension". It exists only for **Mordekaiser** and his target. It consists of an arena that has a radius of 1200 units and includes any terrain features that would exist in the map of the normal realm, including walls and brushes.
   - The boundaries of the arena are impassable but not considered terrain themselves (Unstoppable Onslaught exception), and enemies that try to move out of the area will be displaced back inside.

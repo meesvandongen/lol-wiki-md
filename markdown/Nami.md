@@ -222,8 +222,15 @@ Empowered abilities that apply area damage only deal 33 to 66 of the **bonus** d
 
 **Notes:**
 
+Effect at cast time end
 - Surging Tides will trigger immediately on **Nami** on-cast.
 - The wave travels over .
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 

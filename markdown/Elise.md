@@ -172,6 +172,7 @@
 
 **Notes:**
 
+
 - With the exceptions of **Elise**’s *Death Blossom*, *Victorious*, *Blood Moon*, and *Super Galaxy* skins; *Neurotoxin*’s VFX will scale uncapped based off the total damage it does.
 
 ---
@@ -217,6 +218,7 @@ If there are active *Spiderlings* or *Volatile Spiderlings* nearby, they will da
 - *Venomous Bite* will always apply its effects after the cast time, even if the dash is interrupted.
 - *Venomous Bite*’s reveal is a small area around the target, making it possible for them to exit the reveal radius and lose vision.
 - *Venomous Bite* will still deal its damage but not apply on-hit effects if it is blocked or dodged. It cannot be missed while **Elise** is blinded.
+
 - With the exceptions of **Elise**’s *Death Blossom*, *Victorious*, *Blood Moon*, and *Super Galaxy* skins; *Venomous Bite*’s VFX will scale uncapped based off the total damage it does.
 
 ---
@@ -310,6 +312,7 @@ The spider prioritizes the nearest enemy if it detects one before reaching the t
 
 **Notes:**
 
+Effect at cast time end
 - *Cocoon* deals no damage and thus does **not** trigger turret aggro, or effects such as Elixir of Sorcery and Sudden Impact’s activation.
 - *Cocoon* will activate combat status despite not dealing any damage.
 

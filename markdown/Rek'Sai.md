@@ -123,6 +123,7 @@ When **Rek'Sai** becomes **BURROWED**, she consumes her current Fury over 3 seco
 
 **Notes:**
 
+Effect at cast time end
 - *Prey Seeker*’s effect radius is centered around the location of the missile as it collides.
 
 ---
@@ -184,6 +185,7 @@ Once *Burrow* has been learned, **Rek'Sai** automatically becomes **BURROWED** u
 
 **Notes:**
 
+**Burrow* does not count as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - Enemies detected by *Tremor Sense* are displayed as rings on the ground. Champions display larger rings and **Rek'Sai** will react to this detection.
 - Visible enemies will not be detected by Tremor Sense. Enemies standing still while **Rek'Sai** is nearby are insensible by *Tremor Sense*.
 
@@ -337,6 +339,12 @@ No additional notes.
 - After vanishing and then emerging, **Rek'Sai** will leave behind a temporary, cosmetic Tunnel. She cannot interact with this *Tunnel*, and each entrance is destroyed $2.25$ seconds after being spawned from when she vanished or emerged.
 - A screeching noise made by **Rek'Sai** can be heard globally after *Void Rush* is cast (*will be heard by enemies even if they don't have sight of **Rek'Sai** and/or her destination*).
 - The following table refers for interactions while **Rek'Sai** is performing *Void Rush*:
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Disabled |
 
 ---
 

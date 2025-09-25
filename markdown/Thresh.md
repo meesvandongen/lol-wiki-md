@@ -168,6 +168,12 @@ While the target is stunned, **Thresh** tugs his hook towards him twice, once af
   - This prevents the enemy from knowing where exactly **Thresh** is aiming at before the cast animation is complete. **Death Sentence* triggers on-cast effects (such as Spellblade and triggering Force Pulse’s passive) once at the start of the cast, and once at the end of the cast. It may trigger on-cast effects a third time when casting *Deathly Leap*.
   - This is because a separate spell is cast to prevent **Thresh** from facing towards the target direction immediately, which is (incorrectly) flagged to trigger on-cast effects.
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
+
 ---
 
 ### W: Dark Passage
@@ -248,12 +254,20 @@ While the target is stunned, **Thresh** tugs his hook towards him twice, once af
 
 - *Flay*’s effects start at the start of the cast time. **Thresh** can cast other spells once the cast time completes, but remains unable to attack and move and use mobility spells (such as Flash) until the chain completed its way entirely.
 - Applies area damage on the ability and deals proc damage on the enhanced basic attack.
-- The knockback's airborne debuff is set to last longer than the forced movement, but gets removed as soon as the forced movement from *Flay* ends or is overridden by another. **Flay*’s passive's buff icon changes colors depending on charge level. At 100%, *Thresh*’s scythe will glow green and a sound effect will play. Thresh Flay 2.png|0 - 50% Thresh Flay 3.png|50 - 75% Thresh Flay 4.png|75% - 100% Thresh Flay 5.png|100%
+- The knockback's airborne debuff is set to last longer than the forced movement, but gets removed as soon as the forced movement from *Flay* ends or is overridden by another. **Flay*’s passive's buff icon changes colors depending on charge level. At 100%, *Thresh*’s scythe will glow green and a sound effect will play.
+ Thresh Flay 2.png|0 - 50% Thresh Flay 3.png|50 - 75% Thresh Flay 4.png|75% - 100% Thresh Flay 5.png|100%
+
 - Runaan's Hurricane Wind's Fury will apply *Flay*’s passive to each enemy hit, with the secondary targets taking minimum damage (charge resets upon hitting the primary target).
 - The enhanced attack applies other on-hit effects and can critically strike as normal (the bonus damage cannot).
 - *Flay*’s passive enhanced attack can be dodged (the enhanced attack is not consumed and the charge is not reset) and blocked (the enhanced attack is consumed and the charge is reset).
 - The empowered attack will not trigger against structures nor wards.
   - : Enhanced attack's interactions with blinding effects (regarding both bonus damage and charge reset).
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 
@@ -282,6 +296,7 @@ Enemies that break a wall cannot do so again for 1 second.
 
 **Notes:**
 
+Effect at cast time start
 - *The Box* always uses quick cast, regardless of player settings.
   - The Box always faces the same direction Thresh is facing on cast, placing a corner directly in front of him.
     - The cast indicator displays the opposite of the true behavior.

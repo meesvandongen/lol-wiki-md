@@ -132,6 +132,12 @@
 - **Blitzcrank** will be ordered to basic attack the target once the target arrives.
 - If the target dies to *Rocket Grab*’s damage, they will not be pulled. Effect at cast time end
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
+
 ---
 
 ### W: Overdrive

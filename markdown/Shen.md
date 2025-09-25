@@ -253,6 +253,18 @@ Upon completing the channel, **Shen** and his Spirit Blade blink to the target a
 - *Stand United* has a forgiveness radius of 100 units.
 - The following table refers for interactions while **Shen** is channeling:
 
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death, ground, root, silence |
+
 ---
 
 ## Patch History

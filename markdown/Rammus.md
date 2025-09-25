@@ -146,7 +146,17 @@
   - Rammus acts as if he were ghosted for the duration of *Powerball*.
 - *Powerball* is not a movement channel, and so will not be interrupted by root and ground.
 - Displacement immunity will also resist the application of the stun.
-- The following table refers for interactions while **Rammus** is channeling: interrupts. is disabled. modifies this ability. This ability recasts to end channel.|items=interrupts,true,,false|spells=true,true,interrupts,interrupts,interrupts
+- The following table refers for interactions while **Rammus** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Defensive Ball Curl interrupts. Frenzying Taunt is disabled. Soaring Slam modifies this ability. This ability recasts to end channel. |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Interrupts |
 
 ---
 
@@ -180,6 +190,7 @@
 
 **Notes:**
 
+*The initial cast counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive. **Deactivating the ability manually does not.
 - *Defensive Ball Curl* ends immediately if Powerball is cast.
 - *Defensive Ball Curl* will return damage from attacks and/or abilities that apply on-hit effects (Mystic Shot) as well as from Runaan's Hurricane Wind's Fury (will not return damage from turrets, H-28G Evolution Turret, or Jack in the Box).
 - The resistance scaling will factor from all sources, including *Defensive Ball Curl*’s flat bonus. This will recalculate over the duration.

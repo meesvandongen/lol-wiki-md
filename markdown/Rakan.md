@@ -230,6 +230,17 @@ Colliding with an enemy champion extends *The Quickness' *duration by $0.25$ sec
 
 - The following table refers for interactions while **Rakan** is in cast time:
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Allowed |
+| **Movement** | Allowed |
+| **Abilities** | [File: Grand Entrance.png |
+| **Items** | Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+
 ---
 
 ## Patch History
@@ -288,7 +299,7 @@ Colliding with an enemy champion extends *The Quickness' *duration by $0.25$ sec
 
 ## Trivia
 
-- Rakan's and Xayah’s dual release is the first one since V1.0.0.72.
+- Rakan's and Xayah’s dual release is the first one since [V1.0.0.72.
   - They were also the first champions released in 2017.
 - Rakan's and Xayah's loading screens always align themselves to the rightmost before a game starts and when picked on the same team (to mirror their shared splash art).
 - Rakan's cloak is actually his wings disguised by Vastayan magic in order to blend in with humans.

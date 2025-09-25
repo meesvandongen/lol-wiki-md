@@ -185,6 +185,7 @@ Upon impact, he creates a circle of impassable terrain that knocks aside enemies
 
 **Notes:**
 
+*The initial cast and the manual recast count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive. **If the ability is not manually recasted, the secondary effect will trigger without being considered as an ability activation.
 - *Cataclysm* will not deal damage, generate terrain, nor refund its cooldown if **Jarvan IV** is killed while leaping.
 - The perimeter is made up of 24 units with 95 pathing radius, 65 gameplay radius and 1350 sight radius each. Only every other unit is rendered visible.
 - Searing Charge will not destroy the whole but only the part that Ornn collides with.

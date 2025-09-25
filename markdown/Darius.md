@@ -213,6 +213,12 @@ If this attack kills the target, half of *Crippling Strike*’s cooldown is redu
 - After the pull, **Darius** will attempt to basic attack the closest pulled target, prioritizing enemy champions.
 - The armor penetration stacks multiplicatively with other forms of percentage armor penetration. Effect at cast time end
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
+
 ---
 
 ### R: Noxian Guillotine

@@ -94,6 +94,7 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
 
 **Notes:**
 
+===Before disguising==
 - **Neeko**’s disguise collection is offered through a special menu in the HUD. The menu holds up to 5 *slots*, based on the number of allied champions. The player can select a disguise by clicking on their portrait or via the Champion Specific Interaction hotkeys (default: **SHIFT**+**F1–F5**). The *Sho'Ma* disguise can be discarded by clicking on the 'x' next to the disguise's icon or via the sixth Champion Specific Interaction hotkey (default: **SHIFT**+**F6**).
   - The *slot* containing her *Sho'Ma* disguise will be third in the HUD if there are two or more allied champions in the game, otherwise it will be the rightmost *slot*. The remaining *slots* will contain allied champion disguises in order of their appearance in the pre-game Loading Screen.
 - **Neeko** does not begin storing *Sho'Ma* from a unit if that unit enters her sight and gathering range at the same time, or if it is within gathering range when she loses the disguise.
@@ -101,6 +102,7 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
 - *Inherent Glamour*’s cooldown only prevents **Neeko** from activating disguises; she can still store and remove *Sho'Ma* while the passive is on cooldown.
 - When disguising while storing *Sho'Ma* from a unit, **Neeko** continues to store *Sho'Ma* from that unit.
 - **Neeko** cannot store *Sho'Ma* from Dark Procession and Powder Keg.
+
 - After successfully storing *Sho'Ma*, Neeko celebrates by clapping.
   - This animation is forced and overrides all other animations except Pop Blossom’s landing animation.
 - If **Neeko** attempts to activate a disguise while near the trap, ward, or jungle plant she stored *Sho'Ma* from, she will leap to that unit's exact position over 1 second, though not through terrain, and then become disguised. If she does so for a monster and is near its respective jungle camp, she will leap to that monster's usual position in the camp.
@@ -114,6 +116,7 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
     - *Inherent Glamour*’s leap does not interact with Voltaic Cyclosword Galvanize passive;
     - *Inherent Glamour*’s leap does not override the forced movement inflicted by airborne effects;
     - The path of *Inherent Glamour*’s leap will be similar to the path **Neeko** would take if ordered to move to the unit's position instead.
+
   - **Neeko** will copy the unit's facing direction when disguising after leaping.
   - If **Neeko** does not arrive at the unit's position while leaping, she will continue moving toward it.
 - While not disguised, attempting to cast *Inherent Glamour* during a cast time or attack windup puts the ability on cooldown immediately but postpones the disguise.
@@ -135,6 +138,7 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
   - Level.md)
   - Kill feed icon
   - Minimap icon
+
 - A number of attributes she actually adopts are:
   - **Base** movement speed if it is lower than **Neeko**’s, capped at a minimum of 200.
     - Disguising as Elise while she is in spider form will set **Neeko**’s **base** movement speed to 315 instead.
@@ -162,6 +166,7 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
     - While disguised as a non-champion, **Neeko** will play her laugh sound when attempting to laugh.
     - This is an intentional feature, requested by fans when **Neeko**’s V13.9 gameplay update was released.
       - While disguised as a *Packmate*, she will play Naafiri’s laugh instead.
+
 - **Neeko** does **not** adopt the allegiance of the disguise, meaning enemy turrets and minions will aggro her while disguised as a neutral monster or jungle plant.
 - While disguised as a plant or ward, **Neeko** can be targeted by minions and affected by most abilities and item effects that normally don't affect them.
   - If the ability or item effect only affects units of certain classifications (e.g. champion, minion), it does not affect disguised **Neeko**.
@@ -209,7 +214,9 @@ Breaking the disguise via dying or being immobilized puts *Inherent Glamour* on 
 - **Neeko** benefits from *Mr. Kled's Wild Ride* even while disguised as a lane minion or Voidmite.
 - While disguised as a non-champion, **Neeko** cannot purchase Runaan's Hurricane regardless of her current range type.
 - **Neeko** cannot purchase Elixir of Iron, Elixir of Sorcery , Elixir of Wrath, Farsight Alteration while disguised as a unit with a lower level than required.
-  - **Neeko** will fail to purchase these items when disguising as a unit of required level if her real level is lower than required. === Breaking the disguise==
+  - **Neeko** will fail to purchase these items when disguising as a unit of required level if her real level is lower than required.
+
+=== Breaking the disguise==
 - *Inherent Glamour*’s disguise is broken by the following actions:
   - Casting Q or E.
     - Casting R will not break the disguise immediately, but after a delay.
@@ -261,6 +268,7 @@ Each bloom deals **bonus** magic damage against monsters.
 
 **Notes:**
 
+Effect at cast time start
 - Spell shield blocks an instance of damage but does not prevent subsequent *Blooms*.
 
 ---
@@ -304,8 +312,10 @@ Additionally, the clone stops ongoing movement in order to play the casting anim
 
 **Notes:**
 
+
 - The empowered attack will not trigger against wards and jungle plants.
 - Using a basic attack breaks the stealth at the start of the attack windup.
+
 - Once spawned with a disguise, the clone cannot lose the disguise.
 - When mimicking the animation of *Blooming Burst* and *Tangle-Barbs* while disguised, the clone will play the disguise unit's first and third ability animation respectively.
 - When mimicking the animation of *Blooming Burst*, the clone will turn toward *Blooming Burst*’s target location unless it was ordered to move within the last $0.5$ (estimated) seconds, in which case it will not change its facing direction.
@@ -364,7 +374,7 @@ If the spiral hits at least one enemy, it grows in and its speed and root durati
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
 
 ---
 
@@ -395,6 +405,7 @@ When the cast time ends, she lands to emit a burst of energy that deals magic da
 
 **Notes:**
 
+**Ability details:**
 - The wind up uses a special bar similar to cast bars to represent when *Pop Blossom*’s cast time will start.
   - The wind up has no special interactions.
 - The highlighted area is fixed around **Neeko**.
@@ -402,6 +413,18 @@ When the cast time ends, she lands to emit a burst of energy that deals magic da
   - This may be a remnant of when it would spawn multiple clones during the development of her V13.9 gameplay update, intended to reduce visual clutter. Effect at cast time end **Interactions:**
 - On-cast effects are applied on activation.
 - *Pop Blossom* can start its cast time during stasis.
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | revival-false |
 
 ---
 

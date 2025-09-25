@@ -277,6 +277,19 @@ If *Chilling Scream* was charged for its full duration, enemies hit are also kno
 - *Chilling Scream* increases its damage by its minimum every $0.025$ seconds over the duration. Effect at cast time end
 - The following table refers for interactions while **Briar** is channeling:
 
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+| **Notes** | but can still use trinkets |
+
 ---
 
 ### R: Certain Death
@@ -343,7 +356,9 @@ While in the empowered frenzy, **Briar** prioritizes attacking the marked target
   - Gaining *Hematomania* while *Blood Frenzy* is active will override the previous buff.
 - The disrupt is 'wrapped' into a status effect that says the target is Silenced for $0.3$ seconds, but it does not actually *silence*. It however makes sure that the *disrupt* is prevented by immunity to silences. Effect at cast time start
 - The following table refers for interactions while **Briar** is in either the first or second cast time:
+
 - The following table refers for interactions while **Briar** is dashing:
+
 - The following table refers for interactions while **Briar** is in *Hematomania*: * can only be cast on targets within its radius. ** interrupts the frenzy. ** is disabled.|items=true|consume=true|spells=true,true,false,false|interrupts=death
 
 ---

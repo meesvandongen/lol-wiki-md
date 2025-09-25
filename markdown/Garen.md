@@ -223,6 +223,18 @@ Enemy champions hit 6 times by *Judgment* are inflicted with (armor penetration)
 - The spin animation is capped at once per $0.2$ seconds, but the amount of ticks will keep on scaling.
 - The armor reduction stacks multiplicatively with other percentage armor penetration effects.
 
+#### Channel Behavior (20px)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | [File:Decisive_Strike.png |
+| **Items** | Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
+
 ---
 
 ### R: Demacian Justice
@@ -247,7 +259,7 @@ Enemy champions hit 6 times by *Judgment* are inflicted with (armor penetration)
 
 **Notes:**
 
-- The target will die if they're at least under (0.25×100 to 0.35×100)/(1+(0.25×100 to 0.35×100)/100)% **maximum** health + (150 to 350)/(1+(0.25×100 to 0.35×100)/100) **flat** health on top of that. This does not count effects that mitigate true damage, such as shields.
+- The target will die if they're at least under (0.25×100 to 0.35×100)/(1+(0.25×100 to 0.35×100)/100)% **maximum** health + (150 to 350)/(1+(0.25×100 to 0.35×100)/100) **flat** health on top of that. This does not count effects that mitigate [true damage, such as shields.
 
 ---
 

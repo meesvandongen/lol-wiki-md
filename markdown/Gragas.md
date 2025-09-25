@@ -127,6 +127,7 @@
 
 **Notes:**
 
+*The initial cast counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive. **Deactivating the ability manually does not.
 - The cask ignores unit and terrain collision therefore it will only stop once it reaches the target location.
   - On arrival the cask will begin to glow ever brighter as it ferments until it turns bright red.
 - *Barrel Roll* has an internal cooldown while traveling so that **Gragas** may only make it explode on arrival.
@@ -173,6 +174,16 @@ Upon completing the channel, **Gragas** empowers his next basic attack within 5 
 - The empowered attack will trigger against structures.
 - The empowered attack will trigger against wards but not be consumed nor apply its effects against wards.
 - The following table refers for interactions while **Gragas** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 
@@ -237,7 +248,7 @@ Upon completing the channel, **Gragas** empowers his next basic attack within 5 
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
 
 ---
 

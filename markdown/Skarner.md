@@ -179,6 +179,7 @@ After $0.5$ seconds of the cast, **Skarner** gains the ability to use *Upheaval*
 
 **Notes:**
 
+;General
 - The empowered attacks can be parried and will not trigger the area of effect if either the target blocks or dodges the attack, or if the attacks miss while **Skarner** is blinded.
   - The attacks will be still consumed in all cases regardless.
   - Note that if the main target is not blocking or dodging, then the area of effect can still deal damage to those who do.
@@ -234,6 +235,7 @@ After $0.5$ seconds of the cast, **Skarner** gains the ability to use *Upheaval*
 
 **Notes:**
 
+;General
 - While *Upheaval* can deal damage to structures, the missile can't directly hit them. They have to be within the radius of the explosion.
 - Spell shield will not prevent the explosion from occurring.Effect at cast time end
   - The direction of cast will be updated to go toward the cast location.
@@ -321,6 +323,7 @@ If **Skarner**’s attached target collides with terrain, the charge ends, detac
 - Enemies cannot see **Skarner** while he is inside terrain, unless they grant sight into the area of terrain he is inside (such as with Hawkshot or Heightened Senses) or have unobstructed vision.
   - However, enemies will be notified when **Skarner** is inside nearby terrain while within a certain distance of him. An indicator will be visible to the enemy player's perspective to represent this.
 - The following table refers for interactions while **Skarner** is charging:
+
 - A special indicator for *Ixtal's Impact*’s direction and expected ending location is visible to **Skarner** only during his charge.
 
 ---
@@ -360,6 +363,7 @@ If **Skarner**’s attached target collides with terrain, the charge ends, detac
 - If a target would be on the other of a wall, they are moved to the same as **Skarner**.
 - During *Impale*, **Skarner** always faces in the direction of the nearest attached target. Effect at cast time end
 - The following table refers for interactions while **Skarner** is in cast time:
+
 - The following table refers for interactions while **Skarner** is performing *Impale*: and are disabled, but can be buffered. is usable.|items=true|consume=true|spells=true,false,true,false,false|interrupts=death
 
 ---

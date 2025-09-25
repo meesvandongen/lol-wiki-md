@@ -197,6 +197,7 @@ No additional notes.
 
 **Notes:**
 
+*Toggle abilities do not count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - *Defile* will restore mana if **Karthus** destroys an enemy structure.
 - *Defile* re-calculates its damage with each tick based on changes in **Karthus**’s ability power or an increase in the rank of *Defile* without the need to toggle it off and on again.
 - *Defile* will toggle off automatically if **Karthus** enters resurrection.
@@ -234,6 +235,16 @@ No additional notes.
 - The damage will apply spell effects to targets in order of being spawned. Single target spell effects (such as Luden's Companion) are thus triggered on the leftmost champion on the loading screen.
 - *Requiem* will not affect Neeko if she's disguised as a non-champion if **Karthus** is affected by Death Defied.
 - The following table refers for interactions while **Karthus** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
 
 ---
 

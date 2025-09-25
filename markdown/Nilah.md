@@ -129,6 +129,7 @@ If *Formless Blade* hits an enemy, **Nilah** empowers herself for 4 seconds: gai
 
 **Notes:**
 
+Effect at cast time end
 - *Formless Blade*’s active cast triggers call for help for dealing damage despite not being a targeted spell.
 - Applies area damage on the empowered attacks.
 - Spell shield will not block *Formless Blade*’s empowered basic attacks.

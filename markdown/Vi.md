@@ -152,6 +152,19 @@ She stops upon hitting an enemy champion, knocking them back over $0.75$ seconds
 - Stuck targets (including those that block *Vault Breaker* with a spell shield) are briefly immune to being affected again by *Vault Breaker* from this player, for about $1.25$ seconds.
 - The following table refers for interactions while **Vi** is channeling:
 
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Consumables** | Disabled |
+| **Interrupted by** | death, ground, root, silence |
+| **Notes** | but can still use trinkets. |
+
 ---
 
 ### W: Denting Blows

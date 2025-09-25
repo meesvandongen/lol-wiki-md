@@ -157,7 +157,18 @@
 - *Prowling Projectile* can be buffered $0.5$ seconds before it comes off cooldown.
 - *Prowling Projectile* is slower when attached (before the acceleration). If **Yuumi** unattaches after using it, the missile will go back to its normal speed, without losing the acceleration later. This results in the fastest and longest ranged version of this ability.
 - The **BEST FRIEND**'s empowerment respects enchantment redirection.
-- The following table refers for interactions while **Yuumi** is channeling: and interrupt. is usable.|attack=N/A|items=true|consume=true|spells=true|interrupt=true
+- The following table refers for interactions while **Yuumi** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | N/A |
+| **Movement** | N/A |
+| **Abilities** | Detaching and Final Chapter interrupt. Zoomies is usable. |
+| **Items** | Allowed |
+| **Summoner Spells** | Allowed |
+| **Consumables** | Usable |
 
 ---
 
@@ -234,7 +245,19 @@ If targeting an ally with the recast, the ability will not cast |
 - If **Yuumi** is on the blue team, she will remain attached on the southwest side; if **Yuumi** is on the red team, she will remain on the northeast. While channeling Final Chapter, she will be behind her *Anchor*.
 - The player's screen will briefly flash red if **Yuumi** is affected by a immobilizing or grounding effect, or if she forcibly detaches from her *Anchor*.
 - The *Anchor*’s health bar will have a different frame to indicate the *attached* status:
+
 - The following table refers for interactions while **Yuumi** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Interrupted by** | death, ground, root, silence |
 - The following table refers for interactions while **Yuumi** is attached:
 
 ---
@@ -329,7 +352,17 @@ Enemies struck by the waves take magic damage and are slowed by 10% for $1.25$ s
 - **Yuumi**’s facing direction during the channel is considered to be in *Final Chapter*’s target direction.
   - Using Hexflash during the channel will always cause **Yuumi** to blink in the target direction of *Final Chapter*.
 - Feline Friendship will not be triggered if **Yuumi** and her anchor aren't missing health **after** the wave hit.
-- The following table refers for interactions while **Yuumi** is channeling: is disabled. and are usable.|attack=false|move=true|items=true,,,false|spells=true, true, true, false, true, true, true, true
+- The following table refers for interactions while **Yuumi** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Prowling Projectile is disabled. You and Me! and Zoomies are usable. |
+| **Items** | Allowed / Disabled |
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 

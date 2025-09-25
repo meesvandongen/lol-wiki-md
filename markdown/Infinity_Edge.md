@@ -38,14 +38,14 @@
 
 ## Notes
 
-- The critical strike damage stat provided by **Infinity Edge** increases most champions' total *critical strike damage* from 175% AD to 215% AD.
+- The critical strike damage stat provided by **Infinity Edge** increases most champions' total critical strike damage from 175% AD to 215% AD.
 
 ## Similar items
 
-- *Yun Tal Wildarrows*
-- *Essence Reaver*
-- *The Collector*
-- *Immortal Shieldbow*
+- Yun Tal Wildarrows
+- Essence Reaver
+- The Collector
+- Immortal Shieldbow
 
 ## Background
 
@@ -65,15 +65,15 @@
 
 ### V14.11
 - Critical strike damage reduced to 40% from 50%.
-- Can no longer be upgraded to *Edge of Finality*.
+- Can no longer be upgraded to Edge of Finality.
 
 ### V14.10
 - Total cost increased to 3400 gold from 3300 gold.
   - Combine cost increased to 625 gold from 525 gold.
 - Attack damage increased to 80 from 65.
 - Critical strike chance increased to 25% from 20%.
-- *Edge of Finality* critical strike chance increased to 25% from 20%.
-- No longer limited to 1 **Unbounded** item.
+- Edge of Finality critical strike chance increased to 25% from 20%.
+- No longer limited to 1 **UNBOUNDED** item.
 
 ### V14.6
 - Bonus critical strike damage increased to 50% from 40%.
@@ -84,96 +84,96 @@
   - Combine cost reduced to 525 gold from 625 gold.
 - Critical strike damage reduced to 40% from 45%.
 - **Removed:*** No longer has a Mythic passive granting 5 **bonus** attack damage per Legendary item.
-- No longer limits the user to 1 **Mythic** item.
-- Now limits the user to 1 **Unbounded** item.
+- No longer limits the user to 1 **MYTHIC** item.
+- Now limits the user to 1 **UNBOUNDED** item.
 
 ### V13.14
 - Attack damage reduced to 65 from 70.
 - Critical strike damage increased to 45% from 35%.
-- *Edge of Finality* attack damage reduced to 95 from 100.
+- Edge of Finality attack damage reduced to 95 from 100.
 
 ### V13.10
 - **New:***
-  - **Recipe:** *B. F. Sword* + *Pickaxe* + *Cloak of Agility* + 625 gold = 3400 gold.
-  - **Stats:** 70 attack damage, 20% critical strike chance, 35% critical strike damage.
-  - **Mythic Passive:** Empowers other Legendary items with 5 **bonus** attack damage.
-  - Limited to 1 **Mythic** item.
-  - Living Forge item: *Edge of Finality*.
-    - **Stats:** 100 attack damage, 20% critical strike chance, 35% critical strike damage.
-- **Old:**
-  - **Recipe:** *B. F. Sword* + *Pickaxe* + *Cloak of Agility* + 625 gold = 3400 gold.
-  - **Stats:** 70 attack damage, 20% critical strike chance.
-  - ***Unique Passive - Perfection:*** Gain 35% **bonus** critical strike damage if you have at least 40% critical strike chance.
-  - Limited to 1 **Crit Modifier** / **Marksman Capstone** item.
+  - **RECIPE:** B. F. Sword + Pickaxe + Cloak of Agility + 625 gold = 3400 gold.
+  - **STATS:** 70 attack damage, 20% critical strike chance, 35% critical strike damage.
+  - **MYTHIC PASSIVE:** Empowers other Legendary items with 5 **bonus** attack damage.
+  - Limited to 1 **MYTHIC** item.
+  - Ornn’s Masterwork item: Edge of Finality.
+    - **STATS:** 100 attack damage, 20% critical strike chance, 35% critical strike damage.
+- **OLD:**
+  - **RECIPE:** B. F. Sword + Pickaxe + Cloak of Agility + 625 gold = 3400 gold.
+  - **STATS:** 70 attack damage, 20% critical strike chance.
+  - ***UNIQUE PASSIVE - PERFECTION:*** Gain 35% **bonus** critical strike damage if you have at least 40% critical strike chance.
+  - Limited to 1 **CRIT MODIFIER** / **MARKSMAN CAPSTONE** item.
 
 ### V13.1b
 - Perfection threshold reduced to 40% critical strike chance from 60%.
 
 ### V10.25
-- ***Unique Passive - Perfection:***
+- ***UNIQUE PASSIVE - PERFECTION:***
   - **New Effect:** Gain 35% **bonus** critical strike damage if you have at least 60% critical strike chance.
-  - **Old Effect:** Gain $0.4$% **bonus** critical strike damage for every 1% critical strike chance.
+  - **OLD EFFECT:** Gain $0.4$% **bonus** critical strike damage for every 1% critical strike chance.
 
 ### V10.23
 - Updated icon.
 - **New:***
-  - **Recipe:** *B. F. Sword* + *Pickaxe* + *Cloak of Agility* + 625 gold = 3400 gold.
-  - **Stats:** 70 attack damage, 20% critical strike chance.
-  - ***Unique Passive - Perfection:*** Gain $0.4$% **bonus** critical strike damage for every 1% critical strike chance.
-  - Limited to 1 **Crit Modifier** item.
-- **Old:**
-  - **Recipe:** *B. F. Sword* + *Pickaxe* + *Cloak of Agility* + 425 gold = 3400 gold.
-  - **Stats:** 80 attack damage, 25% critical strike chance.
-  - **Unique Passive:** critical strike deal 225% damage instead of 200%.
-  - Living Forge item: *Molten Edge*.
-    - **Stats:** 110 attack damage, 25% critical strike chance.
+  - **RECIPE:** B. F. Sword + Pickaxe + Cloak of Agility + 625 gold = 3400 gold.
+  - **STATS:** 70 attack damage, 20% critical strike chance.
+  - ***UNIQUE PASSIVE - PERFECTION:*** Gain $0.4$% **bonus** critical strike damage for every 1% critical strike chance.
+  - Limited to 1 **CRIT MODIFIER** item.
+- **OLD:**
+  - **RECIPE:** B. F. Sword + Pickaxe + Cloak of Agility + 425 gold = 3400 gold.
+  - **STATS:** 80 attack damage, 25% critical strike chance.
+  - **UNIQUE PASSIVE:** Critical strikes deal 225% damage instead of 200%.
+  - Ornn’s Masterwork item: Molten Edge.
+    - **STATS:** 110 attack damage, 25% critical strike chance.
 
 ### V9.3
-- **New Recipe:** *B. F. Sword* + *Pickaxe* + *Cloak of Agility* + 425 gold = 3400 gold.
-  - **Old Recipe:** *B. F. Sword* + *Pickaxe* + 1225 gold = 3400 gold.
-- **New Stats:**
+- **NEW RECIPE:** B. F. Sword + Pickaxe + Cloak of Agility + 425 gold = 3400 gold.
+  - **OLD RECIPE:** B. F. Sword + Pickaxe + 1225 gold = 3400 gold.
+- **NEW STATS:**
   - 80 attack damage, 25% critical strike chance.
-  - **Unique Passive:** critical strike deal 225% damage instead of 200%.
-- **Old Stats:**
+  - **UNIQUE PASSIVE:** Critical strikes deal 225% damage instead of 200%.
+- **OLD STATS:**
   - 70 attack damage.
-  - **Unique Passive:** Doubles your critical strike chance.
-  - **Unique Passive:** When critical strike champions, converts 10% of critical strike damage to true damage.
-- *Molten Edge* attack damage increased to 110 from 100.
+  - **UNIQUE PASSIVE:** Doubles your critical strike chance.
+  - **UNIQUE PASSIVE:** When critically striking champions, converts 10% of critical strike damage to true damage.
+- Molten Edge attack damage increased to 110 from 100.
 
 ### V9.1
-- *Molten Edge*
+- Molten Edge
   - Total cost reduced to 3400 gold from 4400 gold.
     - Combine cost reduced to 0 gold from 1000 gold.
-  - Can now only be obtained if **Ornn** forges the item (for himself or for another ally).
+  - Can now only be obtained if Ornn forges the item (for himself or for another ally).
 
 ### V8.15
-- **New Recipe:** *B. F. Sword* + *Pickaxe* + 1225 gold = 3400 gold.
-  - **Old Recipe:** *B. F. Sword* + *B. F. Sword* + 1000 gold = 3600 gold.
+- **NEW RECIPE:** B. F. Sword + Pickaxe + 1225 gold = 3400 gold.
+  - **OLD RECIPE:** B. F. Sword + B. F. Sword + 1000 gold = 3600 gold.
 - Critical strike damage conversion reduced to 10% from 15%.
 - Attack damage reduced to 70 from 80.
 - **New Effect:** *"True Damage Critical Strikes"* now display as a blue/white icon instead of the purple *"Magic Damage Crit"* icon.
-- *Molten Edge* total cost reduced to 4400 gold from 4600 gold.
-- *Molten Edge* attack damage reduced to 100 from 110.
+- Molten Edge total cost reduced to 4400 gold from 4600 gold.
+- Molten Edge attack damage reduced to 100 from 110.
 
 ### V8.12#June 18th Hotfix|V8.12
 - Total cost reduced to 3600 gold from 3700 gold.
   - Combine cost reduced to 1000 gold from 1100 gold.
-- *Molten Edge* total cost reduced to 4600 gold from 4700 gold.
+- Molten Edge total cost reduced to 4600 gold from 4700 gold.
 
 ### V8.11
 - New item icon.
-- **New Recipe:** *B. F. Sword* + *B. F. Sword* + 1100 gold = 3700 gold.
-  - **Old Recipe:** *B. F. Sword* + *Pickaxe* + *Cloak of Agility* + 425 gold = 3400 gold.
-- *Molten Edge* total cost increased to 4700 gold from 4400 gold.
+- **NEW RECIPE:** B. F. Sword + B. F. Sword + 1100 gold = 3700 gold.
+  - **OLD RECIPE:** B. F. Sword + Pickaxe + Cloak of Agility + 425 gold = 3400 gold.
+- Molten Edge total cost increased to 4700 gold from 4400 gold.
 - Attack damage increased to 80 from 70.
-- *Molten Edge* attack damage increased to 110 from 100.
+- Molten Edge attack damage increased to 110 from 100.
 - **Removed:*** +20% critical strike chance.
-- **Removed Unique Passive:** +50% critical strike damage.
-- **New Unique Passive:** Doubles your critical strike chance.
-- **New Unique Passive:** When critically striking enemy champions, converts 15% of critical strike damage to true damage.
+- **REMOVED UNIQUE PASSIVE:** +50% critical strike damage.
+- **NEW UNIQUE PASSIVE:** Doubles your critical strike chance.
+- **NEW UNIQUE PASSIVE:** When critically striking enemy champions, converts 15% of critical strike damage to true damage.
 
 ### V7.17
-- Added to recipe from *Molten Edge*. **Only available while **Ornn** is on your team.*
+- Added to recipe from Molten Edge. *Only available while Ornn is on your team.*
 
 ### V7.9
 - Total cost reduced to 3400 gold from 3600 gold.

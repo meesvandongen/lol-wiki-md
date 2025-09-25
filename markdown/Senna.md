@@ -329,6 +329,7 @@ The broad wave grants a shield to **Senna** and allied champions hit for 3 secon
 
 **Notes:**
 
+Effect at cast time start
 - **Senna** reveals herself during the cast time.
 
 ---

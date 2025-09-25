@@ -278,7 +278,14 @@
 
 **Notes:**
 
-No additional notes.
+Effect at cast time start
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Movement** | Disabled in the first $0.4$ seconds of the cast time. |
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 

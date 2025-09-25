@@ -31,6 +31,7 @@
 
 **Notes:**
 
+;Determination Details
 - The *healing* and **bonus** damage work on different stacking systems, each counting its stacks and being consumed separately. While both stack on-hit, the **bonus** damage stacks are consumed on-attack, and the healing ones on-hit.
   - The *healing* stacks are denoted in the buff-bar.
   - If Guinsoo's Rageblade were to trigger when the stacks are at maximum, they will grant the healing but not the **bonus** damage, thus causing an out-of-sync between the stacks shown in-game versus when the **bonus** damage is dealt.

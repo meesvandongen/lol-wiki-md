@@ -90,6 +90,16 @@ At rank 5, *Breath of Light*’s channel duration is increased to 160 seconds.
 - Spell shield will only block the burst damage.
 - The following table refers to interactions while **Aurelion Sol** is charging.
 
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Interrupts |
+| **Movement** | Interrupts |
+| **Abilities** | Interrupts |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
+
 ---
 
 ### W: Astral Flight

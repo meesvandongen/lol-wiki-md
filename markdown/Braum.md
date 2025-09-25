@@ -121,7 +121,7 @@ This effect cannot apply to the same target more than once every few seconds. Du
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
 
 ---
 
@@ -264,7 +264,13 @@ A field of ice is created along the fissure's path, lasting for 4 seconds and sl
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 

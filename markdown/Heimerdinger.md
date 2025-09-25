@@ -336,7 +336,7 @@ Enemies hit at the center of the grenade's impact are also stunned for $1.5$ sec
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
 
 ---
 
@@ -395,6 +395,7 @@ Enemy champions can only be damaged once per cast, but can be slowed and stunned
 
 **Notes:**
 
+*Toggle abilities do not count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive. **Consuming the buff for an empowered basic ability does.
 - No compensations for mana are made if *UPGRADE!!!* is recast.
 
 ---

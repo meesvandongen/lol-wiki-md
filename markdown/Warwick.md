@@ -144,6 +144,7 @@ While *Jaws of the Beast* is active, **Warwick** is displacement immune and clam
 
 **Notes:**
 
+**Details**
 - *Jaws of the Beast* deals basic damage, but also triggers spell effects by also being tagged as spell damage.
 - *Jaws of the Beast* has a cast *delay*, which is the amount of time required for the bite to occur from the start of the cast. This should not be confused with a cast *time*.
   - If the cast started beforehand, both the damage and the heal occur even after **Warwick**’s death, or during resurrection.
@@ -166,7 +167,19 @@ While *Jaws of the Beast* is active, **Warwick** is displacement immune and clam
 - While *Jaws of the Beast* does not use Quick Casting by default, click-and-hold is comparable to the input required to use Bone Skewer or Comet Spear. It does not accept two-click input (e.g. First Cast and Recast) that abilities like Piercing Arrow or Decimating Smash use in Standard Casting.
 - **Warwick** will attempt to basic attack the target after a short delay.
 - The following table refers for interactions while **Warwick** is channeling:
-  - Flash, Teleport, Hexflash, and Recall are disabled during the first $0.4$ seconds of the channel. is usable. and are disabled.|move=false|spells=true,interrupts,interrupts,interrupts,interrupts|items=interrupts,true,interrupts,false,interrupts,melee|consume=true **Known Issues**
+  - Flash, Teleport, Hexflash, and Recall are disabled during the first $0.4$ seconds of the channel.
+
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Primal Howl is usable. Blood Hunt and Infinite Duress are disabled. |
+| **Items** | Interrupts / Allowed / Disabled / melee |
+| **Summoner Spells** | Allowed / Interrupts |
+| **Consumables** | Usable |
+**Known Issues**
 - *Jaws of the Beast* will also refund its cooldown if it kills the target after being held for exactly its bite delay.
 - The ability may briefly cast on a dead target, with the ability going on cooldown.
 
@@ -220,8 +233,12 @@ The attack speed and movement speed bonuses granted by both passives are doubled
 - Note that monsters are neutral units.
 - *Blood Hunt* can detect and target decoys.
 - *Blood Hunt* will occur from wherever **Warwick** was at the start of the cast time.
-- *Blood Hunt* has an indicator that appears above the target(s) when they are being hunted. Some skins have a unique indicator. Warwick Blood Hunt Mark.png | Classic PROJECT Warwick Blood Hunt Mark.png | PROJECT Lunar Guardian Warwick Blood Hunt Mark.png | Lunar Guardian Old God Warwick Blood Hunt Mark.png | Old God Winterblessed Warwick Blood Hunt Mark.png | Winterblessed Prestige Winterblessed Warwick Blood Hunt Mark.png | Prestige Winterblessed Arcane Vander Warwick Blood Hunt Mark.png | Arcane Vander
-- Some of Warwick's have a unique color variation: Old God Old God Warwick Ruby Blood Hunt Mark.png | Ruby Old God Warwick Citrine Blood Hunt Mark.png | Citrine Old God Warwick Emerald Blood Hunt Mark.png | Emerald Old God Warwick Sapphire Blood Hunt Mark.png | Sapphire Old God Warwick Rose Quartz Blood Hunt Mark.png | Rose Quartz Old God Warwick Obsidian Blood Hunt Mark.png | Obsidian Old God Warwick Aquamarine Blood Hunt Mark.png | Aquamarine Old God Warwick Pearl Blood Hunt Mark.png | Pearl Old God Warwick Dark Ritual Blood Hunt Mark.png | Dark Ritual
+- *Blood Hunt* has an indicator that appears above the target(s) when they are being hunted. Some skins have a unique indicator.
+ Warwick Blood Hunt Mark.png | Classic PROJECT Warwick Blood Hunt Mark.png | PROJECT Lunar Guardian Warwick Blood Hunt Mark.png | Lunar Guardian Old God Warwick Blood Hunt Mark.png | Old God Winterblessed Warwick Blood Hunt Mark.png | Winterblessed Prestige Winterblessed Warwick Blood Hunt Mark.png | Prestige Winterblessed Arcane Vander Warwick Blood Hunt Mark.png | Arcane Vander
+
+- Some of Warwick's have a unique color variation:
+ Old God
+ Old God Warwick Ruby Blood Hunt Mark.png | Ruby Old God Warwick Citrine Blood Hunt Mark.png | Citrine Old God Warwick Emerald Blood Hunt Mark.png | Emerald Old God Warwick Sapphire Blood Hunt Mark.png | Sapphire Old God Warwick Rose Quartz Blood Hunt Mark.png | Rose Quartz Old God Warwick Obsidian Blood Hunt Mark.png | Obsidian Old God Warwick Aquamarine Blood Hunt Mark.png | Aquamarine Old God Warwick Pearl Blood Hunt Mark.png | Pearl Old God Warwick Dark Ritual Blood Hunt Mark.png | Dark Ritual
 
 ---
 
@@ -250,6 +267,7 @@ Starting *Infinite Duress’* channel while *Primal Howl* is active will initiat
 
 **Notes:**
 
+*The initial cast and the manual recast count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive. **If the ability is not manually recasted, the secondary effect will trigger without being considered as an ability activation.
 - The recast's howling animation has a $0.25$-second lockout time.
   - This will also cancel **Warwick**’s basic attack.
   - **Warwick** cannot attack or cast abilities during the animation, instead the last input will be buffered to play after it ends.
@@ -307,7 +325,23 @@ Starting *Infinite Duress’* channel while *Primal Howl* is active will initiat
 - If the target is in a zombie state, **Warwick** will stop the channel after ~$0.5$ seconds of hitting them.
 - *Infinite Duress* covers **Warwick**’s hitbox, meaning he will collide with enemy champions that are particularly close to him.
 - The following table refers for interactions while **Warwick** is in cast time:
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
 - The following table refers for interactions while **Warwick** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 

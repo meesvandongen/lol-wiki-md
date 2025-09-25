@@ -107,6 +107,18 @@ A successful channel will grant an equal amount of experience to the ally to-lev
 - The channel from *Time in a Bottle* is not interrupted even if the allied champion suddenly levels up. However, no experience will be granted to either player, and the passive will not go on cooldown.
 - The following table refers for interactions while **Zilean** is channeling:
 
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Interrupts |
+| **Movement** | Interrupts |
+| **Abilities** | Interrupts |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Interrupts |
+| **Consumables** | Usable |
+| **Interrupted by** | death, silence |
+
 ---
 
 ### Q: Time Bomb

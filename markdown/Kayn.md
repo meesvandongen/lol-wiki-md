@@ -91,7 +91,11 @@ While near his team's summoning platform, **Kayn** can choose a form (By clickin
 
 - The *Shadow Assassin Bonus* will not be triggered nor have its out-of-combat timer be refreshed if **Kayn** deals true damage.
 - If the *Shadow Assassin Bonus* is granted by **Kayn** dealing damage, the triggering instance of damage will benefit from the bonus.
-- Entering transformation will not destroy in-flight projectiles. ; The Orb System The experience is depicted as orbs that drop upon the ground. Melee champions drop red orbs that grant progress towards Rhaast, while ranged champions drop blue orbs that grant progress for Shadow Assassin. Orbs will remain on the ground until automatically collected by **Kayn** regardless of range once he leaves combat. The orbs will be collected even if **Kayn** dies. The experience bar above his portrait gauges his current progression, the color reflects the form with greater progress. **Kayn** can transform by interacting with his portrait, and can wait 4 minutes until the other form becomes available, reduced by 5 seconds for each collected orb of their type after that.
+- Entering transformation will not destroy in-flight projectiles.
+
+; The Orb System The experience is depicted as orbs that drop upon the ground. Melee champions drop red orbs that grant progress towards Rhaast, while ranged champions drop blue orbs that grant progress for Shadow Assassin. Orbs will remain on the ground until automatically collected by **Kayn** regardless of range once he leaves combat. The orbs will be collected even if **Kayn** dies.
+
+The experience bar above his portrait gauges his current progression, the color reflects the form with greater progress. **Kayn** can transform by interacting with his portrait, and can wait 4 minutes until the other form becomes available, reduced by 5 seconds for each collected orb of their type after that.
 - *Melee* orbs grant 2 points per hit and 6 points per takedown.
 - *Ranged* orbs grant 3 points per hit and 7 points per takedown.
 - The amount of points received per orb is multiplied by 3–then + (10-3)/8*x*1.15@0–0 (@=minutes).
@@ -187,6 +191,14 @@ Both instances of *Reaping Slash* deal 40 **bonus** physical damage against mini
 
 - The *shadow* is considered an allied champion and can interact with effects such as World Atlas and Runic Compass Quest and local reward from structures.
 - *Blade's Reach*’s indicator is visible to enemies while cast inside terrain and towards enemy champions. Effect at cast time start
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
 
 ---
 

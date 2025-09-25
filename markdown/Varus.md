@@ -133,7 +133,19 @@ While *Living Vengeance*’s bonus is active, **Varus' **attack speed cap is inc
 - The indicator for the range of the spell will be displayed for the entire channel.
 - *Piercing Arrow* will cast from wherever **Varus** is at the end of the channel.
 - At maximum damage charge, all damage caused by *Piercing Arrow* will trigger cosmetic critical strike text.
-- The following table refers for interactions while **Varus** is channeling: is usable during the first $0.85$ seconds, otherwise, it's disabled. and are disabled. This ability recasts to end channel.|items=false|consume=Disabled, but can still use trinkets.|spells=true, true, false, false, recasts
+- The following table refers for interactions while **Varus** is channeling:
+
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Blighted Quiver is usable during the first $0.85$ seconds, otherwise, it's disabled. Hail of Arrows and Chain of Corruption are disabled. This ability recasts to end channel. |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Consumables** | Disabled |
+| **Notes** | but can still use trinkets. |
 
 ---
 

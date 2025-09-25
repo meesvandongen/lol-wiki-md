@@ -333,6 +333,12 @@ Gaining *Demon Shade* resets *Whiplash*’s cooldown and *empowers* its next cas
 - Enemy champions below the health threshold are marked for **Evelynn**, indicating the target will receive *Last Caress' * increased damage.
 - The screen will direct to **Evelynn**’s position after she blinks.
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
+
 ---
 
 ## Patch History

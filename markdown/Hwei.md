@@ -123,7 +123,7 @@
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
 
 ---
 
@@ -151,7 +151,7 @@ No additional notes.
 
 **Notes:**
 
-No additional notes.
+Effect at cast time start
 
 ---
 
@@ -183,7 +183,7 @@ No additional notes.
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
 
 ---
 

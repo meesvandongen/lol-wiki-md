@@ -198,6 +198,7 @@ The burn will stop once the target scores a takedown against an enemy champion w
 
 **Notes:**
 
+:*See Berserk for specific details on Berserk.* Effect at cast time end
 - Typically, any enemies killed that directly result from *Berserk* are credited to **Renata Glasc**.
 
 ---

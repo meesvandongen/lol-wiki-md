@@ -240,6 +240,7 @@
 
 **Notes:**
 
+Effect at cast time end
 - *Moonshot*’s name is modified based on **Aphelios**' off-hand weapon:
   - Resurgent Moonshot
   - Binding Moonshot
@@ -417,7 +418,8 @@ After $0.3$ seconds of the illumination, attacks based on **Aphelios' ** current
 - With Crescendum, 1 spectral chakram is generated for every target hit, meaning it is possible to generate up to 10 spectral chakrams with one cast of *Moonlight Vigil* if it hits 5 enemy champions.
 - The locked-on attacks' can be dodged and blocked, but won't be prevented if **Aphelios** is blinded.
   - Preventing the attack also prevents the additional effect (e.g. marking them with Gravitum or granting spectral chakrams).
-- *Moonlight Vigil* has different visual effects changed accordingly to each weapon. *This may vary depending on the skin, this showcases the **default**:* Moonlight_Vigil_(Calibrum)_screenshot.png|**Calibrum** Moonlight_Vigil_(Severum)_screenshot.png|**Severum** Moonlight_Vigil_(Gravitum)_screenshot.png|**Gravitum** Moonlight_Vigil_(Infernum)_screenshot.png|**Infernum** Moonlight_Vigil_(Crescendum)_screenshot.png|**Crescendum**
+- *Moonlight Vigil* has different visual effects changed accordingly to each weapon. *This may vary depending on the skin, this showcases the **default**:*
+ Moonlight_Vigil_(Calibrum)_screenshot.png|**Calibrum** Moonlight_Vigil_(Severum)_screenshot.png|**Severum** Moonlight_Vigil_(Gravitum)_screenshot.png|**Gravitum** Moonlight_Vigil_(Infernum)_screenshot.png|**Infernum** Moonlight_Vigil_(Crescendum)_screenshot.png|**Crescendum**
 
 ---
 

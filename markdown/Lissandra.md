@@ -129,6 +129,7 @@ If *Ice Shard* hits an enemy, it will shatter, increasing its width and maximum 
 
 **Notes:**
 
+Effect at cast time end
 - *Ice Shard* picks a location 950 units away in the direction of the cast for the shattered missile to end up at.
 - The initial *Ice Shard* missile has a range of 700 units which it arrives at after . If it hasn't collided with an enemy in this path when it does, it checks for enemies in a cr 100 radius around the point 25 units in front of it.
   - Colliding or hitting an enemy in either fashion creates a new "shattered" missile with the same speed but greater width that continues to travel along the same line to the designated point 950 units from the cast's original position, originating at the location at which the initial missile collided at.
@@ -194,6 +195,7 @@ If *Ice Shard* hits an enemy, it will shatter, increasing its width and maximum 
 
 **Notes:**
 
+*Both casts count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - **Lissandra** can reactivate *Glacial Path* for the duration (plus another $0.2$-$0.3$ seconds after the claw 'sinks' into the ground).
   - The Claw can also hit enemies near the end point at this time, shortly after the missile has reached its maximum range.
 - *Glacial Path* allows **Lissandra** to surpass through every single wall in all maps, so long as the claw is at least halfway through them.

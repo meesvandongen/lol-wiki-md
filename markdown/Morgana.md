@@ -124,7 +124,7 @@
 
 **Notes:**
 
-No additional notes.
+Effect at cast time start
 
 ---
 

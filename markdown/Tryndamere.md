@@ -162,6 +162,7 @@ Targets facing in the opposite direction of **Tryndamere** are also slowed for t
 
 **Notes:**
 
+**Mocking Shout* very briefly reveals **Tryndamere** if he uses it while in the fog of war to enemies.
 - If the attack damage reduction would reduce the target's **bonus** attack damage below 0, the target's **base** attack damage value is unaffected, but their **total** attack damage will still be reduced. The target will however retain a **bonus** attack damage value of 0.
   - Effects that scale with **total** attack damage, such as basic attacks, will take the attack damage reduction into account for their calculations.
     - Those that have a ratio for **base** attack damage or **bonus** attack damage do not take the reduction into account.

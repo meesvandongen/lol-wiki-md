@@ -140,7 +140,7 @@ While under this state, **Kog'Maw** becomes invulnerable, untargetable, and immu
 
 **Notes:**
 
-No additional notes.
+Effect at cast time start
 
 ---
 
@@ -205,6 +205,7 @@ A field of ooze is created in its wake for 3 seconds, slowing enemies every $0.2
 
 **Notes:**
 
+Effect at cast time start
 - : The missile leaves a blob of ooze on the ground every 125 units traveled.
 
 ---

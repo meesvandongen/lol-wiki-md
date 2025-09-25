@@ -224,6 +224,12 @@ If *Facebreaker* affects at least one enemy on each side, all enemies are stunne
 - The spell indicator is slightly shorter than the actual hitbox' rectangle length, and slightly wider than the width (note that the effects are edge-range from the hitbox rectangle).
 - Targets protected by spell shields don't count toward the requirement to stun. Effect at cast time end
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
+
 ---
 
 ### R: The Show Stopper

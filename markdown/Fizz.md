@@ -219,6 +219,7 @@ He then begins to hop off of his trident over $0.5$ seconds, afterwards becoming
 
 **Notes:**
 
+**Playful* counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive. **Detonating the ability early for Trickster does not.
 - *Playful* cannot be used for approximately $0.5$ seconds after using Urchin Strike.
 - Flash can be used while hopping off the trident, but not while balanced on it.
 - **Fizz** can receive while aggro hopping off the trident, but not while balanced on it

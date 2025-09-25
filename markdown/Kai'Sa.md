@@ -109,6 +109,7 @@
 - Plasma stacks that exceed the rupture are reapplied normally.
 - Spell shield will block the Plasma application from Void Seeker only.
 - With Void Seeker, if the stacks detonate Plasma, any remaining stacks are reapplied afterwards. Void Seeker also deals *Caustic Wounds' *damage based on Plasma stacks on the target. This damage is calculated as if each stack was applied successively.<!-- Outdated
+
   - Hitting a target with 0 stack with normal *Void Seeker*: (based on level)|magic damage|2 stacks, - each |0 stack + 1 stack, - each % AP)|0 stack AP ratio % + 1 stack AP ratio %
   - Hitting a target with 3 stacks with normal *Void Seeker*: (based on level)|magic damage|2 stacks, - each (based on level)|buzzword|3 stacks + 4 stacks, - each % AP)|3 stacks AP ratio % + 4 stacks AP ratio %
   - Hitting a target with 0 stack with evolved *Void Seeker*: (based on level)|magic damage|3 stacks, - each (based on level)|buzzword|0 stack + 1 stack + 2 stacks, - each % AP)|0 stack AP ratio % + 1 stack AP ratio % + 2 stacks AP ratio %
@@ -189,7 +190,7 @@ Non-minions take 25% damage from missiles beyond their first.
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end Size of area revealed around target
 
 ---
 

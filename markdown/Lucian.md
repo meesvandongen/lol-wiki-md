@@ -175,6 +175,7 @@ Enemies hit are marked for 6 seconds.
 
 **Notes:**
 
+Effect at cast time end
   - Like most missiles, it will not collide with enemies whose center is beyond the maximum range (not behind **Lucian**), but this determines only the center and timing of the explosion.
 - *Ardent Blaze* will cast from wherever **Lucian** is at the end of the cast time.
 - **Lucian** will not gain *Ardent Blaze*’s bonus movement speed if attacks on marked targets are dodged, blocked, or if missed while the attacker is blinded.
@@ -251,6 +252,7 @@ While channeling, **Lucian** is ghosted and may still move.
 
 **Notes:**
 
+
 - At 100% critical strike chance, *The Culling* fires up to 25 additional shots, for a total of #expr: 100/#var:r_c shots.
   - The **total** damage at the maximum number of shots (at 100% critical strike chance) is (15 to 45)*#expr: 100/4 / physical damage (+ 25*#expr: 100/4% AD) (+ 15*#expr: 100/4% AP) physical damage.
   - Against minions, this is increased to (15 to 45)*#expr: 100/ (+ 25*#expr: 100/ (+ 15*#expr: 100/.
@@ -260,7 +262,17 @@ While channeling, **Lucian** is ghosted and may still move.
 - *The Culling* creates the shots at an offset of 35 units to the front plus 35 units towards each of **Lucian** (sides alternating, first shot fired from **Lucian**’s right gun), unlike the missiles of most abilities.
 - The damage dealt by each bullet of *The Culling* is calculated when the bullet reaches a target, just like single missile abilities.
 - Spell shield only blocks one instance of damage.
-- The following table refers for interactions while **Lucian** is channeling: is usable. and are disabled. This ability recasts to end channel.|move=true|items=true,true,interrupts,true,true|attack=false|spells=true,true,true,false,false
+- The following table refers for interactions while **Lucian** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Relentless Pursuit is usable. Piercing Light and Ardent Blaze are disabled. This ability recasts to end channel. |
+| **Items** | Allowed / Interrupts |
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 

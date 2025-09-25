@@ -312,6 +312,7 @@ Enemies hit by a *Shadow*’s slash are slowed for $1.5$ seconds, with multiple 
   - These *shadows* have a tracking distance of 2200 and a dash speed of 1750.
 - *Death Mark* does not cancel if the target enters a zombie state before the dash begins.
 - If the mark's post-mitigation damage (Damage calculated after modifiers) is higher than the target's **current** health, a *spinning shuriken* will appear above the victim. This does not necessarily mean the target will die, as it does not consider shields or forms of damage modifiers that are not respected by this predictive calculation.
+
 - This following table refers for interactions while **Zed** is performing *Death Mark*:
 
 ---

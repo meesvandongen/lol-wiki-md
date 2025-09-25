@@ -231,6 +231,12 @@ The third stack against a target consumes them all to deal **bonus** magic damag
 
 - **Gnar** is locked out of moving and casting movement abilities for $0.25$ seconds after the cast time. Effect at cast time end
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
+
 ---
 
 ### E: Hop
@@ -351,6 +357,12 @@ Enemies that collide with terrain take 50% increased damage immediately and are 
 
 - **Gnar** is locked out of moving and casting movement abilities for $0.175$ seconds (Estimated) after the cast time.
 - *GNAR!* can interact with player-generated terrain. Effect at cast time end
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 

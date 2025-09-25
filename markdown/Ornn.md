@@ -131,6 +131,19 @@ Additionally, **Ornn** increases his **bonus** armor, **bonus** magic resistance
 - The following table refers for interactions while **Ornn** is channeling:
   - All of **Ornn**’s actions are disabled during the first $0.5$ seconds of the channel.
 
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Interrupts |
+| **Movement** | Interrupts |
+| **Abilities** | Interrupts |
+| **Items** | Interrupts / Disabled |
+| **Summoner Spells** | Interrupts |
+| **Consumables** | Interrupts |
+| **Interrupted by** | death, silence |
+| **Damage** | true |
+
 ---
 
 ### Q: Volcanic Rupture
@@ -260,6 +273,14 @@ The shockwave destroys the pillar formed by *Volcanic Rupture* and partially des
 - **Ornn** will not dash after the cast time if he is airborne or resurrecting.
 - Displacement immunity will also resist the application of the stun.
 - The following table refers for interactions while **Ornn** is in cast time:
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
 
 ---
 

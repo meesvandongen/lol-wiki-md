@@ -250,6 +250,17 @@ Each dagger deals physical damage and magic damage, applies on-hit effects, with
 - The following table refers for interactions while **Katarina** is channeling:
   - Trying to cast a disabled active (excluding Hextech Rocketbelt) will buffer it to cast at the completion of the channel.
 
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Interrupts |
+| **Movement** | Interrupts |
+| **Abilities** | Interrupts |
+| **Items** | Interrupts / Allowed / Disabled / melee |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Notes** | Disabled in the first and last $0.25$ seconds of channel otherwise |
+
 ---
 
 ## Patch History

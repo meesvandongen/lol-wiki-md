@@ -264,6 +264,16 @@ The beam deals magic damage to enemies hit every $0.2$ seconds, and slows them b
   - Because of this, the effect will hit enemies whose center location is to the sides and/or slightly behind Vel'Koz, as long as their radius intersects with the area.
 - The following table refers for interactions while **Vel'Koz** is channeling:
 
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Disabled / Interrupts |
+
 ---
 
 ## Patch History

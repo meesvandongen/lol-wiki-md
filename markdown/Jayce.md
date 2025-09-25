@@ -125,6 +125,7 @@ If the bolt passes through *Acceleration Gate*, it becomes supercharged: increas
 
 **Notes:**
 
+Effect at cast time end
 - Upon touching Acceleration Gate, the enhanced missile gains its remaining range equal to [ 1600 units - travelled distance of the standard missile ].
   - This means that the range of the enhanced *Shock Blast* is always the same, regardless of how early or late it interacted with *Acceleration Gate*.
   - Supercharging the *Shock Blast* as soon as possible, however, will improve its average speed significantly.
@@ -330,6 +331,7 @@ No additional notes.
 
 **Notes:**
 
+*Transformations do not count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - The enhanced attack will not be consumed if it is parried (dodge, block, blind, and Riposte).
 - The *Mercury Hammer*’s bonus damage can affect structures.
 - Both *Transform* on-hit effects have no set duration and will only be consumed when **Jayce** either lands a basic attack or switches stances.

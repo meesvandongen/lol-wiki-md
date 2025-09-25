@@ -125,7 +125,7 @@ The third stack against a target consumes them all to stun them for $1.25$ secon
 
 **Notes:**
 
-No additional notes.
+Effect at cast time start
 
 ---
 

@@ -280,7 +280,8 @@ Breaking stealth ends *Thrill of the Hunt* immediately.
 - The true sight reveal on the target stays until the leap finishes.
 - **Rengar** discerns a distinct *heart beat* instead of the usual true sight indicator. This indicator will be removed when out of range, but the target will remain revealed.
 - Using a basic attack breaks the stealth at the end of the attack windup.
-- *Thrill of the Hunt* has an indicator that appears above the target(s) when Rengar is nearby. Some skins have a unique indicator. Headhunter Rengar Thrill of the Hunt Mark.png | Headhunter Night Hunter Rengar Thrill of the Hunt Mark.png | Night Hunter Mecha Rengar Thrill of the Hunt Mark.png | Mecha Pretty Kitty Rengar Thrill of the Hunt Mark.png | Pretty Kitty Guardian of the Sands Rengar Thrill of the Hunt Mark.png | Guardian of the Sands Sentinel Rengar Thrill of the Hunt Mark.png | Sentinel Street Demons Rengar Thrill of the Hunt Mark.png | Street Demons
+- *Thrill of the Hunt* has an indicator that appears above the target(s) when Rengar is nearby. Some skins have a unique indicator.
+ Headhunter Rengar Thrill of the Hunt Mark.png | Headhunter Night Hunter Rengar Thrill of the Hunt Mark.png | Night Hunter Mecha Rengar Thrill of the Hunt Mark.png | Mecha Pretty Kitty Rengar Thrill of the Hunt Mark.png | Pretty Kitty Guardian of the Sands Rengar Thrill of the Hunt Mark.png | Guardian of the Sands Sentinel Rengar Thrill of the Hunt Mark.png | Sentinel Street Demons Rengar Thrill of the Hunt Mark.png | Street Demons
 
 ---
 

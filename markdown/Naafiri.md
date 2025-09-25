@@ -183,6 +183,7 @@ If the dagger hits a target that is already bleeding, they are instead dealt the
 
 **Notes:**
 
+Effect at cast time end
 - *Darkin Daggers* calculates its additional damage based on missing health before applying the remaining bleed damage.
 - *Darkin Daggers' * execute against minions considers both the damage of the initial hit of the dagger and any bleed tick for putting the target under the threshold.
 
@@ -321,6 +322,17 @@ If **Naafiri** scores a champion takedown within 7 seconds of cast, she triggers
 - The following table refers for interactions while **Naafiri** is channeling:
   - If **Naafiri**’s channel is interrupted, the *Packmates' * channels will be canceled as well.
   - The channel is cancelled if the target dies or moves too far away, but not if they become untargetable.
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Interrupted by** | death,ground,silence,root |
 
 ---
 

@@ -131,6 +131,7 @@
 
 **Notes:**
 
+Effect at cast time end
 - **Rell** is locked out of moving, attacking, and casting any other ability for $0.35$ seconds after *Shattering Strike* is cast.
 
 ---
@@ -282,6 +283,7 @@ If cast without a valid target, or self-cast, *Full Tilt* will automatically tar
 
 **Notes:**
 
+Effect at cast time end
 - *Magnet Storm* will **not** drag units that are:
   - Dashing.
   - Being displaced (e.g. by airborne effects)

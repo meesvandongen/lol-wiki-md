@@ -186,6 +186,7 @@ Isolated targets hit by *Evolved Spike Racks* are slowed by 60% instead.
 
 **Notes:**
 
+Effect at cast time end
 - *Evolved Spike Racks** effect radius is centered around the location of the missile as it collides.
 - Spell shield will not block the reveal.
 
@@ -223,6 +224,7 @@ Isolated targets hit by *Evolved Spike Racks* are slowed by 60% instead.
 
 **Notes:**
 
+Effect at cast time end
 - *Void Spike*’s effect radius is centered around the location of the missile as it collides.
 
 ---
@@ -298,7 +300,7 @@ Isolated targets hit by *Evolved Spike Racks* are slowed by 60% instead.
 
 **Notes:**
 
-No additional notes.
+*No additional details.
 
 ---
 
@@ -323,6 +325,7 @@ After 2 seconds of leaving invisibility, and for the next 12 seconds, *Void Assa
 
 **Notes:**
 
+*Each cast counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - **Kha'Zix** receives the evolution even if he dies while in cast time.
 - Every time *Void Assault* is ranked, a secondary menu will pop up for **Kha'Zix** to select an ability to evolve, this can only be done once per ability.
   - The only way for **Kha'Zix** to evolve all of his abilities is to gain the fourth evolution point by being victorious in The Hunt is On! (by scoring a takedown on Rengar).

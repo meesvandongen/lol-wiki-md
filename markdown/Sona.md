@@ -242,6 +242,7 @@
 
 **Notes:**
 
+Effect at cast time start
 - While stunned by *Crescendo*, enemies will perform their Dance emote.
 
 ---

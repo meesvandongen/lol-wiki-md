@@ -103,6 +103,7 @@
 
 **Notes:**
 
+**Zealous**
 - The stacking **bonus** attack speed can be tracked on the HUD via a buff called **Zeal**, while the maximum stacks bonus grants the buff **Exalted**.
 - Subsequent applications will also refresh the duration of all stacks, but all of them are lost when expired.
 - If **Kayle** is in her attack animation after the stacks expire, she gains another $0.5$ seconds to refresh/stack **Zeal**.
@@ -174,6 +175,7 @@ The sword expands upon hitting an enemy, targets struck in the area are dealt ma
 
 **Notes:**
 
+**Details**
 - This ability has a cast time and cast delay. The former represents the amount of time Kayle needs to spend to cast and is equal to her attack windup time. The latter is the amount of time the portal needs to launch the sword, which is always seconds, starting from the beginning of the cast time.
   - As implied by the previous point, the portal is created at the start of the cast time and **Kayle** does not have to be alive for it to launch the sword.
   - The portal does not follow **Kayle**’s movements, using Flash or getting displaced won't change its position nor direction either.
@@ -220,6 +222,7 @@ If cast without a valid target, or self-cast, *Celestial Blessing* will automati
 
 **Notes:**
 
+**Details**
 - *Celestial Blessing*’s cast time does not interrupt movement and the effects are applied at the start. **Interactions & Other**
 - If cast with auto-targeting, *Celestial Blessing* may target allies who are untargetable, or allied clones that cannot be targeted by allies (such as Wukong’s Warrior Trickster).
 
@@ -261,6 +264,7 @@ If cast without a valid target, or self-cast, *Celestial Blessing* will automati
 
 **Notes:**
 
+**Details**
 - *Starfire Spellblade* deals:
   - The physical damage part of both the attack and the explosion deals basic damage.
   - Proc damage for the passive's on-hit effect.
@@ -311,6 +315,7 @@ After $2.5$ seconds, she rains the swords down around the target, dealing magic 
 
 **Notes:**
 
+**Details**
 - *Divine Judgment*’s cast time does not interrupt movement and the cast will finish even after **Kayle**’s death.
 - Since internalraw damage ignores invulnerability, the target may still die via the Nexus Obelisk, but the ability will finish at their corpse's position regardless.
 - *Divine Judgment* will prioritize casting on allies over **Kayle**. This means that if Kayle's and an ally's selection ranges are intercepting each other on the cursor's position, the cast will always occur on the ally.

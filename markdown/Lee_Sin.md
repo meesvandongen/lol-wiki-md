@@ -68,6 +68,18 @@ The first attack restores 20–40@1–13 energy and the second attack restores�
 - *Resonating Strike* cannot be cast without the marked target nearby or if the target is untargetable.
 - If *Resonating Strike* interrupts another dash, Tempest and Dragon's Rage can be cast during it (both otherwise cannot be cast).
 
+#### Channel Behavior (20px)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | [File: Safeguard.png |
+| **Items** | Allowed / Interrupts |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
+
 ---
 
 ### Q: Sonic Wave
@@ -99,7 +111,7 @@ While the target is marked, **Lee Sin** can cast *Resonating Strike*.
 
 **Notes:**
 
-No additional notes.
+Effect at cast time start
 
 ---
 
@@ -140,7 +152,7 @@ No additional notes.
 
 **ACTIVE:** **Lee Sin** dashes to the target allied unit's location. If the ally is a champion upon arrival, both they and **Lee Sin** gain a shield for 2 seconds and *Safeguard*’s cooldown is halved.
 
-**Lee Sin** can self-cast *Safeguard* to shield himself.
+**Lee Sin** can [self-cast *Safeguard* to shield himself.
 
 | Attribute | Value |
 |-----------|------:|

@@ -236,12 +236,14 @@ Activation resets *Way of the Hunter’s* current sword state. *Soul Unbound* ca
 
 - The *marks* store physical damage, magic damage, and true damage.
 - *Soul Unbound* stays on cooldown for the first 15 seconds of the game.
+
 - Recall and Teleport are disabled during *Soul Unbound*.
 - Only **Yone**’s initial dash can be interrupted.
 - **Yone** is displacement immune during the recast's cast time.
 - **Yone** uses Flow as his resource to indicate the remaining amount of time in centiseconds (100 centiseconds = 1 second) that *Soul Unbound* can be active for before the ability automatically recasts.
 - With 1 second remaining before the recast occurs automatically, a soft, dark vignette will pulse over the screen, accompanied by a distinct audio cue (The actual sound varies by skin). This warning is only visible and audible to **Yone**.
 - **Yone**’s body unit cannot be interacted with by any means. It will despawn as soon as **Yone**’s dash back ends.
+
 - *Soul Unbound*’s recast, even when cast automatically, counts as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - *Soul Unbound*’s recast does not interrupt **Yone**’s last movement or attack order.
 - **Yone** will place himself onto the ground and interrupt displacements affecting him upon recasting.
@@ -262,12 +264,14 @@ Activation resets *Way of the Hunter’s* current sword state. *Soul Unbound* ca
 - If **Yone** dies or enters resurrection with *Spirit Form*, he will immediately initiate the recast and dash back to his body while dead or resurrecting.
   - If he dies during the recast, the dash back is not interrupted.
   - His death animation will play upon arriving to his body.
+
 - The marks do not store damage from items, runes and summoner spells.
 - The mark also automatically detonates without **Yone** having to recast when the marked champion dies or enters resurrection.
 - The detonation damage cannot be dodged by becoming untargetable.
 - The marks will not store damage dealt to shields.
 - If the mark's damage is higher than the target's **current** health, the mark indicator will have a slightly different appearance.
   - This does not take into account effects that would amplify the damage of the mark, such as Coup de Grace.
+
 - The following table refers for interactions while **Yone** is in cast time and dashing back to his body:
 
 ---

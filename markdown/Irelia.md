@@ -189,6 +189,18 @@
   - This refers to the recast.
 - The following table refers for interactions while **Irelia** is channeling:
 
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+| **Notes** | but can still use trinkets |
+
 ---
 
 ### E: Flawless Duet

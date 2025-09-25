@@ -197,6 +197,12 @@ If the two targets are within 700 units of each other, they are instead slammed 
 - Displacement immunity will also resist the application of the stun. Effect at cast time end
 - If the target becomes untargetable, dies, or is too far away during the empowered attack's cast time, it is cancelled but not consumed.
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
+
 ---
 
 ### W: Unstable Matter
@@ -278,7 +284,19 @@ If the two targets are within 700 units of each other, they are instead slammed 
   - The knock up will occasionally end early if the targeted location was slightly away from **Zac**.
 - Displacement immunity will also resist the application of the stun.
 - The following table refers for interactions while **Zac** is channeling:
-  - Recall is disabled for the first $0.9$ seconds and otherwise interrupts the channel if used. and interrupt. initiates the recast and is buffered to cast itself at the end of the dash.|items=interrupts,true,,false|spells=true,false,false,interrupts,recasts|interrupts = silence, death, root, ground
+  - Recall is disabled for the first $0.9$ seconds and otherwise interrupts the channel if used.
+
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Interrupts |
+| **Abilities** | Stretching Strikes and Unstable Matter interrupt. Let's Bounce! initiates the recast and is buffered to cast itself at the end of the dash. |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Disabled / Interrupts / Recasts |
+| **Interrupted by** | silence, death, root, ground |
+| **Notes** | Disabled for the first $0.9$ seconds otherwise |
 
 ---
 

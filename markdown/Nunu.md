@@ -133,6 +133,7 @@ The snowball rolls over enemy minions and small monsters hit, dealing $33.3$% of
 
 **Notes:**
 
+*The initial cast and the manual recast count as ability activations for the purposes of on-cast effects such as Spellblade and Force Pulse.
 - The movement speed reduction the duo receive from initially casting *Biggest Snowball Ever!* is not considered a slow, thus it will not be resisted by their slow immunity.
 - The time threshold to begin gaining bonus movement speed may be bugged, as Flat Bonus MS increases the time while % Bonus MS decreases the time.
   - The formula appears to be (X ÷ 100) - Y, where:
@@ -151,6 +152,19 @@ The snowball rolls over enemy minions and small monsters hit, dealing $33.3$% of
 - *Biggest Snowball Ever!* is disabled for the first 15 seconds of the game.
 - Displacement immunity will not resist the application of the stun.
 - The following table refers for interactions while **Nunu & Willump** are channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death, ground, root, silence |
+| **Notes** | but cannot input movement commands. |
 
 ---
 
@@ -241,9 +255,18 @@ After 3 seconds from the first cast, *Snowbound* enemies near **Willump** take m
 
 **Notes:**
 
+*The initial cast and the manual recast count as ability activations for the purposes of on-cast effects such as Spellblade and Force Pulse.
 - The affected area is hidden if the duo is not visible to the enemy team.
 - While it's unlikely to happen normally, it is possible to deal zero damage with *Absolute Zero* if canceled as soon as it's started.
 - The following table refers for interactions while **Nunu & Willump** are channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Abilities** | Interrupts |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Interrupts |
 
 ---
 

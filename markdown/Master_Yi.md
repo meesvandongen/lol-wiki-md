@@ -159,6 +159,16 @@ While channeling, **Master Yi** gains 70% damage reduction for the first $0.5$ s
 - The first tick of healing may occur at any moment on the first $0.5$ seconds of the channel. This means immediately canceling the channel for the attack reset does not guarantee one tick of healing, though it may occur with some chance.
 - The following table refers for interactions while **Master Yi** is channeling:
 
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Interrupts |
+| **Movement** | Interrupts |
+| **Abilities** | Interrupts |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Interrupts |
+
 ---
 
 ### E: Wuju Style

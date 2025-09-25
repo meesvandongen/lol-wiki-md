@@ -175,7 +175,7 @@ Additionally, she is allowed to exceed the attack speed cap (normally 3.003 atta
 
 **Notes:**
 
-No additional notes.
+Effect at cast time start
 
 ---
 

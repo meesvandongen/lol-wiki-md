@@ -176,6 +176,7 @@ Enemies hit are dealt *Edge of Ixtal*’s damage, reduced to 75% against subsequ
 
 **Notes:**
 
+Effect at cast time end
 - Using a basic attack breaks the stealth at the start of the attack windup.
 
 ---

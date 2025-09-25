@@ -158,6 +158,7 @@ Enemies near **Maokai** are also stunned for $0.5$ seconds and knocked back up t
 
 **Notes:**
 
+Effect at cast time end
 - *Bramble Smash*’s damage based on the target's health ratio is capped at 9999 against non-champions.
 - Displacement immunity will also resist the application of the stun.
 

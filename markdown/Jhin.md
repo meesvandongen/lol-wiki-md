@@ -309,7 +309,22 @@ The fourth shot critically strikes for damage.
 - **Jhin** gains a wider field of view during *Curtain Call*.
 - The reveal debuff is named *Caught Out*.
   - This debuff is shared between Captive Audience and *Curtain Call*. Effect at cast time end
+
 - The following table refers for interactions while **Jhin** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Abilities** | Interrupts |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Disabled / Interrupts |
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 

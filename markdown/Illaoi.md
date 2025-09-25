@@ -189,10 +189,18 @@ Each Tentacle also heals **Illaoi** for 5% of her **missing** health if it hits 
 
 **Notes:**
 
+Effect at cast time end
   - *Tentacle Smash*’s hitbox is fixed in front of **Illaoi**, while the indicator on the ground is fixed to the targeted direction.
 - Conqueror will pre-emptively amplify *Tentacle Smash*’s damage by the generated *Conqueror* stack.
   - Only *Tentacle Smash* or also I attacks?
-- The self-reveal has not been fully tested for complete confirmation. Is the ability invisible when hitting minions and there is no enemy champion nearby? Is the tip of the ability enough to reveal her? Whether it can hit a minion or not? Just if she's around the exit of the fog of war, and even if she points towards the inside of the fog of war? [https://youtu.be/JRizCjxyc5g] and are buffered. is usable.|spells=true,false,false,false,false
+- The self-reveal has not been fully tested for complete confirmation. Is the ability invisible when hitting minions and there is no enemy champion nearby? Is the tip of the ability enough to reveal her? Whether it can hit a minion or not? Just if she's around the exit of the fog of war, and even if she points towards the inside of the fog of war? [https://youtu.be/JRizCjxyc5g]
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Abilities** | E and R are buffered. W is usable. |
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 
@@ -381,6 +389,7 @@ For the duration, *Harsh Lesson’s* cooldown is halved, all Tentacles awakened 
 
 **Notes:**
 
+Effect at cast time end
 - **Illaoi** spawns the ***Tentacle*** 700 range away from her, unless there's a natural wall blocking the way making the ***Tentacle*** spawn on it, with an angle relative to the direction she's facing.
   - 1+ champions: one Tentacle at 0 degrees. (towards **Illaoi**’s facing direction)
   - 2+ champions: one Tentacle at 60 degrees.

@@ -289,6 +289,18 @@ The bolt deals magic damage to enemies hit, capped at 650 against non-champions,
   - Turrets maintain the same targeting behavior even when disabled; damaging an enemy champion will still draw turret aggro. However, if the turret's desired target leaves range or has become an invalid target, it will lock onto the most previous target it was going to attack prior to becoming disabled, or instead, find a new one if that condition is not applicable.
 - The following table refers for interactions while **Volibear** is dashing:
 
+#### Channel Behavior (dash)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+
 ---
 
 ## Patch History

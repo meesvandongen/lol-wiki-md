@@ -116,6 +116,7 @@ While at the allied fountain, 25 Courage is generated every $0.25$ seconds. If r
 - The **bonus** movement speed buff's value is refreshed when **Kled** levels up.
 - **Kled** will neither gain Courage nor **bonus** movement speed if his basic attack is dodged, blocked, missed or parried.
 - It is possible to get the Courage from the fountain but have **Kled** and **Skaarl** reunite outside the fountain.
+
 - Sources of increased **maximum** health that additionally restore **current** health will restore **Kled**’s **current** health even if he is **DISMOUNTED**.
 - The Courage bar is **white** when under 50 courage, **yellow** when equal to or above 50 courage, and **red** at 100 courage.
 
@@ -149,6 +150,7 @@ While **MOUNTED**, healing and health regeneration will first replenish **Skaarl
 - If **Skaarl** health is reduced below 0 by Eclipse Ever Rising Moon, **Kled** will take the triggering attack's damage.
 - While untargetable, **Kled** rapidly destroys enemy projectiles targeting him.
 - **Kled** does not receive damage from Illaoi’s Test of Spirit, or Kayn’s Umbral Trespass while dismounting.
+
 - Dismounting removes Speed Shrine's movement speed buff from **Kled** and prevent him from regaining it for the next 5 seconds, even if he remounts or enters the shrine again.
 - The lunge can pass through Yorick’s Dark Procession.
 - Buying items while **Kled** and **Skaarl** combined **current** health is lower than **Kled**’s **maximum** health will cause **Kled** to dismount upon undoing the purchase and potentially lose health.
@@ -426,6 +428,7 @@ While charging, the duo gain a shield for every $0.25$ seconds of traveling, up 
   - **Kled**’s pathing indicator will not account for changes in **Kled**’s pathing.
     - **Kled**’s pathing indicator will sometimes display a path different from his real path.
 - Axiom Arcanist only increases the first instance of shield gained.
+
 - While charging, if there are enemy champions within 500 (estimated) range in **Kled**’s facing direction, **Kled** will lock onto the closest visible enemy champion within 800 (estimated) range in his facing direction and begin dashing after a brief delay (0.05 to 0.11, estimated).
   - If the charge ends before (because of the delay before the dash begins), or during the dash (because of the charge ending after 15 seconds), the dash will not:
     - Generate a shield;
@@ -443,7 +446,9 @@ While charging, the duo gain a shield for every $0.25$ seconds of traveling, up 
 - The airborne debuff is removed early when the forced movement stops.
 - The following table refers for interactions while **Kled** is charging:
   - Ghost is also disabled, contrary to the table below (technical limitation (hopefully temporary)).
+
 - The following table refers for interactions while **Kled** is dashing:
+
 - Every summoner spell is disabled, but summoner spells that aren't disabled while **Kled** is charging will not visually appear disabled.
 - No summoner spells or items are disabled if the charge ends before or during the dash. **Buffering Interactions**
 - Nothing can be buffered during the charge.

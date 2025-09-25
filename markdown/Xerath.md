@@ -133,6 +133,18 @@
 - The rectangle hitbox's minimum range is er 0, right through **Xerath**’s center.
 - *Arcanopulse* will not fire and deal damage if **Xerath** dies during the recast delay.
 - The following table refers for interactions while **Xerath** is channeling:
+
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Consumables** | Disabled |
+| **Notes** | but can still use trinkets. |
 - The following table refers for interactions while **Xerath** is locked out during the recast delay:
 
 ---
@@ -202,7 +214,7 @@ Enemies in the epicenter take $66.7$% increased damage and are slowed by a great
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
 
 ---
 
@@ -269,6 +281,17 @@ Hitting at least one enemy champion grants a stack of *Arcane Perfection* during
 - **Xerath** can use Dark Passage while channeling.
 - The following table refers for interactions while **Xerath** is channeling:
   - Teleport and Recall are disabled for the first $1.25$ seconds and otherwise interrupt the channel if they are used.
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Interrupts |
+| **Movement** | Interrupts |
+| **Abilities** | Disabled |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Disabled / Interrupts |
+| **Notes** | Disabled for the first $1.25$ seconds otherwise |
 
 ---
 

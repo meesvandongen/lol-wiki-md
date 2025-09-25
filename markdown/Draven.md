@@ -143,7 +143,8 @@ Upon hitting the target, the axe then ricochets off of them to land after 2 seco
 - *Spinning Axe* attacks deal their total increased damage in a single instance of basic damage.
 - The empowered attack will not trigger against structures.
   - The duration will refresh on-attack against them.
-- *Spinning Axe* has an indicator that appears on the ground for Draven to stand on. Some skins have a unique indicator. Gladiator Draven Axe Indicator.png | Gladiator Soul Reaver Draven Axe Indicator.png | Soul Reaver Primetime Draven Axe Indicator.png | Primetime Pool Party Draven Axe Indicator.png | Pool Party Beast Hunter Draven Axe Indicator.png | Beast Hunter Santa Draven Axe Indicator.png | Santa Mecha Kingdoms Draven Axe Indicator.png | Mecha Kingdoms Ruined Draven Axe Indicator.png | Ruined Debonair Draven Axe Indicator.png | Debonair Fright Night Draven Axe Indicator.png | Fright Night La Ilusión Draven Axe Indicator.png | La Ilusión
+- *Spinning Axe* has an indicator that appears on the ground for Draven to stand on. Some skins have a unique indicator.
+ Gladiator Draven Axe Indicator.png | Gladiator Soul Reaver Draven Axe Indicator.png | Soul Reaver Primetime Draven Axe Indicator.png | Primetime Pool Party Draven Axe Indicator.png | Pool Party Beast Hunter Draven Axe Indicator.png | Beast Hunter Santa Draven Axe Indicator.png | Santa Mecha Kingdoms Draven Axe Indicator.png | Mecha Kingdoms Ruined Draven Axe Indicator.png | Ruined Debonair Draven Axe Indicator.png | Debonair Fright Night Draven Axe Indicator.png | Fright Night La Ilusión Draven Axe Indicator.png | La Ilusión
 
 ---
 
@@ -203,7 +204,7 @@ Catching a *Spinning Axe* resets *Blood Rush*’s cooldown.
 
 **Notes:**
 
-No additional notes.
+Effect at cast time end
 
 ---
 

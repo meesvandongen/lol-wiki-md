@@ -274,6 +274,7 @@ The shuriken *marks* and reveals the enemy or the last *smoke* section hit for 3
 
 **Notes:**
 
+*Both casts count as ability activations for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive.
 - With the first cast, **Akali** can dash up to a maximum of 900 units if the first enemy she hit was at the maximum dash range.
 - Casting Flash during either dashes will interrupt them, but **Akali** will deal damage to any enemies she comes in contact with at the new location.
   - Enemies already hit by either of *Perfect Execution*’s casts cannot be affected more than once by the same cast.

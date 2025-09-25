@@ -273,6 +273,12 @@ During this time, **Shyvana**’s basic attacks deal **bonus** magic damage on-h
 - *Dragon Descent*’s displacement immunity begins from the start of the cast time.
 - *Dragon's Descent* has a 100/(1 to 2) seconds effective cooldown when not attacking and not dead.
 
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
+
 ---
 
 ## Patch History

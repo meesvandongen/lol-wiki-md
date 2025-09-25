@@ -238,6 +238,16 @@ While **Fiddlesticks** is channeling, the tethered enemies are dealt magic damag
 - - Fiddlesticks has a special icon for this ability.
 - The following table refers for interactions while **Fiddlesticks** is channeling:
 
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Interrupts |
+| **Movement** | Interrupts |
+| **Abilities** | Interrupts |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Interrupts |
+
 ---
 
 ### E: Reap
@@ -302,6 +312,17 @@ Enemies hit in the center of the area are also silenced for $1.25$ seconds.
 - **Fiddlesticks** will always blink to its intended location even if its position changes during the channel without being interrupted (e.g. by Realm Warp).
 - - Fiddlesticks has a special icon for this ability.
 - The following table refers for interactions while **Fiddlesticks** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Interrupted by** | death, silence, ground |
 
 ---
 

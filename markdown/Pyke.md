@@ -142,6 +142,15 @@ If the charge is interrupted or completes without reactivation, *Bone Skewer* is
 - Only the charged version of *Bone Skewer* will be intercepted.
 - The pull can fling an enemy behind **Pyke** if the harpoon hits at close range. Effect at cast time end
 - The following table refers for interactions while **Pyke** is channeling:
+
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Abilities** | Interrupts |
+| **Items** | Disabled |
+| **Consumables** | Disabled |
+| **Notes** | but can use trinkets |
 - The following table refers for interactions while **Pyke** is locked out from the harpoon being in flight:
   - The lockout ends as soon as the missile fizzles from hitting a target or reaching maximum range, or being intercepted.
 

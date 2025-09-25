@@ -188,6 +188,18 @@ When the blasts meet, the gusts form a tornado that persists for 2 seconds, slow
 - The ability key does not need to be held down when buffered in other abilities except Winds of War.
 - The following table refers for interactions while **Galio** is channeling:
 
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Disabled |
+| **Items** | Interrupts / Allowed / Disabled |
+| **Summoner Spells** | Allowed / Disabled / Interrupts |
+| **Consumables** | Usable |
+| **Interrupted by** | death, silence |
+
 ---
 
 ### E: Justice Punch
@@ -222,6 +234,12 @@ When the blasts meet, the gusts form a tornado that persists for 2 seconds, slow
 - **Galio** will initiate the dash even if his step backwards is knocked down.
 - **Galio**’s second dash will always dash the distance of the target direction. Having the step backwards cut short has no effect on the total distance gained.
 - The following table refers for interactions during *Justice Punch*’s cast time and dash:
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 
@@ -259,6 +277,17 @@ After channeling for $1.25$ seconds, he gains crowd control immunity for the rem
 - **Galio** will still cause an impact to occur at the destination even if he is unable to travel the full distance with the dash (e.g. by The Hextech Ultimatum’s and Realm of Death’s borders and terrain). **Galio** will dash as far as he can go, and thus, does not end the dash prematurely.
 - **Galio** will always dash 100 units minimum, and dash *over* his target's location if they are less than 100 units away from him.
 - The following table refers for interactions while **Galio** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Interrupted by** | death, root, silence, ground |
 - *Hero's Entrance*’s channel can only be interrupted by crowd control in the first $1.25$ seconds.
 
 ---

@@ -104,6 +104,7 @@ While any amount of *Notes* are active, **Seraphine**’s next basic attack is e
 
 **Notes:**
 
+**Echo Details:**
 - *Echo*’s current stacks are represented by a counter under **Seraphine**’s health bar, visible to all players. The last stack is highlighted to indicate that an *Echo* cast is ready.
 - **Seraphine**’s basic abilities alternate their icons between 3 different ones each, depending on the current amount of stacks she has.
 - The additional cast must complete for *Echo* stacks to be consumed; if the cast time does not finish or does not begin at all, or if the ability fails to cast when there is not enough mana, **Seraphine** will keep her stacks.

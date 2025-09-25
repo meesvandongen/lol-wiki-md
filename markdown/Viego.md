@@ -238,7 +238,20 @@ The second strike applies on-hit effects and can critically strike for damage.
 **Notes:**
 
 - The reduced cooldown from the charge will not occur if *Spectral Maw*’s cooldown is already below 3 seconds.
-- The following table refers for interactions while **Viego** is channeling: is usable. and are disabled.|items=false|consume=Disabled, but can still use trinkets.|spells=true, true, false, false, recasts|interrupts=death, silence, ground, root
+- The following table refers for interactions while **Viego** is channeling:
+
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Harrowed Path is usable. Blade of the Ruined King and Heartbreaker are disabled. |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Consumables** | Disabled |
+| **Interrupted by** | death, silence, ground, root |
+| **Notes** | but can still use trinkets. |
 
 ---
 

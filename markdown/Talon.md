@@ -177,6 +177,7 @@ At maximum range, the daggers linger for $0.7$ seconds before homing back to **T
 
 **Notes:**
 
+Effect at cast time end
 - Casting *Rake* when an enemy is within 650 radius and 26° angle in front of *Talon* will reveal him from the fog of war like a targeted cast.
   - This is because of *Rake*’s internal Cone targeting type, which defaults to "targeting" all units in the preset area and thereby trigger revealing the caster if not toggled off for the spell.
 - If **Talon** dies while *Rake* is mid-air, the projectiles will still complete their travel.

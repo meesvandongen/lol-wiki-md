@@ -139,11 +139,18 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 
 **Notes:**
 
+Effect at cast time end
 - If *Ntofo Strikes* hits no more than one enemy champion, **K'Sante** will be ordered an attack command against them.
 - The basic attack reset is not considered one for Hail of Blades.
 - Temporary increases/decreases in bonus resistances will count for reducing/increasing *Ntofo Strikes** cooldown.
 - Only the empowered active is a projectile.
 - The following table refers for interactions while **K'Sante** is in the cast time of the third cast:
+
+#### Channel Behavior (cast)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Summoner Spells** | Allowed / Disabled |
 
 ---
 
@@ -208,6 +215,19 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 - *Path Maker* can be recast by issuing an attack move command (or **LMB**) but not a targeted attack command.
 - The following table refers for interactions while **K'Sante** is channeling:
   - If the charge is cancelled, he will not automatically use the recast.
+
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+| **Notes** | but allows trinkets |
 
 ---
 
@@ -319,6 +339,7 @@ Upon entering *All Out*, **K'Sante** is restored to 100% **maximum** mana. His m
   - For **K'Sante**, his camera centers on him at the start of the cast time, then once again at the end of the cast time at the location of his blink behind the target, and it is not locked.
 - *All Out*’s granted untargetability from the vanish during the target's pull of over 2000 units does not destroy in-flight projectiles.
 - The following table refers for interactions while **K'Sante** is in cast time:
+
 - The following table refers for interactions while **K'Sante** is performing *All Out*’s cast:
 
 ---

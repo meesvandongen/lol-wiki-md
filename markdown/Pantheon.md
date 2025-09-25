@@ -142,6 +142,13 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
   - Item actives that interrupt and those with cast times as well as Titanic Hydra, Hexflash, and Recall will cause *Comet Spear* to recast automatically and the active or spell to buffer to cast afterwards.
     - Teleport will cancel the channel entirely.
 
+#### Channel Behavior (charge)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Items** | Allowed / Interrupts / Disabled |
+| **Summoner Spells** | Allowed / Interrupts / Recasts |
+
 ---
 
 ### W: Shield Vault
@@ -217,9 +224,21 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
 
 **Notes:**
 
+*The initial cast count as an ability activation for the purposes of on-cast effects such as Spellblade and triggering Force Pulse’s passive. **Detonating the ability manually is not.
 - **Pantheon** retains his invulnerability during the recast's cast time. Effect at cast time start** **Pantheon** will slam from wherever he was at the start of the recast's cast time.
 - Spell shield will only block the slam's damage.
 - The following table refers for interactions while **Pantheon** is channeling:
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Disabled |
+| **Items** | Allowed / Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Interrupted by** | death |
 
 ---
 
@@ -276,6 +295,18 @@ Over the remaining $1.25$ (Estimated) seconds, **Pantheon** crashes down after $
 - Using *Grand Starfall* will inform allies with a ping.
 - If Pantheon leaves the Death Realm during *Grand Starfall*’s shockwave, its hitbox will become invisible but it will still deal damage.
 - The following table refers for interactions while **Pantheon** is channeling (first channel):
+
+#### Channel Behavior (channel)
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death, ground, root, silence |
 - The cast time and second channel have the same interactions except they can only be interrupted by death.
 - *Grand Starfall*’s first channel will also be interrupted if he enters or leaves the Death Realm.
 
