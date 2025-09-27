@@ -77,10 +77,9 @@
 
 - This ability will cast from wherever the caster is at the start of the cast time.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---
@@ -124,10 +123,9 @@
 - **Tahm Kench** is vanished (but does not become untargetable) during the $0.15$ seconds delay.
 - The following table refers for interactions while **Tahm Kench** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
@@ -137,10 +135,9 @@
 | **Interrupted by** | death, ground, root, silence |
 - The following table refers for interactions while **Tahm Kench** is unable to act:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
@@ -234,12 +231,22 @@ After 1 second, **Tahm Kench** can cast *Regurgitate* while a target is inside o
 - The swallowed target is not considered to be vanished. They are instead hidden below the visible map plane, to maintain ongoing effects such as Senna’s Curse of the Black Mist.
 - During *Devour*’s attachment and Regurgitate’s displacement, the swallowed target's camera is locked and centered on their champion.
   - This does not affect **Tahm Kench**.
-- The following table refers for interactions while the target is unable to act: * unless movement commands are otherwise restricted. If an enemy, movement commands are disabled.|cast=false|items=false|consume=false|spells=false|interrupts=death
-
-#### Channel Behavior (cast)
+- The following table refers for interactions while the target is unable to act:
 
 | Aspect | State / Notes |
 |--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | If an ally, forces **Tahm Kench** to use *Regurgitate* unless movement commands are otherwise restricted. If an enemy, movement commands are disabled. |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+| **Notes** | If an ally forces **Tahm Kench** to use *Regurgitate* unless movement commands are otherwise restricted. If an enemy movement commands are disabled. |
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Type** | Cast |
 | **Items** | Disabled |
 | **Summoner Spells** | Allowed / Disabled |
 | **Consumables** | Disabled |

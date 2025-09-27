@@ -270,6 +270,16 @@ If **Vex** scores a takedown against *Shadow Surge*’s marked target within 6 s
 - The following table refers for interactions while **Vex** is dashing:
   - All movement spells are disabled during the first $0.25$ seconds of the dash.
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Allowed / Interrupts |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
+
 ---
 
 ## Patch History

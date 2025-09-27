@@ -180,7 +180,16 @@ While **Rell** is **DISMOUNTED**, she can cast *Ferromancy: Mount Up*. Upon comp
 - **Rell** slides between 250 and 350 units in testing, depending on how far the spell was targeted. It is not known where this is intended.
 - If **Rell** dashes before a wall on the map, the slide will cover a shorter distance to the terrain over the same time, moving slower.
   - Interaction with player-made walls.
-- The following table refers for interactions while **Rell** is dashing/in cast time: is disabled. and are usable.|items=true,,,false|spells=true,false,false,false,false|interrupts=death
+- The following table refers for interactions while **Rell** is dashing/in cast time:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Q is disabled. E and R are usable. |
+| **Items** | Allowed / Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Interrupted by** | death |
 
 ---
 

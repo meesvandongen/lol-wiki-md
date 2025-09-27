@@ -266,10 +266,9 @@ A field of ice is created along the fissure's path, lasting for 4 seconds and sl
 
 - This ability will cast from wherever the caster is at the end of the cast time.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---

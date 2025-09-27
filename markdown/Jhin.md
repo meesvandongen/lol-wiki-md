@@ -314,18 +314,16 @@ The fourth shot critically strikes for damage.
 - This ability will cast from wherever the caster is at the end of the cast time.
 - The following table refers for interactions while **Jhin** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Abilities** | Interrupts |
 | **Items** | Interrupts / Allowed / Disabled |
 | **Summoner Spells** | Allowed / Disabled / Interrupts |
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---

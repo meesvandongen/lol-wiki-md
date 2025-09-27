@@ -276,6 +276,16 @@ Activation resets *Way of the Hunter’s* current sword state. *Soul Unbound* ca
 
 - The following table refers for interactions while **Yone** is in cast time and dashing back to his body:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | false |
+
 ---
 
 ### R: Fate Sealed
@@ -324,6 +334,16 @@ After $0.3$ seconds (From the end of the cast time), a gust rushes along the sam
 - The knock up starts once the pull ends.
 - **Yone** is locked out of performing actions for $0.45$ seconds after the cast time. All abilities that have been buffered during this time will cast shortly before the lock out ends.
   - The following table refers for interactions while **Yone** is in cast time:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | revival-false |
 
 ---
 

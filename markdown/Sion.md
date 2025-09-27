@@ -222,10 +222,9 @@ If *Decimating Smash* was charged for at least 1 second, **Sion** instead slams 
 - The indicator of the ability is slightly shorter at its front than the hitbox of the ability is for Sion, Sion and related skins and chromas, while on Sion, the indicator is slightly thinner at the front than the hitbox is, instead.
 - The following table refers for interactions while **Sion** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Soul Furnace and its recast are usable. Roar of the Slayer and Unstoppable Onslaught are disabled. This ability recasts to end channel. |
@@ -409,10 +408,9 @@ Enemies, including turrets, hit by the slam are dealt the same damage and are sl
 - The *leap* appears to always have the same speed regardless of **Sion**’s, at roughly 750.
 - The following table refers for interactions while **Sion** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Soul Furnace and its recast are usable. Decimating Smash and Roar of the Slayer are disabled. This ability recasts to end channel. |

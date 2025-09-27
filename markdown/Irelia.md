@@ -191,10 +191,9 @@
   - This refers to the recast.
 - The following table refers for interactions while **Irelia** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
 | **Items** | Disabled |

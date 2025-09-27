@@ -282,6 +282,16 @@ The shockwave leaves behind a circular to the Spirit Realm for a duration, formi
     - The lockout during the initial cast's dash persists for another $0.5$ seconds after the dash ends.
     - The lockout during the dash persists for another $0.15$ seconds after the dash ends.
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+
 ---
 
 ## Patch History

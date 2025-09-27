@@ -255,10 +255,9 @@ Upon completion, **Ryze** and allied units within (See notes) will blink to the 
     - Teleport / Unleashed Teleport
 - The following table refers for interactions while **Ryze** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Allowed |
 | **Movement** | Allowed |
 | **Abilities** | Allowed |

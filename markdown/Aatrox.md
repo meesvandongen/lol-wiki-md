@@ -147,7 +147,6 @@ Whenever **Aatrox** hits at least one enemy champion or large monster with a bas
 | **Third Sweetspot Damage** | 25.5 / 63.75 / 102 / 140.25 / 178.5 (+ 153 / 172.125 / 191.25 / 210.375 / 229.5% AD) |
 
 *The Darkin Blade* deals 55 to 70 damage against minions, and the knock up duration from hitting the Sweetspot is doubled to $0.5$ seconds against monsters.
-|leveling6 
 
 **Notes:**
 
@@ -164,10 +163,9 @@ Whenever **Aatrox** hits at least one enemy champion or large monster with a bas
 - This ability's damage is calculated based on the caster's current stats and changes dynamically.
 - This ability will cast from wherever the caster is at the end of the cast time.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Abilities** | E can be cast. Other abilities are disabled. |
 | **Interrupted by** | death |
 

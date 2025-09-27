@@ -238,10 +238,9 @@ While **Fiddlesticks** is channeling, the tethered enemies are dealt magic damag
 - - Fiddlesticks has a special icon for this ability.
 - The following table refers for interactions while **Fiddlesticks** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
@@ -313,10 +312,9 @@ Enemies hit in the center of the area are also silenced for $1.25$ seconds.
 - - Fiddlesticks has a special icon for this ability.
 - The following table refers for interactions while **Fiddlesticks** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |

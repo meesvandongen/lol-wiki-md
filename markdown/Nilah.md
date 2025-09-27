@@ -246,6 +246,16 @@ Allied champions she touches (Being within collision range of them) will also be
 - *Apotheosis* shielding reuses indicators from *Joy Unending*.
 - The following table refers for interactions while **Nilah** is performing *Apotheosis*:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Disabled |
+| **Items** | Allowed / Disabled / melee |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
+
 ---
 
 ## Patch History

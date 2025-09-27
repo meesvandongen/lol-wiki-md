@@ -152,10 +152,9 @@ She stops upon hitting an enemy champion, knocking them back over $0.75$ seconds
 - Stuck targets (including those that block *Vault Breaker* with a spell shield) are briefly immune to being affected again by *Vault Breaker* from this player, for about $1.25$ seconds.
 - The following table refers for interactions while **Vi** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
@@ -281,7 +280,17 @@ Enemies she dashes through are dealt the same damage, knocked aside by 350 units
 - Displacement immunity will not resist the application of the stun.
 - The following table refers for interactions while **Vi** is dashing and has grabbed the target:
   - Flash cannot be used during the grab.
-  - This lockout is removed as soon as the grab ends, after which the the target's remaining airborne time will be $0.25$ seconds. is usable. is disabled.|items=false|consume=false|spells=true,true,false,false,true|interrupts=death
+  - This lockout is removed as soon as the grab ends, after which the the target's remaining airborne time will be $0.25$ seconds.
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Relentless Force is usable. Vault Breaker is disabled. |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
 
 ---
 

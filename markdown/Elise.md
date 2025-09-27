@@ -366,6 +366,16 @@ If the recast was used on a target enemy, **Elise** and her *Spiderlings* descen
 - If **Elise** enters resurrection during *Rappel*, she will descend back down immediately.
 - The following table refers for interactions while **Elise** is in *Rappel*:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Descends onto the attack target. |
+| **Movement** | Descends onto her current position. |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+
 ---
 
 ## Patch History

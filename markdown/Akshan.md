@@ -271,8 +271,28 @@ Scoring an enemy champion takedown reduces *Heroic Swing*’s **current** cooldo
   - This particle can be attacked by minions.
 - This ability's damage is calculated based on the caster's current stats and changes dynamically.
 - Hook range including lollipop against walls, automated attacks range while swinging, final dash distance and speed.
-- The following table refers for interactions while the hook is attached or in flight: and are disabled. is usable.|items=false|consume=false|spells=false,interrupts,false,false,false|interrupts=death,root,ground
-- The following table refers for interactions while **Akshan** is swinging: and are disabled. is usable.|items=true,true,interrupts,interrupts,true,interrupts,true|consume=true|spells=true,interrupts,false,false,true|interrupts=death,root
+- The following table refers for interactions while the hook is attached or in flight:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Automatically initiates the second cast. |
+| **Movement** | Automatically initiates the second cast. |
+| **Abilities** | Avengerang and Going Rogue are disabled. Comeuppance is usable. |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled / Interrupts |
+| **Consumables** | Disabled |
+| **Interrupted by** | death,root,ground |
+- The following table refers for interactions while **Akshan** is swinging:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Automatically initiates the third cast. |
+| **Movement** | Automatically initiates the third cast. |
+| **Abilities** | Avengerang and Going Rogue are disabled. Comeuppance is usable. |
+| **Items** | Allowed / Interrupts |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death,root |
 
 ---
 
@@ -322,25 +342,6 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 | Attribute | Value |
 |-----------|------:|
 | **Minimum Physical Damage per Bullet** | [25 / 30 / 35 / 40 / 45 (+ 15% AD)]
-\|description4 = Each bullet's damage applies life steal life steal at 100% effectiveness and execute minions.
-\|description5 = ***Akshan** can move while channeling Comeuppance.*
-\|cooldown = 100 / 92.5 / 85 / 77.5 / 70
-\|cdstart = post-effect
-\|cost = 100
-\|costtype = Mana
-\|cast time = none
-\|target range = cr 2500
-\|width = er 120
-\|speed = 3200
-\|targeting = Unit
-\|affects = Self, Enemies
-\|damagetype = Physical
-\|spellshield = special
-\|spelleffects = spell
-\|silence = true
-\|projectile = true
-\|callforhelp = false
-\|notes 
 - *Comeuppance* refreshes the duration of ** stacks on the target every $0.25$ seconds.
 - A kill threshold will appear on the health bar of the target locked onto during the channel, which increases each time **Akshan** stores a bullet. If the target's **current** health falls below the threshold, their health bar will be framed in red.
   - The indicator factors the bonus damage applied by as well as damage modifiers and the target's resistances.
@@ -353,14 +354,16 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 - Damage to structures **does** scale with their **missing** health.
 - This ability's damage is calculated based on the caster's current stats and changes dynamically.
 - The following table refers for interactions while **Akshan** is channel:
- and are disabled. is usable.\|attack=false\|items=false\|consume=false\|spells=true,true,false,false,interrupts\|interrupts=death,silence
-\|flavorsound = *"Here comes the 'uppance!"*
 
-\|blurbicon = Comeuppance.png
-\|blurb = **ACTIVE:** locks onto the target enemy champion and begins channel power into his gun to store bullets, true sight them as well as sight himself. *Comeuppance* will recast after the channel, or can recast early.
-\|blurb2 = **RECAST:** Akshan fires the stored bullets at the target, each dealing physical damage to the first enemy hit, increased by their **missing** health.
-\|blurb3 = **Akshan** can move normally and cast ** while channeling and firing *Comeuppance*.
-\|blurb4 = *Comeuppance* applies and can hit turrets. |
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled / Interrupts |
+| **Consumables** | Disabled |
+| **Interrupted by** | death,silence |
+
 
 **Notes:**
 
@@ -375,7 +378,17 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 - *Comeuppance* will cancel if the target becomes untargetable or dies during the channel.
 - Damage to structures **does** scale with their **missing** health.
 - This ability's damage is calculated based on the caster's current stats and changes dynamically.
-- The following table refers for interactions while **Akshan** is channeling: and are disabled. is usable.|attack=false|items=false|consume=false|spells=true,true,false,false,interrupts|interrupts=death,silence
+- The following table refers for interactions while **Akshan** is channeling:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Q and W are disabled. E is usable. |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled / Interrupts |
+| **Consumables** | Disabled |
+| **Interrupted by** | death,silence |
 
 ---
 

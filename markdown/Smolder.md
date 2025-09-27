@@ -243,6 +243,15 @@
 - If **Smolder** is inside terrain when the effect ends, he will be placed correspondingly to the nearest valid space.
 - The following table refers for interactions while **Smolder** is flying:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Causes **Smolder** to move towards the attack target. |
+| **Movement** | Allowed |
+| **Abilities** | Interrupts |
+| **Items** | =true / Interrupts |
+| **Summoner Spells** | Allowed |
+| **Interrupted by** | death,root |
+
 ---
 
 ### R: MMOOOMMMM!
@@ -280,10 +289,9 @@
 
 - This ability will cast from wherever the caster is at the start of the cast time.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Movement** | Disabled in the first $0.4$ seconds of the cast time. |
 | **Summoner Spells** | Allowed / Disabled |
 

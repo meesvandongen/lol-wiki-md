@@ -231,10 +231,9 @@ Colliding with an enemy champion extends *The Quickness' *duration by $0.25$ sec
 
 - The following table refers for interactions while **Rakan** is in cast time:
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Attacking** | Allowed |
 | **Movement** | Allowed |
 | **Abilities** | [File: Grand Entrance.png |

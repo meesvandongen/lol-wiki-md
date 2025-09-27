@@ -236,10 +236,9 @@ No additional notes.
 - *Requiem* will not affect Neeko if she's disguised as a non-champion if **Karthus** is affected by Death Defied.
 - The following table refers for interactions while **Karthus** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |

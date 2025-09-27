@@ -340,10 +340,19 @@ No additional notes.
 - A screeching noise made by **Rek'Sai** can be heard globally after *Void Rush* is cast (*will be heard by enemies even if they don't have sight of **Rek'Sai** and/or her destination*).
 - The following table refers for interactions while **Rek'Sai** is performing *Void Rush*:
 
-#### Channel Behavior (cast)
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
 
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Disabled |
 
 ---

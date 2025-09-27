@@ -264,10 +264,9 @@ Once *Behind Enemy Lines* has been learned, respawning or entering any (see note
 - The following table refers for interactions while **Quinn** is channeling:
   - *Behind Enemy Lines* is not a movement channel, and so will not be interrupted by root and ground.
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Interrupts |
 | **Movement** | Disabled |
 | **Abilities** | Interrupts |

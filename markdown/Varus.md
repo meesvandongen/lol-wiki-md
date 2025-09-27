@@ -135,10 +135,9 @@ While *Living Vengeance*’s bonus is active, **Varus' **attack speed cap is inc
 - At maximum damage charge, all damage caused by *Piercing Arrow* will trigger cosmetic critical strike text.
 - The following table refers for interactions while **Varus** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Blighted Quiver is usable during the first $0.85$ seconds, otherwise, it's disabled. Hail of Arrows and Chain of Corruption are disabled. This ability recasts to end channel. |

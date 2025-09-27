@@ -109,6 +109,16 @@
 - The number of available attacks empowered by *Medarda Maxim* are visible as pips under **Ambessa**’s health bar, only visible to the player.
 - The following table refers for interactions while **Ambessa** is dashing:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Allowed / Interrupts |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
+
 ---
 
 ### Q: Cunning Sweep
@@ -145,7 +155,17 @@ Against monsters, *Cunning Sweep* deals 125 **bonus** physical damage and the da
 
 - *Cunning Sweep* will slash from wherever **Ambessa** is at the end of the lockout.
   - If her facing direction changes before the lockout completes, the slash will be performed towards the new direction.
-- The following table refers for interactions while **Ambessa** is locked out: *.|move=Registers input for **.|cast=false|items=false|consume=false|spells=true,true,false,false,false|interrupts=revival-false
+- The following table refers for interactions while **Ambessa** is locked out:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Registers input for *Drakehound's Step*. |
+| **Movement** | Registers input for *Drakehound's Step*. |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | revival-false |
 
 ---
 
@@ -179,7 +199,17 @@ Against monsters, *Sundering Slam* deals 125 **bonus** physical damage and the d
 
 - *Sundering Slam* will slam from wherever **Ambessa** is at the end of the lockout.
   - If her facing direction changes before the lockout completes, the slam will be performed towards the new direction.
-- The following table refers for interactions while **Ambessa** is locked out: *.|move=Registers input for **.|cast=false|items=false|consume=false|spells=true,true,false,false,false|interrupts=revival-false
+- The following table refers for interactions while **Ambessa** is locked out:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Registers input for *Drakehound's Step*. |
+| **Movement** | Registers input for *Drakehound's Step*. |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | revival-false |
 
 ---
 
@@ -222,7 +252,17 @@ Additionally, **Ambessa** shields herself at the time of cast for 50 to 320 (+ 1
       - This would apply in cases where the dash is initiated right before or shortly before the bracing is finished.
 - *Repudiation*’s shield buff and shield health on the health bar UI are not granted to and displayed on the caster on-cast, but rather only after a very short, inconsistent delay from the time of cast.
 - The following table refers for interactions while **Ambessa** is locked out:
-  - **Ambessa** will smash the ground instantly upon entering resurrection. *.|move=Registers input for **.|cast=Other abilities may be cast in the last $0.275$ seconds of the brace after the lockout and are otherwise disabled in the first $0.225$ seconds. If ** dash was buffered during the lockout, casting other abilities overrides the buffer with the new cast input.|items=false|consume=false|spells=true,true,false,false,false|interrupts=revival-false
+  - **Ambessa** will smash the ground instantly upon entering resurrection.
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Registers input for *Drakehound's Step*. |
+| **Movement** | Registers input for *Drakehound's Step*. |
+| **Abilities** | Other abilities may be cast in the last $0.275$ seconds of the brace after the lockout and are otherwise disabled in the first $0.225$ seconds. If *Drakehound's Step’s* dash was buffered during the lockout, casting other abilities overrides the buffer with the new cast input. |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | revival-false |
 
 ---
 
@@ -256,7 +296,17 @@ Additionally, **Ambessa** shields herself at the time of cast for 50 to 320 (+ 1
 
 - **Ambessa** will cast the second spin of *Lacerate* from wherever she is at the end of the dash.
   - She will spin a second time even if the dash is interrupted.
-- The following table refers for interactions while **Ambessa** is locked out: *.|move=Registers input for **.|cast=false|items=false|consume=false|spells=true,true,false,false,false|interrupts=false
+- The following table refers for interactions while **Ambessa** is locked out:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Registers input for *Drakehound's Step*. |
+| **Movement** | Registers input for *Drakehound's Step*. |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | false |
 
 ---
 
@@ -310,7 +360,17 @@ Additionally, **Ambessa** shields herself at the time of cast for 50 to 320 (+ 1
   - This direction can be changed by Seraphine’s Encore.
 - If **Ambessa** successfully seizes a target, any regular movement commands issued before doing so are discarded upon the lockout ending.
   - This does not affect movement orders issued during the lockout.
-- The following table refers for interactions while **Ambessa** is in cast time and during the lockout: *.|move=Registers input for **.|cast=false|items=false|consume=false|spells=true,false,false,false,false|interrupts=revival-false
+- The following table refers for interactions while **Ambessa** is in cast time and during the lockout:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Registers input for *Drakehound's Step*. |
+| **Movement** | Registers input for *Drakehound's Step*. |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | revival-false |
 
 ---
 

@@ -293,6 +293,16 @@ While active, she rapidly slashes at the nearest enemy with the lowest **current
 - Despite this ability's cooldown starts on cast, it cannot be reduced by Navori Flickerblade Transcendence during the effect of this ability. Cooldowns of the other basic abilities can be normally reduced during this ability, though.
 - The following table refers for interactions while **Bel'Veth** is performing *Royal Maelstrom*:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Interrupts |
+| **Items** | Interrupts |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
+
 ---
 
 ### R: Endless Banquet
@@ -378,6 +388,16 @@ While active, she rapidly slashes at the nearest enemy with the lowest **current
 - The following table refers for interactions while **Bel'Veth** is in cast time:
   - Movement summoner spells can be buffered to cast after the cast time completes if permitted.
   - She is locked out of movement and attack actions for $0.5$ seconds after the cast time completes and no buffering of them is permitted for the entirety of her lockout.
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | revival-false |
 
 ---
 

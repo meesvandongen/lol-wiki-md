@@ -227,10 +227,9 @@ If *Tides of Blood* was charged for at least 1 second, enemies hit are also slow
 - The health cost may still drop **Vladimir** below the specified amount if he is above it. This is verified for every tick of health cost, i.e if the first tick drops him below it, the next ones will stop affecting him if he remains below it.
 - The following table refers for interactions while **Vladimir** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Abilities** | Sanguine Pool is usable. Transfusion and Hemoplague both interrupt after $0.25$ seconds. |
 | **Items** | Interrupts / Allowed / Disabled |
 | **Summoner Spells** | Allowed / Interrupts |

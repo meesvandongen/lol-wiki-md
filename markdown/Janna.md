@@ -231,10 +231,9 @@ While the shield holds, the target gains (attack damage) **bonus** attack damage
 
 - The following table refers for interactions while **Janna** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |

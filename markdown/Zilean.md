@@ -107,10 +107,9 @@ A successful channel will grant an equal amount of experience to the ally to-lev
 - The channel from *Time in a Bottle* is not interrupted even if the allied champion suddenly levels up. However, no experience will be granted to either player, and the passive will not go on cooldown.
 - The following table refers for interactions while **Zilean** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
@@ -251,6 +250,16 @@ If the target takes fatal damage within the duration, they enter resurrection fo
 - While in resurrection, the target's health regeneration is set to 0.
 - The target's screen will have a white tint.
 - The following table refers for interactions while the target is unable to act:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
 
 ---
 

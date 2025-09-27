@@ -90,10 +90,9 @@ At rank 5, *Breath of Light*’s channel duration is increased to 160 seconds.
 - Spell shield will only block the burst damage.
 - The following table refers to interactions while **Aurelion Sol** is charging.
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
@@ -139,6 +138,16 @@ Scoring a champion takedown within 3 seconds of damaging them reduces *Astral Fl
 - If a takedown is scored while *Astral Flight* is active, the cooldown will be reduced after it ends.
 - *Astral Flight* cannot be used in the first 15 seconds of the game.
 - The following table refers for interactions while **Aurelion Sol** is dashing:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Interrupts |
+| **Movement** | Interrupts |
+| **Abilities** | Allowed |
+| **Items** | Allowed / Interrupts |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death,root |
 
 ---
 

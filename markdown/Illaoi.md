@@ -196,10 +196,9 @@ Each Tentacle also heals **Illaoi** for 5% of her **missing** health if it hits 
   - Only *Tentacle Smash* or also I attacks?
 - The self-reveal has not been fully tested for complete confirmation. Is the ability invisible when hitting minions and there is no enemy champion nearby? Is the tip of the ability enough to reveal her? Whether it can hit a minion or not? Just if she's around the exit of the fog of war, and even if she points towards the inside of the fog of war? [https://youtu.be/JRizCjxyc5g]
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Abilities** | E and R are buffered. W is usable. |
 | **Summoner Spells** | Allowed / Disabled |
 
@@ -362,7 +361,17 @@ Enemies made a Vessel continuously spawn a Tentacle near themselves, when possib
 - Fiora’s Riposte can be used to prevent becoming a Vessel if used before the Spirit is killed [https://www.youtube.com/watch?v=2jcsdMpvZRc], or while leaving the tether's range. [https://www.youtube.com/watch?v=yI121hbf3jA]
 - Sion’s Spirit cannot be spawned during Glory in Death. Spirits created before *Sion*’s zombie state will remain active.
 - If the target that had its Spirit pulled from them is taken into the Realm of Death, the tether will break, but they will not be made into a Vessel.
-- The following table refers for interactions while **Illaoi** is firing the projectile and while the target's Spirit is being pulled: and are buffered. is usable, but is buffered while pulling the Spirit. |items=false|consume=false|spells=true,false,false,false,false|interrupts=death
+- The following table refers for interactions while **Illaoi** is firing the projectile and while the target's Spirit is being pulled:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Q and R are buffered. W is usable, but is buffered while pulling the Spirit. |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
 
 ---
 

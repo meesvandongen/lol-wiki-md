@@ -265,10 +265,9 @@ While channeling, **Lucian** is ghosted and may still move.
 - Spell shield only blocks one instance of damage.
 - The following table refers for interactions while **Lucian** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Relentless Pursuit is usable. Piercing Light and Ardent Blaze are disabled. This ability recasts to end channel. |

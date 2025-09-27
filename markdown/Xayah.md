@@ -280,6 +280,16 @@ A target hit by at least three Feathers is rooted for $1.25$ seconds.
 - The individual missiles have 1100 range but start slightly behind Xayah, reducing their total range.
 - The following table refers for interactions while **Xayah** is in *Featherstorm*:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+
 ---
 
 ## Patch History

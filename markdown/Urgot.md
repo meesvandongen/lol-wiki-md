@@ -351,10 +351,9 @@ Upon completing the channel, the target is execute. If the execution is successf
   - This does prevent the execution.
 - The following table refers for interactions while **Urgot** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |

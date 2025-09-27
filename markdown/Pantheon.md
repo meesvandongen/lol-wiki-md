@@ -143,10 +143,9 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
   - Item actives that interrupt and those with cast times as well as Titanic Hydra, Hexflash, and Recall will cause *Comet Spear* to recast automatically and the active or spell to buffer to cast afterwards.
     - Teleport will cancel the channel entirely.
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Items** | Allowed / Interrupts / Disabled |
 | **Summoner Spells** | Allowed / Interrupts / Recasts |
 
@@ -232,10 +231,9 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
 - Spell shield will only block the slam's damage.
 - The following table refers for interactions while **Pantheon** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
@@ -299,10 +297,9 @@ Over the remaining $1.25$ (Estimated) seconds, **Pantheon** crashes down after $
 - If Pantheon leaves the Death Realm during *Grand Starfall*’s shockwave, its hitbox will become invisible but it will still deal damage.
 - The following table refers for interactions while **Pantheon** is channeling (first channel):
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |

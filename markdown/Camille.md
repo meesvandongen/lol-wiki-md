@@ -272,7 +272,16 @@ Non-epic monsters take 50% damage from *Tactical Sweep*.
 - Displacement immunity will not resist the application of the stun.
 - If Tactical Sweep is cast during *Wall Dive*’s dash on its opposite direction, the target wil be knockback further and to a different direction.
 - The following table refers for interactions while **Camille** is bound to terrain:
-  - When **Camille** is interrupted, she will automatically cast *Wall Dive*. The only exception is if she was interrupted by casting Flash or Recall, in which case *Wall Dive* cancels. and are usable. is disabled.|items=interrupts|consume=Interrupts|spells=false,interrupts,false,interrupts,false
+  - When **Camille** is interrupted, she will automatically cast *Wall Dive*. The only exception is if she was interrupted by casting Flash or Recall, in which case *Wall Dive* cancels.
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Initiates the dash towards attack target. |
+| **Movement** | Initiates the dash towards the commanded location. |
+| **Abilities** | Precision Protocol and Tactical Sweep are usable. The Hextech Ultimatum is disabled. |
+| **Items** | Interrupts |
+| **Summoner Spells** | Disabled / Interrupts |
+| **Consumables** | Interrupts |
 
 ---
 
@@ -332,6 +341,16 @@ The target cannot escape the zone through any means. While within the zone, **Ca
   - *The Hextech Ultimatum* ends if the target enters *resurrection*, but not if **Camille** does.
 - *The Hextech Ultimatum* ends immediately if the target is dragged by Fear Beyond Death, or displaced outside of the zone by Dragon's Rage or Keeper's Verdict.
 - The following table refers for interactions while **Camille** is dashing.
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
 
 ---
 

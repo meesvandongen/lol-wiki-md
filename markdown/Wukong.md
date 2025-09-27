@@ -293,6 +293,16 @@ Upon arrival, **Wukong** gains **bonus** attack speed for 5 seconds.
 - Spell shield will block one instance of damage.
   - Blocking the knock up will still grant immunity to it from either of *Cyclone*’s casts.
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Other abilities are disabled for the first $0.3$ seconds, casting them afterwards interrupts. |
+| **Items** | Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
+
 ---
 
 ## Patch History

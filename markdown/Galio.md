@@ -190,10 +190,9 @@ When the blasts meet, the gusts form a tornado that persists for 2 seconds, slow
 - The ability key does not need to be held down when buffered in other abilities except Winds of War.
 - The following table refers for interactions while **Galio** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
@@ -237,10 +236,9 @@ When the blasts meet, the gusts form a tornado that persists for 2 seconds, slow
 - **Galio**’s second dash will always dash the distance of the target direction. Having the step backwards cut short has no effect on the total distance gained.
 - The following table refers for interactions during *Justice Punch*’s cast time and dash:
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---
@@ -280,10 +278,9 @@ After channeling for $1.25$ seconds, he gains crowd control immunity for the rem
 - **Galio** will always dash 100 units minimum, and dash *over* his target's location if they are less than 100 units away from him.
 - The following table refers for interactions while **Galio** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |

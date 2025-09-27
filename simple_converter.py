@@ -1124,11 +1124,16 @@ class SimpleLoLConverter:
                     named[k] = v
                 else:
                     pos.append(seg_s)
+            # Accept missing first positional arg if we clearly have ct named params; default to 'unknown'
             if not pos:
-                out.append(block)
-                i = j + len(block)
-                continue
-            ctype = pos[0].strip().lower()
+                ct_keys = {"attack","move","cast","items","spells","consume","interrupts","damage"}
+                if any(k in named for k in ct_keys):
+                    pos = ["unknown"]
+                else:
+                    out.append(block)
+                    i = j + len(block)
+                    continue
+            ctype = pos[0].strip().lower() if pos and pos[0] else 'unknown'
             # Helper to tokenize comma-separated values (top-level only)
             def _tokens(val: str) -> list[str]:
                 # Split on commas not inside nested templates (rare) – simple depth counter
@@ -1258,10 +1263,19 @@ class SimpleLoLConverter:
             # Do not duplicate cast narrative into notes; Abilities cell already conveys it.
             # Assemble markdown table
             if not rows:
-                out.append(block)
-                i = j + len(block)
-                continue
-            header = f"#### Channel Behavior ({ctype})"
+                # Synthesize a minimal table from any known params rather than leaking raw template
+                synth_order = [
+                    ("items", "Items"), ("spells", "Summoner Spells"), ("consume", "Consumables"),
+                    ("interrupts", "Interrupted by"), ("damage", "Damage"),
+                ]
+                for k, lab in synth_order:
+                    if k in named and named[k].strip():
+                        val = self._convert_wiki_to_markdown_ctx(named[k].strip(), None)
+                        rows.append((lab, val))
+                # If still empty, drop the template entirely
+                if not rows:
+                    i = j + len(block)
+                    continue
             table_lines = ["| Aspect | State / Notes |", "|--------|---------------|"]
             # Deduplicate notes while preserving order
             dedup_notes: list[str] = []
@@ -1271,6 +1285,19 @@ class SimpleLoLConverter:
                 if key and key not in seen_notes:
                     dedup_notes.append(ntext.strip())
                     seen_notes.add(key)
+            # Optional first row with Type, if known
+            def _display_ct_type(t: str) -> Optional[str]:
+                if not t or t == 'unknown':
+                    return None
+                mapping = {
+                    'channel': 'Charge channel',
+                    'charge': 'Charge channel',
+                    'charging': 'Charge channel',
+                }
+                return mapping.get(t, t.replace('_', ' ').title())
+            type_disp = _display_ct_type(ctype)
+            if type_disp:
+                table_lines.append(f"| **Type** | {type_disp} |")
             for label, val in rows:
                 safe_val = val.replace('\n', ' ').strip()
                 # Convert any nested templates inside cells now to markdown (context-less)
@@ -1281,7 +1308,7 @@ class SimpleLoLConverter:
                 if note_text:
                     note_text = self._convert_wiki_to_markdown_ctx(note_text, None)
                     table_lines.append(f"| **Notes** | {note_text} |")
-            table_md = '\n'.join([header, *table_lines])
+            table_md = '\n'.join(table_lines)
             # Ensure blank line separation
             if out and not out[-1].endswith('\n\n'):
                 if not out[-1].endswith('\n'):
@@ -1759,6 +1786,25 @@ class SimpleLoLConverter:
             # Fail-safe: keep original notes_text if expansion raises
             pass
 
+        # Rescue pass: detect inline ct parameter runs left in free text and normalize them to a small table
+        try:
+            notes_text = self._rescue_ct_param_runs(notes_text)
+        except Exception:
+            pass
+
+        # Strip raw wiki template param lines (e.g., "|cooldown = ...") that leaked into notes
+        cleaned_lines: List[str] = []
+        for ln in notes_text.split('\n'):
+            # Keep legitimate markdown tables (start with '|' but have many pipes)
+            if ln.startswith('|') and ln.count('|') >= 2 and not re.match(r"^\|\s*[a-z][^=]{0,40}=", ln, flags=re.IGNORECASE):
+                cleaned_lines.append(ln)
+                continue
+            # Drop bare wiki param lines
+            if re.match(r"^\s*\|\s*[a-z][^=]{0,40}=", ln, flags=re.IGNORECASE):
+                continue
+            cleaned_lines.append(ln)
+        notes_text = '\n'.join(cleaned_lines)
+
         out_lines: List[str] = []
         last_kind: str = 'none'  # 'bullet' | 'block' | 'blank' | 'heading'
         in_block_sequence = False
@@ -1852,6 +1898,39 @@ class SimpleLoLConverter:
                     continue
             tightened.append(ln)
         return '\n'.join([ln for ln in tightened if ln is not None]) if tightened else "No additional notes."
+
+    def _rescue_ct_param_runs(self, text: str) -> str:
+        """Detect sequences like '|items=false|consume=false|spells=true,...' outside ct templates
+        and convert them into a compact table using the same rules as ct expansion.
+        We conservatively trigger only when two or more ct-keys appear in a single run.
+        """
+        if not text or '|' not in text:
+            return text
+        ct_keys = ["attack","move","cast","items","spells","consume","interrupts","damage"]
+        # Extract discrete segments like (\|)?key = value up to next pipe/newline
+        seg_re = re.compile(r"(\\?\|)\s*(?:" + '|'.join(ct_keys) + r")\s*=\s*([^|\n]+)", re.IGNORECASE)
+        lines = text.split('\n')
+        out: List[str] = []
+        for ln in lines:
+            segs = []
+            for m in seg_re.finditer(ln):
+                # Normalize leading pipe to a real '|'
+                val = m.group(2).strip()
+                # Trim stray trailing backslashes (escaped pipes from earlier passes)
+                val = re.sub(r"\\+$", "", val)
+                key_match = re.search(r"(attack|move|cast|items|spells|consume|interrupts|damage)", m.group(0), re.IGNORECASE)
+                if not key_match:
+                    continue
+                key = key_match.group(1)
+                segs.append(f"|{key}={val}")
+            if len(segs) >= 2:
+                inner = 'ct|unknown' + ''.join(segs)
+                rendered = self._expand_channel_type_templates('{{' + inner + '}}')
+                if rendered and rendered != '{{' + inner + '}}':
+                    out.append(rendered)
+                    continue
+            out.append(ln)
+        return '\n'.join(out)
 
     def _extract_vardefines(self, text: str) -> Dict[str, str]:
         """Extract {{#vardefine:name|value}} variables from a template page content.
@@ -4691,6 +4770,56 @@ class SimpleLoLConverter:
                 return f"[{text}]({href})"
             return text
         md = re.sub(r'(?<!\!)\[(?P<text>[^\]]+)\]\((?P<href>[^)]+)\)', _unwrap_nonlocal_links, md)
+        # Drop stray wiki template param lines that leaked and are not part of a proper md table region
+        def _is_table_header(i: int, lines: List[str]) -> bool:
+            if i + 1 < len(lines):
+                # header like: '| a | b |' then '| --- | --- |'
+                return bool(re.match(r"^\|(?:[^|]+\|)+$", lines[i].strip())) and bool(re.match(r"^\|\s*-+\s*(\|\s*-+\s*)+\|?\s*$", lines[i+1].strip()))
+            return False
+        md_lines = md.split('\n')
+        cleaned: List[str] = []
+        i = 0
+        while i < len(md_lines):
+            ln = md_lines[i]
+            # Sanitize malformed header lines like "|leveling2 = | Attribute | Value |" -> "| Attribute | Value |"
+            if ln.strip().startswith('|'):
+                ln = re.sub(r"^\|\s*[a-z][^=]{0,40}=\s*(\|.*)$", r"\1", ln, flags=re.IGNORECASE)
+            # Keep intact if part of a markdown table (header or separator or data row)
+            if ln.strip().startswith('|'):
+                if _is_table_header(i, md_lines):
+                    cleaned.append(ln)
+                    i += 1
+                    cleaned.append(md_lines[i])  # separator line
+                    i += 1
+                    # Consume following data rows as-is
+                    while i < len(md_lines) and md_lines[i].strip().startswith('|'):
+                        cleaned.append(md_lines[i])
+                        i += 1
+                    continue
+                # Non-table pipe lines: drop if they look like '|key = value'
+                if re.match(r"^\s*\|\s*[a-z][^=]{0,40}=", ln, flags=re.IGNORECASE):
+                    i += 1
+                    continue
+                # Drop lone pipe-name lines like '|notes' or '|leveling6' (no additional pipes)
+                if ln.count('|') == 1 and re.match(r"^\s*\|\s*[A-Za-z0-9_ ]+\s*$", ln):
+                    i += 1
+                    continue
+            # Also drop escaped pipe param lines like '\\|key = value'
+            if re.match(r"^\s*\\\|\s*[a-z][^=]{0,40}=", ln, flags=re.IGNORECASE):
+                i += 1
+                continue
+            # And escaped lone pipe-name lines like '\\|notes'
+            if re.match(r"^\s*\\\|\s*[A-Za-z0-9_ ]+\s*$", ln):
+                i += 1
+                continue
+            cleaned.append(ln)
+            i += 1
+        md = '\n'.join(cleaned)
+        # Last-resort: rescue any ct param runs that might still be present in prose
+        try:
+            md = self._rescue_ct_param_runs(md)
+        except Exception:
+            pass
         # Note: Avoid global asterisk normalization; prefer source-specific fixes above.
         # Normalize excessive spaces but keep newlines and preserve leading indentation
         # Collapse runs of spaces only after non-space characters to avoid destroying list indents

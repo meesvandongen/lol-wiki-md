@@ -169,10 +169,9 @@ While *Jaws of the Beast* is active, **Warwick** is displacement immune and clam
 - The following table refers for interactions while **Warwick** is channeling:
   - Flash, Teleport, Hexflash, and Recall are disabled during the first $0.4$ seconds of the channel.
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Primal Howl is usable. Blood Hunt and Infinite Duress are disabled. |
@@ -326,17 +325,15 @@ Starting *Infinite Duress’* channel while *Primal Howl* is active will initiat
 - *Infinite Duress* covers **Warwick**’s hitbox, meaning he will collide with enemy champions that are particularly close to him.
 - The following table refers for interactions while **Warwick** is in cast time:
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 - The following table refers for interactions while **Warwick** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |

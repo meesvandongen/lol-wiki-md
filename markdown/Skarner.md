@@ -326,6 +326,17 @@ If **Skarner**’s attached target collides with terrain, the charge ends, detac
 - Enemies cannot see **Skarner** while he is inside terrain, unless they grant sight into the area of terrain he is inside (such as with Hawkshot or Heightened Senses) or have unobstructed vision.
   - However, enemies will be notified when **Skarner** is inside nearby terrain while within a certain distance of him. An indicator will be visible to the enemy player's perspective to represent this.
 - The following table refers for interactions while **Skarner** is charging:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death,root,ground,silence |
+| **Notes** | but cannot input movement commands. |
 - A special indicator for *Ixtal's Impact*’s direction and expected ending location is visible to **Skarner** only during his charge.
 
 ---
@@ -366,7 +377,27 @@ If **Skarner**’s attached target collides with terrain, the charge ends, detac
 - During *Impale*, **Skarner** always faces in the direction of the nearest attached target.
 - This ability will cast from wherever the caster is at the end of the cast time.
 - The following table refers for interactions while **Skarner** is in cast time:
-- The following table refers for interactions while **Skarner** is performing *Impale*: and are disabled, but can be buffered. is usable.|items=true|consume=true|spells=true,false,true,false,false|interrupts=death
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | revival-false |
+- The following table refers for interactions while **Skarner** is performing *Impale*:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Q and E are disabled, but can be buffered. W is usable. |
+| **Items** | Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
 
 ---
 

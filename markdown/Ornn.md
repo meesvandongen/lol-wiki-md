@@ -131,10 +131,9 @@ Additionally, **Ornn** increases his **bonus** armor, **bonus** magic resistance
 - The following table refers for interactions while **Ornn** is channeling:
   - All of **Ornn**’s actions are disabled during the first $0.5$ seconds of the channel.
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
@@ -232,6 +231,16 @@ Over the march he belches fire over a cone in front of him, dealing magic damage
 - **Ornn** can see the on-target VFX on targets that are being struck even while they are in the fog of war.
 - The following table refers for interactions while **Ornn** is performing *Bellows Breath*:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+
 ---
 
 ### E: Searing Charge
@@ -275,10 +284,9 @@ The shockwave destroys the pillar formed by *Volcanic Rupture* and partially des
 - Displacement immunity will also resist the application of the stun.
 - The following table refers for interactions while **Ornn** is in cast time:
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Items** | Disabled |
 | **Summoner Spells** | Allowed / Disabled |
 | **Consumables** | Disabled |

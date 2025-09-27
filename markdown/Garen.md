@@ -223,10 +223,9 @@ Enemy champions hit 6 times by *Judgment* are inflicted with (armor penetration)
 - The spin animation is capped at once per $0.2$ seconds, but the amount of ticks will keep on scaling.
 - The armor reduction stacks multiplicatively with other percentage armor penetration effects.
 
-#### Channel Behavior (20px)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | 20Px |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | [File:Decisive_Strike.png |

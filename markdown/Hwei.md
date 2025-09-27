@@ -306,7 +306,7 @@
 | **Magic Damage** | 60 / 85 / 110 / 135 / 160 (+ 25% AP) |
 
 If *Severing Bolt* hits only one enemy or immobilized enemies, it deals increased damage based on the . This **bonus** damage is capped at 300 against monsters.
-|leveling2 = | Attribute | Value |
+| Attribute | Value |
 |-----------|------:|
 | **Maximum Damage Increase** | 200 / 237.5 / 275 / 312.5 / 350% |
 | **Maximum Damage** | 60×2.0 / 201.875 / 302.5 / 421.875 / 560 (+ 50 / 59.375 / 68.75 / 78.125 / 87.5% AP) |

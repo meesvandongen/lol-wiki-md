@@ -142,10 +142,9 @@ If the camp's large monster has already been slain prior to planting a grove, **
 - Non-epic monsters can attack **Ivern** if his allies enter combat with the monster and he manages to recieve aggro.
   - **Ivern** can be attacked by Voidmite without being able to damage them back.
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Abilities** | Interrupts |
 | **Items** | Interrupts / Allowed / Disabled |
 | **Summoner Spells** | Allowed / Interrupts |

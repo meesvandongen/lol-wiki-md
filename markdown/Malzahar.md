@@ -286,10 +286,9 @@ Additionally, a *Null Zone* is opened beneath the target's location at the time 
 - **Malzahar** places himself onto the ground and interrupts displacements affecting him upon starting the channel.
 - The following table refers for interactions while **Malzahar** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled if attacking Nether Grasp target. Otherwise interrupts after $0.5$ seconds of channeling. |
 | **Movement** | Disabled for the first $0.5$ seconds. Interrupts afterwards. |
 | **Abilities** | Interrupts |

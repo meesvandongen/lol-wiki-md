@@ -214,10 +214,9 @@ If this attack kills the target, half of *Crippling Strike*’s cooldown is redu
 - The armor penetration stacks multiplicatively with other forms of percentage armor penetration.
 - This ability will cast from wherever the caster is at the end of the cast time.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---

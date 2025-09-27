@@ -187,10 +187,9 @@ Each of the waves can critically strike for damage.
   - **Miss Fortune** may cancel the last ~$0.1$ seconds of channel time at no loss of effect.
 - The following table refers for interactions while **Miss Fortune** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |

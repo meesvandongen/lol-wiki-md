@@ -155,6 +155,16 @@ While **MOUNTED**, healing and health regeneration will first replenish **Skaarl
 - Dismounting with a spell shield sometimes consumes the spell shield and negates the effects of dismounting.
 - The following table refers for interactions while **Kled** is lunging:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Allowed / Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
+
 ---
 
 ### Q: Bear Trap on a Rope
@@ -362,6 +372,15 @@ The mark will remain even if the target dies, and ends prematurely if the duo ar
 - *Jousting*’s hitbox
 - The following table refers for interactions while **Kled** is dashing:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Allowed |
+| **Items** | Allowed |
+| **Summoner Spells** | Allowed |
+| **Interrupted by** | death |
+
 ---
 
 ### E: Dismounted Jousting
@@ -447,7 +466,27 @@ While charging, the duo gain a shield for every $0.25$ seconds of traveling, up 
 - The following table refers for interactions while **Kled** is charging:
   - Ghost is also disabled, contrary to the table below (technical limitation (hopefully temporary)).
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | false |
+| **Notes** | but cannot input movement commands. |
 - The following table refers for interactions while **Kled** is dashing:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | false |
 - Every summoner spell is disabled, but summoner spells that aren't disabled while **Kled** is charging will not visually appear disabled.
 - No summoner spells or items are disabled if the charge ends before or during the dash. **Buffering Interactions**
 - Nothing can be buffered during the charge.

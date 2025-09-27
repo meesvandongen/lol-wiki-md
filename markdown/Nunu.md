@@ -153,10 +153,9 @@ The snowball rolls over enemy minions and small monsters hit, dealing $33.3$% of
 - Displacement immunity will not resist the application of the stun.
 - The following table refers for interactions while **Nunu & Willump** are channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
@@ -260,10 +259,9 @@ After 3 seconds from the first cast, *Snowbound* enemies near **Willump** take m
 - While it's unlikely to happen normally, it is possible to deal zero damage with *Absolute Zero* if canceled as soon as it's started.
 - The following table refers for interactions while **Nunu & Willump** are channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Abilities** | Interrupts |
 | **Items** | Interrupts / Allowed / Disabled |
 | **Summoner Spells** | Allowed / Interrupts |

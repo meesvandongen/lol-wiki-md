@@ -148,10 +148,9 @@
 - Displacement immunity will also resist the application of the stun.
 - The following table refers for interactions while **Rammus** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Defensive Ball Curl interrupts. Frenzying Taunt is disabled. Soaring Slam modifies this ability. This ability recasts to end channel. |
@@ -267,6 +266,16 @@ The impact causes 3 aftershocks to burst from the area over $3.5$ seconds, each 
   - The maximum increased center damage is reachable once **Rammus** has had at least $1307.69$ movement speed *average* for the past second.
 - *Soaring Slam* will not impact nor generate aftershocks if the dash is interrupted.
 - The following table refers for interactions while **Rammus** is dashing:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
 
 ---
 

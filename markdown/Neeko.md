@@ -416,10 +416,9 @@ When the cast time ends, she lands to emit a burst of energy that deals magic da
 - On-cast effects are applied on activation.
 - *Pop Blossom* can start its cast time during stasis.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |

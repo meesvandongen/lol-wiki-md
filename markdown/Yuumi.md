@@ -159,10 +159,9 @@
 - The **BEST FRIEND**'s empowerment respects enchantment redirection.
 - The following table refers for interactions while **Yuumi** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | N/A |
 | **Movement** | N/A |
 | **Abilities** | Detaching and Final Chapter interrupt. Zoomies is usable. |
@@ -247,10 +246,9 @@ If targeting an ally with the recast, the ability will not cast |
 - The *Anchor*’s health bar will have a different frame to indicate the *attached* status:
 - The following table refers for interactions while **Yuumi** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
@@ -258,6 +256,15 @@ If targeting an ally with the recast, the ability will not cast |
 | **Summoner Spells** | Allowed / Interrupts / Disabled |
 | **Interrupted by** | death, ground, root, silence |
 - The following table refers for interactions while **Yuumi** is attached:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Allowed |
+| **Items** | Allowed / Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Interrupted by** | death |
 
 ---
 
@@ -353,10 +360,9 @@ Enemies struck by the waves take magic damage and are slowed by 10% for $1.25$ s
 - Feline Friendship will not be triggered if **Yuumi** and her anchor aren't missing health **after** the wave hit.
 - The following table refers for interactions while **Yuumi** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Prowling Projectile is disabled. You and Me! and Zoomies are usable. |

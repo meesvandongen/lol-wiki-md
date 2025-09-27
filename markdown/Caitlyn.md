@@ -267,10 +267,9 @@ Once **Caitlyn** completes the channel, she fires a homing bullet toward the tar
 - The bullet has a sight radius of 1500 attached to it. ** This excludes losing sight of the target.
 - The following table refers for interactions while **Caitlyn** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |

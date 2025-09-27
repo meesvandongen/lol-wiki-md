@@ -292,6 +292,16 @@ For the next 15 seconds, the damage dealt by **Yasuo**’s critical strikes igno
     - Enter the Realm of Death.
 - The following table refers for interactions while **Yasuo** is locked out:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | false |
+
 ---
 
 ## Patch History

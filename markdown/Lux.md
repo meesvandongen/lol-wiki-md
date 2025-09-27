@@ -247,10 +247,9 @@ The slow lingers for 1 second after leaving the area. Enemies hit by *Lucent Sin
 - This ability will cast from wherever the caster is at the start of the cast time.
 - The ability will not preserve the caster's facing direction when using Flash and similar effects.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Abilities** | Lucent Singularity can only be recast if it is present. Light Binding and Prismatic Barrier are disabled. |
 
 ---

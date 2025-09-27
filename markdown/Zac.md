@@ -139,6 +139,16 @@ After the duration, **Zac** is revived with 10 – 50% (Based on his bloblets' t
 - If **Zac**’s health is higher than it is supposed to be when the *bloblets* converge on him, his health will be set to the correct value.
 - The following table refers for interactions while **Zac** is in resurrection:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+
 ---
 
 ### Q: Stretching Strikes
@@ -198,10 +208,9 @@ If the two targets are within 700 units of each other, they are instead slammed 
 - This ability will cast from wherever the caster is at the end of the cast time.
 - If the target becomes untargetable, dies, or is too far away during the empowered attack's cast time, it is cancelled but not consumed.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---
@@ -287,10 +296,9 @@ If the two targets are within 700 units of each other, they are instead slammed 
 - The following table refers for interactions while **Zac** is channeling:
   - Recall is disabled for the first $0.9$ seconds and otherwise interrupts the channel if used.
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Interrupts |
 | **Abilities** | Stretching Strikes and Unstable Matter interrupt. Let's Bounce! initiates the recast and is buffered to cast itself at the end of the dash. |
@@ -334,7 +342,17 @@ If the two targets are within 700 units of each other, they are instead slammed 
 - Spell shield only blocks a single instance of damage.
 - Entering stasis will end *Let's Bounce!* prematurely.
 - While *Let's Bounce!* is active **Zac** consumes *Chunks* within cr 300 range.
-- The following table refers for interactions while **Zac** is performing *Let's Bounce!*: and are disabled. is usable.|items=true|consume=true|spells=true,true,true,false,true|interrupts=death
+- The following table refers for interactions while **Zac** is performing *Let's Bounce!*:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Allowed |
+| **Abilities** | Q and E are disabled. W is usable. |
+| **Items** | Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
 
 ---
 

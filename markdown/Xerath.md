@@ -134,10 +134,9 @@
 - *Arcanopulse* will not fire and deal damage if **Xerath** dies during the recast delay.
 - The following table refers for interactions while **Xerath** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
@@ -146,6 +145,16 @@
 | **Consumables** | Disabled |
 | **Notes** | but can still use trinkets. |
 - The following table refers for interactions while **Xerath** is locked out during the recast delay:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
 
 ---
 
@@ -282,10 +291,9 @@ Hitting at least one enemy champion grants a stack of *Arcane Perfection* during
 - The following table refers for interactions while **Xerath** is channeling:
   - Teleport and Recall are disabled for the first $1.25$ seconds and otherwise interrupt the channel if they are used.
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Disabled |

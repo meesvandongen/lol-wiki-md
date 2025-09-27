@@ -261,20 +261,18 @@ If the charge is interrupted or completes without reactivation, *Keeper's Verdic
   - The debuff will remove itself automatically when the forced movement ends.
 - The following table refers for interactions while **Poppy** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
 | **Items** | Interrupts / Allowed / Disabled |
 | **Summoner Spells** | Allowed / Interrupts / Recasts |
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---

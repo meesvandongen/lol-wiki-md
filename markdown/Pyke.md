@@ -144,16 +144,25 @@ If the charge is interrupted or completes without reactivation, *Bone Skewer* is
 - This ability will cast from wherever the caster is at the end of the cast time.
 - The following table refers for interactions while **Pyke** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Abilities** | Interrupts |
 | **Items** | Disabled |
 | **Consumables** | Disabled |
 | **Notes** | but can use trinkets |
 - The following table refers for interactions while **Pyke** is locked out from the harpoon being in flight:
   - The lockout ends as soon as the missile fizzles from hitting a target or reaching maximum range, or being intercepted.
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
 
 ---
 

@@ -148,6 +148,16 @@
 - If **Viego** posesses an enemy Naafiri, he will keep her Packmates upon discarding the possession.
 - The following table refers for interactions while **Viego** is winding up on a *Mist Wraith*:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+
 ---
 
 ### Q: Blade of the Ruined King
@@ -241,10 +251,9 @@ The second strike applies on-hit effects and can critically strike for damage.
 - The reduced cooldown from the charge will not occur if *Spectral Maw*’s cooldown is already below 3 seconds.
 - The following table refers for interactions while **Viego** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Harrowed Path is usable. Blade of the Ruined King and Heartbreaker are disabled. |

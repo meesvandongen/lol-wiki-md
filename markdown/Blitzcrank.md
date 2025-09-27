@@ -133,10 +133,9 @@
 - If the target dies to *Rocket Grab*’s damage, they will not be pulled.
 - This ability will cast from wherever the caster is at the end of the cast time.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---

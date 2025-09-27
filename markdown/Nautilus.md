@@ -141,10 +141,9 @@ If the anchor hits terrain, **Nautilus** dashes to that location and 50% of *Dre
 - This ability will cast from wherever the caster is at the start of the cast time.
 - The following table refers for interactions during *Dredge Line*’s cast time.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---

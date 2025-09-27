@@ -185,7 +185,17 @@
 - The following table refers for interactions while **Briar** is in her frenzy:
   - While in the frenzy, **Briar** cannot control her movement nor declare who she attacks. She will automatically acquire a nearby enemy as her attack target based on a priority system, becoming *forced* to basic attack the target and consequently move into her attack range of them to do so.
     - Disarming crowd control as well as any other lockout that would disable basic attacking will disable the forced attacks.
-    - Forced action crowd control will cause her forced attacks to be either overridden or disabled, depending on the actions being forced by the debuff. * can only be cast on targets within its radius. ** interrupts the frenzy. ** can be cast during the frenzy without interrupting it.|items=true|consume=true|spells=true,true,false,false|interrupts=death
+    - Forced action crowd control will cause her forced attacks to be either overridden or disabled, depending on the actions being forced by the debuff.
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Uncontrollable |
+| **Movement** | Uncontrollable |
+| **Abilities** | *Head Rush* can only be cast on targets within its radius. *E* interrupts the frenzy. *R* can be cast during the frenzy without interrupting it. |
+| **Items** | Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
 
 ---
 
@@ -278,10 +288,9 @@ If *Chilling Scream* was charged for its full duration, enemies hit are also kno
 - This ability will cast from wherever the caster is at the end of the cast time.
 - The following table refers for interactions while **Briar** is channeling:
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
@@ -359,7 +368,27 @@ While in the empowered frenzy, **Briar** prioritizes attacking the marked target
 - This ability will cast from wherever the caster is at the start of the cast time.
 - The following table refers for interactions while **Briar** is in either the first or second cast time:
 - The following table refers for interactions while **Briar** is dashing:
-- The following table refers for interactions while **Briar** is in *Hematomania*: * can only be cast on targets within its radius. ** interrupts the frenzy. ** is disabled.|items=true|consume=true|spells=true,true,false,false|interrupts=death
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+- The following table refers for interactions while **Briar** is in *Hematomania*:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Uncontrollable |
+| **Movement** | Uncontrollable |
+| **Abilities** | *Head Rush* can only be cast on targets within its radius. *E* interrupts the frenzy. *R* is disabled. |
+| **Items** | Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | death |
 
 ---
 

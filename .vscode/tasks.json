@@ -16,6 +16,51 @@
 				"txt",
 				"--verbose"
 			]
+		},
+		{
+			"label": "Quick regen sample champions and run artifact check",
+			"type": "shell",
+			"command": "pwsh",
+			"args": [
+				"-NoLogo",
+				"-NoProfile",
+				"-Command",
+				"$ErrorActionPreference='Stop'; $py = Join-Path (Resolve-Path .).Path '.venv/Scripts/python.exe'; if (-not (Test-Path $py)) { $py = 'python'; }; & $py './simple_converter.py' --wiki-root './out' --output './markdown' --champion 'Akshan'; & $py './simple_converter.py' --wiki-root './out' --output './markdown' --champion 'Ambessa'; & $py './scripts/check_artifacts.py'"
+			],
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Quick regen sample champions and run artifact check (retry)",
+			"type": "shell",
+			"command": "pwsh",
+			"args": [
+				"-NoLogo",
+				"-NoProfile",
+				"-Command",
+				"$ErrorActionActionPreference='Stop'; $py = Join-Path (Resolve-Path .).Path '.venv/Scripts/python.exe'; if (-not (Test-Path $py)) { $py = 'python'; }; & $py './simple_converter.py' --wiki-root './out' --output './markdown' --champion 'Akshan'; & $py './simple_converter.py' --wiki-root './out' --output './markdown' --champion 'Ambessa'; & $py './scripts/check_artifacts.py'"
+			],
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Re-run artifact check only",
+			"type": "shell",
+			"command": "pwsh",
+			"args": [
+				"-NoLogo",
+				"-NoProfile",
+				"-Command",
+				"$ErrorActionPreference='Continue'; $py = Join-Path (Resolve-Path .).Path '.venv/Scripts/python.exe'; if (-not (Test-Path $py)) { $py = 'python'; }; & $py './scripts/check_artifacts.py'"
+			],
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
 		}
 	]
 }

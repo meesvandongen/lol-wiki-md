@@ -176,10 +176,9 @@ Upon completing the channel, **Gragas** empowers his next basic attack within 5 
 - The empowered attack will trigger against wards but not be consumed nor apply its effects against wards.
 - The following table refers for interactions while **Gragas** is channeling:
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |

@@ -248,10 +248,9 @@ The next instance of non-persistent damage that the sleeping target takes from c
     - An applicable example of this can be seen in an interaction with her Portal Jump. If *Sleepy Trouble Bubble* is cast right before she blinks back to *Portal Jump*’s original cast position, the range of the missile will be extended for it to fire to the same end position as if she had not blinked back. This interaction occurs in this manner due to the missile's behavior as explained prior and the fact that **Zoe** blinks back with *Portal Jump* before the cast time of *Sleepy Trouble Bubble* finishes, causing the cast time to finish from *Portal Jump*’s original cast position.
   - This will still count as damage dealt by **Zoe** in the damage recap.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Items** | Disabled |
 | **Summoner Spells** | Allowed / Disabled |
 | **Consumables** | Disabled |
@@ -286,6 +285,16 @@ The next instance of non-persistent damage that the sleeping target takes from c
 - Upon reaching her destination, **Zoe** will either raspberry at the nearest enemy champion, or lick an ice cream cone when there are no enemy champions in sight.
 - **Zoe**’s return position is shifted by 25 units in the target direction from her cast location.
 - The following table refers for interactions while **Zoe** is locked out during the cast time and for certain periods of time during the ability:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
 
 ---
 

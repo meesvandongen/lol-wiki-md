@@ -146,10 +146,9 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 - Only the empowered active is a projectile.
 - The following table refers for interactions while **K'Sante** is in the cast time of the third cast:
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---
@@ -216,10 +215,9 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 - The following table refers for interactions while **K'Sante** is channeling:
   - If the charge is cancelled, he will not automatically use the recast.
 
-#### Channel Behavior (charge)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
@@ -339,7 +337,27 @@ Upon entering *All Out*, **K'Sante** is restored to 100% **maximum** mana. His m
   - For **K'Sante**, his camera centers on him at the start of the cast time, then once again at the end of the cast time at the location of his blink behind the target, and it is not locked.
 - *All Out*’s granted untargetability from the vanish during the target's pull of over 2000 units does not destroy in-flight projectiles.
 - The following table refers for interactions while **K'Sante** is in cast time:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled / Allowed |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Usable |
+| **Interrupted by** | revival-false |
 - The following table refers for interactions while **K'Sante** is performing *All Out*’s cast:
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
 
 ---
 

@@ -225,6 +225,16 @@ The enemy champion struck is also slowed and crippled by 25% for 2 seconds. If *
 - The shock missile will be fired from wherever **Fiora** is after the first $0.5$ seconds of *Riposte*.
 - The following table refers for interactions while **Fiora** is performing *Riposte*:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+
 ---
 
 ### E: Bladework

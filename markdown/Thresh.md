@@ -170,10 +170,9 @@ While the target is stunned, **Thresh** tugs his hook towards him twice, once af
   - This prevents the enemy from knowing where exactly **Thresh** is aiming at before the cast animation is complete. **Death Sentence* triggers on-cast effects (such as Spellblade and triggering Force Pulse’s passive) once at the start of the cast, and once at the end of the cast. It may trigger on-cast effects a third time when casting *Deathly Leap*.
   - This is because a separate spell is cast to prevent **Thresh** from facing towards the target direction immediately, which is (incorrectly) flagged to trigger on-cast effects.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---
@@ -265,10 +264,9 @@ While the target is stunned, **Thresh** tugs his hook towards him twice, once af
 - The empowered attack will not trigger against structures nor wards.
   - : Enhanced attack's interactions with blinding effects (regarding both bonus damage and charge reset).
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Summoner Spells** | Allowed / Disabled |
 
 ---

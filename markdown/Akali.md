@@ -235,7 +235,15 @@ The shuriken *marks* and reveals the enemy or the last *smoke* section hit for 3
   - The shuriken missile will fire from wherever **Akali** is at the end of the cast time (usually mid-dash), but always towards and reaching the location that was 825 units in front of her at the start of cast. The only exception is if she moves via Flash, in which case the range of the missile is decreased relative to the distance she blinked.
 - Killing an enemy with the shuriken will still mark the last area of the shroud hit.
 - Attempting to cast Five Point Strike during either dash will buffer it to cast as soon as the dash ends.
-- This ability's damage is calculated based on the caster's stats at the time of its application. is usable. is disabled for 10 seconds and then interrupts. Both dashes of interrupt.|items=true,,,interrupts|spells=true,interrupts,true,true,false
+- This ability's damage is calculated based on the caster's stats at the time of its application.
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Twilight Shroud is usable. Shuriken Flip is disabled for 10 seconds and then interrupts. Both dashes of Perfect Execution interrupt. |
+| **Items** | Allowed / Interrupts |
+| **Summoner Spells** | Allowed / Interrupts / Disabled |
 
 ---
 

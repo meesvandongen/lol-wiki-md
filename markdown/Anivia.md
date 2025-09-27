@@ -108,6 +108,16 @@ If **Anivia** remains alive by the end of the duration, she is revived with her 
   - All other channels will be interrupted upon triggering *Rebirth*.
 - The following refers for interactions while **Anivia** is resurrecting:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | death |
+
 ---
 
 ### Q: Flash Frost

@@ -196,10 +196,9 @@
   - Item actives with cast times as well as Titanic Hydra are disabled during the channel.
     - Trying to cast a disabled item active will buffer it to cast at the completion of the channel.
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Pick a Card is usable. Wild Cards is disabled. |

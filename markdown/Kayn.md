@@ -108,6 +108,16 @@ If there is, **Kayn** is given an additional orb of the same type he received, w
 - Damage dealt by damage over time effects and specifically First Strike and Summon Aery will not grant orbs.
 - The following table refers for interactions while **Kayn** is transforming:
 
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Disabled |
+| **Consumables** | Disabled |
+| **Interrupted by** | false |
+
 ---
 
 ### Q: Reaping Slash
@@ -193,10 +203,9 @@ Both instances of *Reaping Slash* deal 40 **bonus** physical damage against mini
 - *Blade's Reach*’s indicator is visible to enemies while cast inside terrain and towards enemy champions.
 - This ability will cast from wherever the caster is at the start of the cast time.
 
-#### Channel Behavior (cast)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Cast |
 | **Items** | Disabled |
 | **Summoner Spells** | Allowed / Disabled |
 | **Consumables** | Disabled |
@@ -319,6 +328,16 @@ Receiving damage from or dealing damage to an enemy champion while *Shadow Step*
 - As Rhaast, an alternate icon is used for the initial activation of *Umbral Trespass*.
 - The following table refers for interactions while **Kayn** is channeling and dashing out of the victim:
   - The dash out is not interrupted by cast-inhibiting crowd control.
+
+| Aspect | State / Notes |
+|--------|---------------|
+| **Attacking** | Disabled |
+| **Movement** | Disabled |
+| **Abilities** | Disabled |
+| **Items** | Disabled |
+| **Summoner Spells** | Allowed / Disabled / Interrupts |
+| **Consumables** | Disabled |
+| **Interrupted by** | death,silence |
 
 ---
 

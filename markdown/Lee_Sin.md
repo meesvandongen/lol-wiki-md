@@ -68,10 +68,9 @@ The first attack restores 20–40@1–13 energy and the second attack restores�
 - *Resonating Strike* cannot be cast without the marked target nearby or if the target is untargetable.
 - If *Resonating Strike* interrupts another dash, Tempest and Dragon's Rage can be cast during it (both otherwise cannot be cast).
 
-#### Channel Behavior (20px)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | 20Px |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | [File: Safeguard.png |

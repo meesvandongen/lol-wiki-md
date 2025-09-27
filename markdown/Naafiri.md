@@ -324,10 +324,9 @@ If **Naafiri** scores a champion takedown within 7 seconds of cast, she triggers
   - If **Naafiri**’s channel is interrupted, the *Packmates' * channels will be canceled as well.
   - The channel is cancelled if the target dies or moves too far away, but not if they become untargetable.
 
-#### Channel Behavior (channel)
-
 | Aspect | State / Notes |
 |--------|---------------|
+| **Type** | Charge channel |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
