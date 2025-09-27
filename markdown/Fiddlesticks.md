@@ -244,8 +244,8 @@ While **Fiddlesticks** is channeling, the tethered enemies are dealt magic damag
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Interrupts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Interrupted by: Flash, Teleport, Recall, Hexflash, Mark, Dash |
 
 ---
 
@@ -318,9 +318,9 @@ Enemies hit in the center of the area are also silenced for $1.25$ seconds.
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled / Allowed |
-| **Summoner Spells** | Allowed / Disabled |
-| **Interrupted by** | death, silence, ground |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
+| **Interrupted by** | Death, Cast-inhibiting effects, Grounding effects |
 
 ---
 

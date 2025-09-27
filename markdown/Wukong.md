@@ -298,10 +298,10 @@ Upon arrival, **Wukong** gains **bonus** attack speed for 5 seconds.
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Other abilities are disabled for the first $0.3$ seconds, casting them afterwards interrupts. |
-| **Items** | Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash, Teleport, Hexflash; Disabled: Recall |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

@@ -229,10 +229,10 @@ Enemy champions hit 6 times by *Judgment* are inflicted with (armor penetration)
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | [File:Decisive_Strike.png |
-| **Items** | Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash, Teleport, Hexflash; Disabled: Recall |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

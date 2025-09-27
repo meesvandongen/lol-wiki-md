@@ -113,8 +113,8 @@ If there is, **Kayn** is given an additional orb of the same type he received, w
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: All summoner spells |
 | **Consumables** | Disabled |
 | **Interrupted by** | false |
 
@@ -206,8 +206,8 @@ Both instances of *Reaping Slash* deal 40 **bonus** physical damage against mini
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
 
 ---
@@ -334,10 +334,10 @@ Receiving damage from or dealing damage to an enemy champion while *Shadow Step*
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled / Interrupts |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall; Interrupted by: Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death,silence |
+| **Interrupted by** | Death, Cast-inhibiting effects |
 
 ---
 

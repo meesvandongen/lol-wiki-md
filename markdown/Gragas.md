@@ -182,8 +182,8 @@ Upon completing the channel, **Gragas** empowers his next basic attack within 5 
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
-| **Items** | Disabled / Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall, Hexflash |
 
 ---
 

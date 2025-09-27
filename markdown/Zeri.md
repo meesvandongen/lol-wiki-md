@@ -250,10 +250,10 @@ Afterwards, she gains *Lightning Rounds* for 5 seconds, empowering *Burst Fire* 
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Q is disabled. W and R are usable. |
-| **Items** | Allowed / Interrupts |
-| **Summoner Spells** | Allowed / Interrupts |
+| **Items** | Interrupted by: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Teleport, Recall; Interrupted by: Flash |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

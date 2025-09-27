@@ -80,7 +80,7 @@
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Summoner Spells** | Allowed / Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 
 ---
 
@@ -129,10 +129,10 @@
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled / Allowed |
-| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass, Hextech Rocketbelt, Stridebreaker; Other items: Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Teleport, Recall, Hexflash; Interrupted by: Flash |
 | **Consumables** | Usable |
-| **Interrupted by** | death, ground, root, silence |
+| **Interrupted by** | Death, Grounding effects, Immobilizing effects, Cast-inhibiting effects |
 - The following table refers for interactions while **Tahm Kench** is unable to act:
 
 | Aspect | State / Notes |
@@ -141,10 +141,10 @@
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 
@@ -238,17 +238,16 @@ After 1 second, **Tahm Kench** can cast *Regurgitate* while a target is inside o
 | **Attacking** | Disabled |
 | **Movement** | If an ally, forces **Tahm Kench** to use *Regurgitate* unless movement commands are otherwise restricted. If an enemy, movement commands are disabled. |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: All summoner spells |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
-| **Notes** | If an ally forces **Tahm Kench** to use *Regurgitate* unless movement commands are otherwise restricted. If an enemy movement commands are disabled. |
+| **Interrupted by** | Death |
 
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
 
 ---

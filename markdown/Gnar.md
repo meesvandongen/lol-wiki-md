@@ -237,7 +237,7 @@ The third stack against a target consumes them all to deal **bonus** magic damag
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Summoner Spells** | Allowed / Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 
 ---
 
@@ -364,7 +364,7 @@ Enemies that collide with terrain take 50% increased damage immediately and are 
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Summoner Spells** | Allowed / Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 
 ---
 

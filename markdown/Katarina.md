@@ -256,9 +256,8 @@ Each dagger deals physical damage and magic damage, applies on-hit effects, with
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts / Allowed / Disabled / melee |
-| **Summoner Spells** | Allowed / Interrupts / Disabled |
-| **Notes** | Disabled in the first and last $0.25$ seconds of channel otherwise |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass, Hextech Rocketbelt, Stridebreaker; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Recall, Hexflash; Interrupted by: Flash, Teleport |
 
 ---
 

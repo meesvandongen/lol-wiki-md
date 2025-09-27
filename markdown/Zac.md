@@ -144,10 +144,10 @@ After the duration, **Zac** is revived with 10 – 50% (Based on his bloblets' t
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: All summoner spells |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 
@@ -211,7 +211,7 @@ If the two targets are within 700 units of each other, they are instead slammed 
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Summoner Spells** | Allowed / Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 
 ---
 
@@ -302,10 +302,9 @@ If the two targets are within 700 units of each other, they are instead slammed 
 | **Attacking** | Disabled |
 | **Movement** | Interrupts |
 | **Abilities** | Stretching Strikes and Unstable Matter interrupt. Let's Bounce! initiates the recast and is buffered to cast itself at the end of the dash. |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Disabled / Interrupts / Recasts |
-| **Interrupted by** | silence, death, root, ground |
-| **Notes** | Disabled for the first $0.9$ seconds otherwise |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport; Interrupted by: Recall, Hexflash (recasts) |
+| **Interrupted by** | Cast-inhibiting effects, Death, Immobilizing effects, Grounding effects |
 
 ---
 
@@ -349,10 +348,10 @@ If the two targets are within 700 units of each other, they are instead slammed 
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Q and E are disabled. W is usable. |
-| **Items** | Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash, Teleport, Hexflash; Disabled: Recall |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

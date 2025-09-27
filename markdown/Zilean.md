@@ -113,10 +113,10 @@ A successful channel will grant an equal amount of experience to the ally to-lev
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Interrupts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Interrupted by: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Usable |
-| **Interrupted by** | death, silence |
+| **Interrupted by** | Death, Cast-inhibiting effects |
 
 ---
 
@@ -256,10 +256,10 @@ If the target takes fatal damage within the duration, they enter resurrection fo
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash, Mark, Dash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

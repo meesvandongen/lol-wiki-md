@@ -113,10 +113,10 @@ If **Anivia** remains alive by the end of the duration, she is revived with her 
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: All summoner spells |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

@@ -160,10 +160,10 @@ While **MOUNTED**, healing and health regeneration will first replenish **Skaarl
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Allowed / Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash, Mark, Dash |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 
@@ -377,9 +377,9 @@ The mark will remain even if the target dies, and ends prematurely if the duo ar
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Allowed |
-| **Items** | Allowed |
-| **Summoner Spells** | Allowed |
-| **Interrupted by** | death |
+| **Items** | Usable: All items |
+| **Summoner Spells** | Usable: All summoner spells |
+| **Interrupted by** | Death |
 
 ---
 
@@ -471,11 +471,10 @@ While charging, the duo gain a shield for every $0.25$ seconds of traveling, up 
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash, Mark, Dash |
 | **Consumables** | Disabled |
 | **Interrupted by** | false |
-| **Notes** | but cannot input movement commands. |
 - The following table refers for interactions while **Kled** is dashing:
 
 | Aspect | State / Notes |
@@ -483,8 +482,8 @@ While charging, the duo gain a shield for every $0.25$ seconds of traveling, up 
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: All summoner spells |
 | **Consumables** | Disabled |
 | **Interrupted by** | false |
 - Every summoner spell is disabled, but summoner spells that aren't disabled while **Kled** is charging will not visually appear disabled.

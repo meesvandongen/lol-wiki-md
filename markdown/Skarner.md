@@ -332,11 +332,10 @@ If **Skarner**’s attached target collides with terrain, the charge ends, detac
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death,root,ground,silence |
-| **Notes** | but cannot input movement commands. |
+| **Interrupted by** | Death, Immobilizing effects, Grounding effects, Cast-inhibiting effects |
 - A special indicator for *Ixtal's Impact*’s direction and expected ending location is visible to **Skarner** only during his charge.
 
 ---
@@ -383,10 +382,10 @@ If **Skarner**’s attached target collides with terrain, the charge ends, detac
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled / Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Usable |
-| **Interrupted by** | revival-false |
+| **Interrupted by** | Death (unless protected by Resurrection) |
 - The following table refers for interactions while **Skarner** is performing *Impale*:
 
 | Aspect | State / Notes |
@@ -394,10 +393,10 @@ If **Skarner**’s attached target collides with terrain, the charge ends, detac
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Q and E are disabled, but can be buffered. W is usable. |
-| **Items** | Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Teleport; Disabled: Flash, Recall, Hexflash |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

@@ -141,8 +141,8 @@ While *Living Vengeance*’s bonus is active, **Varus' **attack speed cap is inc
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Blighted Quiver is usable during the first $0.85$ seconds, otherwise, it's disabled. Hail of Arrows and Chain of Corruption are disabled. This ability recasts to end channel. |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall; Interrupted by: Hexflash (recasts) |
 | **Consumables** | Disabled |
 | **Notes** | but can still use trinkets. |
 

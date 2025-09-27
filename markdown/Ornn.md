@@ -137,10 +137,10 @@ Additionally, **Ornn** increases his **bonus** armor, **bonus** magic resistance
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts / Disabled |
-| **Summoner Spells** | Interrupts |
+| **Items** | Disabled: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Interrupt |
+| **Summoner Spells** | Interrupted by: All summoner spells |
 | **Consumables** | Interrupts |
-| **Interrupted by** | death, silence |
+| **Interrupted by** | Damaging effects, Death, Cast-inhibiting effects |
 | **Damage** | true |
 
 ---
@@ -236,10 +236,10 @@ Over the march he belches fire over a cone in front of him, dealing magic damage
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 
@@ -287,8 +287,8 @@ The shockwave destroys the pillar formed by *Volcanic Rupture* and partially des
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
 
 ---

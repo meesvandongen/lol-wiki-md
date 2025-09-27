@@ -298,10 +298,10 @@ While active, she rapidly slashes at the nearest enemy with the lowest **current
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts |
-| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Items** | Interrupted by: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Hexflash; Disabled: Teleport, Recall; Interrupted by: Flash |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 
@@ -394,10 +394,10 @@ While active, she rapidly slashes at the nearest enemy with the lowest **current
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Mark; Disabled: Flash, Teleport, Recall, Hexflash, Dash |
 | **Consumables** | Disabled |
-| **Interrupted by** | revival-false |
+| **Interrupted by** | Death (unless protected by Resurrection) |
 
 ---
 

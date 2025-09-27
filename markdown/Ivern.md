@@ -146,9 +146,9 @@ If the camp's large monster has already been slain prior to planting a grove, **
 |--------|---------------|
 | **Type** | Charge channel |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Interrupts |
-| **Interrupted by** | death, silence |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Interrupted by: Flash, Teleport, Recall, Hexflash |
+| **Interrupted by** | Damaging effects, Death, Cast-inhibiting effects |
 | **Damage** | true |
 
 ---

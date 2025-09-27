@@ -231,8 +231,8 @@ If *Tides of Blood* was charged for at least 1 second, enemies hit are also slow
 |--------|---------------|
 | **Type** | Charge channel |
 | **Abilities** | Sanguine Pool is usable. Transfusion and Hemoplague both interrupt after $0.25$ seconds. |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Interrupts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Hextech Rocketbelt; Interrupted by: Zhonya's Hourglass, Stridebreaker; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Interrupted by: Teleport, Recall, Hexflash |
 
 ---
 

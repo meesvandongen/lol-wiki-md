@@ -330,9 +330,9 @@ If **Naafiri** scores a champion takedown within 7 seconds of cast, she triggers
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled / Allowed |
-| **Summoner Spells** | Allowed / Disabled |
-| **Interrupted by** | death,ground,silence,root |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass, Hextech Rocketbelt, Stridebreaker; Other items: Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
+| **Interrupted by** | Death, Grounding effects, Cast-inhibiting effects, Immobilizing effects |
 
 ---
 

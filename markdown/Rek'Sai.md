@@ -345,15 +345,15 @@ No additional notes.
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Summoner Spells** | Disabled |
+| **Summoner Spells** | Disabled: All summoner spells |
 
 ---
 

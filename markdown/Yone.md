@@ -281,8 +281,8 @@ Activation resets *Way of the Hunter’s* current sword state. *Soul Unbound* ca
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: All summoner spells |
 | **Consumables** | Disabled |
 | **Interrupted by** | false |
 
@@ -340,10 +340,10 @@ After $0.3$ seconds (From the end of the cast time), a gust rushes along the sam
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | revival-false |
+| **Interrupted by** | Death (unless protected by Resurrection) |
 
 ---
 

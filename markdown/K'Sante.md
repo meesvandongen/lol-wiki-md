@@ -149,7 +149,7 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Summoner Spells** | Allowed / Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 
 ---
 
@@ -221,10 +221,10 @@ If this hits at least one enemy, **K'Sante** generates a stack for 6 seconds, st
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 | **Notes** | but allows trinkets |
 
 ---
@@ -343,10 +343,10 @@ Upon entering *All Out*, **K'Sante** is restored to 100% **maximum** mana. His m
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled / Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Usable |
-| **Interrupted by** | revival-false |
+| **Interrupted by** | Death (unless protected by Resurrection) |
 - The following table refers for interactions while **K'Sante** is performing *All Out*’s cast:
 
 | Aspect | State / Notes |
@@ -354,10 +354,10 @@ Upon entering *All Out*, **K'Sante** is restored to 100% **maximum** mana. His m
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

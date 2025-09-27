@@ -271,8 +271,8 @@ While channeling, **Lucian** is ghosted and may still move.
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Relentless Pursuit is usable. Piercing Light and Ardent Blaze are disabled. This ability recasts to end channel. |
-| **Items** | Allowed / Interrupts |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen, Hextech Rocketbelt, Stridebreaker; Interrupted by: Zhonya's Hourglass; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash, Teleport; Disabled: Recall, Hexflash |
 
 ---
 

@@ -192,10 +192,10 @@
 | **Attacking** | Uncontrollable |
 | **Movement** | Uncontrollable |
 | **Abilities** | *Head Rush* can only be cast on targets within its radius. *E* interrupts the frenzy. *R* can be cast during the frenzy without interrupting it. |
-| **Items** | Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 
@@ -294,10 +294,10 @@ If *Chilling Scream* was charged for its full duration, enemies hit are also kno
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall; Interrupted by: Hexflash (recasts) |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 | **Notes** | but can still use trinkets |
 
 ---
@@ -374,10 +374,10 @@ While in the empowered frenzy, **Briar** prioritizes attacking the marked target
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 - The following table refers for interactions while **Briar** is in *Hematomania*:
 
 | Aspect | State / Notes |
@@ -385,10 +385,10 @@ While in the empowered frenzy, **Briar** prioritizes attacking the marked target
 | **Attacking** | Uncontrollable |
 | **Movement** | Uncontrollable |
 | **Abilities** | *Head Rush* can only be cast on targets within its radius. *E* interrupts the frenzy. *R* is disabled. |
-| **Items** | Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

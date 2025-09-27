@@ -237,8 +237,8 @@ While the shield holds, the target gains (attack damage) **bonus** attack damage
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Interrupts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Interrupted by: Flash, Teleport, Recall, Hexflash |
 
 ---
 

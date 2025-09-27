@@ -153,10 +153,10 @@
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 
@@ -257,10 +257,10 @@ The second strike applies on-hit effects and can critically strike for damage.
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Harrowed Path is usable. Blade of the Ruined King and Heartbreaker are disabled. |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall; Interrupted by: Hexflash (recasts) |
 | **Consumables** | Disabled |
-| **Interrupted by** | death, silence, ground, root |
+| **Interrupted by** | Death, Cast-inhibiting effects, Grounding effects, Immobilizing effects |
 | **Notes** | but can still use trinkets. |
 
 ---

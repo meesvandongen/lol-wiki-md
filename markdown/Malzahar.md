@@ -292,8 +292,8 @@ Additionally, a *Null Zone* is opened beneath the target's location at the time 
 | **Attacking** | Disabled if attacking Nether Grasp target. Otherwise interrupts after $0.5$ seconds of channeling. |
 | **Movement** | Disabled for the first $0.5$ seconds. Interrupts afterwards. |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Interrupts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Hextech Rocketbelt; Interrupted by: Zhonya's Hourglass, Stridebreaker; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Interrupted by: Flash, Teleport, Recall |
 | **Consumables** | Usable |
 
 ---

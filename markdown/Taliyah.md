@@ -268,10 +268,10 @@ Once the wall has fully formed, **Taliyah** can recast to destroy the wall insta
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death, root, silence |
+| **Interrupted by** | Death, Immobilizing effects, Cast-inhibiting effects |
 - The following table refers for interactions while **Taliyah** is surfing after the first $0.65$ seconds (Estimated).
   - Once $0.35$ seconds have elapsed afterwards, her lockout is modified for the rest of the surf.
 
@@ -281,10 +281,10 @@ Once the wall has fully formed, **Taliyah** can recast to destroy the wall insta
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Interrupts / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: Flash, Teleport, Recall, Hexflash; Interrupted by: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite |
 | **Consumables** | Disabled |
-| **Interrupted by** | death, root, silence |
+| **Interrupted by** | Death, Immobilizing effects, Cast-inhibiting effects |
 - The following table refers for interactions while **Taliyah** is surfing after 1 second from the channel's completion.
   - Interrupting the surf by casting a non-auto targeted ability, spell, or item active causes her to jump off the wall to the location of where the spell was targeted. She will dash to maximum range if the spell was cast outside of it.
 
@@ -294,10 +294,10 @@ Once the wall has fully formed, **Taliyah** can recast to destroy the wall insta
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts |
-| **Summoner Spells** | Interrupts |
+| **Items** | Interrupted by: All items |
+| **Summoner Spells** | Interrupted by: All summoner spells |
 | **Consumables** | Interrupts |
-| **Interrupted by** | death, root, silence |
+| **Interrupted by** | Death, Immobilizing effects, Cast-inhibiting effects |
 
 ---
 

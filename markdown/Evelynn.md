@@ -337,7 +337,7 @@ Gaining *Demon Shade* resets *Whiplash*’s cooldown and *empowers* its next cas
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Summoner Spells** | Allowed / Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 
 ---
 

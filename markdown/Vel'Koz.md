@@ -272,8 +272,8 @@ The beam deals magic damage to enemies hit every $0.2$ seconds, and slows them b
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Disabled / Interrupts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Hexflash; Interrupted by: Teleport, Recall |
 
 ---
 

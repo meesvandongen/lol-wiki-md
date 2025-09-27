@@ -165,8 +165,8 @@
 | **Attacking** | N/A |
 | **Movement** | N/A |
 | **Abilities** | Detaching and Final Chapter interrupt. Zoomies is usable. |
-| **Items** | Allowed |
-| **Summoner Spells** | Allowed |
+| **Items** | Usable: All items |
+| **Summoner Spells** | Usable: All summoner spells |
 | **Consumables** | Usable |
 
 ---
@@ -252,9 +252,9 @@ If targeting an ally with the recast, the ability will not cast |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled / Allowed |
-| **Summoner Spells** | Allowed / Interrupts / Disabled |
-| **Interrupted by** | death, ground, root, silence |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Teleport, Recall, Hexflash; Interrupted by: Flash |
+| **Interrupted by** | Death, Grounding effects, Immobilizing effects, Cast-inhibiting effects |
 - The following table refers for interactions while **Yuumi** is attached:
 
 | Aspect | State / Notes |
@@ -262,9 +262,9 @@ If targeting an ally with the recast, the ability will not cast |
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Allowed |
-| **Items** | Allowed / Disabled |
-| **Summoner Spells** | Allowed / Disabled |
-| **Interrupted by** | death |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen, Zhonya's Hourglass; Disabled: Hextech Rocketbelt; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
+| **Interrupted by** | Death |
 
 ---
 
@@ -366,8 +366,8 @@ Enemies struck by the waves take magic damage and are slowed by 10% for $1.25$ s
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Prowling Projectile is disabled. You and Me! and Zoomies are usable. |
-| **Items** | Allowed / Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash, Teleport, Hexflash, Mark, Dash; Disabled: Recall |
 
 ---
 

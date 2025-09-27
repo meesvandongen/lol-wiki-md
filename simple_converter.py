@@ -1189,7 +1189,7 @@ class SimpleLoLConverter:
             notes: list[str] = []
             def add_row(label: str, value: str):
                 rows.append((label, value if value else ''))
-            # Attack / movement / abilities
+            # Attack / movement / abilities (uniform handling)
             for key, label in [('attack', 'Attacking'), ('move', 'Movement'), ('cast', 'Abilities')]:
                 if key in named:
                     toks = _tokens(named[key])
@@ -1203,45 +1203,184 @@ class SimpleLoLConverter:
                         state_parts.append('Disabled')
                     if allowed and disabled:
                         state_parts.append('Partially Allowed')
-                    if key != 'cast':  # treat recast/meta tokens for attack/move only; cast narrative stays inline
-                        if recasts := [t for t in others if _classify_basic(t) == 'recasts']:
-                            state_parts.extend(['Recasts'] * len(recasts))
-                            others = [t for t in others if t not in recasts]
-                        if others:
-                            notes.append(' '.join(others))
+                    # Recasts indicator if explicitly present
+                    if any(_classify_basic(t) == 'recasts' for t in toks):
+                        state_parts.append('Recasts')
+                    # If no simple classification matched, keep the original narrative/text
                     add_row(label, ' / '.join(state_parts) if state_parts else (named[key] or ''))
-            # Items / Summoner Spells token breakdown
-            def _complex_block(param: str, base_label: str):
-                if param not in named:
-                    return
-                toks = _tokens(named[param])
-                # Preserve order of appearance while mapping semantic tokens
-                seen: set[str] = set()
-                seq: list[str] = []
-                for t in toks:
-                    tt = t.strip()
-                    if not tt:
-                        continue
-                    cls = _classify_basic(tt)
-                    if cls == 'allowed':
-                        label = 'Allowed'
-                    elif cls == 'disabled':
-                        label = 'Disabled'
-                    elif cls == 'interrupts':
-                        label = 'Interrupts'
-                    elif cls == 'recasts':
-                        label = 'Recasts'
-                    else:
-                        # keep raw (converted later by markdown ctx)
-                        label = self._convert_wiki_to_markdown_ctx(tt, None)
-                    low = label.lower()
-                    if low not in seen:
-                        seen.add(low)
-                        seq.append(label)
-                if seq:
-                    add_row(base_label, ' / '.join(seq))
-            _complex_block('items', 'Items')
-            _complex_block('spells', 'Summoner Spells')
+            # Items / Summoner Spells token breakdown with positional semantics
+            def _render_spells_summary(val: str) -> str:
+                raw = val.strip()
+                toks = _tokens(raw)
+                # Mapping per Channel_type_table
+                group0 = [
+                    'Barrier','Clarity','Cleanse','Exhaust','Ghost','Heal','Ignite','Smite'
+                ]
+                idx_map = {
+                    1: ['Flash'],
+                    2: ['Teleport'],
+                    3: ['Recall'],
+                    4: ['Hexflash'],
+                    5: ['Mark'],
+                    6: ['Dash'],
+                }
+                def classify(v: str) -> str:
+                    v2 = v.strip().lower()
+                    if v2 in ('true','yes','allowed','allow'): return 'allowed'
+                    if v2 in ('false','no','disabled','disable'): return 'disabled'
+                    if v2.startswith('interrupt'): return 'interrupts'
+                    if v2.startswith('recast'): return 'recasts'
+                    if v2 == 'pft': return 'pft'
+                    return 'other'
+                # Single-token: applies to all spells
+                if ',' not in raw and len(toks) == 1:
+                    t = classify(toks[0])
+                    if t == 'allowed':
+                        return 'Usable: All summoner spells'
+                    if t == 'disabled':
+                        return 'Disabled: All summoner spells'
+                    if t == 'interrupts':
+                        return 'Interrupted by: All summoner spells'
+                    if t == 'pft':
+                        return 'Pending for Test: All summoner spells'
+                    return self._convert_wiki_to_markdown_ctx(raw, None)
+                allowed: list[str] = []
+                disabled: list[str] = []
+                interrupts: list[str] = []
+                pft: list[str] = []
+                # Expand index 0 (group of 8 spells)
+                if len(toks) >= 1:
+                    c = classify(toks[0])
+                    if c == 'allowed':
+                        allowed.extend(group0)
+                    elif c == 'disabled':
+                        disabled.extend(group0)
+                    elif c == 'interrupts':
+                        interrupts.extend(group0)
+                    elif c == 'pft':
+                        pft.extend(group0)
+                # Indices 1..6
+                for idx in range(1, 7):
+                    if idx < len(toks):
+                        c = classify(toks[idx])
+                        if c == 'allowed':
+                            allowed.extend(idx_map.get(idx, []))
+                        elif c == 'disabled':
+                            disabled.extend(idx_map.get(idx, []))
+                        elif c == 'interrupts':
+                            # Special: recasts marker may accompany Hexflash in template; treat as interrupt
+                            lbls = idx_map.get(idx, [])
+                            # If token literally 'recasts', handled below; else interrupts
+                            interrupts.extend(lbls)
+                        elif c == 'recasts':
+                            # Append note to Hexflash if idx==4
+                            names = idx_map.get(idx, [])
+                            interrupts.extend([n + ' (recasts)' for n in names])
+                        elif c == 'pft':
+                            pft.extend(idx_map.get(idx, []))
+                parts: list[str] = []
+                def join_list(xs: list[str]) -> str:
+                    # Keep order and deduplicate
+                    seen: set[str] = set()
+                    out: list[str] = []
+                    for x in xs:
+                        k = x.lower()
+                        if k in seen: continue
+                        seen.add(k)
+                        out.append(x)
+                    return ', '.join(out)
+                if allowed:
+                    parts.append(f"Usable: {join_list(allowed)}")
+                if disabled:
+                    parts.append(f"Disabled: {join_list(disabled)}")
+                if interrupts:
+                    parts.append(f"Interrupted by: {join_list(interrupts)}")
+                if pft:
+                    parts.append(f"Pending for Test: {join_list(pft)}")
+                return '; '.join(parts) if parts else self._convert_wiki_to_markdown_ctx(raw, None)
+
+            def _render_items_summary(val: str) -> str:
+                raw = val.strip()
+                toks = _tokens(raw)
+                # Positional mapping from Channel_type_table
+                idx_map = {
+                    1: ["Shurelya's Battlesong", "Youmuu's Ghostblade", "Randuin's Omen"],
+                    2: ["Zhonya's Hourglass"],
+                    3: ["Hextech Rocketbelt"],
+                    4: ["Stridebreaker"],
+                }
+                def classify(v: str) -> str:
+                    v2 = v.strip().lower()
+                    if v2 in ('true','yes','allowed','allow'): return 'allowed'
+                    if v2 in ('false','no','disabled','disable'): return 'disabled'
+                    if v2.startswith('interrupt'): return 'interrupts'
+                    if v2 == 'pft': return 'pft'
+                    return 'other'
+                # Single-token applies to all items
+                if ',' not in raw and len(toks) == 1:
+                    t = classify(toks[0])
+                    if t == 'allowed':
+                        return 'Usable: All items'
+                    if t == 'disabled':
+                        return 'Disabled: All items'
+                    if t == 'interrupts':
+                        return 'Interrupted by: All items'
+                    if t == 'pft':
+                        return 'Pending for Test: All items'
+                    return self._convert_wiki_to_markdown_ctx(raw, None)
+                allowed: list[str] = []
+                disabled: list[str] = []
+                interrupts: list[str] = []
+                pft: list[str] = []
+                other_note: Optional[str] = None
+                # Index 0 controls "All other item-actives ..."
+                if len(toks) >= 1:
+                    c0 = classify(toks[0])
+                    if c0 == 'allowed':
+                        other_note = 'Other items: Usable'
+                    elif c0 == 'disabled':
+                        other_note = 'Other items: Disabled'
+                    elif c0 == 'interrupts':
+                        other_note = 'Other items: Interrupt'
+                    elif c0 == 'pft':
+                        other_note = 'Other items: Pending for Test'
+                # Specific items by indices
+                for idx in range(1, 5):
+                    if idx < len(toks):
+                        c = classify(toks[idx])
+                        names = idx_map.get(idx, [])
+                        if c == 'allowed':
+                            allowed.extend(names)
+                        elif c == 'disabled':
+                            disabled.extend(names)
+                        elif c == 'interrupts':
+                            interrupts.extend(names)
+                        elif c == 'pft':
+                            pft.extend(names)
+                def join_list(xs: list[str]) -> str:
+                    seen: set[str] = set(); out: list[str] = []
+                    for x in xs:
+                        k = x.lower()
+                        if k in seen: continue
+                        seen.add(k); out.append(x)
+                    return ', '.join(out)
+                parts: list[str] = []
+                if allowed:
+                    parts.append(f"Usable: {join_list(allowed)}")
+                if disabled:
+                    parts.append(f"Disabled: {join_list(disabled)}")
+                if interrupts:
+                    parts.append(f"Interrupted by: {join_list(interrupts)}")
+                if pft:
+                    parts.append(f"Pending for Test: {join_list(pft)}")
+                if other_note:
+                    parts.append(other_note)
+                return '; '.join(parts) if parts else self._convert_wiki_to_markdown_ctx(raw, None)
+
+            if 'items' in named:
+                add_row('Items', _render_items_summary(named['items']))
+            if 'spells' in named:
+                add_row('Summoner Spells', _render_spells_summary(named['spells']))
             # Consumables
             if 'consume' in named:
                 toks = _tokens(named['consume'])
@@ -1256,8 +1395,40 @@ class SimpleLoLConverter:
                     add_row('Consumables', 'Interrupts')
                 if others:
                     notes.append(' '.join(others))
+            # Human-friendly formatting for interrupt tokens
+            def _format_interrupts(int_val: str, damage_val: Optional[str]) -> str:
+                tokens = [t.strip() for t in _tokens(int_val)] if int_val else []
+                out_parts: list[str] = []
+                # Damage effects line (from separate 'damage' param in template)
+                if damage_val is not None:
+                    dv = damage_val.strip().lower()
+                    if dv == 'true':
+                        out_parts.append('Damaging effects')
+                    elif dv and dv != 'false':
+                        out_parts.append(self._convert_wiki_to_markdown_ctx(damage_val.strip(), None))
+                # Map known interrupt keywords
+                mapping = {
+                    'death': 'Death',
+                    'revival-false': 'Death (unless protected by Resurrection)',
+                    'ground': 'Grounding effects',
+                    'root': 'Immobilizing effects',
+                    'silence': 'Cast-inhibiting effects',
+                }
+                seen: set[str] = set()
+                for tok in tokens:
+                    key = tok.lower()
+                    label = mapping.get(key)
+                    if not label:
+                        # keep unknown token as-is
+                        label = self._convert_wiki_to_markdown_ctx(tok, None)
+                    k2 = label.lower()
+                    if k2 not in seen:
+                        seen.add(k2)
+                        out_parts.append(label)
+                return ', '.join(out_parts) if out_parts else (int_val or 'N/A')
+
             if 'interrupts' in named:
-                add_row('Interrupted by', named['interrupts'])
+                add_row('Interrupted by', _format_interrupts(named['interrupts'], named.get('damage')))
             if 'damage' in named:
                 add_row('Damage', named['damage'])
             # Do not duplicate cast narrative into notes; Abilities cell already conveys it.

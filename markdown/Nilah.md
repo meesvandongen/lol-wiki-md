@@ -251,10 +251,10 @@ Allied champions she touches (Being within collision range of them) will also be
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
-| **Items** | Allowed / Disabled / melee |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen, Zhonya's Hourglass, Hextech Rocketbelt; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash, Teleport, Hexflash; Disabled: Recall |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

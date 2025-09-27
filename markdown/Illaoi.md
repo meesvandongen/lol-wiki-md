@@ -200,7 +200,7 @@ Each Tentacle also heals **Illaoi** for 5% of her **missing** health if it hits 
 |--------|---------------|
 | **Type** | Cast |
 | **Abilities** | E and R are buffered. W is usable. |
-| **Summoner Spells** | Allowed / Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 
 ---
 
@@ -368,10 +368,10 @@ Enemies made a Vessel continuously spawn a Tentacle near themselves, when possib
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Q and R are buffered. W is usable, but is buffered while pulling the Spirit. |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

@@ -114,10 +114,10 @@
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Allowed / Interrupts |
-| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Items** | Interrupted by: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Teleport, Recall; Disabled: Hexflash; Interrupted by: Flash |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 
@@ -162,10 +162,10 @@ Against monsters, *Cunning Sweep* deals 125 **bonus** physical damage and the da
 | **Attacking** | Registers input for *Drakehound's Step*. |
 | **Movement** | Registers input for *Drakehound's Step*. |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | revival-false |
+| **Interrupted by** | Death (unless protected by Resurrection) |
 
 ---
 
@@ -206,10 +206,10 @@ Against monsters, *Sundering Slam* deals 125 **bonus** physical damage and the d
 | **Attacking** | Registers input for *Drakehound's Step*. |
 | **Movement** | Registers input for *Drakehound's Step*. |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | revival-false |
+| **Interrupted by** | Death (unless protected by Resurrection) |
 
 ---
 
@@ -259,10 +259,10 @@ Additionally, **Ambessa** shields herself at the time of cast for 50 to 320 (+ 1
 | **Attacking** | Registers input for *Drakehound's Step*. |
 | **Movement** | Registers input for *Drakehound's Step*. |
 | **Abilities** | Other abilities may be cast in the last $0.275$ seconds of the brace after the lockout and are otherwise disabled in the first $0.225$ seconds. If *Drakehound's Step’s* dash was buffered during the lockout, casting other abilities overrides the buffer with the new cast input. |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | revival-false |
+| **Interrupted by** | Death (unless protected by Resurrection) |
 
 ---
 
@@ -303,8 +303,8 @@ Additionally, **Ambessa** shields herself at the time of cast for 50 to 320 (+ 1
 | **Attacking** | Registers input for *Drakehound's Step*. |
 | **Movement** | Registers input for *Drakehound's Step*. |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
 | **Interrupted by** | false |
 
@@ -367,10 +367,10 @@ Additionally, **Ambessa** shields herself at the time of cast for 50 to 320 (+ 1
 | **Attacking** | Registers input for *Drakehound's Step*. |
 | **Movement** | Registers input for *Drakehound's Step*. |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | revival-false |
+| **Interrupted by** | Death (unless protected by Resurrection) |
 
 ---
 

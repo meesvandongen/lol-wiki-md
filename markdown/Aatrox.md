@@ -167,7 +167,7 @@ Whenever **Aatrox** hits at least one enemy champion or large monster with a bas
 |--------|---------------|
 | **Type** | Cast |
 | **Abilities** | E can be cast. Other abilities are disabled. |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

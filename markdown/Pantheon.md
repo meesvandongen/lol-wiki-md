@@ -146,8 +146,8 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Charge channel |
-| **Items** | Allowed / Interrupts / Disabled |
-| **Summoner Spells** | Allowed / Interrupts / Recasts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Hextech Rocketbelt; Interrupted by: Zhonya's Hourglass; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Interrupted by: Teleport, Recall, Hexflash (recasts) |
 
 ---
 
@@ -237,9 +237,9 @@ If the charge is interrupted or completes without reactivation, *Comet Spear* is
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
-| **Items** | Allowed / Disabled |
-| **Summoner Spells** | Allowed / Disabled |
-| **Interrupted by** | death |
+| **Items** | Disabled: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash, Teleport; Disabled: Recall, Hexflash |
+| **Interrupted by** | Death |
 
 ---
 
@@ -303,10 +303,10 @@ Over the remaining $1.25$ (Estimated) seconds, **Pantheon** crashes down after $
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: All summoner spells |
 | **Consumables** | Disabled |
-| **Interrupted by** | death, ground, root, silence |
+| **Interrupted by** | Death, Grounding effects, Immobilizing effects, Cast-inhibiting effects |
 - The cast time and second channel have the same interactions except they can only be interrupted by death.
 - *Grand Starfall*’s first channel will also be interrupted if he enters or leaves the Death Realm.
 

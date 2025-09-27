@@ -196,10 +196,10 @@ When the blasts meet, the gusts form a tornado that persists for 2 seconds, slow
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Disabled / Interrupts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Hexflash; Interrupted by: Recall |
 | **Consumables** | Usable |
-| **Interrupted by** | death, silence |
+| **Interrupted by** | Death, Cast-inhibiting effects |
 
 ---
 
@@ -239,7 +239,7 @@ When the blasts meet, the gusts form a tornado that persists for 2 seconds, slow
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Summoner Spells** | Allowed / Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Recall; Disabled: Flash, Teleport, Hexflash |
 
 ---
 
@@ -284,9 +284,9 @@ After channeling for $1.25$ seconds, he gains crowd control immunity for the rem
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled / Allowed |
-| **Summoner Spells** | Allowed / Disabled |
-| **Interrupted by** | death, root, silence, ground |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
+| **Interrupted by** | Death, Immobilizing effects, Cast-inhibiting effects, Grounding effects |
 - *Hero's Entrance*’s channel can only be interrupted by crowd control in the first $1.25$ seconds.
 
 ---

@@ -140,8 +140,8 @@
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall; Interrupted by: Hexflash (recasts) |
 | **Consumables** | Disabled |
 | **Notes** | but can still use trinkets. |
 - The following table refers for interactions while **Xerath** is locked out during the recast delay:
@@ -151,10 +151,10 @@
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled / Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 
@@ -297,9 +297,8 @@ Hitting at least one enemy champion grants a stack of *Arcane Perfection* during
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Disabled |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Disabled / Interrupts |
-| **Notes** | Disabled for the first $1.25$ seconds otherwise |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Hexflash; Interrupted by: Teleport, Recall |
 
 ---
 

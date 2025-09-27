@@ -159,11 +159,10 @@ The snowball rolls over enemy minions and small monsters hit, dealing $33.3$% of
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death, ground, root, silence |
-| **Notes** | but cannot input movement commands. |
+| **Interrupted by** | Death, Grounding effects, Immobilizing effects, Cast-inhibiting effects |
 
 ---
 
@@ -263,8 +262,8 @@ After 3 seconds from the first cast, *Snowbound* enemies near **Willump** take m
 |--------|---------------|
 | **Type** | Charge channel |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Interrupts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Interrupted by: Flash, Teleport, Recall, Hexflash |
 
 ---
 

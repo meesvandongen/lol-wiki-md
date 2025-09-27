@@ -279,8 +279,8 @@ Non-epic monsters take 50% damage from *Tactical Sweep*.
 | **Attacking** | Initiates the dash towards attack target. |
 | **Movement** | Initiates the dash towards the commanded location. |
 | **Abilities** | Precision Protocol and Tactical Sweep are usable. The Hextech Ultimatum is disabled. |
-| **Items** | Interrupts |
-| **Summoner Spells** | Disabled / Interrupts |
+| **Items** | Interrupted by: All items |
+| **Summoner Spells** | Disabled: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Teleport, Hexflash; Interrupted by: Flash, Recall |
 | **Consumables** | Interrupts |
 
 ---
@@ -347,10 +347,10 @@ The target cannot escape the zone through any means. While within the zone, **Ca
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: All summoner spells |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

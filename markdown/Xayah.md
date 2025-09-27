@@ -285,10 +285,10 @@ A target hit by at least three Feathers is rooted for $1.25$ seconds.
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: All summoner spells |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

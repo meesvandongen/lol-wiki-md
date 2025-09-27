@@ -202,9 +202,9 @@
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Pick a Card is usable. Wild Cards is disabled. |
-| **Items** | Allowed / Interrupts |
-| **Summoner Spells** | Disabled |
-| **Interrupted by** | death, ground, root, silence |
+| **Items** | Interrupted by: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Usable |
+| **Summoner Spells** | Disabled: All summoner spells |
+| **Interrupted by** | Death, Grounding effects, Immobilizing effects, Cast-inhibiting effects |
 
 ---
 

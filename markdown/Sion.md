@@ -228,8 +228,8 @@ If *Decimating Smash* was charged for at least 1 second, **Sion** instead slams 
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Soul Furnace and its recast are usable. Roar of the Slayer and Unstoppable Onslaught are disabled. This ability recasts to end channel. |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall; Interrupted by: Hexflash (recasts) |
 | **Consumables** | Disabled |
 
 ---
@@ -414,11 +414,10 @@ Enemies, including turrets, hit by the slam are dealt the same damage and are sl
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Soul Furnace and its recast are usable. Decimating Smash and Roar of the Slayer are disabled. This ability recasts to end channel. |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: All summoner spells |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
-| **Notes** | but cannot input movement commands. |
+| **Interrupted by** | Death |
 - If *Unstoppable Onslaught*’s channel is interrupted despite the immunity to crowd control or Decimating Smash is cast within $0.25$ seconds after starting the charge, it will also initiate the leap. If the channel ends due to collision or death, there is no leap and the effect occurs immediately.
 
 ---

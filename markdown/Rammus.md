@@ -154,8 +154,8 @@
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Defensive Ball Curl interrupts. Frenzying Taunt is disabled. Soaring Slam modifies this ability. This ability recasts to end channel. |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Interrupts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Interrupted by: Teleport, Recall, Hexflash |
 
 ---
 
@@ -272,10 +272,10 @@ The impact causes 3 aftershocks to burst from the area over $3.5$ seconds, each 
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

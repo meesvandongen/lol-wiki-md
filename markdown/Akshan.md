@@ -278,10 +278,10 @@ Scoring an enemy champion takedown reduces *Heroic Swing*’s **current** cooldo
 | **Attacking** | Automatically initiates the second cast. |
 | **Movement** | Automatically initiates the second cast. |
 | **Abilities** | Avengerang and Going Rogue are disabled. Comeuppance is usable. |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled / Interrupts |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Teleport, Recall, Hexflash; Interrupted by: Flash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death,root,ground |
+| **Interrupted by** | Death, Immobilizing effects, Grounding effects |
 - The following table refers for interactions while **Akshan** is swinging:
 
 | Aspect | State / Notes |
@@ -289,10 +289,10 @@ Scoring an enemy champion takedown reduces *Heroic Swing*’s **current** cooldo
 | **Attacking** | Automatically initiates the third cast. |
 | **Movement** | Automatically initiates the third cast. |
 | **Abilities** | Avengerang and Going Rogue are disabled. Comeuppance is usable. |
-| **Items** | Allowed / Interrupts |
-| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen, Stridebreaker; Interrupted by: Zhonya's Hourglass, Hextech Rocketbelt; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Hexflash; Disabled: Teleport, Recall; Interrupted by: Flash |
 | **Consumables** | Usable |
-| **Interrupted by** | death,root |
+| **Interrupted by** | Death, Immobilizing effects |
 
 ---
 
@@ -359,10 +359,10 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 | Aspect | State / Notes |
 |--------|---------------|
 | **Attacking** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled / Interrupts |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall; Interrupted by: Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death,silence |
+| **Interrupted by** | Death, Cast-inhibiting effects |
 
 
 **Notes:**
@@ -385,10 +385,10 @@ Each bullet's damage applies life steal at 100% effectiveness and executes minio
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Q and W are disabled. E is usable. |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled / Interrupts |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall; Interrupted by: Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death,silence |
+| **Interrupted by** | Death, Cast-inhibiting effects |
 
 ---
 

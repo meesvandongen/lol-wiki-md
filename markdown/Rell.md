@@ -187,9 +187,9 @@ While **Rell** is **DISMOUNTED**, she can cast *Ferromancy: Mount Up*. Upon comp
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Q is disabled. E and R are usable. |
-| **Items** | Allowed / Disabled |
-| **Summoner Spells** | Allowed / Disabled |
-| **Interrupted by** | death |
+| **Items** | Disabled: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
+| **Interrupted by** | Death |
 
 ---
 

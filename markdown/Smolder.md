@@ -248,9 +248,9 @@
 | **Attacking** | Causes **Smolder** to move towards the attack target. |
 | **Movement** | Allowed |
 | **Abilities** | Interrupts |
-| **Items** | =true / Interrupts |
-| **Summoner Spells** | Allowed |
-| **Interrupted by** | death,root |
+| **Items** | Interrupted by: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen |
+| **Summoner Spells** | Usable: All summoner spells |
+| **Interrupted by** | Death, Immobilizing effects |
 
 ---
 
@@ -293,7 +293,7 @@
 |--------|---------------|
 | **Type** | Cast |
 | **Movement** | Disabled in the first $0.4$ seconds of the cast time. |
-| **Summoner Spells** | Allowed / Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 
 ---
 

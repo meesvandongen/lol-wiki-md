@@ -148,7 +148,7 @@ If the charge is interrupted or completes without reactivation, *Bone Skewer* is
 |--------|---------------|
 | **Type** | Charge channel |
 | **Abilities** | Interrupts |
-| **Items** | Disabled |
+| **Items** | Disabled: All items |
 | **Consumables** | Disabled |
 | **Notes** | but can use trinkets |
 - The following table refers for interactions while **Pyke** is locked out from the harpoon being in flight:
@@ -159,10 +159,10 @@ If the charge is interrupted or completes without reactivation, *Bone Skewer* is
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

@@ -96,8 +96,8 @@ At rank 5, *Breath of Light*’s channel duration is increased to 160 seconds.
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Interrupts |
-| **Items** | Interrupts / Allowed / Disabled |
-| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Zhonya's Hourglass; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Teleport; Interrupted by: Flash, Recall, Hexflash |
 
 ---
 
@@ -144,10 +144,10 @@ Scoring a champion takedown within 3 seconds of damaging them reduces *Astral Fl
 | **Attacking** | Interrupts |
 | **Movement** | Interrupts |
 | **Abilities** | Allowed |
-| **Items** | Allowed / Interrupts |
-| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Items** | Interrupted by: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen, Zhonya's Hourglass; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Hexflash; Disabled: Teleport, Recall; Interrupted by: Flash |
 | **Consumables** | Usable |
-| **Interrupted by** | death,root |
+| **Interrupted by** | Death, Immobilizing effects |
 
 ---
 

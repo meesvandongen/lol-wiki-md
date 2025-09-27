@@ -237,8 +237,8 @@ Colliding with an enemy champion extends *The Quickness' *duration by $0.25$ sec
 | **Attacking** | Allowed |
 | **Movement** | Allowed |
 | **Abilities** | [File: Grand Entrance.png |
-| **Items** | Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Teleport, Recall, Hexflash; Disabled: Flash |
 | **Consumables** | Usable |
 
 ---

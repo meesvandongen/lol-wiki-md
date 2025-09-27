@@ -175,8 +175,8 @@ While *Jaws of the Beast* is active, **Warwick** is displacement immune and clam
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Primal Howl is usable. Blood Hunt and Infinite Duress are disabled. |
-| **Items** | Interrupts / Allowed / Disabled / melee |
-| **Summoner Spells** | Allowed / Interrupts |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Disabled: Hextech Rocketbelt; Interrupted by: Zhonya's Hourglass, Stridebreaker; Other items: Interrupt |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Interrupted by: Flash, Teleport, Recall, Hexflash |
 | **Consumables** | Usable |
 **Known Issues**
 - *Jaws of the Beast* will also refund its cooldown if it kills the target after being held for exactly its bite delay.
@@ -328,7 +328,7 @@ Starting *Infinite Duress’* channel while *Primal Howl* is active will initiat
 | Aspect | State / Notes |
 |--------|---------------|
 | **Type** | Cast |
-| **Summoner Spells** | Allowed / Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 - The following table refers for interactions while **Warwick** is channeling:
 
 | Aspect | State / Notes |
@@ -337,8 +337,8 @@ Starting *Infinite Duress’* channel while *Primal Howl* is active will initiat
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Disabled |
-| **Items** | Disabled / Allowed |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Usable: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Disabled |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite; Disabled: Flash, Teleport, Recall, Hexflash |
 
 ---
 

@@ -158,10 +158,10 @@ She stops upon hitting an enemy champion, knocking them back over $0.75$ seconds
 | **Attacking** | Disabled |
 | **Movement** | Allowed |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled / Recasts |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash; Disabled: Teleport, Recall; Interrupted by: Hexflash (recasts) |
 | **Consumables** | Disabled |
-| **Interrupted by** | death, ground, root, silence |
+| **Interrupted by** | Death, Grounding effects, Immobilizing effects, Cast-inhibiting effects |
 | **Notes** | but can still use trinkets. |
 
 ---
@@ -287,10 +287,10 @@ Enemies she dashes through are dealt the same damage, knocked aside by 350 units
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | Relentless Force is usable. Vault Breaker is disabled. |
-| **Items** | Disabled |
-| **Summoner Spells** | Allowed / Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Flash, Hexflash; Disabled: Teleport, Recall |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

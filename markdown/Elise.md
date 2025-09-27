@@ -371,10 +371,10 @@ If the recast was used on a target enemy, **Elise** and her *Spiderlings* descen
 | **Attacking** | Descends onto the attack target. |
 | **Movement** | Descends onto her current position. |
 | **Abilities** | Disabled |
-| **Items** | Disabled |
-| **Summoner Spells** | Disabled |
+| **Items** | Disabled: All items |
+| **Summoner Spells** | Disabled: All summoner spells |
 | **Consumables** | Disabled |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 

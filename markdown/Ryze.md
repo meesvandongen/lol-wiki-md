@@ -261,9 +261,9 @@ Upon completion, **Ryze** and allied units within (See notes) will blink to the 
 | **Attacking** | Allowed |
 | **Movement** | Allowed |
 | **Abilities** | Allowed |
-| **Items** | Allowed / Interrupts |
-| **Summoner Spells** | Allowed |
-| **Interrupted by** | silence,root,revival-false, ground |
+| **Items** | Interrupted by: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Usable |
+| **Summoner Spells** | Usable: All summoner spells |
+| **Interrupted by** | Cast-inhibiting effects, Immobilizing effects, Death (unless protected by Resurrection), Grounding effects |
 
 ---
 

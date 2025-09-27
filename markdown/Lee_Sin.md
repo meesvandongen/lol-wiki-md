@@ -74,10 +74,10 @@ The first attack restores 20–40@1–13 energy and the second attack restores�
 | **Attacking** | Disabled |
 | **Movement** | Disabled |
 | **Abilities** | [File: Safeguard.png |
-| **Items** | Allowed / Interrupts |
-| **Summoner Spells** | Allowed / Interrupts / Disabled |
+| **Items** | Interrupted by: Shurelya's Battlesong, Youmuu's Ghostblade, Randuin's Omen; Other items: Usable |
+| **Summoner Spells** | Usable: Barrier, Clarity, Cleanse, Exhaust, Ghost, Heal, Ignite, Smite, Teleport; Disabled: Recall; Interrupted by: Flash |
 | **Consumables** | Usable |
-| **Interrupted by** | death |
+| **Interrupted by** | Death |
 
 ---
 
