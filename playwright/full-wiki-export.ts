@@ -12,18 +12,21 @@ interface CrawlOptions {
   fullHistory: boolean; // export all revisions
   includeTemplates: boolean; // include templates recursively
   maxCategoryDepth: number; // recursion depth for subcategories
+  noExport: boolean; // list only, do not export page XML
 }
 
 const DEFAULTS: CrawlOptions = {
   limit: undefined,
   delayMs: 250,
   parallel: 4,
-  categories: ['Champions', 'Items', 'Runes'],
+  // Add canonical broad champion category to ensure full coverage.
+  categories: ['League_of_Legends_champion', 'Champions', 'Items', 'Runes'],
   outDir: 'wiki_exports',
   retry: 3,
   fullHistory: false,
   includeTemplates: false,
   maxCategoryDepth: 2,
+  noExport: false,
 };
 
 function parseArgs(): CrawlOptions {
@@ -38,7 +41,9 @@ function parseArgs(): CrawlOptions {
     else if (arg === '--full-history') opts.fullHistory = true;
     else if (arg === '--with-templates') opts.includeTemplates = true;
     else if (arg === '--max-depth') opts.maxCategoryDepth = parseInt(process.argv[++i], 10);
+    else if (arg === '--no-export') opts.noExport = true;
   }
+  if (opts.limit !== undefined && opts.limit <= 0) opts.limit = undefined; // treat non-positive as unlimited
   return opts;
 }
 
@@ -139,8 +144,19 @@ async function main() {
   await browser.close();
 
   const uniqueTitles = Array.from(new Set(allTitles)).sort();
-  const limited = opts.limit ? uniqueTitles.slice(0, opts.limit) : uniqueTitles;
-  console.log(`Total unique titles to export: ${limited.length}`);
+  // Filter out obvious non-content / meta namespaces (can reintroduce by supplying direct categories if needed)
+  const skipPrefixes = ['File:', 'Category:', 'Template:', 'Module:', 'Help:', 'Special:'];
+  const filtered = uniqueTitles.filter(t => !skipPrefixes.some(p => t.startsWith(p)));
+  const limited = opts.limit ? filtered.slice(0, opts.limit) : filtered;
+  console.log(`Total unique titles collected: ${uniqueTitles.length}`);
+  if (filtered.length !== uniqueTitles.length) console.log(`Filtered out ${uniqueTitles.length - filtered.length} meta/namespace pages.`);
+  console.log(`Titles selected for export: ${limited.length}`);
+
+  if (opts.noExport) {
+    await fs.writeFile(path.join(opts.outDir, 'all_titles.json'), JSON.stringify({ total: limited.length, titles: limited }, null, 2));
+    console.log('No-export mode: wrote all_titles.json and exiting.');
+    return;
+  }
 
   let completed = 0, newDownloads = 0;
   const queue = [...limited];
