@@ -13,6 +13,10 @@ interface CrawlOptions {
   includeTemplates: boolean; // include templates recursively
   maxCategoryDepth: number; // recursion depth for subcategories
   noExport: boolean; // list only, do not export page XML
+  batchExport: boolean; // export multiple pages in one request
+  batchSize: number; // number of titles per batch request
+  splitBatches: boolean; // split combined batch XML into per-page files
+  combinedPrefix: string; // prefix for combined batch files
 }
 
 const DEFAULTS: CrawlOptions = {
@@ -27,6 +31,10 @@ const DEFAULTS: CrawlOptions = {
   includeTemplates: false,
   maxCategoryDepth: 2,
   noExport: false,
+  batchExport: false,
+  batchSize: 40,
+  splitBatches: true,
+  combinedPrefix: 'combined_chunk',
 };
 
 function parseArgs(): CrawlOptions {
@@ -42,6 +50,10 @@ function parseArgs(): CrawlOptions {
     else if (arg === '--with-templates') opts.includeTemplates = true;
     else if (arg === '--max-depth') opts.maxCategoryDepth = parseInt(process.argv[++i], 10);
     else if (arg === '--no-export') opts.noExport = true;
+    else if (arg === '--batch-export') opts.batchExport = true;
+    else if (arg === '--batch-size') opts.batchSize = parseInt(process.argv[++i], 10);
+    else if (arg === '--no-split') opts.splitBatches = false;
+    else if (arg === '--combined-prefix') opts.combinedPrefix = process.argv[++i];
   }
   if (opts.limit !== undefined && opts.limit <= 0) opts.limit = undefined; // treat non-positive as unlimited
   return opts;
@@ -158,6 +170,12 @@ async function main() {
     return;
   }
 
+  if (opts.batchExport) {
+    console.log(`Batch export enabled (size=${opts.batchSize}, split=${opts.splitBatches}).`);
+    await batchExportPages(limited, opts);
+    return;
+  }
+
   let completed = 0, newDownloads = 0;
   const queue = [...limited];
   const start = Date.now();
@@ -180,6 +198,67 @@ async function main() {
   const workers = Array.from({ length: opts.parallel }, (_, i) => worker(i + 1));
   await Promise.all(workers);
   console.log(`Done. Exported ${newDownloads} (skipped existing ${completed - newDownloads}). Output in ${opts.outDir}`);
+}
+
+async function batchExportPages(titles: string[], opts: CrawlOptions) {
+  const chunks: string[][] = [];
+  for (let i = 0; i < titles.length; i += opts.batchSize) {
+    chunks.push(titles.slice(i, i + opts.batchSize));
+  }
+  console.log(`Performing ${chunks.length} batch request(s).`);
+  let totalWritten = 0; let skipped = 0; let chunkIndex = 0;
+  for (const chunk of chunks) {
+    chunkIndex++;
+    const params = new URLSearchParams();
+    // Titles separated by newlines (MediaWiki Special:Export supports multiline pages param)
+    params.set('pages', chunk.join('\n'));
+    params.set('action', 'submit');
+    if (!opts.fullHistory) params.set('curonly', '1');
+    if (opts.includeTemplates) params.set('templates', '1');
+    const url = `https://wiki.leagueoflegends.com/en-us/Special:Export?${params.toString()}`;
+    const ctx = await request.newContext();
+    console.log(`[Batch ${chunkIndex}/${chunks.length}] Requesting ${chunk.length} titles`);
+    const resp = await ctx.get(url, { timeout: 300000 });
+    if (!resp.ok()) {
+      console.error(`Batch ${chunkIndex} failed HTTP ${resp.status()}`);
+      await ctx.dispose();
+      continue;
+    }
+    const xml = await resp.text();
+    await ctx.dispose();
+    if (!xml.includes('<mediawiki')) {
+      console.error(`Batch ${chunkIndex} missing <mediawiki> root, skipping.`);
+      continue;
+    }
+    const combinedName = `${opts.combinedPrefix}_${String(chunkIndex).padStart(3,'0')}.xml`;
+    const combinedPath = path.join(opts.outDir, combinedName);
+    await fs.writeFile(combinedPath, xml, 'utf8');
+    console.log(`[Batch ${chunkIndex}] Wrote combined XML ${combinedName} (${xml.length} bytes)`);
+    if (opts.splitBatches) {
+      const headerEndIdx = xml.indexOf('<page>');
+      const footerStartIdx = xml.lastIndexOf('</page>');
+      const header = xml.substring(0, headerEndIdx);
+      const footer = xml.substring(footerStartIdx + '</page>'.length);
+      const pageRegex = /<page>[\s\S]*?<\/page>/g;
+      const pages = xml.match(pageRegex) || [];
+      for (const pageXml of pages) {
+        const titleMatch = pageXml.match(/<title>([\s\S]*?)<\/title>/);
+        if (!titleMatch) continue;
+        const title = titleMatch[1];
+        const safe = title.replace(/[^A-Za-z0-9_.-]+/g, '_');
+        const subDir = path.join(opts.outDir, safe[0]?.toUpperCase() || '_');
+        const outPath = path.join(subDir, safe + '.xml');
+        if (await exists(outPath)) { skipped++; continue; }
+        await fs.mkdir(subDir, { recursive: true });
+        const fullContent = header + pageXml + footer;
+        await fs.writeFile(outPath, fullContent, 'utf8');
+        totalWritten++;
+      }
+      console.log(`[Batch ${chunkIndex}] Split pages: wrote ${totalWritten} (skipped existing ${skipped}).`);
+    }
+    if (opts.delayMs) await sleep(opts.delayMs);
+  }
+  console.log(`Batch export complete. New pages written: ${totalWritten}.`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
