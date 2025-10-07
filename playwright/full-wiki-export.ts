@@ -1,0 +1,169 @@
+import { request, chromium } from 'playwright';
+import { promises as fs } from 'fs';
+import * as path from 'path';
+
+interface CrawlOptions {
+  limit?: number;
+  delayMs: number;
+  parallel: number;
+  categories: string[];
+  outDir: string;
+  retry: number;
+  fullHistory: boolean; // export all revisions
+  includeTemplates: boolean; // include templates recursively
+  maxCategoryDepth: number; // recursion depth for subcategories
+}
+
+const DEFAULTS: CrawlOptions = {
+  limit: undefined,
+  delayMs: 250,
+  parallel: 4,
+  categories: ['Champions', 'Items', 'Runes'],
+  outDir: 'wiki_exports',
+  retry: 3,
+  fullHistory: false,
+  includeTemplates: false,
+  maxCategoryDepth: 2,
+};
+
+function parseArgs(): CrawlOptions {
+  const opts: CrawlOptions = { ...DEFAULTS };
+  for (let i = 2; i < process.argv.length; i++) {
+    const arg = process.argv[i];
+    if (arg === '--limit') opts.limit = parseInt(process.argv[++i], 10);
+    else if (arg === '--delay') opts.delayMs = parseInt(process.argv[++i], 10);
+    else if (arg === '--parallel') opts.parallel = parseInt(process.argv[++i], 10);
+    else if (arg === '--category') opts.categories.push(process.argv[++i]);
+    else if (arg === '--out') opts.outDir = process.argv[++i];
+    else if (arg === '--full-history') opts.fullHistory = true;
+    else if (arg === '--with-templates') opts.includeTemplates = true;
+    else if (arg === '--max-depth') opts.maxCategoryDepth = parseInt(process.argv[++i], 10);
+  }
+  return opts;
+}
+
+async function sleep(ms: number) { return new Promise(r => setTimeout(r, ms)); }
+
+interface CategoryFetchResult { members: string[]; subcategories: string[]; }
+
+async function fetchCategory(browserPage, category: string): Promise<CategoryFetchResult> {
+  // Reuse logic: navigate to category page and paginate.
+  const url = `https://wiki.leagueoflegends.com/en-us/Category:${encodeURIComponent(category)}`;
+  await browserPage.goto(url, { waitUntil: 'domcontentloaded' });
+  const members = new Set<string>();
+  const subcats = new Set<string>();
+  async function extract() {
+    const links = await browserPage.$$eval('#mw-pages li > a', as => as.map(a => (a as HTMLAnchorElement).getAttribute('title') || ''));
+    for (const l of links) if (l) members.add(l);
+    const subcatLinks = await browserPage.$$eval('#mw-subcategories li > a', as => as.map(a => (a as HTMLAnchorElement).textContent || ''));
+    for (const s of subcatLinks) {
+      if (s) {
+        // Category link text may include parentheses counts. Strip trailing count.
+        const cleaned = s.replace(/\s*\(.*?\)$/, '');
+        subcats.add(cleaned);
+      }
+    }
+  }
+  await extract();
+  while (await browserPage.locator('#mw-pages a:has-text("next page")').count() > 0) {
+    await browserPage.locator('#mw-pages a:has-text("next page")').click();
+    await browserPage.waitForLoadState('domcontentloaded');
+    await extract();
+  }
+  return { members: Array.from(members), subcategories: Array.from(subcats) };
+}
+
+async function exportPage(title: string, outRoot: string, retry: number, opts: CrawlOptions): Promise<boolean> {
+  const safeName = title.replace(/[^A-Za-z0-9_.-]+/g, '_');
+  const subDir = path.join(outRoot, safeName[0]?.toUpperCase() || '_');
+  const outPath = path.join(subDir, safeName + '.xml');
+  try {
+    await fs.mkdir(subDir, { recursive: true });
+    if (await exists(outPath)) return false; // already have it
+    const ctx = await request.newContext();
+    const params = new URLSearchParams();
+    params.set('pages', title);
+    params.set('action', 'submit');
+    if (!opts.fullHistory) params.set('curonly', '1');
+    if (opts.includeTemplates) params.set('templates', '1');
+    const url = `https://wiki.leagueoflegends.com/en-us/Special:Export?${params.toString()}`;
+    const resp = await ctx.get(url, { timeout: 120000 });
+    if (!resp.ok()) throw new Error(`HTTP ${resp.status()}`);
+    const body = await resp.text();
+    if (!body.includes('<mediawiki')) throw new Error('Missing <mediawiki> root');
+    await fs.writeFile(outPath, body, 'utf8');
+    await ctx.dispose();
+    return true;
+  } catch (err) {
+    if (retry > 0) {
+      console.warn(`Retrying ${title} after error: ${(err as Error).message}`);
+      await sleep(500 * (4 - retry));
+      return exportPage(title, outRoot, retry - 1, opts);
+    } else {
+      console.error(`Failed to export ${title}: ${(err as Error).message}`);
+      return false;
+    }
+  }
+}
+
+async function exists(p: string) { try { await fs.stat(p); return true; } catch { return false; } }
+
+async function main() {
+  const opts = parseArgs();
+  await fs.mkdir(opts.outDir, { recursive: true });
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+
+  const allTitles: string[] = [];
+  const visitedCategories = new Set<string>();
+  interface PendingCat { name: string; depth: number; }
+  const queueCats: PendingCat[] = opts.categories.map(c => ({ name: c, depth: 0 }));
+
+  while (queueCats.length) {
+    const { name, depth } = queueCats.shift()!;
+    if (visitedCategories.has(name) || depth > opts.maxCategoryDepth) continue;
+    visitedCategories.add(name);
+    console.log(`Collecting Category:${name} (depth=${depth})`);
+    try {
+      const { members, subcategories } = await fetchCategory(page, name);
+      console.log(`  -> ${members.length} titles; ${subcategories.length} subcats`);
+      allTitles.push(...members);
+      await fs.writeFile(path.join(opts.outDir, `category_${name.replace(/[^A-Za-z0-9_.-]+/g,'_')}.json`), JSON.stringify({ members, subcategories }, null, 2));
+      for (const sub of subcategories) {
+        if (!visitedCategories.has(sub)) queueCats.push({ name: sub, depth: depth + 1 });
+      }
+    } catch (e) {
+      console.error(`Failed to collect category ${name}: ${(e as Error).message}`);
+    }
+  }
+  await browser.close();
+
+  const uniqueTitles = Array.from(new Set(allTitles)).sort();
+  const limited = opts.limit ? uniqueTitles.slice(0, opts.limit) : uniqueTitles;
+  console.log(`Total unique titles to export: ${limited.length}`);
+
+  let completed = 0, newDownloads = 0;
+  const queue = [...limited];
+  const start = Date.now();
+
+  async function worker(id: number) {
+    while (queue.length) {
+      const title = queue.shift();
+      if (!title) break;
+      const ok = await exportPage(title, opts.outDir, opts.retry, opts);
+      completed++;
+      if (ok) newDownloads++;
+      if (opts.delayMs) await sleep(opts.delayMs);
+      if (completed % 10 === 0) {
+        const elapsed = (Date.now() - start) / 1000;
+        console.log(`[${id}] ${completed}/${limited.length} (${(completed/limited.length*100).toFixed(1)}%) new=${newDownloads} elapsed=${elapsed.toFixed(1)}s`);
+      }
+    }
+  }
+
+  const workers = Array.from({ length: opts.parallel }, (_, i) => worker(i + 1));
+  await Promise.all(workers);
+  console.log(`Done. Exported ${newDownloads} (skipped existing ${completed - newDownloads}). Output in ${opts.outDir}`);
+}
+
+main().catch(e => { console.error(e); process.exit(1); });
