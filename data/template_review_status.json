@@ -1,0 +1,8217 @@
+{
+  "_meta": {
+    "version": 1
+  },
+  "templates": [
+    {
+      "name": "Ability bar",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability data",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability details",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability details/New",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability frame",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability icon",
+      "category": "content",
+      "decision": "include",
+      "rust_present": true,
+      "status": "done",
+      "priority": 1,
+      "notes": "",
+      "mapping": "ai"
+    },
+    {
+      "name": "Ability info",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability info/old",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability info/stats",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability pet",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability presentation",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability progression",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability scaling",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "AS",
+      "category": "helper",
+      "decision": "include",
+      "rust_present": true,
+      "status": "done",
+      "priority": 1,
+      "notes": "",
+      "mapping": "as"
+    },
+    {
+      "name": "Critical damage",
+      "category": "helper",
+      "decision": "include",
+      "rust_present": true,
+      "status": "done",
+      "priority": 1,
+      "notes": "",
+      "mapping": "critical damage"
+    },
+    {
+      "name": "Item availability",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Item availability compact",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Item group",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Item haste table",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Item header",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Item icon",
+      "category": "content",
+      "decision": "include",
+      "rust_present": true,
+      "status": "done",
+      "priority": 1,
+      "notes": "",
+      "mapping": "ii"
+    },
+    {
+      "name": "Item info",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Item info/var",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Item limit",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Item presentation",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Item presentation/var",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Item stat table",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rune choice description",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rune combinations table",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rune data",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rune footer",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rune header",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rune icon",
+      "category": "content",
+      "decision": "include",
+      "rust_present": true,
+      "status": "done",
+      "priority": 1,
+      "notes": "",
+      "mapping": "ri"
+    },
+    {
+      "name": "Rune path infobox/Trait",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rune presentation",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rune table row",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rune table row/WR",
+      "category": "content",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 1,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Sbc",
+      "category": "helper",
+      "decision": "include",
+      "rust_present": true,
+      "status": "done",
+      "priority": 1,
+      "notes": "",
+      "mapping": "sbc"
+    },
+    {
+      "name": "Times",
+      "category": "helper",
+      "decision": "include",
+      "rust_present": true,
+      "status": "done",
+      "priority": 1,
+      "notes": "",
+      "mapping": "times"
+    },
+    {
+      "name": "TT",
+      "category": "helper",
+      "decision": "include",
+      "rust_present": true,
+      "status": "done",
+      "priority": 1,
+      "notes": "",
+      "mapping": "tt"
+    },
+    {
+      "name": "-",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "!",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "!!",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "·",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "(",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": ")",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "1x",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "2xko",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "2XKO only roster",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "2XKO roster",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Abilities",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ability",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "About",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Active item cooldown table",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Adaptive",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Administration category",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Administrator Promotion Box",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Advanced tooltip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Affiliates",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Age",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "AH",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ais",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "ais"
+    },
+    {
+      "name": "AllRegionsIconLoR",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Alternate Universe lore",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Alternate Universes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ambox",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ambox entry",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ambox type",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Anchor",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Arcane",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "ArcaneCiteEp",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "ArcaneS1Appearances",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "ArcaneS2Appearances",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Archive",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Arena augment table",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Attributes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Audio construction",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Audio page legend",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Availability",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Background bio",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Background quote",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Base gold efficiency",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "BE",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Block",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Blocked",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Blurb",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "BM",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Bot",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Buff data",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Buff header",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Buff icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Bufftip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Bug",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "bug"
+    },
+    {
+      "name": "Bureaucrat Promotion Box",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "BXP",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Cai",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Cais",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "cais"
+    },
+    {
+      "name": "Cancelled champion",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Canonical inconsistencies",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Capital",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Cbis",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "CC-BY-SA",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Cc-by-sa-3.0",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ccib",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "CelestialAspects",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "CelestialConstellations",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion Ability Details",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion attributes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion availability checklist",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion bio",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion categories/WR",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion classes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion data",
+      "category": "other",
+      "decision": "defer",
+      "rust_present": false,
+      "status": "blocked",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion difficulty",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion eternals",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion header",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion info historic",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion info/var",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion mastery",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion roster",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion roster/WR",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion rotation archive",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion skin link",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion skin trivia",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion skins by release cycle TOC",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion spotlight line",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion style",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion with infinite scaling",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion without ability power ratio",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champions by release cycle TOC",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Championtip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Channel type",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "ct"
+    },
+    {
+      "name": "Character background icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Character categories",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Character group",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Character roster",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Character stub",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Chat Moderator Promotion Box",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Chatban",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Checklist champions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Checklist skins",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Chroma exhibition",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Cis",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "cis"
+    },
+    {
+      "name": "Cite",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Cleanup",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Clear",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "ClearLeft",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "ClearRight",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Clvl",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Coin",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Color",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Column",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Comment",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Constellation",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Construction",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Content Director Promotion Box",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Contextual action data",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Cosmetic critical strike",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Cost analysis",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Couple",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Cumulative experience",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Current",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Current champion data",
+      "category": "data-retrieval",
+      "decision": "defer",
+      "rust_present": false,
+      "status": "blocked",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Current champion rotation",
+      "category": "data-retrieval",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Current champion rotation/data",
+      "category": "data-retrieval",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Current item data",
+      "category": "data-retrieval",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Current maintenance data",
+      "category": "data-retrieval",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Current TFT item data",
+      "category": "data-retrieval",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Current Unofficial champion data",
+      "category": "data-retrieval",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Current WR champion data",
+      "category": "data-retrieval",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Current WR item data",
+      "category": "data-retrieval",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Custom Ability bar",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Custom ability details",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Custom champion info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Custom champion info/Client",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Custom content icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Custom grouped ability",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Custom item info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Custom Loading screen",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Dagger",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Dead",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Degree",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Delete",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Diminishing gold info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Disambig",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Disambiguation",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Divided by",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Do for every champion",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Do for every champion ability",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Do for every item",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Do for every rune",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Do for every WR champion",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Do for every WR item",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Documentation",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Documentation subpage",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Done",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Double Dagger",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Dragon info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Dts",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Edit",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Editorial notes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Editors needed",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Effect at cast time end",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "effect at cast time end"
+    },
+    {
+      "name": "Effect at cast time start",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Elixir info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Energized info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ep-list",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ep-list header",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Equals",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Essence",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Events by occasion",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Events by year",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Exhibition",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Exists",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Expedition Token",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Experience granted section",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Experimental",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Experimental Hexplate ultimate interactions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "ExplodeCount",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Faction icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Factions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Factorial",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Fairuse",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Fake",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Fandom",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "File info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Flag",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "FlipText",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "ft"
+    },
+    {
+      "name": "Format decimal",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "fd"
+    },
+    {
+      "name": "Forumheader",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "From Wikimedia",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "GalleryHelper",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Game",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Game modes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Gameplay elements",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Games",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Gems",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Gold",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "g"
+    },
+    {
+      "name": "Gold efficiency",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Gold efficiency calculation",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Gold value",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Gradient bar",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "H:title",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Helptip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Hidden",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Hidden Box",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Hidden sort key",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Highest lowest stats",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Hwei tabber",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "If both",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ifempty",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ifnumber",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ifsubpage",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Iis",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "iis"
+    },
+    {
+      "name": "Image header",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Image header/ability",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Image header/buff",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Image header/chroma",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Image header/item",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Image header/skin",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Image header/spell",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Image tabber",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infinity",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox/Credits",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox/Pet",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infotip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Inspired lore",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "IP",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Items",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Items/List",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Items/WR list",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "JoJ Banner",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Jungle monster stat",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Jungle pet info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Keyword color",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Krakens",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "L",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Lc",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LegendPoints",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Legends of Runeterra",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Legends of Runeterra/Game Mechanics",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Legends of Runeterra/Keywords",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Legends of Runeterra/List of cards",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Legends of Runeterra/Sets",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LessOrEqual",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Lethality",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Level up",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Leveled Stat",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Limited",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Links",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "List of challenge champions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "List of challenge tokens",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "List of challenges",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "List of champion abilities",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "List of champions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "List of champions row",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "List of eternals",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "List of titles",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "List of titles/Mastery",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "List of true sight abilities",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Listen",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "ListOfTerrestrialDragons",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Little legend link",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LMB",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Loading screen",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Login theme",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoL WR item",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoR",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoR Card Skin Link",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoR Champion Roster",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoR File Categories",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoR Game modes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoR rarity",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Lor region featured",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoR release history",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoR Tab Icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LorCoin",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Lore",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Lore banner",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Lore banner/Manual",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Lore footer",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Lore header",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Lore items",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoRKeywordShowcase",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoRPvEModes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoRVocabShowcase",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Main",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Main other",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Manaflow info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Map",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Map changes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Map changes/data/ar",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Map changes/data/aram",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Map changes/data/nb",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Map changes/data/ofa",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Map changes/data/swift",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Map changes/data/urf",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Map changes/data/usb",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Map features",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mastery data",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mastery End",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mastery presentation",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mastery Start",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mastery tree map",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Masterytip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Matchups",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Math",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Math symbols",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "ME",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Media box",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Merge",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Metagame",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mi1",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mi2",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mi3",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mi4",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mi6",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mi7",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "MiniAbility",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Minus",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "MinuteDisplay",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Misnamed file",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Missing",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mitigated damage",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "MM",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Moderator Promotion Box",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Monster patience",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "More lore",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "MoreOrEqual",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Movement speed cap",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mythic content table",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mythic content table row",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Mythic gold value",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Named item effect",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Namespace detect",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Namespace detect see also",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Nearby locations",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Neutral",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Neutral buff",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Nies",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Non-breaking hyphen",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Nosubst",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Not done",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Note",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "NumberSup",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "OE",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "OG",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Old lore",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Oppose",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ornn Masterwork items",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Other free",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Out of scope",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Outdated",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Outdated if after",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Outdated if new champion",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Outdated if new patch",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Outdated if new TFT patch",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Overline",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Pagelist",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Passive progression",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PathOfChampions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PC",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PD",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PE",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Pending for test",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "pending for test"
+    },
+    {
+      "name": "Placeholder text",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Plus",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PlusMinus",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC Adventure row",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC Adventures",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC Adventures/Arcane",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC Adventures/Rogues",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC Adventures/Spirit Blossom",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC Adventures/Titans",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC Champion Grid",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC Champion Roster",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC champion summary",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC File Categories",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC item requirements",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCAdventure",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCAdventureRegions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCAdventureStats",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCAdventureXP",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCCampaign",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCCardItems",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCChallengeXP",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCChampionCategory",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCChampionFragment",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCChampionLevel",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCChampionStars",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCConstellation",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCConstellationBonusStars",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCConstellationCost",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCConstellationStars",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCCustomPower",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PocDeckDecoder",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCDonutChart",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCFoeDeck",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCFoeNode",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCFoePower",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCFoeTable",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCFragment",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCGemstone",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCGemstoneVessel",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCGemstoneVesselsTable",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCGlory",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCGold",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCHealth",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCLegendLevel",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCLevel",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCNode",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCNovaCrystal",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCNovaShard",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCPowerIconOverlay",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCPowerShowcase",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCRarity",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCRegen",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCRelic",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCReliquariesTable",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCReliquary",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCReroll",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCRevive",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCRune",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCRuneShard",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCStar",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCStarCrystal",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCStarVessel",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCStarVessel/Inline",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCStarVesselInfo",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCStarVesselsTable",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCVault",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCVaultsTable",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCVision",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoCWeeklyAdventuresHistory",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Policy",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/League/Events",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/League/News",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/League/Updates",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/LOR/Events",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/LOR/News",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/LOR/POC",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/LOR/POC/Loot",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/LOR/POC/Resources",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/LOR/Updates",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/News/Row",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/Updates/Tile2",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal/WR/Updates",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Position category",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Postponed",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Pre-Arcane",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Prestige",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PrevNext",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Protect",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Pst1",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Pst2",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Pst2d",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Purge",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Question",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Quicksilver info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Quote",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "quote"
+    },
+    {
+      "name": "Range difference",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rank",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "RC",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Recipe",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Recipe/item",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Recommended items",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Recommended items/Icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Recurring",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Redirect",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "References",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Reflist",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Regional rewards",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Release cycle",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Release history",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Removed",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Return",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Riot Store",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ris",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "RMB",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rollback Promotion Box",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rotating game mode",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rotating game mode/var",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rounded up to next game tick",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "RP",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rui",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ruination image",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ruined King",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ruio",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runes (Historical)",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Camavoran Continent",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Camavoran Continent/Map",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Demacia",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Freljord",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Icathia",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Ionian Archipelago",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Map",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Noxus",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Other",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Serpent Isles",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Shadow Isles",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Shurima",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Shuriman Continent",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Shuriman Continent/Map",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Shuriman Jungle",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Targon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Valoran",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runeterra/Valoran/Map",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Runetip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ryze Realm Warp Teleport Interactions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Sale",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Sale box",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Sales archive",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Scroll box",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "SeeOther",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Self",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Set",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Shard",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Sis",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Skarner Impale Displacement Immunity Interactions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Skill Tabs",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Skin icon checklist",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Skin portrait",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Skin tier",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Sm2",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "sm2"
+    },
+    {
+      "name": "Sm2/lor",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Solo and shared experience",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Song",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Species",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Species/AU",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Species/Non-Sentient",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Species/Other",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Species/Sapient",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Species/Sentient",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Spell icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Spell info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Spell info/WR",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Spell presentation",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Spellblade info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Spelltip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Split",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Spoiler",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "SS",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Staff",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Star level",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Stardust",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Statistic icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Stats",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "StrategyHeader",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Stub",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "SubForumheader",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Summoner Name",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Summoner spell comparison table",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Summoner spell cooldown table",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Summoner spells",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Superimpose",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Support",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Swarm stat",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Sylas Hijack Interactions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "T",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "T/piece",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tabview",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics Universe lore",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics/Champions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics/Chibi",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics/Chibi/do",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics/Companions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics/Items",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics/Legends",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics/Legends/do",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics/Sets",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics/Unbound",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Teamfight Tactics/Unbound/do",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Template link",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Template other",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Templatecategory",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Term",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Term table",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Term table end",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Texttip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT ability power",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT Amount Skin Pool",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT anomaly",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT augment",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT champion",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT champion data",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT champion row stats",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT champion synergy",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT Durability Abilities List",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT Group",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT item",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT item grid",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT List Manaless",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT npc",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT pet",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT Physical Damage Abilities List",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT release history",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT set",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT skin tier",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT stat list info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT synergy list",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT synergy only",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT total champions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT trait",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT trait synergy",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFTEmblemDesc",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFTFastTrivia",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "The Mageseeker",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tiles",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "tip"
+    },
+    {
+      "name": "Tip data",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tip info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TipLoR",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tiptft",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TOC",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tocright",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "ToDo",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "tt"
+    },
+    {
+      "name": "Tooltip/LOR",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/Pp",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/Progression",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/RP",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/Sandbox",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/Skin",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/TFT",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/TFT/Champion",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/TFT/Item",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/TFT/Item/sub",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/TFT/NPC",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/TFT/Trait",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Tooltip/WC",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Topicon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Transclude page header",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Trivia compilation",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Trivia header",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Uis",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Unique",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Unit icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Unit-targeted cancel conditions",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Units",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Universe icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Unofficial Champion data",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Unsigned",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Upcoming",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Upgrades",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Upgrades/Ironback",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Upgrades/Ocklepod",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Upgrades/Plundercrab",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Upgrades/Razorfin",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "User other",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "User:Dannenheim/test",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Userbox",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "USERNAME",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "VideoGallery",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Vision and trinkets",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Void",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Vote delete",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Vote keep",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Vote merge",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Vote move",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Vote redirect",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "W",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": true,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": "w"
+    },
+    {
+      "name": "Ward icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ward table",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Ward timer info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Warn2",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Warning",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WC",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Wiki",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Wikipedia",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Wikipedia-deleted",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Wildcard",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WP",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR Ability",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR Ability data",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR Ability details",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR Ability info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR buff icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR Champion data",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR champion icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR champion skin link",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR champion skin trivia",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR Infobox item/new",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR item",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR item info",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR patch",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR release history",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR rune",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR runes",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR skin tier",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR spell icon",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WRa",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WRca",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WRis",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WRtip",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WRui",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "XP",
+      "category": "other",
+      "decision": "unknown",
+      "rust_present": false,
+      "status": "todo",
+      "priority": 2,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Annual cycle navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Article game navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Banner navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Champion categories",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "champion categories"
+    },
+    {
+      "name": "Champion info",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "champion info"
+    },
+    {
+      "name": "Champions",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "champions"
+    },
+    {
+      "name": "Class infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Defense tree navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Event infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Expansion infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Game banner",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "game banner"
+    },
+    {
+      "name": "Game navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Grouped ability",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "grouped ability"
+    },
+    {
+      "name": "Grouped stat table",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox alternate universe",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox buff",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "infobox buff"
+    },
+    {
+      "name": "Infobox champion",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "infobox champion"
+    },
+    {
+      "name": "Infobox champion/WR",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox company",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox faction",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox game",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox historical event",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox item old",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox item/new",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox item/new/var",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox legend",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox lore concept",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox mastery",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox minor character",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox patch",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox pbe",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox place",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox PoC Adventure",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox PoC Foe",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox recommended",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox recommended/WR",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox species",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox species alterations",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox spell",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "infobox spell"
+    },
+    {
+      "name": "Infobox spell/WR",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox stats",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "infobox stats"
+    },
+    {
+      "name": "Infobox stats/WR",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox turret",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox unit",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "infobox unit"
+    },
+    {
+      "name": "Infobox unit/RK",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox unit/WR",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Infobox video",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "infobox video"
+    },
+    {
+      "name": "Legend skins",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoL navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "lol navigation"
+    },
+    {
+      "name": "LOL/Champion infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "LoR navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Navigation link",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Offense tree navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Patch box",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "patch box"
+    },
+    {
+      "name": "PoC adventure navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC champion infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC item infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC power infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "PoC rune infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Policy navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal link",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Portal subheader",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rework infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Rune path infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Section bot",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Section top",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": true,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": "section top"
+    },
+    {
+      "name": "Skin infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT augment infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT champion infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT npc infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "TFT trait infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Thematic Season infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Universe infobox",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Universe navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "Utility tree navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    },
+    {
+      "name": "WR navigation",
+      "category": "structural",
+      "decision": "exclude",
+      "rust_present": false,
+      "status": "done",
+      "priority": 3,
+      "notes": "",
+      "mapping": ""
+    }
+  ]
+}

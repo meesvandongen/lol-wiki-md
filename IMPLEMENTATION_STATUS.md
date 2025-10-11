@@ -72,7 +72,7 @@ Legend:
 - [x] Ability template file parser (`parse_ability_template`)
 - [x] Detect & load champion module stats (basic subset mapping hp/hpGrowth etc.)
 - [x] Ability directory scan + ordering Passive/Q/W/E/R (basic loader)
-- [ ] Ability description multi-field extraction (descriptions, notes, cooldowns, costs, ranges)
+- [x] Ability description multi-field extraction (descriptions, notes, cooldowns, costs, ranges)
 - [ ] Skill tab (`st`) consolidation into leveling tables
 - [ ] Pets extraction (tabber / infobox) and mapping
 - [ ] Patch history extraction (limit 10) with structured Change objects
@@ -82,11 +82,11 @@ Legend:
 
 ## 6. Item Conversion
 
-- [ ] Lua item data parsing (Module/ItemData)
-- [ ] Item gold cost fields & combine cost validation
-- [ ] Components & build tree graph
-- [ ] Stats (flat & percent) extraction
-- [ ] Passive / active parsing (basic text, template expansion)
+- [x] Lua item data parsing (Module/ItemData)
+- [~] Item gold cost fields & combine cost validation
+- [~] Components & build tree graph
+- [~] Stats (flat & percent) extraction
+- [~] Passive / active parsing (basic text, template expansion)
 - [ ] Item classification (starter/basic/legendary/mythic)
 - [ ] Embedded table conversion in item descriptions
 

@@ -13,7 +13,7 @@ pub struct CliConfig {
     pub wiki_root: PathBuf,
 
     /// Output directory for Markdown artifacts
-    #[arg(long, value_name = "DIR", default_value = "./markdown_rust")] 
+    #[arg(long, value_name = "DIR", default_value = "./markdown_rust")]
     pub output: PathBuf,
 
     /// Specific champion to convert

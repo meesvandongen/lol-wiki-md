@@ -2,7 +2,12 @@ use lol_wiki_md::parse::{evaluate_expression, ExprNumberFormat};
 use proptest::prelude::*;
 
 #[test]
-fn basic() { assert_eq!(evaluate_expression("1+2*3", ExprNumberFormat::Float(2)).unwrap(), "7"); }
+fn basic() {
+    assert_eq!(
+        evaluate_expression("1+2*3", ExprNumberFormat::Float(2)).unwrap(),
+        "7"
+    );
+}
 
 proptest! {
     #[test]

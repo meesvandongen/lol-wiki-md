@@ -1,5 +1,5 @@
-use thiserror::Error;
 use std::io;
+use thiserror::Error;
 
 pub type Result<T, E = ConvertError> = std::result::Result<T, E>;
 
@@ -21,7 +21,11 @@ pub enum ConvertError {
     #[error("E_UNKNOWN_TEMPLATE {name}")]
     UnknownTemplate { name: String },
     #[error("E_UNKNOWN_TEMPLATE_SPAN {name} at {line}:{col}")]
-    UnknownTemplateSpan { name: String, line: usize, col: usize },
+    UnknownTemplateSpan {
+        name: String,
+        line: usize,
+        col: usize,
+    },
     #[error("E_EXPR {expr}: {detail}")]
     Expr { expr: String, detail: String },
     #[error("E_TABLE_PARSE {context}: {detail}")]

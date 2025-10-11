@@ -6,15 +6,15 @@
 #![deny(unsafe_code)]
 
 pub mod cli;
+pub mod convert;
 pub mod error;
 pub mod model;
-pub mod convert;
 pub mod parse;
 pub mod render;
-pub mod wiki_export;
 pub mod validate;
+pub mod wiki_export;
 
 pub use crate::cli::CliConfig;
-pub use crate::convert::{convert_champion, ConversionOutcome};
+pub use crate::convert::{convert_champion, convert_item, ConversionOutcome};
 pub use crate::error::{ConvertError, Result};
 pub use crate::validate::validate_templates;
