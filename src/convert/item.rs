@@ -8,24 +8,35 @@ use crate::model::{Item, ItemEffect};
 use crate::parse::lua::{lua_value_to_string, lua_value_to_string_vec, parse_item_data, LuaValue};
 use crate::parse::templates::TemplateRegistry;
 use crate::render::markdown::render_item_markdown;
-use crate::wiki_export::WikiExport;
+
+use super::context::ConversionContext;
 
 /// Convert a single item into Markdown using Module:ItemData for structured fields.
-pub fn convert_item(
-    wiki_root: &Path,
+pub(super) fn convert_item(
+    ctx: &ConversionContext,
     output_dir: &Path,
     name: &str,
-    precision: u8,
 ) -> Result<ConversionOutcome> {
-    let export = WikiExport::new(wiki_root);
+    let export = ctx.export();
     let raw = export.read_item_main(name)?;
-    let registry = TemplateRegistry::new();
+    let registry = ctx.registry();
+    let precision = ctx.precision();
     let vars = collect_page_vars(&raw)?;
-    let module = export
-        .read_item_module_data()?
+    if let Ok(spans) = crate::parse::extract_balanced_templates(&raw) {
+        if !spans.is_empty() {
+            let names = spans
+                .into_iter()
+                .map(|span| span.name.split('|').next().unwrap_or("").trim().to_string())
+                .filter(|n| !n.is_empty())
+                .collect::<Vec<_>>();
+            ctx.record_templates(names);
+        }
+    }
+    let module = ctx
+        .item_module_raw()?
         .ok_or_else(|| ConvertError::Internal("Module:ItemData data export not present".into()))?;
-    let entry = parse_item_data(&module, name)?;
-    let item = build_item_from_entry(name, &entry, precision, &vars, &registry)?;
+    let entry = parse_item_data(module, name)?;
+    let item = build_item_from_entry(ctx, name, &entry, precision, &vars, registry)?;
     let markdown = render_item_markdown(&item, &raw);
     let out_file = output_dir.join(format!("{}.md", name.replace(' ', "_")));
     write_if_changed(&out_file, &markdown)?;
@@ -36,6 +47,7 @@ pub fn convert_item(
 }
 
 fn build_item_from_entry(
+    ctx: &ConversionContext,
     name: &str,
     entry: &HashMap<String, LuaValue>,
     precision: u8,
@@ -46,13 +58,14 @@ fn build_item_from_entry(
         name: name.to_string(),
         ..Item::default()
     };
+    let mut warnings: Vec<String> = Vec::new();
 
     if let Some(val) = entry.get("tier").and_then(lua_value_to_string) {
         item.tier = Some(val);
     }
     if let Some(mut categories) = entry.get("type").and_then(lua_value_to_string_vec) {
         categories.retain(|s| !s.trim().is_empty());
-        item.categories = categories;
+        item.categories = normalize_categories(categories);
     }
     if let Some(mut recipe) = entry.get("recipe").and_then(lua_value_to_string_vec) {
         recipe.retain(|s| !s.trim().is_empty());
@@ -88,7 +101,8 @@ fn build_item_from_entry(
         item.limit = Some(expand_text(&limit, precision, vars, registry)?);
     }
     if let Some(modes) = entry.get("modes") {
-        item.modes = collect_enabled_flags(modes)?;
+        let flags = collect_enabled_flags(modes)?;
+        item.modes = normalize_modes(flags);
     }
     if let Some(stats) = entry.get("stats") {
         item.stats = collect_stats(stats, precision, vars, registry)?;
@@ -96,6 +110,16 @@ fn build_item_from_entry(
     if let Some(effects) = entry.get("effects") {
         item.effects = collect_effects(effects, precision, vars, registry)?;
     }
+
+    let (combine_cost, mut combine_warnings) =
+        compute_combine_cost(ctx, name, &item.recipe, item.cost_total)?;
+    item.cost_combine = combine_cost;
+    warnings.append(&mut combine_warnings);
+
+    item.upgrades = compute_upgrades(ctx, name)?;
+    warnings.sort();
+    warnings.dedup();
+    item.warnings = warnings;
 
     Ok(item)
 }
@@ -233,4 +257,129 @@ fn normalize_effect_kind(raw: &str) -> String {
     } else {
         raw.to_string()
     }
+}
+
+fn normalize_categories(categories: Vec<String>) -> Vec<String> {
+    let mut out: Vec<String> = Vec::new();
+    for cat in categories {
+        let cleaned = cat.replace('_', " ").trim().to_string();
+        if cleaned.is_empty() {
+            continue;
+        }
+        let canonical = match cleaned.to_ascii_lowercase().as_str() {
+            "starter" => "Starter".to_string(),
+            "basic" => "Basic".to_string(),
+            "advanced" => "Advanced".to_string(),
+            "legendary" => "Legendary".to_string(),
+            "mythic" => "Mythic".to_string(),
+            "epic" => "Epic".to_string(),
+            "consumable" => "Consumable".to_string(),
+            other => title_case(other),
+        };
+        if !out.iter().any(|s| s.eq_ignore_ascii_case(&canonical)) {
+            out.push(canonical);
+        }
+    }
+    out.sort();
+    out
+}
+
+fn normalize_modes(modes: Vec<String>) -> Vec<String> {
+    let mut out: Vec<String> = Vec::new();
+    for mode in modes {
+        let cleaned = mode.trim();
+        if cleaned.is_empty() {
+            continue;
+        }
+        let canonical = match cleaned.to_ascii_lowercase().as_str() {
+            "sr" | "summoner's rift" | "summoners rift" => "Summoner's Rift".to_string(),
+            "ha" | "howling abyss" => "Howling Abyss".to_string(),
+            "urf" => "Ultra Rapid Fire".to_string(),
+            "arena" => "Arena".to_string(),
+            other => title_case(other),
+        };
+        if !out.iter().any(|s| s.eq_ignore_ascii_case(&canonical)) {
+            out.push(canonical);
+        }
+    }
+    out.sort();
+    out
+}
+
+fn title_case(input: &str) -> String {
+    input
+        .split_whitespace()
+        .map(|word| {
+            let mut chars = word.chars();
+            if let Some(first) = chars.next() {
+                let mut upper = first.to_uppercase().collect::<String>();
+                upper.push_str(&chars.as_str().to_lowercase());
+                upper
+            } else {
+                String::new()
+            }
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+fn compute_combine_cost(
+    ctx: &ConversionContext,
+    item_name: &str,
+    components: &[String],
+    total_cost: Option<u32>,
+) -> Result<(Option<u32>, Vec<String>)> {
+    if components.is_empty() || total_cost.is_none() {
+        return Ok((None, Vec::new()));
+    }
+    let total = total_cost.unwrap();
+    let module = ctx.item_module_map()?;
+    let mut sum: u32 = 0;
+    let mut warnings: Vec<String> = Vec::new();
+    for comp in components {
+        if let Some(data) = module.get(comp) {
+            let cost = data
+                .get("buy")
+                .and_then(lua_value_to_string)
+                .and_then(parse_u32);
+            match cost {
+                Some(val) => sum = sum.saturating_add(val),
+                None => warnings.push(format!(
+                    "Missing cost for component `{comp}` while computing combine cost for `{item_name}`"
+                )),
+            }
+        } else {
+            warnings.push(format!(
+                "Component `{comp}` not found in Module:ItemData while computing combine cost for `{item_name}`"
+            ));
+        }
+    }
+    if total < sum {
+        warnings.push(format!(
+            "Total cost {total} is less than sum of component costs {sum} for `{item_name}`"
+        ));
+    }
+    let combine = total.saturating_sub(sum);
+    Ok((Some(combine), warnings))
+}
+
+fn compute_upgrades(ctx: &ConversionContext, name: &str) -> Result<Vec<String>> {
+    let module = ctx.item_module_map()?;
+    let mut upgrades: Vec<String> = Vec::new();
+    for (item_name, data) in module.iter() {
+        if item_name.eq_ignore_ascii_case(name) {
+            continue;
+        }
+        if let Some(recipe_vals) = data.get("recipe").and_then(lua_value_to_string_vec) {
+            if recipe_vals
+                .iter()
+                .any(|entry| entry.eq_ignore_ascii_case(name))
+            {
+                upgrades.push(item_name.clone());
+            }
+        }
+    }
+    upgrades.sort();
+    upgrades.dedup();
+    Ok(upgrades)
 }

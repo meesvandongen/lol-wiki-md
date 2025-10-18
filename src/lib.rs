@@ -15,6 +15,8 @@ pub mod validate;
 pub mod wiki_export;
 
 pub use crate::cli::CliConfig;
-pub use crate::convert::{convert_champion, convert_item, ConversionOutcome};
+pub use crate::convert::{
+    convert_champion, convert_item, convert_rune, ConversionContext, ConversionOutcome,
+};
 pub use crate::error::{ConvertError, Result};
 pub use crate::validate::validate_templates;

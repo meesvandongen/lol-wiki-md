@@ -11,7 +11,7 @@ pub struct Champion {
     pub pets: Vec<Pet>,
     pub trivia: Vec<String>,
     pub patch_history: Vec<PatchEntry>,
-    pub notes: Option<String>,
+    pub notes: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
@@ -93,10 +93,13 @@ pub struct Item {
     pub effects: Vec<ItemEffect>,
     pub recipe: Vec<String>,
     pub cost_total: Option<u32>,
+    pub cost_combine: Option<u32>,
     pub cost_sell: Option<u32>,
     pub sell_ratio: Option<f32>,
     pub limit: Option<String>,
     pub modes: Vec<String>,
+    pub upgrades: Vec<String>,
+    pub warnings: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
@@ -109,7 +112,14 @@ pub struct ItemEffect {
     pub unique: bool,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
 pub struct Rune {
     pub name: String,
+    pub path: Option<String>,
+    pub slot: Option<String>,
+    pub description: String,
+    pub notes: Vec<String>,
+    pub trivia: Vec<String>,
+    pub patch_history: Vec<PatchEntry>,
+    pub warnings: Vec<String>,
 }

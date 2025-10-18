@@ -19,9 +19,7 @@ pub fn evaluate_expression(expr: &str, fmt: ExprNumberFormat) -> Result<String> 
             detail: "trailing tokens".into(),
         });
     }
-    let precision = match fmt {
-        ExprNumberFormat::Float(p) => p,
-    };
+    let ExprNumberFormat::Float(precision) = fmt;
     Ok(format_number(val, precision))
 }
 

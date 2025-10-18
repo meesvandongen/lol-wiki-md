@@ -1,9 +1,37 @@
-use crate::model::{AbilityKey, Champion, Item};
+use crate::model::{AbilityKey, Champion, Item, Rune};
 use regex::Regex;
 
 pub fn render_champion_markdown(champ: &Champion, raw_excerpt: &str) -> String {
     let mut out = String::new();
     out.push_str(&format!("# {}\n\n", champ.name));
+    let mut overview: Vec<String> = Vec::new();
+    if let Some(title) = &champ.basic.title {
+        if !title.trim().is_empty() {
+            overview.push(format!("- **Title:** {}", normalize_all(title)));
+        }
+    }
+    if !champ.basic.roles.is_empty() {
+        let roles = champ
+            .basic
+            .roles
+            .iter()
+            .map(|r| normalize_all(r))
+            .collect::<Vec<_>>()
+            .join(", ");
+        if !roles.is_empty() {
+            overview.push(format!("- **Roles:** {}", roles));
+        }
+    }
+    if let Some(resource) = &champ.basic.resource {
+        if !resource.trim().is_empty() {
+            overview.push(format!("- **Resource:** {}", normalize_all(resource)));
+        }
+    }
+    if !overview.is_empty() {
+        out.push_str("## Overview\n\n");
+        out.push_str(&overview.join("\n"));
+        out.push_str("\n\n");
+    }
     // Stats section (basic subset)
     if !champ.stats.base.is_empty() {
         out.push_str("## Stats\n\n| Stat | Base | Growth |\n|------|------|--------|\n");
@@ -156,26 +184,7 @@ pub fn render_champion_markdown(champ: &Champion, raw_excerpt: &str) -> String {
             }
             if !a.notes.is_empty() {
                 out.push_str("**Notes:**\n\n");
-                for note in &a.notes {
-                    let trimmed = note.trim_start();
-                    if trimmed.is_empty() {
-                        continue;
-                    }
-                    let star_count = trimmed.chars().take_while(|c| *c == '*').count();
-                    let byte_index = star_count.min(trimmed.len());
-                    let content = trimmed[byte_index..].trim();
-                    if content.is_empty() {
-                        continue;
-                    }
-                    let indent = "  ".repeat(star_count.saturating_sub(1));
-                    let normalized = normalize_internal_links(&normalize_anchors(
-                        &normalize_apostrophes(content),
-                    ));
-                    out.push_str(&indent);
-                    out.push_str("- ");
-                    out.push_str(&normalized);
-                    out.push('\n');
-                }
+                render_starred_list(&mut out, &a.notes);
                 out.push('\n');
             }
             // Leveling tables as simple sub-tables if present
@@ -198,6 +207,46 @@ pub fn render_champion_markdown(champ: &Champion, raw_excerpt: &str) -> String {
                     out.push('\n');
                 }
             }
+        }
+    }
+    if !champ.notes.is_empty() {
+        out.push_str("## Notes\n\n");
+        render_starred_list(&mut out, &champ.notes);
+        out.push('\n');
+    }
+    if !champ.pets.is_empty() {
+        out.push_str("## Pets\n\n");
+        for pet in &champ.pets {
+            let name = normalize_all(&pet.name);
+            let desc = normalize_all(&pet.description);
+            if desc.is_empty() {
+                out.push_str(&format!("- {}\n", name));
+            } else {
+                out.push_str(&format!("- **{}** — {}\n", name, desc));
+            }
+        }
+        out.push('\n');
+    }
+    if !champ.trivia.is_empty() {
+        out.push_str("## Trivia\n\n");
+        render_starred_list(&mut out, &champ.trivia);
+        out.push('\n');
+    }
+    if !champ.patch_history.is_empty() {
+        out.push_str("## Patch History\n\n");
+        for entry in &champ.patch_history {
+            if entry.version.trim().is_empty() {
+                continue;
+            }
+            out.push_str(&format!("### {}\n\n", normalize_all(&entry.version)));
+            for change in &entry.changes {
+                let text = normalize_all(&change.text);
+                if text.trim().is_empty() {
+                    continue;
+                }
+                out.push_str(&format!("- {}\n", text));
+            }
+            out.push('\n');
         }
     }
     out.push_str("<!-- Raw excerpt (first 20 lines) -->\n\n<details><summary>Raw excerpt</summary>\n\n```wikitext\n");
@@ -225,9 +274,13 @@ pub fn render_item_markdown(item: &Item, raw_excerpt: &str) -> String {
         let total = item.cost_total.map(|v| v.to_string());
         let sell = item.cost_sell.map(|v| v.to_string());
         let ratio = item.sell_ratio.map(|v| format!("{:.2}", v));
+        let combine = item.cost_combine.map(|v| v.to_string());
         let mut pieces: Vec<String> = Vec::new();
         if let Some(t) = total {
             pieces.push(format!("Total: {}", t));
+        }
+        if let Some(c) = combine {
+            pieces.push(format!("Combine: {}", c));
         }
         if let Some(s) = sell {
             pieces.push(format!("Sell: {}", s));
@@ -253,12 +306,22 @@ pub fn render_item_markdown(item: &Item, raw_excerpt: &str) -> String {
         out.push_str("\n\n");
     }
 
-    if !item.recipe.is_empty() {
-        out.push_str("## Recipe\n\n");
-        for component in &item.recipe {
-            out.push_str(&format!("- {}\n", normalize_all(component)));
+    if !item.recipe.is_empty() || !item.upgrades.is_empty() {
+        out.push_str("## Build Tree\n\n");
+        if !item.recipe.is_empty() {
+            out.push_str("**Components**\n\n");
+            for component in &item.recipe {
+                out.push_str(&format!("- {}\n", normalize_all(component)));
+            }
+            out.push('\n');
         }
-        out.push('\n');
+        if !item.upgrades.is_empty() {
+            out.push_str("**Upgrades**\n\n");
+            for upgrade in &item.upgrades {
+                out.push_str(&format!("- {}\n", normalize_all(upgrade)));
+            }
+            out.push('\n');
+        }
     }
 
     if !item.stats.is_empty() {
@@ -270,6 +333,14 @@ pub fn render_item_markdown(item: &Item, raw_excerpt: &str) -> String {
                 let norm_val = normalize_all(val);
                 out.push_str(&format!("| {} | {} |\n", key, norm_val));
             }
+        }
+        out.push('\n');
+    }
+
+    if !item.warnings.is_empty() {
+        out.push_str("## Validation\n\n");
+        for warn in &item.warnings {
+            out.push_str(&format!("- {}\n", normalize_all(warn)));
         }
         out.push('\n');
     }
@@ -306,6 +377,78 @@ pub fn render_item_markdown(item: &Item, raw_excerpt: &str) -> String {
                 out.push_str(&desc);
                 out.push_str("\n\n");
             }
+        }
+    }
+
+    out.push_str("<!-- Raw excerpt (first 20 lines) -->\n\n<details><summary>Raw excerpt</summary>\n\n```wikitext\n");
+    let excerpt_norm = normalize_all(raw_excerpt);
+    out.push_str(&excerpt_norm.lines().take(20).collect::<Vec<_>>().join("\n"));
+    out.push_str("\n```\n</details>\n");
+    ensure_trailing_newline(&collapse_blank_lines(&out))
+}
+
+pub fn render_rune_markdown(rune: &Rune, raw_excerpt: &str) -> String {
+    let mut out = String::new();
+    out.push_str(&format!("# {}\n\n", rune.name));
+
+    let mut overview: Vec<String> = Vec::new();
+    if let Some(path) = &rune.path {
+        if !path.trim().is_empty() {
+            overview.push(format!("- **Path:** {}", normalize_all(path)));
+        }
+    }
+    if let Some(slot) = &rune.slot {
+        if !slot.trim().is_empty() {
+            overview.push(format!("- **Slot:** {}", normalize_all(slot)));
+        }
+    }
+    if !overview.is_empty() {
+        out.push_str("## Overview\n\n");
+        out.push_str(&overview.join("\n"));
+        out.push_str("\n\n");
+    }
+
+    if !rune.description.trim().is_empty() {
+        out.push_str("## Description\n\n");
+        out.push_str(&normalize_all(&rune.description));
+        out.push_str("\n\n");
+    }
+
+    if !rune.notes.is_empty() {
+        out.push_str("## Notes\n\n");
+        render_starred_list(&mut out, &rune.notes);
+        out.push('\n');
+    }
+
+    if !rune.trivia.is_empty() {
+        out.push_str("## Trivia\n\n");
+        render_starred_list(&mut out, &rune.trivia);
+        out.push('\n');
+    }
+
+    if !rune.warnings.is_empty() {
+        out.push_str("## Validation\n\n");
+        for warning in &rune.warnings {
+            out.push_str(&format!("- {}\n", normalize_all(warning)));
+        }
+        out.push('\n');
+    }
+
+    if !rune.patch_history.is_empty() {
+        out.push_str("## Patch History\n\n");
+        for entry in &rune.patch_history {
+            if entry.version.trim().is_empty() {
+                continue;
+            }
+            out.push_str(&format!("### {}\n\n", normalize_all(&entry.version)));
+            for change in &entry.changes {
+                let text = normalize_all(&change.text);
+                if text.trim().is_empty() {
+                    continue;
+                }
+                out.push_str(&format!("- {}\n", text));
+            }
+            out.push('\n');
         }
     }
 
@@ -446,6 +589,27 @@ fn normalize_all(s: &str) -> String {
     normalize_internal_links(&normalize_anchors(&normalize_apostrophes(s)))
 }
 
+fn render_starred_list(out: &mut String, notes: &[String]) {
+    for note in notes {
+        let trimmed = note.trim();
+        if trimmed.is_empty() {
+            continue;
+        }
+        let star_count = trimmed.chars().take_while(|c| *c == '*').count();
+        let content = trimmed.trim_start_matches('*').trim();
+        if content.is_empty() {
+            continue;
+        }
+        let indent = "  ".repeat(star_count.saturating_sub(1));
+        let normalized =
+            normalize_internal_links(&normalize_anchors(&normalize_apostrophes(content)));
+        out.push_str(&indent);
+        out.push_str("- ");
+        out.push_str(&normalized);
+        out.push('\n');
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -466,5 +630,22 @@ mod tests {
         );
         let s = normalize_anchors("[[Page#Section Title]]");
         assert_eq!(s, "Page#Section-Title");
+    }
+
+    #[test]
+    fn rune_markdown_includes_trivia() {
+        let rune = Rune {
+            name: "Electrocute".to_string(),
+            path: Some("Domination".to_string()),
+            slot: Some("Keystone".to_string()),
+            description: "Deal bonus damage.".to_string(),
+            notes: vec!["* Triggered after three attacks".to_string()],
+            trivia: vec!["* Popular in assassin matchups".to_string()],
+            patch_history: Vec::new(),
+            warnings: Vec::new(),
+        };
+        let md = render_rune_markdown(&rune, "== Raw ==\nContent");
+        assert!(md.contains("## Trivia"));
+        assert!(md.contains("Popular in assassin matchups"));
     }
 }

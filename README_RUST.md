@@ -4,7 +4,13 @@ Strict, deterministic converter from an extracted League of Legends Fandom / Med
 
 ## Status
 
-Early scaffolding: only minimal champion page passthrough with structural parsing utilities (brace scanner, expression evaluator) and error model. Incrementally expand template handlers and entity extraction.
+The Rust converter now performs strict single-entity conversion for champions, items, and runes:
+
+- Champion conversion loads `Module:ChampionData`, expands ability templates (including redirects), and renders Markdown with stats tables, ability info blocks, descriptions, cooldowns/costs, and notes.
+- Item conversion consumes `Module:ItemData`, extracting tier/type/recipe/cost/stat/effect fields and rendering structured sections for Overview, Recipe, Stats, and Effects.
+- Rune conversion parses the infobox, notes, trivia, and patch history into Markdown.
+- Template expansion covers parser functions, formula helpers, icon wrappers, stylistic utilities, and a neutralization list for scaffolding templates; unsupported templates remain hard errors.
+- Formatting utilities normalize wiki apostrophes, anchors, internal links (basic), and lists; renderers collapse blank lines and ensure trailing newlines for deterministic output.
 
 ## Quick Start
 
@@ -39,17 +45,33 @@ src/
 3. Explicit Semantics: Every template we support has a spec-like handler; unknown templates are errors.
 4. Safety: No dynamic code execution; expression evaluator is a whitelisted arithmetic grammar.
 
+## Supported Template Handlers (snapshot)
+
+| Template(s)                                                                                       | Behavior                                                                                                                              |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| `#expr`, `#if`, `#ifeq`, `#switch`                                                                | Expression evaluation and parser functions with strict error propagation.                                                             |
+| `#vardefine`, `#var`                                                                              | Page-scoped variable definition/reference (returned to callers as plain text).                                                        |
+| `ap`, `pp`, `pptooltip`, `fd`                                                                     | Ability scaling helpers: emit `(+XX% AP)` style sequences, joined per-level values, and fixed-decimal formatting.                     |
+| `tt`                                                                                              | Inlines tooltips as `value (tooltip)`.                                                                                                |
+| `tip`, `w`                                                                                        | Surface display labels while dropping icon-only usages.                                                                               |
+| `ci`/`cis`, `ai`/`ais`, `ii`/`iis`, `ri`, `bi`, `ui`, `cais`                                      | Icon unwrap: returns the text label (possessive handling basic).                                                                      |
+| `sbc`, `ct`, `ft`                                                                                 | Stylistic wrappers → uppercase bold, `(Channel)` label, and reversed text respectively (current behavior; slated for spec alignment). |
+| `st`                                                                                              | Emits `[SkillTab key:value                                                                                                            | ...]` marker consumed later for leveling tables. |
+| Neutralized scaffolding (`Section top`, `Game banner`, `Champions`, `Patch box`, `#invoke`, etc.) | Removed from output so only information-bearing content remains.                                                                      |
+
+See `docs/refreshed_implementation_plan.md` for a detailed roadmap and template coverage notes.
+
 ## Next Increments (Roadmap)
 
-- Implement Lua narrow parser for ChampionData/ItemData modules.
-- Template registry & handler trait; implement core icon unwrap + formula templates.
-- Markdown rendering layer (abilities, stats, patch history, items, runes).
-- Golden tests (Azir, Infinity Edge, Electrocute) with blake3 hashes.
-- Inventory snapshot build script (template invocation coverage) per requirements §12.1.
+- Capture champion patch history, pets, and trivia; enhance skill-tab consolidation into multi-row leveling tables.
+- Resolve `ccd` / `cid` constant lookups from Lua modules so template expansions emit final numeric values.
+- Introduce deterministic link + anchor normalization that maps wiki links to local markdown targets without harming tables/code.
+- Extend item conversion with combine-cost validation, build tree sections, and classification/mode labelling.
+- Bootstrap drift protection: golden hash tests for champion/item/rune fixtures and a template inventory scanner per `requirements.md` §12.1.
 
 ## Testing
 
-`cargo test` executes unit + property tests. Expression evaluator is fuzzed (non-panics & finite results). Brace parser round-tripped.
+`cargo test` executes unit, integration, property, and golden-hash tests (champion/item/rune outputs). Expression evaluator fuzzing ensures non-panics and finite results.
 
 ## License
 

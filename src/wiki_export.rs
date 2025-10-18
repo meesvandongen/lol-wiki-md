@@ -30,6 +30,11 @@ impl WikiExport {
         self.read_entity_page(name, || ConvertError::ItemNotFound(name.to_string()))
     }
 
+    /// Read a rune page by title (flat export naming expected).
+    pub fn read_rune_main(&self, name: &str) -> Result<String> {
+        self.read_entity_page(name, || ConvertError::RuneNotFound(name.to_string()))
+    }
+
     /// Read Module/ChampionData/data/page.txt or a flat variant if shipped that way.
     pub fn read_champion_module_data(&self) -> Result<Option<String>> {
         // Try common encodings of Module:ChampionData and data subpage

@@ -65,6 +65,17 @@ pub fn parse_item_data(content: &str, item: &str) -> Result<HashMap<String, LuaV
     }
 }
 
+pub fn parse_item_module(content: &str) -> Result<HashMap<String, HashMap<String, LuaValue>>> {
+    let root = parse_module_root(content)?;
+    let mut out: HashMap<String, HashMap<String, LuaValue>> = HashMap::new();
+    for (name, value) in root {
+        if let LuaValue::Table(map) = value {
+            out.insert(name, map);
+        }
+    }
+    Ok(out)
+}
+
 fn parse_module_root(content: &str) -> Result<HashMap<String, LuaValue>> {
     let ret_idx = content
         .find("return")
@@ -178,6 +189,10 @@ fn slice_balanced_braces(s: &str, open_idx: usize) -> Result<(&str, usize)> {
     })
 }
 
+fn is_numeric_expr_char(c: char) -> bool {
+    c.is_ascii_digit() || matches!(c, '.' | '+' | '-' | '*' | '/' | '^' | '(' | ')')
+}
+
 fn tokenize(src: &str) -> Result<Vec<LTok>> {
     let mut out = Vec::new();
     let chars: Vec<char> = src.chars().collect();
@@ -213,7 +228,22 @@ fn tokenize(src: &str) -> Result<Vec<LTok>> {
             if i + 1 < chars.len() && (chars[i + 1].is_ascii_digit()) {
                 let start = i;
                 let mut j = i + 1;
-                while j < chars.len() && (chars[j].is_ascii_digit() || chars[j] == '.') {
+                while j < chars.len() && is_numeric_expr_char(chars[j]) {
+                    j += 1;
+                }
+                out.push(LTok::Number(chars[start..j].iter().collect()));
+                i = j;
+                continue;
+            }
+            return Err(ConvertError::LuaParse {
+                detail: format!("unexpected char {c}"),
+            });
+        }
+        if c == '+' {
+            if i + 1 < chars.len() && chars[i + 1].is_ascii_digit() {
+                let start = i;
+                let mut j = i + 1;
+                while j < chars.len() && is_numeric_expr_char(chars[j]) {
                     j += 1;
                 }
                 out.push(LTok::Number(chars[start..j].iter().collect()));
@@ -281,7 +311,7 @@ fn tokenize(src: &str) -> Result<Vec<LTok>> {
         if c.is_ascii_digit() {
             let start = i;
             let mut j = i + 1;
-            while j < chars.len() && (chars[j].is_ascii_digit() || chars[j] == '.') {
+            while j < chars.len() && is_numeric_expr_char(chars[j]) {
                 j += 1;
             }
             out.push(LTok::Number(chars[start..j].iter().collect()));
@@ -357,9 +387,7 @@ impl<'a> Parser<'a> {
                 _ => {
                     if self.is_next_keyed()? {
                         let (key, value) = self.parse_keyed_entry()?;
-                        if map.insert(key.clone(), value).is_some() {
-                            return Err(ConvertError::DuplicateKey(key));
-                        }
+                        map.insert(key, value);
                         saw_keyed = true;
                     } else {
                         let value = self.parse_value()?;
@@ -384,7 +412,7 @@ impl<'a> Parser<'a> {
         if saw_keyed {
             if saw_array {
                 for (idx, val) in array.into_iter().enumerate() {
-                    map.insert((idx + 1).to_string(), val);
+                    map.entry((idx + 1).to_string()).or_insert(val);
                 }
             }
             Ok(LuaValue::Table(map))
@@ -529,5 +557,17 @@ mod tests {
         } else {
             panic!("expected effects table");
         }
+    }
+
+    #[test]
+    fn duplicate_keys_last_wins() {
+        let lua = r#"return {
+  ["Tester"] = {
+    foo = "first",
+    foo = "second",
+  }
+}"#;
+        let map = parse_champion_data(lua, "Tester").unwrap();
+        assert_eq!(map.get("foo"), Some(&"second".to_string()));
     }
 }

@@ -1,28 +1,35 @@
-use crate::convert::util::{collect_page_vars, expand_inline_templates, expand_with_vars};
+use crate::convert::util::{
+    collect_list_items, collect_page_vars, expand_inline_templates, expand_with_vars,
+    extract_patch_history, extract_section,
+};
 use crate::convert::{write_if_changed, ConversionOutcome};
 use crate::error::{ConvertError, Result};
-use crate::model::{Ability, AbilityKey, BasicInfo, Champion, StatLine, Stats};
+use crate::model::{Ability, AbilityKey, BasicInfo, Champion, Pet, StatLine, Stats};
+use crate::parse::brace::TemplateSpan;
 use crate::parse::lua::parse_champion_data;
-use crate::parse::templates::TemplateRegistry;
-use crate::parse::{extract_balanced_templates, parse_ability_template};
+use crate::parse::templates::{parse_invocation, TemplateRegistry};
+use crate::parse::{
+    evaluate_expression, extract_balanced_templates, parse_ability_template, ExprNumberFormat,
+};
 use crate::render::markdown::render_champion_markdown;
 use crate::wiki_export::WikiExport;
 use std::collections::{HashMap, HashSet};
 use std::path::Path;
 use tracing::info;
 
+use super::context::ConversionContext;
+
 /// Convert a single champion (minimal stub). Looks for `Main/<Name>/page.txt`.
-pub fn convert_champion(
-    wiki_root: &Path,
+pub(super) fn convert_champion(
+    ctx: &ConversionContext,
     output_dir: &Path,
     name: &str,
-    precision: u8,
 ) -> Result<ConversionOutcome> {
-    let export = WikiExport::new(wiki_root);
+    let export = ctx.export();
     if std::env::var("LOL_MD_DEBUG_LIST_ROOT").ok().as_deref() == Some("1") {
         println!(
             "[convert_champion] wiki_root={} export.root={}",
-            wiki_root.display(),
+            ctx.wiki_root().display(),
             export.root.display()
         );
         if let Ok(rd) = std::fs::read_dir(&export.root) {
@@ -32,30 +39,27 @@ pub fn convert_champion(
         }
     }
     let raw = export.read_champion_main(name)?;
-    let stats = load_champion_stats(&export, name)?;
+    let (stats, constants) = load_champion_stats(export, name)?;
     // Collect page-level #vardefine vars first, then expand page raw
-    let registry = TemplateRegistry::new();
-    let vars = collect_page_vars(&raw)?;
-    let expanded = expand_with_vars(&raw, precision, &vars, &registry)?;
+    let registry = ctx.registry();
+    let precision = ctx.precision();
+    let mut vars = collect_page_vars(&raw)?;
+    for (k, v) in &constants {
+        vars.entry(k.clone()).or_insert(v.clone());
+    }
+    ctx.insert_champion_constants(name, constants.clone());
+    let expanded = expand_with_vars(&raw, precision, &vars, registry)?;
     // Template inventory (names only) written adjacent to output dir once per champion for now (will refactor to context-wide)
     if let Ok(spans) = extract_balanced_templates(&raw) {
         if !spans.is_empty() {
-            let inv_path = output_dir.join("template_inventory.json");
-            let mut existing: Vec<String> = if inv_path.exists() {
-                serde_json::from_str(&std::fs::read_to_string(&inv_path).unwrap_or_default())
-                    .unwrap_or_default()
-            } else {
-                vec![]
-            };
+            let mut names: Vec<String> = Vec::new();
             for s in spans {
                 let n = s.name.split('|').next().unwrap_or("").trim();
-                if !n.is_empty() && !existing.iter().any(|e| e.eq_ignore_ascii_case(n)) {
-                    existing.push(n.to_string());
+                if !n.is_empty() {
+                    names.push(n.to_string());
                 }
             }
-            existing.sort_unstable();
-            existing.dedup();
-            let _ = std::fs::write(inv_path, serde_json::to_string_pretty(&existing).unwrap());
+            ctx.record_templates(names);
         }
     }
     if expanded.contains("{{") {
@@ -71,25 +75,40 @@ pub fn convert_champion(
     // Load abilities and expand their key fields with same var context
     let abilities = load_abilities(&export, name, precision, &vars, &registry)?;
     let abilities = attach_skill_tabs(&expanded, abilities);
-    // Populate basic info (resource if present already gathered inside stats helper)
-    let mut basic = BasicInfo::default();
-    if let Some(res_line) = stats.base.get("resource") {
-        if res_line.base == 0.0 {
-            // resource stored as pseudo marker
-            basic.resource =
-                Some(guess_resource_name(wiki_root, name).unwrap_or_else(|| "Unknown".into()));
+    // Populate basic info from infobox (resource fallback from stats if needed)
+    let mut basic = parse_champion_infobox(&raw, precision, &vars, registry)?.unwrap_or_default();
+    if basic.resource.is_none() {
+        if let Some(res_line) = stats.base.get("resource") {
+            if res_line.base == 0.0 {
+                basic.resource = guess_resource_name(name).or_else(|| Some("Unknown".into()));
+            }
         }
     }
+    let notes = extract_section(&expanded, "Notes")
+        .map(|section| collect_list_items(&section))
+        .unwrap_or_default();
+    let trivia_headings = ["Trivia", "Trivia and references", "Trivia and References"];
+    let trivia = trivia_headings
+        .iter()
+        .find_map(|heading| {
+            extract_section(&expanded, heading)
+                .map(|section| collect_list_items(&section))
+                .filter(|items| !items.is_empty())
+        })
+        .unwrap_or_default();
+    let pets = extract_pets(&expanded);
+    let patch_history = extract_patch_history(&expanded);
+
     let champion = Champion {
         name: name.to_string(),
         basic,
         stats,
         advanced: None,
         abilities,
-        pets: vec![],
-        trivia: vec![],
-        patch_history: vec![],
-        notes: None,
+        pets,
+        trivia,
+        patch_history,
+        notes,
     };
     let markdown = render_champion_markdown(&champion, &expanded);
     let out_file = output_dir.join(format!("{}.md", name.replace(' ', "_")));
@@ -101,8 +120,178 @@ pub fn convert_champion(
     })
 }
 
+fn parse_champion_infobox(
+    raw: &str,
+    precision: u8,
+    vars: &HashMap<String, String>,
+    registry: &TemplateRegistry,
+) -> Result<Option<BasicInfo>> {
+    let spans = extract_balanced_templates(raw)?;
+    for span in spans {
+        if !is_champion_infobox(&span) {
+            continue;
+        }
+        let body = &span.raw[2..span.raw.len() - 2];
+        let inv = parse_invocation(body);
+        let mut named: HashMap<String, String> = HashMap::new();
+        let mut positional: Vec<String> = Vec::new();
+        for p in inv.params {
+            if let Some(eq) = p.find('=') {
+                let (k, v) = p.split_at(eq);
+                let key = k.trim().to_ascii_lowercase();
+                let value_raw = v[1..].trim();
+                let expanded = expand_inline_templates(value_raw, precision, vars, registry)?;
+                if !key.is_empty() {
+                    named.insert(key, expanded.trim().to_string());
+                }
+            } else if !p.trim().is_empty() {
+                let expanded = expand_inline_templates(p.trim(), precision, vars, registry)?;
+                positional.push(expanded.trim().to_string());
+            }
+        }
+        let mut info = BasicInfo::default();
+        if let Some(title) = named.get("title").filter(|s| !s.is_empty()) {
+            info.title = Some(title.clone());
+        } else if let Some(first) = positional.first() {
+            if !first.is_empty() {
+                info.title = Some(first.clone());
+            }
+        }
+        let mut roles: Vec<String> = Vec::new();
+        for (key, value) in &named {
+            if key.starts_with("role") {
+                roles.extend(split_roles(value));
+            }
+        }
+        if roles.is_empty() {
+            if let Some(pos) = positional.get(1) {
+                roles.extend(split_roles(pos));
+            }
+        }
+        if !roles.is_empty() {
+            let mut seen: HashSet<String> = HashSet::new();
+            let mut deduped = Vec::new();
+            for role in roles {
+                let canonical = role.to_ascii_lowercase();
+                if seen.insert(canonical) {
+                    deduped.push(role);
+                }
+            }
+            info.roles = deduped;
+        }
+        if let Some(resource) = named.get("resource").filter(|s| !s.is_empty()) {
+            info.resource = Some(resource.clone());
+        } else if let Some(pos) = positional.get(2) {
+            if !pos.is_empty() {
+                info.resource = Some(pos.clone());
+            }
+        }
+        return Ok(Some(info));
+    }
+    Ok(None)
+}
+
+fn is_champion_infobox(span: &TemplateSpan) -> bool {
+    let name_lower = span.name.to_ascii_lowercase();
+    name_lower.contains("infobox champion")
+        || name_lower.contains("champion info")
+        || name_lower.starts_with("champion infobox")
+}
+
+fn split_roles(value: &str) -> Vec<String> {
+    let sanitized = value
+        .replace("<br>", "\n")
+        .replace("<br />", "\n")
+        .replace('/', "\n");
+    sanitized
+        .split(|c| c == ',' || c == '\n' || c == ';')
+        .map(|s| {
+            s.trim()
+                .trim_matches('[')
+                .trim_matches(']')
+                .trim()
+                .to_string()
+        })
+        .filter(|s| !s.is_empty())
+        .collect()
+}
+
+fn extract_pets(expanded: &str) -> Vec<Pet> {
+    let Some(section) = extract_section(expanded, "Pets") else {
+        return Vec::new();
+    };
+    let items = collect_list_items(&section);
+    let mut pets = Vec::new();
+    for item in items {
+        if let Some(pet) = parse_pet_entry(&item) {
+            pets.push(pet);
+        }
+    }
+    pets
+}
+
+fn parse_pet_entry(item: &str) -> Option<Pet> {
+    let trimmed = item.trim();
+    if trimmed.is_empty() {
+        return None;
+    }
+    let mut content = trimmed.trim_start_matches('*').trim();
+    if content.is_empty() {
+        return None;
+    }
+    if content.starts_with('-') {
+        content = content.trim_start_matches('-').trim();
+    }
+    let mut name = String::new();
+    let mut remainder = content;
+    if content.starts_with("'''") {
+        if let Some(end) = content[3..].find("'''") {
+            name = content[3..3 + end].trim().to_string();
+            remainder = content[3 + end + 3..].trim();
+        }
+    }
+    if name.is_empty() {
+        if let Some((left, right)) = split_first_delim(content) {
+            name = left.trim_matches('"').trim_matches('\'').trim().to_string();
+            remainder = right.trim();
+        }
+    }
+    if name.is_empty() {
+        name = content
+            .split_whitespace()
+            .next()
+            .unwrap_or("Companion")
+            .trim_matches('\'')
+            .to_string();
+        remainder = content;
+    }
+    let description = remainder
+        .trim_start_matches(|c: char| c == '–' || c == '—' || c == '-' || c == ':' || c == ' ')
+        .trim()
+        .to_string();
+    Some(Pet { name, description })
+}
+
+fn split_first_delim(input: &str) -> Option<(&str, &str)> {
+    for delim in ['—', '–', '-', ':'] {
+        if let Some(idx) = input.find(delim) {
+            let split_at = idx + delim.len_utf8();
+            return Some((&input[..idx], &input[split_at..]));
+        }
+    }
+    None
+}
+
 fn attach_skill_tabs(page_expanded: &str, mut abilities: Vec<Ability>) -> Vec<Ability> {
-    // Very naive extraction: scan for markers produced by SkillTabExpander: [SkillTab key:value | key:value]
+    use std::collections::HashMap;
+
+    #[derive(Default)]
+    struct TableBuilder {
+        headers: Vec<String>,
+        rows: Vec<Vec<String>>,
+    }
+
+    let mut builders: HashMap<String, TableBuilder> = HashMap::new();
     for line in page_expanded.lines() {
         if let Some(idx) = line.find("[SkillTab ") {
             let rest = &line[idx + 10..];
@@ -114,46 +303,76 @@ fn attach_skill_tabs(page_expanded: &str, mut abilities: Vec<Ability>) -> Vec<Ab
                 for part in body.split('|') {
                     let part = part.trim();
                     if let Some(colon) = part.find(':') {
-                        let key = part[..colon].trim().to_lowercase();
+                        let key = part[..colon].trim();
                         let val = part[colon + 1..].trim();
-                        match key.as_str() {
-                            "slot" => slot = Some(val.to_string()),
-                            "h" => headers.push(val.to_string()),
-                            "r" => row.push(val.to_string()),
+                        let key_lower = key.to_ascii_lowercase();
+                        match key_lower.as_str() {
+                            "slot" => slot = Some(val.to_ascii_uppercase()),
+                            k if k == "h" || k.starts_with("h") => {
+                                headers.push(val.to_string());
+                            }
+                            k if k == "r" || k.starts_with("r") || k.starts_with("row") => {
+                                row.push(val.to_string());
+                            }
                             _ => {}
                         }
                     }
                 }
-                if let Some(slot_name) = slot {
-                    let ability_key = match slot_name.as_str() {
-                        s if s.eq_ignore_ascii_case("passive") => AbilityKey::Passive,
-                        s if s.eq_ignore_ascii_case("q") => AbilityKey::Q,
-                        s if s.eq_ignore_ascii_case("w") => AbilityKey::W,
-                        s if s.eq_ignore_ascii_case("e") => AbilityKey::E,
-                        s if s.eq_ignore_ascii_case("r") => AbilityKey::R,
-                        other => AbilityKey::Other(other.to_string()),
-                    };
-                    if let Some(ab) = abilities.iter_mut().find(|a| a.key == ability_key) {
-                        if !headers.is_empty() && !row.is_empty() {
-                            ab.leveling_tables.push(crate::model::SkillTable {
-                                headers: headers.clone(),
-                                rows: vec![row.clone()],
-                            });
+                if let Some(slot_label) = slot {
+                    let entry = builders.entry(slot_label).or_default();
+                    if !headers.is_empty() {
+                        if entry.headers.is_empty() || entry.headers.len() < headers.len() {
+                            entry.headers = headers.clone();
+                        }
+                    }
+                    if !row.is_empty() {
+                        if !entry.headers.is_empty() && row.len() < entry.headers.len() {
+                            let mut padded = row.clone();
+                            padded.resize(entry.headers.len(), String::new());
+                            entry.rows.push(padded);
+                        } else {
+                            entry.rows.push(row.clone());
                         }
                     }
                 }
             }
         }
     }
+
+    for ability in &mut abilities {
+        let label = ability_key_label(&ability.key);
+        if let Some(builder) = builders.remove(&label) {
+            if !builder.headers.is_empty() || !builder.rows.is_empty() {
+                ability.leveling_tables.push(crate::model::SkillTable {
+                    headers: builder.headers.clone(),
+                    rows: builder.rows.clone(),
+                });
+            }
+        }
+    }
     abilities
+}
+
+fn ability_key_label(key: &AbilityKey) -> String {
+    match key {
+        AbilityKey::Passive => "PASSIVE".to_string(),
+        AbilityKey::Q => "Q".to_string(),
+        AbilityKey::W => "W".to_string(),
+        AbilityKey::E => "E".to_string(),
+        AbilityKey::R => "R".to_string(),
+        AbilityKey::Other(s) => s.to_ascii_uppercase(),
+    }
 }
 
 // old minimal renderer removed (superseded by render_champion_markdown)
 
-fn load_champion_stats(export: &WikiExport, name: &str) -> Result<Stats> {
+fn load_champion_stats(
+    export: &WikiExport,
+    name: &str,
+) -> Result<(Stats, HashMap<String, String>)> {
     // Module/ChampionData/data/page.txt; if missing (flat export), return default Stats for now
     let Some(lua) = export.read_champion_module_data()? else {
-        return Ok(Stats::default());
+        return Ok((Stats::default(), HashMap::new()));
     };
     let map = parse_champion_data(&lua, name)?; // flat map
     let mut stats = Stats::default();
@@ -172,9 +391,9 @@ fn load_champion_stats(export: &WikiExport, name: &str) -> Result<Stats> {
         if let Some(base) = map.get(base_key) {
             let growth = map
                 .get(growth_key)
-                .and_then(|s| s.parse::<f32>().ok())
+                .and_then(|s| parse_stat_value(s))
                 .unwrap_or(0.0);
-            let base_f = base.parse::<f32>().unwrap_or(0.0);
+            let base_f = parse_stat_value(base).unwrap_or(0.0);
             stats.base.insert(
                 base_key.to_string(),
                 StatLine {
@@ -202,10 +421,18 @@ fn load_champion_stats(export: &WikiExport, name: &str) -> Result<Stats> {
             },
         );
     }
-    Ok(stats)
+    Ok((stats, map))
 }
 
-fn guess_resource_name(_root: &Path, _name: &str) -> Option<String> {
+fn parse_stat_value(raw: &str) -> Option<f32> {
+    if let Ok(val) = raw.parse::<f32>() {
+        return Some(val);
+    }
+    let evaluated = evaluate_expression(raw, ExprNumberFormat::Float(6)).ok()?;
+    evaluated.parse::<f32>().ok()
+}
+
+fn guess_resource_name(_name: &str) -> Option<String> {
     // Placeholder for future: could inspect page excerpt for canonical resource label if not in module.
     // For now rely solely on module value which was injected as pseudo key.
     None
@@ -221,10 +448,7 @@ fn load_abilities(
     // Scan the main page for Data <Champion>/<...> templates and load those pages generically.
     let main = export.read_champion_main(champ)?;
     let mut out: Vec<Ability> = Vec::new();
-    let spans = match extract_balanced_templates(&main) {
-        Ok(s) => s,
-        Err(_) => Vec::new(),
-    };
+    let spans = extract_balanced_templates(&main).unwrap_or_default();
     for sp in spans {
         let name_seg = sp.name.trim();
         let lname = name_seg.to_lowercase();

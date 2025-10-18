@@ -103,7 +103,7 @@ impl TemplateExpander for ExprExpander {
     fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         let expr_body = inv
             .params
-            .get(0)
+            .first()
             .map(|s| s.as_str())
             .unwrap_or_else(|| inv.raw.trim());
         // Pre-expand simple #var templates within the expression using current vars
@@ -233,7 +233,7 @@ impl TemplateExpander for GoldExpander {
         &["g"]
     }
     fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        let v = inv.params.get(0).cloned().unwrap_or_default();
+        let v = inv.params.first().cloned().unwrap_or_default();
         Ok(ExpansionResult { expanded: v })
     }
 }
@@ -260,7 +260,7 @@ impl TemplateExpander for CriticalDamageExpander {
         }
         // Fallback: if first param looks numeric, use it as-is with %
         if percent.is_none() {
-            if let Some(first) = inv.params.get(0) {
+            if let Some(first) = inv.params.first() {
                 if first.trim().chars().all(|c| c.is_ascii_digit()) {
                     percent = Some(format!("{}%", first.trim()));
                 }
@@ -280,7 +280,7 @@ impl TemplateExpander for TooltipExpander {
         &["tt"]
     }
     fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        if inv.params.len() < 1 {
+        if inv.params.is_empty() {
             return Err(ConvertError::MalformedTemplate {
                 name: inv.name.clone(),
                 detail: "missing value".into(),
@@ -351,8 +351,7 @@ pub fn parse_invocation(raw_full: &str) -> TemplateInvocation {
     let mut brace = 0i32;
     let mut bracket = 0i32;
     let mut paren = 0i32;
-    let mut chars = raw_full.chars().peekable();
-    while let Some(c) = chars.next() {
+    for c in raw_full.chars() {
         match c {
             '{' => {
                 brace += 1;
@@ -388,7 +387,7 @@ pub fn parse_invocation(raw_full: &str) -> TemplateInvocation {
     if !current.is_empty() {
         parts.push(current.trim().to_string());
     }
-    let mut name = parts.get(0).cloned().unwrap_or_default();
+    let mut name = parts.first().cloned().unwrap_or_default();
     let mut params = if parts.len() > 1 {
         parts[1..].to_vec()
     } else {
@@ -823,23 +822,23 @@ impl TemplateExpander for SkillTabExpander {
     }
 }
 
-// Flip Text (ft) stylistic wrapper -> just return inner text reversed once to preserve information (static form)
+// Flip Text (ft) stylistic wrapper -> 「 a ⟷ b 」
 struct FlipTextExpander;
 impl TemplateExpander for FlipTextExpander {
     fn names(&self) -> &'static [&'static str] {
         &["ft"]
     }
     fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        if inv.params.is_empty() {
+        if inv.params.len() < 2 {
             return Err(ConvertError::MalformedTemplate {
                 name: inv.name.clone(),
-                detail: "missing text".into(),
+                detail: "requires two parameters: a and b".into(),
             });
         }
-        // Reverse the inner text once to mimic the flip effect in a static representation
-        let s = inv.params[0].trim();
-        let rev: String = s.chars().rev().collect();
-        Ok(ExpansionResult { expanded: rev })
+        let a = inv.params[0].trim();
+        let b = inv.params[1].trim();
+        let result = format!("「 {} ⟷ {} 」", a, b);
+        Ok(ExpansionResult { expanded: result })
     }
 }
 

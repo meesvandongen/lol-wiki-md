@@ -43,12 +43,36 @@ fn pp_clean() {
 
 #[test]
 fn ft_flip() {
-    let out = expand("ft|abc");
-    assert_eq!(out, "cba");
+    let out = expand("ft|a|b");
+    assert_eq!(out, "「 a ⟷ b 」");
 }
 
 #[test]
 fn ccd_passthrough_key() {
     let out = expand("ccd|AD");
     assert_eq!(out, "AD");
+}
+
+#[test]
+fn tip_prefers_display_label() {
+    let out = expand("tip|League of Legends|LoL");
+    assert_eq!(out, "LoL");
+}
+
+#[test]
+fn tip_icononly_suppresses_output() {
+    let out = expand("tip|icononly=true|Wild Rift");
+    assert_eq!(out, "");
+}
+
+#[test]
+fn icon_unwrap_handles_possessive() {
+    let out = expand("ci|Akshan|'s");
+    assert_eq!(out, "Akshan's");
+}
+
+#[test]
+fn neutralize_template_returns_empty() {
+    let out = expand("Section top");
+    assert!(out.is_empty());
 }

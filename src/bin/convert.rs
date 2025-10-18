@@ -2,7 +2,7 @@ use clap::Parser;
 use lol_wiki_md::parse::templates::TemplateRegistry;
 use lol_wiki_md::validate::validate_templates;
 use lol_wiki_md::wiki_export::WikiExport;
-use lol_wiki_md::{convert_champion, convert_item, error::ConvertError, CliConfig};
+use lol_wiki_md::{error::ConvertError, CliConfig, ConversionContext};
 use tracing_subscriber::{fmt, prelude::*, EnvFilter};
 
 fn init_tracing(json: bool) {
@@ -67,8 +67,10 @@ fn main() -> Result<(), ConvertError> {
         );
     }
 
+    let ctx = ConversionContext::new(&cfg.wiki_root, cfg.precision)?;
+
     if let Some(name) = &cfg.champion {
-        convert_champion(&cfg.wiki_root, &cfg.output, name, cfg.precision)?;
+        ctx.convert_champion(&cfg.output, name)?;
     } else if cfg.all_champions {
         // enumerate via WikiExport abstraction
         let export = WikiExport::new(&cfg.wiki_root);
@@ -76,22 +78,21 @@ fn main() -> Result<(), ConvertError> {
         #[cfg(feature = "rayon")]
         {
             use rayon::prelude::*;
+            let ctx = ctx.clone();
             names.par_iter().for_each(|name| {
-                let _ = convert_champion(&cfg.wiki_root, &cfg.output, name, cfg.precision);
+                let _ = ctx.convert_champion(&cfg.output, name);
             });
         }
         #[cfg(not(feature = "rayon"))]
         {
             for name in names {
-                let _ = convert_champion(&cfg.wiki_root, &cfg.output, &name, cfg.precision);
+                let _ = ctx.convert_champion(&cfg.output, &name);
             }
         }
     } else if let Some(item) = &cfg.item {
-        convert_item(&cfg.wiki_root, &cfg.output, item, cfg.precision)?;
+        ctx.convert_item(&cfg.output, item)?;
     } else if let Some(rune) = &cfg.rune {
-        return Err(ConvertError::Internal(format!(
-            "rune conversion not yet implemented: {rune}"
-        )));
+        ctx.convert_rune(&cfg.output, rune)?;
     }
     Ok(())
 }

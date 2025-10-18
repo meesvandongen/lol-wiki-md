@@ -31,7 +31,7 @@ Legend:
 - [ ] Pets model usage in pipeline
 - [ ] PatchEntry / Change collection integration
 - [ ] Full Item model fields (cost breakdown, stats, passives, build)
-- [ ] Rune extended model (path, description, notes)
+- [x] Rune extended model (path, description, notes)
 
 ## 3. Parsing Primitives
 
@@ -41,7 +41,7 @@ Legend:
 - [x] Variable definition & reference parsing (#vardefine / #var) two-pass
 - [x] Basic wikitext table → markdown converter (simple header & rows)
 - [ ] Enhanced table parser (styles, row/col spans, nested constructs)
-- [~] Apostrophe bold/italic normalization
+- [x] Apostrophe bold/italic normalization (basic wiki run handling via renderer utilities)
 - [~] Lua narrow parser (Implemented: flat key=value tables, nested table placeholder, line/block comments, unary minus; Missing: arrays, booleans, deeper nested extraction, item data, advanced stats derivations)
 
 ## 4. Template Expansion System
@@ -51,14 +51,14 @@ Legend:
 - [x] Implemented expanders: `#expr`, `tt`, `#vardefine`, `#var`
 - [x] Quote (basic blockquote formatting w/ author)
 - [x] Channel Type (ct) (stub -> parenthetical)
-- [~] Skill Tab (st) parsing & table generation (inline marker + naive row capture)
+- [~] Skill Tab (st) parsing & table generation (inline marker + naive row capture; needs multi-row support)
 - [x] Flip Text (ft)
 - [x] Small Bold Caps (sbc) (uppercase + bold conversion)
-- [~] Formula: ap (multi-value sequence formatting implemented)
-- [~] Formula: pp (trimming & cleaned joins implemented)
-- [~] Formula: pptooltip (mirrors pp)
-- [~] Formula: fd (fixed decimals; CLI precision wired overall)
-- [~] Icon unwrap (label pass-through w/ basic possessive + display label support)
+- [x] Formula: ap (multi-value sequence formatting implemented)
+- [x] Formula: pp (trimming & cleaned joins implemented)
+- [x] Formula: pptooltip (mirrors pp)
+- [x] Formula: fd (fixed decimals; CLI precision wired overall)
+- [~] Icon unwrap (label pass-through w/ basic possessive + display label support; fuller metadata pending)
 - [x] Parser functions: `#if`, `#ifeq`, `#switch` (colon-form parsing + basic semantics)
 - [ ] External info includes (Spellblade, Energized, Diminishing gold, etc.)
 - [~] Champion / item constant data substitution (ccd/cid) (vars placeholder)
@@ -83,20 +83,20 @@ Legend:
 ## 6. Item Conversion
 
 - [x] Lua item data parsing (Module/ItemData)
-- [~] Item gold cost fields & combine cost validation
-- [~] Components & build tree graph
-- [~] Stats (flat & percent) extraction
-- [~] Passive / active parsing (basic text, template expansion)
+- [~] Item gold cost fields & combine cost validation (totals captured; validation pending)
+- [~] Components & build tree graph (recipe list captured; hierarchy unresolved)
+- [x] Stats (flat & percent) extraction
+- [x] Passive / active parsing (basic text, template expansion)
 - [ ] Item classification (starter/basic/legendary/mythic)
 - [ ] Embedded table conversion in item descriptions
 
 ## 7. Rune Conversion
 
-- [ ] Rune page loading
-- [ ] Basic description extraction
-- [ ] Path / slot inference (if determinable)
-- [ ] Patch history (structured) reuse champion logic
-- [ ] Notes / trivia extraction
+- [x] Rune page loading
+- [x] Basic description extraction
+- [x] Path / slot inference (if determinable)
+- [x] Patch history (structured) reuse champion logic
+- [x] Notes / trivia extraction
 
 ## 8. Linking & Anchors
 
@@ -127,10 +127,10 @@ Legend:
 ## 11. Rendering (Markdown)
 
 - [x] Minimal champion placeholder renderer
-- [ ] Full champion Markdown renderer (sections: Overview, Abilities, Stats, Advanced Stats, Pets, Trivia, Patch History)
-- [ ] Item Markdown layout (cost table, stats table, passives/actives)
-- [ ] Rune Markdown layout
-- [ ] Structural whitespace normalization (collapse blanks, ensure EOF newline)
+- [~] Full champion Markdown renderer (Overview/Stats/Abilities implemented; advanced stats, pets, trivia, patch history pending)
+- [x] Item Markdown layout (cost table, stats table, passives/actives)
+- [x] Rune Markdown layout
+- [~] Structural whitespace normalization (collapse blanks + EOF newline in renderers; global pass pending)
 - [ ] Optional JSON sidecar serialization
 
 ## 12. Testing & Quality Gates
@@ -162,15 +162,15 @@ Legend:
 
 ## 14. Template Specific Logic (Detail Backlog)
 
-- [ ] `ap` render format (retain human readable + scaling notation)
-- [ ] `pp` per-level sequences + optional tooltip bridging
-- [ ] `pptooltip` variant aggregator
-- [ ] `fd` fixed decimal formatting wrapper around numeric normalization
+- [x] `ap` render format (baseline + scaling notation)
+- [x] `pp` per-level sequences + optional tooltip bridging (textual join)
+- [x] `pptooltip` variant aggregator
+- [x] `fd` fixed decimal formatting wrapper around numeric normalization
 - [ ] `st` multi-column leveling table composition
-- [ ] `ct` channel type textual rendering
-- [ ] `ft` flip text stylistic wrapper (static form)
-- [ ] `sbc` uppercase + bold transformation
-- [ ] Icon unwrapping: champion/ability/item/rune icons → text label; possessive fix
+- [x] `ct` channel type textual rendering
+- [x] `ft` flip text stylistic wrapper (「 a ⟷ b 」)
+- [x] `sbc` uppercase + bold transformation
+- [~] Icon unwrapping: champion/ability/item/rune icons → text label; possessive fix (baseline label only)
 - [ ] External info includes `<includeonly>` extraction & inlining
 - [ ] `ccd` / `cid` numeric constant substitution (requires data map)
 - [ ] Item haste tabber linearization into subsections
@@ -220,25 +220,23 @@ Legend:
 
 ## Current Implementation Summary (Snapshot)
 
-Foundation in place for strict parsing (errors, expression evaluation, template registry) with an expanded subset of template handlers, including core parser functions (`#if`, `#ifeq`, `#switch`) and common utility/neutralizer templates. Lua tokenizer improved (comments, unary minus). A validator pass now emits both a full report and a compact summary (supported names and top unknowns) to guide implementation. Conversion currently produces a minimal placeholder markdown for champions; domain data integration and rendering remain the largest next steps.
+Champion, item, and rune converters now load their respective module data, expand the supported template set, and render structured Markdown (stats tables, ability info blocks, rune notes/trivia) with apostrophe/link normalization helpers. The template registry covers parser functions, formula helpers, icon unwraps, stylistic wrappers, and a neutralization list for structural scaffolding. The validation CLI produces JSON + summary reports, and integration tests exercise the conversion and parsing primitives.
 
 ## Key Technical Debts / Gaps
 
-1. No integration of Lua-derived stats into `Champion.stats`.
-2. Abilities not yet loaded beyond template parsing logic (directory traversal & structured extraction missing).
-3. Most domain templates (ap, pp, st, ct, etc.) unimplemented → will cause `E_UNKNOWN_TEMPLATE` and halt real pages.
-4. Missing link normalization & apostrophe markup handling; raw wiki formatting will bleed into output.
-5. Drift protection framework not started; need early bootstrap before template surface grows.
-6. Rendering logic minimal; must implement stable layout prior to golden test introduction.
+1. Champion pipeline still needs patch history, pets, trivia, and richer skill-tab consolidation.
+2. Template constants (`ccd`/`cid`) and other Lua-sourced numeric substitutions remain stubs.
+3. Link and anchor normalization is absent, and `FlipText` behavior needs to be reconciled with the spec.
+4. Item combine-cost validation, build tree hierarchy, and classification/mode labelling remain outstanding.
+5. Drift protection tooling (inventory scanner, specimen coverage) is not yet implemented.
 
 ## Near-Term Priority Plan (Next Sessions)
 
-1. Integrate Lua stats mapping (hp, hpGrowth, mp, mpGrowth, ad, adGrowth, asBase, asRatio, asGrowth, armor, mr, ms, range, resource).
-2. Ability loader: enumerate `Template/Data_<Champion>/` keys, parse each, build `Ability` list in canonical order.
-3. Implement first wave of template handlers unlocking ability text fidelity: `ap`, `pp`, `pptooltip`, `fd`, icon unwrap basics.
-4. Introduce early renderer for Abilities + Stats sections; create synthetic fixture champion golden test.
-5. Add link normalization utility & apostrophe style converter.
-6. Bootstrap drift inventory script (collect template names only as v0) to lock current set and detect expansion impact.
+1. Capture champion patch history, trivia, and pets, and upgrade skill-tab handling to support multi-row leveling tables.
+2. Resolve `ccd`/`cid` lookups from Lua constants so template expansions emit final numeric values.
+3. Perform link + anchor normalization without disturbing tables/code blocks and document the behaviour.
+4. Extend item conversion with combine-cost validation, build tree sections, and classification/mode labelling.
+5. Bootstrap drift protection: golden hash tests for champion/item/rune outputs plus initial template inventory scanning approach.
 
 ## Tracking Notes
 
@@ -255,4 +253,4 @@ Foundation in place for strict parsing (errors, expression evaluation, template 
 
 ---
 
-_Last updated: (initialize on creation; update manually)_
+_Last updated: 2025-10-11_
