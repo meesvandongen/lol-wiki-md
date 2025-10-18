@@ -2,7 +2,7 @@ use blake3::Hash;
 use lol_wiki_md::{convert_champion, convert_item, convert_rune};
 
 const EXPECTED_CHAMPION_HASH: &str =
-    "c6bb938b2e98c40c7726d670c2ceea49a7a1118aee1fc480c6de6dc98909d030";
+    "efb53c706f0831598005492ebecf33fd8a365008e60e33c4da2f55ec0e9017dd";
 const EXPECTED_ITEM_HASH: &str = "3266d40aeb239892f34229e06fda7199d9362519daf64f08dc1f59986e58202b";
 const EXPECTED_RUNE_HASH: &str = "e93f7b7b1345cc98f8ccd7e0e19de51a3c9953c72f8896875dbb9c78434d5f35";
 
@@ -21,7 +21,7 @@ fn golden_champion_output_hash() {
 
     std::fs::write(
         export.join("Module%3AChampionData%2Fdata.txt"),
-        "return { ['TestChamp'] = { hp = 600, hpGrowth = 100, ad = 60, adGrowth = 3 } }",
+        "return { ['TestChamp'] = { stats = { hp_base = 600, hp_lvl = 100, dam_base = 60, dam_lvl = 3, as_ratio = 0.625, attack_cast_time = 0.3, attack_total_time = 1.0, acquisition_radius = 550 } } }",
     )
     .unwrap();
 

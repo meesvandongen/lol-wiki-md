@@ -15,7 +15,11 @@ fn var_define_and_reference() {
             vars.insert(inv.params[0].clone(), inv.params[1].clone());
         }
     }
-    let ctx = ExpanderCtx { precision: 2, vars };
+    let ctx = ExpanderCtx {
+        precision: 2,
+        vars,
+        conversion_ctx: None,
+    };
     let reg = TemplateRegistry::new();
     let mut out = String::new();
     let mut last = 0usize;

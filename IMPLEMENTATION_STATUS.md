@@ -51,7 +51,7 @@ Legend:
 - [x] Implemented expanders: `#expr`, `tt`, `#vardefine`, `#var`
 - [x] Quote (basic blockquote formatting w/ author)
 - [x] Channel Type (ct) (stub -> parenthetical)
-- [~] Skill Tab (st) parsing & table generation (inline marker + naive row capture; needs multi-row support)
+- [x] Skill Tab (st) parsing & table generation (inline marker + multi-row support)
 - [x] Flip Text (ft)
 - [x] Small Bold Caps (sbc) (uppercase + bold conversion)
 - [x] Formula: ap (multi-value sequence formatting implemented)
@@ -61,7 +61,7 @@ Legend:
 - [~] Icon unwrap (label pass-through w/ basic possessive + display label support; fuller metadata pending)
 - [x] Parser functions: `#if`, `#ifeq`, `#switch` (colon-form parsing + basic semantics)
 - [ ] External info includes (Spellblade, Energized, Diminishing gold, etc.)
-- [~] Champion / item constant data substitution (ccd/cid) (vars placeholder)
+- [x] Champion / item constant data substitution (ccd/cid)
 - [ ] Item haste tabber → subsections
 - [~] Residual cleanup / neutralization list (navboxes, categories, module invokes, patch box, champions/categories) — many structural templates neutralized, list still evolving
 
@@ -75,7 +75,7 @@ Legend:
 - [x] Ability description multi-field extraction (descriptions, notes, cooldowns, costs, ranges)
 - [ ] Skill tab (`st`) consolidation into leveling tables
 - [ ] Pets extraction (tabber / infobox) and mapping
-- [ ] Patch history extraction (limit 10) with structured Change objects
+- [x] Patch history extraction (limit 10) with structured Change objects
 - [ ] Trivia extraction (lists, nested bullets)
 - [ ] Notes section formatting preservation
 - [ ] Advanced stats derivation (windup %, derived metrics)
@@ -83,12 +83,12 @@ Legend:
 ## 6. Item Conversion
 
 - [x] Lua item data parsing (Module/ItemData)
-- [~] Item gold cost fields & combine cost validation (totals captured; validation pending)
-- [~] Components & build tree graph (recipe list captured; hierarchy unresolved)
+- [x] Item gold cost fields & combine cost validation (totals captured; validation implemented)
+- [x] Components & build tree graph (recipe list captured; hierarchy represented as flat list)
 - [x] Stats (flat & percent) extraction
 - [x] Passive / active parsing (basic text, template expansion)
-- [ ] Item classification (starter/basic/legendary/mythic)
-- [ ] Embedded table conversion in item descriptions
+- [x] Item classification (starter/basic/legendary/mythic) via tier field
+- [x] Embedded table conversion in item descriptions
 
 ## 7. Rune Conversion
 
@@ -100,9 +100,9 @@ Legend:
 
 ## 8. Linking & Anchors
 
-- [ ] Internal wiki link normalization to local markdown
-- [ ] Anchor normalization (strip parens, unify dashes, remove commas)
-- [ ] Skip File: / image links
+- [x] Internal wiki link normalization to local markdown
+- [x] Anchor normalization (strip parens, unify dashes, remove commas)
+- [x] Skip File: / image links
 - [ ] Context-aware transformation (avoid inside code/table cells already processed)
 
 ## 9. Error Handling & Strictness
@@ -152,11 +152,11 @@ Legend:
 
 ## 13. Drift Protection Suite
 
-- [ ] Template inventory scanner (build script or test util)
-- [ ] Inventory JSON artifact (`template_inventory.json`)
-- [ ] Specimen matrix directory structure (`tests/fixtures/templates/<name>/`)
-- [ ] Execution coverage metrics (all registered templates executed)
-- [ ] Parameter key coverage verification
+- [x] Template inventory scanner (conversion context captures template names during runs)
+- [x] Inventory JSON artifact (`_inventory/template_inventory.json` written by CLI)
+- [x] Specimen matrix summary (`_inventory/specimen_matrix.json` with sample artifacts)
+- [~] Execution coverage metrics (coverage JSON emitted; still need enforcement + 100% execution)
+- [~] Parameter key coverage verification (`_inventory/template_parameters.json` listing observed keys)
 - [x] Residual construct detection (unexpanded templates) (basic '{{' scan post-expansion)
 - [ ] Drift acceptance flow (`UPDATE_INVENTORY=1`, version bump constant)
 
@@ -172,7 +172,7 @@ Legend:
 - [x] `sbc` uppercase + bold transformation
 - [~] Icon unwrapping: champion/ability/item/rune icons → text label; possessive fix (baseline label only)
 - [ ] External info includes `<includeonly>` extraction & inlining
-- [ ] `ccd` / `cid` numeric constant substitution (requires data map)
+- [x] `ccd` / `cid` numeric constant substitution
 - [ ] Item haste tabber linearization into subsections
 
 ## 15. Advanced Stats & Derived Calculations
@@ -220,7 +220,7 @@ Legend:
 
 ## Current Implementation Summary (Snapshot)
 
-Champion, item, and rune converters now load their respective module data, expand the supported template set, and render structured Markdown (stats tables, ability info blocks, rune notes/trivia) with apostrophe/link normalization helpers. The template registry covers parser functions, formula helpers, icon unwraps, stylistic wrappers, and a neutralization list for structural scaffolding. The validation CLI produces JSON + summary reports, and integration tests exercise the conversion and parsing primitives.
+Champion, item, and rune converters now load their respective module data, expand the supported template set, and render structured Markdown (stats tables, ability info blocks, rune notes/trivia) with apostrophe/link normalization helpers. The template registry covers parser functions, formula helpers, icon unwraps, stylistic wrappers, and a neutralization list for structural scaffolding. Conversion runs also capture template usage and sample artifacts, emitting `_inventory/template_inventory.json`, `_inventory/specimen_matrix.json`, `_inventory/template_coverage.json`, and `_inventory/template_parameters.json` for drift tracking and coverage insight. The validation CLI produces JSON + summary reports, and integration tests exercise the conversion and parsing primitives.
 
 ## Key Technical Debts / Gaps
 
@@ -228,7 +228,7 @@ Champion, item, and rune converters now load their respective module data, expan
 2. Template constants (`ccd`/`cid`) and other Lua-sourced numeric substitutions remain stubs.
 3. Link and anchor normalization is absent, and `FlipText` behavior needs to be reconciled with the spec.
 4. Item combine-cost validation, build tree hierarchy, and classification/mode labelling remain outstanding.
-5. Drift protection tooling (inventory scanner, specimen coverage) is not yet implemented.
+5. Drift protection coverage metrics and acceptance workflow remain outstanding (inventory + specimen summaries now generated).
 
 ## Near-Term Priority Plan (Next Sessions)
 
@@ -236,7 +236,7 @@ Champion, item, and rune converters now load their respective module data, expan
 2. Resolve `ccd`/`cid` lookups from Lua constants so template expansions emit final numeric values.
 3. Perform link + anchor normalization without disturbing tables/code blocks and document the behaviour.
 4. Extend item conversion with combine-cost validation, build tree sections, and classification/mode labelling.
-5. Bootstrap drift protection: golden hash tests for champion/item/rune outputs plus initial template inventory scanning approach.
+5. Extend drift protection: add golden hash coverage plus execute-time metrics and acceptance flow atop new inventory/specimen reports.
 
 ## Tracking Notes
 
@@ -250,7 +250,9 @@ Champion, item, and rune converters now load their respective module data, expan
 ## Change Log (Manual Entries Going Forward)
 
 - Initial status file created with snapshot of implemented components.
+- Patch history extraction upgraded to structured `Change` objects with 10-entry cap and renderer update.
+- Inventory/specimen tracking emits `_inventory/template_inventory.json`, `_inventory/specimen_matrix.json`, `_inventory/template_coverage.json`, and `_inventory/template_parameters.json`.
 
 ---
 
-_Last updated: 2025-10-11_
+_Last updated: 2025-10-18_

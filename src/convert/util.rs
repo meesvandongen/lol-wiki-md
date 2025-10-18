@@ -1,8 +1,10 @@
+use crate::convert::context::ConversionContext;
 use crate::error::Result;
 use crate::model::{Change, PatchEntry};
 use crate::parse::extract_balanced_templates;
 use crate::parse::templates::{parse_invocation, ExpanderCtx, TemplateRegistry};
 use std::collections::HashMap;
+use std::sync::Arc;
 
 /// Collect `#vardefine` assignments from the provided raw wikitext into a map.
 pub fn collect_page_vars(raw: &str) -> Result<HashMap<String, String>> {
@@ -25,27 +27,9 @@ pub fn expand_with_vars(
     precision: u8,
     vars: &HashMap<String, String>,
     registry: &TemplateRegistry,
+    conversion_ctx: Option<Arc<ConversionContext>>,
 ) -> Result<String> {
-    if let Ok(spans) = extract_balanced_templates(raw) {
-        let mut output = String::new();
-        let mut last = 0usize;
-        let ctx = ExpanderCtx {
-            precision,
-            vars: vars.clone(),
-        };
-        for span in spans {
-            output.push_str(&raw[last..span.start]);
-            let body = &span.raw[2..span.raw.len() - 2];
-            let inv = parse_invocation(body);
-            let exp = registry.expand(&inv, &ctx)?;
-            output.push_str(&exp.expanded);
-            last = span.end;
-        }
-        output.push_str(&raw[last..]);
-        Ok(output)
-    } else {
-        Ok(raw.to_string())
-    }
+    expand_inline_templates(raw, precision, vars, registry, conversion_ctx)
 }
 
 /// Iteratively expand inline templates inside a value until a fixed point or iteration cap is reached.
@@ -54,11 +38,13 @@ pub fn expand_inline_templates(
     precision: u8,
     vars: &HashMap<String, String>,
     registry: &TemplateRegistry,
+    conversion_ctx: Option<Arc<ConversionContext>>,
 ) -> Result<String> {
     let mut curr = raw.to_string();
     let ctx = ExpanderCtx {
         precision,
         vars: vars.clone(),
+        conversion_ctx,
     };
     for _ in 0..6 {
         let Ok(spans) = extract_balanced_templates(&curr) else {
@@ -164,71 +150,134 @@ fn normalize_list_marker(line: &str) -> String {
 
 /// Parse a "Patch history" section into structured entries.
 pub fn extract_patch_history(expanded: &str) -> Vec<PatchEntry> {
+    const MAX_PATCH_ENTRIES: usize = 10;
     let Some(section) = extract_section(expanded, "Patch history") else {
         return Vec::new();
     };
+
     let mut entries: Vec<PatchEntry> = Vec::new();
-    let mut current: Option<PatchEntry> = None;
+    let mut current_entry: Option<PatchEntry> = None;
+    let mut current_section: Option<String> = None;
+    let mut current_change_idx: Option<usize> = None;
+    let mut reached_limit = false;
+
     for line in section.lines() {
-        let trimmed = line.trim();
+        if reached_limit {
+            break;
+        }
+        let mut trimmed = line.trim();
         if trimmed.is_empty() {
             continue;
         }
-        if trimmed.starts_with('*') || trimmed.starts_with('#') {
-            let depth = trimmed
-                .chars()
-                .take_while(|c| *c == '*' || *c == '#')
-                .count();
-            let content = trimmed.trim_start_matches(['*', '#']).trim();
-            if depth <= 1 {
-                if let Some(entry) = current.take() {
-                    if !entry.changes.is_empty() {
-                        entries.push(entry);
+        trimmed = trimmed
+            .trim_start_matches(|c| c == ':' || c == ';')
+            .trim_start();
+        if trimmed.is_empty() {
+            continue;
+        }
+
+        if let Some((depth, content)) = extract_bullet_depth(trimmed) {
+            match depth {
+                1 => {
+                    if let Some(mut entry) = current_entry.take() {
+                        finalize_patch_entry(&mut entry);
+                        if !entry.changes.is_empty() && !entry.version.trim().is_empty() {
+                            entries.push(entry);
+                            if entries.len() >= MAX_PATCH_ENTRIES {
+                                reached_limit = true;
+                                break;
+                            }
+                        }
+                    }
+                    if reached_limit {
+                        break;
+                    }
+                    let (version, summary) = parse_patch_line(content);
+                    current_section = None;
+                    current_change_idx = None;
+                    let mut entry = PatchEntry {
+                        version,
+                        changes: Vec::new(),
+                    };
+                    let summary_text = normalize_detail_line(&summary);
+                    if !summary_text.is_empty() {
+                        let change = Change {
+                            section: "General".to_string(),
+                            text: summary_text,
+                        };
+                        current_section = Some("General".to_string());
+                        current_change_idx = Some(entry.changes.len());
+                        entry.changes.push(change);
+                    }
+                    current_entry = Some(entry);
+                }
+                2 => {
+                    if let Some(entry) = current_entry.as_mut() {
+                        let (label, immediate_text) = parse_section_line(content);
+                        let mut change = Change {
+                            section: label.clone(),
+                            text: immediate_text.unwrap_or_default(),
+                        };
+                        if change.section.trim().is_empty() {
+                            change.section = "General".to_string();
+                        }
+                        current_section = Some(change.section.clone());
+                        current_change_idx = Some(entry.changes.len());
+                        entry.changes.push(change);
                     }
                 }
-                if content.is_empty() {
-                    current = None;
-                    continue;
-                }
-                let (version, text) = parse_patch_line(content);
-                let mut changes = Vec::new();
-                if !text.trim().is_empty() {
-                    changes.push(Change {
-                        section: "General".to_string(),
-                        text,
-                    });
-                }
-                current = Some(PatchEntry { version, changes });
-            } else if let Some(entry) = current.as_mut() {
-                if !content.is_empty() {
-                    entry.changes.push(Change {
-                        section: "General".to_string(),
-                        text: content.to_string(),
-                    });
+                _ => {
+                    if let Some(entry) = current_entry.as_mut() {
+                        let detail_text = normalize_detail_line(content);
+                        if detail_text.is_empty() {
+                            continue;
+                        }
+                        let idx = if let Some(idx) = current_change_idx {
+                            idx
+                        } else {
+                            let section_name = current_section
+                                .clone()
+                                .unwrap_or_else(|| "General".to_string());
+                            entry.changes.push(Change {
+                                section: section_name.clone(),
+                                text: String::new(),
+                            });
+                            current_section = Some(section_name);
+                            let new_idx = entry.changes.len() - 1;
+                            current_change_idx = Some(new_idx);
+                            new_idx
+                        };
+                        if let Some(change) = entry.changes.get_mut(idx) {
+                            append_detail(change, &detail_text);
+                        }
+                    }
                 }
             }
-        } else if let Some(entry) = current.as_mut() {
-            if trimmed.is_empty() {
-                continue;
-            }
-            if let Some(last) = entry.changes.last_mut() {
-                if !last.text.is_empty() {
-                    last.text.push(' ');
+        } else if let Some(entry) = current_entry.as_mut() {
+            if let Some(idx) = current_change_idx {
+                if let Some(change) = entry.changes.get_mut(idx) {
+                    if !change.text.is_empty() && !change.text.ends_with('\n') {
+                        change.text.push(' ');
+                    }
+                    change.text.push_str(trimmed);
                 }
-                last.text.push_str(trimmed);
-            } else {
-                entry.changes.push(Change {
-                    section: "General".to_string(),
-                    text: trimmed.to_string(),
-                });
             }
         }
     }
-    if let Some(entry) = current {
-        if !entry.changes.is_empty() {
-            entries.push(entry);
+
+    if !reached_limit {
+        if let Some(mut entry) = current_entry.take() {
+            finalize_patch_entry(&mut entry);
+            if !entry.changes.is_empty() && !entry.version.trim().is_empty() {
+                entries.push(entry);
+            }
         }
     }
+
+    if entries.len() > MAX_PATCH_ENTRIES {
+        entries.truncate(MAX_PATCH_ENTRIES);
+    }
+
     entries
 }
 
@@ -263,6 +312,124 @@ pub fn parse_patch_line(line: &str) -> (String, String) {
     ("Patch".to_string(), line.trim().to_string())
 }
 
+fn extract_bullet_depth(line: &str) -> Option<(usize, &str)> {
+    let mut depth = 0usize;
+    let mut byte_idx = 0usize;
+    for (idx, ch) in line.char_indices() {
+        if ch == '*' || ch == '#' {
+            depth += 1;
+            byte_idx = idx + ch.len_utf8();
+        } else {
+            break;
+        }
+    }
+    if depth == 0 {
+        None
+    } else {
+        Some((depth, line[byte_idx..].trim_start()))
+    }
+}
+
+fn parse_section_line(content: &str) -> (String, Option<String>) {
+    let cleaned = normalize_detail_line(content);
+    if cleaned.is_empty() {
+        return ("General".to_string(), None);
+    }
+    if cleaned.starts_with("'''") {
+        if let Some(end) = cleaned[3..].find("'''") {
+            let label = cleaned[3..3 + end].trim();
+            let remainder = cleaned[3 + end + 3..].trim().trim_start_matches(':').trim();
+            let label = clean_section_label(label);
+            return if remainder.is_empty() {
+                (label, None)
+            } else {
+                (label, Some(remainder.to_string()))
+            };
+        }
+    }
+    if let Some(idx) = cleaned.find(':') {
+        let label = clean_section_label(&cleaned[..idx]);
+        let remainder = cleaned[idx + 1..].trim();
+        if remainder.is_empty() {
+            (label, None)
+        } else {
+            (label, Some(remainder.to_string()))
+        }
+    } else if is_title_case(&cleaned) {
+        (clean_section_label(&cleaned), None)
+    } else {
+        ("General".to_string(), Some(cleaned))
+    }
+}
+
+fn clean_section_label(label: &str) -> String {
+    let trimmed = label
+        .trim()
+        .trim_matches(|c: char| matches!(c, '-' | '–' | '—' | '•'))
+        .trim();
+    let trimmed = trimmed
+        .trim_end_matches(|c: char| matches!(c, '.' | ':' | '-' | '–' | '—' | '•'))
+        .trim();
+    if trimmed.is_empty() {
+        "General".to_string()
+    } else {
+        trimmed.to_string()
+    }
+}
+
+fn is_title_case(input: &str) -> bool {
+    let mut has_alpha = false;
+    for word in input.split_whitespace() {
+        let mut chars = word.chars().filter(|c| c.is_alphabetic());
+        if let Some(first) = chars.next() {
+            has_alpha = true;
+            if !first.is_uppercase() {
+                return false;
+            }
+            if !chars.all(|c| c.is_lowercase()) {
+                return false;
+            }
+        }
+    }
+    has_alpha
+}
+
+fn normalize_detail_line(line: &str) -> String {
+    let cleaned = line
+        .trim()
+        .trim_start_matches(|c: char| matches!(c, '-' | '–' | '—' | '•'))
+        .trim_start();
+    cleaned.to_string()
+}
+
+fn append_detail(change: &mut Change, detail: &str) {
+    if change.text.trim().is_empty() {
+        if change.text.is_empty() {
+            change.text.push_str(detail);
+        } else {
+            change.text.push(' ');
+            change.text.push_str(detail);
+        }
+    } else {
+        change.text.push('\n');
+        change.text.push_str(detail);
+    }
+}
+
+fn finalize_patch_entry(entry: &mut PatchEntry) {
+    for change in &mut entry.changes {
+        change.section = if change.section.trim().is_empty() {
+            "General".to_string()
+        } else {
+            change.section.trim().to_string()
+        };
+        change.text = change.text.trim_end().to_string();
+    }
+    entry
+        .changes
+        .retain(|change| !change.section.trim().is_empty() || !change.text.trim().is_empty());
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -281,13 +448,40 @@ mod tests {
 
     #[test]
     fn patch_history_parsing() {
-        let expanded = "== Patch History ==\n* '''V14.5:''' Buffed damage\n** Extra detail\n* '''V14.4:'''\n** Secondary adjustment\n";
+        let expanded = "== Patch History ==\n* '''V14.5:''' Dirty Fighting tweaks\n** '''Dirty Fighting:''' Base damage increased\n*** Additional detail\n** Heroic Swing\n*** Gains unstoppable while swinging\n* '''V14.4:'''\n** '''General:''' Adjusted icons\n";
         let history = extract_patch_history(expanded);
         assert_eq!(history.len(), 2);
-        assert_eq!(history[0].version, "V14.5");
-        assert_eq!(history[0].changes.len(), 2);
-        assert_eq!(history[0].changes[0].text, "Buffed damage");
-        assert_eq!(history[1].version, "V14.4");
+
+        let first = &history[0];
+        assert_eq!(first.version, "V14.5");
+        assert_eq!(first.changes.len(), 3);
+        assert_eq!(first.changes[0].section, "General");
+        assert_eq!(first.changes[0].text, "Dirty Fighting tweaks");
+        assert_eq!(first.changes[1].section, "Dirty Fighting");
+        assert_eq!(
+            first.changes[1].text,
+            "Base damage increased\nAdditional detail"
+        );
+        assert_eq!(first.changes[2].section, "Heroic Swing");
+        assert_eq!(first.changes[2].text, "Gains unstoppable while swinging");
+
+        let second = &history[1];
+        assert_eq!(second.version, "V14.4");
+        assert_eq!(second.changes.len(), 1);
+        assert_eq!(second.changes[0].section, "General");
+        assert_eq!(second.changes[0].text, "Adjusted icons");
+    }
+
+    #[test]
+    fn patch_history_limits_to_ten_entries() {
+        let mut expanded = String::from("== Patch History ==\n");
+        for idx in 0..12 {
+            expanded.push_str(&format!("* '''V1.{}:''' Summary {}\n", idx, idx));
+        }
+        let history = extract_patch_history(&expanded);
+        assert_eq!(history.len(), 10);
+        assert_eq!(history[0].version, "V1.0");
+        assert_eq!(history.last().unwrap().version, "V1.9");
     }
 
     #[test]

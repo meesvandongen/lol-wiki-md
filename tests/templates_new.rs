@@ -7,6 +7,7 @@ fn expand(body: &str) -> String {
     let ctx = ExpanderCtx {
         precision: 2,
         vars: HashMap::new(),
+        conversion_ctx: None,
     };
     reg.expand(&inv, &ctx).unwrap().expanded
 }

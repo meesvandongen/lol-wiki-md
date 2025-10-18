@@ -1,7 +1,15 @@
 //! Template expansion framework (minimal subset).
+use crate::convert::context::ConversionContext;
 use crate::error::{ConvertError, Result};
 use crate::parse::expr::evaluate_expression;
+use crate::parse::lua::LuaValue;
 use std::collections::HashMap;
+use std::sync::Arc;
+
+pub trait ConversionContextTrait {
+    fn champion_constants(&self, key: &str) -> Option<HashMap<String, String>>;
+    fn item_module_map(&self) -> Result<&HashMap<String, HashMap<String, LuaValue>>>;
+}
 
 #[derive(Debug, Clone)]
 pub struct TemplateInvocation {
@@ -62,6 +70,9 @@ impl TemplateRegistry {
     pub fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         for e in &self.expanders {
             if e.names().iter().any(|n| n.eq_ignore_ascii_case(&inv.name)) {
+                if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
+                    conv_ctx.record_template_params(&inv.name, &inv.params);
+                }
                 return e.expand(inv, ctx);
             }
         }
@@ -91,6 +102,7 @@ impl TemplateRegistry {
 pub struct ExpanderCtx {
     pub precision: u8,
     pub vars: HashMap<String, String>,
+    pub conversion_ctx: Option<Arc<ConversionContext>>,
 }
 
 // --- Simple expanders ---
@@ -804,20 +816,54 @@ impl TemplateExpander for SkillTabExpander {
         &["st"]
     }
     fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        // Minimal representation: key=value;key=value joined with | for now
-        let mut pairs = Vec::new();
+        // Parse headers (h:) and rows (r:, r2:, r3:, etc.)
+        let mut headers = Vec::new();
+        let mut rows = Vec::new();
+        let mut current_row = Vec::new();
+        let mut row_index = 1;
         for p in &inv.params {
             if let Some(eq) = p.find('=') {
                 let (k, v) = p.split_at(eq);
-                let v = &v[1..];
-                pairs.push(format!("{}:{}", k.trim(), v.trim()));
+                let k = k.trim();
+                let v = v[1..].trim();
+                if k.eq_ignore_ascii_case("h") {
+                    headers.push(v.to_string());
+                } else if k.eq_ignore_ascii_case("r")
+                    || k.eq_ignore_ascii_case(&format!("r{}", row_index))
+                {
+                    current_row.push(v.to_string());
+                    if k.eq_ignore_ascii_case(&format!("r{}", row_index)) {
+                        rows.push(current_row);
+                        current_row = Vec::new();
+                        row_index += 1;
+                    }
+                }
             }
         }
-        if pairs.is_empty() {
-            pairs = inv.params.iter().map(|s| s.to_string()).collect();
+        // If there's an unfinished row
+        if !current_row.is_empty() {
+            rows.push(current_row);
+        }
+        // Fallback if no structured data
+        if headers.is_empty() && rows.is_empty() {
+            let pairs = inv.params.iter().map(|s| s.to_string()).collect::<Vec<_>>();
+            return Ok(ExpansionResult {
+                expanded: format!("[SkillTab {}]", pairs.join(" | ")),
+            });
+        }
+        // Generate marker with structured data
+        let mut parts = Vec::new();
+        for h in &headers {
+            parts.push(format!("h:{}", h));
+        }
+        for (i, row) in rows.iter().enumerate() {
+            let row_key = if i == 0 { "r" } else { &format!("r{}", i + 1) };
+            for val in row {
+                parts.push(format!("{}:{}", row_key, val));
+            }
         }
         Ok(ExpansionResult {
-            expanded: format!("[SkillTab {}]", pairs.join(" | ")),
+            expanded: format!("[SkillTab {}]", parts.join(" | ")),
         })
     }
 }
@@ -842,7 +888,7 @@ impl TemplateExpander for FlipTextExpander {
     }
 }
 
-// Champion / item constant data substitution (ccd / cid). For now, look up a provided var or passthrough.
+// Champion / item constant data substitution (ccd / cid).
 struct ConstantDataExpander;
 impl TemplateExpander for ConstantDataExpander {
     fn names(&self) -> &'static [&'static str] {
@@ -855,16 +901,48 @@ impl TemplateExpander for ConstantDataExpander {
                 detail: "missing key".into(),
             });
         }
-        let key = inv.params[0].trim();
-        // Reuse vars map as early placeholder until a dedicated constant map exists.
-        if let Some(v) = ctx.vars.get(key) {
+        let entity = inv.params[0].trim();
+        let field = inv.params.get(1).map(|s| s.trim()).unwrap_or("");
+        if inv.name.eq_ignore_ascii_case("ccd") {
+            // Champion constant data
+            if let Some(ref conv_ctx) = ctx.conversion_ctx {
+                if let Some(constants) = conv_ctx.champion_constants(entity) {
+                    if let Some(value) = constants.get(field) {
+                        return Ok(ExpansionResult {
+                            expanded: value.clone(),
+                        });
+                    }
+                }
+            }
+        } else if inv.name.eq_ignore_ascii_case("cid") {
+            // Item constant data
+            if let Some(ref conv_ctx) = ctx.conversion_ctx {
+                match conv_ctx.item_module_map() {
+                    Ok(map) => {
+                        if let Some(item_data) = map.get(entity) {
+                            if let Some(LuaValue::String(s)) = item_data.get(field) {
+                                return Ok(ExpansionResult {
+                                    expanded: s.clone(),
+                                });
+                            } else if let Some(LuaValue::Number(n)) = item_data.get(field) {
+                                return Ok(ExpansionResult {
+                                    expanded: n.to_string(),
+                                });
+                            }
+                        }
+                    }
+                    Err(_) => {} // Ignore error for now
+                }
+            }
+        }
+        // Fallback to vars or key
+        if let Some(v) = ctx.vars.get(entity) {
             return Ok(ExpansionResult {
                 expanded: v.clone(),
             });
         }
-        // If not known, preserve key literal to surface discrepancy (strict mode would prefer error but we allow gentle now)
         Ok(ExpansionResult {
-            expanded: key.to_string(),
+            expanded: entity.to_string(),
         })
     }
 }
@@ -913,6 +991,14 @@ impl TemplateExpander for NeutralizeExpander {
             // Range/time formatting helpers that don't affect plain text content here
             "rutngt",
             "pending for test",
+            // Anchor for sections
+            "Anchor",
+            // Pet infobox
+            "Infobox/Pet",
+            // Champion AP ratio category
+            "Champion without ability power ratio",
+            // TFT item marker
+            "TFT Item",
         ]
     }
     fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
@@ -930,6 +1016,7 @@ mod tests {
         ExpanderCtx {
             precision: 2,
             vars: Default::default(),
+            conversion_ctx: None,
         }
     }
 

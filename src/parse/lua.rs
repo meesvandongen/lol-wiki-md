@@ -26,7 +26,7 @@ pub enum LuaValue {
     Array(Vec<LuaValue>),
 }
 
-pub fn parse_champion_data(content: &str, champion: &str) -> Result<HashMap<String, String>> {
+pub fn parse_champion_entry(content: &str, champion: &str) -> Result<HashMap<String, LuaValue>> {
     let root = parse_module_root(content)?;
     let entry = root
         .get(champion)
@@ -36,15 +36,17 @@ pub fn parse_champion_data(content: &str, champion: &str) -> Result<HashMap<Stri
                 .map(|(_, v)| v)
         })
         .ok_or_else(|| ConvertError::ChampionNotFound(champion.to_string()))?;
-    let table = match entry {
-        LuaValue::Table(map) => map,
-        other => {
-            return Err(ConvertError::LuaParse {
-                detail: format!("expected table for champion entry, found {other:?}"),
-            })
-        }
-    };
-    Ok(table_to_string_map(table))
+    match entry {
+        LuaValue::Table(map) => Ok(map.clone()),
+        other => Err(ConvertError::LuaParse {
+            detail: format!("expected table for champion entry, found {other:?}"),
+        }),
+    }
+}
+
+pub fn parse_champion_data(content: &str, champion: &str) -> Result<HashMap<String, String>> {
+    let table = parse_champion_entry(content, champion)?;
+    Ok(table_to_string_map(&table))
 }
 
 pub fn parse_item_data(content: &str, item: &str) -> Result<HashMap<String, LuaValue>> {

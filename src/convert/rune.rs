@@ -11,6 +11,7 @@ use crate::parse::templates::{parse_invocation, TemplateRegistry};
 use crate::render::markdown::render_rune_markdown;
 use std::collections::HashMap;
 use std::path::Path;
+use std::sync::Arc;
 
 use super::context::ConversionContext;
 
@@ -35,7 +36,13 @@ pub(super) fn convert_rune(
             ctx.record_templates(names);
         }
     }
-    let expanded = expand_with_vars(&raw, precision, &vars, registry)?;
+    let expanded = expand_with_vars(
+        &raw,
+        precision,
+        &vars,
+        registry,
+        Some(Arc::new(ctx.clone())),
+    )?;
     if expanded.contains("{{") {
         return Err(ConvertError::Internal(
             "residual template marker '{{' after rune expansion".into(),
@@ -47,7 +54,13 @@ pub(super) fn convert_rune(
         ));
     }
 
-    let info = parse_rune_infobox(&raw, precision, &vars, &registry)?;
+    let info = parse_rune_infobox(
+        &raw,
+        precision,
+        &vars,
+        &registry,
+        Some(Arc::new(ctx.clone())),
+    )?;
     let description = info
         .as_ref()
         .and_then(|inf| inf.description.clone())
@@ -83,6 +96,13 @@ pub(super) fn convert_rune(
     let markdown = render_rune_markdown(&rune, &expanded);
     let out_file = output_dir.join(format!("{}.md", name.replace(' ', "_")));
     write_if_changed(&out_file, &markdown)?;
+    if let Ok(rel) = out_file.strip_prefix(output_dir) {
+        let artifact = rel.to_string_lossy().replace('\\', "/");
+        ctx.set_specimen_sample("rune", &artifact);
+    } else {
+        let artifact = out_file.to_string_lossy().replace('\\', "/");
+        ctx.set_specimen_sample("rune", &artifact);
+    }
     Ok(ConversionOutcome {
         entity: name.to_string(),
         output: out_file,
@@ -100,6 +120,7 @@ fn parse_rune_infobox(
     precision: u8,
     vars: &HashMap<String, String>,
     registry: &TemplateRegistry,
+    conversion_ctx: Option<Arc<ConversionContext>>,
 ) -> Result<Option<RuneInfobox>> {
     let spans = extract_balanced_templates(raw)?;
     for span in spans {
@@ -115,12 +136,24 @@ fn parse_rune_infobox(
                 let (k, v) = p.split_at(eq);
                 let key = k.trim().to_ascii_lowercase();
                 let value_raw = v[1..].trim();
-                let expanded = expand_inline_templates(value_raw, precision, vars, registry)?;
+                let expanded = expand_inline_templates(
+                    value_raw,
+                    precision,
+                    vars,
+                    registry,
+                    conversion_ctx.clone(),
+                )?;
                 if !key.is_empty() {
                     named.insert(key, expanded.trim().to_string());
                 }
             } else if !p.trim().is_empty() {
-                let expanded = expand_inline_templates(p.trim(), precision, vars, registry)?;
+                let expanded = expand_inline_templates(
+                    p.trim(),
+                    precision,
+                    vars,
+                    registry,
+                    conversion_ctx.clone(),
+                )?;
                 positional.push(expanded.trim().to_string());
             }
         }
@@ -216,7 +249,7 @@ mod tests {
     #[test]
     fn parse_rune_infobox_named_and_positional() {
         let raw = "{{Rune info| path = Domination | slot = Keystone | description = Burst damage}}";
-        let info = parse_rune_infobox(raw, 2, &HashMap::new(), &registry())
+        let info = parse_rune_infobox(raw, 2, &HashMap::new(), &registry(), None)
             .unwrap()
             .unwrap();
         assert_eq!(info.path.as_deref(), Some("Domination"));
@@ -224,7 +257,7 @@ mod tests {
         assert_eq!(info.description.as_deref(), Some("Burst damage"));
 
         let raw2 = "{{Rune|Precision|Keystone|Press the Attack}}";
-        let info2 = parse_rune_infobox(raw2, 2, &HashMap::new(), &registry())
+        let info2 = parse_rune_infobox(raw2, 2, &HashMap::new(), &registry(), None)
             .unwrap()
             .unwrap();
         assert_eq!(info2.path.as_deref(), Some("Precision"));
@@ -248,10 +281,13 @@ mod tests {
         assert_eq!(history.len(), 2);
         assert_eq!(history[0].version, "V14.5");
         assert_eq!(history[0].changes.len(), 2);
+        assert_eq!(history[0].changes[0].section, "General");
         assert_eq!(history[0].changes[0].text, "Buffed damage");
+        assert_eq!(history[0].changes[1].section, "General");
         assert_eq!(history[0].changes[1].text, "Extra detail");
         assert_eq!(history[1].version, "V14.4");
         assert_eq!(history[1].changes.len(), 1);
+        assert_eq!(history[1].changes[0].section, "General");
         assert_eq!(history[1].changes[0].text, "Secondary adjustment");
     }
 

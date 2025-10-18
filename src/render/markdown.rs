@@ -52,6 +52,21 @@ pub fn render_champion_markdown(champ: &Champion, raw_excerpt: &str) -> String {
         }
         out.push('\n');
     }
+    if let Some(advanced) = &champ.advanced {
+        if !advanced.metrics.is_empty() {
+            out.push_str("## Advanced Stats\n\n| Metric | Value |\n|--------|-------|\n");
+            let mut rows: Vec<_> = advanced.metrics.iter().collect();
+            rows.sort_by(|(a_label, _), (b_label, _)| {
+                a_label.to_lowercase().cmp(&b_label.to_lowercase())
+            });
+            for (label, value) in rows {
+                let l = normalize_all(label);
+                let v = normalize_all(value);
+                out.push_str(&format!("| {} | {} |\n", l, v));
+            }
+            out.push('\n');
+        }
+    }
     // Abilities
     if !champ.abilities.is_empty() {
         out.push_str("## Abilities\n\n");
@@ -240,11 +255,47 @@ pub fn render_champion_markdown(champ: &Champion, raw_excerpt: &str) -> String {
             }
             out.push_str(&format!("### {}\n\n", normalize_all(&entry.version)));
             for change in &entry.changes {
-                let text = normalize_all(&change.text);
-                if text.trim().is_empty() {
+                let section_label = change.section.trim();
+                let text = change.text.trim();
+                if section_label.eq_ignore_ascii_case("general") || section_label.is_empty() {
+                    if text.is_empty() {
+                        continue;
+                    }
+                    if text.contains('\n') {
+                        for line in text.lines() {
+                            let detail = line.trim();
+                            if detail.is_empty() {
+                                continue;
+                            }
+                            out.push_str(&format!("- {}\n", normalize_all(detail)));
+                        }
+                    } else {
+                        out.push_str(&format!("- {}\n", normalize_all(text)));
+                    }
                     continue;
                 }
-                out.push_str(&format!("- {}\n", text));
+
+                let normalized_label = normalize_all(section_label);
+                if text.is_empty() {
+                    out.push_str(&format!("- **{}**\n", normalized_label));
+                    continue;
+                }
+                if text.contains('\n') {
+                    out.push_str(&format!("- **{}**\n", normalized_label));
+                    for line in text.lines() {
+                        let detail = line.trim();
+                        if detail.is_empty() {
+                            continue;
+                        }
+                        out.push_str(&format!("  - {}\n", normalize_all(detail)));
+                    }
+                } else {
+                    out.push_str(&format!(
+                        "- **{}** — {}\n",
+                        normalized_label,
+                        normalize_all(text)
+                    ));
+                }
             }
             out.push('\n');
         }
@@ -460,7 +511,7 @@ pub fn render_rune_markdown(rune: &Rune, raw_excerpt: &str) -> String {
 }
 
 pub fn normalize_internal_links(s: &str) -> String {
-    // Simple pattern [[Page|Display]] or [[Page]] -> Display or Page (underscores)
+    // Transform [[Page]] or [[Page|Display]] to [Display](./Page.md)
     let mut out = String::new();
     let mut i = 0;
     let bytes = s.as_bytes();
@@ -480,18 +531,26 @@ pub fn normalize_internal_links(s: &str) -> String {
             if inner.starts_with("File:") {
                 continue;
             }
-            let display = if let Some(bar) = inner.find('|') {
-                let page = &inner[..bar];
+            let (page, display) = if let Some(bar) = inner.find('|') {
+                let page_part = &inner[..bar];
                 let disp = &inner[bar + 1..];
-                if disp.is_empty() {
-                    page
-                } else {
-                    disp
-                }
+                (page_part, if disp.is_empty() { page_part } else { disp })
             } else {
-                &inner
+                (inner.as_str(), inner.as_str())
             };
-            out.push_str(display.replace(' ', "_").as_str());
+            // Normalize page name: spaces and / to _, extract anchor
+            let (link_target, anchor) = if let Some(hash_pos) = page.find('#') {
+                let target = page[..hash_pos].replace(|c: char| c == ' ' || c == '/', "_");
+                let anch = &page[hash_pos + 1..];
+                (target, format!("#{}", anch))
+            } else {
+                (
+                    page.replace(|c: char| c == ' ' || c == '/', "_"),
+                    String::new(),
+                )
+            };
+            let link = format!("[{}](./{}.md{})", display, link_target, anchor);
+            out.push_str(&link);
         } else {
             out.push(bytes[i] as char);
             i += 1;
@@ -552,12 +611,19 @@ pub fn normalize_apostrophes(s: &str) -> String {
 }
 
 pub fn normalize_anchors(s: &str) -> String {
-    // Replace patterns [[Page#Section Title]] -> Page_Section-Title (simplistic)
+    // Normalize anchors in links: strip parens, unify dashes, remove commas
     let re = Regex::new(r"\[\[([^\]|#]+)#([^\]|]+)\]\]").unwrap();
     re.replace_all(s, |caps: &regex::Captures| {
-        let page = caps.get(1).unwrap().as_str().replace(' ', "_");
-        let sec = caps.get(2).unwrap().as_str().replace(' ', "-");
-        format!("{page}#{sec}")
+        let page = caps.get(1).unwrap().as_str();
+        let mut sec = caps.get(2).unwrap().as_str().to_string();
+        // Normalize section: strip parens, unify dashes, remove commas
+        sec = sec.replace("(", "").replace(")", "").replace(",", "");
+        // Unify dashes: replace multiple - with single -
+        let re_dash = Regex::new(r"-+").unwrap();
+        sec = re_dash.replace_all(&sec, "-").to_string();
+        // Replace spaces with -
+        sec = sec.replace(' ', "-");
+        format!("{}#{}", page, sec)
     })
     .to_string()
 }
@@ -613,6 +679,8 @@ fn render_starred_list(out: &mut String, notes: &[String]) {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::model::{AdvancedStats, BasicInfo, Change, PatchEntry, Stats};
+    use std::collections::HashMap;
 
     #[test]
     fn apostrophes_normalization_basic() {
@@ -623,13 +691,18 @@ mod tests {
 
     #[test]
     fn internal_links_and_anchors() {
-        assert_eq!(normalize_internal_links("See [[Aatrox]]"), "See Aatrox");
+        assert_eq!(
+            normalize_internal_links("See [[Aatrox]]"),
+            "See [Aatrox](./Aatrox.md)"
+        );
         assert_eq!(
             normalize_internal_links("See [[Akshan/Cosmetics|Akshan (Collection)]]"),
-            "See Akshan_(Collection)"
+            "See [Akshan (Collection)](./Akshan_Cosmetics.md)"
         );
         let s = normalize_anchors("[[Page#Section Title]]");
         assert_eq!(s, "Page#Section-Title");
+        let s2 = normalize_anchors("[[Page#(Section, Title)]]");
+        assert_eq!(s2, "Page#Section-Title");
     }
 
     #[test]
@@ -647,5 +720,59 @@ mod tests {
         let md = render_rune_markdown(&rune, "== Raw ==\nContent");
         assert!(md.contains("## Trivia"));
         assert!(md.contains("Popular in assassin matchups"));
+    }
+
+    #[test]
+    fn champion_patch_history_rendering() {
+        let champ = Champion {
+            name: "Tester".to_string(),
+            basic: BasicInfo::default(),
+            stats: Stats::default(),
+            advanced: None,
+            abilities: Vec::new(),
+            pets: Vec::new(),
+            trivia: Vec::new(),
+            patch_history: vec![PatchEntry {
+                version: "V1.0".to_string(),
+                changes: vec![
+                    Change {
+                        section: "Heroic Swing".to_string(),
+                        text: "Base damage increased\nBug fix resolved".to_string(),
+                    },
+                    Change {
+                        section: "General".to_string(),
+                        text: "Minor tooltip update".to_string(),
+                    },
+                ],
+            }],
+            notes: Vec::new(),
+        };
+        let md = render_champion_markdown(&champ, "== Raw ==\nContent");
+        assert!(md.contains("## Patch History"));
+        assert!(md.contains("### V1.0"));
+        assert!(md.contains("- **Heroic Swing**"));
+        assert!(md.contains("  - Base damage increased"));
+        assert!(md.contains("  - Bug fix resolved"));
+        assert!(md.contains("- Minor tooltip update"));
+    }
+
+    #[test]
+    fn champion_advanced_stats_rendering() {
+        let mut metrics = HashMap::new();
+        metrics.insert("Attack Speed Ratio".to_string(), "0.625".to_string());
+        let champ = Champion {
+            name: "StatsMaster".to_string(),
+            basic: BasicInfo::default(),
+            stats: Stats::default(),
+            advanced: Some(AdvancedStats { metrics }),
+            abilities: Vec::new(),
+            pets: Vec::new(),
+            trivia: Vec::new(),
+            patch_history: Vec::new(),
+            notes: Vec::new(),
+        };
+        let md = render_champion_markdown(&champ, "");
+        assert!(md.contains("## Advanced Stats"));
+        assert!(md.contains("| Attack Speed Ratio | 0.625 |"));
     }
 }

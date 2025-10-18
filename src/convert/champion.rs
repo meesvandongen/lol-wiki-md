@@ -4,9 +4,9 @@ use crate::convert::util::{
 };
 use crate::convert::{write_if_changed, ConversionOutcome};
 use crate::error::{ConvertError, Result};
-use crate::model::{Ability, AbilityKey, BasicInfo, Champion, Pet, StatLine, Stats};
+use crate::model::{Ability, AbilityKey, AdvancedStats, BasicInfo, Champion, Pet, StatLine, Stats};
 use crate::parse::brace::TemplateSpan;
-use crate::parse::lua::parse_champion_data;
+use crate::parse::lua::{lua_value_to_string, parse_champion_entry, LuaValue};
 use crate::parse::templates::{parse_invocation, TemplateRegistry};
 use crate::parse::{
     evaluate_expression, extract_balanced_templates, parse_ability_template, ExprNumberFormat,
@@ -15,6 +15,7 @@ use crate::render::markdown::render_champion_markdown;
 use crate::wiki_export::WikiExport;
 use std::collections::{HashMap, HashSet};
 use std::path::Path;
+use std::sync::Arc;
 use tracing::info;
 
 use super::context::ConversionContext;
@@ -39,7 +40,7 @@ pub(super) fn convert_champion(
         }
     }
     let raw = export.read_champion_main(name)?;
-    let (stats, constants) = load_champion_stats(export, name)?;
+    let (stats, constants, advanced) = load_champion_stats(export, name)?;
     // Collect page-level #vardefine vars first, then expand page raw
     let registry = ctx.registry();
     let precision = ctx.precision();
@@ -48,7 +49,13 @@ pub(super) fn convert_champion(
         vars.entry(k.clone()).or_insert(v.clone());
     }
     ctx.insert_champion_constants(name, constants.clone());
-    let expanded = expand_with_vars(&raw, precision, &vars, registry)?;
+    let expanded = expand_with_vars(
+        &raw,
+        precision,
+        &vars,
+        registry,
+        Some(Arc::new(ctx.clone())),
+    )?;
     // Template inventory (names only) written adjacent to output dir once per champion for now (will refactor to context-wide)
     if let Ok(spans) = extract_balanced_templates(&raw) {
         if !spans.is_empty() {
@@ -73,12 +80,32 @@ pub(super) fn convert_champion(
         ));
     }
     // Load abilities and expand their key fields with same var context
-    let abilities = load_abilities(&export, name, precision, &vars, &registry)?;
+    let abilities = load_abilities(
+        &export,
+        name,
+        precision,
+        &vars,
+        &registry,
+        Some(Arc::new(ctx.clone())),
+    )?;
     let abilities = attach_skill_tabs(&expanded, abilities);
     // Populate basic info from infobox (resource fallback from stats if needed)
-    let mut basic = parse_champion_infobox(&raw, precision, &vars, registry)?.unwrap_or_default();
+    let mut basic = parse_champion_infobox(
+        &raw,
+        precision,
+        &vars,
+        registry,
+        Some(Arc::new(ctx.clone())),
+    )?
+    .unwrap_or_default();
     if basic.resource.is_none() {
-        if let Some(res_line) = stats.base.get("resource") {
+        if let Some(res) = constants
+            .get("resource")
+            .map(|s| s.trim())
+            .filter(|s| !s.is_empty())
+        {
+            basic.resource = Some(res.to_string());
+        } else if let Some(res_line) = stats.base.get("resource") {
             if res_line.base == 0.0 {
                 basic.resource = guess_resource_name(name).or_else(|| Some("Unknown".into()));
             }
@@ -103,7 +130,7 @@ pub(super) fn convert_champion(
         name: name.to_string(),
         basic,
         stats,
-        advanced: None,
+        advanced,
         abilities,
         pets,
         trivia,
@@ -113,6 +140,13 @@ pub(super) fn convert_champion(
     let markdown = render_champion_markdown(&champion, &expanded);
     let out_file = output_dir.join(format!("{}.md", name.replace(' ', "_")));
     write_if_changed(&out_file, &markdown)?;
+    if let Ok(rel) = out_file.strip_prefix(output_dir) {
+        let artifact = rel.to_string_lossy().replace('\\', "/");
+        ctx.set_specimen_sample("champion", &artifact);
+    } else {
+        let artifact = out_file.to_string_lossy().replace('\\', "/");
+        ctx.set_specimen_sample("champion", &artifact);
+    }
     info!(champion = name, "converted (minimal placeholder)");
     Ok(ConversionOutcome {
         entity: name.to_string(),
@@ -125,6 +159,7 @@ fn parse_champion_infobox(
     precision: u8,
     vars: &HashMap<String, String>,
     registry: &TemplateRegistry,
+    conversion_ctx: Option<Arc<ConversionContext>>,
 ) -> Result<Option<BasicInfo>> {
     let spans = extract_balanced_templates(raw)?;
     for span in spans {
@@ -140,12 +175,24 @@ fn parse_champion_infobox(
                 let (k, v) = p.split_at(eq);
                 let key = k.trim().to_ascii_lowercase();
                 let value_raw = v[1..].trim();
-                let expanded = expand_inline_templates(value_raw, precision, vars, registry)?;
+                let expanded = expand_inline_templates(
+                    value_raw,
+                    precision,
+                    vars,
+                    registry,
+                    conversion_ctx.clone(),
+                )?;
                 if !key.is_empty() {
                     named.insert(key, expanded.trim().to_string());
                 }
             } else if !p.trim().is_empty() {
-                let expanded = expand_inline_templates(p.trim(), precision, vars, registry)?;
+                let expanded = expand_inline_templates(
+                    p.trim(),
+                    precision,
+                    vars,
+                    registry,
+                    conversion_ctx.clone(),
+                )?;
                 positional.push(expanded.trim().to_string());
             }
         }
@@ -369,50 +416,26 @@ fn ability_key_label(key: &AbilityKey) -> String {
 fn load_champion_stats(
     export: &WikiExport,
     name: &str,
-) -> Result<(Stats, HashMap<String, String>)> {
-    // Module/ChampionData/data/page.txt; if missing (flat export), return default Stats for now
+) -> Result<(Stats, HashMap<String, String>, Option<AdvancedStats>)> {
     let Some(lua) = export.read_champion_module_data()? else {
-        return Ok((Stats::default(), HashMap::new()));
+        return Ok((Stats::default(), HashMap::new(), None));
     };
-    let map = parse_champion_data(&lua, name)?; // flat map
-    let mut stats = Stats::default();
-    // Map selected keys → StatLine if both base and growth present, else single value growth=0
-    let mapping = [
-        ("hp", "hpGrowth"),
-        ("mp", "mpGrowth"),
-        ("ad", "adGrowth"),
-        ("armor", "armorGrowth"),
-        ("mr", "mrGrowth"),
-        ("ms", "msGrowth"),
-        ("asBase", "asGrowth"),
-        ("range", "rangeGrowth"),
-    ];
-    for (base_key, growth_key) in mapping {
-        if let Some(base) = map.get(base_key) {
-            let growth = map
-                .get(growth_key)
-                .and_then(|s| parse_stat_value(s))
-                .unwrap_or(0.0);
-            let base_f = parse_stat_value(base).unwrap_or(0.0);
-            stats.base.insert(
-                base_key.to_string(),
-                StatLine {
-                    base: base_f,
-                    growth,
-                },
-            );
+    let entry = parse_champion_entry(&lua, name)?;
+    let mut constants: HashMap<String, String> = HashMap::new();
+    for (key, value) in &entry {
+        if let Some(raw) = lua_value_to_string(value) {
+            constants.insert(key.clone(), raw);
         }
     }
-    // Resource if present stored as a separate pseudo-stat
-    if let Some(res) = map.get("resource") {
+    let (mut stats, advanced) = extract_stats_from_entry(&entry);
+    if let Some(res) = constants.get("resource") {
         stats.base.insert(
             "resource".into(),
             StatLine {
                 base: 0.0,
                 growth: 0.0,
             },
-        ); // marker; actual string captured separately
-           // Also include a derived pseudo key for downstream (string accessible separately)
+        );
         stats.base.insert(
             format!("resource__{}", res),
             StatLine {
@@ -421,7 +444,7 @@ fn load_champion_stats(
             },
         );
     }
-    Ok((stats, map))
+    Ok((stats, constants, advanced))
 }
 
 fn parse_stat_value(raw: &str) -> Option<f32> {
@@ -430,6 +453,162 @@ fn parse_stat_value(raw: &str) -> Option<f32> {
     }
     let evaluated = evaluate_expression(raw, ExprNumberFormat::Float(6)).ok()?;
     evaluated.parse::<f32>().ok()
+}
+
+fn extract_stats_from_entry(entry: &HashMap<String, LuaValue>) -> (Stats, Option<AdvancedStats>) {
+    let mut stats = Stats::default();
+    let Some(LuaValue::Table(stat_map)) = entry.get("stats") else {
+        return (stats, None);
+    };
+    let mut consumed: HashSet<String> = HashSet::new();
+    const STAT_MAPPINGS: &[(&str, &str, Option<&str>)] = &[
+        ("HP", "hp_base", Some("hp_lvl")),
+        ("MP", "mp_base", Some("mp_lvl")),
+        ("Armor", "arm_base", Some("arm_lvl")),
+        ("Magic Resist", "mr_base", Some("mr_lvl")),
+        ("HP Regen", "hp5_base", Some("hp5_lvl")),
+        ("MP Regen", "mp5_base", Some("mp5_lvl")),
+        ("Attack Damage", "dam_base", Some("dam_lvl")),
+        ("Attack Speed", "as_base", Some("as_lvl")),
+        ("Range", "range", None),
+        ("Move Speed", "ms", None),
+    ];
+    for (label, base_key, growth_key) in STAT_MAPPINGS {
+        if let Some(base_value) = stat_map.get(*base_key).and_then(lua_value_to_f32) {
+            let growth_value = growth_key
+                .and_then(|g| stat_map.get(g).and_then(lua_value_to_f32))
+                .unwrap_or(0.0);
+            stats.base.insert(
+                (*label).to_string(),
+                StatLine {
+                    base: base_value,
+                    growth: growth_value,
+                },
+            );
+            consumed.insert((*base_key).to_string());
+            if let Some(g_key) = growth_key {
+                consumed.insert((*g_key).to_string());
+            }
+        }
+    }
+    let advanced = extract_advanced_metrics(stat_map, &consumed);
+    (stats, advanced)
+}
+
+fn extract_advanced_metrics(
+    stat_map: &HashMap<String, LuaValue>,
+    consumed: &HashSet<String>,
+) -> Option<AdvancedStats> {
+    let mut metrics: HashMap<String, String> = HashMap::new();
+    for (key, value) in stat_map {
+        if consumed.contains(key) {
+            continue;
+        }
+        if matches!(value, LuaValue::Table(_)) {
+            continue;
+        }
+        if let Some(formatted) = format_metric_value(value) {
+            if formatted.trim().is_empty() {
+                continue;
+            }
+            let label = metric_label(key);
+            metrics.entry(label).or_insert(formatted);
+        }
+    }
+    if let (Some(cast), Some(total)) = (
+        stat_map.get("attack_cast_time").and_then(lua_value_to_f32),
+        stat_map.get("attack_total_time").and_then(lua_value_to_f32),
+    ) {
+        if total > 0.0 {
+            let percent = (cast / total) * 100.0;
+            metrics
+                .entry("Windup %".to_string())
+                .or_insert(format!("{:.1}%", percent));
+        }
+    }
+    if metrics.is_empty() {
+        None
+    } else {
+        Some(AdvancedStats { metrics })
+    }
+}
+
+fn lua_value_to_f32(value: &LuaValue) -> Option<f32> {
+    match value {
+        LuaValue::Number(raw) | LuaValue::String(raw) => parse_stat_value(raw),
+        LuaValue::Bool(true) => Some(1.0),
+        LuaValue::Bool(false) => Some(0.0),
+        _ => None,
+    }
+}
+
+fn format_metric_value(value: &LuaValue) -> Option<String> {
+    match value {
+        LuaValue::Number(raw) | LuaValue::String(raw) => {
+            if let Some(num) = parse_stat_value(raw) {
+                Some(format_number(num))
+            } else {
+                let trimmed = raw.trim();
+                if trimmed.is_empty() {
+                    None
+                } else {
+                    Some(trimmed.to_string())
+                }
+            }
+        }
+        LuaValue::Bool(b) => Some(b.to_string()),
+        _ => None,
+    }
+}
+
+fn format_number(value: f32) -> String {
+    let mut s = if value.abs() >= 1000.0 {
+        format!("{:.0}", value)
+    } else {
+        format!("{:.4}", value)
+    };
+    while s.contains('.') && s.ends_with('0') {
+        s.pop();
+    }
+    if s.ends_with('.') {
+        s.pop();
+    }
+    s
+}
+
+fn metric_label(key: &str) -> String {
+    match key {
+        "as_ratio" | "attack_speed_ratio" => "Attack Speed Ratio".to_string(),
+        "attack_cast_time" => "Attack Cast Time (s)".to_string(),
+        "attack_total_time" => "Base Attack Time (s)".to_string(),
+        "attack_delay_offset" => "Attack Delay Offset (s)".to_string(),
+        "missile_speed" => "Missile Speed".to_string(),
+        "acquisition_radius" => "Acquisition Radius".to_string(),
+        "selection_radius" => "Selection Radius".to_string(),
+        "selection_height" => "Selection Height".to_string(),
+        "pathing_radius" => "Pathing Radius".to_string(),
+        "attack_cast_offset" => "Attack Cast Offset".to_string(),
+        other => title_case(other),
+    }
+}
+
+fn title_case(input: &str) -> String {
+    let mut out = String::new();
+    let mut upper = true;
+    for c in input.chars() {
+        if c == '_' {
+            out.push(' ');
+            upper = true;
+            continue;
+        }
+        if upper {
+            out.push(c.to_ascii_uppercase());
+            upper = false;
+        } else {
+            out.push(c);
+        }
+    }
+    out
 }
 
 fn guess_resource_name(_name: &str) -> Option<String> {
@@ -444,6 +623,7 @@ fn load_abilities(
     precision: u8,
     vars: &HashMap<String, String>,
     registry: &TemplateRegistry,
+    conversion_ctx: Option<Arc<ConversionContext>>,
 ) -> Result<Vec<Ability>> {
     // Scan the main page for Data <Champion>/<...> templates and load those pages generically.
     let main = export.read_champion_main(champ)?;
@@ -490,7 +670,13 @@ fn load_abilities(
 
         for key_name in keys {
             let raw_val = param_map.get(&key_name).unwrap();
-            let expanded = expand_inline_templates(raw_val, precision, &merged_vars, registry)?;
+            let expanded = expand_inline_templates(
+                raw_val,
+                precision,
+                &merged_vars,
+                registry,
+                conversion_ctx.clone(),
+            )?;
             let normalized = normalize_ability_value(&expanded);
             match key_name.as_str() {
                 "champion" => {}
@@ -688,7 +874,9 @@ fn parse_skill_tab_marker(value: &str) -> Option<crate::model::SkillTable> {
     }
     let inner = &value[10..value.len() - 1];
     let mut headers = Vec::new();
-    let mut row = Vec::new();
+    let mut rows = Vec::new();
+    let mut current_row = Vec::new();
+    let mut current_row_index = 0;
     for part in inner.split('|') {
         let part = part.trim();
         if let Some(colon) = part.find(':') {
@@ -696,18 +884,32 @@ fn parse_skill_tab_marker(value: &str) -> Option<crate::model::SkillTable> {
             let val = part[colon + 1..].trim();
             if key.eq_ignore_ascii_case("h") {
                 headers.push(val.to_string());
-            } else if key.eq_ignore_ascii_case("r") {
-                row.push(val.to_string());
+            } else if key.to_lowercase().starts_with("r") {
+                let row_num = if key.eq_ignore_ascii_case("r") {
+                    1
+                } else if let Ok(num) = key[1..].parse::<usize>() {
+                    num
+                } else {
+                    continue;
+                };
+                if row_num == current_row_index + 1 {
+                    if !current_row.is_empty() {
+                        rows.push(current_row);
+                        current_row = Vec::new();
+                    }
+                    current_row_index = row_num;
+                }
+                current_row.push(val.to_string());
             }
         }
     }
-    if headers.is_empty() || row.is_empty() {
+    if !current_row.is_empty() {
+        rows.push(current_row);
+    }
+    if headers.is_empty() || rows.is_empty() {
         return None;
     }
-    Some(crate::model::SkillTable {
-        headers,
-        rows: vec![row],
-    })
+    Some(crate::model::SkillTable { headers, rows })
 }
 
 fn is_cooldown_key(key: &str) -> bool {
@@ -784,6 +986,69 @@ fn fallback_name_from_icons(extra: &HashMap<String, String>) -> Option<String> {
         }
     }
     None
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::parse::lua::parse_champion_entry;
+
+    #[test]
+    fn extracts_stats_and_advanced_metrics() {
+        let lua = r#"return {
+  ["Tester"] = {
+    ["stats"] = {
+      ["hp_base"] = 600,
+      ["hp_lvl"] = 100,
+      ["dam_base"] = 60,
+      ["dam_lvl"] = 3,
+      ["as_base"] = 0.65,
+      ["as_lvl"] = 2.0,
+      ["range"] = 175,
+      ["ms"] = 340,
+      ["as_ratio"] = 0.625,
+      ["attack_cast_time"] = 0.3,
+      ["attack_total_time"] = 1.5,
+      ["acquisition_radius"] = 525,
+      ["selection_radius"] = 100,
+      ["selection_height"] = 120,
+      ["pathing_radius"] = 35,
+    }
+  }
+}"#;
+
+        let entry = parse_champion_entry(lua, "Tester").unwrap();
+        let (stats, advanced) = extract_stats_from_entry(&entry);
+
+        let hp = stats.base.get("HP").expect("HP stat missing");
+        assert!((hp.base - 600.0).abs() < f32::EPSILON);
+        assert!((hp.growth - 100.0).abs() < f32::EPSILON);
+
+        let ad = stats
+            .base
+            .get("Attack Damage")
+            .expect("Attack Damage missing");
+        assert!((ad.base - 60.0).abs() < f32::EPSILON);
+        assert!((ad.growth - 3.0).abs() < f32::EPSILON);
+
+        let as_line = stats
+            .base
+            .get("Attack Speed")
+            .expect("Attack Speed missing");
+        assert!((as_line.base - 0.65).abs() < f32::EPSILON);
+        assert!((as_line.growth - 2.0).abs() < f32::EPSILON);
+
+        let advanced = advanced.expect("advanced metrics missing");
+        assert_eq!(
+            advanced.metrics.get("Attack Speed Ratio"),
+            Some(&"0.625".to_string())
+        );
+        assert_eq!(
+            advanced.metrics.get("Acquisition Radius"),
+            Some(&"525".to_string())
+        );
+        assert_eq!(advanced.metrics.get("Windup %"), Some(&"20.0%".to_string()));
+    }
 }
 
 fn derive_name_from_template(name_seg: &str) -> String {

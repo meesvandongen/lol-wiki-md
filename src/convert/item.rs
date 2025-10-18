@@ -1,11 +1,13 @@
 use std::collections::HashMap;
 use std::path::Path;
+use std::sync::Arc;
 
 use crate::convert::util::{collect_page_vars, expand_inline_templates};
 use crate::convert::{write_if_changed, ConversionOutcome};
 use crate::error::{ConvertError, Result};
 use crate::model::{Item, ItemEffect};
 use crate::parse::lua::{lua_value_to_string, lua_value_to_string_vec, parse_item_data, LuaValue};
+use crate::parse::tables::wikitext_table_to_markdown;
 use crate::parse::templates::TemplateRegistry;
 use crate::render::markdown::render_item_markdown;
 
@@ -40,6 +42,13 @@ pub(super) fn convert_item(
     let markdown = render_item_markdown(&item, &raw);
     let out_file = output_dir.join(format!("{}.md", name.replace(' ', "_")));
     write_if_changed(&out_file, &markdown)?;
+    if let Ok(rel) = out_file.strip_prefix(output_dir) {
+        let artifact = rel.to_string_lossy().replace('\\', "/");
+        ctx.set_specimen_sample("item", &artifact);
+    } else {
+        let artifact = out_file.to_string_lossy().replace('\\', "/");
+        ctx.set_specimen_sample("item", &artifact);
+    }
     Ok(ConversionOutcome {
         entity: name.to_string(),
         output: out_file,
@@ -98,17 +107,35 @@ fn build_item_from_entry(
         }
     }
     if let Some(limit) = entry.get("limit").and_then(lua_value_to_string) {
-        item.limit = Some(expand_text(&limit, precision, vars, registry)?);
+        item.limit = Some(expand_text(
+            &limit,
+            precision,
+            vars,
+            registry,
+            Some(Arc::new(ctx.clone())),
+        )?);
     }
     if let Some(modes) = entry.get("modes") {
         let flags = collect_enabled_flags(modes)?;
         item.modes = normalize_modes(flags);
     }
     if let Some(stats) = entry.get("stats") {
-        item.stats = collect_stats(stats, precision, vars, registry)?;
+        item.stats = collect_stats(
+            stats,
+            precision,
+            vars,
+            registry,
+            Some(Arc::new(ctx.clone())),
+        )?;
     }
     if let Some(effects) = entry.get("effects") {
-        item.effects = collect_effects(effects, precision, vars, registry)?;
+        item.effects = collect_effects(
+            effects,
+            precision,
+            vars,
+            registry,
+            Some(Arc::new(ctx.clone())),
+        )?;
     }
 
     let (combine_cost, mut combine_warnings) =
@@ -129,12 +156,13 @@ fn collect_stats(
     precision: u8,
     vars: &HashMap<String, String>,
     registry: &TemplateRegistry,
+    conversion_ctx: Option<Arc<ConversionContext>>,
 ) -> Result<HashMap<String, String>> {
     let mut out = HashMap::new();
     if let LuaValue::Table(map) = value {
         for (key, val) in map {
             if let Some(s) = lua_value_to_string(val) {
-                let expanded = expand_text(&s, precision, vars, registry)?;
+                let expanded = expand_text(&s, precision, vars, registry, conversion_ctx.clone())?;
                 out.insert(key.clone(), expanded);
             }
         }
@@ -147,6 +175,7 @@ fn collect_effects(
     precision: u8,
     vars: &HashMap<String, String>,
     registry: &TemplateRegistry,
+    conversion_ctx: Option<Arc<ConversionContext>>,
 ) -> Result<Vec<ItemEffect>> {
     let mut out = Vec::new();
     if let LuaValue::Table(map) = value {
@@ -168,23 +197,49 @@ fn collect_effects(
                 .get("unique")
                 .and_then(lua_value_to_bool)
                 .unwrap_or(false);
-            let desc_expanded = expand_text(&description, precision, vars, registry)?;
+            let desc_expanded = expand_text(
+                &description,
+                precision,
+                vars,
+                registry,
+                conversion_ctx.clone(),
+            )?;
+            let desc_with_tables =
+                wikitext_table_to_markdown(&desc_expanded).unwrap_or(desc_expanded);
             let name_expanded = match name {
-                Some(ref n) => Some(expand_text(n, precision, vars, registry)?),
+                Some(ref n) => Some(expand_text(
+                    n,
+                    precision,
+                    vars,
+                    registry,
+                    conversion_ctx.clone(),
+                )?),
                 None => None,
             };
             let cooldown_expanded = match cooldown {
-                Some(ref c) => Some(expand_text(c, precision, vars, registry)?),
+                Some(ref c) => Some(expand_text(
+                    c,
+                    precision,
+                    vars,
+                    registry,
+                    conversion_ctx.clone(),
+                )?),
                 None => None,
             };
             let range_expanded = match range {
-                Some(ref r) => Some(expand_text(r, precision, vars, registry)?),
+                Some(ref r) => Some(expand_text(
+                    r,
+                    precision,
+                    vars,
+                    registry,
+                    conversion_ctx.clone(),
+                )?),
                 None => None,
             };
             out.push(ItemEffect {
                 kind: normalize_effect_kind(kind_raw),
                 name: name_expanded,
-                description: desc_expanded,
+                description: desc_with_tables,
                 cooldown: cooldown_expanded,
                 range: range_expanded,
                 unique,
@@ -214,12 +269,13 @@ fn expand_text(
     precision: u8,
     vars: &HashMap<String, String>,
     registry: &TemplateRegistry,
+    conversion_ctx: Option<Arc<ConversionContext>>,
 ) -> Result<String> {
     let trimmed = raw.trim();
     if trimmed.is_empty() {
         return Ok(String::new());
     }
-    expand_inline_templates(trimmed, precision, vars, registry)
+    expand_inline_templates(trimmed, precision, vars, registry, conversion_ctx)
 }
 
 fn parse_u32(raw: String) -> Option<u32> {

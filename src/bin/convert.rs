@@ -94,5 +94,6 @@ fn main() -> Result<(), ConvertError> {
     } else if let Some(rune) = &cfg.rune {
         ctx.convert_rune(&cfg.output, rune)?;
     }
+    ctx.write_inventory_reports(&cfg.output)?;
     Ok(())
 }

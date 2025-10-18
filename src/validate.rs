@@ -49,6 +49,7 @@ pub fn validate_templates(wiki_root: &Path, precision: u8) -> Result<TemplateVal
             let ctx = ExpanderCtx {
                 precision,
                 vars: Default::default(),
+                conversion_ctx: None,
             };
             if !reg.has_name(&inv.name) {
                 issues.push(TemplateValidationIssue {
