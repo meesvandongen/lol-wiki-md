@@ -60,7 +60,7 @@ Legend:
 - [x] Formula: fd (fixed decimals; CLI precision wired overall)
 - [~] Icon unwrap (label pass-through w/ basic possessive + display label support; fuller metadata pending)
 - [x] Parser functions: `#if`, `#ifeq`, `#switch` (colon-form parsing + basic semantics)
-- [ ] External info includes (Spellblade, Energized, Diminishing gold, etc.)
+- [x] External info includes (Spellblade, Energized, Diminishing gold, etc.)
 - [x] Champion / item constant data substitution (ccd/cid)
 - [ ] Item haste tabber → subsections
 - [~] Residual cleanup / neutralization list (navboxes, categories, module invokes, patch box, champions/categories) — many structural templates neutralized, list still evolving

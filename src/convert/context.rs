@@ -49,6 +49,7 @@ pub struct ConversionContextInner {
     specimen_matrix: Mutex<HashMap<String, Vec<String>>>,
     champion_constants: Mutex<HashMap<String, HashMap<String, String>>>,
     template_parameters: Mutex<HashMap<String, (String, BTreeSet<String>)>>,
+    template_include_cache: Mutex<HashMap<String, Option<String>>>,
 }
 
 impl ConversionContext {
@@ -65,6 +66,7 @@ impl ConversionContext {
             specimen_matrix: Mutex::new(HashMap::new()),
             champion_constants: Mutex::new(HashMap::new()),
             template_parameters: Mutex::new(HashMap::new()),
+            template_include_cache: Mutex::new(HashMap::new()),
         };
         Ok(Self {
             inner: Arc::new(inner),
@@ -347,6 +349,10 @@ impl ConversionContext {
     pub fn convert_rune(&self, output_dir: &Path, name: &str) -> Result<ConversionOutcome> {
         super::rune::convert_rune(self, output_dir, name)
     }
+
+    pub fn template_includeonly(&self, name: &str) -> Result<Option<String>> {
+        self.inner.template_includeonly(name)
+    }
 }
 
 impl ConversionContextTrait for ConversionContextInner {
@@ -369,6 +375,93 @@ impl ConversionContextTrait for ConversionContextInner {
 impl ConversionContextInner {
     pub fn precision(&self) -> u8 {
         self.precision
+    }
+
+    fn template_includeonly(&self, name: &str) -> Result<Option<String>> {
+        let canonical = name.trim().to_ascii_lowercase();
+        if let Ok(cache) = self.template_include_cache.lock() {
+            if let Some(cached) = cache.get(&canonical) {
+                return Ok(cached.clone());
+            }
+        }
+
+        let mut include: Option<String> = None;
+        for title in template_title_candidates(name) {
+            if let Some(raw) = self.export.read_template_page(&title)? {
+                if let Some(body) = extract_includeonly_sections(&raw) {
+                    include = Some(body);
+                    break;
+                }
+            }
+        }
+
+        if let Ok(mut cache) = self.template_include_cache.lock() {
+            cache.insert(canonical, include.clone());
+        }
+
+        Ok(include)
+    }
+}
+
+fn template_title_candidates(name: &str) -> Vec<String> {
+    let trimmed = name.trim();
+    let without_prefix = trimmed
+        .strip_prefix("Template:")
+        .unwrap_or(trimmed)
+        .trim();
+    let canonical_space = without_prefix.replace('_', " ");
+    let mut variants: Vec<String> = Vec::new();
+    if !canonical_space.is_empty() {
+        variants.push(canonical_space.clone());
+    }
+    let underscore = canonical_space.replace(' ', "_");
+    if !underscore.is_empty() && !variants.iter().any(|v| v.eq_ignore_ascii_case(&underscore)) {
+        variants.push(underscore);
+    }
+    if !without_prefix.eq_ignore_ascii_case(&canonical_space)
+        && !variants
+            .iter()
+            .any(|v| v.eq_ignore_ascii_case(without_prefix))
+    {
+        variants.push(without_prefix.to_string());
+    }
+
+    let mut titles: Vec<String> = Vec::new();
+    let mut seen: HashSet<String> = HashSet::new();
+    for variant in variants {
+        let title = format!("Template:{}", variant);
+        let key = title.to_ascii_lowercase();
+        if seen.insert(key) {
+            titles.push(title);
+        }
+    }
+    titles
+}
+
+fn extract_includeonly_sections(raw: &str) -> Option<String> {
+    const OPEN: &str = "<includeonly>";
+    const CLOSE: &str = "</includeonly>";
+    let mut remaining = raw;
+    let mut collected = String::new();
+    while let Some(start) = remaining.find(OPEN) {
+        let after_open = &remaining[start + OPEN.len()..];
+        if let Some(end) = after_open.find(CLOSE) {
+            let section = &after_open[..end];
+            collected.push_str(section);
+            if !section.ends_with('\n') {
+                collected.push('\n');
+            }
+            remaining = &after_open[end + CLOSE.len()..];
+        } else {
+            collected.push_str(after_open);
+            break;
+        }
+    }
+    let trimmed = collected.trim();
+    if trimmed.is_empty() {
+        None
+    } else {
+        Some(trimmed.to_string())
     }
 }
 

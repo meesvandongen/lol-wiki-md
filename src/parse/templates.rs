@@ -1,10 +1,14 @@
 //! Template expansion framework (minimal subset).
 use crate::convert::context::ConversionContext;
+use crate::convert::util::expand_inline_templates;
 use crate::error::{ConvertError, Result};
+use crate::parse::default_wiki_configuration;
 use crate::parse::expr::evaluate_expression;
 use crate::parse::lua::LuaValue;
 use std::collections::HashMap;
 use std::sync::Arc;
+
+use parse_wiki_text::{Node, Positioned};
 
 pub trait ConversionContextTrait {
     fn champion_constants(&self, key: &str) -> Option<HashMap<String, String>>;
@@ -60,8 +64,16 @@ impl TemplateRegistry {
         r.register(Box::new(ChannelTypeExpander));
         r.register(Box::new(SkillTabExpander));
         r.register(Box::new(FlipTextExpander));
+        r.register(Box::new(ClearExpander));
+        r.register(Box::new(ChampionWithInfiniteScalingExpander));
+        r.register(Box::new(CcsExpander));
+        r.register(Box::new(DegreeExpander));
+        r.register(Box::new(DividedByExpander));
+        r.register(Box::new(ColorExpander));
         r.register(Box::new(ConstantDataExpander));
+        r.register(Box::new(IncludeInfoExpander));
         r.register(Box::new(NeutralizeExpander));
+        r.register(Box::new(ChimeListExpander));
         r
     }
     pub fn register(&mut self, ex: Box<dyn TemplateExpander>) {
@@ -238,6 +250,313 @@ impl TemplateExpander for TimesExpander {
     }
 }
 
+struct ClearExpander;
+impl TemplateExpander for ClearExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["clear"]
+    }
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: String::new(),
+        })
+    }
+}
+
+struct ChampionWithInfiniteScalingExpander;
+impl TemplateExpander for ChampionWithInfiniteScalingExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Champion with infinite scaling"]
+    }
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: String::new(),
+        })
+    }
+}
+
+struct ChimeMilestone {
+    time: &'static str,
+    chimes: u32,
+    effect: &'static str,
+}
+
+const CHIME_MILESTONES: &[ChimeMilestone] = &[
+    ChimeMilestone {
+        time: "3:20",
+        chimes: 5,
+        effect: "Meeps now slow by 25%.",
+    },
+    ChimeMilestone {
+        time: "5:00",
+        chimes: 10,
+        effect: "Meep limit increased to 2.",
+    },
+    ChimeMilestone {
+        time: "7:30",
+        chimes: 15,
+        effect: "Meeps now deal splash damage.",
+    },
+    ChimeMilestone {
+        time: "9:10",
+        chimes: 20,
+        effect: "Recharge time reduced to 7 seconds.",
+    },
+    ChimeMilestone {
+        time: "11:40",
+        chimes: 25,
+        effect: "Slow increased to 35%.",
+    },
+    ChimeMilestone {
+        time: "13:20",
+        chimes: 30,
+        effect: "Meep limit increased to 3.",
+    },
+    ChimeMilestone {
+        time: "15:50",
+        chimes: 35,
+        effect: "Splash damage area increased.",
+    },
+    ChimeMilestone {
+        time: "17:30",
+        chimes: 40,
+        effect: "Recharge time reduced to 6 seconds.",
+    },
+    ChimeMilestone {
+        time: "20:00",
+        chimes: 45,
+        effect: "Slow increased to 45%.",
+    },
+    ChimeMilestone {
+        time: "21:40",
+        chimes: 50,
+        effect: "Meep limit increased to 4.",
+    },
+    ChimeMilestone {
+        time: "24:10",
+        chimes: 55,
+        effect: "Recharge time reduced to 5 seconds.",
+    },
+    ChimeMilestone {
+        time: "25:50",
+        chimes: 60,
+        effect: "Slow increased to 55%.",
+    },
+    ChimeMilestone {
+        time: "28:20",
+        chimes: 65,
+        effect: "Meep limit increased to 5.",
+    },
+    ChimeMilestone {
+        time: "30:00",
+        chimes: 70,
+        effect: "Recharge time reduced to 4 seconds.",
+    },
+    ChimeMilestone {
+        time: "32:30",
+        chimes: 75,
+        effect: "Slow increased to 65%.",
+    },
+    ChimeMilestone {
+        time: "34:10",
+        chimes: 80,
+        effect: "Meep limit increased to 6.",
+    },
+    ChimeMilestone {
+        time: "36:40",
+        chimes: 85,
+        effect: "Slow increased to 75%.",
+    },
+    ChimeMilestone {
+        time: "38:20",
+        chimes: 90,
+        effect: "Meep limit increased to 7.",
+    },
+    ChimeMilestone {
+        time: "40:50",
+        chimes: 95,
+        effect: "Meep limit increased to 8.",
+    },
+    ChimeMilestone {
+        time: "42:30",
+        chimes: 100,
+        effect: "Meep limit increased to 9.",
+    },
+];
+
+struct ChimeListExpander;
+impl TemplateExpander for ChimeListExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["chime list"]
+    }
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        const BASE_DAMAGE: i32 = 35;
+        const DAMAGE_PER_STEP: i32 = 14;
+        let mut out = String::new();
+        out.push_str("| Minimum Time | Chimes | Effect | Base Damage |\n");
+        out.push_str("| --- | --- | --- | --- |\n");
+        for milestone in CHIME_MILESTONES {
+            let steps = (milestone.chimes / 5) as i32;
+            let damage = BASE_DAMAGE + DAMAGE_PER_STEP * steps;
+            out.push_str(&format!(
+                "| {} | {} | {} | {} |\n",
+                milestone.time, milestone.chimes, milestone.effect, damage
+            ));
+        }
+        out.push_str("\nEvery additional 5 chimes collected beyond 100 grant +14 bonus damage.\n");
+        Ok(ExpansionResult { expanded: out })
+    }
+}
+
+struct CcsExpander;
+impl TemplateExpander for CcsExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["ccs"]
+    }
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: String::new(),
+        })
+    }
+}
+
+struct DegreeExpander;
+impl TemplateExpander for DegreeExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Degree", "degree", "degrees"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let positional: Vec<&str> = inv
+            .params
+            .iter()
+            .filter_map(|p| {
+                let trimmed = p.trim();
+                if trimmed.is_empty() || trimmed.contains('=') {
+                    None
+                } else {
+                    Some(trimmed)
+                }
+            })
+            .collect();
+        if positional.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: "°".to_string(),
+            });
+        }
+        let mut out = String::new();
+        out.push_str(positional[0]);
+        out.push('°');
+        if let Some(min) = positional.get(1) {
+            if !min.is_empty() {
+                out.push_str(min);
+                out.push('′');
+            }
+        }
+        if let Some(sec) = positional.get(2) {
+            if !sec.is_empty() {
+                out.push_str(sec);
+                out.push('″');
+            }
+        }
+        if let Some(dir) = positional.get(3) {
+            if !dir.is_empty() {
+                out.push_str(dir);
+            }
+        }
+        Ok(ExpansionResult { expanded: out })
+    }
+}
+
+struct DividedByExpander;
+impl TemplateExpander for DividedByExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Divided by"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let left = inv.params.get(0).map(|s| s.trim()).unwrap_or("");
+        let right = inv.params.get(1).map(|s| s.trim()).unwrap_or("");
+        if left.is_empty() && right.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: String::new(),
+            });
+        }
+        let mut out = String::new();
+        if !left.is_empty() {
+            out.push_str(left);
+        }
+        out.push_str(" / ");
+        if !right.is_empty() {
+            out.push_str(right);
+        }
+        Ok(ExpansionResult { expanded: out })
+    }
+}
+
+struct ColorExpander;
+impl TemplateExpander for ColorExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["color", "Color"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: String::new(),
+            });
+        }
+        let text_param = if inv.params.len() >= 2 {
+            inv.params[1].trim()
+        } else {
+            inv.params[0].trim()
+        };
+        Ok(ExpansionResult {
+            expanded: text_param.to_string(),
+        })
+    }
+}
+
+const INFO_INCLUDE_TEMPLATES: &[&str] = &[
+    "Spellblade info",
+    "Energized info",
+    "Diminishing gold info",
+    "Manaflow info",
+    "Quicksilver info",
+    "Elixir info",
+    "Ward timer info",
+    "Zombie state info",
+];
+
+struct IncludeInfoExpander;
+impl TemplateExpander for IncludeInfoExpander {
+    fn names(&self) -> &'static [&'static str] {
+        INFO_INCLUDE_TEMPLATES
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
+            return Err(ConvertError::Internal(format!(
+                "conversion context required for template '{}', but not provided",
+                inv.name
+            )));
+        };
+        let include = conv_ctx
+            .template_includeonly(&inv.name)?
+            .ok_or_else(|| ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "template page missing <includeonly> section".into(),
+            })?;
+        let registry = conv_ctx.registry();
+        let expanded = expand_inline_templates(
+            include.trim(),
+            ctx.precision,
+            &ctx.vars,
+            registry,
+            ctx.conversion_ctx.clone(),
+        )?;
+        Ok(ExpansionResult {
+            expanded: expanded.trim_end().to_string(),
+        })
+    }
+}
+
 // Gold amount: {{g|100}} -> 100 (drop currency glyph for now)
 struct GoldExpander;
 impl TemplateExpander for GoldExpander {
@@ -358,6 +677,59 @@ impl TemplateExpander for VarRefExpander {
 
 /// Depth-aware parser for a raw template body (without outer braces).
 pub fn parse_invocation(raw_full: &str) -> TemplateInvocation {
+    let wrapped = format!("{{{{{}}}}}", raw_full);
+    let output = default_wiki_configuration().parse(&wrapped);
+
+    let mut name = raw_full.trim().to_string();
+    let mut params: Vec<String> = Vec::new();
+    let mut parsed_with_parser = false;
+
+    if let Some((template_name, template_params)) =
+        output.nodes.iter().find_map(|node| match node {
+            Node::Template {
+                start,
+                name,
+                parameters,
+                ..
+            } if *start == 0 => Some((name, parameters)),
+            _ => None,
+        })
+    {
+        name = nodes_to_string(template_name, &wrapped);
+        params = template_params
+            .iter()
+            .map(|parameter| {
+                let mut entry = String::new();
+                if let Some(param_name_nodes) = &parameter.name {
+                    let key = nodes_to_string(param_name_nodes, &wrapped);
+                    let key = key.trim();
+                    if !key.is_empty() {
+                        entry.push_str(key);
+                        entry.push('=');
+                    }
+                }
+                let value = nodes_to_string(&parameter.value, &wrapped);
+                entry.push_str(value.trim());
+                entry.trim().to_string()
+            })
+            .collect();
+        parsed_with_parser = true;
+    }
+
+    if !parsed_with_parser {
+        return legacy_parse_invocation(raw_full);
+    }
+
+    normalize_invocation(&mut name, &mut params);
+
+    TemplateInvocation {
+        name,
+        raw: raw_full.to_string(),
+        params,
+    }
+}
+
+fn legacy_parse_invocation(raw_full: &str) -> TemplateInvocation {
     let mut parts: Vec<String> = Vec::new();
     let mut current = String::new();
     let mut brace = 0i32;
@@ -405,58 +777,74 @@ pub fn parse_invocation(raw_full: &str) -> TemplateInvocation {
     } else {
         vec![]
     };
-    // Special handling for #vardefine:name form where 'name' appears after ':' in first segment.
-    if name.to_lowercase().starts_with("#vardefine:") {
-        if let Some(idx) = name.find(':') {
-            let var_name = name[idx + 1..].trim().to_string();
-            name = "#vardefine".into();
-            params.insert(0, var_name);
-        }
-    } else if name.to_lowercase().starts_with("#var:") {
-        if let Some(idx) = name.find(':') {
-            let var_name = name[idx + 1..].trim().to_string();
-            name = "#var".into();
-            params.insert(0, var_name);
-        }
-    } else if name.to_lowercase().starts_with("#expr:") {
-        if let Some(idx) = name.find(':') {
-            let expr = name[idx + 1..].trim().to_string();
-            name = "#expr".into();
-            params.insert(0, expr);
-        }
-    } else if name.to_lowercase().starts_with("#if:") {
-        if let Some(idx) = name.find(':') {
-            let test = name[idx + 1..].trim().to_string();
-            name = "#if".into();
-            params.insert(0, test);
-        }
-    } else if name.to_lowercase().starts_with("#ifeq:") {
-        if let Some(idx) = name.find(':') {
-            let left = name[idx + 1..].trim().to_string();
-            name = "#ifeq".into();
-            params.insert(0, left);
-        }
-    } else if name.to_lowercase().starts_with("#switch:") {
-        if let Some(idx) = name.find(':') {
-            let val = name[idx + 1..].trim().to_string();
-            name = "#switch".into();
-            params.insert(0, val);
-        }
-    } else if name.to_lowercase().starts_with("#invoke:") {
-        // Normalize Lua module invocations: {{#invoke:Module|func|...}}
-        if let Some(idx) = name.find(':') {
-            let module = name[idx + 1..].trim().to_string();
-            name = "#invoke".into();
-            params.insert(0, module);
-        }
-    } else if name.to_lowercase().starts_with("data ") || name.to_lowercase().starts_with("data_") {
-        // Normalize any champion-specific data template like "Data Akshan/I" to a generic handler
-        name = "Data".into();
-    }
+    normalize_invocation(&mut name, &mut params);
     TemplateInvocation {
         name,
         raw: raw_full.to_string(),
         params,
+    }
+}
+
+fn nodes_to_string(nodes: &[Node<'_>], source: &str) -> String {
+    if nodes.is_empty() {
+        return String::new();
+    }
+    let start = nodes.first().map(|node| node.start()).unwrap_or(0);
+    let end = nodes.last().map(|node| node.end()).unwrap_or(start);
+    source[start..end].trim().to_string()
+}
+
+fn normalize_invocation(name: &mut String, params: &mut Vec<String>) {
+    *name = name.trim().to_string();
+    for param in params.iter_mut() {
+        *param = param.trim().to_string();
+    }
+
+    let lower = name.to_ascii_lowercase();
+    if lower.starts_with("#vardefine:") {
+        if let Some(idx) = name.find(':') {
+            let var_name = name[idx + 1..].trim().to_string();
+            *name = "#vardefine".into();
+            params.insert(0, var_name);
+        }
+    } else if lower.starts_with("#var:") {
+        if let Some(idx) = name.find(':') {
+            let var_name = name[idx + 1..].trim().to_string();
+            *name = "#var".into();
+            params.insert(0, var_name);
+        }
+    } else if lower.starts_with("#expr:") {
+        if let Some(idx) = name.find(':') {
+            let expr = name[idx + 1..].trim().to_string();
+            *name = "#expr".into();
+            params.insert(0, expr);
+        }
+    } else if lower.starts_with("#if:") {
+        if let Some(idx) = name.find(':') {
+            let test = name[idx + 1..].trim().to_string();
+            *name = "#if".into();
+            params.insert(0, test);
+        }
+    } else if lower.starts_with("#ifeq:") {
+        if let Some(idx) = name.find(':') {
+            let left = name[idx + 1..].trim().to_string();
+            *name = "#ifeq".into();
+            params.insert(0, left);
+        }
+    } else if lower.starts_with("#switch:") {
+        if let Some(idx) = name.find(':') {
+            let value = name[idx + 1..].trim().to_string();
+            *name = "#switch".into();
+            params.insert(0, value);
+        }
+    } else if lower.starts_with("#invoke:") {
+        if let Some(idx) = name.find(':') {
+            let module = name[idx + 1..].trim().to_string();
+            *name = "#invoke".into();
+            params.insert(0, module);
+        }
+    } else if lower.starts_with("data ") || lower.starts_with("data_") {
+        *name = "Data".into();
     }
 }
 
@@ -645,7 +1033,8 @@ struct IconUnwrapExpander; // minimal icon unwrap: {{ci|Aatrox}} -> Aatrox; if s
 impl TemplateExpander for IconUnwrapExpander {
     fn names(&self) -> &'static [&'static str] {
         &[
-            "ci", "cis", "ai", "ais", "ii", "iis", "ri", "bi", "ui", "cais", "fi", "nie", "si",
+            "ci", "cis", "ai", "ais", "ii", "iis", "ri", "bi", "ui", "cai", "cais", "cci", "ccis",
+            "fi", "nie", "nies", "si",
         ]
     }
     fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
@@ -984,6 +1373,7 @@ impl TemplateExpander for NeutralizeExpander {
             "Patch box",
             // Casting helper/marker templates
             "Effect at cast time end",
+            "Effect at cast time start",
             // Audio sample / minor markers
             "sm2",
             // Bug marker becomes empty in text
@@ -999,6 +1389,10 @@ impl TemplateExpander for NeutralizeExpander {
             "Champion without ability power ratio",
             // TFT item marker
             "TFT Item",
+            // References block wrappers
+            "References",
+            // Misc attribution banners
+            "wikia",
         ]
     }
     fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
@@ -1011,6 +1405,9 @@ impl TemplateExpander for NeutralizeExpander {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::collections::HashMap;
+    use std::sync::Arc;
+    use tempfile::tempdir;
 
     fn ctx() -> ExpanderCtx {
         ExpanderCtx {
@@ -1068,5 +1465,36 @@ mod tests {
         assert_eq!(reg.expand(&ifeq, &ctx()).unwrap().expanded, "Y");
         let sw = parse_invocation("#switch: b | a=1 | b=2 | #default=0");
         assert_eq!(reg.expand(&sw, &ctx()).unwrap().expanded, "2");
+    }
+
+    #[test]
+    fn include_info_templates_inline_includeonly_content() {
+        let tmp = tempdir().unwrap();
+        let export_dir = tmp.path().join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        let file_path = export_dir.join("Template%3ASpellblade%20info.txt");
+        std::fs::write(
+            &file_path,
+            "<includeonly>* {{sbc|Spellblade}} deals {{tip|proc damage}}.</includeonly>",
+        )
+        .unwrap();
+
+        let ctx = ConversionContext::new(tmp.path(), 2).unwrap();
+        let ctx_arc = Arc::new(ctx);
+        let registry = TemplateRegistry::new();
+        let inv = parse_invocation("Spellblade info");
+        let result = registry
+            .expand(
+                &inv,
+                &ExpanderCtx {
+                    precision: 2,
+                    vars: HashMap::new(),
+                    conversion_ctx: Some(ctx_arc.clone()),
+                },
+            )
+            .unwrap();
+        assert!(result
+            .expanded
+            .contains("* **SPELLBLADE** deals proc damage."));
     }
 }
