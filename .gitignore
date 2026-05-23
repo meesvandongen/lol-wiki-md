@@ -1,3 +1,9 @@
+target/
+Cargo.lock
+*.rs.bk
+/.idea/
+/.vscode/
+**/*.pyc
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -356,3 +362,5 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+export_out
