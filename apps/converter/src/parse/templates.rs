@@ -1,0 +1,3525 @@
+//! Template expansion framework (minimal subset).
+use crate::convert::context::ConversionContext;
+use crate::convert::util::expand_inline_templates_with_store;
+use crate::error::{ConvertError, Result};
+use crate::parse::default_wiki_configuration;
+use crate::parse::expr::{evaluate_expression, ExprNumberFormat};
+use crate::parse::lua::{lua_value_to_string, parse_champion_module, LuaValue};
+use std::cmp::Ordering;
+use std::collections::HashMap;
+use std::sync::{Arc, Mutex};
+
+use parse_wiki_text::{Node, Positioned};
+
+pub trait ConversionContextTrait {
+    fn champion_constants(&self, key: &str) -> Option<HashMap<String, String>>;
+    fn item_module_map(&self) -> Result<&HashMap<String, HashMap<String, LuaValue>>>;
+}
+
+#[derive(Debug, Clone)]
+pub struct TemplateInvocation {
+    pub name: String,
+    pub raw: String,
+    pub params: Vec<String>,
+}
+
+#[derive(Debug, Clone)]
+pub struct ExpansionResult {
+    pub expanded: String,
+}
+
+pub trait TemplateExpander: Send + Sync {
+    fn names(&self) -> &'static [&'static str];
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult>;
+}
+
+#[derive(Default)]
+pub struct TemplateRegistry {
+    expanders: Vec<Box<dyn TemplateExpander>>,
+}
+
+impl TemplateRegistry {
+    pub fn new() -> Self {
+        let mut r = Self::default();
+        r.register(Box::new(ExprExpander));
+        r.register(Box::new(IfExpander));
+        r.register(Box::new(IfEqExpander));
+        r.register(Box::new(SwitchExpander));
+        r.register(Box::new(TooltipExpander));
+        r.register(Box::new(VarDefineExpander));
+        r.register(Box::new(VarDefineEchoExpander));
+        r.register(Box::new(VarRefExpander));
+        r.register(Box::new(ApExpander));
+        r.register(Box::new(PpExpander));
+        r.register(Box::new(PpTooltipExpander));
+        r.register(Box::new(FdExpander));
+        r.register(Box::new(RdExpander));
+        r.register(Box::new(IconUnwrapExpander));
+        r.register(Box::new(ChampionSkinLinkExpander));
+        r.register(Box::new(ChampionSkinTriviaExpander));
+        r.register(Box::new(CharacterBackgroundIconExpander));
+        r.register(Box::new(CustomContentIconExpander));
+        r.register(Box::new(LegendsOfRuneterraExpander));
+        r.register(Box::new(FandomExpander));
+        r.register(Box::new(GemsExpander));
+        r.register(Box::new(UniverseExpander));
+        r.register(Box::new(LabelColonExpander));
+        r.register(Box::new(CurrencyExpander));
+        r.register(Box::new(SymbolExpander));
+        r.register(Box::new(AsExpander));
+        r.register(Box::new(StiExpander));
+        r.register(Box::new(TimesExpander));
+        r.register(Box::new(GoldExpander));
+        r.register(Box::new(GoldValueExpander));
+        r.register(Box::new(CriticalDamageExpander));
+        r.register(Box::new(QuoteExpander));
+        r.register(Box::new(TipExpander));
+        r.register(Box::new(WExpander));
+        r.register(Box::new(SbcExpander));
+        r.register(Box::new(ChannelTypeExpander));
+        r.register(Box::new(SkillTabExpander));
+        r.register(Box::new(FlipTextExpander));
+        r.register(Box::new(ClearExpander));
+        r.register(Box::new(ChampionWithInfiniteScalingExpander));
+        r.register(Box::new(CcsExpander));
+        r.register(Box::new(DegreeExpander));
+        r.register(Box::new(DividedByExpander));
+        r.register(Box::new(ColorExpander));
+        r.register(Box::new(ConstantDataExpander));
+        r.register(Box::new(HighestLowestStatsExpander));
+        r.register(Box::new(IncludeInfoExpander));
+        r.register(Box::new(ScrollBoxExpander));
+        r.register(Box::new(RuneDataExpander));
+        r.register(Box::new(MapChangesExpander));
+        r.register(Box::new(ItemInfoVarExpander));
+        r.register(Box::new(ItemStatTableExpander));
+        r.register(Box::new(SuperimposeExpander));
+        r.register(Box::new(NeutralizeExpander));
+        r.register(Box::new(ChimeListExpander));
+        r
+    }
+    pub fn register(&mut self, ex: Box<dyn TemplateExpander>) {
+        self.expanders.push(ex);
+    }
+    pub fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        for e in &self.expanders {
+            if e.names().iter().any(|n| n.eq_ignore_ascii_case(&inv.name)) {
+                if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
+                    conv_ctx.record_template_params(&inv.name, &inv.params);
+                }
+                return e.expand(inv, ctx);
+            }
+        }
+        if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
+            conv_ctx.record_template_params(&inv.name, &inv.params);
+        }
+        Ok(ExpansionResult {
+            expanded: unhandled_template_marker(inv),
+        })
+    }
+    pub fn has_name(&self, name: &str) -> bool {
+        self.expanders
+            .iter()
+            .any(|e| e.names().iter().any(|n| n.eq_ignore_ascii_case(name)))
+    }
+    pub fn list_names(&self) -> Vec<&'static str> {
+        let mut out: Vec<&'static str> = Vec::new();
+        for e in &self.expanders {
+            for &n in e.names() {
+                out.push(n);
+            }
+        }
+        out.sort();
+        out.dedup();
+        out
+    }
+}
+
+fn unhandled_template_marker(inv: &TemplateInvocation) -> String {
+    let sanitized = inv
+        .raw
+        .replace("{{", "&#123;&#123;")
+        .replace("}}", "&#125;&#125;")
+        .replace("--", "—");
+    format!("<!-- UNHANDLED TEMPLATE {}: {} -->", inv.name, sanitized)
+}
+
+pub struct ExpanderCtx {
+    pub precision: u8,
+    pub vars: Arc<Mutex<HashMap<String, String>>>,
+    pub conversion_ctx: Option<Arc<ConversionContext>>,
+}
+
+impl ExpanderCtx {
+    pub fn new(
+        precision: u8,
+        vars: &HashMap<String, String>,
+        conversion_ctx: Option<Arc<ConversionContext>>,
+    ) -> Self {
+        Self {
+            precision,
+            vars: Arc::new(Mutex::new(vars.clone())),
+            conversion_ctx,
+        }
+    }
+
+    fn vars_snapshot(&self) -> HashMap<String, String> {
+        self.vars
+            .lock()
+            .map(|guard| guard.clone())
+            .unwrap_or_default()
+    }
+
+    fn get_var(&self, key: &str) -> Option<String> {
+        self.vars.lock().ok()?.get(key).cloned()
+    }
+
+    fn set_var(&self, key: impl Into<String>, value: impl Into<String>) {
+        if let Ok(mut guard) = self.vars.lock() {
+            guard.insert(key.into(), value.into());
+        }
+    }
+}
+
+// --- Simple expanders ---
+
+struct ExprExpander;
+impl TemplateExpander for ExprExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["#expr"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let expr_body = inv
+            .params
+            .first()
+            .map(|s| s.as_str())
+            .unwrap_or_else(|| inv.raw.trim());
+        // Pre-expand simple #var templates within the expression using current vars
+        let pre = replace_var_templates(expr_body, &ctx.vars_snapshot(), true);
+        match evaluate_expression(&pre, super::expr::ExprNumberFormat::Float(ctx.precision)) {
+            Ok(v) => Ok(ExpansionResult { expanded: v }),
+            Err(_e) => Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            }),
+        }
+    }
+}
+
+fn replace_var_templates(
+    input: &str,
+    vars: &HashMap<String, String>,
+    missing_as_empty: bool,
+) -> String {
+    let mut out = String::new();
+    let bytes = input.as_bytes();
+    let mut i = 0usize;
+    while i < bytes.len() {
+        if i + 7 < bytes.len() && &bytes[i..i + 7] == b"{{#var:" {
+            let start = i + 7; // after "{{#var:"
+                               // Read until '|' or '}'
+            let mut j = start;
+            while j < bytes.len() && bytes[j] != b'|' && bytes[j] != b'}' {
+                j += 1;
+            }
+            let name = &input[start..j];
+            // Advance to end of template '}}'
+            let mut k = j;
+            while k + 1 < bytes.len() && !(bytes[k] == b'}' && bytes[k + 1] == b'}') {
+                k += 1;
+            }
+            let val = vars.get(name).cloned().unwrap_or_else(|| {
+                if missing_as_empty {
+                    String::new()
+                } else {
+                    format!("{{{{#var:{}}}}}", name.trim())
+                }
+            });
+            out.push_str(&val);
+            i = if k + 2 <= bytes.len() {
+                k + 2
+            } else {
+                bytes.len()
+            };
+        } else {
+            out.push(bytes[i] as char);
+            i += 1;
+        }
+    }
+    out
+}
+
+// Attribute style expander: {{as|text}} -> text (drop styling markers like ms parameter)
+struct AsExpander;
+impl TemplateExpander for AsExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["as", "skin tier"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: String::new(),
+            });
+        }
+        Ok(ExpansionResult {
+            expanded: inv.params[0].trim().to_string(),
+        })
+    }
+}
+
+// Styled inline marker expander: {{sti|key|value}} -> value (or first non-empty)
+struct StiExpander;
+impl TemplateExpander for StiExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["sti", "stil"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        // Many usages are sti|ms|text or sti|text; pick the last param as display
+        let val = inv.params.last().cloned().unwrap_or_default();
+        Ok(ExpansionResult { expanded: val })
+    }
+}
+
+// Times joiner: {{times}} -> × or concatenation marker; here return "×"
+struct TimesExpander;
+impl TemplateExpander for TimesExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["times"]
+    }
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: "x".into(),
+        })
+    }
+}
+
+struct ClearExpander;
+impl TemplateExpander for ClearExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["clear", "Clr"]
+    }
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: String::new(),
+        })
+    }
+}
+
+struct ChampionWithInfiniteScalingExpander;
+impl TemplateExpander for ChampionWithInfiniteScalingExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Champion with infinite scaling"]
+    }
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: String::new(),
+        })
+    }
+}
+
+struct ChimeMilestone {
+    time: &'static str,
+    chimes: u32,
+    effect: &'static str,
+}
+
+const CHIME_MILESTONES: &[ChimeMilestone] = &[
+    ChimeMilestone {
+        time: "3:20",
+        chimes: 5,
+        effect: "Meeps now slow by 25%.",
+    },
+    ChimeMilestone {
+        time: "5:00",
+        chimes: 10,
+        effect: "Meep limit increased to 2.",
+    },
+    ChimeMilestone {
+        time: "7:30",
+        chimes: 15,
+        effect: "Meeps now deal splash damage.",
+    },
+    ChimeMilestone {
+        time: "9:10",
+        chimes: 20,
+        effect: "Recharge time reduced to 7 seconds.",
+    },
+    ChimeMilestone {
+        time: "11:40",
+        chimes: 25,
+        effect: "Slow increased to 35%.",
+    },
+    ChimeMilestone {
+        time: "13:20",
+        chimes: 30,
+        effect: "Meep limit increased to 3.",
+    },
+    ChimeMilestone {
+        time: "15:50",
+        chimes: 35,
+        effect: "Splash damage area increased.",
+    },
+    ChimeMilestone {
+        time: "17:30",
+        chimes: 40,
+        effect: "Recharge time reduced to 6 seconds.",
+    },
+    ChimeMilestone {
+        time: "20:00",
+        chimes: 45,
+        effect: "Slow increased to 45%.",
+    },
+    ChimeMilestone {
+        time: "21:40",
+        chimes: 50,
+        effect: "Meep limit increased to 4.",
+    },
+    ChimeMilestone {
+        time: "24:10",
+        chimes: 55,
+        effect: "Recharge time reduced to 5 seconds.",
+    },
+    ChimeMilestone {
+        time: "25:50",
+        chimes: 60,
+        effect: "Slow increased to 55%.",
+    },
+    ChimeMilestone {
+        time: "28:20",
+        chimes: 65,
+        effect: "Meep limit increased to 5.",
+    },
+    ChimeMilestone {
+        time: "30:00",
+        chimes: 70,
+        effect: "Recharge time reduced to 4 seconds.",
+    },
+    ChimeMilestone {
+        time: "32:30",
+        chimes: 75,
+        effect: "Slow increased to 65%.",
+    },
+    ChimeMilestone {
+        time: "34:10",
+        chimes: 80,
+        effect: "Meep limit increased to 6.",
+    },
+    ChimeMilestone {
+        time: "36:40",
+        chimes: 85,
+        effect: "Slow increased to 75%.",
+    },
+    ChimeMilestone {
+        time: "38:20",
+        chimes: 90,
+        effect: "Meep limit increased to 7.",
+    },
+    ChimeMilestone {
+        time: "40:50",
+        chimes: 95,
+        effect: "Meep limit increased to 8.",
+    },
+    ChimeMilestone {
+        time: "42:30",
+        chimes: 100,
+        effect: "Meep limit increased to 9.",
+    },
+];
+
+struct ChimeListExpander;
+impl TemplateExpander for ChimeListExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["chime list"]
+    }
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        const BASE_DAMAGE: i32 = 35;
+        const DAMAGE_PER_STEP: i32 = 14;
+        let mut out = String::new();
+        out.push_str("| Minimum Time | Chimes | Effect | Base Damage |\n");
+        out.push_str("| --- | --- | --- | --- |\n");
+        for milestone in CHIME_MILESTONES {
+            let steps = (milestone.chimes / 5) as i32;
+            let damage = BASE_DAMAGE + DAMAGE_PER_STEP * steps;
+            out.push_str(&format!(
+                "| {} | {} | {} | {} |\n",
+                milestone.time, milestone.chimes, milestone.effect, damage
+            ));
+        }
+        out.push_str("\nEvery additional 5 chimes collected beyond 100 grant +14 bonus damage.\n");
+        Ok(ExpansionResult { expanded: out })
+    }
+}
+
+struct CcsExpander;
+impl TemplateExpander for CcsExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["ccs"]
+    }
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: String::new(),
+        })
+    }
+}
+
+struct DegreeExpander;
+impl TemplateExpander for DegreeExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Degree", "degree", "degrees"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let positional: Vec<&str> = inv
+            .params
+            .iter()
+            .filter_map(|p| {
+                let trimmed = p.trim();
+                if trimmed.is_empty() || trimmed.contains('=') {
+                    None
+                } else {
+                    Some(trimmed)
+                }
+            })
+            .collect();
+        if positional.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: "°".to_string(),
+            });
+        }
+        let mut out = String::new();
+        out.push_str(positional[0]);
+        out.push('°');
+        if let Some(min) = positional.get(1) {
+            if !min.is_empty() {
+                out.push_str(min);
+                out.push('′');
+            }
+        }
+        if let Some(sec) = positional.get(2) {
+            if !sec.is_empty() {
+                out.push_str(sec);
+                out.push('″');
+            }
+        }
+        if let Some(dir) = positional.get(3) {
+            if !dir.is_empty() {
+                out.push_str(dir);
+            }
+        }
+        Ok(ExpansionResult { expanded: out })
+    }
+}
+
+struct DividedByExpander;
+impl TemplateExpander for DividedByExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Divided by"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let left = inv.params.get(0).map(|s| s.trim()).unwrap_or("");
+        let right = inv.params.get(1).map(|s| s.trim()).unwrap_or("");
+        if left.is_empty() && right.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: String::new(),
+            });
+        }
+        let mut out = String::new();
+        if !left.is_empty() {
+            out.push_str(left);
+        }
+        out.push_str(" / ");
+        if !right.is_empty() {
+            out.push_str(right);
+        }
+        Ok(ExpansionResult { expanded: out })
+    }
+}
+
+struct ColorExpander;
+impl TemplateExpander for ColorExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["color", "Color"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: String::new(),
+            });
+        }
+        let text_param = if inv.params.len() >= 2 {
+            inv.params[1].trim()
+        } else {
+            inv.params[0].trim()
+        };
+        Ok(ExpansionResult {
+            expanded: text_param.to_string(),
+        })
+    }
+}
+
+const INFO_INCLUDE_TEMPLATES: &[&str] = &[
+    "Spellblade info",
+    "Energized info",
+    "Diminishing gold info",
+    "Manaflow info",
+    "Quicksilver info",
+    "Elixir info",
+    "Ward timer info",
+    "Zombie state info",
+    "Unit-targeted cancel conditions",
+];
+
+struct IncludeInfoExpander;
+impl TemplateExpander for IncludeInfoExpander {
+    fn names(&self) -> &'static [&'static str] {
+        INFO_INCLUDE_TEMPLATES
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
+            return Err(ConvertError::Internal(format!(
+                "conversion context required for template '{}', but not provided",
+                inv.name
+            )));
+        };
+        let include = conv_ctx.template_includeonly(&inv.name)?.ok_or_else(|| {
+            ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "template page missing <includeonly> section".into(),
+            }
+        })?;
+        let registry = conv_ctx.registry();
+        let expanded = expand_inline_templates_with_store(
+            include.trim(),
+            ctx.precision,
+            ctx.vars.clone(),
+            registry,
+            ctx.conversion_ctx.clone(),
+        )?;
+        Ok(ExpansionResult {
+            expanded: expanded.trim_end().to_string(),
+        })
+    }
+}
+
+struct ScrollBoxExpander;
+impl TemplateExpander for ScrollBoxExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Scroll box"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, named) = split_named_and_positional(inv);
+        Ok(ExpansionResult {
+            expanded: named
+                .get("content")
+                .cloned()
+                .or_else(|| positional.first().cloned())
+                .unwrap_or_default(),
+        })
+    }
+}
+
+struct RuneDataExpander;
+impl TemplateExpander for RuneDataExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Rune data"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+
+        let (positional, _named) = split_named_and_positional(inv);
+        let Some(rune_name) = positional.first().map(|value| value.trim()) else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        let field = if positional.len() >= 3 {
+            positional[2].trim()
+        } else {
+            positional.get(1).map(|value| value.trim()).unwrap_or("")
+        };
+        if rune_name.is_empty() || field.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        }
+
+        let title = format!("Template:Rune data {}", rune_name);
+        let Some(raw) = conv_ctx.export().read_template_page(&title)? else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        let Some(named_params) = read_named_template_params_from_page(&raw) else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        let Some(value_raw) = named_params.get(&field.to_ascii_lowercase()) else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        let expanded = expand_inline_templates_with_store(
+            value_raw,
+            ctx.precision,
+            ctx.vars.clone(),
+            conv_ctx.registry(),
+            ctx.conversion_ctx.clone(),
+        )?;
+        Ok(ExpansionResult {
+            expanded: expanded.trim().to_string(),
+        })
+    }
+}
+
+struct MapChangesExpander;
+impl TemplateExpander for MapChangesExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Map changes"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+
+        let (positional, _named) = split_named_and_positional(inv);
+        let Some(entity) = positional.first().map(|value| value.trim()) else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        if entity.is_empty() || entity.eq_ignore_ascii_case("table") {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        }
+
+        const MODE_TEMPLATES: &[(&str, &str)] = &[
+            ("swift", "Swiftplay"),
+            ("aram", "Howling Abyss"),
+            ("ofa", "One for All"),
+            ("nb", "Nexus Blitz"),
+            ("urf", "Ultra Rapid Fire"),
+            ("usb", "Ultimate Spellbook"),
+            ("ar", "Arena"),
+        ];
+
+        let mut sections = Vec::new();
+        for (mode_code, mode_label) in MODE_TEMPLATES {
+            let title = format!("Template:Map changes/data/{}", mode_code);
+            let Some(raw) = conv_ctx.export().read_template_page(&title)? else {
+                continue;
+            };
+            let Some(named_params) = read_named_template_params_from_page(&raw) else {
+                continue;
+            };
+            let Some(value_raw) = named_params.get(&entity.to_ascii_lowercase()) else {
+                continue;
+            };
+            let expanded = expand_inline_templates_with_store(
+                value_raw,
+                ctx.precision,
+                ctx.vars.clone(),
+                conv_ctx.registry(),
+                ctx.conversion_ctx.clone(),
+            )?;
+            let trimmed = expanded.trim();
+            if trimmed.is_empty() {
+                continue;
+            }
+            sections.push(format!("### {}\n\n{}", mode_label, trimmed));
+        }
+
+        Ok(ExpansionResult {
+            expanded: sections.join("\n\n"),
+        })
+    }
+}
+
+struct ItemInfoVarExpander;
+impl TemplateExpander for ItemInfoVarExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Item info/var", "Item info var"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, named) = split_named_and_positional(inv);
+        let label = positional
+            .first()
+            .map(|value| value.trim())
+            .filter(|value| !value.is_empty())
+            .or_else(|| {
+                named
+                    .get("1")
+                    .map(|value| value.trim())
+                    .filter(|value| !value.is_empty())
+            })
+            .unwrap_or_default();
+        Ok(ExpansionResult {
+            expanded: label.to_string(),
+        })
+    }
+}
+
+fn read_named_template_params_from_page(raw: &str) -> Option<HashMap<String, String>> {
+    let span = crate::parse::extract_balanced_templates(raw)
+        .ok()?
+        .into_iter()
+        .next()?;
+    let body = &span.raw[2..span.raw.len() - 2];
+    let inv = parse_invocation(body);
+    let mut named = HashMap::new();
+    for param in inv.params {
+        let Some(eq) = param.find('=') else {
+            continue;
+        };
+        let key = param[..eq].trim().to_ascii_lowercase();
+        let value = param[eq + 1..].trim();
+        if key.is_empty() || value.is_empty() {
+            continue;
+        }
+        named.insert(key, value.to_string());
+    }
+    Some(named)
+}
+
+// Gold amount: {{g|100}} -> 100 (drop currency glyph for now)
+struct GoldExpander;
+impl TemplateExpander for GoldExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["g"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let v = inv.params.first().cloned().unwrap_or_default();
+        Ok(ExpansionResult { expanded: v })
+    }
+}
+
+struct GoldValueExpander;
+impl TemplateExpander for GoldValueExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["gold value"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        let label = positional
+            .first()
+            .map(|value| value.trim().trim_matches('\''))
+            .unwrap_or("");
+        if label.is_empty() || label.eq_ignore_ascii_case("gold value") {
+            return Ok(ExpansionResult {
+                expanded: String::new(),
+            });
+        }
+        Ok(ExpansionResult {
+            expanded: format!("**{}**", label),
+        })
+    }
+}
+
+// Critical damage marker: {{critical damage|...|...|mod=0.9}} -> "90%"
+struct CriticalDamageExpander;
+impl TemplateExpander for CriticalDamageExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["critical damage"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: "critical damage".to_string(),
+            });
+        }
+        // Prefer the modifier percentage when present; otherwise render the first positional
+        // value as a percentage literal if it is numeric or an evaluatable expression.
+        for p in &inv.params {
+            if let Some(eq) = p.find('=') {
+                let (k, v) = p.split_at(eq);
+                if k.trim().eq_ignore_ascii_case("mod") {
+                    let Some(f) = evaluate_numeric(v[1..].trim()) else {
+                        return Ok(ExpansionResult {
+                            expanded: unhandled_template_marker(inv),
+                        });
+                    };
+                    return Ok(ExpansionResult {
+                        expanded: format!("{}%", format_progression_number(f * 100.0, None)),
+                    });
+                }
+            }
+        }
+
+        if let Some(first) = inv.params.first() {
+            if let Some(percent) = render_percentage_literal(first.trim()) {
+                return Ok(ExpansionResult { expanded: percent });
+            }
+        }
+
+        Ok(ExpansionResult {
+            expanded: unhandled_template_marker(inv),
+        })
+    }
+}
+
+fn render_percentage_literal(raw: &str) -> Option<String> {
+    let trimmed = raw.trim();
+    if trimmed.is_empty() {
+        return None;
+    }
+    if let Some(stripped) = trimmed.strip_suffix('%') {
+        let value = stripped.trim();
+        if !value.is_empty() {
+            return Some(format!("{}%", value));
+        }
+    }
+    if let Ok(value) = trimmed.parse::<f64>() {
+        return Some(format!("{}%", format_progression_number(value, None)));
+    }
+    if let Ok(value) = evaluate_expression(trimmed, ExprNumberFormat::Float(6)) {
+        if let Ok(number) = value.trim().parse::<f64>() {
+            return Some(format!("{}%", format_progression_number(number, None)));
+        }
+    }
+    None
+}
+
+struct TooltipExpander; // {{tt|value|tooltip}}
+impl TemplateExpander for TooltipExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["tt"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing value".into(),
+            });
+        }
+        let value = &inv.params[0];
+        let tooltip = inv
+            .params
+            .get(1)
+            .map(|s| format!(" ({s})"))
+            .unwrap_or_default();
+        Ok(ExpansionResult {
+            expanded: format!("{value}{tooltip}"),
+        })
+    }
+}
+
+// Variable definition: {{#vardefine:name|value}}
+struct VarDefineExpander;
+impl TemplateExpander for VarDefineExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["#vardefine"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.len() < 2 {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "expected name|value".into(),
+            });
+        }
+        let expanded_value = expand_assignment_value(inv, ctx)?;
+        ctx.set_var(inv.params[0].trim(), expanded_value);
+        // Definition removed from output (value substituted later via #var)
+        Ok(ExpansionResult {
+            expanded: String::new(),
+        })
+    }
+}
+
+struct VarDefineEchoExpander;
+impl TemplateExpander for VarDefineEchoExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["#vardefineecho"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.len() < 2 {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "expected name|value".into(),
+            });
+        }
+        let expanded_value = expand_assignment_value(inv, ctx)?;
+        ctx.set_var(inv.params[0].trim(), expanded_value.clone());
+        Ok(ExpansionResult {
+            expanded: expanded_value,
+        })
+    }
+}
+
+fn expand_assignment_value(inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<String> {
+    let value_raw = inv.params.get(1).map(|value| value.trim()).unwrap_or("");
+    if value_raw.is_empty() {
+        return Ok(String::new());
+    }
+    let fallback_registry;
+    let registry = if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
+        conv_ctx.registry()
+    } else {
+        fallback_registry = TemplateRegistry::new();
+        &fallback_registry
+    };
+    let expanded = expand_inline_templates_with_store(
+        value_raw,
+        ctx.precision,
+        ctx.vars.clone(),
+        registry,
+        ctx.conversion_ctx.clone(),
+    )?;
+    Ok(expanded.trim().to_string())
+}
+
+// Variable reference: {{#var:name}}
+struct VarRefExpander;
+impl TemplateExpander for VarRefExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["#var"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing var name".into(),
+            });
+        }
+        let key = &inv.params[0];
+        match ctx.get_var(key) {
+            Some(v) => Ok(ExpansionResult {
+                expanded: v.clone(),
+            }),
+            None => Ok(ExpansionResult {
+                expanded: format!("<!-- UNDEFINED VAR: {} -->", key.trim()),
+            }),
+        }
+    }
+}
+
+/// Depth-aware parser for a raw template body (without outer braces).
+pub fn parse_invocation(raw_full: &str) -> TemplateInvocation {
+    let wrapped = format!("{{{{{}}}}}", raw_full);
+    let output = default_wiki_configuration().parse(&wrapped);
+
+    let mut name = raw_full.trim().to_string();
+    let mut params: Vec<String> = Vec::new();
+    let mut parsed_with_parser = false;
+
+    if let Some((template_name, template_params)) =
+        output.nodes.iter().find_map(|node| match node {
+            Node::Template {
+                start,
+                name,
+                parameters,
+                ..
+            } if *start == 0 => Some((name, parameters)),
+            _ => None,
+        })
+    {
+        name = nodes_to_string(template_name, &wrapped);
+        params = template_params
+            .iter()
+            .map(|parameter| {
+                let mut entry = String::new();
+                if let Some(param_name_nodes) = &parameter.name {
+                    let key = nodes_to_string(param_name_nodes, &wrapped);
+                    let key = key.trim();
+                    if !key.is_empty() {
+                        entry.push_str(key);
+                        entry.push('=');
+                    }
+                }
+                let value = nodes_to_string(&parameter.value, &wrapped);
+                entry.push_str(value.trim());
+                entry.trim().to_string()
+            })
+            .collect();
+        parsed_with_parser = true;
+    }
+
+    if !parsed_with_parser {
+        return legacy_parse_invocation(raw_full);
+    }
+
+    normalize_invocation(&mut name, &mut params);
+
+    TemplateInvocation {
+        name,
+        raw: raw_full.to_string(),
+        params,
+    }
+}
+
+fn legacy_parse_invocation(raw_full: &str) -> TemplateInvocation {
+    let mut parts: Vec<String> = Vec::new();
+    let mut current = String::new();
+    let mut brace = 0i32;
+    let mut bracket = 0i32;
+    let mut paren = 0i32;
+    for c in raw_full.chars() {
+        match c {
+            '{' => {
+                brace += 1;
+                current.push(c);
+            }
+            '}' => {
+                brace -= 1;
+                current.push(c);
+            }
+            '[' => {
+                bracket += 1;
+                current.push(c);
+            }
+            ']' => {
+                bracket -= 1;
+                current.push(c);
+            }
+            '(' => {
+                paren += 1;
+                current.push(c);
+            }
+            ')' => {
+                paren -= 1;
+                current.push(c);
+            }
+            '|' if brace == 0 && bracket == 0 && paren == 0 => {
+                parts.push(current.trim().to_string());
+                current.clear();
+            }
+            _ => current.push(c),
+        }
+    }
+    if !current.is_empty() {
+        parts.push(current.trim().to_string());
+    }
+    let mut name = parts.first().cloned().unwrap_or_default();
+    let mut params = if parts.len() > 1 {
+        parts[1..].to_vec()
+    } else {
+        vec![]
+    };
+    normalize_invocation(&mut name, &mut params);
+    TemplateInvocation {
+        name,
+        raw: raw_full.to_string(),
+        params,
+    }
+}
+
+fn nodes_to_string(nodes: &[Node<'_>], source: &str) -> String {
+    if nodes.is_empty() {
+        return String::new();
+    }
+    let start = nodes.first().map(|node| node.start()).unwrap_or(0);
+    let end = nodes.last().map(|node| node.end()).unwrap_or(start);
+    source[start..end].trim().to_string()
+}
+
+fn normalize_invocation(name: &mut String, params: &mut Vec<String>) {
+    *name = name.trim().to_string();
+    for param in params.iter_mut() {
+        *param = param.trim().to_string();
+    }
+
+    let lower = name.to_ascii_lowercase();
+    if lower.starts_with("#vardefineecho:") {
+        if let Some(idx) = name.find(':') {
+            let var_name = name[idx + 1..].trim().to_string();
+            *name = "#vardefineecho".into();
+            params.insert(0, var_name);
+        }
+    } else if lower.starts_with("#vardefine:") {
+        if let Some(idx) = name.find(':') {
+            let var_name = name[idx + 1..].trim().to_string();
+            *name = "#vardefine".into();
+            params.insert(0, var_name);
+        }
+    } else if lower.starts_with("#var:") {
+        if let Some(idx) = name.find(':') {
+            let var_name = name[idx + 1..].trim().to_string();
+            *name = "#var".into();
+            params.insert(0, var_name);
+        }
+    } else if lower.starts_with("#expr:") {
+        if let Some(idx) = name.find(':') {
+            let expr = name[idx + 1..].trim().to_string();
+            *name = "#expr".into();
+            params.insert(0, expr);
+        }
+    } else if lower.starts_with("#if:") {
+        if let Some(idx) = name.find(':') {
+            let test = name[idx + 1..].trim().to_string();
+            *name = "#if".into();
+            params.insert(0, test);
+        }
+    } else if lower.starts_with("#ifeq:") {
+        if let Some(idx) = name.find(':') {
+            let left = name[idx + 1..].trim().to_string();
+            *name = "#ifeq".into();
+            params.insert(0, left);
+        }
+    } else if lower.starts_with("#switch:") {
+        if let Some(idx) = name.find(':') {
+            let value = name[idx + 1..].trim().to_string();
+            *name = "#switch".into();
+            params.insert(0, value);
+        }
+    } else if lower.starts_with("#invoke:") {
+        if let Some(idx) = name.find(':') {
+            let module = name[idx + 1..].trim().to_string();
+            *name = "#invoke".into();
+            params.insert(0, module);
+        }
+    } else if lower.starts_with("rune data ") {
+        let rune_name = name[10..].trim().to_string();
+        *name = "Rune data".into();
+        params.insert(0, rune_name);
+    } else if lower.starts_with("data ") || lower.starts_with("data_") {
+        *name = "Data".into();
+    }
+}
+
+// --- Domain stub expanders (initial minimal formatting) ---
+
+// {{#if: test | then | else}}
+struct IfExpander;
+impl TemplateExpander for IfExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["#if"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing test".into(),
+            });
+        }
+        let test = inv.params[0].trim();
+        let truthy = !(test.is_empty() || test == "0");
+        let then_v = inv.params.get(1).cloned().unwrap_or_default();
+        let else_v = inv.params.get(2).cloned().unwrap_or_default();
+        Ok(ExpansionResult {
+            expanded: if truthy { then_v } else { else_v },
+        })
+    }
+}
+
+// {{#ifeq: a | b | then | else}}
+struct IfEqExpander;
+impl TemplateExpander for IfEqExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["#ifeq"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.len() < 2 {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "expected a|b|then|else".into(),
+            });
+        }
+        let a = inv.params[0].trim();
+        let b = inv.params[1].trim();
+        let then_v = inv.params.get(2).cloned().unwrap_or_default();
+        let else_v = inv.params.get(3).cloned().unwrap_or_default();
+        Ok(ExpansionResult {
+            expanded: if a == b { then_v } else { else_v },
+        })
+    }
+}
+
+// {{#switch: val | case1=result1 | case2=result2 | #default=def }}
+struct SwitchExpander;
+impl TemplateExpander for SwitchExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["#switch"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing switch value".into(),
+            });
+        }
+        let val = inv.params[0].trim();
+        let mut default: Option<String> = None;
+        // scan for first key=value pair matching val
+        for p in inv.params.iter().skip(1) {
+            if let Some(eq) = p.find('=') {
+                let (k, v) = p.split_at(eq);
+                let key = k.trim();
+                let rhs = v[1..].to_string();
+                if key.eq_ignore_ascii_case("#default") {
+                    default = Some(rhs);
+                    continue;
+                }
+                if key == val {
+                    return Ok(ExpansionResult { expanded: rhs });
+                }
+            }
+        }
+        Ok(ExpansionResult {
+            expanded: default.unwrap_or_default(),
+        })
+    }
+}
+
+struct ApExpander;
+impl TemplateExpander for ApExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["ap"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: render_ap_progression(inv, ctx)?,
+        })
+    }
+}
+
+struct PpExpander;
+impl TemplateExpander for PpExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["pp"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: render_pp_progression(inv, ctx)?,
+        })
+    }
+}
+
+struct PpTooltipExpander;
+impl TemplateExpander for PpTooltipExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["pptooltip"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (mut positional, named) = split_named_and_positional(inv);
+        if positional.is_empty() {
+            if let Some(bot_values) = named.get("bot_values").cloned() {
+                positional.push(bot_values);
+            }
+            if let Some(top_values) = named.get("top_values").cloned() {
+                positional.push(top_values);
+            }
+        }
+        Ok(ExpansionResult {
+            expanded: render_pp_progression_from_parts(positional, named, ctx)?,
+        })
+    }
+}
+
+struct FdExpander; // {{fd|number|2}} fixed decimals
+impl TemplateExpander for FdExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["fd"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing number".into(),
+            });
+        }
+        let raw = inv.params[0].trim();
+        let (expr, suffix) = match raw.strip_suffix('%') {
+            Some(value) => (value.trim(), "%"),
+            None => (raw, ""),
+        };
+        let Some(num) = evaluate_numeric(expr) else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        let prec = match inv.params.get(1).map(|p| p.trim()) {
+            Some("") | None => 2,
+            Some(raw) => match raw.parse::<usize>() {
+                Ok(value) => value,
+                Err(_) => {
+                    return Ok(ExpansionResult {
+                        expanded: unhandled_template_marker(inv),
+                    });
+                }
+            },
+        };
+        Ok(ExpansionResult {
+            expanded: format!("{:.*}{}", prec, num, suffix),
+        })
+    }
+}
+
+struct RdExpander; // {{rd|melee|ranged}} melee/ranged split display
+impl TemplateExpander for RdExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["rd"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let positional: Vec<&str> = inv
+            .params
+            .iter()
+            .map(|param| param.trim())
+            .filter(|param| !param.is_empty() && !looks_like_named_param(param))
+            .collect();
+        let melee = positional.first().copied().unwrap_or("").trim();
+        let ranged = positional.get(1).copied().unwrap_or(melee).trim();
+        let expanded = if melee.is_empty() && ranged.is_empty() {
+            String::new()
+        } else if ranged.is_empty() || ranged == melee {
+            melee.to_string()
+        } else {
+            format!("{} (melee) / {} (ranged)", melee, ranged)
+        };
+        Ok(ExpansionResult { expanded })
+    }
+}
+
+struct IconUnwrapExpander; // minimal icon unwrap: {{ci|Aatrox}} -> Aatrox; if second param is non-possessive display, prefer it
+impl TemplateExpander for IconUnwrapExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &[
+            "ci", "cis", "ai", "ais", "ii", "iis", "ri", "bi", "ui", "cai", "cais", "cci", "ccis",
+            "fi", "nie", "nies", "si", "sis", "uis",
+        ]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing label".into(),
+            });
+        }
+        let positional: Vec<&str> = inv
+            .params
+            .iter()
+            .map(|param| param.trim())
+            .filter(|param| !param.is_empty() && !looks_like_named_param(param))
+            .collect();
+        let primary = positional
+            .first()
+            .copied()
+            .unwrap_or_else(|| inv.params[0].trim());
+        let is_ability_icon =
+            inv.name.eq_ignore_ascii_case("ai") || inv.name.eq_ignore_ascii_case("ais");
+        let display = if is_ability_icon {
+            positional.get(2).copied()
+        } else {
+            positional.get(1).copied()
+        };
+        // Prefer template-specific display label if present and not possessive marker.
+        let mut label = if let Some(display) = display {
+            let s = display.trim();
+            if s == "'s" || s == "’s" || s.is_empty() {
+                primary.to_string()
+            } else {
+                s.to_string()
+            }
+        } else {
+            primary.to_string()
+        };
+        if let Some(display) = display {
+            let s = display.trim();
+            if s == "'s" || s == "’s" {
+                append_possessive(&mut label);
+            }
+        }
+        Ok(ExpansionResult { expanded: label })
+    }
+}
+
+fn append_possessive(label: &mut String) {
+    let trimmed = label.trim_end();
+    if trimmed.is_empty()
+        || trimmed.ends_with("'s")
+        || trimmed.ends_with("’s")
+        || trimmed.ends_with('\'')
+        || trimmed.ends_with('’')
+    {
+        return;
+    }
+    if trimmed.ends_with('s') || trimmed.ends_with('S') {
+        label.push('\'');
+    } else {
+        label.push_str("'s");
+    }
+}
+
+fn looks_like_named_param(param: &str) -> bool {
+    split_named_param(param).is_some()
+}
+
+fn split_named_param(param: &str) -> Option<(&str, &str)> {
+    let (name, value) = param.split_once('=')?;
+    let key = name.trim();
+    let value = value.trim();
+    if !looks_like_named_param_key(key) || value.is_empty() {
+        return None;
+    }
+    Some((key, value))
+}
+
+fn looks_like_named_param_key(key: &str) -> bool {
+    let trimmed = key.trim();
+    let mut chars = trimmed.chars();
+    let Some(first) = chars.next() else {
+        return false;
+    };
+    if !(first.is_ascii_alphabetic() || first == '#') {
+        return false;
+    }
+    chars.all(|ch| ch.is_ascii_alphanumeric() || matches!(ch, '_' | '-'))
+}
+
+fn split_named_and_positional(inv: &TemplateInvocation) -> (Vec<String>, HashMap<String, String>) {
+    let mut positional = Vec::new();
+    let mut named = HashMap::new();
+    for param in &inv.params {
+        let trimmed = param.trim();
+        if trimmed.is_empty() {
+            continue;
+        }
+        if let Some((name, value)) = split_named_param(trimmed) {
+            let key = name.to_ascii_lowercase();
+            named.entry(key).or_insert_with(|| value.to_string());
+            continue;
+        }
+        positional.push(trimmed.to_string());
+    }
+    (positional, named)
+}
+
+#[derive(Clone, Debug)]
+struct SeriesValue {
+    text: String,
+    numeric: bool,
+}
+
+fn render_ap_progression(inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<String> {
+    let (positional, named) = split_named_and_positional(inv);
+    render_ap_progression_from_parts(positional, named, ctx)
+}
+
+fn render_ap_progression_from_parts(
+    positional: Vec<String>,
+    named: HashMap<String, String>,
+    ctx: &ExpanderCtx,
+) -> Result<String> {
+    if positional.is_empty() {
+        return Err(ConvertError::MalformedTemplate {
+            name: "ap".into(),
+            detail: "missing ability progression values".into(),
+        });
+    }
+    let positional: Vec<String> = positional
+        .into_iter()
+        .map(|value| resolve_progression_fragment(&value, ctx))
+        .collect();
+    let named: HashMap<String, String> = named
+        .into_iter()
+        .map(|(key, value)| (key, resolve_progression_fragment(&value, ctx)))
+        .collect();
+    let round = named.get("round").map(|value| value.as_str());
+    let mut values = Vec::new();
+    for value in positional {
+        values.extend(expand_progression_values(&value, 5, round));
+    }
+    if values.is_empty() {
+        return Err(ConvertError::MalformedTemplate {
+            name: "ap".into(),
+            detail: "empty ability progression".into(),
+        });
+    }
+    normalize_non_numeric_progression_values(&mut values);
+    Ok(values
+        .into_iter()
+        .map(|value| value.text)
+        .collect::<Vec<_>>()
+        .join(" / "))
+}
+
+fn render_pp_progression(inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<String> {
+    let (positional, named) = split_named_and_positional(inv);
+    render_pp_progression_from_parts(positional, named, ctx)
+}
+
+fn render_pp_progression_from_parts(
+    mut positional: Vec<String>,
+    mut named: HashMap<String, String>,
+    ctx: &ExpanderCtx,
+) -> Result<String> {
+    const POSITIONAL_ALIASES: &[&str] = &[
+        "changedisplay",
+        "showtype",
+        "label1",
+        "type",
+        "label",
+        "formula",
+        "key",
+        "key1",
+        "round",
+        "round1",
+        "color",
+    ];
+
+    if positional.len() > 2 {
+        for (index, alias) in POSITIONAL_ALIASES.iter().enumerate() {
+            if let Some(value) = positional.get(index + 2).cloned() {
+                named.entry((*alias).to_string()).or_insert(value);
+            }
+        }
+        positional.truncate(2);
+    }
+
+    positional = positional
+        .into_iter()
+        .map(|value| resolve_progression_fragment(&value, ctx))
+        .collect();
+    named = named
+        .into_iter()
+        .map(|(key, value)| (key, resolve_progression_fragment(&value, ctx)))
+        .collect();
+
+    let Some(values_raw) = positional
+        .first()
+        .cloned()
+        .filter(|value| !value.trim().is_empty())
+    else {
+        return Err(ConvertError::MalformedTemplate {
+            name: "pp".into(),
+            detail: "missing passive progression values".into(),
+        });
+    };
+
+    let round = named.get("round").map(|value| value.as_str());
+    let key = named.get("key").map(|value| value.as_str());
+    let mut values = expand_progression_values(&values_raw, 18, round);
+    append_numeric_key(&mut values, key);
+    normalize_non_numeric_progression_values(&mut values);
+
+    let mut display = if values.is_empty() {
+        values_raw.trim().to_string()
+    } else {
+        render_progression_display(
+            &values,
+            named
+                .get("changedisplay")
+                .map(|value| is_truthy_flag(value))
+                .unwrap_or(false),
+        )
+    };
+
+    let show_type = !named
+        .get("showtype")
+        .map(|value| value.eq_ignore_ascii_case("false"))
+        .unwrap_or(false);
+    let mut annotations = Vec::new();
+    if show_type {
+        let inline_type = named
+            .get("type")
+            .or_else(|| named.get("label1"))
+            .map(|value| value.trim())
+            .filter(|value| !value.is_empty())
+            .unwrap_or("level");
+        annotations.push(format!("based on {}", inline_type));
+    }
+    if let Some(formula) = named.get("formula").map(|value| value.trim()) {
+        if !formula.is_empty() {
+            annotations.push(format!("formula: {}", prettify_formula(formula)));
+        }
+    }
+    if !annotations.is_empty() {
+        display.push_str(" (");
+        display.push_str(&annotations.join("; "));
+        display.push(')');
+    }
+
+    Ok(display)
+}
+
+fn resolve_progression_fragment(fragment: &str, ctx: &ExpanderCtx) -> String {
+    let replaced = replace_var_templates(fragment, &ctx.vars_snapshot(), false);
+    if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
+        if let Ok(expanded) = expand_inline_templates_with_store(
+            replaced.trim(),
+            ctx.precision,
+            ctx.vars.clone(),
+            conv_ctx.registry(),
+            ctx.conversion_ctx.clone(),
+        ) {
+            return expanded.trim().to_string();
+        }
+    }
+    replaced.trim().to_string()
+}
+
+fn expand_progression_values(
+    raw: &str,
+    default_count: usize,
+    round: Option<&str>,
+) -> Vec<SeriesValue> {
+    let mut values = Vec::new();
+    for segment in raw
+        .split(';')
+        .map(|segment| segment.trim())
+        .filter(|segment| !segment.is_empty())
+    {
+        if let Some(expanded) = expand_progression_segment(segment, default_count, round) {
+            values.extend(expanded);
+        } else {
+            values.push(SeriesValue {
+                text: segment.to_string(),
+                numeric: false,
+            });
+        }
+    }
+    values
+}
+
+fn expand_progression_segment(
+    raw: &str,
+    default_count: usize,
+    round: Option<&str>,
+) -> Option<Vec<SeriesValue>> {
+    let trimmed = raw.trim();
+    if trimmed.is_empty() {
+        return Some(Vec::new());
+    }
+    if trimmed.to_ascii_lowercase().starts_with("then ") {
+        return None;
+    }
+
+    if let Some((expr, count)) = split_suffix(trimmed, " for ") {
+        if expr.contains('x') {
+            let count = count.trim().parse::<usize>().ok()?;
+            return evaluate_x_series(expr, count, round);
+        }
+        if let Some((start, end)) = expr.split_once(" to ") {
+            let count = count.trim().parse::<usize>().ok()?;
+            return interpolate_series(start.trim(), end.trim(), count, round);
+        }
+    }
+
+    if let Some((expr, step)) = split_suffix(trimmed, " by ") {
+        if let Some((start, end)) = expr.split_once(" to ") {
+            return step_series(start.trim(), end.trim(), step.trim(), round);
+        }
+    }
+
+    if trimmed.contains('x') {
+        let (expr, count) = split_trailing_count(trimmed);
+        return evaluate_x_series(expr.trim(), count.unwrap_or(default_count), round);
+    }
+
+    if let Some((start, end)) = trimmed.split_once(" to ") {
+        return interpolate_series(start.trim(), end.trim(), default_count, round);
+    }
+
+    evaluate_numeric(trimmed).map(|value| {
+        vec![SeriesValue {
+            text: format_progression_number(value, round),
+            numeric: true,
+        }]
+    })
+}
+
+fn split_suffix<'a>(value: &'a str, marker: &str) -> Option<(&'a str, &'a str)> {
+    let index = value.to_ascii_lowercase().rfind(marker)?;
+    Some((&value[..index], &value[index + marker.len()..]))
+}
+
+fn split_trailing_count(value: &str) -> (&str, Option<usize>) {
+    let mut parts = value.rsplitn(2, char::is_whitespace);
+    let tail = parts.next().unwrap_or("");
+    let rest = parts.next().unwrap_or(value);
+    if !tail.is_empty() && tail.chars().all(|ch| ch.is_ascii_digit()) {
+        return (rest, tail.parse::<usize>().ok());
+    }
+    (value, None)
+}
+
+fn interpolate_series(
+    start_expr: &str,
+    end_expr: &str,
+    count: usize,
+    round: Option<&str>,
+) -> Option<Vec<SeriesValue>> {
+    if count == 0 {
+        return Some(Vec::new());
+    }
+    let start = evaluate_numeric(start_expr)?;
+    let end = evaluate_numeric(end_expr)?;
+    if count == 1 {
+        return Some(vec![SeriesValue {
+            text: format_progression_number(start, round),
+            numeric: true,
+        }]);
+    }
+    let step = (end - start) / (count as f64 - 1.0);
+    Some(
+        (0..count)
+            .map(|index| SeriesValue {
+                text: format_progression_number(start + step * index as f64, round),
+                numeric: true,
+            })
+            .collect(),
+    )
+}
+
+fn step_series(
+    start_expr: &str,
+    end_expr: &str,
+    step_expr: &str,
+    round: Option<&str>,
+) -> Option<Vec<SeriesValue>> {
+    let start = evaluate_numeric(start_expr)?;
+    let end = evaluate_numeric(end_expr)?;
+    let step = evaluate_numeric(step_expr)?;
+    if step == 0.0 {
+        return None;
+    }
+    let forward = end >= start;
+    if (forward && step < 0.0) || (!forward && step > 0.0) {
+        return None;
+    }
+    let mut current = start;
+    let mut values = Vec::new();
+    let mut iterations = 0usize;
+    while iterations < 64 {
+        values.push(SeriesValue {
+            text: format_progression_number(current, round),
+            numeric: true,
+        });
+        if (forward && current >= end) || (!forward && current <= end) {
+            break;
+        }
+        current += step;
+        if (forward && current > end) || (!forward && current < end) {
+            current = end;
+        }
+        iterations += 1;
+    }
+    Some(values)
+}
+
+fn evaluate_x_series(expr: &str, count: usize, round: Option<&str>) -> Option<Vec<SeriesValue>> {
+    if count == 0 {
+        return Some(Vec::new());
+    }
+    let mut values = Vec::new();
+    for index in 1..=count {
+        let replaced = expr.replace('x', &index.to_string());
+        let value = evaluate_numeric(&replaced)?;
+        values.push(SeriesValue {
+            text: format_progression_number(value, round),
+            numeric: true,
+        });
+    }
+    Some(values)
+}
+
+fn evaluate_numeric(expr: &str) -> Option<f64> {
+    let evaluated = evaluate_expression(expr.trim(), ExprNumberFormat::Float(6)).ok()?;
+    evaluated.trim().parse::<f64>().ok()
+}
+
+fn format_progression_number(value: f64, round: Option<&str>) -> String {
+    let round = round.map(|value| value.trim().to_ascii_lowercase());
+    let rounded = match round.as_deref() {
+        Some("abs") => value.abs(),
+        Some("ceil") => value.ceil(),
+        Some("floor") => value.floor(),
+        Some("trunc") => value.trunc(),
+        Some("false") => value,
+        Some(digits) => {
+            if let Ok(precision) = digits.parse::<u32>() {
+                let factor = 10f64.powi(precision as i32);
+                (value * factor).round() / factor
+            } else {
+                (value * 100.0).round() / 100.0
+            }
+        }
+        None => (value * 100.0).round() / 100.0,
+    };
+
+    let mut rendered = match round.as_deref() {
+        Some("false") => format!("{rounded:.6}"),
+        Some(digits) if digits.chars().all(|ch| ch.is_ascii_digit()) => {
+            let precision = digits.parse::<usize>().unwrap_or(2);
+            format!("{rounded:.precision$}")
+        }
+        _ => format!("{rounded:.2}"),
+    };
+    while rendered.contains('.') && rendered.ends_with('0') {
+        rendered.pop();
+    }
+    if rendered.ends_with('.') {
+        rendered.pop();
+    }
+    if rendered == "-0" {
+        "0".to_string()
+    } else {
+        rendered
+    }
+}
+
+fn render_progression_display(values: &[SeriesValue], changed_display: bool) -> String {
+    if values.is_empty() {
+        return String::new();
+    }
+    let show_range = if values.len() <= 5 {
+        changed_display
+    } else {
+        !changed_display
+    };
+    if show_range && values.len() > 1 {
+        format!(
+            "{} – {}",
+            values.first().unwrap().text,
+            values.last().unwrap().text
+        )
+    } else {
+        values
+            .iter()
+            .map(|value| value.text.as_str())
+            .collect::<Vec<_>>()
+            .join(" / ")
+    }
+}
+
+fn normalize_non_numeric_progression_values(values: &mut [SeriesValue]) {
+    for value in values {
+        if !value.numeric {
+            value.text = wrap_formula_code_if_needed(&value.text);
+        }
+    }
+}
+
+fn wrap_formula_code_if_needed(raw: &str) -> String {
+    let trimmed = raw.trim();
+    if trimmed.is_empty() {
+        return String::new();
+    }
+    if trimmed.starts_with('`') && trimmed.ends_with('`') {
+        return trimmed.to_string();
+    }
+    if looks_formula_like(trimmed) {
+        format!("`{}`", trimmed)
+    } else {
+        trimmed.to_string()
+    }
+}
+
+fn looks_formula_like(raw: &str) -> bool {
+    let trimmed = raw.trim();
+    if trimmed.is_empty() {
+        return false;
+    }
+    let has_digit = trimmed.chars().any(|ch| ch.is_ascii_digit());
+    let has_symbolic = trimmed.contains('%')
+        || trimmed.chars().any(|ch| ch.is_ascii_alphabetic())
+        || trimmed.contains('x');
+    let has_operator = trimmed.contains('*')
+        || trimmed.contains('/')
+        || trimmed.contains('(')
+        || trimmed.contains(')');
+    has_digit && has_symbolic && has_operator
+}
+
+fn append_numeric_key(values: &mut [SeriesValue], key: Option<&str>) {
+    let Some(key) = key
+        .map(|value| value.trim())
+        .filter(|value| !value.is_empty())
+    else {
+        return;
+    };
+    for value in values {
+        if value.numeric {
+            value.text.push_str(key);
+        }
+    }
+}
+
+fn is_truthy_flag(value: &str) -> bool {
+    matches!(
+        value.trim().to_ascii_lowercase().as_str(),
+        "1" | "true" | "yes"
+    )
+}
+
+fn prettify_formula(formula: &str) -> String {
+    formula
+        .replace('*', " × ")
+        .replace('/', " ÷ ")
+        .split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ")
+}
+
+struct ChampionSkinLinkExpander;
+impl TemplateExpander for ChampionSkinLinkExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["csl", "Champion skin link", "WRskin", "TFTc"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, named) = split_named_and_positional(inv);
+        let mut label = positional
+            .get(2)
+            .cloned()
+            .or_else(|| positional.get(1).cloned())
+            .or_else(|| positional.first().cloned())
+            .unwrap_or_default();
+        if named
+            .get("possessive")
+            .map(|value| is_truthy_flag(value))
+            .unwrap_or(false)
+        {
+            append_possessive(&mut label);
+        }
+        Ok(ExpansionResult { expanded: label })
+    }
+}
+
+struct ChampionSkinTriviaExpander;
+impl TemplateExpander for ChampionSkinTriviaExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["cst", "Champion skin trivia"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        let label = positional
+            .get(2)
+            .cloned()
+            .or_else(|| positional.get(1).cloned())
+            .unwrap_or_default();
+        Ok(ExpansionResult {
+            expanded: if label.trim().is_empty() {
+                String::new()
+            } else {
+                format!("[Skin: {}]", label.trim())
+            },
+        })
+    }
+}
+
+struct CharacterBackgroundIconExpander;
+impl TemplateExpander for CharacterBackgroundIconExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["cbi", "cbis", "Character background icon"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, named) = split_named_and_positional(inv);
+        let mut label = positional
+            .get(1)
+            .cloned()
+            .or_else(|| positional.first().cloned())
+            .unwrap_or_default();
+        let force_possessive = inv.name.eq_ignore_ascii_case("cbis");
+        if force_possessive
+            || named
+                .get("possessive")
+                .map(|value| is_truthy_flag(value))
+                .unwrap_or(false)
+        {
+            append_possessive(&mut label);
+        }
+        Ok(ExpansionResult { expanded: label })
+    }
+}
+
+struct CustomContentIconExpander;
+impl TemplateExpander for CustomContentIconExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["ccib", "Custom content icon"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        Ok(ExpansionResult {
+            expanded: positional
+                .get(2)
+                .cloned()
+                .or_else(|| positional.get(1).cloned())
+                .unwrap_or_default(),
+        })
+    }
+}
+
+struct LegendsOfRuneterraExpander;
+impl TemplateExpander for LegendsOfRuneterraExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["LoR"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        Ok(ExpansionResult {
+            expanded: positional.first().cloned().unwrap_or_default(),
+        })
+    }
+}
+
+struct FandomExpander;
+impl TemplateExpander for FandomExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["f", "Fandom"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        Ok(ExpansionResult {
+            expanded: positional
+                .get(2)
+                .cloned()
+                .or_else(|| positional.get(1).cloned())
+                .or_else(|| positional.first().cloned())
+                .unwrap_or_default(),
+        })
+    }
+}
+
+struct GemsExpander;
+impl TemplateExpander for GemsExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Gems"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        Ok(ExpansionResult {
+            expanded: positional
+                .first()
+                .cloned()
+                .unwrap_or_else(|| "Gems".to_string()),
+        })
+    }
+}
+
+struct UniverseExpander;
+impl TemplateExpander for UniverseExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["univ", "Universe icon"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, named) = split_named_and_positional(inv);
+        let mut label = positional
+            .get(1)
+            .cloned()
+            .or_else(|| positional.first().cloned())
+            .unwrap_or_default();
+        if named
+            .get("possessive")
+            .map(|value| is_truthy_flag(value))
+            .unwrap_or(false)
+        {
+            append_possessive(&mut label);
+        }
+        Ok(ExpansionResult { expanded: label })
+    }
+}
+
+struct LabelColonExpander;
+impl TemplateExpander for LabelColonExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["lc"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        let label = positional
+            .first()
+            .map(|value| value.trim().trim_end_matches(':'))
+            .unwrap_or("");
+        Ok(ExpansionResult {
+            expanded: if label.is_empty() {
+                String::new()
+            } else {
+                format!("**{}:**", label)
+            },
+        })
+    }
+}
+
+struct CurrencyExpander;
+impl TemplateExpander for CurrencyExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["RP", "IP", "BE", "XP", "ME"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, named) = split_named_and_positional(inv);
+        let code = inv.name.to_ascii_uppercase();
+        let value = named
+            .get("text")
+            .cloned()
+            .or_else(|| positional.first().cloned())
+            .unwrap_or_default();
+        let trimmed = value.trim();
+        let expanded = if trimmed.is_empty() {
+            code.clone()
+        } else if trimmed.eq_ignore_ascii_case(&code)
+            || trimmed
+                .to_ascii_uppercase()
+                .ends_with(&format!(" {}", code))
+            || !trimmed.chars().any(|ch| ch.is_ascii_digit())
+        {
+            trimmed.to_string()
+        } else {
+            format!("{} {}", trimmed, code)
+        };
+        Ok(ExpansionResult { expanded })
+    }
+}
+
+struct SymbolExpander;
+impl TemplateExpander for SymbolExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Infinity", "plus"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let expanded = if inv.name.eq_ignore_ascii_case("Infinity") {
+            "∞"
+        } else {
+            " + "
+        };
+        Ok(ExpansionResult {
+            expanded: expanded.to_string(),
+        })
+    }
+}
+
+// Quote expander: {{Quote|text|author}} -> blockquote; no styling beyond plain text.
+struct QuoteExpander;
+impl TemplateExpander for QuoteExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Quote", "quote"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing quote body".into(),
+            });
+        }
+        let body = inv.params[0].trim();
+        let author = inv
+            .params
+            .get(1)
+            .map(|a| a.trim())
+            .filter(|a| !a.is_empty());
+        let mut out = String::new();
+        out.push_str("> ");
+        out.push_str(body);
+        if let Some(a) = author {
+            out.push_str(" — ");
+            out.push_str(a);
+        }
+        Ok(ExpansionResult { expanded: out })
+    }
+}
+
+// Tip wrapper (game badge / italic on wiki). Keep plain text of the first arg.
+struct TipExpander;
+impl TemplateExpander for TipExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["tip"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing label".into(),
+            });
+        }
+        // If any param mentions icononly=true, suppress output (icon-only markers)
+        if inv
+            .params
+            .iter()
+            .any(|p| p.to_lowercase().contains("icononly"))
+        {
+            return Ok(ExpansionResult {
+                expanded: String::new(),
+            });
+        }
+        // Prefer the last non-empty param (often the display label), else the first
+        let chosen = inv
+            .params
+            .iter()
+            .rev()
+            .find(|s| !s.trim().is_empty())
+            .cloned()
+            .unwrap_or_else(|| inv.params[0].clone());
+        Ok(ExpansionResult {
+            expanded: chosen.trim().to_string(),
+        })
+    }
+}
+
+// Wikipedia link shortcut: {{w|Page|Label}} -> Label (fallback to Page)
+struct WExpander;
+impl TemplateExpander for WExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["w", "W"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing page".into(),
+            });
+        }
+        let label = inv
+            .params
+            .get(1)
+            .map(|s| s.trim())
+            .filter(|s| !s.is_empty())
+            .unwrap_or_else(|| inv.params[0].trim());
+        Ok(ExpansionResult {
+            expanded: label.to_string(),
+        })
+    }
+}
+
+// Small Bold Caps: {{sbc|text}} -> **TEXT** (uppercase)
+struct SbcExpander;
+impl TemplateExpander for SbcExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["sbc"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing text".into(),
+            });
+        }
+        let txt = inv.params[0].to_uppercase();
+        Ok(ExpansionResult {
+            expanded: format!("**{}**", txt),
+        })
+    }
+}
+
+// Channel Type (ct) stub: {{ct|channeled}} -> (Channeled)
+struct ChannelTypeExpander;
+impl TemplateExpander for ChannelTypeExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["ct"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "missing channel type".into(),
+            });
+        }
+        let t = inv.params[0].trim();
+        Ok(ExpansionResult {
+            expanded: format!("({})", t),
+        })
+    }
+}
+
+// Skill Tab (st) expander: convert to a simple inline marker; actual structured capture handled separately.
+struct SkillTabExpander;
+impl TemplateExpander for SkillTabExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["st"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        // Parse headers (h:) and rows (r:, r2:, r3:, etc.)
+        let mut headers = Vec::new();
+        let mut rows = Vec::new();
+        let mut current_row = Vec::new();
+        let mut row_index = 1;
+        for p in &inv.params {
+            if let Some(eq) = p.find('=') {
+                let (k, v) = p.split_at(eq);
+                let k = k.trim();
+                let v = v[1..].trim();
+                if k.eq_ignore_ascii_case("h") {
+                    headers.push(v.to_string());
+                } else if k.eq_ignore_ascii_case("r")
+                    || k.eq_ignore_ascii_case(&format!("r{}", row_index))
+                {
+                    current_row.push(v.to_string());
+                    if k.eq_ignore_ascii_case(&format!("r{}", row_index)) {
+                        rows.push(current_row);
+                        current_row = Vec::new();
+                        row_index += 1;
+                    }
+                }
+            }
+        }
+        // If there's an unfinished row
+        if !current_row.is_empty() {
+            rows.push(current_row);
+        }
+        // Fallback if no structured data
+        if headers.is_empty() && rows.is_empty() {
+            let pairs = inv.params.iter().map(|s| s.to_string()).collect::<Vec<_>>();
+            return Ok(ExpansionResult {
+                expanded: format!("[SkillTab {}]", pairs.join(" | ")),
+            });
+        }
+        // Generate marker with structured data
+        let mut parts = Vec::new();
+        for h in &headers {
+            parts.push(format!("h:{}", h));
+        }
+        for (i, row) in rows.iter().enumerate() {
+            let row_key = if i == 0 { "r" } else { &format!("r{}", i + 1) };
+            for val in row {
+                parts.push(format!("{}:{}", row_key, val));
+            }
+        }
+        Ok(ExpansionResult {
+            expanded: format!("[SkillTab {}]", parts.join(" | ")),
+        })
+    }
+}
+
+// Flip Text (ft) stylistic wrapper -> "a *(equivalently: b)*"
+struct FlipTextExpander;
+impl TemplateExpander for FlipTextExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["ft"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.is_empty() {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "requires at least one parameter".into(),
+            });
+        }
+        let primary = inv.params[0].trim();
+        let alt = inv
+            .params
+            .get(1)
+            .map(|value| value.trim().trim_end_matches(|ch| matches!(ch, ',' | ';')))
+            .unwrap_or("");
+        let result = if alt.is_empty() {
+            primary.to_string()
+        } else {
+            format!("{} *(equivalently: {})*", primary, alt)
+        };
+        Ok(ExpansionResult {
+            expanded: format!(" {} ", result.trim()),
+        })
+    }
+}
+
+// Champion / item constant data substitution (ccd / cid).
+struct ConstantDataExpander;
+impl TemplateExpander for ConstantDataExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["ccd", "cid"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        if inv.params.len() < 2 {
+            return Err(ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: "expected entity|field".into(),
+            });
+        }
+        let entity = inv.params[0].trim();
+        let field = inv.params[1].trim();
+        if inv.name.eq_ignore_ascii_case("ccd") {
+            return Ok(ExpansionResult {
+                expanded: resolve_champion_constant(ctx, entity, field)?,
+            });
+        } else if inv.name.eq_ignore_ascii_case("cid") {
+            return Ok(ExpansionResult {
+                expanded: resolve_item_constant(ctx, entity, field)?,
+            });
+        }
+        Err(ConvertError::Internal(format!(
+            "unsupported constant resolver `{}`",
+            inv.name
+        )))
+    }
+}
+
+fn resolve_champion_constant(ctx: &ExpanderCtx, entity: &str, field: &str) -> Result<String> {
+    let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
+        return Err(ConvertError::Internal(
+            "conversion context required for champion constant lookup".to_string(),
+        ));
+    };
+
+    if let Some(constants) = conv_ctx.champion_constants(entity) {
+        if let Some(value) = constants.get(field) {
+            return Ok(value.clone());
+        }
+    }
+
+    if let Some(default) = default_champion_constant(field) {
+        return Ok(default.to_string());
+    }
+
+    Err(ConvertError::Internal(format!(
+        "unresolved champion constant `{entity}.{field}`"
+    )))
+}
+
+fn default_champion_constant(field: &str) -> Option<&'static str> {
+    match field.trim().to_ascii_lowercase().as_str() {
+        "crit_base" => Some("175"),
+        _ => None,
+    }
+}
+
+fn resolve_item_constant(ctx: &ExpanderCtx, entity: &str, field: &str) -> Result<String> {
+    let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
+        return Err(ConvertError::Internal(
+            "conversion context required for item constant lookup".to_string(),
+        ));
+    };
+
+    let map = conv_ctx.item_module_map()?;
+    let item_data = map
+        .get(entity)
+        .or_else(|| {
+            map.iter()
+                .find(|(name, _)| name.eq_ignore_ascii_case(entity))
+                .map(|(_, value)| value)
+        })
+        .ok_or_else(|| {
+            ConvertError::Internal(format!("unresolved item constant `{entity}.{field}`"))
+        })?;
+
+    if let Some(LuaValue::String(value)) = get_case_insensitive(item_data, field) {
+        return Ok(value.clone());
+    }
+    if let Some(LuaValue::Number(value)) = get_case_insensitive(item_data, field) {
+        return Ok(value.to_string());
+    }
+    if field.eq_ignore_ascii_case("sell") {
+        if let (Some(buy), Some(ratio)) = (
+            get_case_insensitive(item_data, "buy").and_then(lua_value_to_string),
+            get_case_insensitive(item_data, "sellratio").and_then(lua_value_to_string),
+        ) {
+            if let (Ok(buy), Ok(ratio)) = (buy.trim().parse::<f64>(), ratio.trim().parse::<f64>()) {
+                return Ok(format_progression_number((buy * ratio).round(), Some("0")));
+            }
+        }
+    }
+    if let Some(LuaValue::Table(stats)) = get_case_insensitive(item_data, "stats") {
+        if let Some(LuaValue::String(value)) = get_case_insensitive(stats, field) {
+            return Ok(value.clone());
+        }
+        if let Some(LuaValue::Number(value)) = get_case_insensitive(stats, field) {
+            return Ok(value.to_string());
+        }
+    }
+
+    Err(ConvertError::Internal(format!(
+        "unresolved item constant `{entity}.{field}`"
+    )))
+}
+
+fn get_case_insensitive<'a, T>(map: &'a HashMap<String, T>, key: &str) -> Option<&'a T> {
+    map.get(key).or_else(|| {
+        map.iter()
+            .find(|(name, _)| name.eq_ignore_ascii_case(key))
+            .map(|(_, value)| value)
+    })
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum HighestLowestStatField {
+    Health,
+    Mana,
+    Armor,
+    MagicResist,
+    HealthRegen,
+    ManaRegen,
+    AttackDamage,
+    AttackSpeed,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum HighestLowestSort {
+    Top,
+    Bottom,
+}
+
+#[derive(Clone, Debug)]
+struct HighestLowestRow {
+    champion: String,
+    value: f32,
+}
+
+struct HighestLowestStatsExpander;
+impl TemplateExpander for HighestLowestStatsExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Highest lowest stats"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        let Some(module_raw) = conv_ctx.champion_module_raw()? else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        let module = match parse_champion_module(module_raw) {
+            Ok(module) => module,
+            Err(_) => {
+                return Ok(ExpansionResult {
+                    expanded: unhandled_template_marker(inv),
+                })
+            }
+        };
+
+        let (positional, named) = split_named_and_positional(inv);
+        let Some(stat_field) = positional
+            .first()
+            .and_then(|value| parse_highest_lowest_stat_field(value))
+        else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+
+        let sort = named
+            .get("sortby")
+            .and_then(|value| parse_highest_lowest_sort(value));
+        let rangetype = named
+            .get("rangetype")
+            .map(|value| value.trim().to_ascii_lowercase())
+            .filter(|value| !value.is_empty());
+        let level = named
+            .get("lvl")
+            .and_then(|value| value.trim().parse::<usize>().ok())
+            .filter(|value| *value >= 1)
+            .unwrap_or(1);
+        let size = named
+            .get("size")
+            .and_then(|value| value.trim().parse::<usize>().ok())
+            .filter(|value| *value >= 1)
+            .unwrap_or(5);
+        let offset = named
+            .get("show")
+            .and_then(|value| value.trim().parse::<usize>().ok())
+            .unwrap_or(1)
+            .saturating_sub(1);
+        let get = named
+            .get("get")
+            .map(|value| value.trim().to_ascii_lowercase())
+            .filter(|value| !value.is_empty());
+
+        let mut rows = module
+            .iter()
+            .filter_map(|(fallback_name, entry)| {
+                if let Some(ref desired_range) = rangetype {
+                    let actual_range = champion_rangetype(entry)?;
+                    if !actual_range.eq_ignore_ascii_case(desired_range) {
+                        return None;
+                    }
+                }
+                let value = compute_highest_lowest_stat_value(entry, stat_field, level)?;
+                Some(HighestLowestRow {
+                    champion: champion_display_name(entry, fallback_name),
+                    value,
+                })
+            })
+            .collect::<Vec<_>>();
+        if rows.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        }
+
+        let expanded = if let Some(sort) = sort {
+            sort_highest_lowest_rows(&mut rows, sort);
+            let selected = rows.into_iter().skip(offset).take(size).collect::<Vec<_>>();
+            if selected.is_empty() {
+                unhandled_template_marker(inv)
+            } else {
+                render_highest_lowest_rows(&selected, get.as_deref())
+            }
+        } else {
+            let mut bottom = rows.clone();
+            sort_highest_lowest_rows(&mut bottom, HighestLowestSort::Bottom);
+            let bottom = bottom.into_iter().take(size).collect::<Vec<_>>();
+            let mut top = rows;
+            sort_highest_lowest_rows(&mut top, HighestLowestSort::Top);
+            let top = top.into_iter().take(size).collect::<Vec<_>>();
+            format!(
+                "Lowest: {}; Highest: {}",
+                render_highest_lowest_rows(&bottom, get.as_deref()),
+                render_highest_lowest_rows(&top, get.as_deref())
+            )
+        };
+
+        Ok(ExpansionResult { expanded })
+    }
+}
+
+fn parse_highest_lowest_stat_field(raw: &str) -> Option<HighestLowestStatField> {
+    let normalized = raw
+        .trim()
+        .to_ascii_lowercase()
+        .replace(['_', '-'], " ")
+        .split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ");
+    match normalized.as_str() {
+        "hp" | "health" => Some(HighestLowestStatField::Health),
+        "mp" | "mana" => Some(HighestLowestStatField::Mana),
+        "armor" | "arm" => Some(HighestLowestStatField::Armor),
+        "magic resistance" | "magic resist" | "mr" => Some(HighestLowestStatField::MagicResist),
+        "hp5" | "health regen" | "health regeneration" => Some(HighestLowestStatField::HealthRegen),
+        "mp5" | "mana regen" | "mana regeneration" => Some(HighestLowestStatField::ManaRegen),
+        "ad" | "attack damage" | "damage" | "dam" => Some(HighestLowestStatField::AttackDamage),
+        "as" | "attack speed" => Some(HighestLowestStatField::AttackSpeed),
+        _ => None,
+    }
+}
+
+fn parse_highest_lowest_sort(raw: &str) -> Option<HighestLowestSort> {
+    match raw.trim().to_ascii_lowercase().as_str() {
+        "top" | "highest" => Some(HighestLowestSort::Top),
+        "bot" | "bottom" | "lowest" => Some(HighestLowestSort::Bottom),
+        _ => None,
+    }
+}
+
+fn champion_display_name(entry: &HashMap<String, LuaValue>, fallback: &str) -> String {
+    for key in ["disp_name", "name", "fullname", "apiname"] {
+        if let Some(label) = entry.get(key).and_then(lua_value_to_string) {
+            let trimmed = label.trim();
+            if !trimmed.is_empty() {
+                return trimmed.to_string();
+            }
+        }
+    }
+    fallback.to_string()
+}
+
+fn champion_rangetype(entry: &HashMap<String, LuaValue>) -> Option<String> {
+    entry
+        .get("rangetype")
+        .and_then(lua_value_to_string)
+        .map(|value| value.trim().to_string())
+        .filter(|value| !value.is_empty())
+}
+
+fn compute_highest_lowest_stat_value(
+    entry: &HashMap<String, LuaValue>,
+    field: HighestLowestStatField,
+    level: usize,
+) -> Option<f32> {
+    let LuaValue::Table(stats) = entry.get("stats")? else {
+        return None;
+    };
+    match field {
+        HighestLowestStatField::Health => compute_scaled_stat(stats, "hp_base", "hp_lvl", level),
+        HighestLowestStatField::Mana => compute_scaled_stat(stats, "mp_base", "mp_lvl", level),
+        HighestLowestStatField::Armor => compute_scaled_stat(stats, "arm_base", "arm_lvl", level),
+        HighestLowestStatField::MagicResist => {
+            compute_scaled_stat(stats, "mr_base", "mr_lvl", level)
+        }
+        HighestLowestStatField::HealthRegen => {
+            compute_scaled_stat(stats, "hp5_base", "hp5_lvl", level)
+        }
+        HighestLowestStatField::ManaRegen => {
+            compute_scaled_stat(stats, "mp5_base", "mp5_lvl", level)
+        }
+        HighestLowestStatField::AttackDamage => {
+            compute_scaled_stat(stats, "dam_base", "dam_lvl", level)
+        }
+        HighestLowestStatField::AttackSpeed => {
+            let base = stat_number(stats, "as_base")?;
+            let growth_percent = stat_number(stats, "as_lvl").unwrap_or(0.0);
+            let ratio = stat_number(stats, "as_ratio").unwrap_or(base);
+            let bonus = scaled_stat_growth(growth_percent / 100.0, level);
+            Some(base + ratio * bonus)
+        }
+    }
+}
+
+fn compute_scaled_stat(
+    stats: &HashMap<String, LuaValue>,
+    base_key: &str,
+    growth_key: &str,
+    level: usize,
+) -> Option<f32> {
+    let base = stat_number(stats, base_key)?;
+    let growth = stat_number(stats, growth_key).unwrap_or(0.0);
+    Some(base + scaled_stat_growth(growth, level))
+}
+
+fn stat_number(stats: &HashMap<String, LuaValue>, key: &str) -> Option<f32> {
+    match stats.get(key)? {
+        LuaValue::Number(raw) | LuaValue::String(raw) => raw.trim().parse::<f32>().ok(),
+        LuaValue::Bool(true) => Some(1.0),
+        LuaValue::Bool(false) => Some(0.0),
+        _ => None,
+    }
+}
+
+fn scaled_stat_growth(growth: f32, level: usize) -> f32 {
+    if level <= 1 {
+        return 0.0;
+    }
+    let n = level.saturating_sub(1) as f32;
+    growth * n * (0.7025 + 0.0175 * n)
+}
+
+fn sort_highest_lowest_rows(rows: &mut [HighestLowestRow], sort: HighestLowestSort) {
+    rows.sort_by(|left, right| {
+        let value_cmp = left
+            .value
+            .partial_cmp(&right.value)
+            .unwrap_or(Ordering::Equal);
+        let value_cmp = match sort {
+            HighestLowestSort::Top => value_cmp.reverse(),
+            HighestLowestSort::Bottom => value_cmp,
+        };
+        value_cmp.then_with(|| {
+            left.champion
+                .to_ascii_lowercase()
+                .cmp(&right.champion.to_ascii_lowercase())
+        })
+    });
+}
+
+fn render_highest_lowest_rows(rows: &[HighestLowestRow], get: Option<&str>) -> String {
+    if rows.is_empty() {
+        return String::new();
+    }
+    if rows.len() == 1 {
+        return match get {
+            Some("champ") | Some("champion") => rows[0].champion.clone(),
+            Some("stat") | Some("value") | None => format_highest_lowest_stat_value(rows[0].value),
+            _ => format_highest_lowest_stat_value(rows[0].value),
+        };
+    }
+    match get {
+        Some("champ") | Some("champion") => rows
+            .iter()
+            .map(|row| row.champion.as_str())
+            .collect::<Vec<_>>()
+            .join(", "),
+        Some("stat") | Some("value") => rows
+            .iter()
+            .map(|row| format_highest_lowest_stat_value(row.value))
+            .collect::<Vec<_>>()
+            .join(", "),
+        _ => rows
+            .iter()
+            .map(|row| {
+                format!(
+                    "{} ({})",
+                    row.champion,
+                    format_highest_lowest_stat_value(row.value)
+                )
+            })
+            .collect::<Vec<_>>()
+            .join(", "),
+    }
+}
+
+fn format_highest_lowest_stat_value(value: f32) -> String {
+    let mut rendered = if value.abs() >= 1000.0 {
+        format!("{:.0}", value)
+    } else {
+        format!("{:.4}", value)
+    };
+    while rendered.contains('.') && rendered.ends_with('0') {
+        rendered.pop();
+    }
+    if rendered.ends_with('.') {
+        rendered.pop();
+    }
+    if rendered == "-0" {
+        "0".to_string()
+    } else {
+        rendered
+    }
+}
+
+struct ItemStatTableExpander;
+impl TemplateExpander for ItemStatTableExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Item stat table"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, named) = split_named_and_positional(inv);
+        let key = positional
+            .first()
+            .map(|value| value.trim().to_ascii_lowercase())
+            .unwrap_or_default();
+        if key.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        }
+        if named
+            .get("wr")
+            .map(|value| value.trim().eq_ignore_ascii_case("true"))
+            .unwrap_or(false)
+        {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        }
+        let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        let Ok(module) = conv_ctx.item_module_map() else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        let Some(expanded) = render_item_stat_table(module, &key) else {
+            return Ok(ExpansionResult {
+                expanded: unhandled_template_marker(inv),
+            });
+        };
+        Ok(ExpansionResult { expanded })
+    }
+}
+
+struct SuperimposeExpander;
+impl TemplateExpander for SuperimposeExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Superimpose"]
+    }
+
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: String::new(),
+        })
+    }
+}
+
+#[derive(Debug, Clone)]
+struct ItemStatTableRow {
+    item: String,
+    cost: String,
+    amount: String,
+}
+
+fn render_item_stat_table(
+    module: &HashMap<String, HashMap<String, LuaValue>>,
+    key: &str,
+) -> Option<String> {
+    let rows = collect_item_stat_table_rows(module, key);
+    if rows.is_empty() {
+        return None;
+    }
+    Some(
+        rows.into_iter()
+            .map(|row| format!("{} ({} → {})", row.item, row.cost, row.amount))
+            .collect::<Vec<_>>()
+            .join("; "),
+    )
+}
+
+fn collect_item_stat_table_rows(
+    module: &HashMap<String, HashMap<String, LuaValue>>,
+    key: &str,
+) -> Vec<ItemStatTableRow> {
+    if matches!(
+        key,
+        "offensive" | "magical" | "defensive" | "misc" | "baseefficiency"
+    ) {
+        return Vec::new();
+    }
+
+    let mut rows = module
+        .iter()
+        .filter_map(|(item_name, entry)| {
+            let cost_value = item_entry_number(entry, "buy")?;
+            if cost_value <= 0.0 {
+                return None;
+            }
+            let cost = format_highest_lowest_stat_value(cost_value);
+            let LuaValue::Table(stats) = entry.get("stats")? else {
+                return None;
+            };
+            let amount = if key == "pykehealth" {
+                let hp = stat_number(stats, "hp")?;
+                let ad = stat_number(stats, "ad").unwrap_or(0.0);
+                let converted = ((hp / 14.0 + ad) * 10.0).round() / 10.0;
+                format_highest_lowest_stat_value(converted)
+            } else {
+                let mut parts: Vec<String> = Vec::new();
+                if let Some(value) = stat_number(stats, key) {
+                    parts.push(format!(
+                        "{}{}",
+                        format_highest_lowest_stat_value(value),
+                        item_stat_table_suffix(key)
+                    ));
+                }
+                let unique_key = format!("{}unique", key);
+                if let Some(value) = stat_number(stats, &unique_key) {
+                    parts.push(format!(
+                        "{}{} (Unique)",
+                        format_highest_lowest_stat_value(value),
+                        item_stat_table_suffix(key)
+                    ));
+                }
+                if parts.is_empty() {
+                    return None;
+                }
+                parts.join(", ")
+            };
+            Some(ItemStatTableRow {
+                item: item_name.clone(),
+                cost,
+                amount,
+            })
+        })
+        .collect::<Vec<_>>();
+    rows.sort_by(|left, right| {
+        left.item
+            .to_ascii_lowercase()
+            .cmp(&right.item.to_ascii_lowercase())
+    });
+    rows
+}
+
+fn item_entry_number(entry: &HashMap<String, LuaValue>, key: &str) -> Option<f32> {
+    match entry.get(key)? {
+        LuaValue::Number(raw) | LuaValue::String(raw) => raw.trim().parse::<f32>().ok(),
+        LuaValue::Bool(true) => Some(1.0),
+        LuaValue::Bool(false) => Some(0.0),
+        _ => None,
+    }
+}
+
+fn item_stat_table_suffix(key: &str) -> &'static str {
+    match key {
+        "as" | "crit" | "lifesteal" | "armpen" | "mpen" | "hp5" | "mp5" | "hsp" | "omnivamp"
+        | "tenacity" | "ms" | "critdamage" => "%",
+        "gp10" => " per 10s",
+        _ => "",
+    }
+}
+
+// Neutralize structural templates that carry no information payload in markdown output.
+struct NeutralizeExpander;
+impl TemplateExpander for NeutralizeExpander {
+    fn names(&self) -> &'static [&'static str] {
+        // Add more known structural/no-op templates here as they are observed.
+        &[
+            "Section top",
+            "Section end",
+            "section top",
+            "section end",
+            "Game banner",
+            "LoL navigation",
+            "Navbox",
+            "Hatnote",
+            // Infoboxes / page scaffolding
+            "Infobox champion",
+            "Infobox item",
+            "Infobox rune",
+            "Infobox spell",
+            "Infobox stats",
+            "Infobox buff",
+            "Infobox unit",
+            "Infobox video",
+            "Item info",
+            "Champion info",
+            "Champions",
+            "Champion categories",
+            // Grouped ability wrapper used on some pages
+            "Grouped ability",
+            // Champion Data templates (e.g., Data Akshan/I)
+            "Data",
+            // Lua module invocations (e.g., #invoke:SkinData|...)
+            "#invoke",
+            // Patch history inclusion box
+            "Patch box",
+            // Casting helper/marker templates
+            "Effect at cast time end",
+            "Effect at cast time start",
+            // Audio sample / minor markers
+            "sm2",
+            "#ev:youtube",
+            // Bug marker becomes empty in text
+            "bug",
+            // Range/time formatting helpers that don't affect plain text content here
+            "rutngt",
+            "pending for test",
+            // Anchor for sections
+            "Anchor",
+            // Pet infobox
+            "Infobox/Pet",
+            // Champion AP ratio category
+            "Champion without ability power ratio",
+            // TFT item marker
+            "TFT Item",
+            // References block wrappers
+            "References",
+            "Champion eternals",
+            "Infobox/Credits",
+            "Champion bio",
+            "Rune header",
+            "Rune footer",
+            "Buff header",
+            "Jungle pet info",
+            // Misc attribution banners
+            "wikia",
+        ]
+    }
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: String::new(),
+        })
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::convert::util::expand_inline_templates_mut;
+    use std::collections::HashMap;
+    use std::sync::Arc;
+    use tempfile::tempdir;
+
+    fn ctx() -> ExpanderCtx {
+        ExpanderCtx::new(2, &HashMap::new(), None)
+    }
+
+    #[test]
+    fn parse_invocation_colon_forms() {
+        let inv = parse_invocation("#expr: 1+2");
+        assert_eq!(inv.name, "#expr");
+        assert_eq!(inv.params[0], "1+2");
+        let inv = parse_invocation("#vardefine:x|5");
+        assert_eq!(inv.name, "#vardefine");
+        assert_eq!(inv.params[0], "x");
+        let inv = parse_invocation("#var:x");
+        assert_eq!(inv.name, "#var");
+        assert_eq!(inv.params[0], "x");
+    }
+
+    #[test]
+    fn expander_ap_pp_fd_icon() {
+        let reg = TemplateRegistry::new();
+        let ap = parse_invocation("ap|40");
+        assert_eq!(reg.expand(&ap, &ctx()).unwrap().expanded, "40");
+        let ap2 = parse_invocation("ap|60 to 140 by 20");
+        assert_eq!(
+            reg.expand(&ap2, &ctx()).unwrap().expanded,
+            "60 / 80 / 100 / 120 / 140"
+        );
+        let pp = parse_invocation("pp|10;20;30");
+        assert_eq!(
+            reg.expand(&pp, &ctx()).unwrap().expanded,
+            "10 / 20 / 30 (based on level)"
+        );
+        let ppt = parse_invocation("pptooltip|bot_values=5;15");
+        assert_eq!(
+            reg.expand(&ppt, &ctx()).unwrap().expanded,
+            "5 / 15 (based on level)"
+        );
+        let fd = parse_invocation("fd|3.14159|3");
+        assert_eq!(reg.expand(&fd, &ctx()).unwrap().expanded, "3.142");
+        let ci = parse_invocation("ci|Aatrox|'s");
+        assert_eq!(reg.expand(&ci, &ctx()).unwrap().expanded, "Aatrox's");
+        let ii = parse_invocation("ii|Infinity Edge|image=Infinity Edge item old.png");
+        assert_eq!(reg.expand(&ii, &ctx()).unwrap().expanded, "Infinity Edge");
+        let ap_equation = parse_invocation("ap|75 + 90% of 45 = 115.5 magic damage");
+        assert_eq!(
+            reg.expand(&ap_equation, &ctx()).unwrap().expanded,
+            "75 + 90% of 45=115.5 magic damage"
+        );
+        let cis = parse_invocation("cis|Kayle|variant=old3");
+        assert_eq!(reg.expand(&cis, &ctx()).unwrap().expanded, "Kayle");
+        let ai = parse_invocation("ai|World Ender|Aatrox");
+        assert_eq!(reg.expand(&ai, &ctx()).unwrap().expanded, "World Ender");
+        let ai_display = parse_invocation("ai|Living Forge|Ornn|Masterwork");
+        assert_eq!(
+            reg.expand(&ai_display, &ctx()).unwrap().expanded,
+            "Masterwork"
+        );
+        let crit = parse_invocation("critical damage|175|100|mod=0.9");
+        assert_eq!(reg.expand(&crit, &ctx()).unwrap().expanded, "90%");
+    }
+
+    #[test]
+    fn expander_wraps_unresolved_formulae_in_code_spans() {
+        let reg = TemplateRegistry::new();
+        let ap = parse_invocation("ap|((1+(Graves-100)*0.45/100)*(1+5*0.33302)/(1+3*0.33302)*100)");
+        assert_eq!(
+            reg.expand(&ap, &ctx()).unwrap().expanded,
+            "`((1+(Graves-100)*0.45/100)*(1+5*0.33302)/(1+3*0.33302)*100)`"
+        );
+    }
+
+    #[test]
+    fn constant_data_expander_resolves_defaults_and_nested_stats() {
+        let tmp = tempdir().unwrap();
+        let export_dir = tmp.path().join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        std::fs::write(
+            export_dir.join("Module%3AItemData%2Fdata.txt"),
+            r#"return {
+    ["Infinity Edge"] = {
+        ["stats"] = {
+            ["critdamage"] = 40,
+        }
+    },
+    ["Control Ward"] = {
+        ["buy"] = 75,
+        ["sellratio"] = 0.4,
+    }
+}"#,
+        )
+        .unwrap();
+
+        let conversion_ctx = Arc::new(ConversionContext::new(&export_dir, 2).unwrap());
+        let mut constants = HashMap::new();
+        constants.insert("missile_speed".to_string(), "3800".to_string());
+        conversion_ctx.insert_champion_constants("Graves", constants);
+        let ctx = ExpanderCtx::new(2, &HashMap::new(), Some(conversion_ctx));
+        let reg = TemplateRegistry::new();
+
+        let ccd = parse_invocation("ccd|Graves|crit_base");
+        assert_eq!(reg.expand(&ccd, &ctx).unwrap().expanded, "175");
+
+        let nested = parse_invocation("ccd|Graves|missile_speed");
+        assert_eq!(reg.expand(&nested, &ctx).unwrap().expanded, "3800");
+
+        let cid = parse_invocation("cid|Infinity Edge|critdamage");
+        assert_eq!(reg.expand(&cid, &ctx).unwrap().expanded, "40");
+
+        let sell = parse_invocation("cid|Control Ward|sell");
+        assert_eq!(reg.expand(&sell, &ctx).unwrap().expanded, "30");
+    }
+
+    #[test]
+    fn constant_data_expander_errors_on_unresolved_lookup() {
+        let tmp = tempdir().unwrap();
+        let export_dir = tmp.path().join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        let conversion_ctx = Arc::new(ConversionContext::new(&export_dir, 2).unwrap());
+        conversion_ctx.insert_champion_constants("Graves", HashMap::new());
+        let ctx = ExpanderCtx::new(2, &HashMap::new(), Some(conversion_ctx));
+        let reg = TemplateRegistry::new();
+
+        let missing = parse_invocation("ccd|Graves|not_a_real_field");
+        let err = reg.expand(&missing, &ctx).unwrap_err();
+        assert!(err
+            .to_string()
+            .contains("unresolved champion constant `Graves.not_a_real_field`"));
+    }
+
+    #[test]
+    fn vardefineecho_updates_state_and_allows_blank_var_in_expr() {
+        let reg = TemplateRegistry::new();
+        let mut vars = HashMap::new();
+        let expanded = expand_inline_templates_mut(
+            "{{#vardefineecho:total|{{#expr:{{#var:total}}+5}}}} then {{#var:total}}",
+            2,
+            &mut vars,
+            &reg,
+            None,
+        )
+        .unwrap();
+
+        assert_eq!(expanded, "5 then 5");
+        assert_eq!(vars.get("total"), Some(&"5".to_string()));
+    }
+
+    #[test]
+    fn gold_value_expander_promotes_custom_section_labels() {
+        let reg = TemplateRegistry::new();
+        let inv = parse_invocation("gold value|First Light Gold Value (from base stats)|nolink=");
+        assert_eq!(
+            reg.expand(&inv, &ctx()).unwrap().expanded,
+            "**First Light Gold Value (from base stats)**"
+        );
+
+        let default = parse_invocation("gold value|Gold Value");
+        assert!(reg.expand(&default, &ctx()).unwrap().expanded.is_empty());
+    }
+
+    #[test]
+    fn expander_progression_flags_and_template_helpers() {
+        let reg = TemplateRegistry::new();
+
+        let pp = parse_invocation("pp|key=k|2*x for 6");
+        assert_eq!(
+            reg.expand(&pp, &ctx()).unwrap().expanded,
+            "2k – 12k (based on level)"
+        );
+
+        let pp_formula = parse_invocation(
+            "pp|type=target's missing health|key=%|0 to 200 for 11|0 to 100|formula=2% per 1% of target's missing health",
+        );
+        assert_eq!(
+            reg.expand(&pp_formula, &ctx()).unwrap().expanded,
+            "0% – 200% (based on target's missing health; formula: 2% per 1% of target's missing health)"
+        );
+
+        let lc = parse_invocation("lc|Calibrum");
+        assert_eq!(reg.expand(&lc, &ctx()).unwrap().expanded, "**Calibrum:**");
+
+        let rp = parse_invocation("RP|390");
+        assert_eq!(reg.expand(&rp, &ctx()).unwrap().expanded, "390 RP");
+
+        let csl = parse_invocation("csl|Aatrox|Original|Aatrox, the Darkin Blade");
+        assert_eq!(
+            reg.expand(&csl, &ctx()).unwrap().expanded,
+            "Aatrox, the Darkin Blade"
+        );
+
+        let cst = parse_invocation("cst|Akshan|Cyber Pop");
+        assert_eq!(
+            reg.expand(&cst, &ctx()).unwrap().expanded,
+            "[Skin: Cyber Pop]"
+        );
+
+        let infinity = parse_invocation("Infinity");
+        assert_eq!(reg.expand(&infinity, &ctx()).unwrap().expanded, "∞");
+    }
+
+    #[test]
+    fn expander_tt_sbc_ct_if_switch() {
+        let reg = TemplateRegistry::new();
+        let tt = parse_invocation("tt|Value|Tooltip");
+        assert_eq!(reg.expand(&tt, &ctx()).unwrap().expanded, "Value (Tooltip)");
+        let sbc = parse_invocation("sbc|hello");
+        assert_eq!(reg.expand(&sbc, &ctx()).unwrap().expanded, "**HELLO**");
+        let ct = parse_invocation("ct|Channeled");
+        assert_eq!(reg.expand(&ct, &ctx()).unwrap().expanded, "(Channeled)");
+        let iff = parse_invocation("#if:1|yes|no");
+        assert_eq!(reg.expand(&iff, &ctx()).unwrap().expanded, "yes");
+        let ifeq = parse_invocation("#ifeq:a|a|Y|N");
+        assert_eq!(reg.expand(&ifeq, &ctx()).unwrap().expanded, "Y");
+        let sw = parse_invocation("#switch: b | a=1 | b=2 | #default=0");
+        assert_eq!(reg.expand(&sw, &ctx()).unwrap().expanded, "2");
+    }
+
+    #[test]
+    fn expander_additional_reader_facing_templates() {
+        let reg = TemplateRegistry::new();
+
+        let lor = parse_invocation("LoR|Mistkeepers");
+        assert_eq!(reg.expand(&lor, &ctx()).unwrap().expanded, "Mistkeepers");
+
+        let wrskin = parse_invocation("WRskin|Akali|Crystal Rose");
+        assert_eq!(
+            reg.expand(&wrskin, &ctx()).unwrap().expanded,
+            "Crystal Rose"
+        );
+
+        let skin_tier = parse_invocation("skin tier|legendary");
+        assert_eq!(
+            reg.expand(&skin_tier, &ctx()).unwrap().expanded,
+            "legendary"
+        );
+
+        let tftc_display = parse_invocation("TFTc|Amumu|set=10|new splash art");
+        assert_eq!(
+            reg.expand(&tftc_display, &ctx()).unwrap().expanded,
+            "new splash art"
+        );
+
+        let tftc_subject = parse_invocation("TFTc|Alune|set=11");
+        assert_eq!(reg.expand(&tftc_subject, &ctx()).unwrap().expanded, "Alune");
+
+        let gems = parse_invocation("Gems|Gems");
+        assert_eq!(reg.expand(&gems, &ctx()).unwrap().expanded, "Gems");
+
+        let uis = parse_invocation("uis|Tibbers");
+        assert_eq!(reg.expand(&uis, &ctx()).unwrap().expanded, "Tibbers");
+
+        let cbis = parse_invocation("cbis|Nagakabouros");
+        assert_eq!(reg.expand(&cbis, &ctx()).unwrap().expanded, "Nagakabouros'");
+    }
+
+    #[test]
+    fn item_stat_table_expander_renders_basic_and_pykehealth_tables() {
+        let tmp = tempdir().unwrap();
+        let export_dir = tmp.path().join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        std::fs::write(
+            export_dir.join("Module%3AItemData%2Fdata.txt"),
+            r#"return {
+    ["Ruby Crystal"] = { buy = 400, stats = { hp = 150 } },
+    ["Black Cleaver"] = { buy = 3000, stats = { hp = 350, ad = 40 } },
+    ["Long Sword"] = { buy = 350, stats = { ad = 10 } }
+}"#,
+        )
+        .unwrap();
+        let reg = TemplateRegistry::new();
+        let ctx = ExpanderCtx::new(
+            2,
+            &HashMap::new(),
+            Some(Arc::new(ConversionContext::new(&export_dir, 2).unwrap())),
+        );
+
+        let hp = parse_invocation("Item stat table|hp");
+        let hp_expanded = reg.expand(&hp, &ctx).unwrap().expanded;
+        assert!(hp_expanded.contains("Ruby Crystal (400 → 150)"));
+        assert!(hp_expanded.contains("Black Cleaver (3000 → 350)"));
+        assert!(!hp_expanded.contains("Long Sword"));
+
+        let pykehealth = parse_invocation("Item stat table|pykehealth");
+        let pyke_expanded = reg.expand(&pykehealth, &ctx).unwrap().expanded;
+        assert!(pyke_expanded.contains("Ruby Crystal (400 → 10.7)"));
+        assert!(pyke_expanded.contains("Black Cleaver (3000 → 65)"));
+        assert!(!pyke_expanded.contains("Long Sword"));
+    }
+
+    #[test]
+    fn include_info_templates_inline_includeonly_content() {
+        let tmp = tempdir().unwrap();
+        let export_dir = tmp.path().join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        let file_path = export_dir.join("Template%3ASpellblade%20info.txt");
+        std::fs::write(
+            &file_path,
+            "<includeonly>* {{sbc|Spellblade}} deals {{tip|proc damage}}.</includeonly>",
+        )
+        .unwrap();
+
+        let ctx = ConversionContext::new(tmp.path(), 2).unwrap();
+        let ctx_arc = Arc::new(ctx);
+        let registry = TemplateRegistry::new();
+        let inv = parse_invocation("Spellblade info");
+        let result = registry
+            .expand(
+                &inv,
+                &ExpanderCtx::new(2, &HashMap::new(), Some(ctx_arc.clone())),
+            )
+            .unwrap();
+        assert!(result
+            .expanded
+            .contains("* **SPELLBLADE** deals proc damage."));
+    }
+
+    #[test]
+    fn fd_template_preserves_percent_suffix() {
+        let reg = TemplateRegistry::new();
+        let result = reg.expand(&parse_invocation("fd|1.3%"), &ctx()).unwrap();
+        assert_eq!(result.expanded, "1.30%");
+    }
+
+    #[test]
+    fn rd_template_formats_melee_and_ranged_values() {
+        let reg = TemplateRegistry::new();
+        let result = reg.expand(&parse_invocation("rd|5|3"), &ctx()).unwrap();
+        assert_eq!(result.expanded, "5 (melee) / 3 (ranged)");
+    }
+
+    #[test]
+    fn buff_header_and_jungle_pet_info_are_neutralized() {
+        let reg = TemplateRegistry::new();
+        assert_eq!(
+            reg.expand(&parse_invocation("Buff header|Ascended"), &ctx())
+                .unwrap()
+                .expanded,
+            ""
+        );
+        assert_eq!(
+            reg.expand(&parse_invocation("Jungle pet info"), &ctx())
+                .unwrap()
+                .expanded,
+            ""
+        );
+    }
+
+    #[test]
+    fn highest_lowest_stats_resolves_champion_module_values() {
+        let tmp = tempdir().unwrap();
+        let export_dir = tmp.path().join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        std::fs::write(
+            export_dir.join("Module%3AChampionData%2Fdata.txt"),
+            r#"return {
+    ["Mini Gnar"] = {
+        ["name"] = "Mini Gnar",
+        ["rangetype"] = "Ranged",
+        ["stats"] = {
+            ["hp_base"] = 400,
+            ["hp_lvl"] = 80,
+            ["dam_base"] = 50,
+            ["dam_lvl"] = 3,
+        },
+    },
+    ["Mega Gnar"] = {
+        ["name"] = "Mega Gnar",
+        ["rangetype"] = "Melee",
+        ["stats"] = {
+            ["hp_base"] = 500,
+            ["hp_lvl"] = 100,
+            ["dam_base"] = 60,
+            ["dam_lvl"] = 5,
+        },
+    },
+    ["Anivia"] = {
+        ["name"] = "Anivia",
+        ["rangetype"] = "Ranged",
+        ["stats"] = {
+            ["hp_base"] = 390,
+            ["hp_lvl"] = 70,
+            ["dam_base"] = 55,
+            ["dam_lvl"] = 4,
+        },
+    },
+    ["Corki"] = {
+        ["name"] = "Corki",
+        ["rangetype"] = "Ranged",
+        ["stats"] = {
+            ["hp_base"] = 410,
+            ["hp_lvl"] = 75,
+            ["dam_base"] = 52,
+            ["dam_lvl"] = 2,
+        },
+    },
+}"#,
+        )
+        .unwrap();
+
+        let ctx = Arc::new(ConversionContext::new(tmp.path(), 2).unwrap());
+        let registry = TemplateRegistry::new();
+        let expander_ctx = ExpanderCtx::new(2, &HashMap::new(), Some(ctx));
+
+        let third_lowest_hp = parse_invocation(
+            "Highest lowest stats|hp|sortby=bot|size=1|lvl=18|show=3|rangetype=ranged",
+        );
+        assert_eq!(
+            registry
+                .expand(&third_lowest_hp, &expander_ctx)
+                .unwrap()
+                .expanded,
+            "1760"
+        );
+
+        let highest_ad = parse_invocation("Highest lowest stats|ad|sortby=top|size=1|lvl=18");
+        assert_eq!(
+            registry
+                .expand(&highest_ad, &expander_ctx)
+                .unwrap()
+                .expanded,
+            "145"
+        );
+
+        let highest_ad_champ =
+            parse_invocation("Highest lowest stats|ad|sortby=top|size=1|lvl=18|get=champ");
+        assert_eq!(
+            registry
+                .expand(&highest_ad_champ, &expander_ctx)
+                .unwrap()
+                .expanded,
+            "Mega Gnar"
+        );
+    }
+}

@@ -364,3 +364,7 @@ vite.config.ts.timestamp-*
 .vite/
 
 export_out
+generated/
+apps/docs/out/
+apps/docs/docs/
+apps/docs/.rspress/
