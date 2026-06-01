@@ -46,7 +46,7 @@ function Invoke-CheckedCommand {
 
     & $FilePath @ArgumentList
     if ($LASTEXITCODE -ne 0) {
-        throw "Command failed with exit code $LASTEXITCODE: $FilePath $($ArgumentList -join ' ')"
+        throw "Command failed with exit code ${LASTEXITCODE}: $FilePath $($ArgumentList -join ' ')"
     }
 }
 
@@ -123,7 +123,8 @@ function Run-Convert {
         $outputDir = Join-Path $MarkdownRoot $target.Label
         New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
         Write-Host "Converting $($target.Label) into $outputDir"
-        Invoke-CheckedCommand -FilePath $ConverterBin -ArgumentList @('--wiki-root', $SourceRoot, '--output', $outputDir) + $target.Args
+        $argumentList = @('--wiki-root', $SourceRoot, '--output', $outputDir) + $target.Args
+        Invoke-CheckedCommand -FilePath $ConverterBin -ArgumentList $argumentList
     }
 }
 

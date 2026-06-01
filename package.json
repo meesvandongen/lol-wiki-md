@@ -1,6 +1,12 @@
 {
   "name": "lol-wiki-monorepo",
+  "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meesvandongen/lol-wiki-md.git"
+  },
+  "homepage": "https://github.com/meesvandongen/lol-wiki-md",
   "workspaces": [
     "apps/docs"
   ],
@@ -11,8 +17,12 @@
     "docs:sync": "node ./scripts/sync-rspress-content.mjs",
     "docs:build": "npm run build --workspace @lol-wiki/docs",
     "docs:dev": "npm run dev --workspace @lol-wiki/docs",
+    "docs:publish": "npm run docs:sync && npm run docs:build && node ./scripts/publish-wrangler.mjs",
     "pipeline": "bash ./scripts/pipeline.sh",
     "pipeline:sh": "bash ./scripts/pipeline.sh",
     "pipeline:ps": "pwsh ./scripts/pipeline.ps1"
+  },
+  "devDependencies": {
+    "wrangler": "^4.67.3"
   }
 }

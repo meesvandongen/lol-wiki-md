@@ -2,9 +2,9 @@ use blake3::Hash;
 use lol_wiki_md::{convert_champion, convert_item, convert_rune};
 
 const EXPECTED_CHAMPION_HASH: &str =
-    "d402ebdcbdd97ee73d17a49a9f0c04e3474fab0c65ad1d7445c532f5b0974d97";
-const EXPECTED_ITEM_HASH: &str = "a78c0416b55399d46b2873ffa8c7fdf2fd45d02f3daac808be041a3aad661be8";
-const EXPECTED_RUNE_HASH: &str = "e93f7b7b1345cc98f8ccd7e0e19de51a3c9953c72f8896875dbb9c78434d5f35";
+    "cec270764361207dfd465e12069f0e9cb9a139e5b998233fba2e9aa639afa893";
+const EXPECTED_ITEM_HASH: &str = "8cd002332c8994e8ee19c8a84daf272993edc78fd8baa40a44506018b05ad8c9";
+const EXPECTED_RUNE_HASH: &str = "58d3a3086a5d583a60dec1aef59ff3838211e1bb8a3a1b5aabe748316d231fc9";
 
 #[test]
 fn golden_champion_output_hash() {

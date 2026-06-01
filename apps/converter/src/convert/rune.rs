@@ -4,7 +4,7 @@ use crate::convert::util::{
 };
 use crate::convert::{write_markdown_with_plain_text, ConversionOutcome};
 use crate::error::{ConvertError, Result};
-use crate::model::Rune;
+use crate::model::{Rune, SourceAppendix};
 use crate::parse::brace::TemplateSpan;
 use crate::parse::extract_balanced_templates;
 use crate::parse::templates::{parse_invocation, TemplateRegistry};
@@ -90,6 +90,7 @@ pub(super) fn convert_rune(
         })
         .unwrap_or_default();
     let patch_history = extract_patch_history(&visible_expanded);
+    let source_appendices = collect_rune_source_appendices(export, name, &raw)?;
     let warnings = validate_rune_metadata(path.as_deref(), slot.as_deref());
 
     let rune = Rune {
@@ -102,7 +103,7 @@ pub(super) fn convert_rune(
         notes,
         trivia,
         patch_history,
-        source_appendices: Vec::new(),
+        source_appendices,
         warnings,
     };
     let markdown = render_rune_markdown(&rune, &visible_expanded);
@@ -384,21 +385,17 @@ fn extract_first_paragraph(expanded: &str) -> Option<String> {
     let mut paragraph: Vec<String> = Vec::new();
     for line in expanded.lines() {
         let trimmed = line.trim();
+        if trimmed.starts_with("==") {
+            break;
+        }
         if trimmed.is_empty() {
             if !paragraph.is_empty() {
                 break;
             }
             continue;
         }
-        if trimmed.starts_with("<!--") || trimmed.starts_with("[Unhandled template:") {
+        if rune_line_cannot_start_paragraph(trimmed) {
             continue;
-        }
-        if trimmed.starts_with("==") {
-            if !paragraph.is_empty() {
-                break;
-            } else {
-                continue;
-            }
         }
         paragraph.push(trimmed.to_string());
         if trimmed.ends_with('.') {
@@ -406,10 +403,84 @@ fn extract_first_paragraph(expanded: &str) -> Option<String> {
         }
     }
     if paragraph.is_empty() {
-        None
+        let mut section_paragraph: Vec<String> = Vec::new();
+        let mut current_heading_is_descriptive = false;
+
+        for line in expanded.lines() {
+            let trimmed = line.trim();
+            if let Some(heading) = parse_rune_heading(trimmed) {
+                current_heading_is_descriptive = !rune_heading_is_non_descriptive(heading);
+                if !section_paragraph.is_empty() {
+                    break;
+                }
+                continue;
+            }
+            if !current_heading_is_descriptive {
+                continue;
+            }
+            if trimmed.is_empty() {
+                if !section_paragraph.is_empty() {
+                    break;
+                }
+                continue;
+            }
+            if rune_line_cannot_start_paragraph(trimmed) {
+                continue;
+            }
+            section_paragraph.push(trimmed.to_string());
+            if trimmed.ends_with('.') {
+                break;
+            }
+        }
+
+        if section_paragraph.is_empty() {
+            None
+        } else {
+            Some(section_paragraph.join(" "))
+        }
     } else {
         Some(paragraph.join(" "))
     }
+}
+
+fn parse_rune_heading(trimmed: &str) -> Option<&str> {
+    let stripped = trimmed.strip_prefix("==")?.strip_suffix("==")?.trim();
+    if stripped.is_empty() {
+        None
+    } else {
+        Some(stripped)
+    }
+}
+
+fn rune_heading_is_non_descriptive(heading: &str) -> bool {
+    matches!(
+        heading.trim().to_ascii_lowercase().as_str(),
+        "notes"
+            | "trivia"
+            | "tips"
+            | "tips and tricks"
+            | "patch history"
+            | "map-specific differences"
+            | "mode-specific changes"
+    )
+}
+
+fn rune_line_cannot_start_paragraph(trimmed: &str) -> bool {
+    trimmed.starts_with("<!--")
+        || trimmed.starts_with("[Unhandled template:")
+        || trimmed.starts_with("{{")
+        || trimmed.starts_with("|")
+        || trimmed.starts_with("{|")
+        || trimmed.starts_with("|}")
+        || trimmed.starts_with('!')
+        || trimmed.starts_with(':')
+        || trimmed.starts_with(';')
+        || trimmed.starts_with('*')
+        || trimmed.starts_with('#')
+        || trimmed.starts_with("[[File:")
+        || trimmed.starts_with("[[Image:")
+        || trimmed.starts_with("__")
+        || trimmed.starts_with('{')
 }
 
 fn validate_rune_metadata(path: Option<&str>, slot: Option<&str>) -> Vec<String> {
@@ -421,6 +492,41 @@ fn validate_rune_metadata(path: Option<&str>, slot: Option<&str>) -> Vec<String>
         warnings.push("Rune slot is missing".to_string());
     }
     warnings
+}
+
+fn collect_rune_source_appendices(
+    export: &WikiExport,
+    name: &str,
+    raw_main: &str,
+) -> Result<Vec<SourceAppendix>> {
+    let mut appendices = vec![SourceAppendix {
+        title: name.to_string(),
+        format: "wikitext".to_string(),
+        content: raw_main.to_string(),
+    }];
+
+    let mut subpages = export.list_titles_with_prefix(&format!("{name}/"))?;
+    subpages.sort();
+    for title in subpages {
+        if let Some(raw) = export.read_optional_page(&title)? {
+            appendices.push(SourceAppendix {
+                title,
+                format: "wikitext".to_string(),
+                content: raw,
+            });
+        }
+    }
+
+    let rune_data_title = format!("Template:Rune data {name}");
+    if let Some(raw) = export.read_template_page(&rune_data_title)? {
+        appendices.push(SourceAppendix {
+            title: rune_data_title,
+            format: "wikitext".to_string(),
+            content: raw,
+        });
+    }
+
+    Ok(appendices)
 }
 
 #[cfg(test)]
@@ -507,6 +613,36 @@ mod tests {
     }
 
     #[test]
+    fn collect_rune_source_appendices_includes_main_page_and_rune_data() {
+        let td = tempfile::tempdir().unwrap();
+        let export_dir = td.path().join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        std::fs::write(
+            export_dir.join("Electrocute.txt"),
+            "{{rune header|Electrocute}}\n",
+        )
+        .unwrap();
+        std::fs::write(
+            export_dir.join("Template%3ARune%20data%20Electrocute.txt"),
+            concat!(
+                "{{{{{1|Rune data}}}|Electrocute|{{{2|}}}|\n",
+                "|path=Domination\n",
+                "}}"
+            ),
+        )
+        .unwrap();
+
+        let export = WikiExport::new(td.path());
+        let appendices =
+            collect_rune_source_appendices(&export, "Electrocute", "{{rune header|Electrocute}}\n")
+                .unwrap();
+
+        assert_eq!(appendices.len(), 2);
+        assert_eq!(appendices[0].title, "Electrocute");
+        assert_eq!(appendices[1].title, "Template:Rune data Electrocute");
+    }
+
+    #[test]
     fn convert_rune_uses_rune_data_and_map_changes() {
         let td = tempfile::tempdir().unwrap();
         let export_dir = td.path().join("export_out");
@@ -563,10 +699,7 @@ mod tests {
         let out_dir = td.path().join("out");
         convert_rune(&ctx, &out_dir, "Electrocute").unwrap();
         let markdown = std::fs::read_to_string(out_dir.join("Electrocute.md")).unwrap();
-        let rendered_body = markdown
-            .split("<!-- Raw excerpt (first 20 lines) -->")
-            .next()
-            .unwrap_or(&markdown);
+        let rendered_body = markdown.as_str();
 
         assert!(markdown.contains("- **Path:** Domination"));
         assert!(markdown.contains("- **Slot:** Keystone"));
@@ -581,6 +714,10 @@ mod tests {
         assert!(markdown.contains("Storm quote"));
         assert!(!markdown.contains("[Unhandled template: rune header]"));
         assert!(!markdown.contains("Rune slot is missing"));
+        assert!(!markdown.contains("## Source Appendix"));
+        assert!(!markdown.contains("<details><summary>Electrocute</summary>"));
+        assert!(!markdown.contains("<details><summary>Template:Rune data Electrocute</summary>"));
+        assert!(!markdown.contains("<!-- Raw excerpt (first 20 lines) -->"));
         assert!(!rendered_body.contains("\n** Damage changed"));
     }
 
@@ -615,16 +752,15 @@ mod tests {
         let out_dir = td.path().join("out");
         convert_rune(&ctx, &out_dir, "Perfect Timing").unwrap();
         let markdown = std::fs::read_to_string(out_dir.join("Perfect_Timing.md")).unwrap();
-        let rendered_body = markdown
-            .split("<!-- Raw excerpt (first 20 lines) -->")
-            .next()
-            .unwrap_or(&markdown);
+        let rendered_body = markdown.as_str();
 
         assert!(rendered_body.contains("Perfectly Timed Stopwatch"));
         assert!(rendered_body.contains("Commencing Stopwatch"));
         assert!(!rendered_body.contains("{{Item info/var"));
         assert!(!rendered_body.contains("{{map changes|Perfect Timing}}"));
         assert!(!rendered_body.contains("## Map-Specific Differences"));
+        assert!(!markdown.contains("## Source Appendix"));
+        assert!(!markdown.contains("<!-- Raw excerpt (first 20 lines) -->"));
     }
 
     #[test]
@@ -666,6 +802,48 @@ mod tests {
         let items = trivia.expect("expected trivia items");
         assert_eq!(items.len(), 1);
         assert!(items[0].contains("Helpful hint"));
+    }
+
+    #[test]
+    fn extract_first_paragraph_prefers_lead_before_sections() {
+        let expanded = concat!(
+            "{{rune header|Electrocute}}\n",
+            "Electrocute is a rune in League of Legends.\n",
+            "== Notes ==\n",
+            "* Extra note\n"
+        );
+
+        assert_eq!(
+            extract_first_paragraph(expanded),
+            Some("Electrocute is a rune in League of Legends.".to_string())
+        );
+    }
+
+    #[test]
+    fn extract_first_paragraph_ignores_section_local_note_after_heading() {
+        let expanded = concat!(
+            "{{rune header|Perfect Timing}}\n",
+            "== Perfectly Timed Stopwatch ==\n",
+            ":''This article section only contains item variants.''\n"
+        );
+
+        assert_eq!(extract_first_paragraph(expanded), None);
+    }
+
+    #[test]
+    fn extract_first_paragraph_falls_back_to_first_descriptive_section() {
+        let expanded = concat!(
+            "{{rune header|Perfect Timing}}\n",
+            "== Notes ==\n",
+            "* Sell value reminder\n\n",
+            "== Perfectly Timed Stopwatch ==\n",
+            "Perfectly Timed Stopwatch grants a delayed stasis effect.\n"
+        );
+
+        assert_eq!(
+            extract_first_paragraph(expanded),
+            Some("Perfectly Timed Stopwatch grants a delayed stasis effect.".to_string())
+        );
     }
 
     #[test]

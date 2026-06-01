@@ -25,6 +25,9 @@ Useful top-level commands:
 - `npm run audit:similarity -- --help`
 - `npm run docs:build`
 - `npm run docs:dev`
+- `npm run docs:publish`
+
+The docs UI includes the official Rspress `llms` and `sitemap` plugins, a GitHub social link, and site version metadata sourced from the docs package version.
 
 ## One-shot pipeline
 
@@ -66,4 +69,51 @@ By default the pipeline writes:
 - `generated/markdown/runes` — rune Markdown output
 - `apps/docs/out` — static Rspress site build
 
+The static docs build also includes `sitemap.xml`, `llms.txt`, and `llms-full.txt`.
+
 The generated Rspress docs tree under `apps/docs/docs` is rebuilt from the Markdown folders and is intentionally ignored by Git.
+
+## Testing folders and workspace hygiene
+
+Use these folders consistently when validating changes so temporary artifacts do not leak into tracked source areas:
+
+- `generated/` — canonical pipeline output root. Use this when you want the normal export → convert → docs flow that downstream scripts expect.
+- `export_out/` — reusable local wiki export cache for quick converter tests with `--skip-export`. It is ignored by Git.
+- `test_output/` — scratch output for one-off conversion probes, focused comparisons, and temporary entity samples.
+- `validation_reports/` — disposable analysis reports, scans, and audit summaries.
+
+Avoid using legacy or ambiguous root folders for new work:
+
+- `markdown/`
+- `markdown_rust/`
+- `meta/`
+
+Those paths are kept only for old experiments or compatibility checks and should be treated as scratch/legacy locations, not canonical deliverables.
+
+When in doubt:
+
+- read from `export_out/` or `generated/wiki-export/out`
+- write ad-hoc test artifacts to `test_output/<run-name>/`
+- write disposable reports to `validation_reports/<run-name>/`
+- reserve `generated/` for outputs that the main pipeline or docs sync step will consume
+
+## Publishing with Wrangler
+
+The docs site can be published to Cloudflare Pages with Wrangler from the repository root.
+
+1. Authenticate Wrangler once for your machine, for example with `npx wrangler login`.
+2. Set `CLOUDFLARE_PAGES_PROJECT_NAME` in the root `.env` file.
+3. Run `npm run docs:publish`.
+
+If the deployed site uses a custom domain, set `DOCS_SITE_URL` in `.env` so the generated sitemap uses the final public URL instead of the default `*.pages.dev` hostname.
+
+`npm run docs:publish` will:
+
+- sync generated Markdown into `apps/docs/docs`
+- build the static site into `apps/docs/out`
+- run `wrangler pages deploy apps/docs/out`
+
+Optional overrides:
+
+- pass `--project-name <name>` after `npm run docs:publish -- ...`
+- set `CLOUDFLARE_PAGES_BRANCH` in `.env`, or pass `--branch <name>` directly

@@ -45,6 +45,7 @@ pub struct ConversionContextInner {
     champion_module_raw: OnceCell<Option<String>>,
     item_module_raw: OnceCell<Option<String>>,
     item_module_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
+    gold_value_data_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
     template_inventory: Mutex<HashSet<String>>,
     specimen_matrix: Mutex<HashMap<String, Vec<String>>>,
     champion_constants: Mutex<HashMap<String, HashMap<String, String>>>,
@@ -62,6 +63,7 @@ impl ConversionContext {
             champion_module_raw: OnceCell::new(),
             item_module_raw: OnceCell::new(),
             item_module_map: OnceCell::new(),
+            gold_value_data_map: OnceCell::new(),
             template_inventory: Mutex::new(HashSet::new()),
             specimen_matrix: Mutex::new(HashMap::new()),
             champion_constants: Mutex::new(HashMap::new()),
@@ -182,6 +184,19 @@ impl ConversionContext {
                 }
             }
             Ok(merged)
+        })
+    }
+
+    pub fn gold_value_data_map(&self) -> Result<&HashMap<String, HashMap<String, LuaValue>>> {
+        self.inner.gold_value_data_map.get_or_try_init(|| {
+            let Some(raw) = self
+                .inner
+                .export
+                .read_optional_page("Module:Gold value/data")?
+            else {
+                return Ok(HashMap::new());
+            };
+            parse_item_module(&raw)
         })
     }
 

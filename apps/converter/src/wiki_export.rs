@@ -259,6 +259,34 @@ pub fn url_decode(s: &str) -> String {
     out
 }
 
+fn contains_template_start(head: &str, candidates: &[&str]) -> bool {
+    let bytes = head.as_bytes();
+    let mut i = 0;
+    while i + 1 < bytes.len() {
+        if bytes[i] == b'{' && bytes[i + 1] == b'{' {
+            let start = i + 2;
+            let mut end = start;
+            while end < bytes.len() {
+                match bytes[end] {
+                    b'|' | b'}' | b'\n' | b'\r' => break,
+                    _ => end += 1,
+                }
+            }
+            let name = head[start..end].trim();
+            if candidates
+                .iter()
+                .any(|candidate| name.eq_ignore_ascii_case(candidate))
+            {
+                return true;
+            }
+            i = start;
+        } else {
+            i += 1;
+        }
+    }
+    false
+}
+
 impl WikiExport {
     /// List champion names available in the dataset by scanning either the exploded tree or flat files.
     pub fn list_champion_names(&self) -> Result<Vec<String>> {
@@ -275,7 +303,7 @@ impl WikiExport {
                 let mut buf = vec![0u8; 4096];
                 let n = file.read(&mut buf).unwrap_or(0);
                 let head = String::from_utf8_lossy(&buf[..n]);
-                if head.contains("{{Champion info") {
+                if contains_template_start(&head, &["Champion info"]) {
                     names.push(title);
                 }
             }
@@ -297,10 +325,7 @@ impl WikiExport {
                 let mut buf = vec![0u8; 8192];
                 let n = file.read(&mut buf).unwrap_or(0);
                 let head = String::from_utf8_lossy(&buf[..n]);
-                let has_item_info = crate::parse::extract_balanced_templates(&head)
-                    .unwrap_or_default()
-                    .into_iter()
-                    .any(|span| span.name.trim().eq_ignore_ascii_case("Item info"));
+                let has_item_info = contains_template_start(&head, &["Item info"]);
                 if has_item_info {
                     names.push(title);
                 }
@@ -323,15 +348,16 @@ impl WikiExport {
                 let mut buf = vec![0u8; 8192];
                 let n = file.read(&mut buf).unwrap_or(0);
                 let head = String::from_utf8_lossy(&buf[..n]);
-                let has_rune_markup = crate::parse::extract_balanced_templates(&head)
-                    .unwrap_or_default()
-                    .into_iter()
-                    .any(|span| {
-                        matches!(
-                            span.name.trim().to_ascii_lowercase().as_str(),
-                            "rune" | "rune info" | "rune box" | "rune infobox" | "rune header"
-                        )
-                    });
+                let has_rune_markup = contains_template_start(
+                    &head,
+                    &[
+                        "Rune",
+                        "Rune info",
+                        "Rune box",
+                        "Rune infobox",
+                        "Rune header",
+                    ],
+                );
                 if has_rune_markup {
                     names.push(title);
                 }
@@ -428,6 +454,21 @@ mod tests {
             "{{Champion info|title=Rogue Sentinel}}\n",
         )
         .unwrap();
+        let exp = WikiExport::new(td.path());
+        let items = exp.list_item_names().unwrap();
+        assert_eq!(items, vec!["Infinity Edge".to_string()]);
+    }
+
+    #[test]
+    fn list_item_names_detects_long_item_info_templates() {
+        let td = tempdir().unwrap();
+        let flat = td.path().join("export_out");
+        std::fs::create_dir_all(&flat).unwrap();
+        let mut raw = String::from("{{Item info\n|background=");
+        raw.push_str(&"x".repeat(9000));
+        raw.push_str("\n}}\n");
+        std::fs::write(flat.join("Infinity%20Edge.txt"), raw).unwrap();
+
         let exp = WikiExport::new(td.path());
         let items = exp.list_item_names().unwrap();
         assert_eq!(items, vec!["Infinity Edge".to_string()]);

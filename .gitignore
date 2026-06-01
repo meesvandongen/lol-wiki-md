@@ -368,3 +368,10 @@ generated/
 apps/docs/out/
 apps/docs/docs/
 apps/docs/.rspress/
+
+# Legacy and scratch output roots
+markdown/
+markdown_rust/
+meta/
+test_output/
+validation_reports/

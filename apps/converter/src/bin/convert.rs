@@ -4,7 +4,7 @@ use lol_wiki_md::validate::validate_templates;
 use lol_wiki_md::wiki_export::WikiExport;
 use lol_wiki_md::{error::ConvertError, CliConfig, ConversionContext};
 use serde::Serialize;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use tracing_subscriber::{fmt, prelude::*, EnvFilter};
 
 #[derive(Debug, Clone, Serialize)]
@@ -87,34 +87,53 @@ fn main() -> Result<(), ConvertError> {
     let ctx = ConversionContext::new(&cfg.wiki_root, cfg.precision)?;
 
     let conversion_result = if let Some(name) = &cfg.champion {
-        ctx.convert_champion(&cfg.output, name).map(|_| ())
+        let champion_output = category_output_dir(&cfg.output, "champions", false)?;
+        ctx.convert_champion(&champion_output, name).map(|_| ())
     } else if cfg.all_champions {
         let export = WikiExport::new(&cfg.wiki_root);
         let names = export.list_champion_names()?;
+        let champion_output = category_output_dir(&cfg.output, "champions", true)?;
         run_batch("champion", names, &cfg.output, |name| {
-            ctx.convert_champion(&cfg.output, name).map(|_| ())
+            ctx.convert_champion(&champion_output, name).map(|_| ())
         })
     } else if let Some(item) = &cfg.item {
-        ctx.convert_item(&cfg.output, item).map(|_| ())
+        let item_output = category_output_dir(&cfg.output, "items", false)?;
+        ctx.convert_item(&item_output, item).map(|_| ())
     } else if cfg.all_items {
         let export = WikiExport::new(&cfg.wiki_root);
         let names = export.list_item_names()?;
+        let item_output = category_output_dir(&cfg.output, "items", true)?;
         run_batch("item", names, &cfg.output, |name| {
-            ctx.convert_item(&cfg.output, name).map(|_| ())
+            ctx.convert_item(&item_output, name).map(|_| ())
         })
     } else if let Some(rune) = &cfg.rune {
-        ctx.convert_rune(&cfg.output, rune).map(|_| ())
+        let rune_output = category_output_dir(&cfg.output, "runes", false)?;
+        ctx.convert_rune(&rune_output, rune).map(|_| ())
     } else if cfg.all_runes {
         let export = WikiExport::new(&cfg.wiki_root);
         let names = export.list_rune_names()?;
+        let rune_output = category_output_dir(&cfg.output, "runes", true)?;
         run_batch("rune", names, &cfg.output, |name| {
-            ctx.convert_rune(&cfg.output, name).map(|_| ())
+            ctx.convert_rune(&rune_output, name).map(|_| ())
         })
     } else {
         Ok(())
     };
     ctx.write_inventory_reports(&cfg.output)?;
     conversion_result
+}
+
+fn category_output_dir(
+    output_root: &Path,
+    category: &str,
+    clean: bool,
+) -> Result<PathBuf, ConvertError> {
+    let dir = output_root.join(category);
+    if clean && dir.exists() {
+        std::fs::remove_dir_all(&dir)?;
+    }
+    std::fs::create_dir_all(&dir)?;
+    Ok(dir)
 }
 
 fn run_batch<F>(

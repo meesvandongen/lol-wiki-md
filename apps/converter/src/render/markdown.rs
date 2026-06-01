@@ -1,4 +1,4 @@
-use crate::model::{AbilityKey, Champion, ChampionSpecialMode, Item, Rune, SourceAppendix};
+use crate::model::{AbilityKey, Champion, ChampionSpecialMode, Item, Rune};
 use crate::parse::extract_balanced_templates;
 use once_cell::sync::Lazy;
 use regex::Regex;
@@ -91,9 +91,15 @@ static LMB_CLICK_RE: Lazy<Regex> =
 static RMB_CLICK_RE: Lazy<Regex> =
     Lazy::new(|| Regex::new(r"(?i)\bRMB\s*click\b").expect("valid rmb click regex"));
 
-pub fn render_champion_markdown(champ: &Champion, raw_excerpt: &str) -> String {
+pub fn render_champion_markdown(champ: &Champion, _raw_excerpt: &str) -> String {
     let mut out = String::new();
     out.push_str(&format!("# {}\n\n", champ.name));
+    if let Some(summary) = &champ.summary {
+        if !summary.trim().is_empty() {
+            out.push_str(&normalize_all(summary));
+            out.push_str("\n\n");
+        }
+    }
     let mut overview: Vec<String> = Vec::new();
     if let Some(title) = &champ.basic.title {
         if !title.trim().is_empty() {
@@ -401,16 +407,7 @@ pub fn render_champion_markdown(champ: &Champion, raw_excerpt: &str) -> String {
             out.push('\n');
         }
     }
-    out = normalize_rendered_body(&out);
-    out.push_str("<!-- Raw excerpt (first 20 lines) -->\n\n<details><summary>Raw excerpt</summary>\n\n```wikitext\n");
-    let excerpt_norm = normalize_excerpt(raw_excerpt);
-    out.push_str(&excerpt_norm.lines().take(20).collect::<Vec<_>>().join("\n"));
-    out.push_str("\n```\n</details>\n");
-    if !champ.source_appendices.is_empty() {
-        out.push('\n');
-        render_source_appendices(&mut out, &champ.source_appendices);
-    }
-    ensure_trailing_newline(&collapse_blank_lines(&out))
+    ensure_trailing_newline(&collapse_blank_lines(&normalize_rendered_body(&out)))
 }
 
 fn render_champion_stat_view(
@@ -498,7 +495,7 @@ fn render_special_stats(
     }
 }
 
-pub fn render_item_markdown(item: &Item, raw_excerpt: &str) -> String {
+pub fn render_item_markdown(item: &Item, _raw_excerpt: &str) -> String {
     let mut out = String::new();
     out.push_str(&format!("# {}\n\n", item.name));
 
@@ -768,30 +765,10 @@ pub fn render_item_markdown(item: &Item, raw_excerpt: &str) -> String {
         }
     }
 
-    out = normalize_rendered_body(&out);
-    out.push_str("<!-- Raw excerpt (first 20 lines) -->\n\n<details><summary>Raw excerpt</summary>\n\n```wikitext\n");
-    let excerpt_norm = normalize_excerpt(raw_excerpt);
-    out.push_str(&excerpt_norm.lines().take(20).collect::<Vec<_>>().join("\n"));
-    out.push_str("\n```\n</details>\n");
-    if !item.source_appendices.is_empty() {
-        out.push('\n');
-        render_source_appendices(&mut out, &item.source_appendices);
-    }
-    ensure_trailing_newline(&collapse_blank_lines(&out))
+    ensure_trailing_newline(&collapse_blank_lines(&normalize_rendered_body(&out)))
 }
 
 fn synthesize_item_lead(item: &Item) -> Option<String> {
-    if !item.ornn_forged
-        && item
-            .removed_patch
-            .as_deref()
-            .map(str::trim)
-            .filter(|value| !value.is_empty())
-            .is_none()
-    {
-        return None;
-    }
-
     let status_verb = if item
         .removed_patch
         .as_deref()
@@ -849,9 +826,14 @@ fn starts_with_vowel_sound(phrase: &str) -> bool {
     )
 }
 
-pub fn render_rune_markdown(rune: &Rune, raw_excerpt: &str) -> String {
+pub fn render_rune_markdown(rune: &Rune, _raw_excerpt: &str) -> String {
     let mut out = String::new();
     out.push_str(&format!("# {}\n\n", rune.name));
+
+    if let Some(lead) = synthesize_rune_lead(rune) {
+        out.push_str(&lead);
+        out.push_str("\n\n");
+    }
 
     let mut overview: Vec<String> = Vec::new();
     if let Some(path) = &rune.path {
@@ -929,40 +911,18 @@ pub fn render_rune_markdown(rune: &Rune, raw_excerpt: &str) -> String {
         }
     }
 
-    out = normalize_rendered_body(&out);
-    out.push_str("<!-- Raw excerpt (first 20 lines) -->\n\n<details><summary>Raw excerpt</summary>\n\n```wikitext\n");
-    let excerpt_norm = normalize_excerpt(raw_excerpt);
-    out.push_str(&excerpt_norm.lines().take(20).collect::<Vec<_>>().join("\n"));
-    out.push_str("\n```\n</details>\n");
-    if !rune.source_appendices.is_empty() {
-        out.push('\n');
-        render_source_appendices(&mut out, &rune.source_appendices);
-    }
-    ensure_trailing_newline(&collapse_blank_lines(&out))
+    ensure_trailing_newline(&collapse_blank_lines(&normalize_rendered_body(&out)))
 }
 
-fn render_source_appendices(out: &mut String, appendices: &[SourceAppendix]) {
-    if appendices.is_empty() {
-        return;
-    }
-    out.push_str("## Source Appendix\n\n");
-    for appendix in appendices {
-        let title = appendix.title.trim();
-        let content = appendix.content.trim_end();
-        if title.is_empty() || content.is_empty() {
-            continue;
-        }
-        let format = if appendix.format.trim().is_empty() {
-            "text"
-        } else {
-            appendix.format.trim()
-        };
-        out.push_str(&format!(
-            "<details><summary>{}</summary>\n\n````{}\n",
-            title, format
-        ));
-        out.push_str(content);
-        out.push_str("\n````\n</details>\n\n");
+fn synthesize_rune_lead(rune: &Rune) -> Option<String> {
+    let name = rune.name.trim();
+    if name.is_empty() {
+        None
+    } else {
+        Some(format!(
+            "{} is a rune in League of Legends.",
+            normalize_all(name)
+        ))
     }
 }
 
@@ -1528,6 +1488,85 @@ fn render_note_template(args: &[&str]) -> String {
     }
 }
 
+fn render_adaptive_template(args: &[&str]) -> String {
+    let raw = simple_positional_args(args)
+        .first()
+        .copied()
+        .unwrap_or("")
+        .trim();
+    if raw.is_empty() {
+        return String::new();
+    }
+
+    if let Some((start, separator, end)) = split_adaptive_range(raw) {
+        let Some(start_value) = parse_adaptive_number(start) else {
+            return "[Unhandled template: adaptive]".to_string();
+        };
+        let Some(end_value) = parse_adaptive_number(end) else {
+            return "[Unhandled template: adaptive]".to_string();
+        };
+        return format!(
+            "{} **bonus** Attack Damage or {} Ability Power (Adaptive)",
+            format_adaptive_range(start_value * 0.6, separator, end_value * 0.6, true),
+            format_adaptive_range(start_value, separator, end_value, false)
+        );
+    }
+
+    let Some(value) = parse_adaptive_number(raw) else {
+        return "[Unhandled template: adaptive]".to_string();
+    };
+    format!(
+        "{} **bonus** Attack Damage or {} Ability Power (Adaptive)",
+        format_adaptive_damage_value(value * 0.6),
+        format_adaptive_ap_value(value)
+    )
+}
+
+fn split_adaptive_range(raw: &str) -> Option<(&str, &'static str, &str)> {
+    let trimmed = raw.trim();
+    for separator in [" to ", " – ", "–", " — ", "—"] {
+        if let Some((start, end)) = trimmed.split_once(separator) {
+            return Some((start.trim(), separator, end.trim()));
+        }
+    }
+    None
+}
+
+fn parse_adaptive_number(raw: &str) -> Option<f64> {
+    raw.trim().parse::<f64>().ok()
+}
+
+fn format_adaptive_range(start: f64, separator: &str, end: f64, is_damage: bool) -> String {
+    let format_value = if is_damage {
+        format_adaptive_damage_value as fn(f64) -> String
+    } else {
+        format_adaptive_ap_value as fn(f64) -> String
+    };
+    format!("{}{}{}", format_value(start), separator, format_value(end))
+}
+
+fn format_adaptive_damage_value(value: f64) -> String {
+    if (value - value.round()).abs() < 1e-9 {
+        format!("{}", value.round() as i64)
+    } else {
+        format!("{value:.2}")
+    }
+}
+
+fn format_adaptive_ap_value(value: f64) -> String {
+    if (value - value.round()).abs() < 1e-9 {
+        return format!("{}", value.round() as i64);
+    }
+    let mut rendered = format!("{value:.2}");
+    while rendered.ends_with('0') {
+        rendered.pop();
+    }
+    if rendered.ends_with('.') {
+        rendered.pop();
+    }
+    rendered
+}
+
 fn collapse_noisy_comment_payload(body: &str) -> String {
     let trimmed = body.trim();
     let cut = [
@@ -1613,6 +1652,7 @@ fn is_supported_simple_template_name(name: &str) -> bool {
     matches!(
         name.to_ascii_lowercase().as_str(),
         "as" | "ap"
+            | "adaptive"
             | "sti"
             | "ci"
             | "ui"
@@ -1741,6 +1781,7 @@ fn normalize_simple_templates(s: &str) -> String {
                 match name.as_str() {
                     "as" | "ap" | "sti" | "ci" | "ui" | "uis" | "ii" | "nie" | "ris" | "cbi"
                     | "lor" | "gems" | "skin tier" | "si" | "tfti" => first.to_string(),
+                    "adaptive" => render_adaptive_template(args),
                     "fd" => render_fd_template_fallback(args),
                     "tftc" | "tftt" | "wrskin" => {
                         if positional.len() >= 2 {
@@ -1951,8 +1992,148 @@ fn normalize_reader_artifacts(s: &str) -> String {
     let normalized = WORD_OPEN_PAREN_RE
         .replace_all(&normalized, "$1 (")
         .to_string();
-    LINK_PLURAL_SPACE_RE
+    let normalized = LINK_PLURAL_SPACE_RE
         .replace_all(&normalized, "$1$2")
+        .to_string();
+    let normalized = normalize_definition_list_lines(&normalized);
+    normalize_math_tags(&normalized)
+}
+
+fn normalize_definition_list_lines(s: &str) -> String {
+    let mut out = String::with_capacity(s.len());
+    let mut changed = false;
+
+    for segment in s.split_inclusive('\n') {
+        let (line, has_newline) = if let Some(line) = segment.strip_suffix('\n') {
+            (line, true)
+        } else {
+            (segment, false)
+        };
+
+        if let Some(normalized) = normalize_definition_list_line(line) {
+            if normalized != line {
+                changed = true;
+            }
+            out.push_str(&normalized);
+        } else {
+            out.push_str(line);
+        }
+
+        if has_newline {
+            out.push('\n');
+        }
+    }
+
+    if changed {
+        out
+    } else {
+        s.to_string()
+    }
+}
+
+fn normalize_definition_list_line(line: &str) -> Option<String> {
+    let trimmed_start = line.trim_start();
+    let leading_ws = &line[..line.len().saturating_sub(trimmed_start.len())];
+    let marker_len = trimmed_start.chars().take_while(|ch| *ch == ':').count();
+    if marker_len == 0 {
+        return None;
+    }
+
+    let remainder = trimmed_start[marker_len..].trim_start();
+    if remainder.is_empty() {
+        return None;
+    }
+
+    if matches!(remainder.chars().next(), Some('*' | '#' | ';' | ':' | '|')) {
+        return None;
+    }
+
+    Some(format!(
+        "{}{}{}",
+        leading_ws,
+        "> ".repeat(marker_len),
+        remainder
+    ))
+}
+
+fn normalize_math_tags(s: &str) -> String {
+    let mut out = String::with_capacity(s.len());
+    let mut remaining = s;
+
+    while let Some(start) = remaining.find("<math>") {
+        out.push_str(&remaining[..start]);
+        let after_open = &remaining[start + "<math>".len()..];
+        let Some(end) = after_open.find("</math>") else {
+            out.push_str(&remaining[start..]);
+            return out;
+        };
+
+        out.push_str(&render_math_fragment(&after_open[..end]));
+        remaining = &after_open[end + "</math>".len()..];
+    }
+
+    out.push_str(remaining);
+    out
+}
+
+fn render_math_fragment(raw: &str) -> String {
+    let trimmed = raw.trim();
+    if let Some(rest) = trimmed.strip_prefix("\\frac") {
+        let rest = rest.trim_start();
+        if let Some((numerator, rest)) = consume_braced_math(rest) {
+            if let Some((denominator, _)) = consume_braced_math(rest.trim_start()) {
+                let numerator = normalize_math_atom(numerator);
+                let denominator = normalize_math_atom(denominator);
+                if !numerator.is_empty() && !denominator.is_empty() {
+                    return format!("{} / ({})", numerator, denominator);
+                }
+            }
+        }
+    }
+
+    normalize_math_atom(trimmed)
+}
+
+fn consume_braced_math(raw: &str) -> Option<(&str, &str)> {
+    let trimmed = raw.trim_start();
+    if !trimmed.starts_with('{') {
+        return None;
+    }
+
+    let mut depth = 0usize;
+    for (idx, ch) in trimmed.char_indices() {
+        match ch {
+            '{' => depth += 1,
+            '}' => {
+                depth = depth.saturating_sub(1);
+                if depth == 0 {
+                    return Some((&trimmed[1..idx], &trimmed[idx + 1..]));
+                }
+            }
+            _ => {}
+        }
+    }
+
+    None
+}
+
+fn normalize_math_atom(raw: &str) -> String {
+    let normalized = raw
+        .replace("\\%", "%")
+        .replace("\\cdot", " × ")
+        .replace("\\times", " × ")
+        .replace('{', "")
+        .replace('}', "")
+        .replace('−', "-")
+        .replace('–', "-")
+        .replace('—', "-")
+        .replace('+', " + ")
+        .replace('-', " - ")
+        .replace('=', " = ")
+        .replace('\\', "");
+    MULTISPACE_RE
+        .replace_all(&normalized, " ")
+        .trim()
         .to_string()
 }
 
@@ -2502,6 +2683,44 @@ mod tests {
     }
 
     #[test]
+    fn normalize_all_converts_definition_list_skin_note() {
+        assert_eq!(
+            normalize_all(":''This article section only contains champion skins. For all associated collection items, see [[Aatrox/Cosmetics|Aatrox (Collection)]].''"),
+            "> _This article section only contains champion skins. For all associated collection items, see [Aatrox (Collection)](./Aatrox_Cosmetics.md)._"
+        );
+    }
+
+    #[test]
+    fn normalize_all_handles_adaptive_template_values() {
+        assert_eq!(
+            normalize_all("{{adaptive|15}}"),
+            "9 **bonus** Attack Damage or 15 Ability Power (Adaptive)"
+        );
+        assert_eq!(
+            normalize_all("{{adaptive|5 to 40}}"),
+            "3 to 24 **bonus** Attack Damage or 5 to 40 Ability Power (Adaptive)"
+        );
+    }
+
+    #[test]
+    fn normalize_all_renders_math_fraction_tags() {
+        assert_eq!(
+            normalize_all("<math>\\frac{{100\\%}}{100\\%-12\\%}</math>"),
+            "100% / (100% - 12%)"
+        );
+    }
+
+    #[test]
+    fn normalize_rendered_body_rehydrates_adaptive_template_comments() {
+        assert_eq!(
+            normalize_rendered_body(
+                "Gain <!-- UNHANDLED TEMPLATE adaptive: adaptive|5 to 40 --> while above 70% health."
+            ),
+            "Gain 3 to 24 **bonus** Attack Damage or 5 to 40 Ability Power (Adaptive) while above 70% health."
+        );
+    }
+
+    #[test]
     fn normalize_rendered_body_compacts_comments_with_residual_templates() {
         assert_eq!(
             normalize_rendered_body(
@@ -2595,8 +2814,10 @@ mod tests {
             warnings: Vec::new(),
         };
         let md = render_rune_markdown(&rune, "== Raw ==\nContent");
+        assert!(md.contains("Electrocute is a rune in League of Legends."));
         assert!(md.contains("## Trivia"));
         assert!(md.contains("Popular in assassin matchups"));
+        assert!(!md.contains("Raw excerpt"));
     }
 
     #[test]
@@ -2627,6 +2848,7 @@ mod tests {
         assert!(md.contains("- _Obtained from the Combo Master augment._"));
         assert!(md.contains("  - Damage changed to 60 – 300 (based on level)."));
         assert!(md.contains("  - Bonus AD ratio changed to 55% **bonus** AD."));
+        assert!(!md.contains("Raw excerpt"));
     }
 
     #[test]
@@ -2634,6 +2856,7 @@ mod tests {
         let champ = Champion {
             name: "Tester".to_string(),
             basic: BasicInfo::default(),
+            summary: None,
             stats: Stats::default(),
             advanced: None,
             primary_stat_label: None,
@@ -2675,6 +2898,7 @@ mod tests {
         let champ = Champion {
             name: "StatsMaster".to_string(),
             basic: BasicInfo::default(),
+            summary: None,
             stats: Stats::default(),
             advanced: Some(AdvancedStats { metrics }),
             primary_stat_label: None,
@@ -2715,6 +2939,7 @@ mod tests {
         let champ = Champion {
             name: "Kled".to_string(),
             basic: BasicInfo::default(),
+            summary: None,
             stats: mounted_stats,
             advanced: None,
             primary_stat_label: Some("Kled & Skaarl".to_string()),
@@ -2753,6 +2978,7 @@ mod tests {
     fn item_markdown_includes_rich_page_sections() {
         let item = Item {
             name: "Infinity Edge".to_string(),
+            categories: vec!["Legendary".to_string()],
             background: Some("Forged in [[Shurima]].".to_string()),
             similar_items: vec!["Essence Reaver".to_string()],
             notes: vec!["* First note".to_string()],
@@ -2768,6 +2994,7 @@ mod tests {
             ..Item::default()
         };
         let md = render_item_markdown(&item, "{{Item info}}...");
+        assert!(md.contains("Infinity Edge is a legendary item in League of Legends."));
         assert!(md.contains("## Background"));
         assert!(md.contains("Forged in [Shurima](./Shurima.md)."));
         assert!(md.contains("## Similar Items"));
@@ -2779,10 +3006,10 @@ mod tests {
     }
 
     #[test]
-    fn item_markdown_renders_source_appendix_when_present() {
+    fn item_markdown_omits_source_appendix_when_present() {
         let item = Item {
             name: "Infinity Edge".to_string(),
-            source_appendices: vec![SourceAppendix {
+            source_appendices: vec![crate::model::SourceAppendix {
                 title: "Infinity Edge".to_string(),
                 format: "wikitext".to_string(),
                 content: "{{Item info|background=Forged in Shurima.}}".to_string(),
@@ -2790,9 +3017,10 @@ mod tests {
             ..Item::default()
         };
         let md = render_item_markdown(&item, "ignored excerpt");
-        assert!(md.contains("## Source Appendix"));
-        assert!(md.contains("<details><summary>Infinity Edge</summary>"));
-        assert!(md.contains("{{Item info|background=Forged in Shurima.}}"));
+        assert!(!md.contains("## Source Appendix"));
+        assert!(!md.contains("<details><summary>Infinity Edge</summary>"));
+        assert!(!md.contains("{{Item info|background=Forged in Shurima.}}"));
+        assert!(!md.contains("Raw excerpt"));
     }
 
     #[test]
@@ -2809,7 +3037,9 @@ mod tests {
         let md = render_item_markdown(&item, "{{Item info}}...");
         assert!(md.contains("This article or section may contain obsolete information, but exists here for historical purposes."));
         assert!(md.contains("This item was removed on patch V14.11."));
-        assert!(md.contains("Ataraxia was a legendary item in League of Legends. Could only be forged by Ornn."));
+        assert!(md.contains(
+            "Ataraxia was a legendary item in League of Legends. Could only be forged by Ornn."
+        ));
         assert!(md.contains("**MASTER CRAFTSMAN:** All stats have been improved."));
         assert!(md.contains("**Forged by:** Ornn"));
         assert!(md.contains("**Removed:** V14.11"));

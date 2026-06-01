@@ -8,12 +8,16 @@ use std::path::PathBuf;
     .required(true)
     .args(["champion", "item", "rune", "all_champions", "all_items", "all_runes"])))]
 pub struct CliConfig {
-    /// Root directory of exploded wiki dump (e.g. ./out)
-    #[arg(long = "wiki-root", value_name = "PATH", default_value = "./out")]
+    /// Root directory of exploded wiki dump (defaults to the local exporter output)
+    #[arg(
+        long = "wiki-root",
+        value_name = "PATH",
+        default_value = "./export_out"
+    )]
     pub wiki_root: PathBuf,
 
-    /// Output directory for Markdown artifacts
-    #[arg(long, value_name = "DIR", default_value = "./markdown_rust")]
+    /// Output root for Markdown artifacts grouped by category
+    #[arg(long, value_name = "DIR", default_value = "./generated/markdown")]
     pub output: PathBuf,
 
     /// Specific champion to convert

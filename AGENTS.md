@@ -18,3 +18,12 @@
 - **Parse, don't regex.** Use the wikitext AST (`mwparserfromhell`) or the parsed HTML DOM. String matching on `{{...}}` will eventually bite.
 - **Prefer fixing an existing handler over adding a new one.** Check whether a near-match handler already covers the case before introducing parallel logic.
 - **Document formatting decisions in `STYLE.md` as you make them.** "Scaling renders as `base (+ratio stat)`" — if it's not written down, the next handler will choose differently.
+
+**Workspace hygiene (generated files and testing)**
+
+- **Use the canonical pipeline folders by default.** The normal output root is `generated/`, with wiki export data under `generated/wiki-export/{out,meta}` and converted markdown under `generated/markdown/{champions,items,runes}`.
+- **Use `export_out/` only as a reusable local export cache.** It is fine for quick `--wiki-root ./export_out` validation runs, but it is not a tracked deliverable.
+- **Write ad-hoc test artifacts to `test_output/`.** If you need temporary conversion samples, diff targets, or inspection outputs, put them under a named subfolder there.
+- **Write disposable scans and audits to `validation_reports/`.** Do not drop report files into the repo root.
+- **Do not revive legacy output roots unless explicitly asked.** Avoid creating or updating `markdown/`, `markdown_rust/`, or root-level `meta/` for normal work.
+- **If you create a new scratch-output folder, ignore it in the same change.** Future agents should not leave surprise untracked artifacts behind.

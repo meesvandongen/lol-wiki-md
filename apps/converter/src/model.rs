@@ -5,6 +5,7 @@ use std::collections::HashMap;
 pub struct Champion {
     pub name: String,
     pub basic: BasicInfo,
+    pub summary: Option<String>,
     pub stats: Stats,
     pub advanced: Option<AdvancedStats>,
     pub primary_stat_label: Option<String>,

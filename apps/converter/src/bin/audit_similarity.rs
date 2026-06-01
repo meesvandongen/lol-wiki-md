@@ -15,10 +15,18 @@ use std::path::PathBuf;
 )]
 #[command(group(ArgGroup::new("scope").required(true).args(["champion", "all_champions"])))]
 struct SimilarityCli {
-    #[arg(long = "wiki-root", value_name = "PATH", default_value = "./out")]
+    #[arg(
+        long = "wiki-root",
+        value_name = "PATH",
+        default_value = "./export_out"
+    )]
     wiki_root: PathBuf,
 
-    #[arg(long, value_name = "DIR", default_value = "./markdown_rust")]
+    #[arg(
+        long,
+        value_name = "DIR",
+        default_value = "./generated/markdown/champions"
+    )]
     output: PathBuf,
 
     #[arg(long)]

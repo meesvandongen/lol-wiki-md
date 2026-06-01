@@ -182,6 +182,7 @@ pub(super) fn convert_champion(
     let notes = extract_section(&expanded, "Notes")
         .map(|section| collect_list_items(&section))
         .unwrap_or_default();
+    let summary = resolve_champion_summary(name, &expanded);
     let pets = extract_pets(
         &raw,
         precision,
@@ -197,16 +198,10 @@ pub(super) fn convert_champion(
     ));
     warnings.extend(validate_core_ability_coverage(&abilities));
     if expanded.contains("{{") {
-        warnings.push(
-            "Residual template markup remained after expansion; unresolved source is preserved in the source appendix."
-                .to_string(),
-        );
+        warnings.push("Residual template markup remained after expansion.".to_string());
     }
     if expanded.to_ascii_lowercase().contains("<tabber>") {
-        warnings.push(
-            "Residual <tabber> markup remained after expansion; raw source is preserved in the source appendix."
-                .to_string(),
-        );
+        warnings.push("Residual <tabber> markup remained after expansion.".to_string());
     }
     let trivia = collect_champion_trivia(
         ctx,
@@ -226,6 +221,7 @@ pub(super) fn convert_champion(
     let champion = Champion {
         name: name.to_string(),
         basic,
+        summary,
         stats,
         advanced,
         primary_stat_label,
@@ -547,6 +543,69 @@ fn split_roles(value: &str) -> Vec<String> {
         .collect()
 }
 
+fn extract_champion_summary(expanded: &str) -> Option<String> {
+    let mut paragraph: Vec<String> = Vec::new();
+
+    for line in expanded.lines() {
+        let trimmed = line.trim();
+        if trimmed.starts_with("==") {
+            break;
+        }
+        if trimmed.is_empty() {
+            if !paragraph.is_empty() {
+                break;
+            }
+            continue;
+        }
+        if line_cannot_start_champion_summary(trimmed) {
+            continue;
+        }
+
+        paragraph.push(trimmed.to_string());
+
+        if trimmed.ends_with('.') {
+            break;
+        }
+    }
+
+    if paragraph.is_empty() {
+        None
+    } else {
+        Some(paragraph.join(" "))
+    }
+}
+
+fn resolve_champion_summary(page_name: &str, expanded: &str) -> Option<String> {
+    extract_champion_summary(expanded).or_else(|| fallback_champion_summary(page_name))
+}
+
+fn line_cannot_start_champion_summary(trimmed: &str) -> bool {
+    trimmed.starts_with("<!--")
+        || trimmed.starts_with("[Unhandled template:")
+        || trimmed.starts_with("{{")
+        || trimmed.starts_with("|")
+        || trimmed.starts_with("{|")
+        || trimmed.starts_with("|}")
+        || trimmed.starts_with('!')
+        || trimmed.starts_with(':')
+        || trimmed.starts_with(';')
+        || trimmed.starts_with('*')
+        || trimmed.starts_with('#')
+        || trimmed.starts_with("[[File:")
+        || trimmed.starts_with("[[Image:")
+        || trimmed.starts_with("__")
+        || trimmed.starts_with('{')
+}
+
+fn fallback_champion_summary(title: &str) -> Option<String> {
+    let title = title.trim();
+    if title.is_empty() {
+        None
+    } else {
+        Some(format!("{title} is a champion in League of Legends."))
+    }
+}
+
 fn should_use_module_title(current_title: Option<&str>, champion_name: &str) -> bool {
     let Some(current_title) = current_title else {
         return true;
@@ -600,11 +659,8 @@ fn collect_champion_trivia(
                         let mut page_trivia =
                             trivia_items_from_expanded(&expanded_page, name, current_title);
                         if page_trivia.is_empty() {
-                            page_trivia = collect_filtered_trivia_items(
-                                &expanded_page,
-                                name,
-                                current_title,
-                            );
+                            page_trivia =
+                                collect_filtered_trivia_items(&expanded_page, name, current_title);
                         }
                         trivia.extend(page_trivia);
                     }
@@ -662,7 +718,7 @@ fn collect_champion_source_warnings(export: &WikiExport, name: &str, raw: &str) 
     let mut warnings = Vec::new();
     if raw.contains("#invoke:SkinData") {
         warnings.push(
-            "SkinData transclusion detected; raw source is preserved in the source appendix, but structured skins rendering is not yet implemented."
+            "SkinData transclusion detected, but structured skins rendering is not yet implemented."
                 .to_string(),
         );
     }
@@ -810,8 +866,7 @@ fn filter_noncurrent_champion_trivia(
 }
 
 fn trivia_group_mentions_champion(label: &str, champion_name: &str) -> bool {
-    !label.is_empty()
-        && (label == champion_name || label.starts_with(&format!("{champion_name} ")))
+    !label.is_empty() && (label == champion_name || label.starts_with(&format!("{champion_name} ")))
 }
 
 fn trivia_group_matches_current_version(
@@ -1938,6 +1993,15 @@ fn load_abilities(
 
         let ability_vars = collect_page_vars(&raw)?;
         let mut merged_vars = vars.clone();
+        if raw.contains("#invoke:Gold value|wikivaluedefine") {
+            if let Some(conv_ctx) = conversion_ctx.as_ref() {
+                for (key, data) in conv_ctx.gold_value_data_map()? {
+                    if let Some(value) = data.get("val").and_then(lua_value_to_string) {
+                        merged_vars.entry(key.clone()).or_insert(value);
+                    }
+                }
+            }
+        }
         for (k, v) in ability_vars {
             merged_vars.insert(k, v);
         }
@@ -2841,8 +2905,7 @@ mod tests {
 
         let export = WikiExport::new(td.path());
         let registry = TemplateRegistry::new();
-        let loaded = load_abilities(&export, "Akali", 2, &HashMap::new(), &registry, None)
-            .unwrap();
+        let loaded = load_abilities(&export, "Akali", 2, &HashMap::new(), &registry, None).unwrap();
 
         assert!(loaded
             .abilities
@@ -2877,8 +2940,8 @@ mod tests {
 
         let export = WikiExport::new(td.path());
         let registry = TemplateRegistry::new();
-        let loaded = load_abilities(&export, "Tester", 2, &HashMap::new(), &registry, None)
-            .unwrap();
+        let loaded =
+            load_abilities(&export, "Tester", 2, &HashMap::new(), &registry, None).unwrap();
 
         assert_eq!(loaded.abilities.len(), 1);
         assert_eq!(loaded.abilities[0].name, "Steady Hands");
@@ -2897,6 +2960,59 @@ mod tests {
         assert_eq!(
             trivia_items_from_expanded(expanded, "Akali", Some("the Rogue Assassin")),
             vec!["* Current fact".to_string()]
+        );
+    }
+
+    #[test]
+    fn extract_champion_summary_prefers_lead_before_sections() {
+        let expanded = concat!(
+            "{{Champion info|Tester}}\n",
+            "<!-- hidden -->\n",
+            "Tester is a champion in League of Legends.\n",
+            "== Abilities ==\n",
+            "Ability text\n"
+        );
+
+        assert_eq!(
+            extract_champion_summary(expanded),
+            Some("Tester is a champion in League of Legends.".to_string())
+        );
+    }
+
+    #[test]
+    fn extract_champion_summary_ignores_section_note_after_heading() {
+        let expanded = concat!(
+            "{{Champion info|Aatrox}}\n",
+            "== Abilities ==\n",
+            "Ability text\n",
+            "== Champion skins ==\n",
+            ":''This article section only contains champion skins. For all associated collection items, see [[Aatrox/Cosmetics|Aatrox (Collection)]].''\n"
+        );
+
+        assert_eq!(extract_champion_summary(expanded), None);
+    }
+
+    #[test]
+    fn resolve_champion_summary_falls_back_to_page_name() {
+        let expanded = concat!(
+            "{{Champion info|Aatrox}}\n",
+            "== Abilities ==\n",
+            "Ability text\n",
+            "== Champion skins ==\n",
+            ":''This article section only contains champion skins.''\n"
+        );
+
+        assert_eq!(
+            resolve_champion_summary("Aatrox", expanded),
+            Some("Aatrox is a champion in League of Legends.".to_string())
+        );
+    }
+
+    #[test]
+    fn fallback_champion_summary_matches_live_wiki_lead_shape() {
+        assert_eq!(
+            fallback_champion_summary("Aatrox"),
+            Some("Aatrox is a champion in League of Legends.".to_string())
         );
     }
 
@@ -2944,6 +3060,66 @@ mod tests {
             .warnings
             .iter()
             .any(|warning| warning.contains("unsupported skill slot `Z`")));
+    }
+
+    #[test]
+    fn load_abilities_seeds_gold_value_vars_for_wikivaluedefine_preambles() {
+        let td = tempdir().unwrap();
+        let flat = td.path().join("export_out");
+        std::fs::create_dir_all(&flat).unwrap();
+
+        std::fs::write(
+            flat.join("Tester.txt"),
+            concat!(
+                "{{Champion info|Tester}}\n",
+                "== Abilities ==\n",
+                "{{Data Tester/I|Ability}}\n"
+            ),
+        )
+        .unwrap();
+        std::fs::write(
+            flat.join(format!("{}.txt", url_encode("Template:Data Tester/I"))),
+            concat!(
+                "{{#vardefine:i_ad|0.75}}",
+                "{{#vardefine:cs|10}}",
+                "{{#vardefine:stack|20}}",
+                "{{#invoke:Gold value|wikivaluedefine}}",
+                "{{{{{1|Ability data}}}|Measured Value|skill=I|notes=* Value = {{g|{{#expr:{{#var:i_ad}}*{{#var:ad}}+{{#var:crit}}*{{#var:cs}}/{{#var:stack}}}}}}}}"
+            ),
+        )
+        .unwrap();
+        std::fs::write(
+            flat.join("Module%3AGold%20value%2Fdata.txt"),
+            r#"return {
+    ["ad"] = {
+        ["val"] = 35,
+    },
+    ["crit"] = {
+        ["val"] = 40,
+    },
+}"#,
+        )
+        .unwrap();
+
+        let export = WikiExport::new(td.path());
+        let registry = TemplateRegistry::new();
+        let conversion_ctx =
+            Arc::new(crate::convert::ConversionContext::new(td.path(), 2).unwrap());
+        let loaded = load_abilities(
+            &export,
+            "Tester",
+            2,
+            &HashMap::new(),
+            &registry,
+            Some(conversion_ctx),
+        )
+        .unwrap();
+
+        assert_eq!(loaded.abilities.len(), 1);
+        assert!(loaded.abilities[0]
+            .notes
+            .iter()
+            .any(|note| note.contains("46.25")));
     }
 
     #[test]

@@ -410,6 +410,7 @@ fn looks_like_interwiki_link(line: &str) -> bool {
 }
 
 fn normalize_patch_history_source(source: &str) -> String {
+    let source = strip_html_comments(source);
     let mut out: Vec<String> = Vec::new();
     let mut semicolon_mode = false;
 
@@ -443,6 +444,25 @@ fn normalize_patch_history_source(source: &str) -> String {
     }
 
     out.join("\n")
+}
+
+fn strip_html_comments(source: &str) -> String {
+    let mut out = String::with_capacity(source.len());
+    let mut remaining = source;
+
+    while let Some(start) = remaining.find("<!--") {
+        out.push_str(&remaining[..start]);
+        let comment_body = &remaining[start + 4..];
+        if let Some(end) = comment_body.find("-->") {
+            remaining = &comment_body[end + 3..];
+        } else {
+            remaining = "";
+            break;
+        }
+    }
+
+    out.push_str(remaining);
+    out
 }
 
 fn parse_patch_version_header(line: &str) -> Option<(String, String, usize)> {
@@ -863,6 +883,30 @@ mod tests {
         assert_eq!(history[0].version, "V1.0");
         assert_eq!(history[0].changes.len(), 1);
         assert_eq!(history[0].changes[0].text, "Updated numbers");
+    }
+
+    #[test]
+    fn patch_history_strips_inline_and_block_html_comments() {
+        let expanded = concat!(
+            "== Patch History ==\n",
+            ";[[V14.7]]\n",
+            "* '''Test of Spirit:'''<!-- Note: hidden source note -->\n",
+            "** Duration reduced.\n",
+            "* Upheaval\n",
+            "** Slow adjusted.<!--\n",
+            "* Hidden Patch\n",
+            "** This should not be parsed.\n",
+            "-->\n",
+        );
+
+        let history = extract_patch_history(expanded);
+        assert_eq!(history.len(), 1);
+        assert_eq!(history[0].version, "V14.7");
+        assert_eq!(history[0].changes.len(), 2);
+        assert_eq!(history[0].changes[0].section, "Test of Spirit");
+        assert_eq!(history[0].changes[0].text, "Duration reduced.");
+        assert_eq!(history[0].changes[1].section, "Upheaval");
+        assert_eq!(history[0].changes[1].text, "Slow adjusted.");
     }
 
     #[test]

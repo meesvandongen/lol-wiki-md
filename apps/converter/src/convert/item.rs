@@ -232,11 +232,17 @@ fn build_item_from_entry(
         )?;
     }
 
+    let mut page_vars = vars.clone();
+    page_vars
+        .entry("__item_name".to_string())
+        .or_insert_with(|| name.to_string());
+    seed_item_gold_value_vars(ctx, entry, &mut page_vars)?;
+
     let page_info = parse_item_page_info(
         name,
         raw,
         precision,
-        vars,
+        &page_vars,
         registry,
         Some(Arc::new(ctx.clone())),
     );
@@ -419,6 +425,129 @@ fn parse_item_page_info(
     info.warnings.sort();
     info.warnings.dedup();
     info
+}
+
+fn seed_item_gold_value_vars(
+    ctx: &ConversionContext,
+    entry: &HashMap<String, LuaValue>,
+    vars: &mut HashMap<String, String>,
+) -> Result<()> {
+    let gold_values = ctx.gold_value_data_map()?;
+    if gold_values.is_empty() {
+        return Ok(());
+    }
+
+    for (stat_key, data) in gold_values {
+        if let Some(value) = data.get("val").and_then(lua_value_to_string) {
+            vars.entry(stat_key.clone()).or_insert(value);
+        }
+    }
+
+    if !vars.contains_key("total") {
+        if let Some(total) =
+            compute_item_base_gold_value(ctx.item_module_map()?, entry, gold_values)
+        {
+            vars.insert("total".to_string(), total);
+        }
+    }
+
+    Ok(())
+}
+
+fn compute_item_base_gold_value(
+    module: &HashMap<String, HashMap<String, LuaValue>>,
+    entry: &HashMap<String, LuaValue>,
+    gold_values: &HashMap<String, HashMap<String, LuaValue>>,
+) -> Option<String> {
+    let LuaValue::Table(stats) = entry.get("stats")? else {
+        return None;
+    };
+
+    let mut sum = 0.0f64;
+    let mut saw_value = false;
+    for (stat_key, stat_value) in stats {
+        let normalized_key = stat_key.trim_end_matches("unique").to_ascii_lowercase();
+        if matches!(normalized_key.as_str(), "gp10" | "spec" | "spec2") {
+            continue;
+        }
+        let gold_entry = get_case_insensitive_value(gold_values, &normalized_key)?;
+        let unit_value = gold_entry
+            .get("val")
+            .and_then(lua_value_to_string)
+            .and_then(|value| value.trim().parse::<f64>().ok())?;
+        let stat_amount =
+            resolve_item_stat_number_from_value(module, stat_key, stat_value, &mut HashSet::new())?;
+        sum += stat_amount * unit_value;
+        saw_value = true;
+    }
+
+    if saw_value {
+        Some(format_gold_number(sum))
+    } else {
+        None
+    }
+}
+
+fn resolve_item_stat_number_from_value(
+    module: &HashMap<String, HashMap<String, LuaValue>>,
+    stat_key: &str,
+    value: &LuaValue,
+    visited: &mut HashSet<(String, String)>,
+) -> Option<f64> {
+    match value {
+        LuaValue::Number(raw) | LuaValue::String(raw) => {
+            let trimmed = raw.trim();
+            if let Some(target) = trimmed.strip_prefix("=>") {
+                return resolve_item_stat_number(module, target.trim(), stat_key, visited);
+            }
+            trimmed.parse::<f64>().ok()
+        }
+        LuaValue::Bool(true) => Some(1.0),
+        LuaValue::Bool(false) => Some(0.0),
+        _ => None,
+    }
+}
+
+fn resolve_item_stat_number(
+    module: &HashMap<String, HashMap<String, LuaValue>>,
+    item_name: &str,
+    stat_key: &str,
+    visited: &mut HashSet<(String, String)>,
+) -> Option<f64> {
+    let visit_key = (
+        item_name.trim().to_ascii_lowercase(),
+        stat_key.trim().to_ascii_lowercase(),
+    );
+    if !visited.insert(visit_key) {
+        return None;
+    }
+
+    let (_, entry) = find_item_entry(module, item_name)?;
+    let LuaValue::Table(stats) = entry.get("stats")? else {
+        return None;
+    };
+    let value = get_case_insensitive_value(stats, stat_key)?;
+    resolve_item_stat_number_from_value(module, stat_key, value, visited)
+}
+
+fn get_case_insensitive_value<'a, T>(map: &'a HashMap<String, T>, key: &str) -> Option<&'a T> {
+    map.get(key).or_else(|| {
+        map.iter()
+            .find(|(name, _)| name.eq_ignore_ascii_case(key))
+            .map(|(_, value)| value)
+    })
+}
+
+fn format_gold_number(value: f64) -> String {
+    let rounded = (value * 100.0).round() / 100.0;
+    let mut rendered = format!("{rounded:.2}");
+    while rendered.contains('.') && rendered.ends_with('0') {
+        rendered.pop();
+    }
+    if rendered.ends_with('.') {
+        rendered.pop();
+    }
+    rendered
 }
 
 fn is_item_info_template(span: &crate::parse::brace::TemplateSpan) -> bool {
@@ -964,7 +1093,124 @@ mod tests {
         let md = std::fs::read_to_string(out_dir.join("Ataraxia.md")).unwrap();
         assert!(md.contains("This article or section may contain obsolete information, but exists here for historical purposes."));
         assert!(md.contains("This item was removed on patch V14.11."));
-        assert!(md.contains("Ataraxia was a legendary item in League of Legends. Could only be forged by Ornn."));
+        assert!(md.contains(
+            "Ataraxia was a legendary item in League of Legends. Could only be forged by Ornn."
+        ));
         assert!(md.contains("All stats have been improved."));
+    }
+
+    #[test]
+    fn convert_item_resolves_gold_value_formulas_from_module_data() {
+        let td = tempfile::tempdir().unwrap();
+        let flat = td.path().join("export_out");
+        std::fs::create_dir_all(&flat).unwrap();
+        std::fs::write(
+            flat.join("Test%20Blade.txt"),
+            concat!(
+                "{{Item info",
+                "|goldvalue=* 4 [[ability power]] = {{g|{{#vardefineecho:onestack|{{#expr:{{#var:ap}}*4}}}}}}\n",
+                "** '''Total Gold Value''' = {{g|{{#expr:{{#var:total}}+{{#var:onestack}}}}}}\n",
+                "|goldefficiency=* {{iis|Test Blade}} gold efficiency is increased by {{gec|Test Blade|+{{#var:onestack}}}}.\n",
+                "|notes=* Health total = {{fd|{{#expr:{{cid|Test Blade|health}}+10}}}}\n",
+                "}}\n"
+            ),
+        )
+        .unwrap();
+        std::fs::write(
+            flat.join("Module%3AItemData%2Fdata.txt"),
+            r#"return {
+    ["Test Blade"] = {
+        ["buy"] = 350,
+        ["sellratio"] = 0.4,
+        ["tier"] = 1,
+        ["type"] = {
+            [1] = "Starter",
+        },
+        ["stats"] = {
+            ["ap"] = 15,
+            ["hp"] = 50,
+        },
+    },
+}"#,
+        )
+        .unwrap();
+        std::fs::write(
+            flat.join("Module%3AGold%20value%2Fdata.txt"),
+            r#"return {
+    ["ap"] = {
+        ["val"] = 20,
+    },
+    ["hp"] = {
+        ["val"] = 2.666667,
+    },
+}"#,
+        )
+        .unwrap();
+
+        let ctx = crate::convert::ConversionContext::new(td.path(), 2).unwrap();
+        let out_dir = td.path().join("out");
+        std::fs::create_dir_all(&out_dir).unwrap();
+
+        ctx.convert_item(&out_dir, "Test Blade").unwrap();
+
+        let md = std::fs::read_to_string(out_dir.join("Test_Blade.md")).unwrap();
+        assert!(md.contains("4 [ability power](./ability_power.md) = 80"));
+        assert!(md.contains("513.33"));
+        assert!(md.contains("22.86% (+80g)"));
+        assert!(md.contains("Health total = 60.00"));
+    }
+
+    #[test]
+    fn convert_item_uses_current_item_name_for_bare_gec() {
+        let td = tempfile::tempdir().unwrap();
+        let flat = td.path().join("export_out");
+        std::fs::create_dir_all(&flat).unwrap();
+        std::fs::write(
+            flat.join("Test%20Elixir.txt"),
+            concat!(
+                "{{Item info",
+                "|goldvalue={{gold value}}\n",
+                "* 300 [[health]] = {{g|{{#expr:{{#var:hp}}*300}}}}\n",
+                "** '''Total Gold Value''' = {{g|{{#expr:{{#var:hp}}*300}}}}\n",
+                "|goldefficiency=* After consuming {{ii|Test Elixir}}, it becomes {{gec}} gold efficient.\n",
+                "}}\n"
+            ),
+        )
+        .unwrap();
+        std::fs::write(
+            flat.join("Module%3AItemData%2Fdata.txt"),
+            r#"return {
+    ["Test Elixir"] = {
+        ["buy"] = 500,
+        ["sellratio"] = 0.4,
+        ["tier"] = 1,
+        ["type"] = {
+            [1] = "Consumable",
+        },
+        ["stats"] = {
+            ["hp"] = 300,
+        },
+    },
+}"#,
+        )
+        .unwrap();
+        std::fs::write(
+            flat.join("Module%3AGold%20value%2Fdata.txt"),
+            r#"return {
+    ["hp"] = {
+        ["val"] = 2.666667,
+    },
+}"#,
+        )
+        .unwrap();
+
+        let ctx = crate::convert::ConversionContext::new(td.path(), 2).unwrap();
+        let out_dir = td.path().join("out");
+        std::fs::create_dir_all(&out_dir).unwrap();
+
+        ctx.convert_item(&out_dir, "Test Elixir").unwrap();
+
+        let md = std::fs::read_to_string(out_dir.join("Test_Elixir.md")).unwrap();
+        assert!(md.contains("160% (+300g) gold efficient"));
     }
 }
