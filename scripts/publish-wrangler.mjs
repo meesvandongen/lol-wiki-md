@@ -5,7 +5,10 @@ import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const docsDir = path.join(rootDir, 'apps', 'docs');
 const docsOutDir = path.join(rootDir, 'apps', 'docs', 'out');
+const wranglerConfigPath = path.join(docsDir, 'wrangler.jsonc');
+const wranglerCliPath = path.join(rootDir, 'node_modules', 'wrangler', 'bin', 'wrangler.js');
 const envFilePath = path.join(rootDir, '.env');
 
 loadDotEnv(envFilePath);
@@ -16,29 +19,78 @@ if (!fs.existsSync(docsOutDir)) {
   );
 }
 
-const forwardedArgs = process.argv.slice(2);
-const projectName = process.env.CLOUDFLARE_PAGES_PROJECT_NAME?.trim() ?? '';
-const branchName = process.env.CLOUDFLARE_PAGES_BRANCH?.trim() ?? '';
+if (!fs.existsSync(wranglerConfigPath)) {
+  fail(
+    `Wrangler config was not found at ${wranglerConfigPath}. Restore the checked-in docs Worker config before publishing.`,
+  );
+}
 
-if (!hasOption(forwardedArgs, '--project-name')) {
-  if (!isConfiguredProjectName(projectName)) {
-    fail(
-      'Set CLOUDFLARE_PAGES_PROJECT_NAME in the repository .env file or pass --project-name <name> when invoking the publish command.',
-    );
+if (!fs.existsSync(wranglerCliPath)) {
+  fail(
+    `Wrangler CLI entrypoint was not found at ${wranglerCliPath}. Run \`npm install\` before publishing.`,
+  );
+}
+
+const rawForwardedArgs = process.argv.slice(2);
+const forwardedArgs = normalizeLegacyPagesArgs(rawForwardedArgs);
+const workerName = resolveFirstConfiguredValue([
+  process.env.DOCS_WORKER_NAME,
+  process.env.CLOUDFLARE_WORKER_NAME,
+  process.env.CLOUDFLARE_PAGES_PROJECT_NAME,
+]);
+const customDomains = parseDelimitedValues(
+  resolveFirstConfiguredValue([
+    process.env.DOCS_WORKER_DOMAINS,
+    process.env.CLOUDFLARE_WORKER_DOMAINS,
+    process.env.DOCS_WORKER_DOMAIN,
+  ]),
+);
+const routes = parseDelimitedValues(process.env.DOCS_WORKER_ROUTES);
+
+if (hasOption(forwardedArgs, '--branch')) {
+  fail(
+    'Cloudflare Workers deployments do not use Pages branches. Remove `--branch` / `CLOUDFLARE_PAGES_BRANCH` and use `--env` only if you define Wrangler environments.',
+  );
+}
+
+if (!hasOption(forwardedArgs, '--config')) {
+  forwardedArgs.push('--config', wranglerConfigPath);
+}
+
+if (!hasOption(forwardedArgs, '--name') && isConfiguredValue(workerName)) {
+  forwardedArgs.push('--name', workerName);
+}
+
+if (!hasAnyOption(forwardedArgs, ['--domain', '--domains'])) {
+  for (const domain of customDomains) {
+    forwardedArgs.push('--domain', domain);
   }
-  forwardedArgs.push('--project-name', projectName);
 }
 
-if (!hasOption(forwardedArgs, '--branch') && branchName) {
-  forwardedArgs.push('--branch', branchName);
+if (!hasAnyOption(forwardedArgs, ['--route', '--routes'])) {
+  for (const route of routes) {
+    forwardedArgs.push('--route', route);
+  }
 }
 
-const npmExecutable = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-const wranglerArgs = ['exec', 'wrangler', 'pages', 'deploy', docsOutDir, ...forwardedArgs];
+const wranglerExecutable = process.execPath;
+const wranglerArgs = [wranglerCliPath, 'deploy', ...forwardedArgs];
 
-console.log(`Publishing ${path.relative(rootDir, docsOutDir)} with Wrangler...`);
+console.log(`Publishing ${path.relative(rootDir, docsOutDir)} as a static Worker with Wrangler...`);
 
-const result = spawnSync(npmExecutable, wranglerArgs, {
+if (isConfiguredValue(workerName) && !hasOption(rawForwardedArgs, '--name')) {
+  console.log(`[docs:publish] Worker name: ${workerName}`);
+}
+
+if (customDomains.length > 0 && !hasAnyOption(rawForwardedArgs, ['--domain', '--domains'])) {
+  console.log(`[docs:publish] Custom domains: ${customDomains.join(', ')}`);
+}
+
+if (routes.length > 0 && !hasAnyOption(rawForwardedArgs, ['--route', '--routes'])) {
+  console.log(`[docs:publish] Routes: ${routes.join(', ')}`);
+}
+
+const result = spawnSync(wranglerExecutable, wranglerArgs, {
   cwd: rootDir,
   env: process.env,
   stdio: 'inherit',
@@ -54,9 +106,53 @@ function hasOption(args, optionName) {
   return args.some((arg) => arg === optionName || arg.startsWith(`${optionName}=`));
 }
 
-function isConfiguredProjectName(value) {
+function hasAnyOption(args, optionNames) {
+  return optionNames.some((optionName) => hasOption(args, optionName));
+}
+
+function isConfiguredValue(value) {
+  if (!value) {
+    return false;
+  }
+
   const normalized = value.trim().toLowerCase();
-  return normalized.length > 0 && normalized !== 'your-cloudflare-pages-project-name';
+  return (
+    normalized.length > 0 &&
+    normalized !== 'your-cloudflare-pages-project-name' &&
+    normalized !== 'your-cloudflare-worker-name'
+  );
+}
+
+function resolveFirstConfiguredValue(values) {
+  for (const value of values) {
+    if (isConfiguredValue(value)) {
+      return value.trim();
+    }
+  }
+  return '';
+}
+
+function parseDelimitedValues(value) {
+  if (!value) {
+    return [];
+  }
+
+  return value
+    .split(/[\r\n,]/)
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+}
+
+function normalizeLegacyPagesArgs(args) {
+  return args.map((arg) => {
+    if (arg === '--project-name') {
+      return '--name';
+    }
+    if (arg.startsWith('--project-name=')) {
+      return arg.replace('--project-name=', '--name=');
+    }
+    return arg;
+  });
 }
 
 function loadDotEnv(filePath) {

@@ -99,21 +99,25 @@ When in doubt:
 
 ## Publishing with Wrangler
 
-The docs site can be published to Cloudflare Pages with Wrangler from the repository root.
+The docs site can be published as a static-assets Cloudflare Worker from the repository root. The checked-in Worker configuration lives at `apps/docs/wrangler.jsonc` and serves the built Rspress output from `apps/docs/out`.
 
 1. Authenticate Wrangler once for your machine, for example with `npx wrangler login`.
-2. Set `CLOUDFLARE_PAGES_PROJECT_NAME` in the root `.env` file.
-3. Run `npm run docs:publish`.
+2. Optionally set `DOCS_WORKER_NAME` in the root `.env` file if you do not want to use the default Worker name from `apps/docs/wrangler.jsonc`.
+3. Optionally set `DOCS_WORKER_DOMAINS` and/or `DOCS_WORKER_ROUTES` in the root `.env` file as comma-separated lists if you want the deploy step to attach custom domains or routes.
+4. If the deployed site uses a custom domain, set `DOCS_SITE_URL` in `.env` so the generated sitemap uses the final public URL instead of the fallback `*.workers.dev` hostname.
+5. Run `npm run docs:publish`.
 
-If the deployed site uses a custom domain, set `DOCS_SITE_URL` in `.env` so the generated sitemap uses the final public URL instead of the default `*.pages.dev` hostname.
+You can also preview the built static Worker locally after `npm run docs:build` with `npm run docs:worker:dev`.
 
 `npm run docs:publish` will:
 
 - sync generated Markdown into `apps/docs/docs`
 - build the static site into `apps/docs/out`
-- run `wrangler pages deploy apps/docs/out`
+- run `wrangler deploy --config apps/docs/wrangler.jsonc`
 
 Optional overrides:
 
-- pass `--project-name <name>` after `npm run docs:publish -- ...`
-- set `CLOUDFLARE_PAGES_BRANCH` in `.env`, or pass `--branch <name>` directly
+- pass `--name <worker-name>` after `npm run docs:publish -- ...`
+- pass `--domain <hostname>` multiple times to attach custom domains during deploy
+- pass `--route <pattern>` multiple times to attach routes during deploy
+- pass `--env <name>` if you add named environments to `apps/docs/wrangler.jsonc`

@@ -17,6 +17,8 @@
     "docs:sync": "node ./scripts/sync-rspress-content.mjs",
     "docs:build": "npm run build --workspace @lol-wiki/docs",
     "docs:dev": "npm run dev --workspace @lol-wiki/docs",
+    "docs:worker:dev": "node ./node_modules/wrangler/bin/wrangler.js dev --config ./apps/docs/wrangler.jsonc",
+    "docs:worker:deploy": "node ./scripts/publish-wrangler.mjs",
     "docs:publish": "npm run docs:sync && npm run docs:build && node ./scripts/publish-wrangler.mjs",
     "pipeline": "bash ./scripts/pipeline.sh",
     "pipeline:sh": "bash ./scripts/pipeline.sh",

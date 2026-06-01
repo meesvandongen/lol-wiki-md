@@ -368,6 +368,7 @@ generated/
 apps/docs/out/
 apps/docs/docs/
 apps/docs/.rspress/
+.wrangler/
 
 # Legacy and scratch output roots
 markdown/

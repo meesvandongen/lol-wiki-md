@@ -19,6 +19,7 @@ const repoUrl =
   resolveRepositoryUrl(docsPackage.repository) ??
   docsPackage.homepage ??
   'https://github.com/meesvandongen/lol-wiki-md';
+const defaultWorkerName = 'lol-wiki-docs';
 const docsRoot = process.env.RSPRESS_DOCS_ROOT?.trim() || 'docs';
 const outputDir = process.env.RSPRESS_OUT_DIR?.trim() || 'out';
 const siteUrl = resolveSiteUrl();
@@ -80,12 +81,21 @@ function normalizeRepositoryUrl(value: string | undefined): string | undefined {
 function resolveSiteUrl(): string {
   const explicitSiteUrl = resolveEnvValue('DOCS_SITE_URL');
   if (explicitSiteUrl) {
-    return withTrailingSlash(explicitSiteUrl);
+    return withTrailingSlash(normalizeSiteOrigin(explicitSiteUrl));
   }
 
-  const pagesProjectName =
-    resolveEnvValue('CLOUDFLARE_PAGES_PROJECT_NAME') || 'your-cloudflare-pages-project-name';
-  return withTrailingSlash(`https://${pagesProjectName}.pages.dev`);
+  const explicitDomain =
+    firstDelimitedValue(resolveEnvValue('DOCS_WORKER_DOMAINS')) || resolveEnvValue('DOCS_WORKER_DOMAIN');
+  if (explicitDomain) {
+    return withTrailingSlash(normalizeSiteOrigin(explicitDomain));
+  }
+
+  const workerName =
+    resolveEnvValue('DOCS_WORKER_NAME') ||
+    resolveEnvValue('CLOUDFLARE_WORKER_NAME') ||
+    resolveEnvValue('CLOUDFLARE_PAGES_PROJECT_NAME') ||
+    defaultWorkerName;
+  return withTrailingSlash(`https://${workerName}.workers.dev`);
 }
 
 function resolveEnvValue(name: string): string | undefined {
@@ -132,4 +142,22 @@ function loadDotEnvValue(name: string): string | undefined {
 
 function withTrailingSlash(value: string): string {
   return value.endsWith('/') ? value : `${value}/`;
+}
+
+function firstDelimitedValue(value: string | undefined): string | undefined {
+  if (!value) {
+    return undefined;
+  }
+
+  return value
+    .split(/[\r\n,]/)
+    .map((entry) => entry.trim())
+    .find(Boolean);
+}
+
+function normalizeSiteOrigin(value: string): string {
+  if (/^https?:\/\//i.test(value)) {
+    return value;
+  }
+  return `https://${value}`;
 }
