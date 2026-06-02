@@ -581,7 +581,6 @@ fn resolve_champion_summary(page_name: &str, expanded: &str) -> Option<String> {
 
 fn line_cannot_start_champion_summary(trimmed: &str) -> bool {
     trimmed.starts_with("<!--")
-        || trimmed.starts_with("[Unhandled template:")
         || trimmed.starts_with("{{")
         || trimmed.starts_with("|")
         || trimmed.starts_with("{|")
@@ -1979,6 +1978,21 @@ fn load_abilities(
         template_titles = export.list_champion_ability_templates(champ)?;
     }
 
+    // On the wiki every ability data template is transcluded into the champion
+    // page and shares one `#vardefine` scope, so a variable defined in one
+    // ability (e.g. a Wild Rift stat) is visible to the others. Pre-collect
+    // those definitions so per-ability expansion can resolve cross-references.
+    let mut shared_ability_vars: HashMap<String, String> = HashMap::new();
+    for template_title in &template_titles {
+        if let Ok(Some(raw)) = export.read_template_page(template_title) {
+            if let Ok(template_vars) = collect_page_vars(&raw) {
+                for (k, v) in template_vars {
+                    shared_ability_vars.insert(k, v);
+                }
+            }
+        }
+    }
+
     let mut out: Vec<Ability> = Vec::new();
     let mut warnings: Vec<String> = Vec::new();
     for template_title in template_titles {
@@ -1993,6 +2007,9 @@ fn load_abilities(
 
         let ability_vars = collect_page_vars(&raw)?;
         let mut merged_vars = vars.clone();
+        for (k, v) in &shared_ability_vars {
+            merged_vars.insert(k.clone(), v.clone());
+        }
         if raw.contains("#invoke:Gold value|wikivaluedefine") {
             if let Some(conv_ctx) = conversion_ctx.as_ref() {
                 for (key, data) in conv_ctx.gold_value_data_map()? {

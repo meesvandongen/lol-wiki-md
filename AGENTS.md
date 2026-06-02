@@ -1,6 +1,6 @@
 **Information integrity (the most important category)**
 
-- **Never silently drop content.** If you can't handle a template, emit a visible marker like `<!-- UNHANDLED: {{templatename|...}} -->` so it shows up in diffs. Silent omission is worse than ugly output.
+- **Fail fast on unhandled templates.** The template registry returns a hard error (`E_UNKNOWN_TEMPLATE` / `E_MALFORMED_TEMPLATE`) for any template it cannot expand; there is no "unhandled template" placeholder marker. A conversion that hits an unknown or unexpandable template fails loudly and is reported in the batch conversion report. Add a real handler (an explicit `TemplateExpander`) rather than papering over it — decorative/navigation templates get an explicit expander that renders empty, not a silent skip.
 - **Resolve data-lookup templates; never invent their values.** If a template fetches from a Lua module (`Module:ChampionData`, etc.), fetch the module via API. Guessing scaling numbers from training data is forbidden.
 - **When in doubt, verify against dumped data.** The wiki API is the source of truth, not your prior knowledge. This applies to template behavior, page structure, and numerical values.
 - **Tooltip and `data-*` content is content.** It must end up in the output somewhere. Decide where in `STYLE.md`, then be consistent.

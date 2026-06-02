@@ -1168,12 +1168,7 @@ fn normalize_all(s: &str) -> String {
         .replace_all(&normalized, " ")
         .trim()
         .to_string();
-    if normalized.trim_start().starts_with("[Unhandled template:")
-        && normalized.trim_end().ends_with(']')
-    {
-        normalized
-    } else if normalized.contains("{{")
-        || normalized.contains("[Unhandled template:")
+    if normalized.contains("{{")
         || normalized.contains("<!--")
         || normalized.contains("|yvideo")
     {
@@ -1396,20 +1391,13 @@ fn render_recurring_template(args: &[&str]) -> String {
     rendered
 }
 
-fn render_item_stat_table_fallback(args: &[&str]) -> String {
-    let key = simple_positional_args(args)
-        .first()
-        .copied()
-        .unwrap_or("")
-        .trim();
-    if key.is_empty() {
-        "[Unhandled template: Item stat table]".to_string()
-    } else {
-        format!("[Unhandled template: Item stat table ({})]", key)
-    }
+fn render_item_stat_table_fallback(_args: &[&str]) -> Option<String> {
+    // The item stat table requires module data and is handled by the template
+    // registry; there is no meaningful inline rendering at this stage.
+    None
 }
 
-fn render_fd_template_fallback(args: &[&str]) -> String {
+fn render_fd_template_fallback(args: &[&str]) -> Option<String> {
     let value = simple_positional_args(args)
         .first()
         .copied()
@@ -1417,9 +1405,9 @@ fn render_fd_template_fallback(args: &[&str]) -> String {
         .trim();
     let numeric = value.strip_suffix('%').map(str::trim).unwrap_or(value);
     if numeric.parse::<f64>().is_ok() {
-        value.to_string()
+        Some(value.to_string())
     } else {
-        "[Unhandled template: fd]".to_string()
+        None
     }
 }
 
@@ -1488,38 +1476,32 @@ fn render_note_template(args: &[&str]) -> String {
     }
 }
 
-fn render_adaptive_template(args: &[&str]) -> String {
+fn render_adaptive_template(args: &[&str]) -> Option<String> {
     let raw = simple_positional_args(args)
         .first()
         .copied()
         .unwrap_or("")
         .trim();
     if raw.is_empty() {
-        return String::new();
+        return Some(String::new());
     }
 
     if let Some((start, separator, end)) = split_adaptive_range(raw) {
-        let Some(start_value) = parse_adaptive_number(start) else {
-            return "[Unhandled template: adaptive]".to_string();
-        };
-        let Some(end_value) = parse_adaptive_number(end) else {
-            return "[Unhandled template: adaptive]".to_string();
-        };
-        return format!(
+        let start_value = parse_adaptive_number(start)?;
+        let end_value = parse_adaptive_number(end)?;
+        return Some(format!(
             "{} **bonus** Attack Damage or {} Ability Power (Adaptive)",
             format_adaptive_range(start_value * 0.6, separator, end_value * 0.6, true),
             format_adaptive_range(start_value, separator, end_value, false)
-        );
+        ));
     }
 
-    let Some(value) = parse_adaptive_number(raw) else {
-        return "[Unhandled template: adaptive]".to_string();
-    };
-    format!(
+    let value = parse_adaptive_number(raw)?;
+    Some(format!(
         "{} **bonus** Attack Damage or {} Ability Power (Adaptive)",
         format_adaptive_damage_value(value * 0.6),
         format_adaptive_ap_value(value)
-    )
+    ))
 }
 
 fn split_adaptive_range(raw: &str) -> Option<(&str, &'static str, &str)> {
@@ -1533,7 +1515,14 @@ fn split_adaptive_range(raw: &str) -> Option<(&str, &'static str, &str)> {
 }
 
 fn parse_adaptive_number(raw: &str) -> Option<f64> {
-    raw.trim().parse::<f64>().ok()
+    let trimmed = raw.trim();
+    if let Ok(value) = trimmed.parse::<f64>() {
+        return Some(value);
+    }
+    // Endpoints may be simple arithmetic expressions (e.g. `1.8*12`).
+    crate::parse::expr::evaluate_expression(trimmed, crate::parse::expr::ExprNumberFormat::Float(6))
+        .ok()
+        .and_then(|value| value.trim().parse::<f64>().ok())
 }
 
 fn format_adaptive_range(start: f64, separator: &str, end: f64, is_damage: bool) -> String {
@@ -1599,7 +1588,6 @@ fn collapse_residual_comment_payload(body: &str) -> String {
     let trimmed = body.trim();
     let cut = [
         trimmed.find("{{"),
-        trimmed.find("[Unhandled template:"),
         trimmed.find("<!--"),
         trimmed.find("-->"),
     ]
@@ -1639,7 +1627,6 @@ fn normalize_comment_payload(body: &str) -> String {
     if normalized.contains("{{")
         || normalized.contains("}}")
         || normalized.contains("<ref")
-        || normalized.contains("[Unhandled template:")
         || normalized.contains("|yvideo")
     {
         collapse_residual_comment_payload(&normalized)
@@ -1725,16 +1712,6 @@ fn is_supported_simple_template_name(name: &str) -> bool {
     )
 }
 
-fn should_rehydrate_supported_template_name(name: &str) -> bool {
-    if !is_supported_simple_template_name(name) {
-        return false;
-    }
-    !matches!(
-        name.trim().to_ascii_lowercase().as_str(),
-        "fd" | "item stat table"
-    )
-}
-
 pub fn detect_renderer_cleanup_template_names(s: &str) -> Vec<String> {
     let Ok(spans) = extract_balanced_templates(s) else {
         return Vec::new();
@@ -1765,159 +1742,10 @@ fn normalize_simple_templates(s: &str) -> String {
                 if parts.is_empty() {
                     return caps.get(0).unwrap().as_str().to_string();
                 }
-                let name = parts[0].to_ascii_lowercase();
+                let name = parts[0];
                 let args = &parts[1..];
-                let positional = simple_positional_args(args);
-                let named = args
-                    .iter()
-                    .filter_map(|arg| split_simple_named_arg(arg))
-                    .map(|(key, value)| (key.to_ascii_lowercase(), value))
-                    .collect::<std::collections::HashMap<_, _>>();
-                let first = positional
-                    .first()
-                    .copied()
-                    .unwrap_or_else(|| args.first().copied().unwrap_or(""));
-                let last = positional.last().copied().unwrap_or(first);
-                match name.as_str() {
-                    "as" | "ap" | "sti" | "ci" | "ui" | "uis" | "ii" | "nie" | "ris" | "cbi"
-                    | "lor" | "gems" | "skin tier" | "si" | "tfti" => first.to_string(),
-                    "adaptive" => render_adaptive_template(args),
-                    "fd" => render_fd_template_fallback(args),
-                    "tftc" | "tftt" | "wrskin" => {
-                        if positional.len() >= 2 {
-                            last.to_string()
-                        } else {
-                            first.to_string()
-                        }
-                    }
-                    "cis" | "cbis" | "iis" | "nies" | "sis" => {
-                        if first.is_empty() {
-                            String::new()
-                        } else {
-                            make_possessive(first)
-                        }
-                    }
-                    "csl" => render_csl_template(args),
-                    "fi" | "tip" => last.to_string(),
-                    "lorskin" => render_lorskin_template(args),
-                    "w" | "univ" => first.to_string(),
-                    "citation needed" => "[Citation needed]".to_string(),
-                    "equals" => " = ".to_string(),
-                    "gold" => {
-                        if first.is_empty() {
-                            " gold".to_string()
-                        } else {
-                            format!("{} gold", first)
-                        }
-                    }
-                    "champion_icon" | "champion icon" => named
-                        .get("champion")
-                        .copied()
-                        .or_else(|| positional.first().copied())
-                        .unwrap_or("")
-                        .to_string(),
-                    "ability icon" => {
-                        if first.is_empty() {
-                            String::new()
-                        } else {
-                            format!("_{}_", first)
-                        }
-                    }
-                    "zoe spell thief list" => {
-                        "(Spell Thief item-actives list omitted.)".to_string()
-                    }
-                    "bug" => "[Bug]".to_string(),
-                    "pending for test" => "[Pending test]".to_string(),
-                    "effect at cast time start" => {
-                        "(effect determined at cast time start)".to_string()
-                    }
-                    "effect at cast time end" => "(effect determined at cast time end)".to_string(),
-                    "degree" => "°".to_string(),
-                    "minus" => "-".to_string(),
-                    "plus" => "+".to_string(),
-                    "lmb" => "LMB".to_string(),
-                    "rmb" => "RMB".to_string(),
-                    "times" => "×".to_string(),
-                    "arcaneciteep" => {
-                        if first.is_empty() {
-                            "Arcane episode".to_string()
-                        } else {
-                            format!("Arcane episode {}", first)
-                        }
-                    }
-                    "ccd" | "cid" => format!("<!-- UNHANDLED TEMPLATE {}: {} -->", parts[0], raw),
-                    "ai" => {
-                        let label = if positional.len() >= 3 { last } else { first };
-                        if label.is_empty() {
-                            String::new()
-                        } else {
-                            format!("_{}_", label)
-                        }
-                    }
-                    "cai" => {
-                        if first.is_empty() {
-                            String::new()
-                        } else {
-                            format!("_{}_", first)
-                        }
-                    }
-                    "ais" => {
-                        if first.is_empty() {
-                            String::new()
-                        } else {
-                            format!("_{}_", make_possessive(first))
-                        }
-                    }
-                    "cais" => {
-                        if first.is_empty() {
-                            String::new()
-                        } else {
-                            format!("_{}_", make_possessive(first))
-                        }
-                    }
-                    "sbc" => first.to_string(),
-                    "spoiler" => {
-                        if first.is_empty() {
-                            "(Spoiler warning)".to_string()
-                        } else {
-                            format!("(Spoilers: {})", first)
-                        }
-                    }
-                    "note" => render_note_template(args),
-                    "rd" => render_rd_template(args),
-                    "ig" => render_ig_template(args),
-                    "wi" => render_wi_template(args),
-                    "recurring" => render_recurring_template(args),
-                    "wrcst" => {
-                        if positional.len() >= 2 {
-                            last.to_string()
-                        } else {
-                            first.to_string()
-                        }
-                    }
-                    "mi1" | "mi2" | "mi3" | "mi4" | "mi6" | "mi7" => {
-                        render_mastery_icon_template(args)
-                    }
-                    "lll" => render_lll_template(args),
-                    "set" => {
-                        if first.is_empty() {
-                            String::new()
-                        } else {
-                            format!("Set: {}", first)
-                        }
-                    }
-                    "item stat table" => render_item_stat_table_fallback(args),
-                    "tt" => {
-                        if first.is_empty() {
-                            String::new()
-                        } else if positional.len() >= 2 && !last.is_empty() {
-                            format!("{} ({})", first, last)
-                        } else {
-                            first.to_string()
-                        }
-                    }
-                    _ => caps.get(0).unwrap().as_str().to_string(),
-                }
+                render_simple_inline_template(name, args)
+                    .unwrap_or_else(|| caps.get(0).unwrap().as_str().to_string())
             })
             .to_string();
         if next == current {
@@ -1926,6 +1754,152 @@ fn normalize_simple_templates(s: &str) -> String {
         current = next;
     }
     current
+}
+
+/// Render a "simple" inline template (icon/label/text helper) to reader-facing
+/// text. Returns `None` for any name this renderer does not handle, so callers
+/// can decide how to treat genuinely unknown templates (the template registry
+/// fails fast on them).
+pub fn render_simple_inline_template(name: &str, args: &[&str]) -> Option<String> {
+    let name = name.trim().to_ascii_lowercase();
+    let positional = simple_positional_args(args);
+    let named = args
+        .iter()
+        .filter_map(|arg| split_simple_named_arg(arg))
+        .map(|(key, value)| (key.to_ascii_lowercase(), value))
+        .collect::<std::collections::HashMap<_, _>>();
+    let first = positional
+        .first()
+        .copied()
+        .unwrap_or_else(|| args.first().copied().unwrap_or(""));
+    let last = positional.last().copied().unwrap_or(first);
+    let rendered = match name.as_str() {
+        "as" | "ap" | "sti" | "ci" | "ui" | "uis" | "ii" | "nie" | "ris" | "cbi" | "lor"
+        | "gems" | "skin tier" | "si" | "tfti" => first.to_string(),
+        "adaptive" => return render_adaptive_template(args),
+        "fd" => return render_fd_template_fallback(args),
+        "tftc" | "tftt" | "wrskin" => {
+            if positional.len() >= 2 {
+                last.to_string()
+            } else {
+                first.to_string()
+            }
+        }
+        "cis" | "cbis" | "iis" | "nies" | "sis" => {
+            if first.is_empty() {
+                String::new()
+            } else {
+                make_possessive(first)
+            }
+        }
+        "csl" => render_csl_template(args),
+        "fi" | "tip" | "wrtip" => last.to_string(),
+        "lorskin" => render_lorskin_template(args),
+        "w" | "univ" => first.to_string(),
+        "citation needed" => "[Citation needed]".to_string(),
+        "equals" => " = ".to_string(),
+        "gold" => {
+            if first.is_empty() {
+                " gold".to_string()
+            } else {
+                format!("{} gold", first)
+            }
+        }
+        "champion_icon" | "champion icon" => named
+            .get("champion")
+            .copied()
+            .or_else(|| positional.first().copied())
+            .unwrap_or("")
+            .to_string(),
+        "ability icon" => {
+            if first.is_empty() {
+                String::new()
+            } else {
+                format!("_{}_", first)
+            }
+        }
+        "zoe spell thief list" => "(Spell Thief item-actives list omitted.)".to_string(),
+        "bug" => "[Bug]".to_string(),
+        "pending for test" | "pft" => "[Pending test]".to_string(),
+        "effect at cast time start" => "(effect determined at cast time start)".to_string(),
+        "effect at cast time end" => "(effect determined at cast time end)".to_string(),
+        "degree" => "°".to_string(),
+        "minus" => "-".to_string(),
+        "plus" => "+".to_string(),
+        "lmb" => "LMB".to_string(),
+        "rmb" => "RMB".to_string(),
+        "times" => "×".to_string(),
+        "arcaneciteep" => {
+            if first.is_empty() {
+                "Arcane episode".to_string()
+            } else {
+                format!("Arcane episode {}", first)
+            }
+        }
+        "ai" => {
+            let label = if positional.len() >= 3 { last } else { first };
+            if label.is_empty() {
+                String::new()
+            } else {
+                format!("_{}_", label)
+            }
+        }
+        "cai" => {
+            if first.is_empty() {
+                String::new()
+            } else {
+                format!("_{}_", first)
+            }
+        }
+        "ais" | "cais" => {
+            if first.is_empty() {
+                String::new()
+            } else {
+                format!("_{}_", make_possessive(first))
+            }
+        }
+        "sbc" => first.to_string(),
+        "spoiler" => {
+            if first.is_empty() {
+                "(Spoiler warning)".to_string()
+            } else {
+                format!("(Spoilers: {})", first)
+            }
+        }
+        "note" => render_note_template(args),
+        "rd" => render_rd_template(args),
+        "ig" => render_ig_template(args),
+        "wi" => render_wi_template(args),
+        "recurring" => render_recurring_template(args),
+        "wrcst" => {
+            if positional.len() >= 2 {
+                last.to_string()
+            } else {
+                first.to_string()
+            }
+        }
+        "mi1" | "mi2" | "mi3" | "mi4" | "mi6" | "mi7" => render_mastery_icon_template(args),
+        "lll" => render_lll_template(args),
+        "set" => {
+            if first.is_empty() {
+                String::new()
+            } else {
+                format!("Set: {}", first)
+            }
+        }
+        "item stat table" => return render_item_stat_table_fallback(args),
+        "tt" => {
+            if first.is_empty() {
+                String::new()
+            } else if positional.len() >= 2 && !last.is_empty() {
+                format!("{} ({})", first, last)
+            } else {
+                first.to_string()
+            }
+        }
+        _ => return None,
+    };
+    Some(rendered)
 }
 
 fn normalize_reader_artifacts(s: &str) -> String {
@@ -2230,31 +2204,6 @@ fn normalize_comments(s: &str) -> String {
             if body.is_empty() || body.eq_ignore_ascii_case("Blurb") {
                 return String::new();
             }
-            if let Some(summary) = body.strip_prefix("UNHANDLED TEMPLATE ") {
-                let (name, payload) = summary
-                    .split_once(':')
-                    .map(|(name, payload)| (name.trim(), payload.trim()))
-                    .unwrap_or((summary.trim(), ""));
-                if name.eq_ignore_ascii_case("column") {
-                    let mut lines = payload.lines();
-                    let _header = lines.next();
-                    let content = lines.collect::<Vec<_>>().join("\n");
-                    let decoded = decode_template_entities(content.trim_end());
-                    if decoded.trim().is_empty() {
-                        return String::new();
-                    }
-                    return format!("\n{}", decoded);
-                }
-                if should_rehydrate_supported_template_name(name) {
-                    let template_payload = if payload.is_empty() {
-                        name.to_string()
-                    } else {
-                        decode_template_entities(payload)
-                    };
-                    return format!("{{{{{}}}}}", template_payload);
-                }
-                return format!("[Unhandled template: {}]", name);
-            }
             let normalized = normalize_comment_payload(body);
             if normalized.is_empty() {
                 String::new()
@@ -2458,14 +2407,6 @@ mod tests {
     }
 
     #[test]
-    fn normalize_all_compacts_unhandled_template_comments() {
-        assert_eq!(
-            normalize_all("<!-- UNHANDLED TEMPLATE lc: lc|Calibrum -->"),
-            "[Unhandled template: lc]"
-        );
-    }
-
-    #[test]
     fn normalize_all_decodes_common_mojibake_segments() {
         let raw = format!("Damage {}\u{0080}\u{0093} bonus", '\u{00e2}');
         assert_eq!(normalize_all(&raw), "Damage – bonus");
@@ -2575,14 +2516,6 @@ mod tests {
     }
 
     #[test]
-    fn normalize_rendered_body_cleans_multiline_comment_payloads() {
-        assert_eq!(
-            normalize_rendered_body("Lead:<!-- UNHANDLED TEMPLATE column: column|2|\n    - &#123;&#123;csl|Draven|Primetime&#125;&#125;\n    - &#123;&#123;csl|Neeko|Original&#125;&#125;\n-->"),
-            "Lead:\n    - Primetime Draven\n    - Neeko"
-        );
-    }
-
-    #[test]
     fn normalize_rendered_body_cleans_multiline_comments_with_templates() {
         assert_eq!(
             normalize_rendered_body("Value<!-- note {{fd|0.25}} {{LMB}} clicking -->"),
@@ -2597,22 +2530,6 @@ mod tests {
                 "Value<!--\nOutdated\n{{#vardefine:x|1}}\n{{#expr:1+1}}\n|yvideo = abc\n-->"
             ),
             "Value (Comment: Outdated details omitted.)"
-        );
-    }
-
-    #[test]
-    fn normalize_rendered_body_rehydrates_supported_unhandled_template_comments() {
-        assert_eq!(
-            normalize_rendered_body("A <!-- UNHANDLED TEMPLATE ris: ris|Conqueror --> B <!-- UNHANDLED TEMPLATE LMB: LMB --> clicking <!-- UNHANDLED TEMPLATE ArcaneCiteEp: ArcaneCiteEp|1x07 -->"),
-            "A Conqueror B left-clicking Arcane episode 1x07"
-        );
-    }
-
-    #[test]
-    fn normalize_rendered_body_preserves_unresolved_constant_templates_as_markers() {
-        assert_eq!(
-            normalize_rendered_body("Value {{ccd|Graves|missile_speed}} end"),
-            "Value <!-- UNHANDLED TEMPLATE ccd: ccd|Graves|missile_speed --> end"
         );
     }
 
@@ -2711,36 +2628,12 @@ mod tests {
     }
 
     #[test]
-    fn normalize_rendered_body_rehydrates_adaptive_template_comments() {
-        assert_eq!(
-            normalize_rendered_body(
-                "Gain <!-- UNHANDLED TEMPLATE adaptive: adaptive|5 to 40 --> while above 70% health."
-            ),
-            "Gain 3 to 24 **bonus** Attack Damage or 5 to 40 Ability Power (Adaptive) while above 70% health."
-        );
-    }
-
-    #[test]
     fn normalize_rendered_body_compacts_comments_with_residual_templates() {
         assert_eq!(
             normalize_rendered_body(
                 "Value<!-- note feature is planned {{Ornn Masterwork items}} -->"
             ),
             "Value (Comment: note feature is planned (details omitted))"
-        );
-        assert_eq!(
-            normalize_rendered_body(
-                "Value <!-- UNHANDLED TEMPLATE Item stat table: Item stat table|pykehealth -->"
-            ),
-            "Value [Unhandled template: Item stat table]"
-        );
-    }
-
-    #[test]
-    fn normalize_rendered_body_keeps_invalid_fd_markers_visible() {
-        assert_eq!(
-            normalize_rendered_body("Value <!-- UNHANDLED TEMPLATE fd: fd|oops --> end"),
-            "Value [Unhandled template: fd] end"
         );
     }
 

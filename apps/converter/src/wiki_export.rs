@@ -111,9 +111,18 @@ impl WikiExport {
     pub fn read_template_page(&self, title: &str) -> Result<Option<String>> {
         let encoded = url_encode(title);
         let path = self.root.join(format!("{}.txt", encoded));
-        if !path.exists() {
-            return Ok(None);
-        }
+        // MediaWiki capitalizes the first letter of a title, so an invocation
+        // like `{{always quickcast}}` resolves to `Template:Always quickcast`.
+        // Fall back to a case-insensitive title lookup when the exact-cased file
+        // is absent.
+        let path = if path.exists() {
+            path
+        } else {
+            match self.find_entity_page_path(title)? {
+                Some(found) => found,
+                None => return Ok(None),
+            }
+        };
         let content = std::fs::read_to_string(&path).map_err(ConvertError::Io)?;
         // Handle redirects of the form: #REDIRECT [[Template:Data Akshan/Avengerang]]
         let trimmed = content.trim_start();

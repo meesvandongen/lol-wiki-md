@@ -1,5 +1,5 @@
 use crate::error::{ConvertError, Result};
-use crate::parse::lua::{parse_item_module, LuaValue};
+use crate::parse::lua::{lua_value_to_string, parse_champion_module, parse_item_module, LuaValue};
 use crate::parse::templates::{ConversionContextTrait, TemplateRegistry};
 use crate::wiki_export::WikiExport;
 use once_cell::sync::OnceCell;
@@ -43,6 +43,7 @@ pub struct ConversionContextInner {
     export: WikiExport,
     registry: TemplateRegistry,
     champion_module_raw: OnceCell<Option<String>>,
+    champion_module_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
     item_module_raw: OnceCell<Option<String>>,
     item_module_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
     gold_value_data_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
@@ -61,6 +62,7 @@ impl ConversionContext {
             export: WikiExport::new(root),
             registry: TemplateRegistry::new(),
             champion_module_raw: OnceCell::new(),
+            champion_module_map: OnceCell::new(),
             item_module_raw: OnceCell::new(),
             item_module_map: OnceCell::new(),
             gold_value_data_map: OnceCell::new(),
@@ -230,6 +232,46 @@ impl ConversionContext {
             }
             Err(_) => Vec::new(),
         }
+    }
+
+    /// Champion module data parsed once (name -> data table).
+    pub fn champion_module_map(&self) -> Result<&HashMap<String, HashMap<String, LuaValue>>> {
+        self.inner.champion_module_map.get_or_try_init(|| {
+            match self.champion_module_raw()? {
+                Some(raw) => parse_champion_module(raw),
+                None => Ok(HashMap::new()),
+            }
+        })
+    }
+
+    /// Resolve a champion's flattened constants, loading them from the champion
+    /// module on demand (and caching) when they were not seeded by a prior
+    /// champion conversion. Lets `{{ccd}}` work from any conversion context.
+    pub fn champion_constants_or_load(&self, entity: &str) -> Option<HashMap<String, String>> {
+        if let Some(constants) = self.champion_constants(entity) {
+            return Some(constants);
+        }
+        let map = self.champion_module_map().ok()?;
+        let entry = map.get(entity).or_else(|| {
+            map.iter()
+                .find(|(name, _)| name.eq_ignore_ascii_case(entity))
+                .map(|(_, value)| value)
+        })?;
+        let mut constants: HashMap<String, String> = HashMap::new();
+        for (key, value) in entry {
+            if let Some(raw) = lua_value_to_string(value) {
+                constants.insert(key.clone(), raw);
+            }
+        }
+        if let Some(LuaValue::Table(stats)) = entry.get("stats") {
+            for (key, value) in stats {
+                if let Some(raw) = lua_value_to_string(value) {
+                    constants.entry(key.clone()).or_insert(raw);
+                }
+            }
+        }
+        self.insert_champion_constants(entity, constants.clone());
+        Some(constants)
     }
 
     pub fn champion_constants(&self, key: &str) -> Option<HashMap<String, String>> {
