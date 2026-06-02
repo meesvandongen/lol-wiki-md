@@ -26,7 +26,18 @@ pub(super) fn convert_rune(
     let raw = export.read_rune_main(name)?;
     let registry = ctx.registry();
     let precision = ctx.precision();
-    let vars = collect_page_vars(&raw)?;
+    let mut vars = collect_page_vars(&raw)?;
+    // The rune page transcludes its `Rune data` template, so `#vardefine`s set
+    // there (cooldown bases, etc.) share scope with the main page. Seed them so
+    // expressions on the main page can resolve, without overriding page-local
+    // definitions.
+    if let Ok(Some(data_raw)) = export.read_template_page(&format!("Template:Rune data {name}")) {
+        if let Ok(data_vars) = collect_page_vars(&data_raw) {
+            for (k, v) in data_vars {
+                vars.entry(k).or_insert(v);
+            }
+        }
+    }
     let conversion_ctx = Some(Arc::new(ctx.clone()));
     if let Ok(spans) = extract_balanced_templates(&raw) {
         if !spans.is_empty() {

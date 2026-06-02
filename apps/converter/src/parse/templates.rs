@@ -116,6 +116,9 @@ impl TemplateRegistry {
         r.register(Box::new(UnexpectedExpander));
         r.register(Box::new(TipDataExpander));
         r.register(Box::new(SupNoteExpander));
+        r.register(Box::new(AugExpander));
+        r.register(Box::new(NumberSupExpander));
+        r.register(Box::new(MinuteDisplayExpander));
         r.register(Box::new(AdaptiveExpander));
         // Registered last: a catch-all for inline icon/label helper templates that
         // render to plain reader-facing text. Dedicated expanders above take
@@ -1003,6 +1006,9 @@ impl TemplateExpander for DecorativeEmptyExpander {
             "Image tabber",
             "SeeOther",
             "ToDo",
+            "cr",
+            "Item haste table",
+            "Ward table",
         ]
     }
 
@@ -1156,6 +1162,83 @@ impl TemplateExpander for AdaptiveExpander {
             expanded: format!(
                 "{attack_damage} **bonus** Attack Damage or {ability_power} Ability Power (Adaptive)"
             ),
+        })
+    }
+}
+
+/// `{{aug|type|name|...}}` renders an Arena augment icon and label; the reader
+/// content is the augment name (second positional value).
+struct AugExpander;
+impl TemplateExpander for AugExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["aug"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        Ok(ExpansionResult {
+            expanded: positional
+                .get(1)
+                .or_else(|| positional.first())
+                .map(|value| value.trim().to_string())
+                .unwrap_or_default(),
+        })
+    }
+}
+
+/// `{{NumberSup|n}}` renders an ordinal (e.g. `1st`, `12th`).
+struct NumberSupExpander;
+impl TemplateExpander for NumberSupExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["NumberSup"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        let raw = positional.first().map(|v| v.trim()).unwrap_or("");
+        let value = expand_nested_template_text(raw, ctx).unwrap_or_else(|_| raw.to_string());
+        let Some(number) = evaluate_numeric(value.trim()) else {
+            return Err(unhandled_template_error(inv));
+        };
+        let n = number as i64;
+        let suffix = match (n.rem_euclid(100), n.rem_euclid(10)) {
+            (11..=13, _) => "th",
+            (_, 1) => "st",
+            (_, 2) => "nd",
+            (_, 3) => "rd",
+            _ => "th",
+        };
+        Ok(ExpansionResult {
+            expanded: format!("{}{}", format_progression_number(number, None), suffix),
+        })
+    }
+}
+
+/// `{{MinuteDisplay|s1|s2|...}}` sums the (second) values and renders `M:SS`.
+struct MinuteDisplayExpander;
+impl TemplateExpander for MinuteDisplayExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["MinuteDisplay"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        let mut total = 0.0;
+        for value in &positional {
+            let resolved =
+                expand_nested_template_text(value, ctx).unwrap_or_else(|_| value.trim().to_string());
+            let resolved = resolved.trim();
+            if resolved.is_empty() {
+                continue;
+            }
+            let Some(seconds) = evaluate_numeric(resolved) else {
+                return Err(unhandled_template_error(inv));
+            };
+            total += seconds;
+        }
+        let total = total as i64;
+        Ok(ExpansionResult {
+            expanded: format!("{}:{:02}", total / 60, total.rem_euclid(60)),
         })
     }
 }
@@ -3313,7 +3396,7 @@ fn resolve_champion_constant(ctx: &ExpanderCtx, entity: &str, field: &str) -> Re
         ));
     };
 
-    if let Some(constants) = conv_ctx.champion_constants(entity) {
+    if let Some(constants) = conv_ctx.champion_constants_or_load(entity) {
         if let Some(value) = constants.get(field) {
             return Ok(value.clone());
         }
