@@ -1978,6 +1978,38 @@ fn load_abilities(
         template_titles = export.list_champion_ability_templates(champ)?;
     }
 
+    // Some slots are transcluded via {{Grouped ability|Champion|Slot}} instead of a
+    // direct {{Data Champion/Slot}} reference. A grouped slot bundles several distinct
+    // sub-abilities (e.g. Fizz's E = "Playful" / "Trickster") whose individual data
+    // templates are never named on the champion page, so the plain reference scan above
+    // misses them entirely. Mirror the wiki template's own logic: read the constituent
+    // ability names from the champion module's `skill_<slot>` list and append the
+    // corresponding `Data Champion/<name>` templates. This stays fully data-driven — no
+    // champion- or slot-specific names are baked in.
+    let grouped_refs = collect_grouped_ability_refs(&main);
+    if !grouped_refs.is_empty() {
+        if let Some(lua) = export.read_champion_module_data()? {
+            if let Ok(module) = parse_champion_module(&lua) {
+                for reference in &grouped_refs {
+                    let names = if !reference.explicit_skills.is_empty() {
+                        reference.explicit_skills.clone()
+                    } else {
+                        grouped_ability_skill_names(&module, &reference.champion, &reference.slot)
+                    };
+                    for name in names {
+                        let title = format!("Template:Data {}/{}", reference.champion, name);
+                        if !template_titles
+                            .iter()
+                            .any(|existing| existing.eq_ignore_ascii_case(&title))
+                        {
+                            template_titles.push(title);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // On the wiki every ability data template is transcluded into the champion
     // page and shares one `#vardefine` scope, so a variable defined in one
     // ability (e.g. a Wild Rift stat) is visible to the others. Pre-collect
@@ -2279,6 +2311,130 @@ fn collect_referenced_ability_templates_inner(
             }
         }
     }
+}
+
+/// A `{{Grouped ability}}` transclusion discovered on a champion page.
+#[derive(Debug, Clone)]
+struct GroupedAbilityRef {
+    champion: String,
+    slot: String,
+    /// Explicit `skill1..skill4` overrides, when the page supplies them directly
+    /// instead of relying on the champion module's `skill_<slot>` list.
+    explicit_skills: Vec<String>,
+}
+
+/// Scan a page (recursing into nested templates) for `{{Grouped ability|Champion|Slot}}`
+/// transclusions, returning the champion/slot pairs that need their constituent
+/// sub-ability data templates resolved from the champion module.
+fn collect_grouped_ability_refs(raw: &str) -> Vec<GroupedAbilityRef> {
+    let mut out = Vec::new();
+    let mut seen = HashSet::new();
+    collect_grouped_ability_refs_inner(raw, &mut seen, &mut out);
+    out
+}
+
+fn collect_grouped_ability_refs_inner(
+    raw: &str,
+    seen: &mut HashSet<String>,
+    out: &mut Vec<GroupedAbilityRef>,
+) {
+    let Ok(spans) = extract_balanced_templates(raw) else {
+        return;
+    };
+
+    for span in spans {
+        if span.name.trim().eq_ignore_ascii_case("Grouped ability") {
+            let inner = &span.raw[2..span.raw.len() - 2];
+            if let Some(reference) = parse_grouped_ability_ref(inner) {
+                let key = format!(
+                    "{}|{}",
+                    reference.champion.to_ascii_lowercase(),
+                    reference.slot.to_ascii_lowercase()
+                );
+                if seen.insert(key) {
+                    out.push(reference);
+                }
+            }
+        }
+
+        if span.raw.len() > 4 {
+            let inner = &span.raw[2..span.raw.len() - 2];
+            if inner.contains("{{") {
+                collect_grouped_ability_refs_inner(inner, seen, out);
+            }
+        }
+    }
+}
+
+fn parse_grouped_ability_ref(body: &str) -> Option<GroupedAbilityRef> {
+    let inv = parse_invocation(body);
+    let mut positional: Vec<String> = Vec::new();
+    let mut champion: Option<String> = None;
+    let mut slot: Option<String> = None;
+    let mut explicit_skills: Vec<String> = Vec::new();
+
+    for param in inv.params {
+        if let Some(eq) = param.find('=') {
+            let key = param[..eq].trim().to_ascii_lowercase();
+            let value = param[eq + 1..].trim().to_string();
+            match key.as_str() {
+                "champion" => champion = Some(value),
+                "skill" => slot = Some(value),
+                "skill1" | "skill2" | "skill3" | "skill4" => {
+                    if !value.is_empty() {
+                        explicit_skills.push(value);
+                    }
+                }
+                _ => {}
+            }
+        } else {
+            let trimmed = param.trim();
+            if !trimmed.is_empty() {
+                positional.push(trimmed.to_string());
+            }
+        }
+    }
+
+    let champion = champion
+        .or_else(|| positional.first().cloned())
+        .map(|value| value.trim().to_string())
+        .filter(|value| !value.is_empty())?;
+    // The grouped-ability template defaults the slot to `Q` when omitted.
+    let slot = slot
+        .or_else(|| positional.get(1).cloned())
+        .map(|value| value.trim().to_string())
+        .filter(|value| !value.is_empty())
+        .unwrap_or_else(|| "Q".to_string());
+
+    Some(GroupedAbilityRef {
+        champion,
+        slot,
+        explicit_skills,
+    })
+}
+
+/// Resolve the constituent sub-ability names for a grouped slot from the champion
+/// module's `skill_<slot>` list (e.g. `skill_e = {"Playful", "Trickster"}`).
+fn grouped_ability_skill_names(
+    module: &HashMap<String, HashMap<String, LuaValue>>,
+    champion: &str,
+    slot: &str,
+) -> Vec<String> {
+    let Some(entry_key) = find_matching_entry_key(module, champion) else {
+        return Vec::new();
+    };
+    let Some(entry) = module.get(&entry_key) else {
+        return Vec::new();
+    };
+    let field = format!("skill_{}", slot.trim().to_ascii_lowercase());
+    entry
+        .get(&field)
+        .and_then(lua_value_to_string_vec)
+        .unwrap_or_default()
+        .into_iter()
+        .map(|name| name.trim().to_string())
+        .filter(|name| !name.is_empty())
+        .collect()
 }
 
 fn normalize_ability_value(raw: &str) -> String {
@@ -2868,6 +3024,86 @@ mod tests {
             abilities
                 .iter()
                 .filter(|ability| matches!(ability.key, AbilityKey::Q))
+                .count(),
+            2
+        );
+        assert!(loaded.warnings.is_empty());
+    }
+
+    #[test]
+    fn load_abilities_resolves_grouped_ability_slots_from_module() {
+        let td = tempdir().unwrap();
+        let flat = td.path().join("export_out");
+        std::fs::create_dir_all(&flat).unwrap();
+
+        // Mirrors the live Fizz page: the E slot is transcluded via {{Grouped ability}}
+        // rather than a direct {{Data Fizz/E}} reference, so its two sub-abilities are
+        // only discoverable through the champion module's skill_e list.
+        std::fs::write(
+            flat.join("Fizz.txt"),
+            concat!(
+                "{{Champion info|Fizz}}\n",
+                "== Abilities ==\n",
+                "{{Data Fizz/I|Ability}}\n",
+                "{{Data Fizz/Q|Ability}}\n",
+                "{{Data Fizz/W|Ability}}\n",
+                "{{Grouped ability|Fizz|E}}\n",
+                "{{Data Fizz/R|Ability}}\n"
+            ),
+        )
+        .unwrap();
+
+        std::fs::write(
+            flat.join("Module%3AChampionData%2Fdata.txt"),
+            concat!(
+                "return { ['Fizz'] = { ",
+                "skill_i = {'Nimble Fighter'}, skill_q = {'Urchin Strike'}, ",
+                "skill_w = {'Seastone Trident'}, skill_e = {'Playful', 'Trickster'}, ",
+                "skill_r = {'Chum the Waters'} } }"
+            ),
+        )
+        .unwrap();
+
+        for (title, content) in [
+            (
+                "Template:Data Fizz/I",
+                "{{{{{1|Ability data}}}|Nimble Fighter|skill=I|description=Passive}}",
+            ),
+            (
+                "Template:Data Fizz/Q",
+                "{{{{{1|Ability data}}}|Urchin Strike|skill=Q|description=Dash}}",
+            ),
+            (
+                "Template:Data Fizz/W",
+                "{{{{{1|Ability data}}}|Seastone Trident|skill=W|description=On-hit}}",
+            ),
+            (
+                "Template:Data Fizz/Playful",
+                "{{{{{1|Ability data}}}|Playful|skill=E|description=Hop away}}",
+            ),
+            (
+                "Template:Data Fizz/Trickster",
+                "{{{{{1|Ability data}}}|Trickster|skill=E|description=Second hop}}",
+            ),
+            (
+                "Template:Data Fizz/R",
+                "{{{{{1|Ability data}}}|Chum the Waters|skill=R|description=Shark}}",
+            ),
+        ] {
+            std::fs::write(flat.join(format!("{}.txt", url_encode(title))), content).unwrap();
+        }
+
+        let export = WikiExport::new(td.path());
+        let registry = TemplateRegistry::new();
+        let loaded = load_abilities(&export, "Fizz", 2, &HashMap::new(), &registry, None).unwrap();
+        let abilities = loaded.abilities;
+
+        assert!(abilities.iter().any(|ability| ability.name == "Playful"));
+        assert!(abilities.iter().any(|ability| ability.name == "Trickster"));
+        assert_eq!(
+            abilities
+                .iter()
+                .filter(|ability| matches!(ability.key, AbilityKey::E))
                 .count(),
             2
         );
