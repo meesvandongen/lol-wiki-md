@@ -1793,7 +1793,7 @@ pub fn render_simple_inline_template(name: &str, args: &[&str]) -> Option<String
             }
         }
         "csl" => render_csl_template(args),
-        "fi" | "tip" => last.to_string(),
+        "fi" | "tip" | "wrtip" => last.to_string(),
         "lorskin" => render_lorskin_template(args),
         "w" | "univ" => first.to_string(),
         "citation needed" => "[Citation needed]".to_string(),
@@ -1820,7 +1820,7 @@ pub fn render_simple_inline_template(name: &str, args: &[&str]) -> Option<String
         }
         "zoe spell thief list" => "(Spell Thief item-actives list omitted.)".to_string(),
         "bug" => "[Bug]".to_string(),
-        "pending for test" => "[Pending test]".to_string(),
+        "pending for test" | "pft" => "[Pending test]".to_string(),
         "effect at cast time start" => "(effect determined at cast time start)".to_string(),
         "effect at cast time end" => "(effect determined at cast time end)".to_string(),
         "degree" => "°".to_string(),

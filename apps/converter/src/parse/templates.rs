@@ -109,7 +109,7 @@ impl TemplateRegistry {
         r.register(Box::new(NeutralizeExpander));
         r.register(Box::new(ChimeListExpander));
         r.register(Box::new(DelimitValuesExpander));
-        r.register(Box::new(ShapeshifterChampionExpander));
+        r.register(Box::new(CategoryChampionListExpander));
         r.register(Box::new(DecorativeEmptyExpander));
         r.register(Box::new(NamedItemEffectExpander));
         r.register(Box::new(UniqueExpander));
@@ -238,6 +238,7 @@ impl TemplateExpander for SimpleInlineExpander {
             "csl",
             "fi",
             "tip",
+            "wrtip",
             "lorskin",
             "w",
             "univ",
@@ -250,6 +251,7 @@ impl TemplateExpander for SimpleInlineExpander {
             "zoe spell thief list",
             "bug",
             "pending for test",
+            "pft",
             "effect at cast time start",
             "effect at cast time end",
             "degree",
@@ -962,22 +964,27 @@ impl TemplateExpander for DelimitValuesExpander {
     }
 }
 
-/// `{{Shapeshifter Champion|Name}}` renders a category-driven list of
-/// shape-shifting champions via DPL, which cannot be resolved offline. Emit the
-/// reader-facing lead sentence and omit the dynamic roster.
-struct ShapeshifterChampionExpander;
-impl TemplateExpander for ShapeshifterChampionExpander {
+/// Category-driven champion-list templates (`Shapeshifter Champion`,
+/// `Self Crowd Control champion`) render a DPL roster that cannot be resolved
+/// offline. Emit the reader-facing lead sentence and omit the dynamic roster.
+struct CategoryChampionListExpander;
+impl TemplateExpander for CategoryChampionListExpander {
     fn names(&self) -> &'static [&'static str] {
-        &["Shapeshifter Champion"]
+        &["Shapeshifter Champion", "Self Crowd Control champion"]
     }
 
     fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         let (positional, _named) = split_named_and_positional(inv);
+        let trait_clause = if inv.name.eq_ignore_ascii_case("Self Crowd Control champion") {
+            "can apply a form of crowd control to themselves by using an ability"
+        } else {
+            "can change shape, altering some or all of their abilities"
+        };
         let expanded = match positional.first().map(|value| value.trim()) {
-            Some(name) if !name.is_empty() => format!(
-                "'''{name}''' is one of the champions that can change shape, altering some or all of their abilities."
-            ),
-            _ => "The following champions can change shape, altering some or all of their abilities.".to_string(),
+            Some(name) if !name.is_empty() => {
+                format!("'''{name}''' is one of the champions that {trait_clause}.")
+            }
+            _ => format!("The following champions {trait_clause}."),
         };
         Ok(ExpansionResult { expanded })
     }
@@ -995,6 +1002,7 @@ impl TemplateExpander for DecorativeEmptyExpander {
             "GalleryHelper",
             "Image tabber",
             "SeeOther",
+            "ToDo",
         ]
     }
 
@@ -1327,7 +1335,7 @@ impl TemplateExpander for InvokeExpander {
     }
 
     fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        let (positional, _named) = split_named_and_positional(inv);
+        let (positional, named) = split_named_and_positional(inv);
         let module = positional
             .first()
             .map(|value| value.trim())
@@ -1345,6 +1353,16 @@ impl TemplateExpander for InvokeExpander {
                     if let Some(value) = data.get("val").and_then(lua_value_to_string) {
                         ctx.set_var(key.clone(), value);
                     }
+                }
+            }
+        }
+
+        // {{#invoke:ItemData|get|item=X|datatype=Y}} resolves an item constant,
+        // the same data source backing the {{cid}} template.
+        if module.eq_ignore_ascii_case("ItemData") && function.eq_ignore_ascii_case("get") {
+            if let (Some(item), Some(datatype)) = (named.get("item"), named.get("datatype")) {
+                if let Ok(value) = resolve_item_constant(ctx, item.trim(), datatype.trim()) {
+                    return Ok(ExpansionResult { expanded: value });
                 }
             }
         }
