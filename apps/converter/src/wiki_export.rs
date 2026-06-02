@@ -1,6 +1,6 @@
 use crate::error::{ConvertError, Result};
 use once_cell::sync::OnceCell;
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
@@ -12,11 +12,17 @@ struct PageIndexEntry {
     path: PathBuf,
 }
 
+#[derive(Debug)]
+struct PageIndex {
+    entries: Vec<PageIndexEntry>,
+    by_lower: HashMap<String, usize>,
+}
+
 /// Reader for flat export_out layout with URL-encoded filenames.
 #[derive(Debug, Clone)]
 pub struct WikiExport {
     pub root: PathBuf,
-    page_index: Arc<OnceCell<Vec<PageIndexEntry>>>,
+    page_index: Arc<OnceCell<PageIndex>>,
 }
 
 impl WikiExport {
@@ -141,7 +147,7 @@ impl WikiExport {
     pub fn list_champion_ability_templates(&self, champ: &str) -> Result<Vec<String>> {
         let mut out = Vec::new();
         let prefix = format!("template:data {}/", champ.to_ascii_lowercase());
-        for entry in self.page_index()? {
+        for entry in &self.page_index()?.entries {
             if entry.lower_title.starts_with(&prefix) {
                 out.push(entry.title.clone());
             }
@@ -163,7 +169,7 @@ impl WikiExport {
     pub fn list_titles_with_prefix(&self, prefix: &str) -> Result<Vec<String>> {
         let prefix_lower = prefix.to_ascii_lowercase();
         let mut titles = Vec::new();
-        for entry in self.page_index()? {
+        for entry in &self.page_index()?.entries {
             if entry.lower_title.starts_with(&prefix_lower) {
                 titles.push(entry.title.clone());
             }
@@ -189,18 +195,17 @@ impl WikiExport {
         if path.exists() {
             return Ok(Some(path));
         }
+        let index = self.page_index()?;
         let title_lower = title.to_ascii_lowercase();
-        for entry in self.page_index()? {
-            if entry.lower_title == title_lower {
-                return Ok(Some(entry.path.clone()));
-            }
+        if let Some(&idx) = index.by_lower.get(&title_lower) {
+            return Ok(Some(index.entries[idx].path.clone()));
         }
         Ok(None)
     }
 
-    fn page_index(&self) -> Result<&Vec<PageIndexEntry>> {
+    fn page_index(&self) -> Result<&PageIndex> {
         self.page_index.get_or_try_init(|| {
-            let mut entries = Vec::new();
+            let mut entries: Vec<PageIndexEntry> = Vec::new();
             for entry in fs::read_dir(&self.root).map_err(ConvertError::Io)? {
                 let entry = entry.map_err(ConvertError::Io)?;
                 let path = entry.path();
@@ -215,7 +220,13 @@ impl WikiExport {
                     path,
                 });
             }
-            Ok(entries)
+            let mut by_lower: HashMap<String, usize> = HashMap::with_capacity(entries.len());
+            for (idx, entry) in entries.iter().enumerate() {
+                // First occurrence wins (consistent with the prior linear scan,
+                // which would return the first match).
+                by_lower.entry(entry.lower_title.clone()).or_insert(idx);
+            }
+            Ok(PageIndex { entries, by_lower })
         })
     }
 }
@@ -299,54 +310,58 @@ fn contains_template_start(head: &str, candidates: &[&str]) -> bool {
 impl WikiExport {
     /// List champion names available in the dataset by scanning either the exploded tree or flat files.
     pub fn list_champion_names(&self) -> Result<Vec<String>> {
-        let mut names = Vec::new();
-        for entry in self.page_index()? {
-            let path = &entry.path;
-            let title = entry.title.clone();
-            if title.contains('/') || title.contains(':') {
-                continue;
-            }
-            // Cheap content sniff: look for Champion info template in first 4KB
-            if let Ok(mut file) = fs::File::open(path) {
-                use std::io::Read;
-                let mut buf = vec![0u8; 4096];
-                let n = file.read(&mut buf).unwrap_or(0);
-                let head = String::from_utf8_lossy(&buf[..n]);
-                if contains_template_start(&head, &["Champion info"]) {
-                    names.push(title);
-                }
-            }
-        }
-        names.sort_unstable();
-        Ok(names)
+        self.list_entity_names_with_template(&["Champion info"], 4096)
     }
 
     pub fn list_item_names(&self) -> Result<Vec<String>> {
-        let mut names = Vec::new();
-        for entry in self.page_index()? {
-            let path = &entry.path;
-            let title = entry.title.clone();
-            if title.contains(':') || title.contains('/') {
-                continue;
+        self.list_entity_names_with_template(&["Item info"], 8192)
+    }
+
+    /// Shared scan that opens each entity page (top-level title, no namespace
+    /// prefix or subpage path) and sniffs the first `head_size` bytes for one
+    /// of the marker templates. Parallelized via Rayon when available because
+    /// real exports contain many thousands of pages and this is otherwise
+    /// I/O-bound on a single thread.
+    fn list_entity_names_with_template(
+        &self,
+        markers: &[&str],
+        head_size: usize,
+    ) -> Result<Vec<String>> {
+        let entries = &self.page_index()?.entries;
+        let scan = |entry: &PageIndexEntry| -> Option<String> {
+            let title = &entry.title;
+            if title.contains('/') || title.contains(':') {
+                return None;
             }
-            if let Ok(mut file) = fs::File::open(path) {
-                use std::io::Read;
-                let mut buf = vec![0u8; 8192];
-                let n = file.read(&mut buf).unwrap_or(0);
-                let head = String::from_utf8_lossy(&buf[..n]);
-                let has_item_info = contains_template_start(&head, &["Item info"]);
-                if has_item_info {
-                    names.push(title);
-                }
+            let mut file = fs::File::open(&entry.path).ok()?;
+            use std::io::Read;
+            let mut buf = vec![0u8; head_size];
+            let n = file.read(&mut buf).unwrap_or(0);
+            let head = String::from_utf8_lossy(&buf[..n]);
+            if contains_template_start(&head, markers) {
+                Some(title.clone())
+            } else {
+                None
             }
-        }
+        };
+        let mut names: Vec<String> = {
+            #[cfg(feature = "rayon")]
+            {
+                use rayon::prelude::*;
+                entries.par_iter().filter_map(scan).collect()
+            }
+            #[cfg(not(feature = "rayon"))]
+            {
+                entries.iter().filter_map(scan).collect()
+            }
+        };
         names.sort_unstable();
         Ok(names)
     }
 
     pub fn list_rune_names(&self) -> Result<Vec<String>> {
         let mut names = Vec::new();
-        for entry in self.page_index()? {
+        for entry in &self.page_index()?.entries {
             let path = &entry.path;
             let title = entry.title.clone();
             if title.contains(':') || title.contains('/') {

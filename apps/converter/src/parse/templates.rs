@@ -36,6 +36,12 @@ pub trait TemplateExpander: Send + Sync {
 #[derive(Default)]
 pub struct TemplateRegistry {
     expanders: Vec<Box<dyn TemplateExpander>>,
+    /// Lookup of normalized (lowercase) template name to the index in
+    /// `expanders` that first claims it. Keeps "first registered wins"
+    /// semantics for shared names (e.g. the catch-all `SimpleInlineExpander`
+    /// is registered last so dedicated handlers win) while eliminating the
+    /// O(N_expanders) scan that previously ran for every template invocation.
+    name_index: HashMap<String, usize>,
 }
 
 impl TemplateRegistry {
@@ -127,16 +133,22 @@ impl TemplateRegistry {
         r
     }
     pub fn register(&mut self, ex: Box<dyn TemplateExpander>) {
+        let idx = self.expanders.len();
+        for &raw_name in ex.names() {
+            let key = raw_name.to_ascii_lowercase();
+            // First registration wins; later expanders sharing a name (notably
+            // the catch-all `SimpleInlineExpander`) defer to the dedicated one.
+            self.name_index.entry(key).or_insert(idx);
+        }
         self.expanders.push(ex);
     }
     pub fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        for e in &self.expanders {
-            if e.names().iter().any(|n| n.eq_ignore_ascii_case(&inv.name)) {
-                if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
-                    conv_ctx.record_template_params(&inv.name, &inv.params);
-                }
-                return e.expand(inv, ctx);
+        let lookup_key = inv.name.to_ascii_lowercase();
+        if let Some(&idx) = self.name_index.get(&lookup_key) {
+            if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
+                conv_ctx.record_template_params(&inv.name, &inv.params);
             }
+            return self.expanders[idx].expand(inv, ctx);
         }
         if let Some(recovered) = recover_malformed_wrapper_invocation(inv) {
             return self.expand(&recovered, ctx);
@@ -177,9 +189,7 @@ impl TemplateRegistry {
         })
     }
     pub fn has_name(&self, name: &str) -> bool {
-        self.expanders
-            .iter()
-            .any(|e| e.names().iter().any(|n| n.eq_ignore_ascii_case(name)))
+        self.name_index.contains_key(&name.to_ascii_lowercase())
     }
     pub fn list_names(&self) -> Vec<&'static str> {
         let mut out: Vec<&'static str> = Vec::new();
