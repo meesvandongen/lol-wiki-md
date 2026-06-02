@@ -26,6 +26,38 @@ pub fn collect_page_vars(raw: &str) -> Result<HashMap<String, String>> {
     Ok(vars)
 }
 
+/// Like [`collect_page_vars`], but descends into template parameters so that
+/// `#vardefine`/`#vardefineecho` calls nested inside another template (e.g. a
+/// `Rune data` template's `effect=` field) are also captured. This mirrors how
+/// MediaWiki executes those side-effecting parser functions on transclusion,
+/// making the variables they define available page-wide.
+pub fn collect_page_vars_recursive(raw: &str) -> Result<HashMap<String, String>> {
+    let mut vars = HashMap::new();
+    collect_vars_into(raw, &mut vars);
+    Ok(vars)
+}
+
+fn collect_vars_into(raw: &str, vars: &mut HashMap<String, String>) {
+    let Ok(spans) = extract_balanced_templates(raw) else {
+        return;
+    };
+    for span in spans {
+        let body = &span.raw[2..span.raw.len() - 2];
+        let inv = parse_invocation(body);
+        if (inv.name.eq_ignore_ascii_case("#vardefine")
+            || inv.name.eq_ignore_ascii_case("#vardefineecho"))
+            && inv.params.len() >= 2
+        {
+            vars.insert(inv.params[0].clone(), inv.params[1].clone());
+        }
+        for param in &inv.params {
+            if param.contains("{{") {
+                collect_vars_into(param, vars);
+            }
+        }
+    }
+}
+
 /// Expand all top-level templates in `raw` using the provided registry and variable map.
 pub fn expand_with_vars(
     raw: &str,
