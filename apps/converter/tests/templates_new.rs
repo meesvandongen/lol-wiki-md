@@ -82,28 +82,36 @@ fn ccd_and_cid_resolve_constants() {
     assert_eq!(reg.expand(&cid, &expander_ctx).unwrap().expanded, "40");
 }
 
-#[test]
-fn expr_failure_returns_unhandled_marker() {
-    let out = expand("#expr:not actually math");
-    assert!(out.contains("UNHANDLED TEMPLATE #expr"));
+fn expand_is_err(body: &str) -> bool {
+    let reg = TemplateRegistry::new();
+    let inv = parse_invocation(body);
+    let ctx = ExpanderCtx::new(2, &HashMap::new(), None);
+    reg.expand(&inv, &ctx).is_err()
 }
 
 #[test]
-fn fd_invalid_number_returns_unhandled_marker() {
-    let out = expand("fd|not-a-number");
-    assert!(out.contains("UNHANDLED TEMPLATE fd"));
+fn expr_failure_fails_fast() {
+    assert!(expand_is_err("#expr:not actually math"));
 }
 
 #[test]
-fn critical_damage_invalid_params_return_unhandled_marker() {
-    let out = expand("critical damage|oops|100");
-    assert!(out.contains("UNHANDLED TEMPLATE critical damage"));
+fn fd_invalid_number_fails_fast() {
+    assert!(expand_is_err("fd|not-a-number"));
 }
 
 #[test]
-fn item_stat_table_without_context_returns_unhandled_marker() {
-    let out = expand("Item stat table|pykehealth");
-    assert!(out.contains("UNHANDLED TEMPLATE Item stat table"));
+fn critical_damage_invalid_params_fail_fast() {
+    assert!(expand_is_err("critical damage|oops|100"));
+}
+
+#[test]
+fn item_stat_table_without_context_fails_fast() {
+    assert!(expand_is_err("Item stat table|pykehealth"));
+}
+
+#[test]
+fn unknown_template_fails_fast() {
+    assert!(expand_is_err("TotallyUnknownTemplate|x|y"));
 }
 
 #[test]

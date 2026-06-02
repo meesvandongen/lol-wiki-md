@@ -108,6 +108,19 @@ impl TemplateRegistry {
         r.register(Box::new(SimpleStatExpander));
         r.register(Box::new(NeutralizeExpander));
         r.register(Box::new(ChimeListExpander));
+        r.register(Box::new(DelimitValuesExpander));
+        r.register(Box::new(ShapeshifterChampionExpander));
+        r.register(Box::new(DecorativeEmptyExpander));
+        r.register(Box::new(NamedItemEffectExpander));
+        r.register(Box::new(UniqueExpander));
+        r.register(Box::new(UnexpectedExpander));
+        r.register(Box::new(TipDataExpander));
+        r.register(Box::new(SupNoteExpander));
+        r.register(Box::new(AdaptiveExpander));
+        // Registered last: a catch-all for inline icon/label helper templates that
+        // render to plain reader-facing text. Dedicated expanders above take
+        // precedence for any shared names.
+        r.register(Box::new(SimpleInlineExpander));
         r
     }
     pub fn register(&mut self, ex: Box<dyn TemplateExpander>) {
@@ -125,11 +138,39 @@ impl TemplateRegistry {
         if let Some(recovered) = recover_malformed_wrapper_invocation(inv) {
             return self.expand(&recovered, ctx);
         }
+        // MediaWiki substitution prefixes (`subst:` / `safesubst:`) are dispatch
+        // hints, not part of the template name. Strip them and re-dispatch.
+        let lower_name = inv.name.trim().to_ascii_lowercase();
+        for prefix in ["safesubst:", "subst:"] {
+            if lower_name.starts_with(prefix) {
+                let stripped = inv.name.trim()[prefix.len()..].trim().to_string();
+                if !stripped.is_empty() {
+                    let recovered = TemplateInvocation {
+                        name: stripped.clone(),
+                        raw: format!(
+                            "{}{}",
+                            stripped,
+                            inv.raw.trim().strip_prefix(inv.name.trim()).unwrap_or("")
+                        ),
+                        params: inv.params.clone(),
+                    };
+                    return self.expand(&recovered, ctx);
+                }
+            }
+        }
+        // `Tip data/<topic>` is a buzzword data family resolved from the topic's
+        // template page.
+        if lower_name.starts_with("tip data/") {
+            if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
+                conv_ctx.record_template_params(&inv.name, &inv.params);
+            }
+            return TipDataExpander.expand(inv, ctx);
+        }
         if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
             conv_ctx.record_template_params(&inv.name, &inv.params);
         }
-        Ok(ExpansionResult {
-            expanded: unhandled_template_marker(inv),
+        Err(ConvertError::UnknownTemplate {
+            name: inv.name.clone(),
         })
     }
     pub fn has_name(&self, name: &str) -> bool {
@@ -150,13 +191,107 @@ impl TemplateRegistry {
     }
 }
 
-fn unhandled_template_marker(inv: &TemplateInvocation) -> String {
-    let sanitized = inv
-        .raw
-        .replace("{{", "&#123;&#123;")
-        .replace("}}", "&#125;&#125;")
-        .replace("--", "—");
-    format!("<!-- UNHANDLED TEMPLATE {}: {} -->", inv.name, sanitized)
+/// Error produced when a recognized template cannot be expanded for the given
+/// invocation (missing data, malformed arguments, unsupported variant). The
+/// pipeline fails fast rather than emitting a placeholder marker.
+fn unhandled_template_error(inv: &TemplateInvocation) -> ConvertError {
+    ConvertError::MalformedTemplate {
+        name: inv.name.clone(),
+        detail: format!("could not expand invocation: {}", inv.raw),
+    }
+}
+
+/// Catch-all expander for inline icon/label/helper templates that render to
+/// plain reader-facing text (e.g. `csl`, `cai`, `lor`, `tip`). Shares its
+/// rendering logic with the markdown renderer. Returns
+/// [`ConvertError::UnknownTemplate`] for any name it does not handle so the
+/// pipeline fails fast on genuinely unsupported templates.
+struct SimpleInlineExpander;
+impl TemplateExpander for SimpleInlineExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &[
+            "as",
+            "ap",
+            "sti",
+            "ci",
+            "ui",
+            "uis",
+            "ii",
+            "nie",
+            "ris",
+            "cbi",
+            "lor",
+            "gems",
+            "skin tier",
+            "si",
+            "tfti",
+            "adaptive",
+            "fd",
+            "tftc",
+            "tftt",
+            "wrskin",
+            "cis",
+            "cbis",
+            "iis",
+            "nies",
+            "sis",
+            "csl",
+            "fi",
+            "tip",
+            "lorskin",
+            "w",
+            "univ",
+            "citation needed",
+            "equals",
+            "gold",
+            "champion_icon",
+            "champion icon",
+            "ability icon",
+            "zoe spell thief list",
+            "bug",
+            "pending for test",
+            "effect at cast time start",
+            "effect at cast time end",
+            "degree",
+            "minus",
+            "plus",
+            "lmb",
+            "rmb",
+            "times",
+            "arcaneciteep",
+            "ai",
+            "cai",
+            "ais",
+            "cais",
+            "sbc",
+            "spoiler",
+            "note",
+            "rd",
+            "ig",
+            "wi",
+            "recurring",
+            "wrcst",
+            "mi1",
+            "mi2",
+            "mi3",
+            "mi4",
+            "mi6",
+            "mi7",
+            "lll",
+            "set",
+            "item stat table",
+            "tt",
+        ]
+    }
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let args: Vec<&str> = inv.params.iter().map(|p| p.as_str()).collect();
+        match crate::render::markdown::render_simple_inline_template(&inv.name, &args) {
+            Some(expanded) => Ok(ExpansionResult { expanded }),
+            None => Err(ConvertError::UnknownTemplate {
+                name: inv.name.clone(),
+            }),
+        }
+    }
 }
 
 fn recover_malformed_wrapper_invocation(inv: &TemplateInvocation) -> Option<TemplateInvocation> {
@@ -237,9 +372,7 @@ impl TemplateExpander for ExprExpander {
         let pre = replace_var_templates(&nested, &ctx.vars_snapshot(), true);
         match evaluate_expression_display(&pre, ctx.precision) {
             Some(v) => Ok(ExpansionResult { expanded: v }),
-            None => Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            }),
+            None => Err(unhandled_template_error(inv)),
         }
     }
 }
@@ -777,6 +910,7 @@ const INFO_INCLUDE_TEMPLATES: &[&str] = &[
     "Summoner spell cooldown table",
     "Healing modifiers",
     "Experimental Hexplate ultimate interactions",
+    "Always quickcast",
 ];
 
 struct IncludeInfoExpander;
@@ -812,6 +946,229 @@ impl TemplateExpander for IncludeInfoExpander {
     }
 }
 
+/// `{{dv|a|b|...}}` (a.k.a. `Delimit values`) joins its positional values with
+/// the bullet delimiter used by `Module:Ability progression`'s `dv` function.
+struct DelimitValuesExpander;
+impl TemplateExpander for DelimitValuesExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["dv", "Delimit values"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        Ok(ExpansionResult {
+            expanded: positional.join(" • "),
+        })
+    }
+}
+
+/// `{{Shapeshifter Champion|Name}}` renders a category-driven list of
+/// shape-shifting champions via DPL, which cannot be resolved offline. Emit the
+/// reader-facing lead sentence and omit the dynamic roster.
+struct ShapeshifterChampionExpander;
+impl TemplateExpander for ShapeshifterChampionExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Shapeshifter Champion"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        let expanded = match positional.first().map(|value| value.trim()) {
+            Some(name) if !name.is_empty() => format!(
+                "'''{name}''' is one of the champions that can change shape, altering some or all of their abilities."
+            ),
+            _ => "The following champions can change shape, altering some or all of their abilities.".to_string(),
+        };
+        Ok(ExpansionResult { expanded })
+    }
+}
+
+/// Navigation, gallery, and hatnote templates that carry no reader-facing
+/// prose in the Markdown output. Rendered as empty rather than dropped silently
+/// so unknown templates still fail fast.
+struct DecorativeEmptyExpander;
+impl TemplateExpander for DecorativeEmptyExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &[
+            "game navigation",
+            "Article game navigation",
+            "GalleryHelper",
+            "Image tabber",
+            "SeeOther",
+        ]
+    }
+
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        Ok(ExpansionResult {
+            expanded: String::new(),
+        })
+    }
+}
+
+/// `{{Named item effect|name|anchor|wr=}}` links to a named item effect; the
+/// display text is the first positional value.
+struct NamedItemEffectExpander;
+impl TemplateExpander for NamedItemEffectExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Named item effect"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        Ok(ExpansionResult {
+            expanded: positional
+                .first()
+                .map(|value| value.trim().to_string())
+                .unwrap_or_default(),
+        })
+    }
+}
+
+/// `{{Unique|effect}}` / `{{Unique|effect|text}}` render an item's unique
+/// passive label.
+struct UniqueExpander;
+impl TemplateExpander for UniqueExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Unique"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        let first = positional.first().map(|v| v.trim()).unwrap_or("");
+        let expanded = match positional.get(1).map(|v| v.trim()).filter(|v| !v.is_empty()) {
+            Some(second) => format!("Unique – {first}: {second}"),
+            None => format!("Unique: {first}"),
+        };
+        Ok(ExpansionResult { expanded })
+    }
+}
+
+/// `{{unexpected|desc=...}}` flags unexpected in-game behaviour; the reader
+/// content is the description text.
+struct UnexpectedExpander;
+impl TemplateExpander for UnexpectedExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["unexpected"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (_positional, named) = split_named_and_positional(inv);
+        let desc = named
+            .get("desc")
+            .or_else(|| named.get("1"))
+            .cloned()
+            .unwrap_or_default();
+        let expanded = expand_nested_template_text(&desc, ctx).unwrap_or(desc);
+        Ok(ExpansionResult {
+            expanded: expanded.trim().to_string(),
+        })
+    }
+}
+
+/// `{{Tip data/<topic>|selector|field}}` exposes a single field (e.g.
+/// `description`) of a buzzword tooltip stored on the topic's template page.
+struct TipDataExpander;
+impl TemplateExpander for TipDataExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["Tip data"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
+            return Err(unhandled_template_error(inv));
+        };
+        let (positional, _named) = split_named_and_positional(inv);
+        let field = positional
+            .get(1)
+            .map(|value| value.trim().to_ascii_lowercase())
+            .filter(|value| !value.is_empty())
+            .unwrap_or_else(|| "description".to_string());
+        let title = format!("Template:{}", inv.name.trim());
+        let Some(raw) = conv_ctx.export().read_template_page(&title)? else {
+            return Err(unhandled_template_error(inv));
+        };
+        let Some(named_params) = read_named_template_params_from_page(&raw) else {
+            return Err(unhandled_template_error(inv));
+        };
+        let Some(value_raw) = named_params.get(&field) else {
+            return Err(unhandled_template_error(inv));
+        };
+        let expanded = expand_inline_templates_with_store(
+            value_raw,
+            ctx.precision,
+            ctx.vars.clone(),
+            conv_ctx.registry(),
+            ctx.conversion_ctx.clone(),
+        )?;
+        Ok(ExpansionResult {
+            expanded: expanded.trim().to_string(),
+        })
+    }
+}
+
+/// `{{adaptive|value|levels|wr=}}` renders an adaptive bonus as
+/// `<AD> bonus Attack Damage or <AP> Ability Power (Adaptive)`. Per-level
+/// formulas (values containing `x`) delegate to the `{{pp}}` progression
+/// engine; plain numbers and `a to b` ranges use the inline renderer.
+struct AdaptiveExpander;
+impl TemplateExpander for AdaptiveExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["adaptive"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, named) = split_named_and_positional(inv);
+        let value = positional.first().map(|v| v.trim()).unwrap_or("");
+        if !value.contains('x') {
+            // Plain number or `a to b` range: reuse the shared inline renderer.
+            let args: Vec<&str> = inv.params.iter().map(|p| p.as_str()).collect();
+            return match crate::render::markdown::render_simple_inline_template("adaptive", &args) {
+                Some(expanded) => Ok(ExpansionResult { expanded }),
+                None => Err(unhandled_template_error(inv)),
+            };
+        }
+
+        let wild_rift = named
+            .get("wr")
+            .map(|v| v.trim().eq_ignore_ascii_case("true"))
+            .unwrap_or(false);
+        let af = if wild_rift { "0.5" } else { "0.6" };
+        let for_clause = match positional.get(1).map(|v| v.trim()).filter(|v| !v.is_empty()) {
+            Some(levels) => format!(" for {levels}"),
+            None if wild_rift => " for 15".to_string(),
+            None => String::new(),
+        };
+
+        let render_pp = |expr: String| -> Result<String> {
+            render_pp_progression_from_parts(vec![expr], HashMap::new(), ctx)
+        };
+        let attack_damage = render_pp(format!("({value})*{af}{for_clause}"))?;
+        let ability_power = render_pp(format!("({value}){for_clause}"))?;
+        Ok(ExpansionResult {
+            expanded: format!(
+                "{attack_damage} **bonus** Attack Damage or {ability_power} Ability Power (Adaptive)"
+            ),
+        })
+    }
+}
+
+/// `{{supNote|text}}` is a superscript footnote marker pointing at a note.
+struct SupNoteExpander;
+impl TemplateExpander for SupNoteExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["supNote"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let (positional, _named) = split_named_and_positional(inv);
+        let expanded = match positional.first().map(|v| v.trim()).filter(|v| !v.is_empty()) {
+            Some(note) => format!("(note: {note})"),
+            None => "(note)".to_string(),
+        };
+        Ok(ExpansionResult { expanded })
+    }
+}
+
 struct ScrollBoxExpander;
 impl TemplateExpander for ScrollBoxExpander {
     fn names(&self) -> &'static [&'static str] {
@@ -838,16 +1195,12 @@ impl TemplateExpander for RuneDataExpander {
 
     fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
 
         let (positional, _named) = split_named_and_positional(inv);
         let Some(rune_name) = positional.first().map(|value| value.trim()) else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         let field = if positional.len() >= 3 {
             positional[2].trim()
@@ -855,26 +1208,18 @@ impl TemplateExpander for RuneDataExpander {
             positional.get(1).map(|value| value.trim()).unwrap_or("")
         };
         if rune_name.is_empty() || field.is_empty() {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         }
 
         let title = format!("Template:Rune data {}", rune_name);
         let Some(raw) = conv_ctx.export().read_template_page(&title)? else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         let Some(named_params) = read_named_template_params_from_page(&raw) else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         let Some(value_raw) = named_params.get(&field.to_ascii_lowercase()) else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         let expanded = expand_inline_templates_with_store(
             value_raw,
@@ -897,21 +1242,15 @@ impl TemplateExpander for MapChangesExpander {
 
     fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
 
         let (positional, _named) = split_named_and_positional(inv);
         let Some(entity) = positional.first().map(|value| value.trim()) else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         if entity.is_empty() || entity.eq_ignore_ascii_case("table") {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         }
 
         const MODE_TEMPLATES: &[(&str, &str)] = &[
@@ -1156,9 +1495,7 @@ impl TemplateExpander for GoldEfficiencyCalculationExpander {
                     .filter(|value| !value.is_empty())
             });
         let Some(item_name) = item_name else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         let item = item_name.as_str();
 
@@ -1169,14 +1506,10 @@ impl TemplateExpander for GoldEfficiencyCalculationExpander {
             .unwrap_or_default();
         let buy_resolved = expand_nested_template_text(&buy_raw, ctx).unwrap_or(buy_raw);
         let Some(buy_value) = evaluate_numeric(buy_resolved.trim()) else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         if buy_value == 0.0 {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         }
 
         let tgv_source = named
@@ -1185,16 +1518,12 @@ impl TemplateExpander for GoldEfficiencyCalculationExpander {
             .or_else(|| positional.get(1).cloned())
             .or_else(|| ctx.get_var("total"));
         let Some(tgv_source) = tgv_source else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         let tgv_resolved = expand_nested_template_text(&tgv_source, ctx).unwrap_or(tgv_source);
         let trimmed = tgv_resolved.trim();
         if trimmed.is_empty() {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         }
 
         let (plus_mode, numeric_expr) = if let Some(rest) = trimmed.strip_prefix('+') {
@@ -1203,9 +1532,7 @@ impl TemplateExpander for GoldEfficiencyCalculationExpander {
             (false, trimmed)
         };
         let Some(value) = evaluate_numeric(numeric_expr) else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
 
         let percent = format!(
@@ -1241,41 +1568,53 @@ impl TemplateExpander for CriticalDamageExpander {
             });
         }
 
-        let resolved_params = inv
-            .params
-            .iter()
-            .map(|value| {
-                expand_nested_template_text(value, ctx).unwrap_or_else(|_| value.trim().to_string())
-            })
-            .collect::<Vec<_>>();
+        let (positional, named) = split_named_and_positional(inv);
+        let suffix = if named
+            .get("flat")
+            .map(|value| value.trim().eq_ignore_ascii_case("true"))
+            .unwrap_or(false)
+        {
+            ""
+        } else {
+            "%"
+        };
 
-        // Prefer the modifier percentage when present; otherwise render the first positional
-        // value as a percentage literal if it is numeric or an evaluatable expression.
-        for p in &resolved_params {
-            if let Some(eq) = p.find('=') {
-                let (k, v) = p.split_at(eq);
-                if k.trim().eq_ignore_ascii_case("mod") {
-                    let Some(f) = evaluate_numeric(v[1..].trim()) else {
-                        return Ok(ExpansionResult {
-                            expanded: unhandled_template_marker(inv),
-                        });
-                    };
-                    return Ok(ExpansionResult {
-                        expanded: format!("{}%", format_progression_number(f * 100.0, None)),
-                    });
-                }
+        // Prefer the modifier percentage when present.
+        if let Some(factor) = named.get("mod").and_then(|value| {
+            let resolved =
+                expand_nested_template_text(value, ctx).unwrap_or_else(|_| value.trim().to_string());
+            evaluate_numeric(resolved.trim())
+        }) {
+            return Ok(ExpansionResult {
+                expanded: format!("{}%", format_progression_number(factor * 100.0, None)),
+            });
+        }
+
+        let first_raw = positional.first().map(|value| value.trim()).unwrap_or("");
+        let first = expand_nested_template_text(first_raw, ctx)
+            .unwrap_or_else(|_| first_raw.to_string());
+        let first = first.trim();
+
+        // Chance-scaling and other range forms render `a to b` as a percentage range.
+        if let Some((start, end)) = first.split_once(" to ") {
+            if let (Some(start_value), Some(end_value)) =
+                (evaluate_numeric(start.trim()), evaluate_numeric(end.trim()))
+            {
+                return Ok(ExpansionResult {
+                    expanded: format!(
+                        "{}{suffix} to {}{suffix}",
+                        format_progression_number(start_value, None),
+                        format_progression_number(end_value, None),
+                    ),
+                });
             }
         }
 
-        if let Some(first) = resolved_params.first() {
-            if let Some(percent) = render_percentage_literal(first.trim()) {
-                return Ok(ExpansionResult { expanded: percent });
-            }
+        if let Some(percent) = render_percentage_literal(first) {
+            return Ok(ExpansionResult { expanded: percent });
         }
 
-        Ok(ExpansionResult {
-            expanded: unhandled_template_marker(inv),
-        })
+        Err(unhandled_template_error(inv))
     }
 }
 
@@ -1777,14 +2116,10 @@ impl TemplateExpander for FdExpander {
         }
 
         if raw.contains("<!--") || raw.contains("{{") {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         }
         if !looks_like_textual_fd_value(&raw) && (aux.is_empty() || aux.parse::<usize>().is_ok()) {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         }
 
         Ok(ExpansionResult {
@@ -3157,21 +3492,15 @@ impl TemplateExpander for HighestLowestStatsExpander {
 
     fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         let Some(module_raw) = conv_ctx.champion_module_raw()? else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         let module = match parse_champion_module(module_raw) {
             Ok(module) => module,
             Err(_) => {
-                return Ok(ExpansionResult {
-                    expanded: unhandled_template_marker(inv),
-                })
+                return Err(unhandled_template_error(inv))
             }
         };
 
@@ -3180,9 +3509,7 @@ impl TemplateExpander for HighestLowestStatsExpander {
             .first()
             .and_then(|value| parse_highest_lowest_stat_field(value))
         else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
 
         let sort = named
@@ -3229,19 +3556,16 @@ impl TemplateExpander for HighestLowestStatsExpander {
             })
             .collect::<Vec<_>>();
         if rows.is_empty() {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         }
 
         let expanded = if let Some(sort) = sort {
             sort_highest_lowest_rows(&mut rows, sort);
             let selected = rows.into_iter().skip(offset).take(size).collect::<Vec<_>>();
             if selected.is_empty() {
-                unhandled_template_marker(inv)
-            } else {
-                render_highest_lowest_rows(&selected, get.as_deref())
+                return Err(unhandled_template_error(inv));
             }
+            render_highest_lowest_rows(&selected, get.as_deref())
         } else {
             let mut bottom = rows.clone();
             sort_highest_lowest_rows(&mut bottom, HighestLowestSort::Bottom);
@@ -3457,33 +3781,23 @@ impl TemplateExpander for ItemStatTableExpander {
             .map(|value| value.trim().to_ascii_lowercase())
             .unwrap_or_default();
         if key.is_empty() {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         }
         if named
             .get("wr")
             .map(|value| value.trim().eq_ignore_ascii_case("true"))
             .unwrap_or(false)
         {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         }
         let Some(conv_ctx) = ctx.conversion_ctx.as_ref() else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         let Ok(module) = conv_ctx.item_module_map() else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         let Some(expanded) = render_item_stat_table(module, &key) else {
-            return Ok(ExpansionResult {
-                expanded: unhandled_template_marker(inv),
-            });
+            return Err(unhandled_template_error(inv));
         };
         Ok(ExpansionResult { expanded })
     }

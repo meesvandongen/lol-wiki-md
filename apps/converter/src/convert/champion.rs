@@ -581,7 +581,6 @@ fn resolve_champion_summary(page_name: &str, expanded: &str) -> Option<String> {
 
 fn line_cannot_start_champion_summary(trimmed: &str) -> bool {
     trimmed.starts_with("<!--")
-        || trimmed.starts_with("[Unhandled template:")
         || trimmed.starts_with("{{")
         || trimmed.starts_with("|")
         || trimmed.starts_with("{|")
