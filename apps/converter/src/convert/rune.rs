@@ -1,5 +1,6 @@
 use crate::convert::util::{
-    collect_list_items, collect_page_vars, expand_inline_templates, expand_with_vars,
+    collect_list_items, collect_page_vars, collect_page_vars_recursive, expand_inline_templates,
+    expand_with_vars,
     extract_patch_history, extract_section,
 };
 use crate::convert::{write_markdown_with_plain_text, ConversionOutcome};
@@ -32,7 +33,7 @@ pub(super) fn convert_rune(
     // expressions on the main page can resolve, without overriding page-local
     // definitions.
     if let Ok(Some(data_raw)) = export.read_template_page(&format!("Template:Rune data {name}")) {
-        if let Ok(data_vars) = collect_page_vars(&data_raw) {
+        if let Ok(data_vars) = collect_page_vars_recursive(&data_raw) {
             for (k, v) in data_vars {
                 vars.entry(k).or_insert(v);
             }
