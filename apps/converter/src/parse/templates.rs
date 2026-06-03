@@ -2642,11 +2642,35 @@ fn expand_progression_values(
     round: Option<&str>,
 ) -> Vec<SeriesValue> {
     let mut values = Vec::new();
+    let mut saw_counted_then = false;
     for segment in raw
         .split(';')
         .map(|segment| segment.trim())
         .filter(|segment| !segment.is_empty())
     {
+        // `then …` segments are cumulative increments relative to the running
+        // value produced by the preceding segments (e.g. piecewise per-level
+        // growth: `16; then +4*x for 5; then +6*x for 5`).
+        if let Some(rest) = strip_ascii_prefix(segment, "then ") {
+            let has_count = split_suffix(rest, " for ").is_some();
+            // An open-ended trailing increment (no `for N`) continues to the
+            // level/rank cap, but only when preceding counted segments have
+            // positioned the series. A bare `base; then +N*x` (no counted
+            // segment) encodes a delayed start whose timing lives only in the
+            // prose formula, so expanding it would fabricate values.
+            if let Some(expanded) =
+                expand_then_segment(rest, &values, default_count, round, saw_counted_then)
+            {
+                saw_counted_then |= has_count;
+                values.extend(expanded);
+                continue;
+            }
+            values.push(SeriesValue {
+                text: segment.to_string(),
+                numeric: false,
+            });
+            continue;
+        }
         if let Some(expanded) = expand_progression_segment(segment, default_count, round) {
             values.extend(expanded);
         } else {
@@ -2657,6 +2681,78 @@ fn expand_progression_values(
         }
     }
     values
+}
+
+fn strip_ascii_prefix<'a>(value: &'a str, prefix: &str) -> Option<&'a str> {
+    if value.len() >= prefix.len() && value[..prefix.len()].eq_ignore_ascii_case(prefix) {
+        Some(&value[prefix.len()..])
+    } else {
+        None
+    }
+}
+
+/// Expand a cumulative `+EXPR*x for N` increment segment, offset from the last
+/// numeric value produced so far. Only segments with an explicit `for N` count
+/// are expanded; open-ended increments are left to the caller (rendered raw)
+/// rather than fabricating an unbounded series. The produced count is clamped
+/// to the remaining level/rank budget so a series never exceeds `default_count`
+/// points.
+fn expand_then_segment(
+    incr_raw: &str,
+    prior: &[SeriesValue],
+    default_count: usize,
+    round: Option<&str>,
+    allow_open: bool,
+) -> Option<Vec<SeriesValue>> {
+    let base = prior
+        .iter()
+        .rev()
+        .find(|value| value.numeric)
+        .and_then(|value| evaluate_numeric(&value.text))?;
+    let count = match split_suffix(incr_raw, " for ") {
+        Some((expr_part, count_part)) => {
+            let count = count_part.trim().parse::<usize>().ok()?;
+            // Reassign `incr_raw` to the expression portion below.
+            return finish_then_segment(expr_part, base, count, prior, default_count, round);
+        }
+        None => {
+            if !allow_open {
+                return None;
+            }
+            // Open-ended: fill the remaining level/rank budget.
+            default_count.saturating_sub(prior.len())
+        }
+    };
+    finish_then_segment(incr_raw, base, count, prior, default_count, round)
+}
+
+fn finish_then_segment(
+    expr: &str,
+    base: f64,
+    count: usize,
+    prior: &[SeriesValue],
+    default_count: usize,
+    round: Option<&str>,
+) -> Option<Vec<SeriesValue>> {
+    let remaining = default_count.saturating_sub(prior.len());
+    let count = count.min(remaining);
+    if count == 0 {
+        return Some(Vec::new());
+    }
+    let expr = expr.trim().trim_start_matches('+').trim();
+    if !expr.contains('x') {
+        return None;
+    }
+    let mut values = Vec::with_capacity(count);
+    for index in 1..=count {
+        let replaced = expr.replace('x', &index.to_string());
+        let delta = evaluate_numeric(&replaced)?;
+        values.push(SeriesValue {
+            text: format_progression_number(base + delta, round),
+            numeric: true,
+        });
+    }
+    Some(values)
 }
 
 fn expand_progression_segment(
@@ -2695,7 +2791,10 @@ fn expand_progression_segment(
     }
 
     if let Some((start, end)) = trimmed.split_once(" to ") {
-        return interpolate_series(start.trim(), end.trim(), default_count, round);
+        // The end value may carry an explicit point count, e.g. `60 to 310 6`.
+        let (end_expr, trailing_count) = split_trailing_count(end.trim());
+        let count = trailing_count.unwrap_or(default_count);
+        return interpolate_series(start.trim(), end_expr.trim(), count, round);
     }
 
     evaluate_numeric(trimmed).map(|value| {
@@ -2712,11 +2811,18 @@ fn split_suffix<'a>(value: &'a str, marker: &str) -> Option<(&'a str, &'a str)> 
 }
 
 fn split_trailing_count(value: &str) -> (&str, Option<usize>) {
-    let mut parts = value.rsplitn(2, char::is_whitespace);
-    let tail = parts.next().unwrap_or("");
-    let rest = parts.next().unwrap_or(value);
+    // A trailing count must be separated by whitespace (e.g. `60 to 310 6`).
+    // Without this guard a bare single token like `310` would be misread as a
+    // count of 310 with an empty expression.
+    let trimmed = value.trim_end();
+    let Some(pos) = trimmed.rfind(char::is_whitespace) else {
+        return (value, None);
+    };
+    let tail = trimmed[pos..].trim();
     if !tail.is_empty() && tail.chars().all(|ch| ch.is_ascii_digit()) {
-        return (rest, tail.parse::<usize>().ok());
+        if let Ok(count) = tail.parse::<usize>() {
+            return (trimmed[..pos].trim_end(), Some(count));
+        }
     }
     (value, None)
 }
@@ -2761,10 +2867,10 @@ fn step_series(
     if step == 0.0 {
         return None;
     }
+    // The `by` step is a magnitude; the direction of travel is implied by the
+    // start/end endpoints (a `3.5 to 2 by 0.05` series decreases).
     let forward = end >= start;
-    if (forward && step < 0.0) || (!forward && step > 0.0) {
-        return None;
-    }
+    let step = if forward { step.abs() } else { -step.abs() };
     let mut current = start;
     let mut values = Vec::new();
     let mut iterations = 0usize;
