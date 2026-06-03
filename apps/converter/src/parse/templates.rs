@@ -669,15 +669,20 @@ impl TemplateExpander for RoundUpToGameTickExpander {
         &["rutngt", "Rounded up to next game tick"]
     }
 
-    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         // Tick length defined by the wiki template; one tick is 0.033 seconds.
         const TICK_LENGTH: f64 = 0.033;
         let (positional, _named) = split_named_and_positional(inv);
         let raw = positional.first().map(|s| s.trim()).unwrap_or_default();
-        let seconds = evaluate_numeric(raw).ok_or_else(|| ConvertError::MalformedTemplate {
-            name: inv.name.clone(),
-            detail: format!("expected a numeric duration, got {raw:?}"),
-        })?;
+        // The duration is frequently a nested expression — `{{#expr:700/2200}}`,
+        // possibly with `{{ccd|...}}`/`{{#var:...}}` lookups inside — so resolve
+        // nested templates to a bare numeric value before evaluating.
+        let resolved = expand_nested_template_text(raw, ctx).unwrap_or_else(|_| raw.to_string());
+        let seconds =
+            evaluate_numeric(resolved.trim()).ok_or_else(|| ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: format!("expected a numeric duration, got {raw:?}"),
+            })?;
         let rounded = (seconds / TICK_LENGTH).ceil() * TICK_LENGTH;
         // TICK_LENGTH has three decimals and the tick count is an integer, so the
         // result is exact to three decimals; round there to drop binary float
@@ -4589,6 +4594,24 @@ mod tests {
                 .unwrap()
                 .expanded,
             "0.066 seconds"
+        );
+        // The duration is often a nested expression rather than a bare number
+        // (Lissandra, Nami, Tahm Kench, ...); it must be resolved before
+        // evaluation. Values verified against the live wiki.
+        assert_eq!(
+            reg.expand(&parse_invocation("rutngt|{{#expr:700/2200}}"), &ctx())
+                .unwrap()
+                .expanded,
+            "0.33 seconds"
+        );
+        assert_eq!(
+            reg.expand(
+                &parse_invocation("rutngt|{{#expr:2750 / 850 round 4}}"),
+                &ctx()
+            )
+            .unwrap()
+            .expanded,
+            "3.267 seconds"
         );
     }
 
