@@ -140,22 +140,54 @@ fn run_batch<F>(
     entity_type: &str,
     names: Vec<String>,
     output_dir: &Path,
-    mut convert_one: F,
+    convert_one: F,
 ) -> Result<(), ConvertError>
 where
-    F: FnMut(&str) -> Result<(), ConvertError>,
+    F: Fn(&str) -> Result<(), ConvertError> + Sync + Send,
 {
     let total = names.len();
+    // `ConversionContext` is internally `Arc`-shared and all of its mutable
+    // state lives behind `Mutex`/`OnceCell`, so the conversion closure is safe
+    // to invoke from multiple threads. Use Rayon when available to parallelize
+    // across all champions / items / runes — that's the single largest win for
+    // batch runs, since per-page conversion is CPU-bound (heavy wikitext
+    // parsing + template expansion).
+    let results: Vec<Option<BatchFailure>> = {
+        #[cfg(feature = "rayon")]
+        {
+            use rayon::prelude::*;
+            names
+                .par_iter()
+                .map(|name| match convert_one(name) {
+                    Ok(()) => None,
+                    Err(err) => Some(BatchFailure {
+                        name: name.clone(),
+                        error: err.to_string(),
+                    }),
+                })
+                .collect()
+        }
+        #[cfg(not(feature = "rayon"))]
+        {
+            names
+                .iter()
+                .map(|name| match convert_one(name) {
+                    Ok(()) => None,
+                    Err(err) => Some(BatchFailure {
+                        name: name.clone(),
+                        error: err.to_string(),
+                    }),
+                })
+                .collect()
+        }
+    };
+
     let mut converted = 0usize;
     let mut failures: Vec<BatchFailure> = Vec::new();
-
-    for name in names {
-        match convert_one(&name) {
-            Ok(()) => converted += 1,
-            Err(err) => failures.push(BatchFailure {
-                name,
-                error: err.to_string(),
-            }),
+    for result in results {
+        match result {
+            None => converted += 1,
+            Some(failure) => failures.push(failure),
         }
     }
 
