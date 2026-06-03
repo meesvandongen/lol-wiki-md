@@ -212,43 +212,31 @@ pub fn render_champion_markdown(champ: &Champion, _raw_excerpt: &str) -> String 
                 ("On-Target CD", a.extra.get("ontargetcd")),
                 ("Queue Time", a.extra.get("queue time")),
             ];
-            // Filter out empty
-            let mut any_info = false;
-            for (_label, val_opt) in &info_rows {
-                if let Some(val) = val_opt {
-                    if !val.trim().is_empty() {
-                        any_info = true;
-                        break;
+            // Build the rows first so the header is only emitted when at least
+            // one value survives normalization (avoids an empty table).
+            let mut info_lines: Vec<String> = info_rows
+                .into_iter()
+                .filter_map(|(label, val_opt)| {
+                    let v = normalize_table_value(val_opt?, false)?;
+                    Some(format!("| **{}** | {} |\n", label, v))
+                })
+                .collect();
+            for (label_key, info_key) in [
+                ("customlabel", "custominfo"),
+                ("customlabel2", "custominfo2"),
+            ] {
+                if let (Some(cl), Some(ci)) = (a.extra.get(label_key), a.extra.get(info_key)) {
+                    if !cl.trim().is_empty() {
+                        if let Some(v) = normalize_table_value(ci, false) {
+                            info_lines.push(format!("| **{}** | {} |\n", cl, v));
+                        }
                     }
                 }
             }
-            if any_info {
+            if !info_lines.is_empty() {
                 out.push_str("| Attribute | Value |\n|-----------|------:|\n");
-                for (label, val_opt) in info_rows {
-                    if let Some(val) = val_opt {
-                        if let Some(v) = normalize_table_value(val, false) {
-                            out.push_str(&format!("| **{}** | {} |\n", label, v));
-                        }
-                    }
-                }
-                // Custom labels
-                if let (Some(cl), Some(ci)) =
-                    (a.extra.get("customlabel"), a.extra.get("custominfo"))
-                {
-                    if let Some(v) = normalize_table_value(ci, false) {
-                        if !cl.trim().is_empty() {
-                            out.push_str(&format!("| **{}** | {} |\n", cl, v));
-                        }
-                    }
-                }
-                if let (Some(cl), Some(ci)) =
-                    (a.extra.get("customlabel2"), a.extra.get("custominfo2"))
-                {
-                    if let Some(v) = normalize_table_value(ci, false) {
-                        if !cl.trim().is_empty() {
-                            out.push_str(&format!("| **{}** | {} |\n", cl, v));
-                        }
-                    }
+                for line in info_lines {
+                    out.push_str(&line);
                 }
                 out.push('\n');
             }
@@ -277,23 +265,17 @@ pub fn render_champion_markdown(champ: &Champion, _raw_excerpt: &str) -> String 
                 ("Knockdown", a.extra.get("knockdown")),
                 ("Silence", a.extra.get("silence")),
             ];
-            let mut any_details = false;
-            for (_l, v) in &details_rows {
-                if let Some(s) = v {
-                    if !s.trim().is_empty() {
-                        any_details = true;
-                        break;
-                    }
-                }
-            }
-            if any_details {
+            let detail_lines: Vec<String> = details_rows
+                .into_iter()
+                .filter_map(|(label, val_opt)| {
+                    let v = normalize_table_value(val_opt?, true)?;
+                    Some(format!("| **{}** | {} |\n", label, v))
+                })
+                .collect();
+            if !detail_lines.is_empty() {
                 out.push_str("| Detail | Value |\n|--------|------:|\n");
-                for (label, val_opt) in details_rows {
-                    if let Some(val) = val_opt {
-                        if let Some(v) = normalize_table_value(val, true) {
-                            out.push_str(&format!("| **{}** | {} |\n", label, v));
-                        }
-                    }
+                for line in detail_lines {
+                    out.push_str(&line);
                 }
                 out.push('\n');
             }

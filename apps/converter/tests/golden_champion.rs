@@ -38,6 +38,59 @@ fn golden_champion_output_hash() {
 }
 
 #[test]
+fn ability_with_only_falsey_details_emits_no_empty_table() {
+    // An ability whose only detail value normalizes away (e.g. `spellshield=No`)
+    // must not leave an empty `| Detail | Value |` header behind.
+    let tmp = tempfile::tempdir().unwrap();
+    let root = tmp.path();
+    let export = root.join("export_out");
+    std::fs::create_dir_all(&export).unwrap();
+
+    std::fs::write(
+        export.join("TestChamp.txt"),
+        "Body\n{{Data TestChamp/Q|Ability}}",
+    )
+    .unwrap();
+    std::fs::write(
+        export.join("Module%3AChampionData%2Fdata.txt"),
+        "return { ['TestChamp'] = { stats = { hp_base = 600, hp_lvl = 100, dam_base = 60, dam_lvl = 3, as_ratio = 0.625, attack_cast_time = 0.3, attack_total_time = 1.0, acquisition_radius = 550 } } }",
+    )
+    .unwrap();
+    std::fs::write(
+        export.join("Template%3AData%20TestChamp%2FQ.txt"),
+        "{{AbilityData|champion=TestChamp|skill=Q|name=Plain Strike|description=Deals damage.|spellshield=No|projectile=No}}",
+    )
+    .unwrap();
+
+    let out_dir = root.join("out");
+    convert_champion(&export, &out_dir, "TestChamp", 2).unwrap();
+    let md = std::fs::read_to_string(out_dir.join("TestChamp.md")).unwrap();
+
+    assert!(md.contains("Plain Strike"));
+    assert!(
+        !has_empty_table(&md),
+        "rendered markdown contains an empty table:\n{md}"
+    );
+}
+
+/// True if any table header line is immediately followed by a separator row
+/// and then a line that is not a table row (i.e. the table has no body).
+fn has_empty_table(md: &str) -> bool {
+    let lines: Vec<&str> = md.lines().collect();
+    for window in lines.windows(3) {
+        let [header, separator, after] = window else {
+            continue;
+        };
+        let is_header = header.starts_with("| ") && header.ends_with(" |");
+        let is_separator = separator.starts_with('|') && separator.contains("---");
+        if is_header && is_separator && !after.trim_start().starts_with('|') {
+            return true;
+        }
+    }
+    false
+}
+
+#[test]
 fn golden_item_output_hash() {
     let tmp = tempfile::tempdir().unwrap();
     let root = tmp.path();
