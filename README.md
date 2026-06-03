@@ -20,19 +20,46 @@ The repo root is only the orchestration layer now; the three primary deliverable
 
 Useful top-level commands:
 
-- `npm run export:wiki -- --help`
-- `npm run convert -- --help`
+- `npm run download`
+- `npm run export:wiki`
+- `npm run convert`
+- `npm run convert:fresh`
 - `npm run audit:similarity -- --help`
 - `npm run docs:build`
+- `npm run docs:fresh`
 - `npm run docs:dev`
 - `npm run docs:publish`
+- `npm run pipeline`
 
 The docs UI includes the official Rspress `llms` and `sitemap` plugins, a GitHub social link, and site version metadata sourced from the docs package version.
+
+## Step-by-step root commands
+
+From the repository root, the default step commands now line up with the canonical pipeline output folders:
+
+1. `npm run download` (alias: `npm run export:wiki`) — exports raw wiki pages into `generated/wiki-export/{out,meta}`
+2. `npm run convert` — converts champions, items, and runes into `generated/markdown`
+3. `npm run docs:build` — syncs `generated/markdown` into `apps/docs/docs` and builds the Rspress site
+
+The default `npm run convert` command automatically runs all three content categories in sequence. If `generated/wiki-export/out` does not exist yet, it falls back to `./export_out` for local quick-validation workflows.
+
+If CI is green but a local convert run is failing, try refreshing the local export first instead of reusing an older cache:
+
+- `npm run convert:fresh` — re-export into `generated/wiki-export/out` and then convert all categories
+- `npm run docs:fresh` — re-export, reconvert, sync docs content, and build the site
+
+You can still target individual conversions when needed, for example:
+
+- `npm run convert -- --champion Akshan`
+- `npm run convert:champions`
+- `npm run convert:items`
+- `npm run convert:runes`
 
 ## One-shot pipeline
 
 Run the full pipeline from the repository root:
 
+- `npm run pipeline`
 - `bash ./scripts/pipeline.sh`
 - `pwsh ./scripts/pipeline.ps1`
 
@@ -52,7 +79,9 @@ Example local validation using an existing export:
 
 ### Windows note
 
-`scripts/pipeline.sh` expects `cargo`, `node`, `npm`, and `python` to be available from the bash environment that launches it.
+`npm run pipeline` automatically chooses `scripts/pipeline.ps1` on Windows and `scripts/pipeline.sh` on non-Windows shells.
+
+`scripts/pipeline.sh` still expects `cargo`, `node`, `npm`, and `python` to be available from the bash environment that launches it.
 
 - On Linux and macOS, that usually just works.
 - On Windows, either use `pwsh ./scripts/pipeline.ps1` or run `scripts/pipeline.sh` from Git Bash / a WSL environment with the Linux Rust/Node/Python toolchain installed inside WSL.
@@ -70,6 +99,8 @@ By default the pipeline writes:
 - `apps/docs/out` — static Rspress site build
 
 The static docs build also includes `sitemap.xml`, `llms.txt`, and `llms-full.txt`.
+
+`npm run docs:build` performs the docs sync step automatically before invoking the Rspress build.
 
 The generated Rspress docs tree under `apps/docs/docs` is rebuilt from the Markdown folders and is intentionally ignored by Git.
 
