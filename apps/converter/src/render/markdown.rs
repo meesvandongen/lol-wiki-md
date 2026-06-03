@@ -315,11 +315,30 @@ pub fn render_champion_markdown(champ: &Champion, _raw_excerpt: &str) -> String 
         out.push_str("## Pets\n\n");
         for pet in &champ.pets {
             let name = normalize_all(&pet.name);
-            let desc = normalize_all(&pet.description);
-            if desc.is_empty() {
-                out.push_str(&format!("- {}\n", name));
+            if !pet.stats.is_empty() {
+                out.push_str(&format!("- **{}**\n", name));
+                for stat in &pet.stats {
+                    let label = normalize_all(&stat.label);
+                    if stat.items.is_empty() {
+                        out.push_str(&format!(
+                            "  - {}: {}\n",
+                            label,
+                            normalize_all(&stat.value)
+                        ));
+                    } else {
+                        out.push_str(&format!("  - {}:\n", label));
+                        for item in &stat.items {
+                            out.push_str(&format!("    - {}\n", normalize_all(item)));
+                        }
+                    }
+                }
             } else {
-                out.push_str(&format!("- **{}** — {}\n", name, desc));
+                let desc = normalize_all(&pet.description);
+                if desc.is_empty() {
+                    out.push_str(&format!("- {}\n", name));
+                } else {
+                    out.push_str(&format!("- **{}** — {}\n", name, desc));
+                }
             }
         }
         out.push('\n');

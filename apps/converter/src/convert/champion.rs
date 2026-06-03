@@ -1000,7 +1000,7 @@ fn extract_pet_infoboxes(
             continue;
         };
 
-        let mut parts = Vec::new();
+        let mut stats: Vec<crate::model::PetStat> = Vec::new();
         for (label, key) in [
             ("Gold", "gold"),
             ("EXP", "exp"),
@@ -1012,35 +1012,60 @@ fn extract_pet_infoboxes(
             ("Attack Speed", "attackspeed"),
             ("Move Speed", "movespeed"),
             ("Range", "range"),
+            ("CC Resist", "ccresist"),
             ("Control", "control"),
             ("Targeting", "targeting"),
             ("Spell Effects", "spelleffects"),
             ("On-hit", "onhit"),
         ] {
             if let Some(value) = fields.get(key) {
+                // A field may itself be a `*` bullet list (e.g. damage modifiers
+                // or CC resistances); render those as nested sub-bullets.
+                let items = split_star_list_items(value);
+                if !items.is_empty() {
+                    stats.push(crate::model::PetStat {
+                        label: label.to_string(),
+                        value: String::new(),
+                        items,
+                    });
+                    continue;
+                }
                 let normalized = collapse_inline_whitespace(value);
                 if !normalized.is_empty() {
-                    parts.push(format!("{label}: {normalized}"));
+                    stats.push(crate::model::PetStat {
+                        label: label.to_string(),
+                        value: normalized,
+                        items: Vec::new(),
+                    });
                 }
             }
         }
 
         if let Some(abilities) = fields.get("abilities") {
-            let summary = summarize_pet_block("Abilities", abilities);
-            if !summary.is_empty() {
-                parts.push(summary);
+            let entries = pet_block_entries(abilities);
+            if !entries.is_empty() {
+                stats.push(crate::model::PetStat {
+                    label: "Abilities".to_string(),
+                    value: String::new(),
+                    items: entries,
+                });
             }
         }
         if let Some(notes) = fields.get("notes") {
-            let summary = summarize_pet_notes(notes);
-            if !summary.is_empty() {
-                parts.push(summary);
+            let entries = pet_note_entries(notes);
+            if !entries.is_empty() {
+                stats.push(crate::model::PetStat {
+                    label: "Notes".to_string(),
+                    value: String::new(),
+                    items: entries,
+                });
             }
         }
 
         pets.push(Pet {
             name,
-            description: parts.join(" "),
+            description: String::new(),
+            stats,
         });
     }
 
@@ -1086,7 +1111,40 @@ fn parse_pet_entry(item: &str) -> Option<Pet> {
         .trim_start_matches(|c: char| c == '–' || c == '—' || c == '-' || c == ':' || c == ' ')
         .trim()
         .to_string();
-    Some(Pet { name, description })
+    Some(Pet {
+        name,
+        description,
+        stats: Vec::new(),
+    })
+}
+
+/// Split a wikitext `*` bullet list value into its item texts. Returns an empty
+/// vector when the value is not a `*` list so callers can fall back to a flat
+/// rendering.
+fn split_star_list_items(raw: &str) -> Vec<String> {
+    let collapsed = collapse_inline_whitespace(raw);
+    let mut trimmed = collapsed.trim();
+    // A field list is sometimes introduced by a leading line break (`|x =<br>`).
+    loop {
+        let stripped = trimmed
+            .strip_prefix("<br>")
+            .or_else(|| trimmed.strip_prefix("<br/>"))
+            .or_else(|| trimmed.strip_prefix("<br />"))
+            .map(str::trim_start);
+        match stripped {
+            Some(rest) => trimmed = rest,
+            None => break,
+        }
+    }
+    if !trimmed.starts_with('*') {
+        return Vec::new();
+    }
+    trimmed
+        .split('*')
+        .map(|item| item.trim())
+        .filter(|item| !item.is_empty())
+        .map(|item| item.to_string())
+        .collect()
 }
 
 fn split_first_delim(input: &str) -> Option<(&str, &str)> {
@@ -1103,10 +1161,31 @@ fn collapse_inline_whitespace(input: &str) -> String {
     input.split_whitespace().collect::<Vec<_>>().join(" ")
 }
 
-fn summarize_pet_block(label: &str, raw: &str) -> String {
+/// Parse a `;Name\n* body` definition block (e.g. a pet's `abilities` field)
+/// into one `Name — body` entry per term.
+fn pet_block_entries(raw: &str) -> Vec<String> {
     let mut entries = Vec::new();
     let mut current_name: Option<String> = None;
     let mut current_body: Vec<String> = Vec::new();
+
+    let flush = |entries: &mut Vec<String>, name: Option<String>, body: &mut Vec<String>| {
+        if let Some(name) = name {
+            let joined = collapse_inline_whitespace(&body.join(" "));
+            // The body lines are themselves `*` bullets; strip the markers.
+            let joined = joined
+                .split('*')
+                .map(|part| part.trim())
+                .filter(|part| !part.is_empty())
+                .collect::<Vec<_>>()
+                .join(" ");
+            if joined.is_empty() {
+                entries.push(name);
+            } else {
+                entries.push(format!("{name} — {joined}"));
+            }
+        }
+        body.clear();
+    };
 
     for line in raw.lines() {
         let trimmed = line.trim();
@@ -1114,60 +1193,39 @@ fn summarize_pet_block(label: &str, raw: &str) -> String {
             continue;
         }
         if let Some(name) = trimmed.strip_prefix(';') {
-            if let Some(existing_name) = current_name.take() {
-                let body = collapse_inline_whitespace(&current_body.join(" "));
-                if body.is_empty() {
-                    entries.push(existing_name);
-                } else {
-                    entries.push(format!("{existing_name} — {body}"));
-                }
-                current_body.clear();
-            }
+            flush(&mut entries, current_name.take(), &mut current_body);
             current_name = Some(name.trim().to_string());
             continue;
         }
         current_body.push(trimmed.to_string());
     }
-
-    if let Some(existing_name) = current_name.take() {
-        let body = collapse_inline_whitespace(&current_body.join(" "));
-        if body.is_empty() {
-            entries.push(existing_name);
-        } else {
-            entries.push(format!("{existing_name} — {body}"));
-        }
-    }
+    flush(&mut entries, current_name.take(), &mut current_body);
 
     if !entries.is_empty() {
-        format!("{label}: {}", entries.join(" ; "))
+        return entries;
+    }
+    let collapsed = collapse_inline_whitespace(raw);
+    if collapsed.is_empty() {
+        Vec::new()
     } else {
-        let collapsed = collapse_inline_whitespace(raw);
-        if collapsed.is_empty() {
-            String::new()
-        } else {
-            format!("{label}: {collapsed}")
-        }
+        vec![collapsed]
     }
 }
 
-fn summarize_pet_notes(raw: &str) -> String {
+fn pet_note_entries(raw: &str) -> Vec<String> {
     let items = collect_list_items(raw);
     if !items.is_empty() {
-        return format!(
-            "Notes: {}",
-            items
-                .into_iter()
-                .map(|item| collapse_inline_whitespace(item.trim_start_matches('*').trim()))
-                .collect::<Vec<_>>()
-                .join(" ")
-        );
+        return items
+            .into_iter()
+            .map(|item| collapse_inline_whitespace(item.trim_start_matches('*').trim()))
+            .filter(|item| !item.is_empty())
+            .collect();
     }
-
     let collapsed = collapse_inline_whitespace(raw);
     if collapsed.is_empty() {
-        String::new()
+        Vec::new()
     } else {
-        format!("Notes: {collapsed}")
+        vec![collapsed]
     }
 }
 
@@ -3462,10 +3520,17 @@ mod tests {
 
         assert_eq!(pets.len(), 1);
         assert_eq!(pets[0].name, "Spiderling");
-        assert!(pets[0].description.contains("Control: Autonomous"));
-        assert!(pets[0].description.contains("Targeting: Ward"));
-        assert!(pets[0].description.contains("Pounce — Dashes to a target."));
-        assert!(pets[0].description.contains("Notes: Grants sight"));
+        let stat = |label: &str| pets[0].stats.iter().find(|s| s.label == label);
+        assert_eq!(stat("Control").unwrap().value, "Autonomous");
+        assert_eq!(stat("Targeting").unwrap().value, "Ward");
+        assert_eq!(
+            stat("Abilities").unwrap().items,
+            vec!["Pounce — Dashes to a target.".to_string()]
+        );
+        assert_eq!(
+            stat("Notes").unwrap().items,
+            vec!["Grants sight".to_string()]
+        );
     }
 }
 
