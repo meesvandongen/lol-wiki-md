@@ -1035,6 +1035,17 @@ fn is_file_link_parameter(part: &str) -> bool {
     )
 }
 
+/// Pop trailing spaces/tabs (not newlines) off `out` and return them, so a
+/// closing emphasis delimiter can be emitted before the whitespace. GFM does
+/// not render emphasis whose closing delimiter is preceded by whitespace.
+fn take_trailing_inline_whitespace(out: &mut String) -> String {
+    let mut ws = String::new();
+    while matches!(out.chars().last(), Some(' ') | Some('\t')) {
+        ws.push(out.pop().unwrap());
+    }
+    ws
+}
+
 pub fn normalize_apostrophes(s: &str) -> String {
     // Stateful conversion of wiki apostrophes to Markdown markers.
     // Handles 2 (italic), 3 (bold), 5 (bold+italic) with simple toggles.
@@ -1058,17 +1069,32 @@ pub fn normalize_apostrophes(s: &str) -> String {
                         bold_on = true;
                         italic_on = true;
                     } else {
+                        // Closing: keep the delimiter off inner whitespace.
+                        let ws = take_trailing_inline_whitespace(&mut out);
                         out.push_str("_**");
+                        out.push_str(&ws);
                         bold_on = false;
                         italic_on = false;
                     }
                 }
                 3 => {
-                    out.push_str("**");
+                    if bold_on {
+                        let ws = take_trailing_inline_whitespace(&mut out);
+                        out.push_str("**");
+                        out.push_str(&ws);
+                    } else {
+                        out.push_str("**");
+                    }
                     bold_on = !bold_on;
                 }
                 2 => {
-                    out.push('_');
+                    if italic_on {
+                        let ws = take_trailing_inline_whitespace(&mut out);
+                        out.push('_');
+                        out.push_str(&ws);
+                    } else {
+                        out.push('_');
+                    }
                     italic_on = !italic_on;
                 }
                 _ => {
@@ -2421,6 +2447,21 @@ mod tests {
         assert_eq!(normalize_apostrophes("''italic''"), "_italic_");
         assert_eq!(normalize_apostrophes("'''bold'''"), "**bold**");
         assert_eq!(normalize_apostrophes("'''''both'''''"), "**_both_**");
+    }
+
+    #[test]
+    fn apostrophes_move_trailing_whitespace_outside_emphasis() {
+        // A trailing space inside the closing delimiter (`''Severum's ''`) would
+        // otherwise produce `_Severum's _`, which GFM renders literally.
+        assert_eq!(normalize_apostrophes("''Severum's ''"), "_Severum's_ ");
+        assert_eq!(normalize_apostrophes("'''bonus  '''"), "**bonus**  ");
+        assert_eq!(normalize_apostrophes("'''''both ('''''"), "**_both (_**");
+        // Whitespace before an opening delimiter is fine and is left alone.
+        assert_eq!(normalize_apostrophes("a ''b''"), "a _b_");
+        assert_eq!(
+            normalize_apostrophes("''A'' and ''B''"),
+            "_A_ and _B_"
+        );
     }
 
     #[test]
