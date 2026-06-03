@@ -669,15 +669,20 @@ impl TemplateExpander for RoundUpToGameTickExpander {
         &["rutngt", "Rounded up to next game tick"]
     }
 
-    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         // Tick length defined by the wiki template; one tick is 0.033 seconds.
         const TICK_LENGTH: f64 = 0.033;
         let (positional, _named) = split_named_and_positional(inv);
         let raw = positional.first().map(|s| s.trim()).unwrap_or_default();
-        let seconds = evaluate_numeric(raw).ok_or_else(|| ConvertError::MalformedTemplate {
-            name: inv.name.clone(),
-            detail: format!("expected a numeric duration, got {raw:?}"),
-        })?;
+        // The duration is frequently a nested expression — `{{#expr:700/2200}}`,
+        // possibly with `{{ccd|...}}`/`{{#var:...}}` lookups inside — so resolve
+        // nested templates to a bare numeric value before evaluating.
+        let resolved = expand_nested_template_text(raw, ctx).unwrap_or_else(|_| raw.to_string());
+        let seconds =
+            evaluate_numeric(resolved.trim()).ok_or_else(|| ConvertError::MalformedTemplate {
+                name: inv.name.clone(),
+                detail: format!("expected a numeric duration, got {raw:?}"),
+            })?;
         let rounded = (seconds / TICK_LENGTH).ceil() * TICK_LENGTH;
         // TICK_LENGTH has three decimals and the tick count is an integer, so the
         // result is exact to three decimals; round there to drop binary float
@@ -1043,18 +1048,28 @@ impl TemplateExpander for DelimitValuesExpander {
 }
 
 /// Category-driven champion-list templates (`Shapeshifter Champion`,
-/// `Self Crowd Control champion`) render a DPL roster that cannot be resolved
-/// offline. Emit the reader-facing lead sentence and omit the dynamic roster.
+/// `Self Crowd Control champion`, `Champion without ability power ratio`)
+/// render a DPL roster that cannot be resolved offline. Emit the reader-facing
+/// lead sentence and omit the dynamic roster.
 struct CategoryChampionListExpander;
 impl TemplateExpander for CategoryChampionListExpander {
     fn names(&self) -> &'static [&'static str] {
-        &["Shapeshifter Champion", "Self Crowd Control champion"]
+        &[
+            "Shapeshifter Champion",
+            "Self Crowd Control champion",
+            "Champion without ability power ratio",
+        ]
     }
 
     fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         let (positional, _named) = split_named_and_positional(inv);
         let trait_clause = if inv.name.eq_ignore_ascii_case("Self Crowd Control champion") {
             "can apply a form of crowd control to themselves by using an ability"
+        } else if inv
+            .name
+            .eq_ignore_ascii_case("Champion without ability power ratio")
+        {
+            "do not have a single ability power ratio on any of their abilities"
         } else {
             "can change shape, altering some or all of their abilities"
         };
@@ -4132,22 +4147,13 @@ impl TemplateExpander for NeutralizeExpander {
             "#invoke",
             // Patch history inclusion box
             "Patch box",
-            // Casting helper/marker templates
-            "Effect at cast time end",
-            "Effect at cast time start",
             // Audio sample / minor markers
             "sm2",
             "#ev:youtube",
-            // Bug marker becomes empty in text
-            "bug",
-            // Range/time formatting helpers that don't affect plain text content here
-            "pending for test",
             // Anchor for sections
             "Anchor",
             // Pet infobox
             "Infobox/Pet",
-            // Champion AP ratio category
-            "Champion without ability power ratio",
             // TFT item marker
             "TFT Item",
             // References block wrappers
@@ -4590,6 +4596,24 @@ mod tests {
                 .expanded,
             "0.066 seconds"
         );
+        // The duration is often a nested expression rather than a bare number
+        // (Lissandra, Nami, Tahm Kench, ...); it must be resolved before
+        // evaluation. Values verified against the live wiki.
+        assert_eq!(
+            reg.expand(&parse_invocation("rutngt|{{#expr:700/2200}}"), &ctx())
+                .unwrap()
+                .expanded,
+            "0.33 seconds"
+        );
+        assert_eq!(
+            reg.expand(
+                &parse_invocation("rutngt|{{#expr:2750 / 850 round 4}}"),
+                &ctx()
+            )
+            .unwrap()
+            .expanded,
+            "3.267 seconds"
+        );
     }
 
     #[test]
@@ -4783,6 +4807,64 @@ mod tests {
                 .unwrap()
                 .expanded,
             ""
+        );
+    }
+
+    #[test]
+    fn inline_marker_templates_render_visible_text_not_empty() {
+        // These carry reader-facing text on the wiki, so the registry expansion
+        // path must render them instead of dropping them to empty (they used to
+        // be neutralized, leaving holes in ability text).
+        let reg = TemplateRegistry::new();
+        let expand = |raw: &str| reg.expand(&parse_invocation(raw), &ctx()).unwrap().expanded;
+        assert_eq!(expand("bug"), "[Bug]");
+        assert_eq!(expand("pending for test"), "[Pending test]");
+        assert_eq!(
+            expand("Effect at cast time start"),
+            "(effect determined at cast time start)"
+        );
+        assert_eq!(
+            expand("Effect at cast time end"),
+            "(effect determined at cast time end)"
+        );
+    }
+
+    #[test]
+    fn rutngt_resolves_champion_constant_lookups_in_argument() {
+        // Senna-style argument: the duration is an #expr over {{ccd|...}}
+        // champion-constant lookups, which only resolve with a conversion
+        // context. 0.7 / 0.033 = 21.2..., rounds up to 22 ticks * 0.033 = 0.726.
+        let tmp = tempdir().unwrap();
+        let export_dir = tmp.path().join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        let conversion_ctx = Arc::new(ConversionContext::new(&export_dir, 2).unwrap());
+        let mut constants = HashMap::new();
+        constants.insert("windup".to_string(), "0.7".to_string());
+        conversion_ctx.insert_champion_constants("Tester", constants);
+        let ctx = ExpanderCtx::new(2, &HashMap::new(), Some(conversion_ctx));
+        let reg = TemplateRegistry::new();
+        assert_eq!(
+            reg.expand(
+                &parse_invocation("rutngt|{{#expr:{{ccd|Tester|windup}}}}"),
+                &ctx
+            )
+            .unwrap()
+            .expanded,
+            "0.726 seconds"
+        );
+    }
+
+    #[test]
+    fn champion_without_ap_ratio_renders_lead_sentence() {
+        let reg = TemplateRegistry::new();
+        assert_eq!(
+            reg.expand(
+                &parse_invocation("Champion without ability power ratio|Garen"),
+                &ctx()
+            )
+            .unwrap()
+            .expanded,
+            "'''Garen''' is one of the champions that do not have a single ability power ratio on any of their abilities."
         );
     }
 
