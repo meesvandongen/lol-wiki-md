@@ -33,6 +33,29 @@ pub trait TemplateExpander: Send + Sync {
     fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult>;
 }
 
+/// Normalize a template name into the canonical lookup key used by the
+/// registry. MediaWiki treats underscores and spaces as equivalent in page and
+/// template names and collapses runs of whitespace, so `{{Zombie_state_info}}`
+/// and `{{Zombie state info}}` resolve to the same template. The key is also
+/// lowercased to keep the registry case-insensitive on the first character
+/// (and, in practice here, the whole name).
+fn normalize_template_name(name: &str) -> String {
+    let mut out = String::with_capacity(name.len());
+    let mut prev_was_space = false;
+    for ch in name.trim().chars() {
+        if ch == '_' || ch.is_whitespace() {
+            if !prev_was_space {
+                out.push(' ');
+                prev_was_space = true;
+            }
+        } else {
+            out.extend(ch.to_lowercase());
+            prev_was_space = false;
+        }
+    }
+    out
+}
+
 #[derive(Default)]
 pub struct TemplateRegistry {
     expanders: Vec<Box<dyn TemplateExpander>>,
@@ -80,6 +103,7 @@ impl TemplateRegistry {
         r.register(Box::new(PipeEscapeExpander));
         r.register(Box::new(SimpleLabelExpander));
         r.register(Box::new(LethalityExpander));
+        r.register(Box::new(RoundUpToGameTickExpander));
         r.register(Box::new(WildRiftItemExpander));
         r.register(Box::new(GoldExpander));
         r.register(Box::new(GoldValueExpander));
@@ -135,7 +159,7 @@ impl TemplateRegistry {
     pub fn register(&mut self, ex: Box<dyn TemplateExpander>) {
         let idx = self.expanders.len();
         for &raw_name in ex.names() {
-            let key = raw_name.to_ascii_lowercase();
+            let key = normalize_template_name(raw_name);
             // First registration wins; later expanders sharing a name (notably
             // the catch-all `SimpleInlineExpander`) defer to the dedicated one.
             self.name_index.entry(key).or_insert(idx);
@@ -143,7 +167,7 @@ impl TemplateRegistry {
         self.expanders.push(ex);
     }
     pub fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        let lookup_key = inv.name.to_ascii_lowercase();
+        let lookup_key = normalize_template_name(&inv.name);
         if let Some(&idx) = self.name_index.get(&lookup_key) {
             if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
                 conv_ctx.record_template_params(&inv.name, &inv.params);
@@ -189,7 +213,7 @@ impl TemplateRegistry {
         })
     }
     pub fn has_name(&self, name: &str) -> bool {
-        self.name_index.contains_key(&name.to_ascii_lowercase())
+        self.name_index.contains_key(&normalize_template_name(name))
     }
     pub fn list_names(&self) -> Vec<&'static str> {
         let mut out: Vec<&'static str> = Vec::new();
@@ -627,6 +651,47 @@ impl TemplateExpander for LethalityExpander {
             } else {
                 format!("{} lethality", value)
             },
+        })
+    }
+}
+
+/// `{{rutngt|x}}` (a.k.a. `{{Rounded up to next game tick|x}}`) rounds a
+/// duration in seconds UP to the next server game tick and renders it as
+/// `"<value> seconds"`. Mirrors the wiki template
+/// `Template:Rounded up to next game tick`, whose tick length is `0.033`s; the
+/// computation is parameter-driven so it applies to any duration, not a single
+/// instance. The wiki evaluates the rounding at full precision, so this is a
+/// dedicated handler rather than a body transclusion (which would inherit the
+/// converter's 2-decimal display precision and drop the third decimal).
+struct RoundUpToGameTickExpander;
+impl TemplateExpander for RoundUpToGameTickExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["rutngt", "Rounded up to next game tick"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        // Tick length defined by the wiki template; one tick is 0.033 seconds.
+        const TICK_LENGTH: f64 = 0.033;
+        let (positional, _named) = split_named_and_positional(inv);
+        let raw = positional.first().map(|s| s.trim()).unwrap_or_default();
+        let seconds = evaluate_numeric(raw).ok_or_else(|| ConvertError::MalformedTemplate {
+            name: inv.name.clone(),
+            detail: format!("expected a numeric duration, got {raw:?}"),
+        })?;
+        let rounded = (seconds / TICK_LENGTH).ceil() * TICK_LENGTH;
+        // TICK_LENGTH has three decimals and the tick count is an integer, so the
+        // result is exact to three decimals; round there to drop binary float
+        // noise (e.g. 0.264000000000000012 -> 0.264).
+        let rounded = (rounded * 1000.0).round() / 1000.0;
+        let mut rendered = format!("{rounded:.3}");
+        while rendered.contains('.') && rendered.ends_with('0') {
+            rendered.pop();
+        }
+        if rendered.ends_with('.') {
+            rendered.pop();
+        }
+        Ok(ExpansionResult {
+            expanded: format!("{rendered} seconds"),
         })
     }
 }
@@ -4076,7 +4141,6 @@ impl TemplateExpander for NeutralizeExpander {
             // Bug marker becomes empty in text
             "bug",
             // Range/time formatting helpers that don't affect plain text content here
-            "rutngt",
             "pending for test",
             // Anchor for sections
             "Anchor",
@@ -4452,10 +4516,80 @@ mod tests {
     }
 
     #[test]
+    fn template_names_match_with_underscores_or_spaces() {
+        // MediaWiki treats underscores and spaces as equivalent in template
+        // names, so `{{Zombie_state_info}}` must resolve to the same expander as
+        // `{{Zombie state info}}`. Regression test for E_UNKNOWN_TEMPLATE on
+        // Sion's "Glory in Death" passive, which invokes `{{Zombie_state_info}}`.
+        let reg = TemplateRegistry::new();
+        assert!(reg.has_name("Zombie_state_info"));
+        assert!(reg.has_name("Zombie state info"));
+        assert!(reg.has_name("zombie__state  info"));
+        assert!(reg.has_name("Spellblade_info"));
+    }
+
+    #[test]
+    fn include_info_template_resolves_via_underscore_invocation() {
+        // End-to-end: the underscore-form invocation `{{Zombie_state_info}}`
+        // used on Sion's "Glory in Death" passive must dispatch to the
+        // IncludeInfoExpander and expand the template body, not fail with
+        // E_UNKNOWN_TEMPLATE.
+        let tmp = tempdir().unwrap();
+        let export_dir = tmp.path().join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        std::fs::write(
+            export_dir.join("Template%3AZombie%20state%20info.txt"),
+            "* Zombie states trigger upon taking {{tip|death|lethal damage}}.\n<noinclude>[[Category:Data templates]]</noinclude>",
+        )
+        .unwrap();
+
+        let ctx_arc = Arc::new(ConversionContext::new(tmp.path(), 2).unwrap());
+        let registry = TemplateRegistry::new();
+        let result = registry
+            .expand(
+                &parse_invocation("Zombie_state_info"),
+                &ExpanderCtx::new(2, &HashMap::new(), Some(ctx_arc)),
+            )
+            .unwrap();
+        assert!(result
+            .expanded
+            .contains("Zombie states trigger upon taking lethal damage."));
+        assert!(!result.expanded.contains("Category:Data templates"));
+    }
+
+    #[test]
     fn fd_template_preserves_percent_suffix() {
         let reg = TemplateRegistry::new();
         let result = reg.expand(&parse_invocation("fd|1.3%"), &ctx()).unwrap();
         assert_eq!(result.expanded, "1.30%");
+    }
+
+    #[test]
+    fn rutngt_rounds_duration_up_to_next_game_tick() {
+        let reg = TemplateRegistry::new();
+        // 0.25 / 0.033 = 7.57..., rounds up to 8 ticks * 0.033 = 0.264 seconds.
+        // Regression for Sion's "Glory in Death" passive, which used to drop the
+        // interval entirely ("...health every , increasing...").
+        assert_eq!(
+            reg.expand(&parse_invocation("rutngt|0.25"), &ctx())
+                .unwrap()
+                .expanded,
+            "0.264 seconds"
+        );
+        // Canonical (non-redirect) template name behaves identically.
+        assert_eq!(
+            reg.expand(&parse_invocation("Rounded up to next game tick|1.5"), &ctx())
+                .unwrap()
+                .expanded,
+            "1.518 seconds"
+        );
+        // A value already on a tick boundary keeps its exact duration.
+        assert_eq!(
+            reg.expand(&parse_invocation("rutngt|0.066"), &ctx())
+                .unwrap()
+                .expanded,
+            "0.066 seconds"
+        );
     }
 
     #[test]
