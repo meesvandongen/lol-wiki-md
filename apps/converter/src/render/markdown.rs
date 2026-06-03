@@ -2374,8 +2374,15 @@ fn render_starred_list(out: &mut String, notes: &[String]) {
         if content.is_empty() {
             continue;
         }
+        // A leading `;` marks a wikitext definition-list term, which renders as
+        // a bold sub-header (e.g. `;Zombie info`). Bold it so it reads as a
+        // heading rather than literal `;` text.
+        let content = match content.strip_prefix(';') {
+            Some(term) if !term.trim().is_empty() => format!("'''{}'''", term.trim()),
+            _ => content.to_string(),
+        };
         let indent = "  ".repeat(star_count.saturating_sub(1));
-        let normalized = normalize_all(content);
+        let normalized = normalize_all(&content);
         out.push_str(&indent);
         out.push_str("- ");
         out.push_str(&normalized);
@@ -2391,6 +2398,22 @@ mod tests {
         Stats,
     };
     use std::collections::HashMap;
+
+    #[test]
+    fn render_starred_list_bolds_definition_terms() {
+        let mut out = String::new();
+        render_starred_list(
+            &mut out,
+            &[
+                ";Zombie info".to_string(),
+                "* Zombie states trigger upon lethal damage.".to_string(),
+            ],
+        );
+        assert_eq!(
+            out,
+            "- **Zombie info**\n- Zombie states trigger upon lethal damage.\n"
+        );
+    }
 
     #[test]
     fn apostrophes_normalization_basic() {

@@ -2556,7 +2556,7 @@ fn collect_notes(value: &str, out: &mut Vec<String>) {
         if trimmed.is_empty() {
             continue;
         }
-        if trimmed.starts_with('*') {
+        if trimmed.starts_with('*') || is_note_block_header(trimmed) {
             if let Some(existing) = current.take() {
                 if !existing.trim().is_empty() {
                     out.push(existing);
@@ -2575,6 +2575,24 @@ fn collect_notes(value: &str, out: &mut Vec<String>) {
             out.push(existing);
         }
     }
+}
+
+/// A note line that introduces a sub-section rather than continuing the
+/// previous bullet: a definition-list term (`;Zombie info`) or a standalone
+/// bold paragraph used as a header (`'''Interactions & Other'''`). In wikitext
+/// a newline ends the preceding block, so these must start a new note entry
+/// instead of being appended to the prior bullet's text.
+fn is_note_block_header(trimmed: &str) -> bool {
+    if trimmed.starts_with(';') {
+        return true;
+    }
+    if let Some(inner) = trimmed
+        .strip_prefix("'''")
+        .and_then(|rest| rest.strip_suffix("'''"))
+    {
+        return !inner.is_empty() && !inner.contains("'''");
+    }
+    false
 }
 
 fn dedup_preserve_order(values: &mut Vec<String>) {
@@ -2650,6 +2668,37 @@ mod tests {
     use crate::parse::lua::parse_champion_entry;
     use crate::wiki_export::url_encode;
     use tempfile::tempdir;
+
+    #[test]
+    fn collect_notes_splits_definition_terms_and_bold_headers() {
+        // Sion's "Glory in Death" notes interleave bullets with a bold
+        // sub-header (`'''Interactions & Other'''`) and a definition-list term
+        // (`;Zombie info`). Each must become its own note entry rather than
+        // being glued onto the trailing text of the previous bullet.
+        let notes = concat!(
+            "'''Details'''\n",
+            "* First detail.\n",
+            "* Last detail.\n",
+            "'''Interactions & Other'''\n",
+            "* An interaction.\n",
+            ";Zombie info\n",
+            "* Zombie states trigger upon lethal damage.\n",
+        );
+        let mut out = Vec::new();
+        collect_notes(notes, &mut out);
+        assert_eq!(
+            out,
+            vec![
+                "'''Details'''".to_string(),
+                "* First detail.".to_string(),
+                "* Last detail.".to_string(),
+                "'''Interactions & Other'''".to_string(),
+                "* An interaction.".to_string(),
+                ";Zombie info".to_string(),
+                "* Zombie states trigger upon lethal damage.".to_string(),
+            ]
+        );
+    }
 
     #[test]
     fn extracts_stats_and_advanced_metrics() {
