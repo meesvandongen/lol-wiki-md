@@ -103,6 +103,7 @@ impl TemplateRegistry {
         r.register(Box::new(PipeEscapeExpander));
         r.register(Box::new(SimpleLabelExpander));
         r.register(Box::new(LethalityExpander));
+        r.register(Box::new(RoundUpToGameTickExpander));
         r.register(Box::new(WildRiftItemExpander));
         r.register(Box::new(GoldExpander));
         r.register(Box::new(GoldValueExpander));
@@ -650,6 +651,47 @@ impl TemplateExpander for LethalityExpander {
             } else {
                 format!("{} lethality", value)
             },
+        })
+    }
+}
+
+/// `{{rutngt|x}}` (a.k.a. `{{Rounded up to next game tick|x}}`) rounds a
+/// duration in seconds UP to the next server game tick and renders it as
+/// `"<value> seconds"`. Mirrors the wiki template
+/// `Template:Rounded up to next game tick`, whose tick length is `0.033`s; the
+/// computation is parameter-driven so it applies to any duration, not a single
+/// instance. The wiki evaluates the rounding at full precision, so this is a
+/// dedicated handler rather than a body transclusion (which would inherit the
+/// converter's 2-decimal display precision and drop the third decimal).
+struct RoundUpToGameTickExpander;
+impl TemplateExpander for RoundUpToGameTickExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["rutngt", "Rounded up to next game tick"]
+    }
+
+    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        // Tick length defined by the wiki template; one tick is 0.033 seconds.
+        const TICK_LENGTH: f64 = 0.033;
+        let (positional, _named) = split_named_and_positional(inv);
+        let raw = positional.first().map(|s| s.trim()).unwrap_or_default();
+        let seconds = evaluate_numeric(raw).ok_or_else(|| ConvertError::MalformedTemplate {
+            name: inv.name.clone(),
+            detail: format!("expected a numeric duration, got {raw:?}"),
+        })?;
+        let rounded = (seconds / TICK_LENGTH).ceil() * TICK_LENGTH;
+        // TICK_LENGTH has three decimals and the tick count is an integer, so the
+        // result is exact to three decimals; round there to drop binary float
+        // noise (e.g. 0.264000000000000012 -> 0.264).
+        let rounded = (rounded * 1000.0).round() / 1000.0;
+        let mut rendered = format!("{rounded:.3}");
+        while rendered.contains('.') && rendered.ends_with('0') {
+            rendered.pop();
+        }
+        if rendered.ends_with('.') {
+            rendered.pop();
+        }
+        Ok(ExpansionResult {
+            expanded: format!("{rendered} seconds"),
         })
     }
 }
@@ -4099,7 +4141,6 @@ impl TemplateExpander for NeutralizeExpander {
             // Bug marker becomes empty in text
             "bug",
             // Range/time formatting helpers that don't affect plain text content here
-            "rutngt",
             "pending for test",
             // Anchor for sections
             "Anchor",
@@ -4521,6 +4562,34 @@ mod tests {
         let reg = TemplateRegistry::new();
         let result = reg.expand(&parse_invocation("fd|1.3%"), &ctx()).unwrap();
         assert_eq!(result.expanded, "1.30%");
+    }
+
+    #[test]
+    fn rutngt_rounds_duration_up_to_next_game_tick() {
+        let reg = TemplateRegistry::new();
+        // 0.25 / 0.033 = 7.57..., rounds up to 8 ticks * 0.033 = 0.264 seconds.
+        // Regression for Sion's "Glory in Death" passive, which used to drop the
+        // interval entirely ("...health every , increasing...").
+        assert_eq!(
+            reg.expand(&parse_invocation("rutngt|0.25"), &ctx())
+                .unwrap()
+                .expanded,
+            "0.264 seconds"
+        );
+        // Canonical (non-redirect) template name behaves identically.
+        assert_eq!(
+            reg.expand(&parse_invocation("Rounded up to next game tick|1.5"), &ctx())
+                .unwrap()
+                .expanded,
+            "1.518 seconds"
+        );
+        // A value already on a tick boundary keeps its exact duration.
+        assert_eq!(
+            reg.expand(&parse_invocation("rutngt|0.066"), &ctx())
+                .unwrap()
+                .expanded,
+            "0.066 seconds"
+        );
     }
 
     #[test]
