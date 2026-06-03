@@ -2223,11 +2223,20 @@ fn load_abilities(
             ability_key,
             AbilityKey::Passive | AbilityKey::Q | AbilityKey::W | AbilityKey::E | AbilityKey::R
         ) {
-            warnings.push(format!(
-                "Ability template `{template_title}` resolved to unsupported skill slot `{}` and was skipped.",
-                describe_ability_key(&ability_key)
-            ));
-            continue;
+            // Auxiliary-slot abilities (e.g. Aphelios' weapon slot `A`) carry a
+            // real, non-empty slot label and ability content; render those as
+            // their own entries instead of dropping them. Templates whose slot
+            // does not resolve (empty label) or that have no description are
+            // decorative/duplicate and are still skipped.
+            let renderable = matches!(&ability_key, AbilityKey::Other(slot) if !slot.trim().is_empty())
+                && !descriptions_with_order.is_empty();
+            if !renderable {
+                warnings.push(format!(
+                    "Ability template `{template_title}` resolved to unsupported skill slot `{}` and was skipped.",
+                    describe_ability_key(&ability_key)
+                ));
+                continue;
+            }
         }
 
         descriptions_with_order.sort_by_key(|(idx, _)| *idx);
@@ -3389,7 +3398,8 @@ mod tests {
                 "== Abilities ==\n",
                 "{{Data Tester/I|Ability}}\n",
                 "{{Data Tester/Q|Ability}}\n",
-                "{{Data Tester/W|Ability}}\n"
+                "{{Data Tester/W|Ability}}\n",
+                "{{Data Tester/A|Ability}}\n"
             ),
         )
         .unwrap();
@@ -3399,9 +3409,16 @@ mod tests {
             "{{{{{1|Ability data}}}|Steady Hands|skill=I|description=Passive}}",
         )
         .unwrap();
+        // Auxiliary slot with real content: rendered as its own ability.
         std::fs::write(
             flat.join(format!("{}.txt", url_encode("Template:Data Tester/W"))),
-            "{{{{{1|Ability data}}}|Broken Stance|skill=Z|description=Oops}}",
+            "{{{{{1|Ability data}}}|Sidearm|skill=A|description=An off-hand weapon.}}",
+        )
+        .unwrap();
+        // Non-standard slot but no content: still skipped.
+        std::fs::write(
+            flat.join(format!("{}.txt", url_encode("Template:Data Tester/A"))),
+            "{{{{{1|Ability data}}}|Decorative|skill=X}}",
         )
         .unwrap();
 
@@ -3410,7 +3427,13 @@ mod tests {
         let loaded =
             load_abilities(&export, "Tester", 2, &HashMap::new(), &registry, None).unwrap();
 
-        assert_eq!(loaded.abilities.len(), 1);
+        // Passive + the auxiliary-slot ability render; the content-less one is skipped.
+        assert_eq!(loaded.abilities.len(), 2);
+        assert!(loaded
+            .abilities
+            .iter()
+            .any(|ability| ability.name == "Sidearm"
+                && matches!(&ability.key, AbilityKey::Other(slot) if slot == "A")));
         assert!(loaded
             .warnings
             .iter()
@@ -3419,7 +3442,7 @@ mod tests {
         assert!(loaded
             .warnings
             .iter()
-            .any(|warning| warning.contains("unsupported skill slot `Z`")));
+            .any(|warning| warning.contains("unsupported skill slot `X`")));
     }
 
     #[test]
