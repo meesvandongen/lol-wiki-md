@@ -33,6 +33,29 @@ pub trait TemplateExpander: Send + Sync {
     fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult>;
 }
 
+/// Normalize a template name into the canonical lookup key used by the
+/// registry. MediaWiki treats underscores and spaces as equivalent in page and
+/// template names and collapses runs of whitespace, so `{{Zombie_state_info}}`
+/// and `{{Zombie state info}}` resolve to the same template. The key is also
+/// lowercased to keep the registry case-insensitive on the first character
+/// (and, in practice here, the whole name).
+fn normalize_template_name(name: &str) -> String {
+    let mut out = String::with_capacity(name.len());
+    let mut prev_was_space = false;
+    for ch in name.trim().chars() {
+        if ch == '_' || ch.is_whitespace() {
+            if !prev_was_space {
+                out.push(' ');
+                prev_was_space = true;
+            }
+        } else {
+            out.extend(ch.to_lowercase());
+            prev_was_space = false;
+        }
+    }
+    out
+}
+
 #[derive(Default)]
 pub struct TemplateRegistry {
     expanders: Vec<Box<dyn TemplateExpander>>,
@@ -135,7 +158,7 @@ impl TemplateRegistry {
     pub fn register(&mut self, ex: Box<dyn TemplateExpander>) {
         let idx = self.expanders.len();
         for &raw_name in ex.names() {
-            let key = raw_name.to_ascii_lowercase();
+            let key = normalize_template_name(raw_name);
             // First registration wins; later expanders sharing a name (notably
             // the catch-all `SimpleInlineExpander`) defer to the dedicated one.
             self.name_index.entry(key).or_insert(idx);
@@ -143,7 +166,7 @@ impl TemplateRegistry {
         self.expanders.push(ex);
     }
     pub fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        let lookup_key = inv.name.to_ascii_lowercase();
+        let lookup_key = normalize_template_name(&inv.name);
         if let Some(&idx) = self.name_index.get(&lookup_key) {
             if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
                 conv_ctx.record_template_params(&inv.name, &inv.params);
@@ -189,7 +212,7 @@ impl TemplateRegistry {
         })
     }
     pub fn has_name(&self, name: &str) -> bool {
-        self.name_index.contains_key(&name.to_ascii_lowercase())
+        self.name_index.contains_key(&normalize_template_name(name))
     }
     pub fn list_names(&self) -> Vec<&'static str> {
         let mut out: Vec<&'static str> = Vec::new();
@@ -4449,6 +4472,48 @@ mod tests {
             .unwrap();
         assert!(result.expanded.contains("* Yes"));
         assert!(result.expanded.contains("* 8 lethality"));
+    }
+
+    #[test]
+    fn template_names_match_with_underscores_or_spaces() {
+        // MediaWiki treats underscores and spaces as equivalent in template
+        // names, so `{{Zombie_state_info}}` must resolve to the same expander as
+        // `{{Zombie state info}}`. Regression test for E_UNKNOWN_TEMPLATE on
+        // Sion's "Glory in Death" passive, which invokes `{{Zombie_state_info}}`.
+        let reg = TemplateRegistry::new();
+        assert!(reg.has_name("Zombie_state_info"));
+        assert!(reg.has_name("Zombie state info"));
+        assert!(reg.has_name("zombie__state  info"));
+        assert!(reg.has_name("Spellblade_info"));
+    }
+
+    #[test]
+    fn include_info_template_resolves_via_underscore_invocation() {
+        // End-to-end: the underscore-form invocation `{{Zombie_state_info}}`
+        // used on Sion's "Glory in Death" passive must dispatch to the
+        // IncludeInfoExpander and expand the template body, not fail with
+        // E_UNKNOWN_TEMPLATE.
+        let tmp = tempdir().unwrap();
+        let export_dir = tmp.path().join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        std::fs::write(
+            export_dir.join("Template%3AZombie%20state%20info.txt"),
+            "* Zombie states trigger upon taking {{tip|death|lethal damage}}.\n<noinclude>[[Category:Data templates]]</noinclude>",
+        )
+        .unwrap();
+
+        let ctx_arc = Arc::new(ConversionContext::new(tmp.path(), 2).unwrap());
+        let registry = TemplateRegistry::new();
+        let result = registry
+            .expand(
+                &parse_invocation("Zombie_state_info"),
+                &ExpanderCtx::new(2, &HashMap::new(), Some(ctx_arc)),
+            )
+            .unwrap();
+        assert!(result
+            .expanded
+            .contains("Zombie states trigger upon taking lethal damage."));
+        assert!(!result.expanded.contains("Category:Data templates"));
     }
 
     #[test]

@@ -1635,9 +1635,29 @@ fn normalize_comment_payload(body: &str) -> String {
     }
 }
 
+/// Canonicalize a template name for matching: MediaWiki treats underscores and
+/// spaces as equivalent and collapses whitespace runs, so `skin_tier`,
+/// `skin tier`, and `skin  tier` all name the same template.
+fn normalize_simple_template_name(name: &str) -> String {
+    let mut out = String::with_capacity(name.len());
+    let mut prev_was_space = false;
+    for ch in name.trim().chars() {
+        if ch == '_' || ch.is_whitespace() {
+            if !prev_was_space {
+                out.push(' ');
+                prev_was_space = true;
+            }
+        } else {
+            out.extend(ch.to_lowercase());
+            prev_was_space = false;
+        }
+    }
+    out
+}
+
 fn is_supported_simple_template_name(name: &str) -> bool {
     matches!(
-        name.to_ascii_lowercase().as_str(),
+        normalize_simple_template_name(name).as_str(),
         "as" | "ap"
             | "adaptive"
             | "sti"
@@ -1761,7 +1781,7 @@ fn normalize_simple_templates(s: &str) -> String {
 /// can decide how to treat genuinely unknown templates (the template registry
 /// fails fast on them).
 pub fn render_simple_inline_template(name: &str, args: &[&str]) -> Option<String> {
-    let name = name.trim().to_ascii_lowercase();
+    let name = normalize_simple_template_name(name);
     let positional = simple_positional_args(args);
     let named = args
         .iter()
