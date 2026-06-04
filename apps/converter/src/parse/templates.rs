@@ -2424,19 +2424,27 @@ impl TemplateExpander for FdExpander {
             None => (raw.as_str(), ""),
         };
         if let Some(num) = evaluate_numeric(expr) {
+            // The wiki's {{fd}} (Module:Fd) only *styles* the decimals; it never
+            // pads to a fixed width, so `{{fd|50}}` is "50" and `{{fd|2.5}}` is
+            // "2.5", not "50.00"/"2.50". Trim trailing zeros to match, reusing
+            // the shared progression formatter.
             if aux.is_empty() {
                 return Ok(ExpansionResult {
-                    expanded: format!("{:.2}{}", num, suffix),
+                    expanded: format!("{}{}", format_progression_number(num, None), suffix),
                 });
             }
-            if let Ok(prec) = aux.parse::<usize>() {
+            if aux.parse::<usize>().is_ok() {
                 return Ok(ExpansionResult {
-                    expanded: format!("{:.*}{}", prec, num, suffix),
+                    expanded: format!("{}{}", format_progression_number(num, Some(aux)), suffix),
                 });
             }
 
             return Ok(ExpansionResult {
-                expanded: format!("{} ({})", format!("{:.2}{}", num, suffix), aux),
+                expanded: format!(
+                    "{} ({})",
+                    format!("{}{}", format_progression_number(num, None), suffix),
+                    aux
+                ),
             });
         }
 
@@ -4855,8 +4863,30 @@ mod tests {
     #[test]
     fn fd_template_preserves_percent_suffix() {
         let reg = TemplateRegistry::new();
+        // {{fd}} styles decimals but never pads them: the wiki renders "1.3%",
+        // not "1.30%".
         let result = reg.expand(&parse_invocation("fd|1.3%"), &ctx()).unwrap();
-        assert_eq!(result.expanded, "1.30%");
+        assert_eq!(result.expanded, "1.3%");
+    }
+
+    #[test]
+    fn fd_template_does_not_pad_to_fixed_decimals() {
+        let reg = TemplateRegistry::new();
+        // Integers stay integers; trailing zeros are trimmed — matching the
+        // wiki's Module:Fd, which only wraps decimals in <small> and never pads.
+        for (input, expected) in [
+            ("fd|50", "50"),
+            ("fd|2.5", "2.5"),
+            ("fd|2.50", "2.5"),
+            ("fd|0", "0"),
+            ("fd|0.25", "0.25"),
+        ] {
+            let out = reg.expand(&parse_invocation(input), &ctx()).unwrap();
+            assert_eq!(out.expanded, expected, "for {input}");
+        }
+        // An explicit precision still rounds (and then trims).
+        let three = reg.expand(&parse_invocation("fd|3.14159|3"), &ctx()).unwrap();
+        assert_eq!(three.expanded, "3.142");
     }
 
     #[test]

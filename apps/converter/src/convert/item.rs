@@ -1157,7 +1157,9 @@ mod tests {
         assert!(md.contains("4 [ability power](./ability_power.md) = 80"));
         assert!(md.contains("513.33"));
         assert!(md.contains("22.86% (+80g)"));
-        assert!(md.contains("Health total = 60.00"));
+        // {{fd|60}} renders "60", not the padded "60.00" (Module:Fd never pads).
+        assert!(md.contains("Health total = 60"));
+        assert!(!md.contains("Health total = 60.00"));
     }
 
     #[test]
