@@ -3624,7 +3624,10 @@ fn resolve_champion_constant(ctx: &ExpanderCtx, entity: &str, field: &str) -> Re
 
 fn default_champion_constant(field: &str) -> Option<&'static str> {
     match field.trim().to_ascii_lowercase().as_str() {
-        "crit_base" => Some("175"),
+        // Matches the wiki's Module:ChampionData/getter, which returns
+        // `getData(champname, true).crit_base or 200` — champions without an
+        // explicit crit_base fall back to 200 (not the live-game 175).
+        "crit_base" => Some("200"),
         _ => None,
     }
 }
@@ -4405,7 +4408,7 @@ mod tests {
         let reg = TemplateRegistry::new();
 
         let ccd = parse_invocation("ccd|Graves|crit_base");
-        assert_eq!(reg.expand(&ccd, &ctx).unwrap().expanded, "175");
+        assert_eq!(reg.expand(&ccd, &ctx).unwrap().expanded, "200");
 
         let nested = parse_invocation("ccd|Graves|missile_speed");
         assert_eq!(reg.expand(&nested, &ctx).unwrap().expanded, "3800");
