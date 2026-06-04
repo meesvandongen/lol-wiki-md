@@ -59,17 +59,29 @@ async fn main() -> Result<()> {
     fs::create_dir_all(&meta_dir_path).context("Failed creating metadata directory")?;
 
     let page_list_path = meta_dir_path.join("page_list.txt");
-    println!(
-        "Generating page list starting at {} (depth <= {})",
-        args.root_category, args.max_depth
-    );
-    let mut all_pages = generate_page_list(
-        &client,
-        &args.root_category,
-        args.max_depth,
-        args.traversal_delay_ms,
-    )
-    .await?;
+    let mut all_pages = if let Some(list_path) = &args.page_list {
+        println!("Reading page list from {}", list_path.display());
+        let contents = fs::read_to_string(list_path)
+            .with_context(|| format!("Failed reading page list {}", list_path.display()))?;
+        contents
+            .lines()
+            .map(str::trim)
+            .filter(|line| !line.is_empty() && !line.starts_with('#'))
+            .map(str::to_string)
+            .collect::<Vec<_>>()
+    } else {
+        println!(
+            "Generating page list starting at {} (depth <= {})",
+            args.root_category, args.max_depth
+        );
+        generate_page_list(
+            &client,
+            &args.root_category,
+            args.max_depth,
+            args.traversal_delay_ms,
+        )
+        .await?
+    };
     println!("Discovered {} total unique pages", all_pages.len());
     fs::write(
         &page_list_path,
