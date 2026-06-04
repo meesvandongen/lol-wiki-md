@@ -678,11 +678,26 @@ impl TemplateExpander for RoundUpToGameTickExpander {
         // possibly with `{{ccd|...}}`/`{{#var:...}}` lookups inside — so resolve
         // nested templates to a bare numeric value before evaluating.
         let resolved = expand_nested_template_text(raw, ctx).unwrap_or_else(|_| raw.to_string());
-        let seconds =
-            evaluate_numeric(resolved.trim()).ok_or_else(|| ConvertError::MalformedTemplate {
-                name: inv.name.clone(),
-                detail: format!("expected a numeric duration, got {raw:?}"),
-            })?;
+        let seconds = match evaluate_numeric(resolved.trim()) {
+            Some(value) => value,
+            // The argument can reference a variable that a sibling template
+            // defines later in the same text (e.g. a `{{#vardefineecho}}` nested
+            // inside an earlier `{{as|{{fd|...}}}}`), which only executes on a
+            // later expansion pass. While unexpanded templates remain, defer by
+            // re-emitting the invocation so a subsequent pass retries once the
+            // dependency is defined; only fail once nothing is left to resolve.
+            None if resolved.contains("{{") => {
+                return Ok(ExpansionResult {
+                    expanded: format!("{{{{{}}}}}", inv.raw),
+                });
+            }
+            None => {
+                return Err(ConvertError::MalformedTemplate {
+                    name: inv.name.clone(),
+                    detail: format!("expected a numeric duration, got {raw:?}"),
+                });
+            }
+        };
         let rounded = (seconds / TICK_LENGTH).ceil() * TICK_LENGTH;
         // TICK_LENGTH has three decimals and the tick count is an integer, so the
         // result is exact to three decimals; round there to drop binary float
@@ -4719,6 +4734,34 @@ mod tests {
             .unwrap()
             .expanded,
             "3.267 seconds"
+        );
+    }
+
+    #[test]
+    fn rutngt_defers_until_sibling_defined_variable_is_available() {
+        // Senna's basic-attack note defines a variable with {{#vardefineecho}}
+        // nested inside an earlier {{as|{{fd|...}}}} and then references it in a
+        // later {{rutngt|{{#expr:...{{#var:...}}...}}}}. The sibling vardefine
+        // only executes on a later expansion pass, so rutngt must defer instead
+        // of failing. Here defvar=0.5, so rutngt's argument is 0.5*0.5 = 0.25,
+        // which rounds up to 0.264 seconds.
+        let mut vars = HashMap::new();
+        let reg = TemplateRegistry::new();
+        let out = expand_inline_templates_mut(
+            "{{as|{{fd|{{#vardefineecho:defvar|0.5}}}}}} then {{rutngt|{{#expr:{{#var:defvar}}*0.5}}}}",
+            2,
+            &mut vars,
+            &reg,
+            None,
+        )
+        .unwrap();
+        assert!(
+            out.contains("0.264 seconds"),
+            "rutngt did not resolve after deferral: {out:?}"
+        );
+        assert!(
+            !out.contains("{{"),
+            "deferred template left unexpanded: {out:?}"
         );
     }
 
