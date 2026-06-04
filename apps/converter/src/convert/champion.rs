@@ -2135,6 +2135,11 @@ fn load_abilities(
         }
 
         let mut ability_key = AbilityKey::Other(String::new());
+        // The `A`/Basic Attack slot is icon-dependent (see ability_key_from_slot),
+        // so capture the raw slot and icon and resolve the key once, after every
+        // field is known.
+        let mut skill_slot: Option<String> = None;
+        let mut icon_value: Option<String> = None;
         let mut display_name = param_map
             .get("name")
             .cloned()
@@ -2171,7 +2176,13 @@ fn load_abilities(
                 "champion" => {}
                 "skill" => {
                     if !normalized.is_empty() {
-                        ability_key = ability_key_from_slot(&normalized);
+                        skill_slot = Some(normalized.clone());
+                    }
+                }
+                "icon" => {
+                    if !normalized.is_empty() {
+                        icon_value = Some(normalized.clone());
+                        extra.insert("icon".to_string(), normalized.clone());
                     }
                 }
                 "name" => {
@@ -2222,6 +2233,10 @@ fn load_abilities(
                     }
                 }
             }
+        }
+
+        if let Some(slot) = skill_slot.as_deref() {
+            ability_key = ability_key_from_slot(slot, icon_value.as_deref());
         }
 
         if !matches!(
@@ -2530,20 +2545,39 @@ fn normalize_ability_value(raw: &str) -> String {
     s.trim().to_string()
 }
 
-fn ability_key_from_slot(slot: &str) -> AbilityKey {
+fn ability_key_from_slot(slot: &str, icon: Option<&str>) -> AbilityKey {
     let trimmed = slot.trim();
     if trimmed.is_empty() {
         return AbilityKey::Other(String::new());
     }
     match trimmed.to_ascii_uppercase().as_str() {
         "I" | "P" | "PASSIVE" => AbilityKey::Passive,
-        "A" | "BASIC ATTACK" => AbilityKey::BasicAttack,
+        // The `A` slot is overloaded on the wiki: a champion's real auto-attack
+        // ability (Senna's relic cannon) uses `skill=A` with `icon=Basic
+        // Attack.png`, but auxiliary weapon abilities pulled in via grouped
+        // slots (Aphelios' guns — Calibrum etc.) also declare `skill=A` while
+        // carrying their own icon. Only the former is the Basic Attack section;
+        // the latter must stay a distinct auxiliary ability so it is not
+        // mislabelled (or collapsed) into the basic attack.
+        "A" | "BASIC ATTACK" if icon_denotes_basic_attack(icon) => AbilityKey::BasicAttack,
         "Q" => AbilityKey::Q,
         "W" => AbilityKey::W,
         "E" => AbilityKey::E,
         "R" | "ULTIMATE" => AbilityKey::R,
         _ => AbilityKey::Other(trimmed.to_string()),
     }
+}
+
+/// True when an ability's `icon` is the shared basic-attack icon
+/// (`Basic Attack.png`), the wiki's marker for the auto-attack slot.
+fn icon_denotes_basic_attack(icon: Option<&str>) -> bool {
+    icon.map(|value| {
+        value
+            .trim()
+            .to_ascii_lowercase()
+            .starts_with("basic attack")
+    })
+    .unwrap_or(false)
 }
 
 fn suffix_index(key: &str, prefix: &str) -> usize {
@@ -3443,6 +3477,34 @@ mod tests {
         assert_eq!(
             fallback_champion_summary("Aatrox"),
             Some("Aatrox is a champion in League of Legends.".to_string())
+        );
+    }
+
+    #[test]
+    fn ability_key_from_slot_disambiguates_basic_attack_by_icon() {
+        // Standard slots ignore the icon entirely.
+        assert_eq!(ability_key_from_slot("Q", None), AbilityKey::Q);
+        assert_eq!(ability_key_from_slot("I", None), AbilityKey::Passive);
+
+        // skill=A is the Basic Attack only when it carries the basic-attack icon
+        // (Senna's relic cannon: skill=A, icon=Basic Attack.png).
+        assert_eq!(
+            ability_key_from_slot("A", Some("Basic Attack.png")),
+            AbilityKey::BasicAttack
+        );
+
+        // skill=A with a weapon icon is an auxiliary ability, not the basic
+        // attack (Aphelios' Calibrum: skill=A, icon=Calibrum.png). Without this,
+        // every gun collapses into the Basic Attack slot.
+        assert_eq!(
+            ability_key_from_slot("A", Some("Calibrum.png")),
+            AbilityKey::Other("A".to_string())
+        );
+
+        // skill=A with no icon is treated as auxiliary as well.
+        assert_eq!(
+            ability_key_from_slot("A", None),
+            AbilityKey::Other("A".to_string())
         );
     }
 
