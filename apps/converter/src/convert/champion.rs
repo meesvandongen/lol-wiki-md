@@ -1720,14 +1720,12 @@ fn collect_entry_constants(entry: &HashMap<String, LuaValue>) -> HashMap<String,
                 .or_insert_with(|| format_number(windup));
         }
     }
-    // Mirror the wiki's own fallback: Module:ChampionData/getter resolves
-    // `crit_base` as `getData(champname, true).crit_base or 200`, i.e. champions
-    // without an explicit crit_base (Graves, Kled, most of the roster) render
-    // with 200, not the in-game 175. The wiki is the source of truth here; do
-    // not "correct" this to the live-game value.
-    constants
-        .entry("crit_base".to_string())
-        .or_insert_with(|| "200".to_string());
+    // NB: we deliberately do *not* inject a `crit_base` (or any other) default
+    // here. Champions missing a field fall back to the wiki's own value at
+    // lookup time via `ConversionContext::champion_constant_default`, which
+    // reads `Module:ChampionData/getter` (`crit_base or 200`). Keeping the
+    // default in one place — sourced from the dumped module — avoids the two
+    // code paths drifting apart.
     constants
 }
 
@@ -2919,7 +2917,9 @@ mod tests {
         assert_eq!(loaded.positions, vec!["Top".to_string()]);
         assert_eq!(loaded.stats.base.get("Move Speed").unwrap().base, 345.0);
         assert_eq!(loaded.stats.base.get("Range").unwrap().base, 125.0);
-        assert_eq!(loaded.constants.get("crit_base"), Some(&"200".to_string()));
+        // crit_base is not stamped onto the constants; champions missing it fall
+        // back to the wiki's getter default at lookup time, not here.
+        assert_eq!(loaded.constants.get("crit_base"), None);
         assert_eq!(loaded.special_stats[0].mode, "ARAM");
         assert_eq!(
             loaded.special_stats[0].metrics.get("Damage Taken"),
@@ -2943,7 +2943,7 @@ mod tests {
     }
 
     #[test]
-    fn collect_entry_constants_flattens_stats_and_defaults_crit_base() {
+    fn collect_entry_constants_flattens_stats_without_injecting_crit_base() {
         let lua = r#"return {
     ["Graves"] = {
         ["title"] = "the Outlaw",
@@ -2963,7 +2963,9 @@ mod tests {
         assert_eq!(constants.get("missile_speed"), Some(&"3800".to_string()));
         assert_eq!(constants.get("range"), Some(&"425".to_string()));
         assert_eq!(constants.get("windup"), Some(&"0.2".to_string()));
-        assert_eq!(constants.get("crit_base"), Some(&"200".to_string()));
+        // No default is stamped in: crit_base is resolved from the getter module
+        // at lookup time, so a champion without it simply has no entry here.
+        assert_eq!(constants.get("crit_base"), None);
     }
 
     #[test]

@@ -44,6 +44,7 @@ pub struct ConversionContextInner {
     registry: TemplateRegistry,
     champion_module_raw: OnceCell<Option<String>>,
     champion_module_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
+    champion_getter_defaults: OnceCell<HashMap<String, String>>,
     item_module_raw: OnceCell<Option<String>>,
     item_module_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
     gold_value_data_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
@@ -63,6 +64,7 @@ impl ConversionContext {
             registry: TemplateRegistry::new(),
             champion_module_raw: OnceCell::new(),
             champion_module_map: OnceCell::new(),
+            champion_getter_defaults: OnceCell::new(),
             item_module_raw: OnceCell::new(),
             item_module_map: OnceCell::new(),
             gold_value_data_map: OnceCell::new(),
@@ -274,6 +276,27 @@ impl ConversionContext {
         Some(constants)
     }
 
+    /// Resolve the fallback value the wiki applies for a champion stat that is
+    /// absent from `Module:ChampionData/data`. These defaults live in
+    /// `Module:ChampionData/getter` as one-line accessors of the form
+    /// `getData(champname, ...).field or <default>` (e.g. `crit_base or 200`),
+    /// so we parse them straight out of the dumped module rather than hardcoding
+    /// any numbers — the wiki module is the single source of truth, and if it
+    /// changes the next export picks it up automatically.
+    pub fn champion_constant_default(&self, field: &str) -> Option<String> {
+        let defaults = self.inner.champion_getter_defaults.get_or_init(|| {
+            match self
+                .inner
+                .export
+                .read_optional_page("Module:ChampionData/getter")
+            {
+                Ok(Some(raw)) => parse_getter_defaults(&raw),
+                _ => HashMap::new(),
+            }
+        });
+        defaults.get(&field.trim().to_ascii_lowercase()).cloned()
+    }
+
     pub fn champion_constants(&self, key: &str) -> Option<HashMap<String, String>> {
         match self.inner.champion_constants.lock() {
             Ok(guard) => guard.get(key).cloned().or_else(|| {
@@ -477,6 +500,30 @@ impl ConversionContextInner {
     }
 }
 
+/// Parse the per-field fallbacks out of `Module:ChampionData/getter`.
+///
+/// The module exposes one accessor per stat, each of the shape
+/// `... = getData(champname, ...).field or <default>`, where `<default>` is a
+/// bare number (`200`, `65`) or a quoted string (`"Physical"`). We capture the
+/// field name and its literal default verbatim so callers get exactly what the
+/// wiki would render. Anything that does not match (multi-line bodies, computed
+/// defaults) is simply skipped — those fields have no static fallback to mirror.
+fn parse_getter_defaults(raw: &str) -> HashMap<String, String> {
+    use regex::Regex;
+    static RE: OnceCell<Regex> = OnceCell::new();
+    let re = RE.get_or_init(|| {
+        Regex::new(r#"getData\([^)]*\)\.(\w+)\s+or\s+("[^"]*"|[-+0-9.]+)"#)
+            .expect("valid getter-default regex")
+    });
+    let mut defaults = HashMap::new();
+    for caps in re.captures_iter(raw) {
+        let field = caps[1].trim().to_ascii_lowercase();
+        let value = caps[2].trim().trim_matches('"').to_string();
+        defaults.entry(field).or_insert(value);
+    }
+    defaults
+}
+
 fn extract_template_body(raw: &str) -> Option<String> {
     if let Some(includeonly) = extract_includeonly_sections(raw) {
         return Some(includeonly);
@@ -574,6 +621,52 @@ mod tests {
     use super::*;
     use serde_json::Value;
     use tempfile::tempdir;
+
+    #[test]
+    fn parse_getter_defaults_extracts_number_and_string_fallbacks() {
+        let raw = r#"
+function p.acquisition_radius(champname)
+	return getData(champname, true).acquisition_radius or 750
+end
+function p.gameplay_radius(champname)
+	return getData(champname, true).gameplay_radius or 65
+end
+function p.crit_base(champname)
+	return getData(champname, true).crit_base or 200
+end
+function p.adaptivetype(champname)
+	return getData(champname).adaptivetype or "Physical"
+end
+function p.computed(champname)
+	-- no static fallback to mirror
+	return getData(champname).computed
+end
+"#;
+        let defaults = parse_getter_defaults(raw);
+        assert_eq!(defaults.get("crit_base"), Some(&"200".to_string()));
+        assert_eq!(defaults.get("gameplay_radius"), Some(&"65".to_string()));
+        assert_eq!(defaults.get("acquisition_radius"), Some(&"750".to_string()));
+        assert_eq!(defaults.get("adaptivetype"), Some(&"Physical".to_string()));
+        assert_eq!(defaults.get("computed"), None);
+    }
+
+    #[test]
+    fn champion_constant_default_reads_from_getter_module() {
+        let td = tempdir().unwrap();
+        std::fs::write(
+            td.path().join("Module%3AChampionData%2Fgetter.txt"),
+            "function p.crit_base(champname)\n\treturn getData(champname, true).crit_base or 200\nend\n",
+        )
+        .unwrap();
+        let ctx = ConversionContext::new(td.path(), 2).unwrap();
+        assert_eq!(
+            ctx.champion_constant_default("crit_base").as_deref(),
+            Some("200")
+        );
+        // A field with no static fallback in the module yields nothing — the
+        // caller then fails fast rather than inventing a value.
+        assert_eq!(ctx.champion_constant_default("missile_speed"), None);
+    }
 
     #[test]
     fn inventory_reports_written_with_deduplication() {
