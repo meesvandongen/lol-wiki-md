@@ -1245,6 +1245,7 @@ fn attach_skill_tabs(page_expanded: &str, mut abilities: Vec<Ability>) -> Vec<Ab
 fn ability_key_label(key: &AbilityKey) -> String {
     match key {
         AbilityKey::Passive => "PASSIVE".to_string(),
+        AbilityKey::BasicAttack => "A".to_string(),
         AbilityKey::Q => "Q".to_string(),
         AbilityKey::W => "W".to_string(),
         AbilityKey::E => "E".to_string(),
@@ -1256,6 +1257,7 @@ fn ability_key_label(key: &AbilityKey) -> String {
 fn describe_ability_key(key: &AbilityKey) -> String {
     match key {
         AbilityKey::Passive => "Passive".to_string(),
+        AbilityKey::BasicAttack => "Basic Attack".to_string(),
         AbilityKey::Q => "Q".to_string(),
         AbilityKey::W => "W".to_string(),
         AbilityKey::E => "E".to_string(),
@@ -2163,7 +2165,12 @@ fn load_abilities(
 
         if !matches!(
             ability_key,
-            AbilityKey::Passive | AbilityKey::Q | AbilityKey::W | AbilityKey::E | AbilityKey::R
+            AbilityKey::Passive
+                | AbilityKey::BasicAttack
+                | AbilityKey::Q
+                | AbilityKey::W
+                | AbilityKey::E
+                | AbilityKey::R
         ) {
             warnings.push(format!(
                 "Ability template `{template_title}` resolved to unsupported skill slot `{}` and was skipped.",
@@ -2257,11 +2264,14 @@ fn load_abilities(
         }
     }
     out.sort_by_key(|a| match a.key {
-        AbilityKey::Passive => 0,
-        AbilityKey::Q => 1,
-        AbilityKey::W => 2,
-        AbilityKey::E => 3,
-        AbilityKey::R => 4,
+        // Basic attack first, mirroring the wiki's ability ordering for
+        // champions whose auto-attack is a distinct ability (Senna, Aphelios).
+        AbilityKey::BasicAttack => 0,
+        AbilityKey::Passive => 1,
+        AbilityKey::Q => 2,
+        AbilityKey::W => 3,
+        AbilityKey::E => 4,
+        AbilityKey::R => 5,
         AbilityKey::Other(_) => 9,
     });
     warnings.sort();
@@ -2457,6 +2467,7 @@ fn ability_key_from_slot(slot: &str) -> AbilityKey {
     }
     match trimmed.to_ascii_uppercase().as_str() {
         "I" | "P" | "PASSIVE" => AbilityKey::Passive,
+        "A" | "BASIC ATTACK" => AbilityKey::BasicAttack,
         "Q" => AbilityKey::Q,
         "W" => AbilityKey::W,
         "E" => AbilityKey::E,
@@ -3247,6 +3258,49 @@ mod tests {
 
         assert_eq!(loaded.abilities.len(), 1);
         assert_eq!(loaded.abilities[0].name, "Steady Hands");
+    }
+
+    #[test]
+    fn load_abilities_keeps_basic_attack_slot_and_orders_it_first() {
+        // Champions whose auto-attack is a distinct ability (Senna, Aphelios)
+        // reference a {{Data X/A}} basic-attack slot. It must be rendered, not
+        // skipped as an unsupported slot, and ordered ahead of the passive.
+        let td = tempdir().unwrap();
+        let flat = td.path().join("export_out");
+        std::fs::create_dir_all(&flat).unwrap();
+
+        std::fs::write(
+            flat.join("Tester.txt"),
+            "{{Champion info|Tester}}\n{{Data Tester/A|Ability}}\n{{Data Tester/I|Ability}}\n",
+        )
+        .unwrap();
+        std::fs::write(
+            flat.join(format!("{}.txt", url_encode("Template:Data Tester/A"))),
+            "{{{{{1|Ability data}}}|skill=A|icon=Basic Attack.png|description=Relic cannon blast}}",
+        )
+        .unwrap();
+        std::fs::write(
+            flat.join(format!("{}.txt", url_encode("Template:Data Tester/I"))),
+            "{{{{{1|Ability data}}}|Soul Siphon|skill=I|description=Passive}}",
+        )
+        .unwrap();
+
+        let export = WikiExport::new(td.path());
+        let registry = TemplateRegistry::new();
+        let loaded =
+            load_abilities(&export, "Tester", 2, &HashMap::new(), &registry, None).unwrap();
+
+        assert_eq!(loaded.abilities.len(), 2);
+        assert_eq!(loaded.abilities[0].key, AbilityKey::BasicAttack);
+        assert_eq!(loaded.abilities[1].key, AbilityKey::Passive);
+        assert!(
+            !loaded
+                .warnings
+                .iter()
+                .any(|w| w.contains("unsupported skill slot")),
+            "basic attack slot should not warn as unsupported: {:?}",
+            loaded.warnings
+        );
     }
 
     #[test]

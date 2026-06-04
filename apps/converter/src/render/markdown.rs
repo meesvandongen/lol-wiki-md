@@ -176,17 +176,23 @@ pub fn render_champion_markdown(champ: &Champion, _raw_excerpt: &str) -> String 
         for a in &champ.abilities {
             let key_label = match &a.key {
                 AbilityKey::Passive => "Passive",
+                AbilityKey::BasicAttack => "Basic Attack",
                 AbilityKey::Q => "Q",
                 AbilityKey::W => "W",
                 AbilityKey::E => "E",
                 AbilityKey::R => "R",
                 AbilityKey::Other(s) => s,
             };
-            out.push_str(&format!(
-                "### {} – {}\n\n",
-                key_label,
-                normalize_all(&a.name)
-            ));
+            let name = normalize_all(&a.name);
+            // The basic-attack slot has no distinct ability name, so its label
+            // already titles the section; only append a name when it adds
+            // information, to avoid "Basic Attack – Basic Attack".
+            let heading = if name.is_empty() || name.eq_ignore_ascii_case(key_label) {
+                key_label.to_string()
+            } else {
+                format!("{} – {}", key_label, name)
+            };
+            out.push_str(&format!("### {}\n\n", heading));
             // Ability info block: show key attribute/value fields in the same general order as Template:Ability info
             let info_rows: Vec<(&str, Option<&String>)> = vec![
                 ("Range", a.extra.get("range")),

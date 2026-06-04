@@ -80,6 +80,7 @@ pub struct Ability {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub enum AbilityKey {
     Passive,
+    BasicAttack,
     Q,
     W,
     E,
