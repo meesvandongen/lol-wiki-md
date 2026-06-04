@@ -2183,9 +2183,15 @@ fn load_abilities(
                     }
                 }
                 k if k.starts_with("leveling") => {
-                    if let Some(table) = parse_skill_tab_marker(&normalized) {
+                    // A single `leveling` field can carry more than one `{{st}}`
+                    // table (e.g. Graves' Quickdraw stacks armor and MR), so
+                    // collect every marker rather than just the first.
+                    let tables = parse_skill_tab_markers(&normalized);
+                    if !tables.is_empty() {
                         let idx = suffix_index(k, "leveling");
-                        leveling_with_order.push((idx, table));
+                        for table in tables {
+                            leveling_with_order.push((idx, table));
+                        }
                     } else if !normalized.is_empty() {
                         extra.insert(k.to_string(), normalized.clone());
                     }
@@ -2560,45 +2566,47 @@ fn suffix_index(key: &str, prefix: &str) -> usize {
     }
 }
 
-fn parse_skill_tab_marker(value: &str) -> Option<crate::model::SkillTable> {
-    if !value.starts_with("[SkillTab ") || !value.ends_with(']') {
-        return None;
-    }
-    let inner = &value[10..value.len() - 1];
-    let mut headers = Vec::new();
-    let mut rows = Vec::new();
-    let mut current_row = Vec::new();
-    let mut current_row_index = 0;
-    for part in inner.split('|') {
-        let part = part.trim();
-        if let Some(colon) = part.find(':') {
-            let key = part[..colon].trim();
-            let val = part[colon + 1..].trim();
-            if key.eq_ignore_ascii_case("h") {
-                headers.push(val.to_string());
-            } else if key.to_lowercase().starts_with("r") {
-                let row_num = if key.eq_ignore_ascii_case("r") {
-                    1
-                } else if let Ok(num) = key[1..].parse::<usize>() {
-                    num
-                } else {
-                    continue;
-                };
-                if row_num == current_row_index + 1 {
-                    if !current_row.is_empty() {
-                        rows.push(current_row);
-                        current_row = Vec::new();
-                    }
-                    current_row_index = row_num;
-                }
-                current_row.push(val.to_string());
-            }
+/// Extract every `[SkillTab …]` marker contained in `value`. Multiple `{{st}}`
+/// invocations can share a single `leveling` field, each producing its own
+/// marker, so they are parsed independently.
+fn parse_skill_tab_markers(value: &str) -> Vec<crate::model::SkillTable> {
+    let mut tables = Vec::new();
+    let mut rest = value;
+    while let Some(start) = rest.find("[SkillTab ") {
+        let after = &rest[start..];
+        let Some(end_rel) = after.find(']') else {
+            break;
+        };
+        if let Some(table) = parse_skill_tab_marker(&after[..=end_rel]) {
+            tables.push(table);
         }
+        rest = &after[end_rel + 1..];
     }
-    if !current_row.is_empty() {
-        rows.push(current_row);
-    }
-    if headers.is_empty() || rows.is_empty() {
+    tables
+}
+
+fn parse_skill_tab_marker(value: &str) -> Option<crate::model::SkillTable> {
+    use crate::parse::templates::{SKILL_TAB_CELL_SEP, SKILL_TAB_ROW_SEP};
+
+    let inner = value.strip_prefix("[SkillTab ")?.strip_suffix(']')?;
+    let mut records = inner.split(SKILL_TAB_ROW_SEP);
+    let headers: Vec<String> = records
+        .next()?
+        .split(SKILL_TAB_CELL_SEP)
+        .map(|cell| cell.trim().to_string())
+        .collect();
+    let rows: Vec<Vec<String>> = records
+        .map(|record| {
+            record
+                .split(SKILL_TAB_CELL_SEP)
+                .map(|cell| cell.trim().to_string())
+                .collect()
+        })
+        .collect();
+
+    let has_headers = headers.iter().any(|h| !h.is_empty());
+    let has_rows = rows.iter().any(|row| row.iter().any(|cell| !cell.is_empty()));
+    if !has_headers && !has_rows {
         return None;
     }
     Some(crate::model::SkillTable { headers, rows })
@@ -2746,6 +2754,46 @@ mod tests {
     use crate::parse::lua::parse_champion_entry;
     use crate::wiki_export::url_encode;
     use tempfile::tempdir;
+
+    #[test]
+    fn parse_skill_tab_markers_handles_single_and_multiple_tables() {
+        use crate::parse::templates::encode_skill_tab_marker;
+
+        let one = encode_skill_tab_marker(
+            &["Physical Damage".to_string()],
+            &[vec!["50 / 75 / 100".to_string()]],
+        );
+        let tables = parse_skill_tab_markers(&one);
+        assert_eq!(tables.len(), 1);
+        assert_eq!(tables[0].headers, vec!["Physical Damage".to_string()]);
+        assert_eq!(tables[0].rows, vec![vec!["50 / 75 / 100".to_string()]]);
+
+        // Two `{{st}}` markers in one field (e.g. Graves' Quickdraw) become two
+        // independent tables even when newline-joined.
+        let armor = encode_skill_tab_marker(
+            &["Bonus Armor".to_string(), "Max".to_string()],
+            &[vec!["7 / 10".to_string(), "56 / 80".to_string()]],
+        );
+        let mr = encode_skill_tab_marker(
+            &["Bonus MR".to_string(), "Max".to_string()],
+            &[vec!["3.5 / 5".to_string(), "28 / 40".to_string()]],
+        );
+        let joined = format!("{armor}\n{mr}");
+        let tables = parse_skill_tab_markers(&joined);
+        assert_eq!(tables.len(), 2);
+        assert_eq!(
+            tables[0].headers,
+            vec!["Bonus Armor".to_string(), "Max".to_string()]
+        );
+        assert_eq!(
+            tables[1].headers,
+            vec!["Bonus MR".to_string(), "Max".to_string()]
+        );
+        assert_eq!(
+            tables[1].rows,
+            vec![vec!["3.5 / 5".to_string(), "28 / 40".to_string()]]
+        );
+    }
 
     #[test]
     fn collect_notes_splits_definition_terms_and_bold_headers() {
@@ -3463,10 +3511,12 @@ mod tests {
             "{{{{{1|Ability data}}}|Steady Hands|skill=I|description=Passive}}",
         )
         .unwrap();
-        // Auxiliary slot with real content: rendered as its own ability.
+        // Auxiliary (non-core) slot with real content: rendered as its own
+        // ability. `A` is now the basic-attack slot, so a genuinely auxiliary
+        // slot like `B` exercises the `AbilityKey::Other` rendering path.
         std::fs::write(
             flat.join(format!("{}.txt", url_encode("Template:Data Tester/W"))),
-            "{{{{{1|Ability data}}}|Sidearm|skill=A|description=An off-hand weapon.}}",
+            "{{{{{1|Ability data}}}|Sidearm|skill=B|description=An off-hand weapon.}}",
         )
         .unwrap();
         // Non-standard slot but no content: still skipped.
@@ -3487,7 +3537,7 @@ mod tests {
             .abilities
             .iter()
             .any(|ability| ability.name == "Sidearm"
-                && matches!(&ability.key, AbilityKey::Other(slot) if slot == "A")));
+                && matches!(&ability.key, AbilityKey::Other(slot) if slot == "B")));
         assert!(loaded
             .warnings
             .iter()

@@ -254,6 +254,9 @@ pub fn render_champion_markdown(champ: &Champion, _raw_excerpt: &str) -> String 
                     out.push_str("\n\n");
                 }
             }
+            // Leveling/scaling tables (the per-rank damage numbers) belong right
+            // under the description that introduces them, before the details.
+            render_leveling_tables(&mut out, &a.leveling_tables);
             // Ability details block after info (order from Template:Ability details)
             let details_rows: Vec<(&str, Option<&String>)> = vec![
                 ("Targeting", a.extra.get("targeting")),
@@ -289,26 +292,6 @@ pub fn render_champion_markdown(champ: &Champion, _raw_excerpt: &str) -> String 
                 out.push_str("**Notes:**\n\n");
                 render_starred_list(&mut out, &a.notes);
                 out.push('\n');
-            }
-            // Leveling tables as simple sub-tables if present
-            if !a.leveling_tables.is_empty() {
-                for st in &a.leveling_tables {
-                    if !st.headers.is_empty() {
-                        out.push_str(&format!("| {} |\n", st.headers.join(" | ")));
-                        out.push_str(&format!(
-                            "|{}|\n",
-                            st.headers
-                                .iter()
-                                .map(|_| "---")
-                                .collect::<Vec<_>>()
-                                .join("|")
-                        ));
-                    }
-                    for row in &st.rows {
-                        out.push_str(&format!("| {} |\n", row.join(" | ")));
-                    }
-                    out.push('\n');
-                }
             }
         }
     }
@@ -977,6 +960,18 @@ pub fn normalize_internal_links(s: &str) -> String {
             }
             continue;
         }
+        // MediaWiki "linktrail": lowercase letters directly following `]]` are
+        // part of the link label (e.g. `[[basic attack]]ing` → "basic attacking").
+        // Folding them into the display text both matches the wiki rendering and
+        // avoids a later heuristic inserting a stray space after the link's `)`.
+        let trail_len = remaining
+            .char_indices()
+            .take_while(|(_, c)| c.is_ascii_lowercase())
+            .map(|(i, c)| i + c.len_utf8())
+            .last()
+            .unwrap_or(0);
+        let display = format!("{}{}", display, &remaining[..trail_len]);
+        remaining = &remaining[trail_len..];
         // Normalize page name: spaces and / to _, extract anchor
         let (link_target, anchor) = if let Some(hash_pos) = page.find('#') {
             let target = page[..hash_pos].replace(|c: char| c == ' ' || c == '/', "_");
@@ -2396,6 +2391,62 @@ fn normalize_table_value(value: &str, omit_falsey: bool) -> Option<String> {
     Some(rendered)
 }
 
+/// Render an ability's leveling/scaling tables (per-rank damage numbers).
+///
+/// The wiki authors these as `label -> value` pairs. The common single-row case
+/// reads best as a definition list (`**Physical Damage:** 50 / 75 / …`); the
+/// rarer multi-row form falls back to a Markdown table.
+fn render_leveling_tables(out: &mut String, tables: &[crate::model::SkillTable]) {
+    for table in tables {
+        let headers: Vec<String> = table.headers.iter().map(|h| normalize_all(h)).collect();
+        let rows: Vec<Vec<String>> = table
+            .rows
+            .iter()
+            .map(|row| row.iter().map(|c| normalize_all(c)).collect())
+            .collect();
+        let has_headers = headers.iter().any(|h| !h.is_empty());
+        let has_rows = rows.iter().any(|row| row.iter().any(|c| !c.is_empty()));
+        if !has_headers && !has_rows {
+            continue;
+        }
+
+        // Single-row tables are label/value pairs: render as a definition list.
+        if rows.len() == 1 && has_headers && rows[0].len() == headers.len() {
+            let mut wrote = false;
+            for (label, value) in headers.iter().zip(&rows[0]) {
+                if label.is_empty() && value.is_empty() {
+                    continue;
+                }
+                if label.is_empty() {
+                    out.push_str(&format!("- {}\n", value));
+                } else if value.is_empty() {
+                    out.push_str(&format!("- **{}**\n", label));
+                } else {
+                    out.push_str(&format!("- **{}:** {}\n", label, value));
+                }
+                wrote = true;
+            }
+            if wrote {
+                out.push('\n');
+            }
+            continue;
+        }
+
+        // Multi-row: emit a Markdown table.
+        if has_headers {
+            out.push_str(&format!("| {} |\n", headers.join(" | ")));
+            out.push_str(&format!(
+                "|{}|\n",
+                headers.iter().map(|_| "---").collect::<Vec<_>>().join("|")
+            ));
+        }
+        for row in &rows {
+            out.push_str(&format!("| {} |\n", row.join(" | ")));
+        }
+        out.push('\n');
+    }
+}
+
 fn render_starred_list(out: &mut String, notes: &[String]) {
     for note in notes {
         let trimmed = note.trim();
@@ -2484,6 +2535,24 @@ mod tests {
         assert_eq!(s, "Page#Section-Title");
         let s2 = normalize_anchors("[[Page#(Section, Title)]]");
         assert_eq!(s2, "Page#Section-Title");
+    }
+
+    #[test]
+    fn internal_links_absorb_lowercase_linktrail() {
+        // MediaWiki appends trailing lowercase letters to the link label, and the
+        // trail must not be separated from the link by a stray space later on.
+        assert_eq!(
+            normalize_internal_links("such as [[basic attack]]ing"),
+            "such as [basic attacking](./basic_attack.md)"
+        );
+        assert_eq!(
+            normalize_internal_links("a [[minion]]s wave"),
+            "a [minions](./minion.md) wave"
+        );
+        assert_eq!(
+            normalize_all("performing [[basic attack]]ing."),
+            "performing [basic attacking](./basic_attack.md)."
+        );
     }
 
     #[test]
