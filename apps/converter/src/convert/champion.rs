@@ -13,7 +13,7 @@ use crate::parse::lua::{
     lua_value_to_string, lua_value_to_string_vec, parse_champion_entry, parse_champion_module,
     LuaValue,
 };
-use crate::parse::templates::{parse_invocation, TemplateRegistry};
+use crate::parse::templates::{format_progression_number, parse_invocation, TemplateRegistry};
 use crate::parse::{
     evaluate_expression, extract_balanced_templates, parse_ability_template, ExprNumberFormat,
 };
@@ -1838,9 +1838,13 @@ fn extract_advanced_metrics(
         }
     }
     if let Some(windup) = derive_entry_windup(stat_map) {
-        metrics
-            .entry("Windup %".to_string())
-            .or_insert(format!("{:.1}%", windup * 100.0));
+        // Match the wiki's windup display: 2 decimal places with trailing zeros
+        // trimmed (Senna "31.25%", Graves "0.5%"). The old `{:.1}%` both padded
+        // ("20.0%") and silently truncated precision ("31.25%" -> "31.2%").
+        metrics.entry("Windup %".to_string()).or_insert(format!(
+            "{}%",
+            format_progression_number(windup as f64 * 100.0, None)
+        ));
     }
     if metrics.is_empty() {
         None
@@ -2869,7 +2873,8 @@ mod tests {
             advanced.metrics.get("Acquisition Radius"),
             Some(&"525".to_string())
         );
-        assert_eq!(advanced.metrics.get("Windup %"), Some(&"20.0%".to_string()));
+        // Trailing zeros trimmed to match the wiki (e.g. Graves "0.5%").
+        assert_eq!(advanced.metrics.get("Windup %"), Some(&"20%".to_string()));
         assert!(special_stats.is_empty());
     }
 
@@ -3022,7 +3027,7 @@ mod tests {
             advanced
                 .as_ref()
                 .and_then(|metrics| metrics.metrics.get("Windup %")),
-            Some(&"20.0%".to_string())
+            Some(&"20%".to_string())
         );
     }
 

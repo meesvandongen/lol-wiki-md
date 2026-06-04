@@ -3117,7 +3117,7 @@ fn evaluate_numeric(expr: &str) -> Option<f64> {
     Some(value)
 }
 
-fn format_progression_number(value: f64, round: Option<&str>) -> String {
+pub(crate) fn format_progression_number(value: f64, round: Option<&str>) -> String {
     let round = round.map(|value| value.trim().to_ascii_lowercase());
     let rounded = match round.as_deref() {
         Some("abs") => value.abs(),
