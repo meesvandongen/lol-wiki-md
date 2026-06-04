@@ -96,7 +96,22 @@ pub struct SkillTable {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct Pet {
     pub name: String,
+    /// Flat fallback description (used for plain list-item pet entries).
+    #[serde(default)]
     pub description: String,
+    /// Structured stat lines from a `{{Infobox/Pet}}`, rendered as sub-bullets.
+    #[serde(default)]
+    pub stats: Vec<PetStat>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+pub struct PetStat {
+    pub label: String,
+    #[serde(default)]
+    pub value: String,
+    /// Nested sub-bullets (e.g. per-ability or per-modifier list entries).
+    #[serde(default)]
+    pub items: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]

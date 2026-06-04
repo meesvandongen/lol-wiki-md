@@ -212,43 +212,31 @@ pub fn render_champion_markdown(champ: &Champion, _raw_excerpt: &str) -> String 
                 ("On-Target CD", a.extra.get("ontargetcd")),
                 ("Queue Time", a.extra.get("queue time")),
             ];
-            // Filter out empty
-            let mut any_info = false;
-            for (_label, val_opt) in &info_rows {
-                if let Some(val) = val_opt {
-                    if !val.trim().is_empty() {
-                        any_info = true;
-                        break;
+            // Build the rows first so the header is only emitted when at least
+            // one value survives normalization (avoids an empty table).
+            let mut info_lines: Vec<String> = info_rows
+                .into_iter()
+                .filter_map(|(label, val_opt)| {
+                    let v = normalize_table_value(val_opt?, false)?;
+                    Some(format!("| **{}** | {} |\n", label, v))
+                })
+                .collect();
+            for (label_key, info_key) in [
+                ("customlabel", "custominfo"),
+                ("customlabel2", "custominfo2"),
+            ] {
+                if let (Some(cl), Some(ci)) = (a.extra.get(label_key), a.extra.get(info_key)) {
+                    if !cl.trim().is_empty() {
+                        if let Some(v) = normalize_table_value(ci, false) {
+                            info_lines.push(format!("| **{}** | {} |\n", cl, v));
+                        }
                     }
                 }
             }
-            if any_info {
+            if !info_lines.is_empty() {
                 out.push_str("| Attribute | Value |\n|-----------|------:|\n");
-                for (label, val_opt) in info_rows {
-                    if let Some(val) = val_opt {
-                        if let Some(v) = normalize_table_value(val, false) {
-                            out.push_str(&format!("| **{}** | {} |\n", label, v));
-                        }
-                    }
-                }
-                // Custom labels
-                if let (Some(cl), Some(ci)) =
-                    (a.extra.get("customlabel"), a.extra.get("custominfo"))
-                {
-                    if let Some(v) = normalize_table_value(ci, false) {
-                        if !cl.trim().is_empty() {
-                            out.push_str(&format!("| **{}** | {} |\n", cl, v));
-                        }
-                    }
-                }
-                if let (Some(cl), Some(ci)) =
-                    (a.extra.get("customlabel2"), a.extra.get("custominfo2"))
-                {
-                    if let Some(v) = normalize_table_value(ci, false) {
-                        if !cl.trim().is_empty() {
-                            out.push_str(&format!("| **{}** | {} |\n", cl, v));
-                        }
-                    }
+                for line in info_lines {
+                    out.push_str(&line);
                 }
                 out.push('\n');
             }
@@ -277,23 +265,17 @@ pub fn render_champion_markdown(champ: &Champion, _raw_excerpt: &str) -> String 
                 ("Knockdown", a.extra.get("knockdown")),
                 ("Silence", a.extra.get("silence")),
             ];
-            let mut any_details = false;
-            for (_l, v) in &details_rows {
-                if let Some(s) = v {
-                    if !s.trim().is_empty() {
-                        any_details = true;
-                        break;
-                    }
-                }
-            }
-            if any_details {
+            let detail_lines: Vec<String> = details_rows
+                .into_iter()
+                .filter_map(|(label, val_opt)| {
+                    let v = normalize_table_value(val_opt?, true)?;
+                    Some(format!("| **{}** | {} |\n", label, v))
+                })
+                .collect();
+            if !detail_lines.is_empty() {
                 out.push_str("| Detail | Value |\n|--------|------:|\n");
-                for (label, val_opt) in details_rows {
-                    if let Some(val) = val_opt {
-                        if let Some(v) = normalize_table_value(val, true) {
-                            out.push_str(&format!("| **{}** | {} |\n", label, v));
-                        }
-                    }
+                for line in detail_lines {
+                    out.push_str(&line);
                 }
                 out.push('\n');
             }
@@ -333,11 +315,30 @@ pub fn render_champion_markdown(champ: &Champion, _raw_excerpt: &str) -> String 
         out.push_str("## Pets\n\n");
         for pet in &champ.pets {
             let name = normalize_all(&pet.name);
-            let desc = normalize_all(&pet.description);
-            if desc.is_empty() {
-                out.push_str(&format!("- {}\n", name));
+            if !pet.stats.is_empty() {
+                out.push_str(&format!("- **{}**\n", name));
+                for stat in &pet.stats {
+                    let label = normalize_all(&stat.label);
+                    if stat.items.is_empty() {
+                        out.push_str(&format!(
+                            "  - {}: {}\n",
+                            label,
+                            normalize_all(&stat.value)
+                        ));
+                    } else {
+                        out.push_str(&format!("  - {}:\n", label));
+                        for item in &stat.items {
+                            out.push_str(&format!("    - {}\n", normalize_all(item)));
+                        }
+                    }
+                }
             } else {
-                out.push_str(&format!("- **{}** — {}\n", name, desc));
+                let desc = normalize_all(&pet.description);
+                if desc.is_empty() {
+                    out.push_str(&format!("- {}\n", name));
+                } else {
+                    out.push_str(&format!("- **{}** — {}\n", name, desc));
+                }
             }
         }
         out.push('\n');
@@ -1034,6 +1035,17 @@ fn is_file_link_parameter(part: &str) -> bool {
     )
 }
 
+/// Pop trailing spaces/tabs (not newlines) off `out` and return them, so a
+/// closing emphasis delimiter can be emitted before the whitespace. GFM does
+/// not render emphasis whose closing delimiter is preceded by whitespace.
+fn take_trailing_inline_whitespace(out: &mut String) -> String {
+    let mut ws = String::new();
+    while matches!(out.chars().last(), Some(' ') | Some('\t')) {
+        ws.push(out.pop().unwrap());
+    }
+    ws
+}
+
 pub fn normalize_apostrophes(s: &str) -> String {
     // Stateful conversion of wiki apostrophes to Markdown markers.
     // Handles 2 (italic), 3 (bold), 5 (bold+italic) with simple toggles.
@@ -1057,17 +1069,32 @@ pub fn normalize_apostrophes(s: &str) -> String {
                         bold_on = true;
                         italic_on = true;
                     } else {
+                        // Closing: keep the delimiter off inner whitespace.
+                        let ws = take_trailing_inline_whitespace(&mut out);
                         out.push_str("_**");
+                        out.push_str(&ws);
                         bold_on = false;
                         italic_on = false;
                     }
                 }
                 3 => {
-                    out.push_str("**");
+                    if bold_on {
+                        let ws = take_trailing_inline_whitespace(&mut out);
+                        out.push_str("**");
+                        out.push_str(&ws);
+                    } else {
+                        out.push_str("**");
+                    }
                     bold_on = !bold_on;
                 }
                 2 => {
-                    out.push('_');
+                    if italic_on {
+                        let ws = take_trailing_inline_whitespace(&mut out);
+                        out.push('_');
+                        out.push_str(&ws);
+                    } else {
+                        out.push('_');
+                    }
                     italic_on = !italic_on;
                 }
                 _ => {
@@ -2420,6 +2447,21 @@ mod tests {
         assert_eq!(normalize_apostrophes("''italic''"), "_italic_");
         assert_eq!(normalize_apostrophes("'''bold'''"), "**bold**");
         assert_eq!(normalize_apostrophes("'''''both'''''"), "**_both_**");
+    }
+
+    #[test]
+    fn apostrophes_move_trailing_whitespace_outside_emphasis() {
+        // A trailing space inside the closing delimiter (`''Severum's ''`) would
+        // otherwise produce `_Severum's _`, which GFM renders literally.
+        assert_eq!(normalize_apostrophes("''Severum's ''"), "_Severum's_ ");
+        assert_eq!(normalize_apostrophes("'''bonus  '''"), "**bonus**  ");
+        assert_eq!(normalize_apostrophes("'''''both ('''''"), "**_both (_**");
+        // Whitespace before an opening delimiter is fine and is left alone.
+        assert_eq!(normalize_apostrophes("a ''b''"), "a _b_");
+        assert_eq!(
+            normalize_apostrophes("''A'' and ''B''"),
+            "_A_ and _B_"
+        );
     }
 
     #[test]

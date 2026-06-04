@@ -42,6 +42,46 @@ fn pp_clean() {
 }
 
 #[test]
+fn ap_range_with_trailing_point_count() {
+    // `60 to 310 6` is a 6-point range, not a literal string with a stray `6`.
+    let out = expand("ap|60 to 310 6");
+    assert_eq!(out, "60 / 110 / 160 / 210 / 260 / 310");
+}
+
+#[test]
+fn ap_range_with_arithmetic_endpoints_and_count() {
+    let out = expand("ap|80*1.4 to 310*1.4 6");
+    assert_eq!(out, "112 / 176.4 / 240.8 / 305.2 / 369.6 / 434");
+}
+
+#[test]
+fn pp_decreasing_by_step_renders_range() {
+    // A `by` step is a magnitude; a decreasing series must still expand.
+    let out = expand("pp|3.5 to 2 by 0.05");
+    assert_eq!(out, "3.5 – 2 (based on level)");
+}
+
+#[test]
+fn pp_cumulative_then_segments() {
+    let out = expand("pp|16; then +4*x for 5; then +6*x for 5; then +8*x for 3; then +10*x for 6");
+    assert_eq!(out, "16 – 130 (based on level)");
+}
+
+#[test]
+fn pp_open_ended_then_after_counted_segments_fills_budget() {
+    let out = expand("pp|2; then +2*x for 8; then +3*x for 4; then +4*x");
+    assert_eq!(out, "2 – 50 (based on level)");
+}
+
+#[test]
+fn pp_bare_then_without_count_is_left_raw() {
+    // No preceding counted segment: the timing lives only in the prose formula,
+    // so the increment must not be fabricated into a series.
+    let out = expand("pp|0; then +5*x");
+    assert_eq!(out, "0 / `then +5*x` (based on level)");
+}
+
+#[test]
 fn ft_flip() {
     let out = expand("ft|a|b");
     assert_eq!(out.trim(), "a *(equivalently: b)*");

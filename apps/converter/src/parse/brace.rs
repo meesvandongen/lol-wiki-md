@@ -48,7 +48,27 @@ pub fn extract_balanced_templates(input: &str) -> Result<Vec<TemplateSpan>, Conv
         &mut spans,
         &mut recorded,
     );
-    Ok(spans)
+    Ok(sort_and_dedupe_overlaps(spans))
+}
+
+/// Return the spans sorted by start offset, dropping any span that overlaps a
+/// span already kept. Top-level template spans must be disjoint; an overlapping
+/// span is a mis-recovery (e.g. a parameter recovery that latched onto the
+/// `{{` of an earlier sibling template). Downstream consumers walk these spans
+/// and slice `source[last_end..next_start]`, so unsorted or overlapping spans
+/// would otherwise trigger an out-of-order slice panic.
+fn sort_and_dedupe_overlaps(mut spans: Vec<TemplateSpan>) -> Vec<TemplateSpan> {
+    spans.sort_by(|a, b| a.start.cmp(&b.start).then(b.end.cmp(&a.end)));
+    let mut kept: Vec<TemplateSpan> = Vec::with_capacity(spans.len());
+    let mut last_end = 0usize;
+    for span in spans {
+        if span.start < last_end {
+            continue;
+        }
+        last_end = span.end;
+        kept.push(span);
+    }
+    kept
 }
 
 fn first_unbalanced_template_start(input: &str) -> Option<usize> {
@@ -340,6 +360,7 @@ fn recover_parameter_template(
     index: &LineIndex,
 ) -> Option<TemplateSpan> {
     let param_start = node.start();
+    let param_end = node.end();
     if param_start == 0 {
         return None;
     }
@@ -361,6 +382,12 @@ fn recover_parameter_template(
             if depth == 0 {
                 let end = i;
                 if end <= start + 4 {
+                    return None;
+                }
+                // The recovered `{{...}}` must actually wrap the parameter node.
+                // Otherwise `rfind("{{")` has latched onto an earlier sibling
+                // template that merely precedes this top-level parameter.
+                if end < param_end {
                     return None;
                 }
                 let raw = &source[start..end];

@@ -9,6 +9,27 @@ fn nested_templates() {
 }
 
 #[test]
+fn parameter_after_sibling_template_does_not_overlap() {
+    // Regression: a trailing `{{{param}}}` used to make parameter recovery
+    // latch onto the `{{` of the earlier `{{#if:}}` sibling, yielding an
+    // overlapping/out-of-order span that panicked downstream slicing.
+    let src = "({{{1|0}}}){{#if:{{{mod|}}}|*({{{mod}}})}}-({{{base|0}}})";
+    let spans = extract_balanced_templates(src).unwrap();
+    // Spans must be sorted and non-overlapping.
+    let mut last_end = 0usize;
+    for span in &spans {
+        assert!(
+            span.start >= last_end,
+            "spans must be sorted and disjoint, got {span:?} after end {last_end}"
+        );
+        assert!(span.start < span.end);
+        last_end = span.end;
+    }
+    // The only real template here is the `{{#if:}}`.
+    assert!(spans.iter().any(|s| s.name.starts_with("#if")));
+}
+
+#[test]
 fn unbalanced_error() {
     let err = extract_balanced_templates("{{Bad").unwrap_err();
     let msg = format!("{}", err);
