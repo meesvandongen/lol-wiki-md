@@ -161,6 +161,26 @@ fn scroll_box_returns_content() {
 }
 
 #[test]
+fn skill_tabs_positional_pairs_expand_to_marker() {
+    // `{{st}}` (Template:Skill Tabs) is invoked with positional label/value
+    // pairs and must surface the per-rank scaling, expanding nested templates.
+    let out = expand("st|Physical Damage|{{ap|50 to 150}}");
+    assert_eq!(
+        out,
+        "[SkillTab Physical Damage\u{1E}50 / 75 / 100 / 125 / 150]"
+    );
+}
+
+#[test]
+fn skill_tabs_multiple_columns_expand_to_marker() {
+    let out = expand("st|Bonus Armor|{{ap|7 to 19}}|Maximum Bonus Armor|{{ap|7*8 to 19*8}}");
+    assert_eq!(
+        out,
+        "[SkillTab Bonus Armor\u{1F}Maximum Bonus Armor\u{1E}7 / 10 / 13 / 16 / 19\u{1F}56 / 80 / 104 / 128 / 152]"
+    );
+}
+
+#[test]
 fn rune_data_reads_exported_template_fields() {
     let td = tempdir().unwrap();
     let export_dir = td.path().join("export_out");

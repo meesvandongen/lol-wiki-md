@@ -3486,57 +3486,94 @@ impl TemplateExpander for SkillTabExpander {
     fn names(&self) -> &'static [&'static str] {
         &["st"]
     }
-    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        // Parse headers (h:) and rows (r:, r2:, r3:, etc.)
-        let mut headers = Vec::new();
-        let mut rows = Vec::new();
-        let mut current_row = Vec::new();
-        let mut row_index = 1;
-        for p in &inv.params {
-            if let Some(eq) = p.find('=') {
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        // `{{st|...}}` redirects to `Template:Skill Tabs`, which is invoked with
+        // positional `label1|value1|label2|value2|...` pairs and renders a small
+        // definition list describing an ability's per-rank scaling (the damage
+        // numbers shown under each ability). A few legacy pages instead use the
+        // explicit `h=<header>` / `r=<value>` named form, so both are supported.
+        let (positional, _named) = split_named_and_positional(inv);
+
+        let mut headers: Vec<String> = Vec::new();
+        let mut rows: Vec<Vec<String>> = Vec::new();
+
+        if !positional.is_empty() {
+            // Positional label/value pairs become a single-row table whose
+            // columns are the labels (e.g. "Physical Damage").
+            let mut row: Vec<String> = Vec::new();
+            let mut iter = positional.iter();
+            while let Some(label) = iter.next() {
+                let value = iter.next();
+                let label = expand_nested_template_text(label, ctx)
+                    .unwrap_or_else(|_| label.trim().to_string());
+                let value = value
+                    .map(|v| {
+                        expand_nested_template_text(v, ctx).unwrap_or_else(|_| v.trim().to_string())
+                    })
+                    .unwrap_or_default();
+                headers.push(label.trim().to_string());
+                row.push(value.trim().to_string());
+            }
+            if headers.iter().any(|h| !h.is_empty()) || row.iter().any(|c| !c.is_empty()) {
+                rows.push(row);
+            }
+        } else {
+            // Legacy named form: `h=<header>` columns plus `r=`/`rN=` rows.
+            let mut current_row: Vec<String> = Vec::new();
+            let mut row_index = 1usize;
+            for p in &inv.params {
+                let Some(eq) = p.find('=') else { continue };
                 let (k, v) = p.split_at(eq);
                 let k = k.trim();
-                let v = v[1..].trim();
+                let raw = v[1..].trim();
+                let v = expand_nested_template_text(raw, ctx).unwrap_or_else(|_| raw.to_string());
                 if k.eq_ignore_ascii_case("h") {
-                    headers.push(v.to_string());
+                    headers.push(v);
                 } else if k.eq_ignore_ascii_case("r")
                     || k.eq_ignore_ascii_case(&format!("r{}", row_index))
                 {
-                    current_row.push(v.to_string());
+                    current_row.push(v);
                     if k.eq_ignore_ascii_case(&format!("r{}", row_index)) {
-                        rows.push(current_row);
-                        current_row = Vec::new();
+                        rows.push(std::mem::take(&mut current_row));
                         row_index += 1;
                     }
                 }
             }
-        }
-        // If there's an unfinished row
-        if !current_row.is_empty() {
-            rows.push(current_row);
-        }
-        // Fallback if no structured data
-        if headers.is_empty() && rows.is_empty() {
-            let pairs = inv.params.iter().map(|s| s.to_string()).collect::<Vec<_>>();
-            return Ok(ExpansionResult {
-                expanded: format!("[SkillTab {}]", pairs.join(" | ")),
-            });
-        }
-        // Generate marker with structured data
-        let mut parts = Vec::new();
-        for h in &headers {
-            parts.push(format!("h:{}", h));
-        }
-        for (i, row) in rows.iter().enumerate() {
-            let row_key = if i == 0 { "r" } else { &format!("r{}", i + 1) };
-            for val in row {
-                parts.push(format!("{}:{}", row_key, val));
+            if !current_row.is_empty() {
+                rows.push(current_row);
             }
         }
+
+        if headers.is_empty() && rows.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: String::new(),
+            });
+        }
+
         Ok(ExpansionResult {
-            expanded: format!("[SkillTab {}]", parts.join(" | ")),
+            expanded: encode_skill_tab_marker(&headers, &rows),
         })
     }
+}
+
+/// Field/record separators for the `[SkillTab …]` marker. ASCII Unit/Record
+/// Separator control characters never appear in expanded wiki text, so cell
+/// contents (which may contain `|`, `:`, `/`, `•`, …) round-trip losslessly.
+pub(crate) const SKILL_TAB_CELL_SEP: char = '\u{1F}';
+pub(crate) const SKILL_TAB_ROW_SEP: char = '\u{1E}';
+
+/// Encode a skill-tab table into the internal `[SkillTab …]` marker consumed by
+/// the champion converter. The first record holds the headers; each subsequent
+/// record is a row, with cells joined by the unit separator.
+pub(crate) fn encode_skill_tab_marker(headers: &[String], rows: &[Vec<String>]) -> String {
+    let cell_sep = SKILL_TAB_CELL_SEP.to_string();
+    let row_sep = SKILL_TAB_ROW_SEP.to_string();
+    let mut records: Vec<String> = Vec::with_capacity(rows.len() + 1);
+    records.push(headers.join(&cell_sep));
+    for row in rows {
+        records.push(row.join(&cell_sep));
+    }
+    format!("[SkillTab {}]", records.join(&row_sep))
 }
 
 // Flip Text (ft) stylistic wrapper -> "a *(equivalently: b)*"
