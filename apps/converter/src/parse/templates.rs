@@ -4890,7 +4890,9 @@ mod tests {
             assert_eq!(out.expanded, expected, "for {input}");
         }
         // An explicit precision still rounds (and then trims).
-        let three = reg.expand(&parse_invocation("fd|3.14159|3"), &ctx()).unwrap();
+        let three = reg
+            .expand(&parse_invocation("fd|3.14159|3"), &ctx())
+            .unwrap();
         assert_eq!(three.expanded, "3.142");
     }
 
