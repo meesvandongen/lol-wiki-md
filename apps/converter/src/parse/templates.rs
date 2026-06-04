@@ -2424,15 +2424,19 @@ impl TemplateExpander for FdExpander {
             None => (raw.as_str(), ""),
         };
         if let Some(num) = evaluate_numeric(expr) {
-            // The wiki's {{fd}} (Module:Fd) only *styles* the decimals; it never
-            // pads to a fixed width, so `{{fd|50}}` is "50" and `{{fd|2.5}}` is
-            // "2.5", not "50.00"/"2.50". Trim trailing zeros to match, reusing
-            // the shared progression formatter.
+            // The wiki's {{fd}} (Module:Fd) only *styles* a value's decimals
+            // (wrapping them in <small>); it never pads OR rounds. So the value
+            // must pass through at full precision — `{{fd|50}}` is "50",
+            // `{{fd|2.5}}` is "2.5", and `{{fd|35.62125}}` is "35.62125", not a
+            // 2-decimal "35.62". Rust's `{}` for f64 is the shortest round-trip
+            // form, which trims trailing zeros without losing precision.
             if aux.is_empty() {
                 return Ok(ExpansionResult {
-                    expanded: format!("{}{}", format_progression_number(num, None), suffix),
+                    expanded: format!("{}{}", num, suffix),
                 });
             }
+            // An explicit decimal-places argument (rare; the wiki ignores it but
+            // we honour it as a deliberate authoring choice) still rounds.
             if aux.parse::<usize>().is_ok() {
                 return Ok(ExpansionResult {
                     expanded: format!("{}{}", format_progression_number(num, Some(aux)), suffix),
@@ -2440,11 +2444,7 @@ impl TemplateExpander for FdExpander {
             }
 
             return Ok(ExpansionResult {
-                expanded: format!(
-                    "{} ({})",
-                    format!("{}{}", format_progression_number(num, None), suffix),
-                    aux
-                ),
+                expanded: format!("{} ({})", format!("{}{}", num, suffix), aux),
             });
         }
 
@@ -4880,6 +4880,11 @@ mod tests {
             ("fd|2.50", "2.5"),
             ("fd|0", "0"),
             ("fd|0.25", "0.25"),
+            // Full precision is preserved (the wiki never rounds): a 3+ decimal
+            // value must not be clipped to 2 places.
+            ("fd|0.625", "0.625"),
+            ("fd|35.62125", "35.62125"),
+            ("fd|199.976%", "199.976%"),
         ] {
             let out = reg.expand(&parse_invocation(input), &ctx()).unwrap();
             assert_eq!(out.expanded, expected, "for {input}");
