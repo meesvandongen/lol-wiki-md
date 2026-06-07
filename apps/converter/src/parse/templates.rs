@@ -4620,6 +4620,45 @@ mod tests {
     }
 
     #[test]
+    fn critical_damage_blank_mod_and_ie_are_not_applied() {
+        // The template gates `mod`/`ie` behind `{{#if:{{{mod|}}}|…}}` /
+        // `{{#if:{{{ie|}}}|…|ie_mod}}`, so a value that expands to blank takes the
+        // empty branch — the parameter is simply not applied (verified against the
+        // wiki renderer: `{{critical damage|200|100|mod=}}` ==
+        // `{{critical damage|200|100}}`). A blank value must therefore be treated
+        // as absent rather than failing to parse a number out of an empty string.
+        let reg = TemplateRegistry::new();
+        let td = tempdir().unwrap();
+        let ctx = ctx_with_ie_critdamage(td.path(), 30);
+
+        let no_mod = parse_invocation("critical damage|200|100");
+        let blank_mod = parse_invocation("critical damage|200|100|mod=");
+        let blank_both = parse_invocation("critical damage|200|100|mod=|ie=");
+        let expected = "(200% + Infinity Edge 30%)";
+        assert_eq!(reg.expand(&no_mod, &ctx).unwrap().expanded, expected);
+        assert_eq!(reg.expand(&blank_mod, &ctx).unwrap().expanded, expected);
+        // A blank `ie=` falls through to the default IE scaling factor too.
+        assert_eq!(reg.expand(&blank_both, &ctx).unwrap().expanded, expected);
+
+        // A non-blank but non-numeric value is still malformed and fails fast.
+        let bad = parse_invocation("critical damage|200|100|mod=oops");
+        assert!(reg.expand(&bad, &ctx).is_err());
+    }
+
+    #[test]
+    fn strip_ascii_prefix_handles_non_char_boundary() {
+        // Regression: slicing the input as a `str` at `prefix.len()` panicked
+        // when that byte offset landed inside a multi-byte UTF-8 char (a Unicode
+        // `−`/`×` in a progression formula), crashing the whole batch.
+        assert_eq!(strip_ascii_prefix("then x", "then "), Some("x"));
+        assert_eq!(strip_ascii_prefix("THEN x", "then "), Some("x"));
+        // "123−4": byte index 5 falls inside the 3-byte U+2212 minus sign.
+        assert_eq!(strip_ascii_prefix("123\u{2212}4", "then "), None);
+        // Leading multi-byte char shorter than the prefix must not panic either.
+        assert_eq!(strip_ascii_prefix("\u{2212}", "then "), None);
+    }
+
+    #[test]
     fn expander_wraps_unresolved_formulae_in_code_spans() {
         let reg = TemplateRegistry::new();
         let ap = parse_invocation("ap|((1+(Graves-100)*0.45/100)*(1+5*0.33302)/(1+3*0.33302)*100)");
