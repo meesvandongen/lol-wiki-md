@@ -103,6 +103,13 @@ fn ccd_and_cid_resolve_constants() {
 }"#,
     )
     .unwrap();
+    // crit_base is absent from Graves' data, so the fallback comes from the
+    // dumped getter module (`crit_base or 200`), exactly as the wiki resolves it.
+    std::fs::write(
+        export_dir.join("Module%3AChampionData%2Fgetter.txt"),
+        "function p.crit_base(champname)\n\treturn getData(champname, true).crit_base or 200\nend\n",
+    )
+    .unwrap();
 
     let ctx = ConversionContext::new(&export_dir, 2).unwrap();
     let mut constants = HashMap::new();
@@ -113,7 +120,7 @@ fn ccd_and_cid_resolve_constants() {
     let expander_ctx = ExpanderCtx::new(2, &HashMap::new(), Some(Arc::new(ctx)));
 
     let ccd = parse_invocation("ccd|Graves|crit_base");
-    assert_eq!(reg.expand(&ccd, &expander_ctx).unwrap().expanded, "175");
+    assert_eq!(reg.expand(&ccd, &expander_ctx).unwrap().expanded, "200");
 
     let nested = parse_invocation("ccd|Graves|missile_speed");
     assert_eq!(reg.expand(&nested, &expander_ctx).unwrap().expanded, "3800");

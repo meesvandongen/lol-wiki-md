@@ -13,7 +13,7 @@ use crate::parse::lua::{
     lua_value_to_string, lua_value_to_string_vec, parse_champion_entry, parse_champion_module,
     LuaValue,
 };
-use crate::parse::templates::{parse_invocation, TemplateRegistry};
+use crate::parse::templates::{format_progression_number, parse_invocation, TemplateRegistry};
 use crate::parse::{
     evaluate_expression, extract_balanced_templates, parse_ability_template, ExprNumberFormat,
 };
@@ -1720,9 +1720,12 @@ fn collect_entry_constants(entry: &HashMap<String, LuaValue>) -> HashMap<String,
                 .or_insert_with(|| format_number(windup));
         }
     }
-    constants
-        .entry("crit_base".to_string())
-        .or_insert_with(|| "175".to_string());
+    // NB: we deliberately do *not* inject a `crit_base` (or any other) default
+    // here. Champions missing a field fall back to the wiki's own value at
+    // lookup time via `ConversionContext::champion_constant_default`, which
+    // reads `Module:ChampionData/getter` (`crit_base or 200`). Keeping the
+    // default in one place — sourced from the dumped module — avoids the two
+    // code paths drifting apart.
     constants
 }
 
@@ -1835,9 +1838,13 @@ fn extract_advanced_metrics(
         }
     }
     if let Some(windup) = derive_entry_windup(stat_map) {
-        metrics
-            .entry("Windup %".to_string())
-            .or_insert(format!("{:.1}%", windup * 100.0));
+        // Match the wiki's windup display: 2 decimal places with trailing zeros
+        // trimmed (Senna "31.25%", Graves "0.5%"). The old `{:.1}%` both padded
+        // ("20.0%") and silently truncated precision ("31.25%" -> "31.2%").
+        metrics.entry("Windup %".to_string()).or_insert(format!(
+            "{}%",
+            format_progression_number(windup as f64 * 100.0, None)
+        ));
     }
     if metrics.is_empty() {
         None
@@ -2132,6 +2139,11 @@ fn load_abilities(
         }
 
         let mut ability_key = AbilityKey::Other(String::new());
+        // The `A`/Basic Attack slot is icon-dependent (see ability_key_from_slot),
+        // so capture the raw slot and icon and resolve the key once, after every
+        // field is known.
+        let mut skill_slot: Option<String> = None;
+        let mut icon_value: Option<String> = None;
         let mut display_name = param_map
             .get("name")
             .cloned()
@@ -2168,7 +2180,13 @@ fn load_abilities(
                 "champion" => {}
                 "skill" => {
                     if !normalized.is_empty() {
-                        ability_key = ability_key_from_slot(&normalized);
+                        skill_slot = Some(normalized.clone());
+                    }
+                }
+                "icon" => {
+                    if !normalized.is_empty() {
+                        icon_value = Some(normalized.clone());
+                        extra.insert("icon".to_string(), normalized.clone());
                     }
                 }
                 "name" => {
@@ -2225,6 +2243,10 @@ fn load_abilities(
                     }
                 }
             }
+        }
+
+        if let Some(slot) = skill_slot.as_deref() {
+            ability_key = ability_key_from_slot(slot, icon_value.as_deref());
         }
 
         if !matches!(
@@ -2533,20 +2555,39 @@ fn normalize_ability_value(raw: &str) -> String {
     s.trim().to_string()
 }
 
-fn ability_key_from_slot(slot: &str) -> AbilityKey {
+fn ability_key_from_slot(slot: &str, icon: Option<&str>) -> AbilityKey {
     let trimmed = slot.trim();
     if trimmed.is_empty() {
         return AbilityKey::Other(String::new());
     }
     match trimmed.to_ascii_uppercase().as_str() {
         "I" | "P" | "PASSIVE" => AbilityKey::Passive,
-        "A" | "BASIC ATTACK" => AbilityKey::BasicAttack,
+        // The `A` slot is overloaded on the wiki: a champion's real auto-attack
+        // ability (Senna's relic cannon) uses `skill=A` with `icon=Basic
+        // Attack.png`, but auxiliary weapon abilities pulled in via grouped
+        // slots (Aphelios' guns — Calibrum etc.) also declare `skill=A` while
+        // carrying their own icon. Only the former is the Basic Attack section;
+        // the latter must stay a distinct auxiliary ability so it is not
+        // mislabelled (or collapsed) into the basic attack.
+        "A" | "BASIC ATTACK" if icon_denotes_basic_attack(icon) => AbilityKey::BasicAttack,
         "Q" => AbilityKey::Q,
         "W" => AbilityKey::W,
         "E" => AbilityKey::E,
         "R" | "ULTIMATE" => AbilityKey::R,
         _ => AbilityKey::Other(trimmed.to_string()),
     }
+}
+
+/// True when an ability's `icon` is the shared basic-attack icon
+/// (`Basic Attack.png`), the wiki's marker for the auto-attack slot.
+fn icon_denotes_basic_attack(icon: Option<&str>) -> bool {
+    icon.map(|value| {
+        value
+            .trim()
+            .to_ascii_lowercase()
+            .starts_with("basic attack")
+    })
+    .unwrap_or(false)
 }
 
 fn suffix_index(key: &str, prefix: &str) -> usize {
@@ -2880,7 +2921,8 @@ mod tests {
             advanced.metrics.get("Acquisition Radius"),
             Some(&"525".to_string())
         );
-        assert_eq!(advanced.metrics.get("Windup %"), Some(&"20.0%".to_string()));
+        // Trailing zeros trimmed to match the wiki (e.g. Graves "0.5%").
+        assert_eq!(advanced.metrics.get("Windup %"), Some(&"20%".to_string()));
         assert!(special_stats.is_empty());
     }
 
@@ -2962,7 +3004,9 @@ mod tests {
         assert_eq!(loaded.positions, vec!["Top".to_string()]);
         assert_eq!(loaded.stats.base.get("Move Speed").unwrap().base, 345.0);
         assert_eq!(loaded.stats.base.get("Range").unwrap().base, 125.0);
-        assert_eq!(loaded.constants.get("crit_base"), Some(&"175".to_string()));
+        // crit_base is not stamped onto the constants; champions missing it fall
+        // back to the wiki's getter default at lookup time, not here.
+        assert_eq!(loaded.constants.get("crit_base"), None);
         assert_eq!(loaded.special_stats[0].mode, "ARAM");
         assert_eq!(
             loaded.special_stats[0].metrics.get("Damage Taken"),
@@ -2986,7 +3030,7 @@ mod tests {
     }
 
     #[test]
-    fn collect_entry_constants_flattens_stats_and_defaults_crit_base() {
+    fn collect_entry_constants_flattens_stats_without_injecting_crit_base() {
         let lua = r#"return {
     ["Graves"] = {
         ["title"] = "the Outlaw",
@@ -3006,7 +3050,9 @@ mod tests {
         assert_eq!(constants.get("missile_speed"), Some(&"3800".to_string()));
         assert_eq!(constants.get("range"), Some(&"425".to_string()));
         assert_eq!(constants.get("windup"), Some(&"0.2".to_string()));
-        assert_eq!(constants.get("crit_base"), Some(&"175".to_string()));
+        // No default is stamped in: crit_base is resolved from the getter module
+        // at lookup time, so a champion without it simply has no entry here.
+        assert_eq!(constants.get("crit_base"), None);
     }
 
     #[test]
@@ -3029,7 +3075,7 @@ mod tests {
             advanced
                 .as_ref()
                 .and_then(|metrics| metrics.metrics.get("Windup %")),
-            Some(&"20.0%".to_string())
+            Some(&"20%".to_string())
         );
     }
 
@@ -3484,6 +3530,34 @@ mod tests {
         assert_eq!(
             fallback_champion_summary("Aatrox"),
             Some("Aatrox is a champion in League of Legends.".to_string())
+        );
+    }
+
+    #[test]
+    fn ability_key_from_slot_disambiguates_basic_attack_by_icon() {
+        // Standard slots ignore the icon entirely.
+        assert_eq!(ability_key_from_slot("Q", None), AbilityKey::Q);
+        assert_eq!(ability_key_from_slot("I", None), AbilityKey::Passive);
+
+        // skill=A is the Basic Attack only when it carries the basic-attack icon
+        // (Senna's relic cannon: skill=A, icon=Basic Attack.png).
+        assert_eq!(
+            ability_key_from_slot("A", Some("Basic Attack.png")),
+            AbilityKey::BasicAttack
+        );
+
+        // skill=A with a weapon icon is an auxiliary ability, not the basic
+        // attack (Aphelios' Calibrum: skill=A, icon=Calibrum.png). Without this,
+        // every gun collapses into the Basic Attack slot.
+        assert_eq!(
+            ability_key_from_slot("A", Some("Calibrum.png")),
+            AbilityKey::Other("A".to_string())
+        );
+
+        // skill=A with no icon is treated as auxiliary as well.
+        assert_eq!(
+            ability_key_from_slot("A", None),
+            AbilityKey::Other("A".to_string())
         );
     }
 

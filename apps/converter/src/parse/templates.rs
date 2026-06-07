@@ -1761,7 +1761,17 @@ impl TemplateExpander for GoldEfficiencyCalculationExpander {
     }
 }
 
-// Critical damage marker: {{critical damage|...|...|mod=0.9}} -> "90%"
+/// The wiki template hardcodes Infinity Edge as the (only) item granting bonus
+/// critical strike damage (`{{#invoke:ItemData|get|item=Infinity Edge|...}}`).
+/// Reproducing that name here mirrors the template; it is not champion-instance
+/// overfitting.
+const CRITICAL_DAMAGE_IE_ITEM: &str = "Infinity Edge";
+
+// `{{critical damage|main|ie|base=|mod=|ie=|flat=|wr=|critScaling=}}` mirrors
+// Template:Critical damage. Its common (non-critScaling) branch reports the
+// crit damage as `main% (+ Infinity Edge ie%)`, where the Infinity Edge term is
+// the second value scaled by IE's `critdamage` stat (`ie_mod = critdamage/100`,
+// or 30/100 in Wild Rift). See the template source for the exact arithmetic.
 struct CriticalDamageExpander;
 impl TemplateExpander for CriticalDamageExpander {
     fn names(&self) -> &'static [&'static str] {
@@ -1775,6 +1785,127 @@ impl TemplateExpander for CriticalDamageExpander {
         }
 
         let (positional, named) = split_named_and_positional(inv);
+
+        // Crit-chance-scaling abilities (critScaling=true) drive
+        // `{{pp|… for 11}}` progressions plus `#explode`, neither of which this
+        // renderer models. Keep the legacy approximate rendering for them rather
+        // than silently emit a wrong single number or regress those pages; a
+        // faithful crit-chance-scaling renderer is tracked separately.
+        if named
+            .get("critscaling")
+            .map(|value| value.trim().eq_ignore_ascii_case("true"))
+            .unwrap_or(false)
+        {
+            return self.expand_legacy(&positional, &named, ctx, inv);
+        }
+
+        self.expand_flat(&positional, &named, ctx, inv)
+    }
+}
+
+impl CriticalDamageExpander {
+    /// Faithful rendering of the non-critScaling branch of Template:Critical
+    /// damage:
+    ///   mainDmg = (p1 [* mod]) - base
+    ///   IEdmg   = p2 (default p1) * (ie/100 | ie_mod) [* mod]
+    /// rendered as `(mainDmg% + <IE icon> IEdmg%)`, dropping either side when it
+    /// is zero (matching the template's `#ifexpr` guards).
+    fn expand_flat(
+        &self,
+        positional: &[String],
+        named: &HashMap<String, String>,
+        ctx: &ExpanderCtx,
+        inv: &TemplateInvocation,
+    ) -> Result<ExpansionResult> {
+        let resolve_num = |raw: &str| -> Result<f64> {
+            let resolved =
+                expand_nested_template_text(raw, ctx).unwrap_or_else(|_| raw.trim().to_string());
+            evaluate_numeric(resolved.trim()).ok_or_else(|| unhandled_template_error(inv))
+        };
+
+        // The wiki wraps p1/p2/base/mod in `#expr`, so a non-numeric value here
+        // is malformed — fail fast rather than coerce it to zero.
+        let p1 = match positional.first() {
+            Some(raw) => resolve_num(raw)?,
+            None => 0.0,
+        };
+        let p2 = match positional.get(1) {
+            Some(raw) => resolve_num(raw)?,
+            None => p1,
+        };
+        let base = match named.get("base") {
+            Some(raw) => resolve_num(raw)?,
+            None => 0.0,
+        };
+        let mod_factor = match named.get("mod") {
+            Some(raw) => resolve_num(raw)?,
+            None => 1.0,
+        };
+
+        let flat = named
+            .get("flat")
+            .map(|value| value.trim().eq_ignore_ascii_case("true"))
+            .unwrap_or(false);
+        let suffix = if flat { "" } else { "%" };
+        let wild_rift = named
+            .get("wr")
+            .map(|value| !value.trim().is_empty())
+            .unwrap_or(false);
+
+        // ie_mod = (wr ? 30 : Infinity Edge critdamage) / 100, overridable per
+        // call with `ie=` (a flat percentage).
+        let ie_factor = match named.get("ie") {
+            Some(raw) => resolve_num(raw)? / 100.0,
+            None => {
+                let ie_critdamage = if wild_rift {
+                    30.0
+                } else {
+                    let raw = resolve_item_constant(ctx, CRITICAL_DAMAGE_IE_ITEM, "critdamage")?;
+                    evaluate_numeric(raw.trim()).ok_or_else(|| unhandled_template_error(inv))?
+                };
+                ie_critdamage / 100.0
+            }
+        };
+
+        let main_dmg = p1 * mod_factor - base;
+        let ie_dmg = p2 * ie_factor * mod_factor;
+
+        let main_part = (main_dmg != 0.0)
+            .then(|| format!("{}{}", format_progression_number(main_dmg, None), suffix));
+        let ie_part = if ie_dmg != 0.0 {
+            let icon = expand_nested_template_text(
+                &format!("{{{{ii|{CRITICAL_DAMAGE_IE_ITEM}|icononly=true}}}}"),
+                ctx,
+            )?;
+            Some(format!(
+                "{} {}{}",
+                icon,
+                format_progression_number(ie_dmg, None),
+                suffix
+            ))
+        } else {
+            None
+        };
+
+        let expanded = match (main_part, ie_part) {
+            (Some(main), Some(ie)) => format!("({} + {})", main, ie),
+            (Some(main), None) => main,
+            (None, Some(ie)) => ie,
+            (None, None) => String::new(),
+        };
+        Ok(ExpansionResult { expanded })
+    }
+
+    /// Approximate rendering retained for critScaling=true inputs (crit-chance
+    /// ranges). Mirrors the historical behaviour and does not attempt the
+    /// Infinity Edge term or the "based on critical strike chance" note.
+    fn expand_legacy(
+        &self,
+        positional: &[String],
+        named: &HashMap<String, String>,
+        ctx: &ExpanderCtx,
+        inv: &TemplateInvocation,
+    ) -> Result<ExpansionResult> {
         let suffix = if named
             .get("flat")
             .map(|value| value.trim().eq_ignore_ascii_case("true"))
@@ -1785,23 +1916,11 @@ impl TemplateExpander for CriticalDamageExpander {
             "%"
         };
 
-        // Prefer the modifier percentage when present.
-        if let Some(factor) = named.get("mod").and_then(|value| {
-            let resolved =
-                expand_nested_template_text(value, ctx).unwrap_or_else(|_| value.trim().to_string());
-            evaluate_numeric(resolved.trim())
-        }) {
-            return Ok(ExpansionResult {
-                expanded: format!("{}%", format_progression_number(factor * 100.0, None)),
-            });
-        }
-
         let first_raw = positional.first().map(|value| value.trim()).unwrap_or("");
-        let first = expand_nested_template_text(first_raw, ctx)
-            .unwrap_or_else(|_| first_raw.to_string());
+        let first =
+            expand_nested_template_text(first_raw, ctx).unwrap_or_else(|_| first_raw.to_string());
         let first = first.trim();
 
-        // Chance-scaling and other range forms render `a to b` as a percentage range.
         if let Some((start, end)) = first.split_once(" to ") {
             if let (Some(start_value), Some(end_value)) =
                 (evaluate_numeric(start.trim()), evaluate_numeric(end.trim()))
@@ -2305,19 +2424,27 @@ impl TemplateExpander for FdExpander {
             None => (raw.as_str(), ""),
         };
         if let Some(num) = evaluate_numeric(expr) {
+            // The wiki's {{fd}} (Module:Fd) only *styles* a value's decimals
+            // (wrapping them in <small>); it never pads OR rounds. So the value
+            // must pass through at full precision — `{{fd|50}}` is "50",
+            // `{{fd|2.5}}` is "2.5", and `{{fd|35.62125}}` is "35.62125", not a
+            // 2-decimal "35.62". Rust's `{}` for f64 is the shortest round-trip
+            // form, which trims trailing zeros without losing precision.
             if aux.is_empty() {
                 return Ok(ExpansionResult {
-                    expanded: format!("{:.2}{}", num, suffix),
+                    expanded: format!("{}{}", num, suffix),
                 });
             }
-            if let Ok(prec) = aux.parse::<usize>() {
+            // An explicit decimal-places argument (rare; the wiki ignores it but
+            // we honour it as a deliberate authoring choice) still rounds.
+            if aux.parse::<usize>().is_ok() {
                 return Ok(ExpansionResult {
-                    expanded: format!("{:.*}{}", prec, num, suffix),
+                    expanded: format!("{}{}", format_progression_number(num, Some(aux)), suffix),
                 });
             }
 
             return Ok(ExpansionResult {
-                expanded: format!("{} ({})", format!("{:.2}{}", num, suffix), aux),
+                expanded: format!("{} ({})", format!("{}{}", num, suffix), aux),
             });
         }
 
@@ -2990,7 +3117,7 @@ fn evaluate_numeric(expr: &str) -> Option<f64> {
     Some(value)
 }
 
-fn format_progression_number(value: f64, round: Option<&str>) -> String {
+pub(crate) fn format_progression_number(value: f64, round: Option<&str>) -> String {
     let round = round.map(|value| value.trim().to_ascii_lowercase());
     let rounded = match round.as_deref() {
         Some("abs") => value.abs(),
@@ -3650,20 +3777,17 @@ fn resolve_champion_constant(ctx: &ExpanderCtx, entity: &str, field: &str) -> Re
         }
     }
 
-    if let Some(default) = default_champion_constant(field) {
-        return Ok(default.to_string());
+    // Mirror the wiki's own fallback. Module:ChampionData/getter resolves a
+    // missing field with `getData(champname, ...).field or <default>`
+    // (e.g. `crit_base or 200`); we read that default straight from the dumped
+    // module instead of baking any number into this binary.
+    if let Some(default) = conv_ctx.champion_constant_default(field) {
+        return Ok(default);
     }
 
     Err(ConvertError::Internal(format!(
         "unresolved champion constant `{entity}.{field}`"
     )))
-}
-
-fn default_champion_constant(field: &str) -> Option<&'static str> {
-    match field.trim().to_ascii_lowercase().as_str() {
-        "crit_base" => Some("175"),
-        _ => None,
-    }
 }
 
 fn resolve_item_constant(ctx: &ExpanderCtx, entity: &str, field: &str) -> Result<String> {
@@ -4399,8 +4523,51 @@ mod tests {
             reg.expand(&ai_display, &ctx()).unwrap().expanded,
             "Masterwork"
         );
-        let crit = parse_invocation("critical damage|175|100|mod=0.9");
-        assert_eq!(reg.expand(&crit, &ctx()).unwrap().expanded, "90%");
+    }
+
+    /// Builds a conversion context whose item module exposes Infinity Edge with
+    /// the given `critdamage`, used to exercise Template:Critical damage.
+    fn ctx_with_ie_critdamage(td: &std::path::Path, critdamage: u32) -> ExpanderCtx {
+        let export_dir = td.join("export_out");
+        std::fs::create_dir_all(&export_dir).unwrap();
+        std::fs::write(
+            export_dir.join("Module%3AItemData%2Fdata.txt"),
+            format!(
+                "return {{\n    [\"Infinity Edge\"] = {{\n        [\"stats\"] = {{\n            [\"critdamage\"] = {critdamage},\n        }}\n    }}\n}}"
+            ),
+        )
+        .unwrap();
+        let conversion_ctx = Arc::new(ConversionContext::new(&export_dir, 2).unwrap());
+        ExpanderCtx::new(2, &HashMap::new(), Some(conversion_ctx))
+    }
+
+    #[test]
+    fn critical_damage_flat_adds_infinity_edge_term() {
+        let reg = TemplateRegistry::new();
+        let td = tempdir().unwrap();
+        // Graves' New Destiny: {{critical damage|50}} with the live IE critdamage
+        // of 30 must read as "(50% + Infinity Edge 15%)" — 15 = 50 * 30/100 — not
+        // a bare "50%".
+        let ctx = ctx_with_ie_critdamage(td.path(), 30);
+        let graves = parse_invocation("critical damage|50");
+        assert_eq!(
+            reg.expand(&graves, &ctx).unwrap().expanded,
+            "(50% + Infinity Edge 15%)"
+        );
+
+        // Two positionals: main value is positional 1, the IE term scales
+        // positional 2. mod multiplies both; base subtracts from the main only.
+        let two = parse_invocation("critical damage|175|100|mod=0.9");
+        // mainDmg = 175 * 0.9 = 157.5; IEdmg = 100 * 30/100 * 0.9 = 27.
+        assert_eq!(
+            reg.expand(&two, &ctx).unwrap().expanded,
+            "(157.5% + Infinity Edge 27%)"
+        );
+
+        // flat=true drops the percent sign; ie= overrides the IE scaling factor.
+        let flat = parse_invocation("critical damage|20|base=20|flat=true");
+        // mainDmg = 20 - 20 = 0, so only the IE term renders: 20 * 30/100 = 6.
+        assert_eq!(reg.expand(&flat, &ctx).unwrap().expanded, "Infinity Edge 6");
     }
 
     #[test]
@@ -4433,6 +4600,13 @@ mod tests {
 }"#,
         )
         .unwrap();
+        // The crit_base fallback is read from the dumped getter module, exactly
+        // as the wiki resolves `getData(champname, true).crit_base or 200`.
+        std::fs::write(
+            export_dir.join("Module%3AChampionData%2Fgetter.txt"),
+            "function p.crit_base(champname)\n\treturn getData(champname, true).crit_base or 200\nend\n",
+        )
+        .unwrap();
 
         let conversion_ctx = Arc::new(ConversionContext::new(&export_dir, 2).unwrap());
         let mut constants = HashMap::new();
@@ -4441,8 +4615,10 @@ mod tests {
         let ctx = ExpanderCtx::new(2, &HashMap::new(), Some(conversion_ctx));
         let reg = TemplateRegistry::new();
 
+        // Graves has no crit_base in data, so this must come from the getter
+        // module's `or 200` fallback above — not a hardcoded constant.
         let ccd = parse_invocation("ccd|Graves|crit_base");
-        assert_eq!(reg.expand(&ccd, &ctx).unwrap().expanded, "175");
+        assert_eq!(reg.expand(&ccd, &ctx).unwrap().expanded, "200");
 
         let nested = parse_invocation("ccd|Graves|missile_speed");
         assert_eq!(reg.expand(&nested, &ctx).unwrap().expanded, "3800");
@@ -4724,8 +4900,37 @@ mod tests {
     #[test]
     fn fd_template_preserves_percent_suffix() {
         let reg = TemplateRegistry::new();
+        // {{fd}} styles decimals but never pads them: the wiki renders "1.3%",
+        // not "1.30%".
         let result = reg.expand(&parse_invocation("fd|1.3%"), &ctx()).unwrap();
-        assert_eq!(result.expanded, "1.30%");
+        assert_eq!(result.expanded, "1.3%");
+    }
+
+    #[test]
+    fn fd_template_does_not_pad_to_fixed_decimals() {
+        let reg = TemplateRegistry::new();
+        // Integers stay integers; trailing zeros are trimmed — matching the
+        // wiki's Module:Fd, which only wraps decimals in <small> and never pads.
+        for (input, expected) in [
+            ("fd|50", "50"),
+            ("fd|2.5", "2.5"),
+            ("fd|2.50", "2.5"),
+            ("fd|0", "0"),
+            ("fd|0.25", "0.25"),
+            // Full precision is preserved (the wiki never rounds): a 3+ decimal
+            // value must not be clipped to 2 places.
+            ("fd|0.625", "0.625"),
+            ("fd|35.62125", "35.62125"),
+            ("fd|199.976%", "199.976%"),
+        ] {
+            let out = reg.expand(&parse_invocation(input), &ctx()).unwrap();
+            assert_eq!(out.expanded, expected, "for {input}");
+        }
+        // An explicit precision still rounds (and then trims).
+        let three = reg
+            .expand(&parse_invocation("fd|3.14159|3"), &ctx())
+            .unwrap();
+        assert_eq!(three.expanded, "3.142");
     }
 
     #[test]
@@ -4908,6 +5113,11 @@ mod tests {
             ["mana"] = 860,
         },
     },
+    ["Infinity Edge"] = {
+        ["stats"] = {
+            ["critdamage"] = 40,
+        },
+    },
 }"#,
         )
         .unwrap();
@@ -4919,8 +5129,12 @@ mod tests {
         let ctx = ExpanderCtx::new(2, &HashMap::new(), Some(conversion_ctx));
         let reg = TemplateRegistry::new();
 
+        // mainDmg = ccd(Yasuo, crit_base) = 175; IEdmg = 100 * 40/100 = 40.
         let crit = parse_invocation("critical damage|{{ccd|Yasuo|crit_base}}|100");
-        assert_eq!(reg.expand(&crit, &ctx).unwrap().expanded, "175%");
+        assert_eq!(
+            reg.expand(&crit, &ctx).unwrap().expanded,
+            "(175% + Infinity Edge 40%)"
+        );
 
         let expr = parse_invocation("#expr:{{cid|Dark Seal|buy}}*2");
         assert_eq!(reg.expand(&expr, &ctx).unwrap().expanded, "700");
