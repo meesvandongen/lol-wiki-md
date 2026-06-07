@@ -1823,8 +1823,38 @@ impl CriticalDamageExpander {
             evaluate_numeric(resolved.trim()).ok_or_else(|| unhandled_template_error(inv))
         };
 
-        // The wiki wraps p1/p2/base/mod in `#expr`, so a non-numeric value here
-        // is malformed — fail fast rather than coerce it to zero.
+        // Named numeric params `mod` and `ie` are gated in the template by
+        // `{{#if:{{{mod|}}}|*({{{mod}}})}}` / `{{#if:{{{ie|}}}|({{{ie}}})/100|…}}`,
+        // so a value that expands to blank takes the empty `#if` branch — i.e.
+        // the parameter is simply not applied. This happens in the wild when the
+        // value is a nested data lookup with no result, e.g.
+        // `mod={{ccd|Neeko|crit_mod}}` where the champion defines no `crit_mod`
+        // and the getter has no default. Mirror the template: treat a
+        // blank-after-expansion value as absent rather than failing to read a
+        // number out of an empty string. (Verified against the wiki renderer:
+        // `{{critical damage|200|100|mod=}}` renders identically to
+        // `{{critical damage|200|100}}`.) A non-blank but non-numeric value is
+        // still malformed and fails fast.
+        let resolve_named_num = |key: &str| -> Result<Option<f64>> {
+            match named.get(key) {
+                Some(raw) => {
+                    let resolved = expand_nested_template_text(raw, ctx)
+                        .unwrap_or_else(|_| raw.trim().to_string());
+                    if resolved.trim().is_empty() {
+                        Ok(None)
+                    } else {
+                        Ok(Some(
+                            evaluate_numeric(resolved.trim())
+                                .ok_or_else(|| unhandled_template_error(inv))?,
+                        ))
+                    }
+                }
+                None => Ok(None),
+            }
+        };
+
+        // The wiki wraps p1/p2/base in `#expr`, so a non-numeric value here is
+        // malformed — fail fast rather than coerce it to zero.
         let p1 = match positional.first() {
             Some(raw) => resolve_num(raw)?,
             None => 0.0,
@@ -1837,10 +1867,7 @@ impl CriticalDamageExpander {
             Some(raw) => resolve_num(raw)?,
             None => 0.0,
         };
-        let mod_factor = match named.get("mod") {
-            Some(raw) => resolve_num(raw)?,
-            None => 1.0,
-        };
+        let mod_factor = resolve_named_num("mod")?.unwrap_or(1.0);
 
         let flat = named
             .get("flat")
@@ -1853,9 +1880,10 @@ impl CriticalDamageExpander {
             .unwrap_or(false);
 
         // ie_mod = (wr ? 30 : Infinity Edge critdamage) / 100, overridable per
-        // call with `ie=` (a flat percentage).
-        let ie_factor = match named.get("ie") {
-            Some(raw) => resolve_num(raw)? / 100.0,
+        // call with `ie=` (a flat percentage). A blank `ie=` falls through to the
+        // ie_mod branch, matching `{{#if:{{{ie|}}}|({{{ie}}})/100|{{#var:ie_mod}}}}`.
+        let ie_factor = match resolve_named_num("ie")? {
+            Some(ie) => ie / 100.0,
             None => {
                 let ie_critdamage = if wild_rift {
                     30.0
@@ -2841,7 +2869,18 @@ fn expand_progression_values(
 }
 
 fn strip_ascii_prefix<'a>(value: &'a str, prefix: &str) -> Option<&'a str> {
-    if value.len() >= prefix.len() && value[..prefix.len()].eq_ignore_ascii_case(prefix) {
+    // Compare on raw bytes rather than slicing `value` as a `str`. A `str` slice
+    // at `prefix.len()` panics when that byte offset lands in the middle of a
+    // multi-byte UTF-8 char (e.g. a Unicode `−`/`×` inside a progression
+    // formula), which would otherwise crash the whole batch. Byte comparison is
+    // safe for any input, and because a matching prefix is ASCII its byte length
+    // is guaranteed to be a valid char boundary, so the final `str` slice cannot
+    // split a code point.
+    let prefix_bytes = prefix.as_bytes();
+    let value_bytes = value.as_bytes();
+    if value_bytes.len() >= prefix_bytes.len()
+        && value_bytes[..prefix_bytes.len()].eq_ignore_ascii_case(prefix_bytes)
+    {
         Some(&value[prefix.len()..])
     } else {
         None
@@ -3783,6 +3822,16 @@ fn resolve_champion_constant(ctx: &ExpanderCtx, entity: &str, field: &str) -> Re
     // module instead of baking any number into this binary.
     if let Some(default) = conv_ctx.champion_constant_default(field) {
         return Ok(default);
+    }
+
+    // The field is a real wiki-known stat (the getter exposes an accessor for
+    // it) but this champion does not set it and the accessor has no static
+    // fallback — so `getData(...).<field>` is nil, which the wiki renders as an
+    // empty string. Mirror that. (Verified: `{{ccd|Neeko|crit_mod}}` renders ''
+    // because `Module:ChampionData/getter` has `p.crit_mod` with no `or`
+    // default and Neeko sets no `crit_mod`.)
+    if conv_ctx.champion_getter_defines_field(field) {
+        return Ok(String::new());
     }
 
     Err(ConvertError::Internal(format!(
