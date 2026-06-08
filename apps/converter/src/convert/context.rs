@@ -45,6 +45,7 @@ pub struct ConversionContextInner {
     champion_module_raw: OnceCell<Option<String>>,
     champion_module_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
     champion_getter_defaults: OnceCell<HashMap<String, String>>,
+    champion_getter_fields: OnceCell<HashSet<String>>,
     item_module_raw: OnceCell<Option<String>>,
     item_module_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
     gold_value_data_map: OnceCell<HashMap<String, HashMap<String, LuaValue>>>,
@@ -65,6 +66,7 @@ impl ConversionContext {
             champion_module_raw: OnceCell::new(),
             champion_module_map: OnceCell::new(),
             champion_getter_defaults: OnceCell::new(),
+            champion_getter_fields: OnceCell::new(),
             item_module_raw: OnceCell::new(),
             item_module_map: OnceCell::new(),
             gold_value_data_map: OnceCell::new(),
@@ -297,6 +299,27 @@ impl ConversionContext {
         defaults.get(&field.trim().to_ascii_lowercase()).cloned()
     }
 
+    /// Whether `Module:ChampionData/getter` exposes an accessor for `field`
+    /// (a `function p.<field>(champname)` declaration). Such a field is a real,
+    /// wiki-known stat: when a champion does not set it and the accessor has no
+    /// static `or <default>` fallback, the getter returns nil, which the wiki
+    /// renders as an empty string. Callers use this to mirror that empty result
+    /// instead of erroring, while still failing fast on genuinely unknown fields
+    /// the getter never defines.
+    pub fn champion_getter_defines_field(&self, field: &str) -> bool {
+        let fields = self.inner.champion_getter_fields.get_or_init(|| {
+            match self
+                .inner
+                .export
+                .read_optional_page("Module:ChampionData/getter")
+            {
+                Ok(Some(raw)) => parse_getter_field_names(&raw),
+                _ => HashSet::new(),
+            }
+        });
+        fields.contains(&field.trim().to_ascii_lowercase())
+    }
+
     pub fn champion_constants(&self, key: &str) -> Option<HashMap<String, String>> {
         match self.inner.champion_constants.lock() {
             Ok(guard) => guard.get(key).cloned().or_else(|| {
@@ -522,6 +545,21 @@ fn parse_getter_defaults(raw: &str) -> HashMap<String, String> {
         defaults.entry(field).or_insert(value);
     }
     defaults
+}
+
+/// Collect the set of field names the getter module exposes as accessors, i.e.
+/// every `function p.<field>(...)` declaration. These are the stats the wiki
+/// knows how to look up; a field outside this set is never resolvable through
+/// `{{ccd}}` and should fail fast rather than silently render empty.
+fn parse_getter_field_names(raw: &str) -> HashSet<String> {
+    use regex::Regex;
+    static RE: OnceCell<Regex> = OnceCell::new();
+    let re = RE.get_or_init(|| {
+        Regex::new(r"(?m)^\s*function\s+p\.(\w+)\s*\(").expect("valid getter-field regex")
+    });
+    re.captures_iter(raw)
+        .map(|caps| caps[1].trim().to_ascii_lowercase())
+        .collect()
 }
 
 fn extract_template_body(raw: &str) -> Option<String> {

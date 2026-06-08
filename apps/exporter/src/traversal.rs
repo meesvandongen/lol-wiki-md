@@ -78,15 +78,86 @@ async fn fetch_category_members(client: &Client, category: &str) -> Result<Vec<C
             url.push_str(&format!("&cmcontinue={}", urlencoding::encode(cont)));
         }
 
-        let resp = client.get(&url).send().await?;
-        if resp.status() == StatusCode::TOO_MANY_REQUESTS {
-            eprintln!("429 rate limited fetching category members; sleeping 10s");
-            sleep(Duration::from_secs(10)).await;
-            continue;
-        }
-        let text = resp.text().await?;
-        let v: serde_json::Value =
-            serde_json::from_str(&text).context("Parsing categorymembers json")?;
+        // Fetch + parse with bounded retry/backoff. A multi-thousand-request
+        // traversal will inevitably hit the occasional transient hiccup — a
+        // dropped connection, a gateway error, or an empty/non-JSON body from an
+        // intermediary proxy. A single one of those used to abort the whole run
+        // (and discard 15+ minutes of work), so retry on network errors,
+        // non-success statuses, body-read errors, and JSON parse failures
+        // instead of propagating the first error. This mirrors the resilience
+        // already present in the bulk-export `process_batch` path.
+        let mut attempt = 0u32;
+        let max_attempts = 5u32;
+        let backoff_base = 5u64;
+        let v: serde_json::Value = loop {
+            attempt += 1;
+            match client.get(&url).send().await {
+                Ok(resp) => {
+                    if resp.status() == StatusCode::TOO_MANY_REQUESTS {
+                        let sleep_for = backoff_base * attempt as u64 * 2;
+                        eprintln!(
+                            "429 rate limited fetching members of '{category}' attempt {attempt}; sleeping {sleep_for}s"
+                        );
+                        sleep(Duration::from_secs(sleep_for)).await;
+                        continue;
+                    }
+                    if !resp.status().is_success() {
+                        let status = resp.status();
+                        if attempt >= max_attempts {
+                            anyhow::bail!(
+                                "HTTP status {status} after {attempt} attempts fetching members of '{category}'"
+                            );
+                        }
+                        eprintln!(
+                            "HTTP {status} fetching members of '{category}' attempt {attempt}; retrying"
+                        );
+                        sleep(Duration::from_secs(backoff_base * attempt as u64)).await;
+                        continue;
+                    }
+                    match resp.text().await {
+                        Ok(text) => match serde_json::from_str::<serde_json::Value>(&text) {
+                            Ok(parsed) => break parsed,
+                            Err(e) => {
+                                if attempt >= max_attempts {
+                                    return Err(anyhow::Error::new(e)).context(format!(
+                                        "Parsing categorymembers json for '{category}' after {attempt} attempts"
+                                    ));
+                                }
+                                eprintln!(
+                                    "Non-JSON response fetching members of '{category}' attempt {attempt}: {e}; retrying"
+                                );
+                                sleep(Duration::from_secs(backoff_base * attempt as u64)).await;
+                                continue;
+                            }
+                        },
+                        Err(e) => {
+                            if attempt >= max_attempts {
+                                return Err(e).context(format!(
+                                    "Reading categorymembers body for '{category}' after {attempt} attempts"
+                                ));
+                            }
+                            eprintln!(
+                                "Read body error fetching members of '{category}' attempt {attempt}: {e}; retrying"
+                            );
+                            sleep(Duration::from_secs(backoff_base * attempt as u64)).await;
+                            continue;
+                        }
+                    }
+                }
+                Err(e) => {
+                    if attempt >= max_attempts {
+                        return Err(e).context(format!(
+                            "Request error after {attempt} attempts fetching members of '{category}'"
+                        ));
+                    }
+                    eprintln!(
+                        "Network error fetching members of '{category}' attempt {attempt}: {e}; retrying"
+                    );
+                    sleep(Duration::from_secs(backoff_base * attempt as u64)).await;
+                    continue;
+                }
+            }
+        };
 
         if let Some(arr) = v
             .get("query")

@@ -43,6 +43,10 @@ async fn main() -> Result<()> {
     let client = Client::builder()
         .user_agent("LoL Wiki Educational Bulk Scraper (rust) 1.0")
         .gzip(true)
+        // Use the OS trust store (which honors SSL_CERT_FILE) rather than only
+        // the bundled webpki Mozilla roots, so the exporter works behind
+        // TLS-inspecting egress proxies whose CA lives in the system trust store.
+        .tls_built_in_native_certs(true)
         .build()?;
 
     let meta_dir_path = PathBuf::from(&args.meta_dir);
