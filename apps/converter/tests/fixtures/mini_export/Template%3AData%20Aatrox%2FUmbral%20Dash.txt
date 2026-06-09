@@ -1,0 +1,30 @@
+{{{{{1<noinclude>|Ability data</noinclude>}}}|Umbral Dash|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}
+|champion     = Aatrox
+|skill        = E
+|icon         = false
+|description  = {{sbc|Passive:}} '''Aatrox''' {{tip|heals}} for 16% {{as|(+ {{fd|1.1}}% per 100 '''bonus''' health)}} of non-{{tip|persistent damage|persistent}} {{tt|post-mitigation damage|Damage calculated after modifiers}} he deals against enemy champions.
+|icon2        = Umbral Dash.png
+|description2 = {{sbc|Active:}} '''Aatrox''' {{tip|dash|dashes}} in the target direction.
+|description3 = ''Umbral Dash {{tip|basic attack reset|resets}} '''Aatrox's''' basic attack timer and can be cast during his other abilities without cancelling them and vice versa.''
+|cast time    = none
+|target range = {{dv|{{tt|75 - 300|Minimum and maximum dash distance}}|{{tt|500|Maximum extended dash distance across terrain}}}}
+|speed        = {{dv|{{tt|800|Dash speed, slightly higher when measured}}|{{tt|1340|Maximum increased dash speed, when dashing through wide terrain}}}}
+|cooldown     = {{ap|9 to 5}}
+|targeting    = Location
+|affects      = Self
+|grounded     = True
+|knockdown    = True
+|terraingrace = true
+|outofrange   = cast at max
+|notes        = 
+* The {{tip|dash}} distance can be extended to up-to 500 units when targeting across terrain. It will only extend for the distance needed to cross the wall.
+** This may upscale his dash speed so that the dash takes the same total time as the standard maximum-range dash.
+* If ''Umbral Dash'' is cast towards a movement command's end point, ''Umbral Dash'' will re-issue a movement command to that point when the dash ends.
+** He will be unable to buffer any commands during the dash if it is casted this way. {{bug|1}}
+* '''Aatrox's''' model darkens for {{fd|1.5}} seconds upon casting ''Umbral Dash'', which is a remnant of an {{as|attack damage}} buff he received before it got removed in [[V9.9]].
+<!-- Blurb -->
+|blurbicon    = Umbral Dash.png
+|blurb        = {{sbc|Passive:}} {{ci|Aatrox}} {{as|{{sti|heals}}}} for the portion of the damage he deals to champions.
+|blurb2       = {{sbc|Active:}} '''Aatrox''' {{tip|dash|dashes}} in the target direction.
+|blurb4       = ''Umbral Dash be cast during other abilities without cancelling them and vice versa.''
+}}

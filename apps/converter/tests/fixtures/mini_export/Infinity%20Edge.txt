@@ -1,0 +1,206 @@
+: ''For the removed {{ai|Living Forge|Ornn|Masterwork}} items, see {{ii|Edge of Finality}} and {{ii|Molten Edge}}.''
+{{Item info
+|goldvalue = 
+|goldefficiency =
+|similaritems = Yun Tal Wildarrows;Essence Reaver;The Collector;Immortal Shieldbow;Hexoptics C44;Stormrazor;Bloodthirster
+|background = Only the boldest of men and women dare take the risky trip to the hottest spot in [[Valoran]], in the very center of the [[Shurima]] Desert. Those who successfully make the journey may bathe their swords in a magical pool of the purest water known to this world. Any edge dipped into this pool will stay sharper and strike truer than any other sword.
+|notes =
+* The critical strike damage stat provided by '''Infinity Edge''' increases most champions' total {{stil|{{as|critical strike damage|critical damage}}}} from {{as|200% AD}} to {{as|{{#expr:200+30}}% AD}}.
+|strategy = 
+|trivia = 
+* '''Infinity Edge''' shares its name with a set of Infinity Weapons from the game ''[[Wikipedia:Lineage II|Lineage II]],'' which are the strongest weapons available. '''Infinity Edge''' bears similarities to the [https://l2vn.com/upload/images/InfinityShaper.png Infinity Shaper].
+* As hinted in its lore, the Infinity Edge got its powers from the ''Oasis of the Dawn'' located in the Ancient [[Shurima]]n Capital, the once center of the vast Shuriman Empire. The Oasis is described as a pool with many magical properties.
+* {{ii|Infinity Edge|image=Infinity Edge item old.png}} was in the old [[Summoner's Rift]] map, specifically in the [[shop]]keeper's bag.
+** It is still hung on display in both shops.
+* '''Infinity Edge''' looks somewhat similar to {{cis|Kayle|variant=old3}} old {{ai|Righteous Fury|Kayle|sword}} in terms of blade shape and inscriptions.
+* {{Univ|Pentakill|Pentakill's}} second volume, [[Pentakill II: Grasp of the Undying]], named its fourth track after this item.
+* This item was featured in [[The Call]] and [[Katarina: Issue 4]].
+[[File:Shurima Crest icon.png|link=Shurima#Trivia|100px|center]]
+|media = 
+|revisions = 
+|patchhistory = 
+;[[V26.01]]
+* Total cost increased to {{g|3500}} from {{g|3450}}.
+** Combine cost increased to {{g|725}} from {{g|675}}.
+* Attack damage increased to 75 from 65.
+* Bonus critical strike damage reduced to 30% from 40%.
+
+;[[V25.04]]
+* Total cost reduced to {{g|3450}} from {{g|3600}}.
+** Combine cost reduced to {{g|675}} from {{g|825}}.
+* Attack damage reduced to 65 from 70.
+
+;[[V14.19]]
+* Total cost increased to {{g|3600}} from {{g|3400}}.
+** Combine cost increased to {{g|825}} from {{g|625}}.
+* Attack damage reduced to 70 from 80.
+
+;[[V14.11]]
+* Critical strike damage reduced to 40% from 50%.
+* Can no longer be upgraded to {{ii|Edge of Finality}}.
+
+;[[V14.10]]
+* Total cost increased to {{g|3400}} from {{g|3300}}.
+** Combine cost increased to {{g|625}} from {{g|525}}.
+* Attack damage increased to 80 from 65.
+* Critical strike chance increased to 25% from 20%.
+* {{ii|Edge of Finality}} critical strike chance increased to 25% from 20%.
+* No longer limited to 1 {{sbc|Unbounded}} item.
+
+;[[V14.6]]
+* Bonus critical strike damage increased to 50% from 40%.
+
+;[[V14.1]]
+* Item type changed to Legendary from Mythic.
+* Total cost reduced to {{g|3300}} from {{g|3400}}.
+** Combine cost reduced to {{g|525}} from {{g|625}}.
+* Critical strike damage reduced to 40% from 45%.
+* {{sbc|Removed:}} No longer has a Mythic passive granting {{as|5 '''bonus''' attack damage}} per Legendary item.
+* No longer limits the user to 1 {{sbc|Mythic}} item.
+* Now limits the user to 1 {{sbc|Unbounded}} item.
+
+;[[V13.14]]
+* Attack damage reduced to 65 from 70.
+* Critical strike damage increased to 45% from 35%.
+* {{ii|Edge of Finality}} attack damage reduced to 95 from 100.
+
+;[[V13.10]]
+* {{sbc|New:}}
+** {{sbc|Recipe:}} {{ii|B. F. Sword}} + {{ii|Pickaxe}} + {{ii|Cloak of Agility}} + {{g|625}} = {{g|3400}}.
+** {{sbc|Stats:}} 70 attack damage, 20% critical strike chance, 35% critical strike damage.
+** {{sbc|Mythic Passive:}} Empowers other Legendary items with {{as|5 '''bonus''' attack damage}}.
+** Limited to 1 {{sbc|Mythic}} item.
+** {{cai|Living Forge|Ornn|Masterwork}} item: {{ii|Edge of Finality}}.
+*** {{sbc|Stats:}} 100 attack damage, 20% critical strike chance, 35% critical strike damage.
+* {{sbc|Old:}}
+** {{sbc|Recipe:}} {{ii|B. F. Sword}} + {{ii|Pickaxe}} + {{ii|Cloak of Agility}} + {{g|625}} = {{g|3400}}.
+** {{sbc|Stats:}} 70 attack damage, 20% critical strike chance.
+** {{sbc|Unique Passive - Perfection:}} Gain {{as|35% '''bonus''' critical strike damage}} if you have at least {{as|40% critical strike chance}}.
+** Limited to 1 {{sbc|Crit Modifier}} / {{sbc|Marksman Capstone}} item.
+
+;[[V13.1b]]
+* Perfection threshold reduced to 40% critical strike chance from 60%.
+
+;[[V10.25]]
+* {{sbc|Unique Passive - Perfection:}}
+** {{sbc|New Effect:}} Gain 35% '''bonus''' critical strike damage if you have at least {{as|60% critical strike chance}}.
+** {{sbc|Old Effect:}} Gain {{fd|0.4}}% '''bonus''' critical strike damage for every {{as|1% critical strike chance}}.
+
+;[[V10.23]]
+* Updated icon.
+* {{sbc|New:}}
+** {{sbc|Recipe:}} {{ii|B. F. Sword}} + {{ii|Pickaxe}} + {{ii|Cloak of Agility}} + {{g|625}} = {{g|3400}}.
+** {{sbc|Stats:}} 70 attack damage, 20% critical strike chance.
+** {{sbc|Unique Passive - Perfection:}} Gain {{as|{{fd|0.4}}% '''bonus''' critical strike damage}} for every {{as|1% critical strike chance}}.
+** Limited to 1 {{sbc|Crit Modifier}} item.
+* {{sbc|Old:}}
+** {{sbc|Recipe:}} {{ii|B. F. Sword}} + {{ii|Pickaxe}} + {{ii|Cloak of Agility}} + {{g|425}} = {{g|3400}}.
+** {{sbc|Stats:}} 80 attack damage, 25% critical strike chance.
+** {{sbc|Unique Passive:}} {{tip|critical strike|Critical strikes}} deal {{as|225% damage|critical strike damage}} instead of {{as|200%|critical strike damage}}.
+** {{cai|Living Forge|Ornn|Masterwork}} item: {{ii|Molten Edge}}.
+*** {{sbc|Stats:}} 110 attack damage, 25% critical strike chance.
+
+;[[V9.3]]
+* {{sbc|New Recipe:}} {{ii|B. F. Sword}} + {{ii|Pickaxe}} + {{ii|Cloak of Agility}} + {{g|425}} = {{g|3400}}.
+** {{sbc|Old Recipe:}} {{ii|B. F. Sword}} + {{ii|Pickaxe}} + {{g|1225}} = {{g|3400}}.
+* {{sbc|New Stats:}} 
+** 80 attack damage, 25% critical strike chance.
+** {{sbc|Unique Passive:}} {{tip|critical strike|Critical strikes}} deal 225% damage instead of 200%.
+* {{sbc|Old Stats:}} 
+** 70 attack damage.
+** {{sbc|Unique Passive:}} Doubles your critical strike chance.
+** {{sbc|Unique Passive:}} When {{tip|critical strike|critically striking}} champions, converts {{as|10% of critical strike damage}} to true damage.
+* {{ii|Molten Edge}} attack damage increased to 110 from 100.
+
+;[[V9.1]]
+* {{ii|Molten Edge}}
+** Total cost reduced to {{g|3400}} from {{g|4400}}.
+*** Combine cost reduced to {{g|0}} from {{g|1000}}.
+** Can now only be obtained if {{ci|Ornn}} forges the item (for himself or for another ally).
+
+;[[V8.15]]
+* {{sbc|New Recipe:}} {{ii|B. F. Sword}} + {{ii|Pickaxe}} + {{g|1225}} = {{g|3400}}.
+** {{sbc|Old Recipe:}} {{ii|B. F. Sword}} + {{ii|B. F. Sword}} + {{g|1000}} = {{g|3600}}.
+* Critical strike damage conversion reduced to {{as|10%|critical damage}} from {{as|15%|critical damage}}.
+* Attack damage reduced to 70 from 80.
+* {{sbc|New Effect:}} ''"True Damage Critical Strikes"'' now display as a blue/white icon instead of the purple ''"Magic Damage Crit"'' icon.
+* {{ii|Molten Edge}} total cost reduced to {{g|4400}} from {{g|4600}}.
+* {{ii|Molten Edge}} attack damage reduced to 100 from 110.
+
+;[[V8.12#June 18th Hotfix|V8.12]] - June 18th Hotfix
+* Total cost reduced to {{g|3600}} from {{g|3700}}.
+** Combine cost reduced to {{g|1000}} from {{g|1100}}.
+* {{ii|Molten Edge}} total cost reduced to {{g|4600}} from {{g|4700}}.
+
+;[[V8.11]]
+* New item icon.
+* {{sbc|New Recipe:}} {{ii|B. F. Sword}} + {{ii|B. F. Sword}} + {{g|1100}} = {{g|3700}}.
+** {{sbc|Old Recipe:}} {{ii|B. F. Sword}} + {{ii|Pickaxe}} + {{ii|Cloak of Agility}} + {{g|425}} = {{g|3400}}.
+* {{ii|Molten Edge}} total cost increased to {{g|4700}} from {{g|4400}}.
+* Attack damage increased to 80 from 70.
+* {{ii|Molten Edge}} attack damage increased to 110 from 100.
+* {{sbc|Removed:}} +20% critical strike chance.
+* {{sbc|Removed Unique Passive:}} +50% critical strike damage.
+* {{sbc|New Unique Passive:}} Doubles your critical strike chance.
+* {{sbc|New Unique Passive:}} When critically striking enemy champions, converts 15% of critical strike damage to {{as|true damage}}.
+
+;[[V7.17]]
+* Added to recipe from {{ii|Molten Edge}}. ''Only available while {{ci|Ornn}} is on your team.''
+
+;[[V7.9]]
+* Total cost reduced to {{g|3400}} from {{g|3600}}.
+** Combine cost reduced to {{g|425}} from {{g|625}}.
+
+;[[V6.14]]
+* Added to the [[Twisted Treeline]].
+
+;[[V6.12]]
+* Attack damage increased to 70 from 65.
+
+;[[V5.22]]
+* Total cost reduced to {{g|3600}} from {{g|3800}}.
+* AD reduced to 65 from 80.
+
+;[[V5.1]]
+* Critical strike chance reduced to 20% from 25%. 
+
+;[[V4.10]]
+* Attack damage increased to 80 from 70.
+
+;[[V4.1]]
+* Item removed from Dominion and Twisted Treeline.
+
+;[[V1.0.0.152]]
+* Item cost reduced to {{g|3800}} from {{g|3830}}.
+* Attack damage reduced to 70 from 80.
+
+;[[V1.0.0.115]]
+* Total cost reduced to {{g|3830}} from {{g|4080}}.
+* Attack damage increased to 80 from 75.
+* Critical strike chance increased to 25% from 20%.
+
+;[[V1.0.0.107]]
+* Attack damage reduced to 75 from 80.
+
+;[[V0.9.22.16]]
+* Issue with scaling with crit talents/runes fixed.
+
+;[[May 15, 2009 Patch]]
+* Fixed a bug where certain item effects would persist past selling the item.
+
+;[[April 18, 2009 Patch]]
+* Effect made Unique, having multiple Infinity Edges will not stack their passive ability.
+
+;[[April 11, 2009 Patch]]
+* Combine cost increased to {{g|375}} from {{g|350}}.
+}}
+
+
+[[cs:Infinity Edge]]
+[[de:Klinge der Unendlichkeit]]
+[[es:Filo del Infinito]]
+[[fr:Lame d'infini]]
+[[pl:Ostrze Nieskończoności]]
+[[ru:Грань Бесконечности]]
+[[zh:无尽之刃]]
+[[Category:Items with passive abilities]]

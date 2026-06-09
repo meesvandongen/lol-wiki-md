@@ -15,11 +15,16 @@ implicit level counts) are NOT reliably comparable standalone and are excluded.
 
 ## Corpus coverage (PASS)
 
-The full real corpus converts cleanly with **zero hard errors**:
+The full real corpus converts cleanly with **zero hard errors**. Against the
+complete wiki download (21,831 files, 8,416 categories, 19,352 source pages):
 
-- champions: 170/170
-- items: 305/305
-- runes: 76/76
+- champions: 172/172
+- items: 594/594
+- runes: 77/77
+
+(The earlier targeted export — all champions/items/runes from the data modules
+plus transclusions — was 170/305/76; the full download adds Wild Rift variants
+and items outside the main `ItemData` module, all of which also convert clean.)
 
 So the fail-fast template registry recognizes every template actually reached
 on the convertible champion/item/rune surface. The gaps below are reached only

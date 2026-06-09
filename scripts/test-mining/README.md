@@ -8,8 +8,9 @@ The tests these scripts produced live in:
 
 - `apps/converter/tests/template_combinations.rs` — differential + contract +
   nesting cases, plus an `#[ignore]`d `known_divergences` module.
-- `apps/converter/tests/corpus_coverage.rs` — whole-corpus conversion guarantee
-  (skips when no export is present).
+- `apps/converter/tests/real_page_fixtures.rs` — end-to-end conversion of a real
+  champion/item/rune from committed fixtures (`tests/fixtures/mini_export/`),
+  fully self-contained (no download, no skip).
 
 Findings are summarized in `DIVERGENCES.md`.
 

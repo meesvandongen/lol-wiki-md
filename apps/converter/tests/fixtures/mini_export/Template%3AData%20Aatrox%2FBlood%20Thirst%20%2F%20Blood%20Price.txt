@@ -1,0 +1,36 @@
+{{{{{1<noinclude>|Ability data</noinclude>}}}|Blood Thirst / Blood Price|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}
+|champion     = Aatrox
+|skill        = W
+|icon         = false
+|blurb        = While toggled-on Aatrox deals bonus damage and fills a portion of his Blood Well every third subsequent attack. While toggled-off Aatrox restores Health every third subsequent attack.
+|description  = {{sbc|Passive:}} '''Aatrox''' applies a bonus [[on-hit effect]] on every third ''hit'' against non-structures.
+|icon2        = Blood Thirst.png
+|description2 = {{sbc|Toggle Off – {{ai|Blood Thirst 2|Aatrox|Blood Thirst}}:}} '''Aatrox''' {{sti|healing|heals}} himself on-hit.
+|leveling2    = {{st|Heal|{{ap|30|45|60|75|90}} {{as|(+ {{fd|6.5}}% '''missing''' health)}}}}
+|icon3        = Blood Price.png
+|description3 = {{sbc|Toggle On – {{ai|Blood Price 2|Aatrox|Blood Price}}:}} '''Aatrox''' deals '''bonus''' on-hit {{as|physical damage}} and fills 20% of his {{ai|Blood Well|Aatrox}}.
+|leveling3    = {{st|Physical Damage|{{ap|50|85|120|155|190}} {{as|(+ 75% '''bonus''' AD)}}}}
+|static       = {{fd|0.5}}
+|targeting    = [[Unit-targeted|Unit]] / [[Self-targeting|Self]]
+|affects      = [[Unit-targeted|Unit]] / [[Self-targeting|Self]]
+|damagetype   = Physical
+|spellshield  = False
+|spelleffects = Heal
+|projectile   = 
+|onhiteffects = Special
+|grounded     = 
+|knockdown    = 
+|notes        = 
+* The attack counter between ''Blood Thirst'' and ''Blood Price'' is shared, meaning that toggling the ability with one empowered attack prepared will immediately allow use of the empowered attack of the other.
+* Toggling between ''Blood Thirst'' and ''Blood Price'' does not reset the basic attack timer. It will, however, cancel an empowered basic attack in its windup animation if it is toggled during that time.
+* Toggled abilities do not count as ability activation for the purposes of effects such as {{nie|Spellblade}} or {{ai|Force Pulse|Kassadin}}.
+* '''Aatrox's''' basic attack animation correlates with the amount of stacks for ''Blood Thirst/Price''. The first basic attack animation (after leveling up ''Blood Thirst/Price'' or proccing an empowered basic attack) is '''Aatrox''' swinging his sword to the left, the second is to the right and the third basic attack animation (which will be affected by ''Blood Thirst/Price'') is '''Aatrox''' stabbing the target.
+* ''Blood Thirst/Price'' will not proc against turrets or wards.
+* The triggering attack will apply other [[on-hit effect]]s and can {{tip|critical strike|critically strike}} as normal.
+** Unlike most other on-hit physical damage, ''Blood Price's'' bonus damage does not apply [[life steal]]; this is a special case. The triggering attack will still apply life steal.
+** However, using {{ii|Death's Dance}} would then heal '''Aatrox''' for 15% of the ''Blood Price's'' bonus damage.
+** ''Blood Thirst/Price'' will miss if '''Aatrox''' is {{tip|blind|blinded}}.
+** {{tip|critical strike|Critical strikes}} do not interact with the bonus damage of ''Blood Thirst/Blood Price.''
+** If ''Blood Thirst/Price'' is {{ai|Spirit's Refuge|Shen|blocked}}, the effect will still apply, but the base damage will not.
+** If ''Blood Thirst/Price'' is {{ai|Counter Strike|Jax|dodged}}, the effect and base damage will apply as normal.
+}}

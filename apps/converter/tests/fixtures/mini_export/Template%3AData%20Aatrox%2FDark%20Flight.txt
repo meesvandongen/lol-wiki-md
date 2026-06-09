@@ -1,0 +1,28 @@
+{{{{{1<noinclude>|Ability data</noinclude>}}}|Dark Flight|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}
+|champion     = Aatrox
+|skill        = Q
+|icon         = Dark Flight.png
+|blurb        = Aatrox takes flight and slams down at a targeted location, dealing damage and knocking up enemies at the center of impact.
+|description  = {{sbc|Active:}} After a brief delay, '''Aatrox''' [[dash]]es to the target area with {{tip|displacement immunity}}, filling 20% of his {{ai|Blood Well|Aatrox}}, dealing {{tip|physical damage}} to nearby units upon landing, and {{tip|airborne|knocking up}} all units in the epicenter for 1 second.
+|leveling     = {{st|Physical Damage|{{ap|20|50|80|110|140}} {{as|(+ 110% AD)}}}}
+|target range = 650
+|effect radius= 225
+|inner radius = 75
+|cooldown     = {{ap|13|12.5|12|11.5|11}}
+|targeting    = Ground
+|affects      = Enemies
+|damagetype   = Physical
+|spellshield  = True
+|spelleffects = Area of effect
+|projectile   = 
+|grounded     = True
+|knockdown    = False
+|notes        = 
+* ''Dark Flight'' possesses a considerable overhead for a dash ability, able to traverse many walls that are otherwise much wider than the indicator suggests is possible to vault.
+* If '''Aatrox''' is sent {{tip|airborne}} or forced into {{ais|Blood Well|Aatrox}} {{tip|stasis (buff)|stasis}} during the initial flight time, ''Dark Flight'' will fail and will not cause him to dash.
+** Other forms of crowd control applied while the animation is in progress will be suspended until the animation finishes.
+* ''Dark Flight'' does not cancel other commands. '''Aatrox''' will immediately begin attacking after he lands.
+* With smartcast on, ''Dark Flight'' will be cast immediately and at '''650'''-range if the cursor is beyond that.
+* {{si|Flash}} cannot be cast during ''Dark Flight''.
+* ''Dark Flight'' has a {{fd|0.6}} second cast time. {{fd|0.3}} second wind-up, and {{fd|0.3}} second wind-down.
+}}

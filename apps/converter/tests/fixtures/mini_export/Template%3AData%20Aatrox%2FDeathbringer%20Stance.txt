@@ -1,0 +1,28 @@
+<!-- The following values are defined as parameters.
+-->{{#vardefine:i_hmod|1.0}}<!-- Primary healing modifier as a DECIMAL (currently unused)
+-->{{#vardefine:i_mhmod|0.25}}<!-- Minion healing modifier as a DECIMAL
+-->{{{{{1<noinclude>|Ability data</noinclude>}}}|Deathbringer Stance|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}
+|champion     = Aatrox
+|skill        = I
+|icon         = Deathbringer Stance.png
+|description  = {{sbc|Innate:}} Periodically, '''Aatrox''' empowers his next {{tip|basic attack}} to gain {{sti|range|50 '''bonus''' range}} and deal {{as|'''bonus''' magic damage}} equal to {{as|{{pp|key=%|4 + (10-4)/17*(x-1)|1 to 20 by 1}} of the target's '''maximum''' health}}, capped at {{pp|100 + (320-100)/17*(x-1)|1 to 20 by 1}} against {{tip|monsters}}. ''Deathbringer Stance's'' damage applies {{as|{{sti|life steal}}}}.<br><br>'''Aatrox''' {{tip|heals}} for <!--{{ap|{{#var:i_hmod}}*100}}% of -->the {{tt|post-mitigation '''bonus''' damage|Damage calculated after modifiers}} dealt, reduced to {{ap|{{#var:i_mhmod}}*{{#var:i_hmod}}*100}}% against {{tip|minions}}.
+|description2 = Whenever '''Aatrox''' hits at least one enemy {{tip|champion}} or large {{tip|monster}} with a basic attack {{tip|on-hit}} or an {{tip|ability}}, ''Deathbringer Stance's'' {{sti|'''current''' cooldown}} is reduced by 2 seconds, doubled to 4 if he hits with the {{as|Sweetspot|sweetspot}} of ''{{ai|The Darkin Blade|Aatrox}}''.
+|static       = {{pp|22 - (22-10)/17*(x-1)|1 to 20 by 1}}
+|targeting    = Passive
+|affects      = Self, Enemies
+|damagetype   = magic
+|spellshield  = False
+|spelleffects = proc
+|parry        = True
+|notes        =
+* '''Aatrox''' will assume stance when an enemy champion is in range of {{ai|Infernal Chains|Aatrox}}.
+** The [[Emoting|toggle]] expression (default {{sbc|CTRL + 5}}) switches between stances manually.
+* If ''Deathbringer Stance'' becomes available during a standard attack's windup, it will not be consumed or trigger the '''bonus''' damage.
+* Even if the ability hit is {{tip|spell shield|spell shielded}} ''Deathbringer Stance's'' cooldown will still be reduced.
+* This ability goes on cooldown on death and refreshes upon respawn.
+* The empowered attack will not trigger against {{tip|structures}} and {{tip|wards}}.
+<!-- Blurb -->
+|blurbicon    = Deathbringer Stance.png
+|blurb        = {{sbc|Innate:}} Periodically, {{cis|Aatrox}} next {{tip|basic attack}} deals {{as|'''bonus''' magic damage}} based on the {{as|target's '''maximum''' health}}, {{as|{{sti|healing}}}} him for the damage dealt.
+|blurb2       = '''Aatrox's''' basic attacks and {{tip|ability}} hits against enemy {{tip|champions}} or large {{tip|monsters}} {{sti|ah|reduce}} ''Deathbringer Stance's'' {{sti|cd|cooldown}}.
+}}
