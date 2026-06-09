@@ -501,6 +501,40 @@ mod known_divergences {
         assert_eq!(render("{{times}}"), "×");
     }
 
+    /// Bare `{{#expr:...}}` is rounded to the conversion precision (2 dp) via
+    /// `evaluate_expression_display(_, ctx.precision)`. MediaWiki `#expr` returns
+    /// full precision and only rounds with an explicit `round N`, so the
+    /// converter silently loses precision on every non-trivial computation
+    /// (reaches real items: Archangel's Staff, Ardent Censer, …).
+    #[test]
+    #[ignore = "ExprExpander rounds to precision by default; see DIVERGENCES.md"]
+    fn expr_keeps_full_precision() {
+        assert_eq!(render("{{#expr:0.02*0.6}}"), "0.012"); // converter: 0.01
+        assert_eq!(render("{{#expr:(345*0.24)*0.12}}"), "9.936"); // converter: 9.94
+        assert_eq!(render("{{#expr:700/2200}}"), "0.31818181818182");
+    }
+
+    /// `{{ccs|text|type}}` colors `text` by damage type on the wiki and renders
+    /// the text; `CcsExpander` returns the empty string, dropping the content
+    /// entirely (e.g. "deals {{ccs|bonus damage|physical}}" loses "bonus damage").
+    #[test]
+    #[ignore = "CcsExpander drops its text content; see DIVERGENCES.md"]
+    fn ccs_keeps_its_text() {
+        assert_eq!(
+            render("{{ccs|60% increased damage|physical}}"),
+            "60% increased damage"
+        );
+    }
+
+    /// `Module:fd` preserves the literal value (it only wraps decimals in
+    /// `<small>`), so `{{fd|1.30}}` stays `1.30`. The converter reparses to f64
+    /// and drops the trailing zero → `1.3`.
+    #[test]
+    #[ignore = "FdExpander drops trailing zeros via f64 reparse; see DIVERGENCES.md (issue #20)"]
+    fn fd_preserves_trailing_zeros() {
+        assert_eq!(render("{{fd|1.30}}"), "1.30");
+    }
+
     /// `Template:Lethality` renders `N Lethality (… armor penetration)` with the
     /// full per-level armor-penetration conversion. The converter's
     /// `LethalityExpander` emits only `N lethality`, dropping the scaling clause

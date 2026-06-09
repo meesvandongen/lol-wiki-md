@@ -27,6 +27,23 @@ GROUPS = {
     "ifeq":   {"#ifeq"},
     "switch": {"#switch"},
     "tt":     {"tt"},
+    # broader families (issue-hunting; exact matches still become tests)
+    "pptooltip":     {"pptooltip"},
+    "as":            {"as"},
+    "sti":           {"sti"},
+    "dv":            {"dv", "delimit values"},
+    "ft":            {"ft"},
+    "color":         {"color"},
+    "rd":            {"rd"},
+    "sbc":           {"sbc"},
+    "numbersup":     {"numbersup"},
+    "minutedisplay": {"minutedisplay"},
+    "recurring":     {"recurring"},
+    "aug":           {"aug"},
+    "adaptive":      {"adaptive"},
+    "ccs":           {"ccs"},
+    "lll":           {"lll"},
+    "gold":          {"gold"},
 }
 NAME_TO_GROUP = {n: g for g, names in GROUPS.items() for n in names}
 
@@ -54,7 +71,10 @@ def main():
     per = 60
     if "--per" in sys.argv:
         per = int(sys.argv[sys.argv.index("--per")+1])
-    caps = {"ap":70,"pp":55,"fd":45,"expr":55,"if":28,"ifeq":28,"switch":28,"tt":35}
+    caps = {"ap":170,"pp":130,"fd":95,"expr":130,"if":30,"ifeq":30,"switch":15,"tt":35,
+            "pptooltip":25,"as":40,"sti":30,"dv":25,"ft":25,"color":25,"rd":35,"sbc":25,
+            "numbersup":20,"minutedisplay":15,"recurring":20,"aug":20,"adaptive":20,
+            "ccs":20,"lll":15,"gold":20}
 
     buckets = collections.defaultdict(list)
     seen = collections.defaultdict(set)

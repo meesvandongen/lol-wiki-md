@@ -46,11 +46,28 @@ demand (`cargo test -- --ignored`) and will pass once the handler is fixed.
 | 3 | `{{lc:Hello}}`, `{{uc:hello}}`, `{{ucfirst:hello}}`, `{{lcfirst:Hello}}` | `hello`, `HELLO`, `Hello`, `hello` | `E_UNKNOWN_TEMPLATE` | string-casing magic words not implemented. `lcfirst:` on 9 pages, used in `tip`/`Tip data` bodies. | #15 |
 | 4 | `{{#replace:hello world\|world\|there}}` | `hello there` | `E_UNKNOWN_TEMPLATE` | ParserFunctions `#replace:` not implemented. Appears in `tt` gold-efficiency bodies. | #16 |
 | 5 | `{{cis\|Aatrox}}` | `Aatrox's` | `Aatrox` | `IconUnwrapExpander` claims the possessive variants (`cis`/`cais`/`iis`/`sis`/`nies`/`uis`) but only appends `'s` for an explicit `'s` positional, so the bare-name form silently drops the possessive. | #17 |
-| 6 | `(24{{divided by}}n)` (Bloodsong) | `(24 ÷ n)` | `(24n)` | `Template:Divided by` is literally `&nbsp;&divide;&nbsp;` and ignores args; operands are adjacent wikitext. `DividedByExpander` joins (absent) args with ` / `, so the no-arg inline form drops the ÷ entirely → garbled output on a real item. | new |
-| 7 | `{{fd\|500\|750\|1000}}`, `{{fd\|0.6666666\|2}}` | `500`, `0.6666666` | `NaN`, `0.67` | `Module:fd` uses only arg 1; extra positional args are ignored. `FdExpander` treats arg2 as a decimal-precision count → wrong rounding, and `NaN` for some real multi-arg forms (present on convertible pages: Heimerdinger, Conqueror). | new |
-| 8 | `{{times}}` | `×` | `x` | `TimesExpander` hardcodes ASCII `x`; the wiki is the multiplication sign `×`. Affects all damage/scaling `×N` text (1,248 uses). | new |
-| 9 | `{{lethality\|10}}` | `10 Lethality (6.22 – 10 (based on level) armor penetration)` | `10 lethality` | `LethalityExpander` models only the flat number and drops the per-level armor-penetration conversion clause (`Template:Lethality` emits both). Partial-model handler — AGENTS.md flags these as more dangerous than an error. Latent: no convertible page uses `{{lethality\|N}}` directly today. | new |
-| 10 | `{{#titleparts:A/B/C\|1}}`, `{{formatnum:12345.678}}`, `{{#ifexist:...}}` | `A`, `12,345.678`, branch | `E_UNKNOWN_TEMPLATE` | more MediaWiki magic words reached in the corpus: `#ifexist:` (77 pages), `#titleparts:` (29), `formatnum:` (6). Latent (live in unexpanded template bodies). | new |
+| 6 | `(24{{divided by}}n)` (Bloodsong) | `(24 ÷ n)` | `(24n)` | `Template:Divided by` is literally `&nbsp;&divide;&nbsp;` and ignores args; operands are adjacent wikitext. `DividedByExpander` joins (absent) args with ` / `, so the no-arg inline form drops the ÷ entirely → garbled output on a real item. | #19 |
+| 7 | `{{fd\|500\|750\|1000}}`, `{{fd\|0.6666666\|2}}`, `{{fd\|1.30}}` | `500`, `0.6666666`, `1.30` | `NaN`, `0.67`, `1.3` | `Module:fd` uses only arg 1 (and preserves the literal value, only wrapping decimals in `<small>`). `FdExpander` treats arg2 as a decimal-precision count → wrong rounding / `NaN` (real forms on Heimerdinger, Conqueror), and reparses arg1 as f64 so trailing zeros are dropped. | #20 |
+| 8 | `{{times}}` | `×` | `x` | `TimesExpander` hardcodes ASCII `x`; the wiki is the multiplication sign `×`. Affects all damage/scaling `×N` text (1,248 uses). | #21 |
+| 9 | `{{lethality\|10}}` | `10 Lethality (6.22 – 10 (based on level) armor penetration)` | `10 lethality` | `LethalityExpander` models only the flat number and drops the per-level armor-penetration conversion clause (`Template:Lethality` emits both). Partial-model handler — AGENTS.md flags these as more dangerous than an error. Latent: no convertible page uses `{{lethality\|N}}` directly today. | #22 |
+| 10 | `{{#titleparts:A/B/C\|1}}`, `{{formatnum:12345.678}}`, `{{#ifexist:...}}` | `A`, `12,345.678`, branch | `E_UNKNOWN_TEMPLATE` | more MediaWiki magic words reached in the corpus: `#ifexist:` (77 pages), `#titleparts:` (29), `formatnum:` (6). Latent (live in unexpanded template bodies). | #23 |
+| 11 | `{{#expr:0.02*0.6}}`, `{{#expr:700/2200}}` | `0.012`, `0.31818181818182` | `0.01`, `0.32` | `ExprExpander` calls `evaluate_expression_display(_, ctx.precision)`, rounding **every** bare `#expr` to the site precision (2 dp). MediaWiki `#expr` returns full precision and only rounds with explicit `round N`. Silent precision loss; reaches real items (Archangel's Staff, Ardent Censer, …). Violates "numbers round-trip exactly." | new |
+| 12 | `{{ccs\|60% increased damage\|physical}}` | `60% increased damage` | `` (empty) | `CcsExpander` returns the empty string, dropping the damage-type text entirely (e.g. "deals {{ccs\|bonus damage\|physical}}" → "deals "). Content loss in ability/item text. | new |
+
+### Round-2 sweep summary
+
+A broader harvest (921 candidates across 28 template families) generated **593
+passing self-contained tests** (`tests/wiki_examples.rs`). Families whose every
+mismatch is an *intentional contract* difference (not bugs): `rd` (melee/ranged
+labels), `sbc` (bold-uppercase), `tt`/`dv` (tooltip/bullet text), `gold`
+(icon→word), `ft` (flip-text), `as`/`sti`/`color` (keep `'''bold'''` markup for
+the markdown layer), `recurring` (combining overline `5̅` — *more* faithful than
+the wiki's CSS overline, which a plain-text strip flattens to `5`). Minor, low-
+priority field/format divergences noted but not separately filed: `adaptive`
+leaves a `X to Y` arg as literal "to" instead of the "– (based on level)" range
+on the bonus-AD side; `aug` shows the link target instead of a display-text 3rd
+arg; `lll` renders `Skin (Theme)` instead of the wiki's `Theme Skin` and ignores
+`text=`.
 
 ## Intentional contract differences (NOT bugs)
 
