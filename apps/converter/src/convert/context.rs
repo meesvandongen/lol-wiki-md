@@ -6,6 +6,7 @@ use once_cell::sync::OnceCell;
 use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use std::path::{Path, PathBuf};
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
 
 #[derive(Serialize)]
@@ -54,6 +55,7 @@ pub struct ConversionContextInner {
     champion_constants: Mutex<HashMap<String, HashMap<String, String>>>,
     template_parameters: Mutex<HashMap<String, (String, BTreeSet<String>)>>,
     template_include_cache: Mutex<HashMap<String, Option<String>>>,
+    include_removed: AtomicBool,
 }
 
 impl ConversionContext {
@@ -75,6 +77,7 @@ impl ConversionContext {
             champion_constants: Mutex::new(HashMap::new()),
             template_parameters: Mutex::new(HashMap::new()),
             template_include_cache: Mutex::new(HashMap::new()),
+            include_removed: AtomicBool::new(false),
         };
         Ok(Self {
             inner: Arc::new(inner),
@@ -83,6 +86,19 @@ impl ConversionContext {
 
     pub fn precision(&self) -> u8 {
         self.inner.precision
+    }
+
+    /// Whether removed items should be converted and written to the output.
+    /// Defaults to `false`; removed items are excluded unless explicitly opted in.
+    pub fn include_removed(&self) -> bool {
+        self.inner.include_removed.load(Ordering::Relaxed)
+    }
+
+    /// Toggle whether removed items are included in the output. Configure this
+    /// once before running conversions; it is read (without mutation) by the
+    /// parallel batch workers.
+    pub fn set_include_removed(&self, value: bool) {
+        self.inner.include_removed.store(value, Ordering::Relaxed);
     }
 
     pub fn export(&self) -> &WikiExport {

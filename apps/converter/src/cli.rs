@@ -59,4 +59,9 @@ pub struct CliConfig {
     /// Validate templates across the wiki export and write a JSON report
     #[arg(long, default_value_t = false)]
     pub validate: bool,
+
+    /// Include items that have been removed from the game. Removed items are
+    /// excluded from the output by default.
+    #[arg(long = "include-removed", default_value_t = false)]
+    pub include_removed: bool,
 }
