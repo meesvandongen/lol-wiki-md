@@ -67,6 +67,15 @@ fn item_stats_use_labels_and_resolve_references() -> Result<()> {
   }
 }"#;
     std::fs::write(&module_path, lua)?;
+    // Stat labels come from the wiki's own Module:Gold value/data `name` field.
+    std::fs::write(
+        export.join("Module%3AGold value%2Fdata.txt"),
+        r#"return {
+  ["ad"]   = {["val"] = 35, ["name"] = "attack damage"},
+  ["ah"]   = {["val"] = 50, ["name"] = "ability haste"},
+  ["mana"] = {["val"] = 1,  ["name"] = "mana"},
+}"#,
+    )?;
     let out_dir = root.join("out");
     convert_item(&export, &out_dir, "Muramana", 2)?;
     let md = std::fs::read_to_string(out_dir.join("Muramana.md"))?;

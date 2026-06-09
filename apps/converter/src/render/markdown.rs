@@ -485,62 +485,6 @@ fn render_special_stats(
     }
 }
 
-/// Map a raw `Module:ItemData` stat key (e.g. `ad`, `ah`) to the human-readable
-/// label the wiki uses in item tooltips. Mirrors the canonical stat aliases the
-/// converter already relies on (`item_field_candidates`), with a humanized
-/// fallback for unrecognized keys so a new stat key never renders bare.
-fn item_stat_label(key: &str) -> String {
-    let normalized = key.trim().trim_end_matches("unique").to_ascii_lowercase();
-    let label = match normalized.as_str() {
-        "hp" => "Health",
-        "mp" | "mana" => "Mana",
-        "ap" => "Ability Power",
-        "ad" | "dam" => "Attack Damage",
-        "arm" | "armor" => "Armor",
-        "mr" => "Magic Resistance",
-        "ms" | "msflat" => "Movement Speed",
-        "crit" => "Critical Strike Chance",
-        "critdamage" => "Critical Strike Damage",
-        "as" => "Attack Speed",
-        "ah" => "Ability Haste",
-        "cdr" => "Cooldown Reduction",
-        "hp5" | "hp5flat" => "Health Regeneration",
-        "mp5" | "mp5flat" => "Mana Regeneration",
-        "lifesteal" => "Life Steal",
-        "omnivamp" => "Omnivamp",
-        "hsp" => "Heal and Shield Power",
-        "lethality" => "Lethality",
-        "armpen" => "Armor Penetration",
-        "mpen" | "mpenflat" => "Magic Penetration",
-        "tenacity" => "Tenacity",
-        "range" => "Attack Range",
-        "gp10" => "Gold Per 10 Seconds",
-        _ => return humanize_stat_key(&normalized),
-    };
-    label.to_string()
-}
-
-/// Title-case an unrecognized stat key so it still reads as a label rather than a
-/// bare code (e.g. `some_stat` -> `Some Stat`).
-fn humanize_stat_key(key: &str) -> String {
-    let mut out = String::new();
-    let mut upper = true;
-    for c in key.chars() {
-        if c == '_' || c == '-' {
-            out.push(' ');
-            upper = true;
-            continue;
-        }
-        if upper {
-            out.extend(c.to_uppercase());
-            upper = false;
-        } else {
-            out.push(c);
-        }
-    }
-    out
-}
-
 pub fn render_item_markdown(item: &Item, _raw_excerpt: &str) -> String {
     let mut out = String::new();
     out.push_str(&format!("# {}\n\n", item.name));
@@ -675,13 +619,12 @@ pub fn render_item_markdown(item: &Item, _raw_excerpt: &str) -> String {
 
     if !item.stats.is_empty() {
         out.push_str("## Stats\n\n| Stat | Value |\n|------|-------|\n");
-        let mut keys: Vec<_> = item.stats.keys().collect();
-        keys.sort();
-        for key in keys {
-            if let Some(val) = item.stats.get(key) {
-                let norm_val = normalize_all(val);
-                out.push_str(&format!("| {} | {} |\n", item_stat_label(key), norm_val));
-            }
+        for stat in &item.stats {
+            out.push_str(&format!(
+                "| {} | {} |\n",
+                normalize_all(&stat.label),
+                normalize_all(&stat.value)
+            ));
         }
         out.push('\n');
     }

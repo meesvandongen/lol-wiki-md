@@ -8,7 +8,7 @@ use crate::convert::util::{
 };
 use crate::convert::{write_markdown_with_plain_text, ConversionOutcome};
 use crate::error::{ConvertError, Result};
-use crate::model::{Item, ItemEffect, SourceAppendix};
+use crate::model::{Item, ItemEffect, ItemStat, SourceAppendix};
 use crate::parse::lua::{lua_value_to_string, lua_value_to_string_vec, LuaValue};
 use crate::parse::tables::wikitext_table_to_markdown;
 use crate::parse::templates::{parse_invocation, TemplateRegistry};
@@ -211,8 +211,10 @@ fn build_item_from_entry(
     }
     if let Some(stats) = entry.get("stats") {
         let module = ctx.item_module_map()?;
+        let gold_values = ctx.gold_value_data_map()?;
         item.stats = collect_stats(
             module,
+            gold_values,
             name,
             stats,
             precision,
@@ -639,6 +641,7 @@ fn push_render_cleanup_warning(warnings: &mut Vec<String>, scope: &str, expanded
 
 fn collect_stats(
     module: &HashMap<String, HashMap<String, LuaValue>>,
+    gold_values: &HashMap<String, HashMap<String, LuaValue>>,
     item_name: &str,
     value: &LuaValue,
     precision: u8,
@@ -646,14 +649,15 @@ fn collect_stats(
     registry: &TemplateRegistry,
     conversion_ctx: Option<Arc<ConversionContext>>,
     warnings: &mut Vec<String>,
-) -> Result<HashMap<String, String>> {
-    let mut out = HashMap::new();
+) -> Result<Vec<ItemStat>> {
+    let mut out = Vec::new();
     if let LuaValue::Table(map) = value {
         for (key, val) in map {
             if let Some(s) = lua_value_to_string(val) {
                 // A stat stored as `=>Other Item` inherits the same stat's value from the
-                // referenced item (the wiki resolves this pointer rather than printing it).
-                // Resolve the chain before expanding so the rendered table shows the real value.
+                // referenced item (the wiki resolves this pointer rather than printing it
+                // — see `get()` in Module:ItemData/getter). Resolve the chain before
+                // expanding so the rendered value is the real number, not the pointer.
                 let resolved = if s.trim().starts_with("=>") {
                     match resolve_item_stat_string(module, key, &s, &mut HashSet::new()) {
                         Some(value) => value,
@@ -674,11 +678,64 @@ fn collect_stats(
                     &format!("item stat `{key}` for `{item_name}`"),
                     &expanded,
                 );
-                out.insert(key.clone(), expanded);
+                let label = item_stat_label(gold_values, key, warnings, item_name);
+                out.push(ItemStat {
+                    key: key.clone(),
+                    label,
+                    value: expanded,
+                });
             }
         }
     }
+    // Lua tables have no inherent order; sort by stat key for deterministic output.
+    out.sort_by(|a, b| a.key.cmp(&b.key));
     Ok(out)
+}
+
+/// Resolve the human-readable label for an item stat key from the wiki's own
+/// `Module:Gold value/data`, which stores a `name` field for every stat key items
+/// use (e.g. `ad` -> "attack damage"). Keys ending in `unique` (e.g. `apunique`)
+/// share the base stat's name, mirroring the wiki getter's `gsub("unique", "")`.
+/// Falls back to a humanized key (and a warning) for any key the data lacks, so a
+/// label is never invented from thin air.
+fn item_stat_label(
+    gold_values: &HashMap<String, HashMap<String, LuaValue>>,
+    key: &str,
+    warnings: &mut Vec<String>,
+    item_name: &str,
+) -> String {
+    let normalized = key.trim().trim_end_matches("unique").to_ascii_lowercase();
+    if let Some(name) = get_case_insensitive_value(gold_values, &normalized)
+        .and_then(|entry| entry.get("name"))
+        .and_then(lua_value_to_string)
+    {
+        return title_case_label(&name);
+    }
+    warnings.push(format!(
+        "No stat name found in Module:Gold value/data for item stat `{key}` on `{item_name}`; using a humanized fallback label."
+    ));
+    title_case_label(&normalized.replace(['_', '-'], " "))
+}
+
+/// Title-case a wiki stat name (`attack damage` -> `Attack Damage`) so item stat
+/// labels read like the titled stats in champion output.
+fn title_case_label(input: &str) -> String {
+    let mut out = String::new();
+    let mut upper = true;
+    for c in input.chars() {
+        if c.is_whitespace() {
+            out.push(c);
+            upper = true;
+            continue;
+        }
+        if upper {
+            out.extend(c.to_uppercase());
+            upper = false;
+        } else {
+            out.push(c);
+        }
+    }
+    out
 }
 
 /// Resolve an item stat value, following `=>Item` references to the same stat on the

@@ -132,7 +132,7 @@ pub struct Item {
     pub name: String,
     pub tier: Option<String>,
     pub categories: Vec<String>,
-    pub stats: HashMap<String, String>,
+    pub stats: Vec<ItemStat>,
     pub effects: Vec<ItemEffect>,
     pub recipe: Vec<String>,
     pub cost_total: Option<u32>,
@@ -155,6 +155,16 @@ pub struct Item {
     pub patch_history: Vec<PatchEntry>,
     pub source_appendices: Vec<SourceAppendix>,
     pub warnings: Vec<String>,
+}
+
+/// A single item statistic line. `key` is the raw `Module:ItemData` stat key
+/// (e.g. `ad`, `ah`); `label` is the human-readable name the wiki uses for it
+/// (sourced from `Module:Gold value/data`); `value` is the resolved, rendered value.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
+pub struct ItemStat {
+    pub key: String,
+    pub label: String,
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Default)]
