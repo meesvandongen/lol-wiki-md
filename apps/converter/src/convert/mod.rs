@@ -15,6 +15,9 @@ pub use context::ConversionContext;
 pub struct ConversionOutcome {
     pub entity: String,
     pub output: PathBuf,
+    /// True when the entity was intentionally not written (e.g. a removed item
+    /// excluded by default). No output file exists at `output` in that case.
+    pub skipped: bool,
 }
 
 /// High-level convenience helpers that mirror the legacy conversion entry points.

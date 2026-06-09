@@ -27,6 +27,17 @@ pub(super) fn convert_item(
     let module = ctx.item_module_map()?;
     let (module_name, entry) = resolve_item_entry(module, name, &raw)
         .ok_or_else(|| ConvertError::ItemNotFound(name.to_string()))?;
+    let out_file = output_dir.join(format!("{}.md", name.replace(' ', "_")));
+    // Removed items live in `Module:ItemData/data/removed` and carry a `removed`
+    // marker. They are excluded from the output by default; only emit them when
+    // the caller explicitly opts in via `--include-removed`.
+    if entry.contains_key("removed") && !ctx.include_removed() {
+        return Ok(ConversionOutcome {
+            entity: name.to_string(),
+            output: out_file,
+            skipped: true,
+        });
+    }
     let registry = ctx.registry();
     let precision = ctx.precision();
     let vars = collect_page_vars(&raw)?;
@@ -44,7 +55,6 @@ pub(super) fn convert_item(
     item.source_appendices =
         collect_item_source_appendices(export, name, &raw, module_name, entry)?;
     let markdown = render_item_markdown(&item, &raw);
-    let out_file = output_dir.join(format!("{}.md", name.replace(' ', "_")));
     write_markdown_with_plain_text(&out_file, &markdown)?;
     if let Ok(rel) = out_file.strip_prefix(output_dir) {
         let artifact = rel.to_string_lossy().replace('\\', "/");
@@ -56,6 +66,7 @@ pub(super) fn convert_item(
     Ok(ConversionOutcome {
         entity: name.to_string(),
         output: out_file,
+        skipped: false,
     })
 }
 
@@ -1085,6 +1096,7 @@ mod tests {
         .unwrap();
 
         let ctx = crate::convert::ConversionContext::new(td.path(), 2).unwrap();
+        ctx.set_include_removed(true);
         let out_dir = td.path().join("out");
         std::fs::create_dir_all(&out_dir).unwrap();
 
@@ -1097,6 +1109,46 @@ mod tests {
             "Ataraxia was a legendary item in League of Legends. Could only be forged by Ornn."
         ));
         assert!(md.contains("All stats have been improved."));
+    }
+
+    #[test]
+    fn convert_item_skips_removed_items_by_default() {
+        let td = tempfile::tempdir().unwrap();
+        let flat = td.path().join("export_out");
+        std::fs::create_dir_all(&flat).unwrap();
+        std::fs::write(flat.join("Ataraxia.txt"), "{{Item info}}\n").unwrap();
+        std::fs::write(
+            flat.join("Module%3AItemData%2Fdata%2Fremoved.txt"),
+            r#"return {
+    ["Ataraxia"] = {
+        ["buy"] = 3000,
+        ["ornn"] = true,
+        ["removed"] = "V14.11",
+        ["tier"] = 4,
+        ["type"] = {
+            [1] = "Legendary",
+        },
+    },
+}"#,
+        )
+        .unwrap();
+
+        let ctx = crate::convert::ConversionContext::new(td.path(), 2).unwrap();
+        let out_dir = td.path().join("out");
+        std::fs::create_dir_all(&out_dir).unwrap();
+
+        let outcome = ctx.convert_item(&out_dir, "Ataraxia").unwrap();
+        assert!(outcome.skipped, "removed item should be skipped by default");
+        assert!(
+            !out_dir.join("Ataraxia.md").exists(),
+            "no markdown file should be written for a skipped removed item"
+        );
+
+        // Opting in writes the file as before.
+        ctx.set_include_removed(true);
+        let outcome = ctx.convert_item(&out_dir, "Ataraxia").unwrap();
+        assert!(!outcome.skipped);
+        assert!(out_dir.join("Ataraxia.md").exists());
     }
 
     #[test]

@@ -55,6 +55,8 @@ You can still target individual conversions when needed, for example:
 - `npm run convert:items`
 - `npm run convert:runes`
 
+Items that have been removed from the game are excluded from the output by default. Pass `--include-removed` to convert them as well (for example `npm run convert -- --all-items --include-removed`).
+
 ## One-shot pipeline
 
 Run the full pipeline from the repository root:
