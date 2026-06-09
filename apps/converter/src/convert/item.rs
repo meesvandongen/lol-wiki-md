@@ -657,7 +657,7 @@ fn collect_stats(
                 // A stat stored as `=>Other Item` inherits the same stat's value from the
                 // referenced item (the wiki resolves this pointer rather than printing it
                 // — see `get()` in Module:ItemData/getter). Resolve the chain before
-                // expanding so the rendered value is the real number, not the pointer.
+                // formatting so the rendered value is the real number, not the pointer.
                 let resolved = if s.trim().starts_with("=>") {
                     match resolve_item_stat_string(module, key, &s, &mut HashSet::new()) {
                         Some(value) => value,
@@ -671,19 +671,18 @@ fn collect_stats(
                 } else {
                     s
                 };
-                let expanded =
-                    expand_text(&resolved, precision, vars, registry, conversion_ctx.clone())?;
-                push_render_cleanup_warning(
+                let stat = render_item_stat(
+                    gold_values,
+                    key,
+                    &resolved,
+                    precision,
+                    vars,
+                    registry,
+                    conversion_ctx.clone(),
                     warnings,
-                    &format!("item stat `{key}` for `{item_name}`"),
-                    &expanded,
-                );
-                let label = item_stat_label(gold_values, key, warnings, item_name);
-                out.push(ItemStat {
-                    key: key.clone(),
-                    label,
-                    value: expanded,
-                });
+                    item_name,
+                )?;
+                out.push(stat);
             }
         }
     }
@@ -692,12 +691,120 @@ fn collect_stats(
     Ok(out)
 }
 
+/// Stat keys the wiki renders as a percentage, taken verbatim from the
+/// `percentage_stat_table` in `Module:ItemData/getter` (`p.isPercentage`). The
+/// infobox appends `%` to exactly these; every other numeric stat is flat.
+///
+/// This is the one piece of per-stat behaviour that lives in wiki *code* rather
+/// than a data module, so it is transcribed here. Adding/removing items or
+/// changing values never needs a change; only the rare introduction of a brand
+/// new percentage *stat type* on the wiki would require adding its key here.
+const PERCENTAGE_STATS: &[&str] = &[
+    "armpen",
+    "as",
+    "cdr",
+    "crit",
+    "critdamage",
+    "hsp",
+    "lifesteal",
+    "ms",
+    "hp5",
+    "mp5",
+    "mpen",
+    "omnivamp",
+    "pvamp",
+    "spellvamp",
+    "tenacity",
+];
+
+/// Trailing unit phrase the infobox appends to a stat's value, transcribed from
+/// `Template:Infobox item/new/var` (e.g. flat regen reads `+X health per 5 seconds`,
+/// gold income reads `+X per 10 seconds`).
+fn stat_value_suffix(normalized_key: &str) -> Option<&'static str> {
+    match normalized_key {
+        "hp5flat" | "mp5flat" => Some("per 5 seconds"),
+        "gp10" => Some("per 10 seconds"),
+        _ => None,
+    }
+}
+
+/// Render a single item stat into its labelled, fully-formatted form, mirroring
+/// `Template:Infobox item/new/var`: a `+`-prefixed value, a `%` for percentage
+/// stats, any trailing unit phrase, and the wiki's stat name as the label.
+///
+/// The label and the set of stats are data-driven (`Module:Gold value/data` and
+/// the item's own stat table), so items/stats can be added or removed without code
+/// changes; only the small percentage/suffix rules above are transcribed from wiki
+/// templates because that behaviour is not exposed as data.
+#[allow(clippy::too_many_arguments)]
+fn render_item_stat(
+    gold_values: &HashMap<String, HashMap<String, LuaValue>>,
+    key: &str,
+    resolved_raw: &str,
+    precision: u8,
+    vars: &HashMap<String, String>,
+    registry: &TemplateRegistry,
+    conversion_ctx: Option<Arc<ConversionContext>>,
+    warnings: &mut Vec<String>,
+    item_name: &str,
+) -> Result<ItemStat> {
+    let normalized = key.trim().trim_end_matches("unique").to_ascii_lowercase();
+
+    // `spec`/`spec2` carry free-form text (e.g. a unique-passive blurb) with no
+    // numeric value and no stat noun; the infobox prints the text verbatim.
+    if normalized == "spec" || normalized == "spec2" {
+        let text = expand_text(resolved_raw, precision, vars, registry, conversion_ctx)?;
+        push_render_cleanup_warning(
+            warnings,
+            &format!("item stat `{key}` for `{item_name}`"),
+            &text,
+        );
+        return Ok(ItemStat {
+            key: key.to_string(),
+            label: "Special".to_string(),
+            value: text,
+        });
+    }
+
+    // Format the number through `{{fd}}` exactly as the infobox does, then apply
+    // the `+` sign, the percentage marker, and any trailing unit phrase.
+    let formatted = expand_text(
+        &format!("{{{{fd|{resolved_raw}}}}}"),
+        precision,
+        vars,
+        registry,
+        conversion_ctx,
+    )?;
+    push_render_cleanup_warning(
+        warnings,
+        &format!("item stat `{key}` for `{item_name}`"),
+        &formatted,
+    );
+    let percent = if PERCENTAGE_STATS.contains(&normalized.as_str()) {
+        "%"
+    } else {
+        ""
+    };
+    let value = match stat_value_suffix(&normalized) {
+        Some(suffix) => format!("+{formatted}{percent} {suffix}"),
+        None => format!("+{formatted}{percent}"),
+    };
+
+    Ok(ItemStat {
+        key: key.to_string(),
+        label: item_stat_label(gold_values, key, warnings, item_name),
+        value,
+    })
+}
+
 /// Resolve the human-readable label for an item stat key from the wiki's own
 /// `Module:Gold value/data`, which stores a `name` field for every stat key items
 /// use (e.g. `ad` -> "attack damage"). Keys ending in `unique` (e.g. `apunique`)
 /// share the base stat's name, mirroring the wiki getter's `gsub("unique", "")`.
-/// Falls back to a humanized key (and a warning) for any key the data lacks, so a
-/// label is never invented from thin air.
+///
+/// A few keys carry no gold value (and so no `name`): `gp10` is labelled from the
+/// `categoryTable` in `Module:ItemData`. Any other unmapped key falls back to a
+/// humanized key (and a warning), so a label is never invented from thin air.
 fn item_stat_label(
     gold_values: &HashMap<String, HashMap<String, LuaValue>>,
     key: &str,
@@ -710,6 +817,11 @@ fn item_stat_label(
         .and_then(lua_value_to_string)
     {
         return title_case_label(&name);
+    }
+    // `gp10` is deliberately omitted from Module:Gold value/data; Module:ItemData's
+    // categoryTable names it "Gold income".
+    if normalized == "gp10" {
+        return "Gold Income".to_string();
     }
     warnings.push(format!(
         "No stat name found in Module:Gold value/data for item stat `{key}` on `{item_name}`; using a humanized fallback label."
