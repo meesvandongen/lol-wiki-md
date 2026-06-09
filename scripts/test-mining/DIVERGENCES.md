@@ -39,15 +39,18 @@ These are context-independent and unambiguous. Each is encoded as an
 `known_divergences`) asserting the wiki-correct value, so they are runnable on
 demand (`cargo test -- --ignored`) and will pass once the handler is fixed.
 
-| # | Input | Wiki renders | Converter renders | Cause |
-|---|-------|--------------|-------------------|-------|
-| 1 | `{{#switch:z\|a=Apple\|b=Banana\|Default}}` | `Default` | `` (empty) | `SwitchExpander` only honors `#default=`, not MediaWiki's bare-last-parameter default (`templates.rs` `SwitchExpander`). Silent: emits empty where a default exists. |
-| 2 | `{{#expr:10 mod 3}}` | `1` | `E_MALFORMED_TEMPLATE` | `parse/expr.rs` tokenizer has no `mod` operator. |
-| 3 | `{{lc:Hello}}` | `hello` | `E_UNKNOWN_TEMPLATE` | MediaWiki magic word `lc:` not implemented. Appears in `tip`/`Tip data` bodies (`{{lc:{{{1}}}}}`). |
-| 4 | `{{uc:hello}}` | `HELLO` | `E_UNKNOWN_TEMPLATE` | magic word `uc:` not implemented. |
-| 5 | `{{ucfirst:hello}}` | `Hello` | `E_UNKNOWN_TEMPLATE` | magic word `ucfirst:` not implemented. |
-| 6 | `{{#replace:hello world\|world\|there}}` | `hello there` | `E_UNKNOWN_TEMPLATE` | ParserFunctions `#replace:` not implemented. Appears in `tt` gold-efficiency bodies. |
-| 7 | `{{cis\|Aatrox}}` | `Aatrox's` | `Aatrox` | `IconUnwrapExpander` claims the possessive variants (`cis`/`cais`/`iis`/`sis`/`nies`/`uis`) but only appends `'s` for an explicit `'s` positional, so the bare-name form silently drops the possessive. |
+| # | Input | Wiki renders | Converter renders | Cause | GH |
+|---|-------|--------------|-------------------|-------|----|
+| 1 | `{{#switch:z\|a=Apple\|b=Banana\|Default}}` | `Default` | `` (empty) | `SwitchExpander` only honors `#default=`, not MediaWiki's bare-last-parameter default. Silent: emits empty where a default exists. | #13 |
+| 2 | `{{#expr:10 mod 3}}`, `{{#expr:5 > 3}}`, `{{#expr:sqrt 16}}` | `1`, `1`, `4` | `E_MALFORMED_TEMPLATE` | `parse/expr.rs` implements only `+ - * / ^` and `round/floor/ceil/abs`; missing `mod`, comparison (`< > = <= >= <>`), boolean (`and or not`), `e` notation, `sqrt/trunc/ln/...`. Comparison appears on 3 corpus pages. | #14 |
+| 3 | `{{lc:Hello}}`, `{{uc:hello}}`, `{{ucfirst:hello}}`, `{{lcfirst:Hello}}` | `hello`, `HELLO`, `Hello`, `hello` | `E_UNKNOWN_TEMPLATE` | string-casing magic words not implemented. `lcfirst:` on 9 pages, used in `tip`/`Tip data` bodies. | #15 |
+| 4 | `{{#replace:hello world\|world\|there}}` | `hello there` | `E_UNKNOWN_TEMPLATE` | ParserFunctions `#replace:` not implemented. Appears in `tt` gold-efficiency bodies. | #16 |
+| 5 | `{{cis\|Aatrox}}` | `Aatrox's` | `Aatrox` | `IconUnwrapExpander` claims the possessive variants (`cis`/`cais`/`iis`/`sis`/`nies`/`uis`) but only appends `'s` for an explicit `'s` positional, so the bare-name form silently drops the possessive. | #17 |
+| 6 | `(24{{divided by}}n)` (Bloodsong) | `(24 ÷ n)` | `(24n)` | `Template:Divided by` is literally `&nbsp;&divide;&nbsp;` and ignores args; operands are adjacent wikitext. `DividedByExpander` joins (absent) args with ` / `, so the no-arg inline form drops the ÷ entirely → garbled output on a real item. | new |
+| 7 | `{{fd\|500\|750\|1000}}`, `{{fd\|0.6666666\|2}}` | `500`, `0.6666666` | `NaN`, `0.67` | `Module:fd` uses only arg 1; extra positional args are ignored. `FdExpander` treats arg2 as a decimal-precision count → wrong rounding, and `NaN` for some real multi-arg forms (present on convertible pages: Heimerdinger, Conqueror). | new |
+| 8 | `{{times}}` | `×` | `x` | `TimesExpander` hardcodes ASCII `x`; the wiki is the multiplication sign `×`. Affects all damage/scaling `×N` text (1,248 uses). | new |
+| 9 | `{{lethality\|10}}` | `10 Lethality (6.22 – 10 (based on level) armor penetration)` | `10 lethality` | `LethalityExpander` models only the flat number and drops the per-level armor-penetration conversion clause (`Template:Lethality` emits both). Partial-model handler — AGENTS.md flags these as more dangerous than an error. Latent: no convertible page uses `{{lethality\|N}}` directly today. | new |
+| 10 | `{{#titleparts:A/B/C\|1}}`, `{{formatnum:12345.678}}`, `{{#ifexist:...}}` | `A`, `12,345.678`, branch | `E_UNKNOWN_TEMPLATE` | more MediaWiki magic words reached in the corpus: `#ifexist:` (77 pages), `#titleparts:` (29), `formatnum:` (6). Latent (live in unexpanded template bodies). | new |
 
 ## Intentional contract differences (NOT bugs)
 
@@ -61,9 +64,12 @@ locked in as characterization tests, not differential tests:
 | `{{ft\|a\|b}}` | `「 a 」「 b 」` (one side shown live) | `a *(equivalently: b)*` | documented flip-text normalization |
 | `{{sbc\|small caps}}` | `small caps` (CSS small-caps) | `**SMALL CAPS**` | small-caps → bold uppercase |
 | `{{rd\|85\|65}}` | `( 85 / 65)` | `85 (melee) / 65 (ranged)` | melee/ranged labels made explicit |
-| `{{times}}` | `×` | `x` | ascii multiplication |
-| `{{Divided by\|100\|4}}` | `÷` | `100 / 4` | renders the operands instead of the bare sign |
+| `{{color\|yellow\|'''Steal'''}}` | `Steal` | `'''Steal'''` | color dropped; bold markup kept for the markdown layer |
 | `{{ci\|Akshan\|'s}}` | `'s` (name is icon) | `Akshan's` | name text preserved |
+
+(`{{times}}` and `{{Divided by}}` were previously listed here but are now in the
+table above: fetching their template sources showed the converter is wrong, not
+making a stylistic choice.)
 
 ## Context-dependent (excluded from differential tests)
 

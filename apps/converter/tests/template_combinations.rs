@@ -268,6 +268,83 @@ fn contract_numeric_and_symbol_helpers() {
 }
 
 // ---------------------------------------------------------------------------
+// Differential / contract: a wider mined sweep (round 2)
+// ---------------------------------------------------------------------------
+
+#[test]
+fn differential_ap_more_sequences_and_ranges() {
+    assert_table(&[
+        // Two-value and six-value explicit lists (Ahri, Jhin, et al.).
+        ("{{ap|25|50}}", "25 / 50"),
+        (
+            "{{ap|70|110|150|190|230|270}}",
+            "70 / 110 / 150 / 190 / 230 / 270",
+        ),
+        ("{{ap|80|140|200|360}}", "80 / 140 / 200 / 360"),
+        // Implicit 5-point range (no count) defaults to five steps.
+        ("{{ap|0.5 to 2.5}}", "0.5 / 1 / 1.5 / 2 / 2.5"),
+        // Explicit `round=` named parameter.
+        ("{{ap|10 to 30|round=1}}", "10 / 15 / 20 / 25 / 30"),
+        // Arithmetic on both endpoints (Maximum Bonus Armor pattern).
+        ("{{ap|7*8 to 19*8}}", "56 / 80 / 104 / 128 / 152"),
+    ]);
+}
+
+#[test]
+fn differential_pp_more_forms() {
+    assert_table(&[
+        // `;`-list with `key=%` per-value unit.
+        (
+            "{{pp|10;30;70;125|key=%}}",
+            "10% / 30% / 70% / 125% (based on level)",
+        ),
+        ("{{pp|3 to 4.5|key=%}}", "3% – 4.5% (based on level)"),
+        // `start to end for N` counted range.
+        (
+            "{{pp|12 to 24 for 4}}",
+            "12 / 16 / 20 / 24 (based on level)",
+        ),
+    ]);
+}
+
+#[test]
+fn differential_expr_and_conditionals_more() {
+    assert_table(&[
+        ("{{#expr:10 / 4 round 0}}", "3"),
+        ("{{#expr:-5 + 3}}", "-2"),
+        // `#switch` on a numeric key, and a present `#default=` fallback.
+        ("{{#switch:5|4=four|5=five|other}}", "five"),
+        ("{{#switch:B|a=1|b=2|#default=def}}", "def"),
+        // `#ifeq` trims whitespace before comparing.
+        ("{{#ifeq: 5 |5|eq|ne}}", "eq"),
+        // Whitespace-only condition is falsey.
+        ("{{#if: |t|f}}", "f"),
+    ]);
+}
+
+#[test]
+fn nesting_tt_wraps_ap_progression() {
+    // {{tt|{{ap|180|160|140}}}} — a tooltip wrapping a progression passes the
+    // expanded value straight through.
+    assert_eq!(render("{{tt|{{ap|180|160|140}}}}"), "180 / 160 / 140");
+}
+
+#[test]
+fn contract_more_inline_helpers() {
+    // {{NumberSup|N}} is an ordinal, not a superscript digit.
+    assert_eq!(expand_one("NumberSup|14"), "14th");
+    // {{degrees}} is the degree sign (alias of {{degree}}).
+    assert_eq!(expand_one("degrees"), "°");
+    // {{color|name|text}} drops the color and keeps the (bold) content markup,
+    // which the markdown layer renders downstream.
+    assert_eq!(expand_one("color|yellow|'''Steal'''"), "'''Steal'''");
+    // {{sbc}} uppercases the first positional; extra args are ignored.
+    assert_eq!(expand_one("sbc|Singed|Surfer"), "**SINGED**");
+    // {{rd}} also handles percent-suffixed melee/ranged values.
+    assert_eq!(expand_one("rd|40%|20%"), "40% (melee) / 20% (ranged)");
+}
+
+// ---------------------------------------------------------------------------
 // Data-lookup combinations with inline module fixtures
 // ---------------------------------------------------------------------------
 
@@ -362,20 +439,80 @@ mod known_divergences {
         assert_eq!(render("{{#switch:z|a=Apple|b=Banana|Default}}"), "Default");
     }
 
-    /// `#expr` `mod` operator is unimplemented in parse/expr.rs (hard error).
+    /// `parse/expr.rs` implements only `+ - * / ^` and `round/floor/ceil/abs`.
+    /// MediaWiki `#expr` also supports `mod`, comparison (`< > = <= >= <>`),
+    /// boolean (`and or not`), `e` notation, and `sqrt/trunc/ln/exp/...`. The
+    /// comparison operators appear in the corpus (3 pages); all of these hard-
+    /// error today.
     #[test]
-    #[ignore = "expr tokenizer lacks `mod`; see DIVERGENCES.md"]
-    fn expr_mod_operator() {
+    #[ignore = "expr lacks mod/comparison/boolean/sqrt/trunc/ln/e; see DIVERGENCES.md"]
+    fn expr_missing_operators() {
         assert_eq!(render("{{#expr:10 mod 3}}"), "1");
+        assert_eq!(render("{{#expr:5 > 3}}"), "1");
+        assert_eq!(render("{{#expr:sqrt 16}}"), "4");
+        assert_eq!(render("{{#expr:trunc 7.9}}"), "7");
     }
 
     /// MediaWiki string magic words used inside `tip`/`tt` bodies.
     #[test]
-    #[ignore = "lc:/uc:/ucfirst: magic words unimplemented; see DIVERGENCES.md"]
+    #[ignore = "lc:/uc:/ucfirst:/lcfirst: magic words unimplemented; see DIVERGENCES.md"]
     fn case_magic_words() {
         assert_eq!(render("{{lc:Hello}}"), "hello");
         assert_eq!(render("{{uc:hello}}"), "HELLO");
         assert_eq!(render("{{ucfirst:hello}}"), "Hello");
+        assert_eq!(render("{{lcfirst:Hello}}"), "hello");
+    }
+
+    /// Other MediaWiki magic words reached in the corpus: `#ifexist:` (77
+    /// pages), `#titleparts:` (29), `formatnum:` (6). All hard-error today.
+    #[test]
+    #[ignore = "#ifexist:/#titleparts:/formatnum: unimplemented; see DIVERGENCES.md"]
+    fn other_magic_words() {
+        assert_eq!(render("{{#titleparts:A/B/C|1}}"), "A");
+        assert_eq!(render("{{formatnum:12345.678}}"), "12,345.678");
+    }
+
+    /// `Template:Divided by` is literally `&nbsp;&divide;&nbsp;` and ignores its
+    /// arguments. The converter's `DividedByExpander` instead joins the (usually
+    /// absent) args with ` / `, so the no-arg inline form — `(24{{divided by}}n)`
+    /// in Bloodsong — collapses to the garbled `(24n)`, dropping the ÷ operator.
+    #[test]
+    #[ignore = "DividedByExpander drops the ÷ operator; see DIVERGENCES.md"]
+    fn divided_by_is_the_division_sign() {
+        assert_eq!(render("{{Divided by}}"), "÷");
+    }
+
+    /// `Module:fd` uses only the first argument (it just wraps the decimals in
+    /// `<small>`); extra positional args are ignored. The converter treats arg2
+    /// as a decimal-precision count, which both rounds when it should not and
+    /// produces `NaN` for real corpus forms like `{{fd|500|750|1000}}`.
+    #[test]
+    #[ignore = "FdExpander mishandles extra positional args (rounds / NaN); see DIVERGENCES.md"]
+    fn fd_ignores_extra_positional_args() {
+        assert_eq!(render("{{fd|500|750|1000}}"), "500");
+        assert_eq!(render("{{fd|0.6666666|2}}"), "0.6666666");
+    }
+
+    /// `{{times}}` is the multiplication sign `×` on the wiki; the converter
+    /// emits ASCII `x`, which is ambiguous in damage/scaling text.
+    #[test]
+    #[ignore = "TimesExpander emits ASCII 'x' not '×'; see DIVERGENCES.md"]
+    fn times_is_the_multiplication_sign() {
+        assert_eq!(render("{{times}}"), "×");
+    }
+
+    /// `Template:Lethality` renders `N Lethality (… armor penetration)` with the
+    /// full per-level armor-penetration conversion. The converter's
+    /// `LethalityExpander` emits only `N lethality`, dropping the scaling clause
+    /// (a partial-model handler — AGENTS.md flags these as more dangerous than an
+    /// error). Latent: no convertible page uses `{{lethality|N}}` directly today.
+    #[test]
+    #[ignore = "LethalityExpander drops the armor-penetration scaling; see DIVERGENCES.md"]
+    fn lethality_includes_armor_penetration_scaling() {
+        assert_eq!(
+            render("{{lethality|10}}"),
+            "10 Lethality (6.22 – 10 (based on level) armor penetration)"
+        );
     }
 
     /// ParserFunctions `#replace:` used inside gold-efficiency `tt` bodies.
