@@ -7,7 +7,7 @@ import sys, os, json, re, html, time, urllib.parse, urllib.request
 
 API = "https://wiki.leagueoflegends.com/en-us/api.php"
 HERE = os.path.dirname(os.path.abspath(__file__))
-CACHE = os.path.join(HERE, "render_cache.json")
+CACHE = os.path.join(HERE, "..", "..", "validation_reports", "test-mining", "render_cache.json")
 
 def strip_html(h):
     h = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", h, flags=re.S)
@@ -39,6 +39,7 @@ def main():
             cache[wt] = strip_html(render(wt))
             time.sleep(0.15)
         print("%s\t%s" % (wt, cache[wt].replace("\n","\\n")))
+    os.makedirs(os.path.dirname(CACHE), exist_ok=True)
     json.dump(cache, open(CACHE,"w"), indent=0, ensure_ascii=False)
 
 if __name__ == "__main__":

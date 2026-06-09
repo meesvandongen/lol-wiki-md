@@ -75,7 +75,9 @@ def main():
         "pages_with_examples": {k: sorted(list(pages_with[k]))[:5] for k, _ in freq.most_common(top)},
         "parse_errors": parse_errors[:50],
     }
-    json.dump(out, open(os.path.join(HERE, "mining.json"), "w"), indent=2, ensure_ascii=False)
+    out_path = os.path.join(HERE, "..", "..", "validation_reports", "test-mining", "mining.json")
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    json.dump(out, open(out_path, "w"), indent=2, ensure_ascii=False)
     print("pages=%d unique_templates=%d parse_errors=%d" % (page_count, len(freq), len(parse_errors)))
     print("--- top 50 templates ---")
     for name, n in freq.most_common(50):
