@@ -210,7 +210,9 @@ fn build_item_from_entry(
         item.modes = normalize_modes(flags);
     }
     if let Some(stats) = entry.get("stats") {
+        let module = ctx.item_module_map()?;
         item.stats = collect_stats(
+            module,
             name,
             stats,
             precision,
@@ -636,6 +638,7 @@ fn push_render_cleanup_warning(warnings: &mut Vec<String>, scope: &str, expanded
 }
 
 fn collect_stats(
+    module: &HashMap<String, HashMap<String, LuaValue>>,
     item_name: &str,
     value: &LuaValue,
     precision: u8,
@@ -648,7 +651,24 @@ fn collect_stats(
     if let LuaValue::Table(map) = value {
         for (key, val) in map {
             if let Some(s) = lua_value_to_string(val) {
-                let expanded = expand_text(&s, precision, vars, registry, conversion_ctx.clone())?;
+                // A stat stored as `=>Other Item` inherits the same stat's value from the
+                // referenced item (the wiki resolves this pointer rather than printing it).
+                // Resolve the chain before expanding so the rendered table shows the real value.
+                let resolved = if s.trim().starts_with("=>") {
+                    match resolve_item_stat_string(module, key, &s, &mut HashSet::new()) {
+                        Some(value) => value,
+                        None => {
+                            warnings.push(format!(
+                                "Could not resolve stat reference `{s}` for item stat `{key}` on `{item_name}`."
+                            ));
+                            s
+                        }
+                    }
+                } else {
+                    s
+                };
+                let expanded =
+                    expand_text(&resolved, precision, vars, registry, conversion_ctx.clone())?;
                 push_render_cleanup_warning(
                     warnings,
                     &format!("item stat `{key}` for `{item_name}`"),
@@ -659,6 +679,35 @@ fn collect_stats(
         }
     }
     Ok(out)
+}
+
+/// Resolve an item stat value, following `=>Item` references to the same stat on the
+/// referenced item. Returns the literal (non-reference) string the wiki would display.
+fn resolve_item_stat_string(
+    module: &HashMap<String, HashMap<String, LuaValue>>,
+    stat_key: &str,
+    raw: &str,
+    visited: &mut HashSet<(String, String)>,
+) -> Option<String> {
+    let trimmed = raw.trim();
+    let Some(target) = trimmed.strip_prefix("=>") else {
+        return Some(trimmed.to_string());
+    };
+    let item_name = target.trim();
+    let visit_key = (
+        item_name.to_ascii_lowercase(),
+        stat_key.trim().to_ascii_lowercase(),
+    );
+    if !visited.insert(visit_key) {
+        return None;
+    }
+    let (_, entry) = find_item_entry(module, item_name)?;
+    let LuaValue::Table(stats) = entry.get("stats")? else {
+        return None;
+    };
+    let value = get_case_insensitive_value(stats, stat_key)?;
+    let s = lua_value_to_string(value)?;
+    resolve_item_stat_string(module, stat_key, &s, visited)
 }
 
 fn collect_effects(

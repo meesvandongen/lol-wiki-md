@@ -3,7 +3,7 @@ use lol_wiki_md::{convert_champion, convert_item, convert_rune};
 
 const EXPECTED_CHAMPION_HASH: &str =
     "49e93a8b5b2aafdf91c35a7bb66039bb4961f448324ff94f24ff739d2d69d965";
-const EXPECTED_ITEM_HASH: &str = "8cd002332c8994e8ee19c8a84daf272993edc78fd8baa40a44506018b05ad8c9";
+const EXPECTED_ITEM_HASH: &str = "7461b800e829839c1654e9b5213ebf9e840149906939d3868154c4168b29c10b";
 const EXPECTED_RUNE_HASH: &str = "58d3a3086a5d583a60dec1aef59ff3838211e1bb8a3a1b5aabe748316d231fc9";
 
 #[test]
