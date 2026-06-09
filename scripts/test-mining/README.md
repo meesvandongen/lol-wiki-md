@@ -11,6 +11,10 @@ The tests these scripts produced live in:
 - `apps/converter/tests/real_page_fixtures.rs` — end-to-end conversion of a real
   champion/item/rune from committed fixtures (`tests/fixtures/mini_export/`),
   fully self-contained (no download, no skip).
+- `apps/converter/tests/wiki_examples.rs` — **auto-generated**: 221 individual
+  self-contained differential tests, one per real invocation harvested from the
+  corpus, each with a wiki-verified expected value. Regenerate with `harvest.py`
+  + the throwaway `_gen.rs` (see below).
 
 Findings are summarized in `DIVERGENCES.md`.
 
@@ -25,6 +29,11 @@ stock Python 3 plus `mwparserfromhell` (`pip install mwparserfromhell`).
 | `mine.py <export_dir>` | Parse a downloaded export, rank template frequency, find parent→child nesting, and dump diverse real invocations to `mining.json`. |
 | `render.py '<wikitext>'` | Render one wikitext snippet on the wiki and print the plain-text result (ground truth). |
 | `batch_render.py <file>` | Render many snippets (one per line), cached to `render_cache.json`, as `INPUT<TAB>PLAIN`. |
+| `harvest.py <export_dir>` | Harvest self-contained invocations of value/parser templates, render each on the wiki, and write `candidates.tsv` (`group<TAB>input<TAB>wiki_plain`). Feeds the generated `wiki_examples.rs`. |
+
+To regenerate `tests/wiki_examples.rs`: run `harvest.py` to refresh
+`candidates.tsv`, then a throwaway `_gen.rs` test that reads the TSV, keeps only
+the rows the converter reproduces exactly, and writes one `#[test]` per row.
 
 ## Workflow
 
