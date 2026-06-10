@@ -512,6 +512,53 @@ mod known_divergences {
         assert_eq!(render("{{#expr:0.02*0.6}}"), "0.012"); // converter: 0.01
         assert_eq!(render("{{#expr:(345*0.24)*0.12}}"), "9.936"); // converter: 9.94
         assert_eq!(render("{{#expr:700/2200}}"), "0.31818181818182");
+        // An explicit `round N` (N > precision) is also clobbered to 2 dp, even
+        // when nested inside fd. Wiki honours the round.
+        assert_eq!(render("{{#expr:1/3 round 10}}"), "0.3333333333"); // converter: 0.33
+        assert_eq!(render("{{fd|{{#expr:(100/3) round 4}}}}"), "33.3333"); // converter: 33.33
+    }
+
+    /// MediaWiki `#expr` exponentiation is **left**-associative: `2^3^2` is
+    /// `(2^3)^2 = 64`. The converter parses `^` right-associatively, yielding
+    /// `2^(3^2) = 512`. (Latent: no chained `^` in the corpus.)
+    #[test]
+    #[ignore = "ExprExpander treats ^ as right-associative; wiki is left; see DIVERGENCES.md"]
+    fn exponent_is_left_associative() {
+        assert_eq!(render("{{#expr:2^3^2}}"), "64");
+    }
+
+    /// `#if`/`#ifeq`/`#switch` expand the *output branch* they select, but NOT
+    /// the condition / compared value / switch key — so a nested template there
+    /// is compared as raw wikitext, selecting the wrong branch. Wiki expands the
+    /// condition first. (Low corpus reach: conditions usually use `{{{params}}}`,
+    /// which take a different substitution path.)
+    #[test]
+    #[ignore = "parser functions don't expand nested templates in their condition/key; see DIVERGENCES.md"]
+    fn parser_functions_expand_their_condition() {
+        // #var of an undefined var is empty -> falsey -> "unset" (converter: "set").
+        assert_eq!(render("{{#if:{{#var:undefined}}|set|unset}}"), "unset");
+        // #expr in the compared value -> "4" == "4" -> "correct" (converter: "wrong").
+        assert_eq!(render("{{#ifeq:{{#expr:2+2}}|4|correct|wrong}}"), "correct");
+        // #expr as the switch key -> "5" -> "five" (converter: "" empty).
+        assert_eq!(
+            render("{{#switch:{{#expr:2+3}}|5=five|6=six|other}}"),
+            "five"
+        );
+    }
+
+    /// When an `ap`/`pp` range's endpoints are themselves templates, the range
+    /// is not re-parsed after expansion: the converter code-fences the literal
+    /// (`` `112 to 434 6` ``) instead of interpolating. Wiki expands first, then
+    /// interpolates. (Single-value nested arithmetic like
+    /// `{{ap|(1/{{ccd|..}})*..}}` DOES work — see corpus_coverage; only the
+    /// `X to Y` range form with nested-template endpoints breaks.)
+    #[test]
+    #[ignore = "ap/pp don't reparse a range with nested-template endpoints; see DIVERGENCES.md"]
+    fn ap_range_with_nested_template_endpoints() {
+        assert_eq!(
+            render("{{ap|{{#expr:80*1.4}} to {{#expr:310*1.4}} 6}}"),
+            "112 / 176.4 / 240.8 / 305.2 / 369.6 / 434"
+        );
     }
 
     /// `{{ccs|text|type}}` colors `text` by damage type on the wiki and renders
