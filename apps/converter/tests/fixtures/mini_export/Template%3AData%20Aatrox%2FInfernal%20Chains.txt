@@ -1,0 +1,38 @@
+{{{{{1<noinclude>|Ability data</noinclude>}}}|Infernal Chains|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}
+|champion     = Aatrox
+|skill        = W
+|icon         = Infernal Chains.png
+|description  = {{sbc|Active:}} '''Aatrox''' sends a chain in the target direction that deals {{as|physical damage}} to the first enemy hit, doubled against {{tip|minions}}, and {{tip|slow|slowing}} them for {{fd|1.5}} seconds.
+|leveling     = {{st|Physical Damage|{{ap|30 to 70}} {{as|(+ 40% AD)}}|Minion Damage|{{ap|30*2 to 70*2}} {{as|(+ 80% AD)}}}}
+{{st|Slow|{{ap|25 to 35}}%}}
+|description2 = If this hits an enemy {{tip|champion}} or large {{tip|monster}}, a {{tip|tether}} is formed between the target and the ground beneath them for {{fd|1.5}} seconds, during which they are {{tip|true sight|revealed}}.
+|description3 = If the tether is not broken by the end of its duration, the target is dealt the same {{as|physical damage}} again and {{tip|airborne|pulled}} to the center of the area.
+|leveling3    = {{st|Total Damage|{{ap|30*2 to 70*2}} {{as|(+ 80% AD)}}}}
+|range        = {{dv|{{tip|cr|icononly = true}} 825|{{tip|er|icononly = true}} 765}}
+|speed        = 1800
+|width        = {{tip|er|icononly = true}} 160
+|cast time    = {{fd|0.25}}
+|effect radius= 
+|inner radius = 
+|cooldown     = {{ap|20 to 12}}
+|targeting    = Direction
+|affects      = Enemies
+|damagetype   = Physical
+|spellshield  = Special
+|spelleffects = spell
+|projectile   = True
+|notes        = 
+* The impact area is oriented relative to '''Aatrox's''' position when the projectile hits, not where the projectile originated from.
+* The location that the target is dragged to is not at the target's original location, but slightly closer towards '''Aatrox's''' position when the zone expires.
+<!-- (Uncomment this note if this problem somehow still exists/comes back after V14.4)* There's a small delay in checking if the target is in or outside the ''Infernal Chains'' area. Because of this it is still possible to drag the target if they leave the zone at the last instant. -->
+* {{tip|Spell shield}} will block the chain's application and initial damage but not the aftereffects of one already applied.
+* This ability's damage is calculated based on the caster's current stats and changes dynamically.
+{{Effect at cast time end}}
+* ''Infernal Chains'' maintains its casting angle direction in relation to '''Aatrox''' if he moves during the cast time.
+|tips         =
+* To succesfully escape when moving in a straight line away from '''Aatrox''' requires at least {{as|628 movement speed| movement speed}}.
+<!-- Blurb -->
+|blurbicon    = Infernal Chains.png
+|blurb        = {{sbc|Active:}} {{ci|Aatrox}} sends a chain in the target direction that deals {{as|physical damage}} and {{tip|slow|slows}} the first enemy hit.
+|blurb2       = If this hits an enemy {{tip|champion}} or large {{tip|monster}}, it creates a {{tip|true sight|revealing}} {{tip|tether|tether}} between them and the ground. If the tether is not broken after a brief moment, they are dealt {{as|physical damage}} and {{tip|airborne|pulled back}} to the center.
+}}

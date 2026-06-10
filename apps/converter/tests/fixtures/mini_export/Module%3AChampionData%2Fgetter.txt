@@ -1,0 +1,394 @@
+-- <pre>
+local lib = require("Module:Feature")
+local p    = {}
+local data = mw.loadData('Module:ChampionData/data')
+
+local function getData(champname, stat)
+	if stat then
+		return data[champname] and data[champname].stats or {}
+	else
+		return data[champname] or {}
+	end
+end
+
+local function getDataStat(champname, stat)
+	return getData(champname, true)[stat] or {}
+end
+
+function p.id(champname)
+    return getData(champname).id
+end
+
+function p.apiname(champname)
+    return getData(champname).apiname or champname
+end
+
+function p.title(champname)
+    return getData(champname).title or champname
+end
+
+function p.attack(champname)
+    return getData(champname).attack
+end
+
+function p.defense(champname)
+    return getData(champname).defense
+end
+
+function p.magic(champname)
+    return getData(champname).magic
+end
+
+function p.difficulty(champname)
+    return getData(champname).difficulty
+end
+
+function p.herotype(champname)
+    return getData(champname).herotype
+end
+
+function p.alttype(champname)
+    return getData(champname).alttype
+end
+
+function p.resource(champname)
+    return getData(champname).resource
+end
+
+function p.categories(champname)
+    return getData(champname).categories
+end
+
+function p.hp_base(champname)
+    return getData(champname, true).hp_base
+end
+
+function p.hp_lvl(champname)
+    return getData(champname, true).hp_lvl
+end
+
+function p.mp_base(champname)
+    return getData(champname, true).mp_base
+end
+
+function p.mp_lvl(champname)
+    return getData(champname, true).mp_lvl
+end
+
+function p.arm_base(champname)
+    return getData(champname, true).arm_base
+end
+
+function p.arm_lvl(champname)
+    return getData(champname, true).arm_lvl
+end
+
+function p.mr_base(champname)
+    return getData(champname, true).mr_base
+end
+
+function p.mr_lvl(champname)
+    return getData(champname, true).mr_lvl
+end
+
+function p.hp5_base(champname)
+    return getData(champname, true).hp5_base
+end
+
+function p.hp5_lvl(champname)
+    return getData(champname, true).hp5_lvl
+end
+
+function p.mp5_base(champname)
+    return getData(champname, true).mp5_base
+end
+
+function p.mp5_lvl(champname)
+    return getData(champname, true).mp5_lvl
+end
+
+function p.dam_base(champname)
+    return getData(champname, true).dam_base
+end
+
+function p.dam_lvl(champname)
+    return getData(champname, true).dam_lvl
+end
+
+function p.as_base(champname)
+    return getData(champname, true).as_base
+end
+function p.as_lvl1(champname)
+    return getData(champname, true).as_lvl1
+end
+
+function p.attack_delay(champname)
+    return getData(champname, true).attack_delay
+end
+
+function p.as_lvl(champname)
+    return getData(champname, true).as_lvl
+end
+
+function p.as_lvl1_bonus(champname)
+    return getData(champname, true).as_lvl1_bonus
+end
+
+function p.range(champname)
+    return getData(champname, true).range
+end
+
+function p.range_lvl(champname)
+    return getData(champname, true).range_lvl
+end
+
+function p.ms(champname)
+    return getData(champname, true).ms
+end
+
+function p.ms_lvl(champname)
+    return getData(champname, true).ms_lvl
+end
+
+function p.acquisition_radius(champname)
+    return getData(champname, true).acquisition_radius or 750
+end
+
+function p.selection_height(champname)
+    return getData(champname, true).selection_height-- or 100
+end
+
+function p.selection_radius(champname)
+    return getData(champname, true).selection_radius
+end
+
+function p.pathing_radius(champname)
+    return getData(champname, true).pathing_radius
+end
+
+function p.gameplay_radius(champname)
+    return getData(champname, true).gameplay_radius or 65
+end
+
+function p.crit_base(champname)
+    return getData(champname, true).crit_base or 200
+end
+
+function p.crit_mod(champname)
+    return getData(champname, true).crit_mod
+end
+
+function p.as_ratio(champname)
+    return getData(champname, true).as_ratio
+end
+
+function p.windup_modifier(champname)
+    return getData(champname, true).windup_modifier
+end
+
+function p.missile_speed(champname)
+    return getData(champname, true).missile_speed
+end
+
+function p.attack_cast_time(champname)
+    return getData(champname, true).attack_cast_time
+end
+
+function p.attack_total_time(champname)
+    return getData(champname, true).attack_total_time
+end
+
+function p.attack_delay_offset(champname)
+    return getData(champname, true).attack_delay_offset
+end
+
+function p.windup(champname)
+	local act = getData(champname, true).attack_cast_time
+	local att = getData(champname, true).attack_total_time
+    if act and att then
+        return act / att
+    else
+        return 0.3 + (getData(champname, true).attack_delay_offset or 0)
+    end
+end
+
+function p.fullname(champname)
+    return getData(champname).fullname
+end
+
+function p.nickname(champname)
+    return getData(champname).nickname
+end
+
+function p.rangetype(champname)
+    return getData(champname).rangetype
+end
+
+function p.date(champname)
+    return getData(champname).date
+end
+
+function p.patch(champname)
+    return getData(champname).patch
+end
+
+function p.changes(champname)
+    return getData(champname).changes
+end
+
+function p.changes_sortkey(champname)
+	local changes = getData(champname).changes
+	if changes ~= nil then
+		local s, e, major, minor, hotfix = changes:find('V?(%d%d?)%.(%d%d?)(%a?)')
+		if s ~= nil then
+			return string.format("%02d%02d%01d", tonumber(major), tonumber(minor), (string.byte(hotfix:lower()) or 96) - 96)
+		end
+	end
+	return nil
+end
+
+function p.role(champname) -- table
+    return getData(champname).role
+end
+
+--function p.positions(champname) -- table
+--    return getData(champname).positions
+--end
+
+function p.client_positions(champname) -- table
+    return getData(champname).client_positions
+end
+
+function p.external_positions(champname) -- table
+    return getData(champname).external_positions
+end
+
+function p.all_positions(champname) -- table
+    local riot_pos  = data[champname].client_positions
+    local ext_pos    = data[champname].external_positions
+    
+    local sets      = {}
+    local hash      = {}
+    
+    for _, value in pairs(riot_pos) do
+       if (not hash[value]) then
+           table.insert(sets, value)
+           hash[value] = true
+       end
+    end
+    
+    for _, value in pairs(ext_pos) do
+       if (not hash[value]) then
+           table.insert(sets, value)
+           hash[value] = true
+       end
+    end
+    
+    return sets
+end
+
+function p.damage(champname)
+    return getData(champname).damage
+end
+
+function p.toughness(champname)
+    return getData(champname).toughness
+end
+
+function p.control(champname)
+    return getData(champname).control
+end
+
+function p.mobility(champname)
+    return getData(champname).mobility
+end
+
+function p.utility(champname)
+    return getData(champname).utility
+end
+
+function p.style(champname)
+    return getData(champname).style
+end
+
+function p.adaptivetype(champname)
+    return getData(champname).adaptivetype or "Physical"
+end
+
+function p.be(champname)
+    return getData(champname).be
+end
+
+function p.rp(champname)
+    return getData(champname).rp
+end
+
+function p.skill_i(champname)
+    return getData(champname).skill_i -- table
+end
+
+function p.skill_q(champname)
+    return getData(champname).skill_q -- table
+end
+
+function p.skill_w(champname)
+    return getData(champname).skill_w -- table
+end
+
+function p.skill_e(champname)
+    return getData(champname).skill_e -- table
+end
+
+function p.skill_r(champname)
+    return getData(champname).skill_r -- table
+end
+
+function p.skills(champname)
+    return getData(champname).skills -- table
+end
+
+-- Game mode changes data getter / also see [[Module:MapChanges]]
+local gamemodePercentageMods = {"dmg_dealt", "dmg_taken", "healing", "shielding", "manaregen_mod", "energyregen_mod", "total_as", "ms_mod", "tenacity"}
+
+for i = 1, #gamemodePercentageMods do
+	gamemodePercentageMods[gamemodePercentageMods[i]] = true
+	gamemodePercentageMods[i] = nil
+end
+
+local gamemodeStatGetter = {
+	__call = function (self, champname)
+		local statTable = getData(champname, true)
+		if statTable[self.gamemode] ~= nil then
+			local gamemodeStatValue = statTable[self.gamemode][self.stat]
+			if gamemodeStatValue ~= nil and lib.ternary(gamemodePercentageMods[self.stat] == true, gamemodeStatValue ~= 1, gamemodeStatValue ~= 0) then -- returning nil when value exists but is unchanged
+				local baseStat = statTable[self.stat] or 0-- initialize zero when the stat is a special modifier (no corresponding "default" type of stat like health, attack damage,.... have)
+				return baseStat + gamemodeStatValue
+			end
+		end
+		return nil	
+	end
+}
+
+local gamemode = mw.loadData("Module:GamemodeData/data")
+
+setmetatable(p, {
+	__index = function(self, k)
+		--being here means that p[k] does not currently exist
+		local indexFind = k:find("_", 1, true) -- only works if "_" is used as a divider and is not contained within the gamemodeName
+		if indexFind ~= nil then
+			local inputGamemode = k:sub(1, indexFind - 1)
+			if (gamemode[inputGamemode]) then -- does the input contain a gamemode?
+				--as long as we have a valid gameMode, we create the function so it's more accessible next time,
+				--regardless of what stat is being looked for.
+				local stat = k:sub(indexFind + 1)
+				p[k] = {gamemode = inputGamemode, stat = stat}
+				setmetatable(p[k], gamemodeStatGetter)
+				return p[k]
+			end
+		end
+	end
+})
+
+return p
+-- </pre>
+-- [[Category:Lua]]

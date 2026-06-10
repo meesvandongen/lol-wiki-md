@@ -364,6 +364,7 @@ vite.config.ts.timestamp-*
 .vite/
 
 export_out
+export_out_meta/
 generated/
 apps/docs/out/
 apps/docs/docs/

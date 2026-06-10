@@ -1,0 +1,83 @@
+return {
+["Infinity Edge"] = {
+        ["id"]                  = 3031,
+        ["nickname"]            = {"ie"},
+        ["tier"]                = 2,
+        ["type"]                = {"Legendary"},
+        ["modes"] = {
+            ["classic sr 5v5"]  = true,
+            ["aram"]            = true,
+            ["nb"]              = true,
+            ["ar"]              = true,
+        },
+        ["menu"] = {
+            ["marksman"]        = true,
+        },
+        ["stats"] = {
+            ["ad"]              = 75,
+            ["crit"]            = 25,
+            ["critdamage"]		= 30,
+        },
+        ["recipe"]              = {"B. F. Sword", "Pickaxe", "Cloak of Agility"},
+        ["buy"]                 = 3500,
+    },
+["B. F. Sword"] = {
+        ["id"]                  = 1038,
+        ["nickname"]            = {"bf"},
+        ["tier"]                = 1,
+        ["type"]                = {"Basic"},
+        ["modes"] = {
+            ["classic sr 5v5"]  = true,
+            ["aram"]            = true,
+            ["nb"]              = true,
+            ["ar"]              = false,
+        },
+        ["menu"] = {
+            ["fighter"]         = true,
+            ["marksman"]        = true,
+            ["assassin"]        = true,
+        },
+        ["stats"] = {
+            ["ad"]              = 40,
+        },
+        ["buy"]                 = 1300,
+    },
+["Cloak of Agility"] = {
+        ["id"]                  = 1018,
+        ["tier"]                = 1,
+        ["type"]                = {"Basic"},
+        ["modes"] = {
+            ["classic sr 5v5"]  = true,
+            ["aram"]            = true,
+            ["nb"]              = true,
+            ["ar"]              = false,
+        },
+        ["menu"] = {
+            ["marksman"]        = true,
+        },
+        ["stats"] = {
+            ["crit"]            = 15,
+        },
+        ["buy"]                 = 600,
+    },
+["Pickaxe"] = {
+        ["id"]                  = 1037,
+        ["tier"]                = 1,
+        ["type"]                = {"Basic"},
+        ["modes"] = {
+            ["classic sr 5v5"]  = true,
+            ["aram"]            = true,
+            ["nb"]              = true,
+            ["ar"]              = false,
+        },
+        ["menu"] = {
+            ["fighter"]         = true,
+            ["marksman"]        = true,
+            ["assassin"]        = true,
+        },
+        ["stats"] = {
+            ["ad"]              = 25,
+        },
+        ["buy"]                 = 875,
+    }
+}

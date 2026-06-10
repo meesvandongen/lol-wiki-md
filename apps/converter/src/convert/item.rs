@@ -1207,6 +1207,9 @@ mod tests {
 
         let md = std::fs::read_to_string(out_dir.join("Test_Blade.md")).unwrap();
         assert!(md.contains("4 [ability power](./ability_power.md) = 80"));
+        // NOTE: the gold-value `total` var is rounded to display precision in the
+        // Gold value module path (separate from bare {{#expr}}), so this stays
+        // 513.33 rather than the wiki's full-precision 513.33335.
         assert!(md.contains("513.33"));
         assert!(md.contains("22.86% (+80g)"));
         // {{fd|60}} renders "60", not the padded "60.00" (Module:Fd never pads).
