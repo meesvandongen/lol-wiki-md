@@ -419,132 +419,144 @@ fn ccd_nested_inside_ap_arithmetic() {
 }
 
 // ---------------------------------------------------------------------------
-// Known divergences (mined): the converter does NOT yet match the wiki here.
-//
-// These assert the WIKI-CORRECT value and are #[ignore]d so the suite stays
-// green; run with `cargo test -- --ignored` to see them, and un-ignore once the
-// corresponding handler gains the missing branch. Full evidence (rendered HTML
-// vs converter output) is in scripts/test-mining/DIVERGENCES.md.
+// Regression tests for divergences that were mined as #[ignore]d failures and
+// have since been FIXED. Each asserts the wiki-correct value (verified against
+// rendered HTML) and now passes. Issue references are in
+// scripts/test-mining/DIVERGENCES.md.
 // ---------------------------------------------------------------------------
 
-mod known_divergences {
+mod fixed_divergences {
     use super::render;
 
-    /// MediaWiki `#switch` treats a bare trailing parameter (no `=`) as the
-    /// default. The converter only honors `#default=`, so it emits empty here.
-    /// Wiki renders `Default`.
+    /// #13 — `#switch` honors a bare trailing parameter as the default.
     #[test]
-    #[ignore = "SwitchExpander lacks bare-last-param default; see DIVERGENCES.md"]
     fn switch_bare_default() {
         assert_eq!(render("{{#switch:z|a=Apple|b=Banana|Default}}"), "Default");
     }
 
-    /// `parse/expr.rs` implements only `+ - * / ^` and `round/floor/ceil/abs`.
-    /// MediaWiki `#expr` also supports `mod`, comparison (`< > = <= >= <>`),
-    /// boolean (`and or not`), `e` notation, and `sqrt/trunc/ln/exp/...`. The
-    /// comparison operators appear in the corpus (3 pages); all of these hard-
-    /// error today.
+    /// #14 — `#expr` supports `mod`, comparison, boolean, and `sqrt`/`trunc`.
     #[test]
-    #[ignore = "expr lacks mod/comparison/boolean/sqrt/trunc/ln/e; see DIVERGENCES.md"]
-    fn expr_missing_operators() {
+    fn expr_extended_operators() {
         assert_eq!(render("{{#expr:10 mod 3}}"), "1");
         assert_eq!(render("{{#expr:5 > 3}}"), "1");
+        assert_eq!(render("{{#expr:5 < 3}}"), "0");
+        assert_eq!(render("{{#expr:1 and 0}}"), "0");
+        assert_eq!(render("{{#expr:1 or 0}}"), "1");
+        assert_eq!(render("{{#expr:not 0}}"), "1");
         assert_eq!(render("{{#expr:sqrt 16}}"), "4");
         assert_eq!(render("{{#expr:trunc 7.9}}"), "7");
     }
 
-    /// MediaWiki string magic words used inside `tip`/`tt` bodies.
+    /// #14 — `^` is left-associative (`2^3^2 = (2^3)^2 = 64`).
     #[test]
-    #[ignore = "lc:/uc:/ucfirst:/lcfirst: magic words unimplemented; see DIVERGENCES.md"]
+    fn exponent_is_left_associative() {
+        assert_eq!(render("{{#expr:2^3^2}}"), "64");
+    }
+
+    /// #15 — string-casing magic words.
+    #[test]
     fn case_magic_words() {
         assert_eq!(render("{{lc:Hello}}"), "hello");
         assert_eq!(render("{{uc:hello}}"), "HELLO");
         assert_eq!(render("{{ucfirst:hello}}"), "Hello");
         assert_eq!(render("{{lcfirst:Hello}}"), "hello");
+        // The pipe form is a different (label) template and is unaffected.
+        assert_eq!(render("{{lc|Calibrum}}"), "**Calibrum:**");
     }
 
-    /// Other MediaWiki magic words reached in the corpus: `#ifexist:` (77
-    /// pages), `#titleparts:` (29), `formatnum:` (6). All hard-error today.
+    /// #23 — `#titleparts:` and `formatnum:` magic words.
     #[test]
-    #[ignore = "#ifexist:/#titleparts:/formatnum: unimplemented; see DIVERGENCES.md"]
     fn other_magic_words() {
         assert_eq!(render("{{#titleparts:A/B/C|1}}"), "A");
+        assert_eq!(render("{{#titleparts:A/B/C|1|2}}"), "B");
         assert_eq!(render("{{formatnum:12345.678}}"), "12,345.678");
     }
 
-    /// `Template:Divided by` is literally `&nbsp;&divide;&nbsp;` and ignores its
-    /// arguments. The converter's `DividedByExpander` instead joins the (usually
-    /// absent) args with ` / `, so the no-arg inline form — `(24{{divided by}}n)`
-    /// in Bloodsong — collapses to the garbled `(24n)`, dropping the ÷ operator.
+    /// #16 — `#replace:`.
     #[test]
-    #[ignore = "DividedByExpander drops the ÷ operator; see DIVERGENCES.md"]
-    fn divided_by_is_the_division_sign() {
-        assert_eq!(render("{{Divided by}}"), "÷");
+    fn replace_parser_function() {
+        assert_eq!(
+            render("{{#replace:hello world|world|there}}"),
+            "hello there"
+        );
     }
 
-    /// `Module:fd` uses only the first argument (it just wraps the decimals in
-    /// `<small>`); extra positional args are ignored. The converter treats arg2
-    /// as a decimal-precision count, which both rounds when it should not and
-    /// produces `NaN` for real corpus forms like `{{fd|500|750|1000}}`.
+    /// #19 — `{{Divided by}}` renders the division sign inline (it ignores its
+    /// args), so `(24{{divided by}}n)` is `(24 ÷ n)`, not the garbled `(24n)`.
     #[test]
-    #[ignore = "FdExpander mishandles extra positional args (rounds / NaN); see DIVERGENCES.md"]
-    fn fd_ignores_extra_positional_args() {
+    fn divided_by_is_the_division_sign() {
+        assert_eq!(render("(24{{divided by}}n)"), "(24 ÷ n)");
+    }
+
+    /// #20 — `fd` uses only arg 1, ignoring extras and preserving trailing zeros.
+    #[test]
+    fn fd_uses_only_first_arg() {
         assert_eq!(render("{{fd|500|750|1000}}"), "500");
         assert_eq!(render("{{fd|0.6666666|2}}"), "0.6666666");
+        assert_eq!(render("{{fd|1.30}}"), "1.30");
     }
 
-    /// `{{times}}` is the multiplication sign `×` on the wiki; the converter
-    /// emits ASCII `x`, which is ambiguous in damage/scaling text.
+    /// #21 — `{{times}}` is the multiplication sign `×`.
     #[test]
-    #[ignore = "TimesExpander emits ASCII 'x' not '×'; see DIVERGENCES.md"]
     fn times_is_the_multiplication_sign() {
         assert_eq!(render("{{times}}"), "×");
     }
 
-    /// Bare `{{#expr:...}}` is rounded to the conversion precision (2 dp) via
-    /// `evaluate_expression_display(_, ctx.precision)`. MediaWiki `#expr` returns
-    /// full precision and only rounds with an explicit `round N`, so the
-    /// converter silently loses precision on every non-trivial computation
-    /// (reaches real items: Archangel's Staff, Ardent Censer, …).
+    /// #24 — bare `#expr` keeps full precision; an explicit `round N` is honored.
     #[test]
-    #[ignore = "ExprExpander rounds to precision by default; see DIVERGENCES.md"]
     fn expr_keeps_full_precision() {
-        assert_eq!(render("{{#expr:0.02*0.6}}"), "0.012"); // converter: 0.01
-        assert_eq!(render("{{#expr:(345*0.24)*0.12}}"), "9.936"); // converter: 9.94
+        assert_eq!(render("{{#expr:0.02*0.6}}"), "0.012");
+        assert_eq!(render("{{#expr:(345*0.24)*0.12}}"), "9.936");
         assert_eq!(render("{{#expr:700/2200}}"), "0.31818181818182");
-        // An explicit `round N` (N > precision) is also clobbered to 2 dp, even
-        // when nested inside fd. Wiki honours the round.
-        assert_eq!(render("{{#expr:1/3 round 10}}"), "0.3333333333"); // converter: 0.33
-        assert_eq!(render("{{fd|{{#expr:(100/3) round 4}}}}"), "33.3333"); // converter: 33.33
+        assert_eq!(render("{{#expr:1/3 round 10}}"), "0.3333333333");
+        assert_eq!(render("{{fd|{{#expr:(100/3) round 4}}}}"), "33.3333");
     }
 
-    /// MediaWiki `#expr` exponentiation is **left**-associative: `2^3^2` is
-    /// `(2^3)^2 = 64`. The converter parses `^` right-associatively, yielding
-    /// `2^(3^2) = 512`. (Latent: no chained `^` in the corpus.)
+    /// #27 — `#if`/`#ifeq`/`#switch` expand nested templates in their
+    /// condition/compared value/key before evaluating.
     #[test]
-    #[ignore = "ExprExpander treats ^ as right-associative; wiki is left; see DIVERGENCES.md"]
-    fn exponent_is_left_associative() {
-        assert_eq!(render("{{#expr:2^3^2}}"), "64");
-    }
-
-    /// `#if`/`#ifeq`/`#switch` expand the *output branch* they select, but NOT
-    /// the condition / compared value / switch key — so a nested template there
-    /// is compared as raw wikitext, selecting the wrong branch. Wiki expands the
-    /// condition first. (Low corpus reach: conditions usually use `{{{params}}}`,
-    /// which take a different substitution path.)
-    #[test]
-    #[ignore = "parser functions don't expand nested templates in their condition/key; see DIVERGENCES.md"]
     fn parser_functions_expand_their_condition() {
-        // #var of an undefined var is empty -> falsey -> "unset" (converter: "set").
         assert_eq!(render("{{#if:{{#var:undefined}}|set|unset}}"), "unset");
-        // #expr in the compared value -> "4" == "4" -> "correct" (converter: "wrong").
         assert_eq!(render("{{#ifeq:{{#expr:2+2}}|4|correct|wrong}}"), "correct");
-        // #expr as the switch key -> "5" -> "five" (converter: "" empty).
         assert_eq!(
             render("{{#switch:{{#expr:2+3}}|5=five|6=six|other}}"),
             "five"
         );
     }
+
+    /// #25 — `{{ccs|text|type}}` renders its text (it no longer drops content).
+    #[test]
+    fn ccs_keeps_its_text() {
+        assert_eq!(
+            render("{{ccs|60% increased damage|physical}}"),
+            "60% increased damage"
+        );
+    }
+
+    /// #22 — `{{lethality|N}}` renders the full armor-penetration clause.
+    #[test]
+    fn lethality_includes_armor_penetration_scaling() {
+        assert_eq!(
+            render("{{lethality|10}}"),
+            "10 Lethality (6.22 – 10 (based on level) armor penetration)"
+        );
+    }
+
+    /// #17 — possessive icon variants render the possessive form.
+    #[test]
+    fn possessive_icon_variants() {
+        assert_eq!(render("{{cis|Aatrox}}"), "Aatrox's");
+        assert_eq!(render("{{uis|Tibbers}}"), "Tibbers'");
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Still-open divergences: assert the WIKI-CORRECT value, #[ignore]d so the suite
+// stays green. Run with `cargo test -- --ignored`; un-ignore once fixed.
+// ---------------------------------------------------------------------------
+
+mod known_divergences {
+    use super::render;
 
     /// When an `ap`/`pp` range's endpoints are themselves templates, the range
     /// is not re-parsed after expansion: the converter code-fences the literal
@@ -559,60 +571,5 @@ mod known_divergences {
             render("{{ap|{{#expr:80*1.4}} to {{#expr:310*1.4}} 6}}"),
             "112 / 176.4 / 240.8 / 305.2 / 369.6 / 434"
         );
-    }
-
-    /// `{{ccs|text|type}}` colors `text` by damage type on the wiki and renders
-    /// the text; `CcsExpander` returns the empty string, dropping the content
-    /// entirely (e.g. "deals {{ccs|bonus damage|physical}}" loses "bonus damage").
-    #[test]
-    #[ignore = "CcsExpander drops its text content; see DIVERGENCES.md"]
-    fn ccs_keeps_its_text() {
-        assert_eq!(
-            render("{{ccs|60% increased damage|physical}}"),
-            "60% increased damage"
-        );
-    }
-
-    /// `Module:fd` preserves the literal value (it only wraps decimals in
-    /// `<small>`), so `{{fd|1.30}}` stays `1.30`. The converter reparses to f64
-    /// and drops the trailing zero → `1.3`.
-    #[test]
-    #[ignore = "FdExpander drops trailing zeros via f64 reparse; see DIVERGENCES.md (issue #20)"]
-    fn fd_preserves_trailing_zeros() {
-        assert_eq!(render("{{fd|1.30}}"), "1.30");
-    }
-
-    /// `Template:Lethality` renders `N Lethality (… armor penetration)` with the
-    /// full per-level armor-penetration conversion. The converter's
-    /// `LethalityExpander` emits only `N lethality`, dropping the scaling clause
-    /// (a partial-model handler — AGENTS.md flags these as more dangerous than an
-    /// error). Latent: no convertible page uses `{{lethality|N}}` directly today.
-    #[test]
-    #[ignore = "LethalityExpander drops the armor-penetration scaling; see DIVERGENCES.md"]
-    fn lethality_includes_armor_penetration_scaling() {
-        assert_eq!(
-            render("{{lethality|10}}"),
-            "10 Lethality (6.22 – 10 (based on level) armor penetration)"
-        );
-    }
-
-    /// ParserFunctions `#replace:` used inside gold-efficiency `tt` bodies.
-    #[test]
-    #[ignore = "#replace: unimplemented; see DIVERGENCES.md"]
-    fn replace_parser_function() {
-        assert_eq!(
-            render("{{#replace:hello world|world|there}}"),
-            "hello there"
-        );
-    }
-
-    /// The dedicated possessive icon variants (`cis`, `cais`, `iis`, `sis`,
-    /// `nies`, `uis`) are claimed by `IconUnwrapExpander`, which only appends a
-    /// possessive for an explicit `'s` positional — so the bare name form drops
-    /// the apostrophe-s. The wiki renders `Aatrox's`.
-    #[test]
-    #[ignore = "IconUnwrapExpander drops possessive on *is/*s name variants; see DIVERGENCES.md"]
-    fn possessive_icon_variants() {
-        assert_eq!(render("{{cis|Aatrox}}"), "Aatrox's");
     }
 }

@@ -85,8 +85,6 @@ fn expr_functions_and_explicit_round() {
 #[test]
 fn nesting_fd_wraps_expr_wraps_expr() {
     // fd( expr( expr * expr ) ) — three levels, integer result.
-    // (The `fd|{{#expr:... round 4}}` form is a known divergence — the #expr
-    // precision bug clobbers the explicit round; see known_divergences.)
     assert_eq!(
         render("{{fd|{{#expr:{{#expr:2+3}}*{{#expr:10/2}}}}}}"),
         "25"

@@ -71,6 +71,9 @@ impl TemplateRegistry {
     pub fn new() -> Self {
         let mut r = Self::default();
         r.register(Box::new(ExprExpander));
+        r.register(Box::new(StringMagicWordExpander));
+        r.register(Box::new(ReplaceExpander));
+        r.register(Box::new(TitlePartsExpander));
         r.register(Box::new(IfExpander));
         r.register(Box::new(IfEqExpander));
         r.register(Box::new(SwitchExpander));
@@ -600,8 +603,9 @@ impl TemplateExpander for TimesExpander {
         &["times"]
     }
     fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        // Template:Times is the multiplication sign, not an ASCII letter.
         Ok(ExpansionResult {
-            expanded: "x".into(),
+            expanded: "×".into(),
         })
     }
 }
@@ -639,18 +643,37 @@ impl TemplateExpander for LethalityExpander {
         &["Lethality"]
     }
 
-    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         let (positional, _named) = split_named_and_positional(inv);
-        let value = positional
+        let raw = positional
             .first()
             .map(|value| value.trim())
             .unwrap_or_default();
+        if raw.is_empty() {
+            return Ok(ExpansionResult {
+                expanded: "Lethality".to_string(),
+            });
+        }
+        let value = expand_nested_template_text(raw, ctx).unwrap_or_else(|_| raw.to_string());
+        // `Template:Lethality` renders `N Lethality (… armor penetration)`, where
+        // the armor-penetration value is the per-level conversion
+        // `N * (0.6 + 0.4 * level / 18)` rendered as a `{{pp}}` range: lo at
+        // level 1, hi at level 18 (= N). Model the whole template, not just N.
+        if let Ok(n) = value.trim().parse::<f64>() {
+            let lo = n * (0.6 + 0.4 * 1.0 / 18.0);
+            let hi = n; // 0.6 + 0.4 * 18/18 = 1
+            let n_s = crate::parse::expr::format_sig(n, 14);
+            let lo_s = format_progression_number(lo, Some("2"));
+            let hi_s = format_progression_number(hi, Some("2"));
+            return Ok(ExpansionResult {
+                expanded: format!(
+                    "{n_s} Lethality ({lo_s} – {hi_s} (based on level) armor penetration)"
+                ),
+            });
+        }
+        // Non-numeric (e.g. an unresolved variable): fall back to the label.
         Ok(ExpansionResult {
-            expanded: if value.is_empty() {
-                "lethality".to_string()
-            } else {
-                format!("{} lethality", value)
-            },
+            expanded: format!("{} Lethality", value.trim()),
         })
     }
 }
@@ -896,10 +919,19 @@ impl TemplateExpander for CcsExpander {
     fn names(&self) -> &'static [&'static str] {
         &["ccs"]
     }
-    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        Ok(ExpansionResult {
-            expanded: String::new(),
-        })
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        // `{{ccs|text|type}}` colors `text` by damage type on the wiki and
+        // renders the text. Surface the first positional (expanding any nested
+        // templates) and drop the color/`type` and styling args.
+        let first = inv
+            .params
+            .iter()
+            .map(|p| p.trim())
+            .find(|p| !p.is_empty() && !looks_like_named_param(p))
+            .unwrap_or("");
+        let expanded =
+            expand_nested_template_text(first, ctx).unwrap_or_else(|_| first.to_string());
+        Ok(ExpansionResult { expanded })
     }
 }
 
@@ -955,23 +987,13 @@ impl TemplateExpander for DividedByExpander {
     fn names(&self) -> &'static [&'static str] {
         &["Divided by"]
     }
-    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
-        let left = inv.params.get(0).map(|s| s.trim()).unwrap_or("");
-        let right = inv.params.get(1).map(|s| s.trim()).unwrap_or("");
-        if left.is_empty() && right.is_empty() {
-            return Ok(ExpansionResult {
-                expanded: String::new(),
-            });
-        }
-        let mut out = String::new();
-        if !left.is_empty() {
-            out.push_str(left);
-        }
-        out.push_str(" / ");
-        if !right.is_empty() {
-            out.push_str(right);
-        }
-        Ok(ExpansionResult { expanded: out })
+    fn expand(&self, _inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        // `Template:Divided by` is literally `&nbsp;&divide;&nbsp;` — it always
+        // renders the division sign and ignores any arguments. The operands are
+        // adjacent wikitext (e.g. `(24{{divided by}}n)` -> `(24 ÷ n)`).
+        Ok(ExpansionResult {
+            expanded: " ÷ ".to_string(),
+        })
     }
 }
 
@@ -1154,7 +1176,11 @@ impl TemplateExpander for UniqueExpander {
     fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         let (positional, _named) = split_named_and_positional(inv);
         let first = positional.first().map(|v| v.trim()).unwrap_or("");
-        let expanded = match positional.get(1).map(|v| v.trim()).filter(|v| !v.is_empty()) {
+        let expanded = match positional
+            .get(1)
+            .map(|v| v.trim())
+            .filter(|v| !v.is_empty())
+        {
             Some(second) => format!("Unique – {first}: {second}"),
             None => format!("Unique: {first}"),
         };
@@ -1252,7 +1278,11 @@ impl TemplateExpander for AdaptiveExpander {
             .map(|v| v.trim().eq_ignore_ascii_case("true"))
             .unwrap_or(false);
         let af = if wild_rift { "0.5" } else { "0.6" };
-        let for_clause = match positional.get(1).map(|v| v.trim()).filter(|v| !v.is_empty()) {
+        let for_clause = match positional
+            .get(1)
+            .map(|v| v.trim())
+            .filter(|v| !v.is_empty())
+        {
             Some(levels) => format!(" for {levels}"),
             None if wild_rift => " for 15".to_string(),
             None => String::new(),
@@ -1330,8 +1360,8 @@ impl TemplateExpander for MinuteDisplayExpander {
         let (positional, _named) = split_named_and_positional(inv);
         let mut total = 0.0;
         for value in &positional {
-            let resolved =
-                expand_nested_template_text(value, ctx).unwrap_or_else(|_| value.trim().to_string());
+            let resolved = expand_nested_template_text(value, ctx)
+                .unwrap_or_else(|_| value.trim().to_string());
             let resolved = resolved.trim();
             if resolved.is_empty() {
                 continue;
@@ -1357,7 +1387,11 @@ impl TemplateExpander for SupNoteExpander {
 
     fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         let (positional, _named) = split_named_and_positional(inv);
-        let expanded = match positional.first().map(|v| v.trim()).filter(|v| !v.is_empty()) {
+        let expanded = match positional
+            .first()
+            .map(|v| v.trim())
+            .filter(|v| !v.is_empty())
+        {
             Some(note) => format!("(note: {note})"),
             None => "(note)".to_string(),
         };
@@ -2286,6 +2320,11 @@ fn normalize_invocation(name: &mut String, params: &mut Vec<String>) {
             *name = "#invoke".into();
             params.insert(0, module);
         }
+    } else if let Some((kw, rest)) = split_colon_magic_word(&lower, name) {
+        // MediaWiki magic words whose first argument is glued to the name with a
+        // colon (`lc:VALUE`, `formatnum:N`, `#replace:text`, ...).
+        *name = kw;
+        params.insert(0, rest);
     } else if lower.starts_with("rune data ") {
         let rune_name = name[10..].trim().to_string();
         *name = "Rune data".into();
@@ -2295,7 +2334,175 @@ fn normalize_invocation(name: &mut String, params: &mut Vec<String>) {
     }
 }
 
+/// Recognize a colon-glued magic word (`lc:`, `uc:`, `ucfirst:`, `lcfirst:`,
+/// `formatnum:`, `#replace:`, `#titleparts:`, `#ifexist:`) and split it into its
+/// canonical keyword and the trailing first argument.
+fn split_colon_magic_word(lower: &str, name: &str) -> Option<(String, String)> {
+    let idx = name.find(':')?;
+    let kw = &lower[..idx];
+    let rest = name[idx + 1..].trim().to_string();
+    match kw {
+        // String magic words KEEP a trailing colon in their canonical name so
+        // the colon form `{{lc:X}}` (lowercase) does not collide with the
+        // pipe-form label template `{{lc|X}}` (which renders `**X:**`).
+        "lc" | "uc" | "ucfirst" | "lcfirst" | "formatnum" => Some((format!("{kw}:"), rest)),
+        // Parser functions are unambiguous (the `#` prefix has no pipe-template).
+        "#replace" | "#titleparts" => Some((kw.to_string(), rest)),
+        _ => None,
+    }
+}
+
+/// Remove `<!-- ... -->` HTML comments. MediaWiki strips comments before
+/// evaluating parser-function conditions; the converter uses comment markers for
+/// undefined `{{#var}}`, so they must not affect condition/equality/switch logic.
+fn strip_html_comments(s: &str) -> String {
+    let mut out = String::with_capacity(s.len());
+    let mut rest = s;
+    while let Some(start) = rest.find("<!--") {
+        out.push_str(&rest[..start]);
+        match rest[start..].find("-->") {
+            Some(end) => rest = &rest[start + end + 3..],
+            None => {
+                rest = "";
+                break;
+            }
+        }
+    }
+    out.push_str(rest);
+    out
+}
+
 // --- Domain stub expanders (initial minimal formatting) ---
+
+/// MediaWiki string magic words: `{{lc:...}}`, `{{uc:...}}`, `{{ucfirst:...}}`,
+/// `{{lcfirst:...}}`, and `{{formatnum:...}}` (digit grouping). The first
+/// argument is supplied positionally by `normalize_invocation`.
+struct StringMagicWordExpander;
+impl TemplateExpander for StringMagicWordExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["lc:", "uc:", "ucfirst:", "lcfirst:", "formatnum:"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let raw = inv.params.first().map(|s| s.as_str()).unwrap_or("");
+        let value =
+            expand_nested_template_text(raw.trim(), ctx).unwrap_or_else(|_| raw.trim().to_string());
+        let name = inv.name.trim().trim_end_matches(':').to_ascii_lowercase();
+        let expanded = match name.as_str() {
+            "lc" => value.to_lowercase(),
+            "uc" => value.to_uppercase(),
+            "ucfirst" => {
+                let mut c = value.chars();
+                match c.next() {
+                    Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
+                    None => String::new(),
+                }
+            }
+            "lcfirst" => {
+                let mut c = value.chars();
+                match c.next() {
+                    Some(f) => f.to_lowercase().collect::<String>() + c.as_str(),
+                    None => String::new(),
+                }
+            }
+            "formatnum" => format_number_grouped(&value),
+            _ => value,
+        };
+        Ok(ExpansionResult { expanded })
+    }
+}
+
+/// `{{formatnum:N}}` groups the integer part with thousands separators (the
+/// reverse `|R` form is not needed by the corpus).
+fn format_number_grouped(value: &str) -> String {
+    let trimmed = value.trim();
+    let (sign, digits) = trimmed
+        .strip_prefix('-')
+        .map_or(("", trimmed), |d| ("-", d));
+    let (int_part, frac_part) = match digits.split_once('.') {
+        Some((i, f)) => (i, Some(f)),
+        None => (digits, None),
+    };
+    if int_part.is_empty() || !int_part.bytes().all(|b| b.is_ascii_digit()) {
+        return value.to_string();
+    }
+    let mut grouped = String::new();
+    let bytes = int_part.as_bytes();
+    for (i, b) in bytes.iter().enumerate() {
+        if i > 0 && (bytes.len() - i) % 3 == 0 {
+            grouped.push(',');
+        }
+        grouped.push(*b as char);
+    }
+    match frac_part {
+        Some(f) => format!("{sign}{grouped}.{f}"),
+        None => format!("{sign}{grouped}"),
+    }
+}
+
+/// `{{#replace:text|from|to}}` — replace all occurrences of `from` with `to`.
+struct ReplaceExpander;
+impl TemplateExpander for ReplaceExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["#replace"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let expand = |s: &str| {
+            expand_nested_template_text(s.trim(), ctx).unwrap_or_else(|_| s.trim().to_string())
+        };
+        let text = inv.params.first().map(|s| expand(s)).unwrap_or_default();
+        let from = inv.params.get(1).map(|s| expand(s)).unwrap_or_default();
+        let to = inv.params.get(2).map(|s| expand(s)).unwrap_or_default();
+        let expanded = if from.is_empty() {
+            text
+        } else {
+            text.replace(&from, &to)
+        };
+        Ok(ExpansionResult { expanded })
+    }
+}
+
+/// `{{#titleparts:path|count|offset}}` — split `path` on `/` and return the
+/// requested slice (1-based `offset`, up to `count` segments).
+struct TitlePartsExpander;
+impl TemplateExpander for TitlePartsExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["#titleparts"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let path = inv
+            .params
+            .first()
+            .map(|s| {
+                expand_nested_template_text(s.trim(), ctx).unwrap_or_else(|_| s.trim().to_string())
+            })
+            .unwrap_or_default();
+        let segments: Vec<&str> = path.split('/').collect();
+        let count = inv
+            .params
+            .get(1)
+            .and_then(|s| s.trim().parse::<i64>().ok())
+            .unwrap_or(0);
+        let offset = inv
+            .params
+            .get(2)
+            .and_then(|s| s.trim().parse::<i64>().ok())
+            .unwrap_or(1);
+        let start = if offset >= 1 {
+            (offset - 1) as usize
+        } else {
+            0
+        };
+        let start = start.min(segments.len());
+        let end = if count > 0 {
+            (start + count as usize).min(segments.len())
+        } else {
+            segments.len()
+        };
+        Ok(ExpansionResult {
+            expanded: segments[start..end].join("/"),
+        })
+    }
+}
 
 // {{#if: test | then | else}}
 struct IfExpander;
@@ -2303,14 +2510,21 @@ impl TemplateExpander for IfExpander {
     fn names(&self) -> &'static [&'static str] {
         &["#if"]
     }
-    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         if inv.params.is_empty() {
             return Err(ConvertError::MalformedTemplate {
                 name: inv.name.clone(),
                 detail: "missing test".into(),
             });
         }
-        let test = inv.params[0].trim();
+        // MediaWiki expands the condition before testing truthiness; a nested
+        // template (e.g. {{#var:x}}) that resolves to empty makes #if falsey. An
+        // undefined `{{#var}}` expands to an HTML-comment marker here, which (like
+        // MediaWiki, where comments are stripped pre-evaluation) must not count.
+        let test = expand_nested_template_text(inv.params[0].trim(), ctx)
+            .unwrap_or_else(|_| inv.params[0].trim().to_string());
+        let test = strip_html_comments(&test);
+        let test = test.trim();
         let truthy = !(test.is_empty() || test == "0");
         let then_v = inv.params.get(1).cloned().unwrap_or_default();
         let else_v = inv.params.get(2).cloned().unwrap_or_default();
@@ -2326,50 +2540,78 @@ impl TemplateExpander for IfEqExpander {
     fn names(&self) -> &'static [&'static str] {
         &["#ifeq"]
     }
-    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         if inv.params.len() < 2 {
             return Err(ConvertError::MalformedTemplate {
                 name: inv.name.clone(),
                 detail: "expected a|b|then|else".into(),
             });
         }
-        let a = inv.params[0].trim();
-        let b = inv.params[1].trim();
+        let expand = |s: &str| {
+            let v =
+                expand_nested_template_text(s.trim(), ctx).unwrap_or_else(|_| s.trim().to_string());
+            strip_html_comments(&v)
+        };
+        let a = expand(&inv.params[0]);
+        let b = expand(&inv.params[1]);
+        // MediaWiki compares numerically when both sides are numbers, else as
+        // strings (e.g. "5.0" == "5", but "abc" == "abc").
+        let equal = match (a.trim().parse::<f64>(), b.trim().parse::<f64>()) {
+            (Ok(x), Ok(y)) => x == y,
+            _ => a.trim() == b.trim(),
+        };
         let then_v = inv.params.get(2).cloned().unwrap_or_default();
         let else_v = inv.params.get(3).cloned().unwrap_or_default();
         Ok(ExpansionResult {
-            expanded: if a == b { then_v } else { else_v },
+            expanded: if equal { then_v } else { else_v },
         })
     }
 }
 
-// {{#switch: val | case1=result1 | case2=result2 | #default=def }}
+// {{#switch: val | case1=result1 | k2 | k3=result2 | bare-default }}
 struct SwitchExpander;
 impl TemplateExpander for SwitchExpander {
     fn names(&self) -> &'static [&'static str] {
         &["#switch"]
     }
-    fn expand(&self, inv: &TemplateInvocation, _ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
         if inv.params.is_empty() {
             return Err(ConvertError::MalformedTemplate {
                 name: inv.name.clone(),
                 detail: "missing switch value".into(),
             });
         }
-        let val = inv.params[0].trim();
+        // Expand the switch value first (MediaWiki does), so a nested
+        // {{#expr}}/{{#var}} key resolves before matching.
+        let val = expand_nested_template_text(inv.params[0].trim(), ctx)
+            .unwrap_or_else(|_| inv.params[0].trim().to_string());
+        let val = strip_html_comments(&val);
+        let val = val.trim();
+
+        let cases = &inv.params[1..];
         let mut default: Option<String> = None;
-        // scan for first key=value pair matching val
-        for p in inv.params.iter().skip(1) {
+        // Bare keys (no `=`) "fall through" to the next `key=value`. A trailing
+        // bare parameter (none following with `=`) is the default.
+        let mut pending_match = false;
+        for (i, p) in cases.iter().enumerate() {
             if let Some(eq) = p.find('=') {
-                let (k, v) = p.split_at(eq);
-                let key = k.trim();
-                let rhs = v[1..].to_string();
+                let key = p[..eq].trim();
+                let rhs = p[eq + 1..].to_string();
                 if key.eq_ignore_ascii_case("#default") {
                     default = Some(rhs);
                     continue;
                 }
-                if key == val {
+                if pending_match || key == val {
                     return Ok(ExpansionResult { expanded: rhs });
+                }
+            } else {
+                let key = p.trim();
+                if i == cases.len() - 1 {
+                    // Trailing bare parameter → the default.
+                    default = default.or_else(|| Some(key.to_string()));
+                } else if key == val {
+                    // Fall-through key: match the next `key=value`.
+                    pending_match = true;
                 }
             }
         }
@@ -2436,61 +2678,54 @@ impl TemplateExpander for FdExpander {
                 detail: "missing number".into(),
             });
         }
+        // `Module:fd` (`p.get`) uses ONLY the first argument — it styles the
+        // decimal part in `<small>` and returns the value otherwise verbatim. It
+        // never pads, rounds, or consumes extra positional args. So:
+        //   * a literal number passes through unchanged (trailing zeros kept:
+        //     `{{fd|1.30}}` is `1.30`);
+        //   * extra args are ignored (`{{fd|500|750|1000}}` is `500`, not NaN);
+        //   * arithmetic (rare; usually a nested `{{#expr}}` already resolved it)
+        //     is evaluated at full precision.
         let raw = expand_nested_template_text(inv.params[0].trim(), ctx)
             .unwrap_or_else(|_| inv.params[0].trim().to_string());
-        let aux = inv
-            .params
-            .get(1)
-            .map(|value| {
-                expand_nested_template_text(value.trim(), ctx)
-                    .unwrap_or_else(|_| value.trim().to_string())
-            })
-            .unwrap_or_default();
-        let aux = aux.trim();
-        let (expr, suffix) = match raw.strip_suffix('%') {
+        let (core, suffix) = match raw.strip_suffix('%') {
             Some(value) => (value.trim(), "%"),
-            None => (raw.as_str(), ""),
+            None => (raw.trim(), ""),
         };
-        if let Some(num) = evaluate_numeric(expr) {
-            // The wiki's {{fd}} (Module:Fd) only *styles* a value's decimals
-            // (wrapping them in <small>); it never pads OR rounds. So the value
-            // must pass through at full precision — `{{fd|50}}` is "50",
-            // `{{fd|2.5}}` is "2.5", and `{{fd|35.62125}}` is "35.62125", not a
-            // 2-decimal "35.62". Rust's `{}` for f64 is the shortest round-trip
-            // form, which trims trailing zeros without losing precision.
-            if aux.is_empty() {
-                return Ok(ExpansionResult {
-                    expanded: format!("{}{}", num, suffix),
-                });
-            }
-            // An explicit decimal-places argument (rare; the wiki ignores it but
-            // we honour it as a deliberate authoring choice) still rounds.
-            if aux.parse::<usize>().is_ok() {
-                return Ok(ExpansionResult {
-                    expanded: format!("{}{}", format_progression_number(num, Some(aux)), suffix),
-                });
-            }
-
+        if is_plain_number(core) {
             return Ok(ExpansionResult {
-                expanded: format!("{} ({})", format!("{}{}", num, suffix), aux),
+                expanded: format!("{}{}", core, suffix),
             });
         }
-
+        if let Ok(value) = crate::parse::expr::evaluate_expression_value(core) {
+            return Ok(ExpansionResult {
+                expanded: format!("{}{}", crate::parse::expr::format_sig(value, 14), suffix),
+            });
+        }
         if raw.contains("<!--") || raw.contains("{{") {
             return Err(unhandled_template_error(inv));
         }
-        if !looks_like_textual_fd_value(&raw) && (aux.is_empty() || aux.parse::<usize>().is_ok()) {
-            return Err(unhandled_template_error(inv));
+        if looks_like_textual_fd_value(&raw) {
+            return Ok(ExpansionResult {
+                expanded: raw.trim().to_string(),
+            });
         }
-
-        Ok(ExpansionResult {
-            expanded: if aux.is_empty() || aux.parse::<usize>().is_ok() {
-                raw.trim().to_string()
-            } else {
-                format!("{} ({})", raw.trim(), aux)
-            },
-        })
+        Err(unhandled_template_error(inv))
     }
+}
+
+/// True if `s` is a plain decimal literal (digits, an optional sign, an optional
+/// single decimal point) — i.e. something `Module:fd` would pass through
+/// verbatim rather than treating as a formula or text.
+fn is_plain_number(s: &str) -> bool {
+    let s = s.trim();
+    if s.is_empty() {
+        return false;
+    }
+    let body = s.strip_prefix('-').unwrap_or(s);
+    body.bytes().any(|b| b.is_ascii_digit())
+        && body.bytes().all(|b| b.is_ascii_digit() || b == b'.')
+        && body.bytes().filter(|b| *b == b'.').count() <= 1
 }
 
 struct ColumnExpander;
@@ -2591,6 +2826,16 @@ impl TemplateExpander for IconUnwrapExpander {
             if s == "'s" || s == "’s" {
                 append_possessive(&mut label);
             }
+        }
+        // The dedicated possessive variants (`cis`/`cais`/`ccis`/`iis`/`ais`/
+        // `nies`/`sis`/`uis`) render the name in the possessive form even with no
+        // explicit `'s` argument. `append_possessive` is idempotent.
+        let lname = inv.name.trim().to_ascii_lowercase();
+        if matches!(
+            lname.as_str(),
+            "cis" | "cais" | "ccis" | "iis" | "ais" | "nies" | "sis" | "uis"
+        ) {
+            append_possessive(&mut label);
         }
         Ok(ExpansionResult { expanded: label })
     }
@@ -3134,14 +3379,15 @@ fn split_expr_rounding(expr: &str) -> (String, Option<String>) {
     (trimmed.to_string(), None)
 }
 
-fn evaluate_expression_display(expr: &str, precision: u8) -> Option<String> {
+fn evaluate_expression_display(expr: &str, _precision: u8) -> Option<String> {
     let (core, round_digits) = split_expr_rounding(expr);
-    let evaluated = evaluate_expression(core.trim(), ExprNumberFormat::Float(precision)).ok()?;
+    // Bare `#expr` mirrors MediaWiki: full precision (≈14 significant digits),
+    // NOT the conversion's display precision. Only an explicit `round N` rounds.
+    let value = crate::parse::expr::evaluate_expression_value(core.trim()).ok()?;
     if let Some(digits) = round_digits {
-        let numeric = evaluated.trim().parse::<f64>().ok()?;
-        return Some(format_progression_number(numeric, Some(digits.as_str())));
+        return Some(format_progression_number(value, Some(digits.as_str())));
     }
-    Some(evaluated)
+    Some(crate::parse::expr::format_sig(value, 14))
 }
 
 fn evaluate_numeric(expr: &str) -> Option<f64> {
@@ -4021,9 +4267,7 @@ impl TemplateExpander for HighestLowestStatsExpander {
         };
         let module = match parse_champion_module(module_raw) {
             Ok(module) => module,
-            Err(_) => {
-                return Err(unhandled_template_error(inv))
-            }
+            Err(_) => return Err(unhandled_template_error(inv)),
         };
 
         let (positional, named) = split_named_and_positional(inv);
@@ -4552,8 +4796,9 @@ mod tests {
             reg.expand(&ppt, &ctx()).unwrap().expanded,
             "5 / 15 (based on level)"
         );
+        // Module:fd ignores extra positional args, so the "3" does not round.
         let fd = parse_invocation("fd|3.14159|3");
-        assert_eq!(reg.expand(&fd, &ctx()).unwrap().expanded, "3.142");
+        assert_eq!(reg.expand(&fd, &ctx()).unwrap().expanded, "3.14159");
         let ci = parse_invocation("ci|Aatrox|'s");
         assert_eq!(reg.expand(&ci, &ctx()).unwrap().expanded, "Aatrox's");
         let ii = parse_invocation("ii|Infinity Edge|image=Infinity Edge item old.png");
@@ -4563,8 +4808,9 @@ mod tests {
             reg.expand(&ap_equation, &ctx()).unwrap().expanded,
             "75 + 90% of 45=115.5 magic damage"
         );
+        // `cis` is the possessive champion-icon variant (wiki: "Kayle's").
         let cis = parse_invocation("cis|Kayle|variant=old3");
-        assert_eq!(reg.expand(&cis, &ctx()).unwrap().expanded, "Kayle");
+        assert_eq!(reg.expand(&cis, &ctx()).unwrap().expanded, "Kayle's");
         let ai = parse_invocation("ai|World Ender|Aatrox");
         assert_eq!(reg.expand(&ai, &ctx()).unwrap().expanded, "World Ender");
         let ai_display = parse_invocation("ai|Living Forge|Ornn|Masterwork");
@@ -4853,8 +5099,10 @@ mod tests {
         let gems = parse_invocation("Gems|Gems");
         assert_eq!(reg.expand(&gems, &ctx()).unwrap().expanded, "Gems");
 
+        // `uis` is the possessive unit-icon variant: it appends the possessive
+        // (just an apostrophe after a trailing "s"), matching the wiki.
         let uis = parse_invocation("uis|Tibbers");
-        assert_eq!(reg.expand(&uis, &ctx()).unwrap().expanded, "Tibbers");
+        assert_eq!(reg.expand(&uis, &ctx()).unwrap().expanded, "Tibbers'");
 
         let cbis = parse_invocation("cbis|Nagakabouros");
         assert_eq!(reg.expand(&cbis, &ctx()).unwrap().expanded, "Nagakabouros'");
@@ -4940,7 +5188,11 @@ mod tests {
             )
             .unwrap();
         assert!(result.expanded.contains("* Yes"));
-        assert!(result.expanded.contains("* 8 lethality"));
+        // {{Lethality|8}} renders the full armor-penetration clause, matching the
+        // wiki: "8 Lethality (4.98 – 8 (based on level) armor penetration)".
+        assert!(result
+            .expanded
+            .contains("* 8 Lethality (4.98 – 8 (based on level) armor penetration)"));
     }
 
     #[test]
@@ -5002,7 +5254,8 @@ mod tests {
         for (input, expected) in [
             ("fd|50", "50"),
             ("fd|2.5", "2.5"),
-            ("fd|2.50", "2.5"),
+            // Module:fd preserves the literal value — trailing zeros are kept.
+            ("fd|2.50", "2.50"),
             ("fd|0", "0"),
             ("fd|0.25", "0.25"),
             // Full precision is preserved (the wiki never rounds): a 3+ decimal
@@ -5014,11 +5267,12 @@ mod tests {
             let out = reg.expand(&parse_invocation(input), &ctx()).unwrap();
             assert_eq!(out.expanded, expected, "for {input}");
         }
-        // An explicit precision still rounds (and then trims).
+        // Extra positional args are ignored (Module:fd uses only arg 1), so a
+        // second "precision" argument does NOT round.
         let three = reg
             .expand(&parse_invocation("fd|3.14159|3"), &ctx())
             .unwrap();
-        assert_eq!(three.expanded, "3.142");
+        assert_eq!(three.expanded, "3.14159");
     }
 
     #[test]
@@ -5035,9 +5289,12 @@ mod tests {
         );
         // Canonical (non-redirect) template name behaves identically.
         assert_eq!(
-            reg.expand(&parse_invocation("Rounded up to next game tick|1.5"), &ctx())
-                .unwrap()
-                .expanded,
+            reg.expand(
+                &parse_invocation("Rounded up to next game tick|1.5"),
+                &ctx()
+            )
+            .unwrap()
+            .expanded,
             "1.518 seconds"
         );
         // A value already on a tick boundary keeps its exact duration.
@@ -5112,15 +5369,19 @@ mod tests {
             .unwrap();
         assert_eq!(ranged_fd.expanded, "1.75 – 2");
 
+        // Module:fd uses only arg 1 and ignores the rest; a non-numeric value
+        // passes through unchanged (the wiki renders `{{fd|None|Recast}}` as "None").
         let labeled_text_fd = reg
             .expand(&parse_invocation("fd|None|Recast"), &ctx())
             .unwrap();
-        assert_eq!(labeled_text_fd.expanded, "None (Recast)");
+        assert_eq!(labeled_text_fd.expanded, "None");
 
+        // Extra positional args are ignored (Module:fd uses only arg 1), so the
+        // label is dropped — the wiki renders just "802.75".
         let labeled_numeric_fd = reg
             .expand(&parse_invocation("fd|802.75|Forwards edge range"), &ctx())
             .unwrap();
-        assert_eq!(labeled_numeric_fd.expanded, "802.75 (Forwards edge range)");
+        assert_eq!(labeled_numeric_fd.expanded, "802.75");
 
         let recurring_fd = reg
             .expand(&parse_invocation("fd|11.1{{Recurring|1}}"), &ctx())
@@ -5143,10 +5404,14 @@ mod tests {
         let affirmative = reg.expand(&parse_invocation("a|Yes"), &ctx()).unwrap();
         assert_eq!(affirmative.expanded, "Yes");
 
+        // {{Lethality|N}} renders the full per-level armor-penetration clause.
         let lethality = reg
             .expand(&parse_invocation("Lethality|8"), &ctx())
             .unwrap();
-        assert_eq!(lethality.expanded, "8 lethality");
+        assert_eq!(
+            lethality.expanded,
+            "8 Lethality (4.98 – 8 (based on level) armor penetration)"
+        );
 
         let wr_item = reg
             .expand(&parse_invocation("WRi|Stinger"), &ctx())
@@ -5262,7 +5527,9 @@ mod tests {
             Some(conversion_ctx),
         )
         .unwrap();
-        assert_eq!(invoked, "800");
+        // 2.666667*300 = 800.0001; bare {{#expr}} keeps full precision (wiki
+        // renders `{{g|{{#expr:2.666667*300}}}}` as 800.0001, not 800).
+        assert_eq!(invoked, "800.0001");
 
         let recipe = parse_invocation("Recipe/item|Oracle Lens");
         assert_eq!(reg.expand(&recipe, &ctx).unwrap().expanded, "* Oracle Lens");
