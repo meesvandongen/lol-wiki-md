@@ -3,7 +3,7 @@ use lol_wiki_md::{convert_champion, convert_item, convert_rune};
 
 const EXPECTED_CHAMPION_HASH: &str =
     "49e93a8b5b2aafdf91c35a7bb66039bb4961f448324ff94f24ff739d2d69d965";
-const EXPECTED_ITEM_HASH: &str = "8cd002332c8994e8ee19c8a84daf272993edc78fd8baa40a44506018b05ad8c9";
+const EXPECTED_ITEM_HASH: &str = "37f918a1d27eb4ec8e5c52552ca2c1c2dbdb2c32636f64b8d086542e46e870a8";
 const EXPECTED_RUNE_HASH: &str = "58d3a3086a5d583a60dec1aef59ff3838211e1bb8a3a1b5aabe748316d231fc9";
 
 #[test]
@@ -111,11 +111,19 @@ fn golden_item_output_hash() {
     type = {"Legendary"},
     buy = 3300,
     recipe = {"Long Sword", "Sheen"},
-    stats = { ad = 70, haste = 20 },
+    stats = { ad = 70, ah = 20 },
     effects = {
       pass = { name = "Sharpen", unique = true, description = "Deals {{ap|40}} bonus damage." }
     }
   }
+}"#,
+    )
+    .unwrap();
+    std::fs::write(
+        export.join("Module%3AGold value%2Fdata.txt"),
+        r#"return {
+  ["ad"] = {["val"] = 35, ["name"] = "attack damage"},
+  ["ah"] = {["val"] = 50, ["name"] = "ability haste"},
 }"#,
     )
     .unwrap();

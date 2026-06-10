@@ -619,13 +619,12 @@ pub fn render_item_markdown(item: &Item, _raw_excerpt: &str) -> String {
 
     if !item.stats.is_empty() {
         out.push_str("## Stats\n\n| Stat | Value |\n|------|-------|\n");
-        let mut keys: Vec<_> = item.stats.keys().collect();
-        keys.sort();
-        for key in keys {
-            if let Some(val) = item.stats.get(key) {
-                let norm_val = normalize_all(val);
-                out.push_str(&format!("| {} | {} |\n", key, norm_val));
-            }
+        for stat in &item.stats {
+            out.push_str(&format!(
+                "| {} | {} |\n",
+                normalize_all(&stat.label),
+                normalize_all(&stat.value)
+            ));
         }
         out.push('\n');
     }
