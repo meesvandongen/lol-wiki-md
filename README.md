@@ -4,15 +4,17 @@ This repository is a small polyglot monorepo that can:
 
 1. export raw League Wiki wikitext,
 2. convert the export into Markdown,
-3. build an Rspress static site from the generated Markdown.
+3. build an Rspress static site from the generated Markdown,
+4. compile the Markdown into an LLM-native knowledge pack (structured JSON, RAG chunks, `llms.txt`, and an MCP server).
 
-The repo root is only the orchestration layer now; the three primary deliverables live side by side under `apps/`.
+The repo root is only the orchestration layer now; the primary deliverables live side by side under `apps/`.
 
 ## Layout
 
 - `apps/converter` — Rust Markdown converter crate (`lol_wiki_md`)
 - `apps/exporter` — Rust wiki exporter crate (`lol-wiki-export`)
 - `apps/docs` — Rspress docs site
+- `apps/llm-pack` — zero-dependency LLM knowledge pack builder + MCP server (see `apps/llm-pack/README.md`)
 - `scripts/` — repo-level orchestration (`pipeline.sh`, `pipeline.ps1`, content sync)
 - `Cargo.toml` — Rust workspace manifest for converter/exporter
 - `package.json` — Node workspace manifest for the docs app and top-level convenience scripts
@@ -29,6 +31,10 @@ Useful top-level commands:
 - `npm run docs:fresh`
 - `npm run docs:dev`
 - `npm run docs:publish`
+- `npm run llm:build`
+- `npm run llm:fresh`
+- `npm run llm:search -- "aatrox q sweetspot"`
+- `npm run llm:mcp`
 - `npm run pipeline`
 
 The docs UI includes the official Rspress `llms` and `sitemap` plugins, a GitHub social link, and site version metadata sourced from the docs package version.
@@ -40,6 +46,7 @@ From the repository root, the default step commands now line up with the canonic
 1. `npm run download` (alias: `npm run export:wiki`) — exports raw wiki pages into `generated/wiki-export/{out,meta}`
 2. `npm run convert` — converts champions, items, and runes into `generated/markdown`
 3. `npm run docs:build` — syncs `generated/markdown` into `apps/docs/docs` and builds the Rspress site
+4. `npm run llm:build` — compiles `generated/markdown` into `generated/llm-pack` (structured JSON, `chunks.jsonl`, `digest.md`, `llms.txt`, `manifest.json`); serve it to agents with `npm run llm:mcp`
 
 The default `npm run convert` command automatically runs all three content categories in sequence. If `generated/wiki-export/out` does not exist yet, it falls back to `./export_out` for local quick-validation workflows.
 

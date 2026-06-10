@@ -1,0 +1,17 @@
+{
+  "name": "@lol-wiki/llm-pack",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Compiles the generated wiki Markdown into an LLM-native knowledge pack: structured JSON, RAG chunks, llms.txt, and an MCP server.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meesvandongen/lol-wiki-md.git"
+  },
+  "homepage": "https://github.com/meesvandongen/lol-wiki-md",
+  "scripts": {
+    "build": "node ./src/cli.mjs build",
+    "mcp": "node ./src/mcp-server.mjs",
+    "test": "node --test"
+  }
+}

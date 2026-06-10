@@ -8,7 +8,8 @@
   },
   "homepage": "https://github.com/meesvandongen/lol-wiki-md",
   "workspaces": [
-    "apps/docs"
+    "apps/docs",
+    "apps/llm-pack"
   ],
   "scripts": {
     "download": "node ./scripts/run-export-wiki.mjs",
@@ -27,6 +28,11 @@
     "docs:worker:dev": "node ./node_modules/wrangler/bin/wrangler.js dev --config ./apps/docs/wrangler.jsonc",
     "docs:worker:deploy": "node ./scripts/publish-wrangler.mjs",
     "docs:publish": "npm run docs:build && node ./scripts/publish-wrangler.mjs",
+    "llm:build": "node ./apps/llm-pack/src/cli.mjs build",
+    "llm:fresh": "npm run convert && npm run llm:build",
+    "llm:search": "node ./apps/llm-pack/src/cli.mjs search",
+    "llm:mcp": "node ./apps/llm-pack/src/mcp-server.mjs",
+    "llm:test": "npm test --workspace @lol-wiki/llm-pack",
     "pipeline": "node ./scripts/run-pipeline.mjs",
     "pipeline:sh": "bash ./scripts/pipeline.sh",
     "pipeline:ps": "pwsh ./scripts/pipeline.ps1"
