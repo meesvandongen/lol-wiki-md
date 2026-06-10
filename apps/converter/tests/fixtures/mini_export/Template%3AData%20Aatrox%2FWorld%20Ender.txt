@@ -1,0 +1,29 @@
+{{{{{1<noinclude>|Ability data</noinclude>}}}|World Ender|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}
+|champion     = Aatrox
+|skill        = R
+|icon         = World Ender.png
+|description  = {{sbc|Active:}} '''Aatrox''' unleashes his true form for 10 seconds, {{tip|fearing}} nearby enemy {{tip|minions}} and {{tip|monsters}} for 3 seconds, during which they are gradually {{tip|slow|slowed}} by up to 99% over the duration. He also gains {{sti|{{as|'''bonus''' movement speed}}}} that decays by 10% of the '''current bonus''' every {{fd|0.25}} seconds, lasting until ''World Ender'' has ended.
+|leveling     = {{st|Bonus Movement Speed|{{ap|60 to 100}}%}}
+|description2 = Whenever '''Aatrox''' scores a champion {{tip|takedown}}, he extends the duration by 5 seconds, up to its original length, and becomes unleashed again.
+|description3 = During ''World Ender'', '''Aatrox''' gains {{as|{{sti|'''bonus''' attack damage}}}}, has 5% increased [[size]], is {{tip|ghosted}}, and receives increased {{tip|heal|self-healing}} from all sources.
+|leveling3    = {{st|Bonus Attack Damage|{{as|{{ap|20 to 40}}% AD}}}}
+{{st|Increased Healing|{{ap|50 to 100}}%}}
+|description4 = '''''Aatrox''' can move during World Ender's cast time.''
+|cast time    = {{fd|0.25}}
+|effect radius= {{tt|600|Flee radius}}
+|cooldown     = {{ap|120 to 80}}
+|cdstart      = on-cast
+|targeting    = Auto
+|affects      = Self, Enemies
+|notes        = 
+* His resource bar indicates the remaining duration of ''World Ender''.
+* While ''World Ender'' is active, the screen will have a red tint. Near the end of the duration, the tint is intensified.
+* ''World Ender'' persists through {{tip|resurrection}} effects.
+** ''World Ender's'' healing amplification applies to the health gained by resurrecting.
+* ''World Ender'' will cast from wherever '''Aatrox''' is at the end of the cast time.
+* Casting ''World Ender'' while it is still active removes the timer on the resource bar. {{bug}}
+** If this happens while using {{csl|Aatrox|Primordian}}, the intensified tint effect of ''World Ender'' will stay on the screen for the rest of the game. {{bug}}
+<!-- Blurb -->
+|blurb       = {{sbc|Active:}} {{ci|Aatrox}} unleashes his true form for a period, gaining a burst of {{sti|{{as|move speed}}}}. During this time, '''Aatrox''' has increased {{as|{{sti|attack damage}}}}, {{as|{{sti|self-healing}}}}, and is {{tip|ghosted}}.
+|blurb2      = These effects are refreshed and the duration is extended whenever '''Aatrox''' scores a champion {{tip|takedown}}.
+}}

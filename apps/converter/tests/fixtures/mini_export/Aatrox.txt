@@ -1,0 +1,59 @@
+{{Section top}}
+{{Game banner|Aatrox}}
+{{LoL navigation}}{{Champion info|Aatrox}}
+
+== Abilities ==
+{{Data Aatrox/I|Ability}}
+{{Data Aatrox/Q|Ability}}
+{{Data Aatrox/W|Ability}}
+{{Data Aatrox/E|Ability}}
+{{Data Aatrox/R|Ability}}
+
+==Champion skins==
+:''This article section only contains champion skins. For all associated collection items, see [[Aatrox/Cosmetics|Aatrox (Collection)]].''
+
+{{#invoke:SkinData|skintabber|Aatrox}}
+
+==Patch history==
+{{Patch box|Aatrox}}
+
+==Trivia==
+;{{ci|Aatrox|size=32|Aatrox, the Darkin Blade}}
+* Aatrox is the first champion, since {{cis|Lulu}} [[V1.0.0.136|patch]] introduced champion specific [[Login Screen|login screens]], to receive two login screens and themes released for his Classic skin.
+* In-game, Aatrox can toggle his banner-style wings and his sword stance [default: Ctrl + 5].
+* {{Champion without ability power ratio|Aatrox}}
+* The icon for {{ai|World Ender|Aatrox}} is reused for the [[Teamfight Tactics]] item {{TFT Item|Darkin}}.
+* Aatrox's passive, Deathbringer Stance, is a reference to Final Fantasy IV in both name and function. "Deathbringer" is the name of the last sword you get in the game as a Dark Knight and the icon and ability looks exactly how Cecil holds his sword using his "Darkness" ability.
+* {{cai|The Darkin Blade|Aatrox}}, {{cai|Spider Queen|Elise}}, {{cai|Grandmaster-at-Arms|Jax}}, {{cai|Fury of the North|Sejuani}}, {{cai|Night Hunter|Vayne}}, and {{cai|The Relentless Storm|Volibear}} are the only abilities in ''League of Legends'' that have the same name as their champion's title.
+* Aatrox's Series 1 [[Eternals]] make the following references:
+** ''Chains Yanked'' references the idiom [https://idioms.thefreedictionary.com/yank+chain yank one's chain] as well as the pull of {{ai|Infernal Chains|Aatrox}}. 
+** ''QQ's'' references the [https://www.dictionary.com/e/slang/qq/ QQ emoticon] as well the multi-cast nature of {{ai|The Darkin Blade|Aatrox}}.
+
+;{{ci|Aatrox|variant=old|size=32|Aatrox, the Darkin Blade}}
+* Out-of-universe, ''Aatrox'' is a word play on Latin [http://en.wiktionary.org/wiki/atrox ''atrox''] "fierce, savage, cruel" in turn from ''ater'' "dull black, dark", from root {{w|Proto-Indo-European languages|PIE|}} ''*h₂eh₁ter-'' "fire";<ref>DeVaan, M. ''Etymoligical Dictionary of Latin and other Italic languages'', p. 60</ref>
+** All of these reference the [[Darkin]] weapon's physical manifestation and demonic nature (punning on ''dark kin''), various {{w|early thermal weapons|historical fire-based weapons}}, the {{w|scorched earth}} strategy, and his '{{w|The Art of War|war as an artform}}' philosophy. Latin ''atrox'' gives rise to Anglo-French ''atrocity.''
+* Enemies hit by {{ai|Massacre|Aatrox}} will leave a blood trail between themselves and Aatrox that he will rapidly absorb (this is a remaining visual effect from PBE testing, where Aatrox would gain attack speed based on how many enemies had been hit by {{ai|Massacre|Aatrox}}, that was recycled in [[V5.6]]).
+* Aatrox can still use emotes during {{ais|Blood Well|Aatrox}} revive.
+* {{ii|Sterak's Gage}} is speculated to have been '''Aatrox's''' missing left arm glove. Its passive was also coincidentally similar to Aatrox's.
+* Prior to his rework, on the statement "This champion needs an update", players ranked Aatrox 5th in NA; 4th in BR; 3rd in KR and 14th in CN. He ranked 4th overall.<ref>[https://twitter.com/RiotBlaustoise/status/1031656660006133760 Riot Blaustoise Aatrox data tweet]</ref>
+
+==See also==
+{{Champions}}
+
+==References==
+<references/>
+
+[[es:Aatrox/Habilidades]]
+[[pt-br:Aatrox/LoL]]
+{{Champion categories|Aatrox}}
+[[Category:Dash champion]]
+[[Category:Haste champion]]
+[[Category:Knockup champion]]
+[[Category:Pull champion]]
+[[Category:Self Heal champion]]
+[[Category:Slow champion]]
+[[Category:Flee champion]]
+[[Category:Knockback champion]]
+[[Category:Manaless champion]]
+[[Category:Cooldown champion]]
+[[Category:Champion without ability power ratio]]

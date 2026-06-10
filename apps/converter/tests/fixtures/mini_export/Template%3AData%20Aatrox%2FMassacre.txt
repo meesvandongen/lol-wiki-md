@@ -1,0 +1,24 @@
+{{{{{1<noinclude>|Ability data</noinclude>}}}|Massacre|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}
+|champion     = Aatrox
+|skill        = R
+|icon         = Massacre.png
+|blurb        = Aatrox draws in the blood of his foes, damaging all nearby enemy champions around him and gaining increased Attack Speed and bonus Attack Range for a short duration.
+|description  = {{sbc|Active:}} '''Aatrox''' draws in the blood of his foes, dealing {{tip|magic damage}} to nearby enemy champions and filling 20% of his {{ai|Blood Well|Aatrox}} for each enemy champion hit.
+|leveling     = {{st|Magic Damage|{{ap|200|300|400}} {{as|(+ 100% AP)}}}}
+|description2 = Additionally, '''Aatrox''' gains {{sti|{{as|'''bonus''' attack speed}}}} and {{sti|225 '''bonus''' attack range}} for 12 seconds.
+|leveling2    = {{st|Attack Speed|{{ap|40|50|60%}}}}
+|cooldown     = {{ap|100|85|70}}
+|effect radius= 550
+|cost         = 
+|costtype     = 
+|targeting    = None
+|affects      = Self, Enemies
+|damagetype   = Magic
+|spellshield  = True
+|spelleffects = Area of effect
+|projectile   = 
+|grounded     = 
+|knockdown    = 
+|notes        = 
+* {{si|Flash}} can be cast during the cast animation of ''Massacre''. If done so, the ability resolves after {{si|Flash}} in the location '''Aatrox''' flashes to.
+}}

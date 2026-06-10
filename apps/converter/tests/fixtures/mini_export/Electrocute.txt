@@ -1,0 +1,80 @@
+{{rune header|Electrocute}}
+
+== Notes ==
+* '''Electrocute''' deals {{tip|proc damage}}, and thus will not trigger [[spell effects]].
+* '''Electrocute''' can trigger while [[death|dead]].
+* {{tip|Blind}}, {{tip|Cripple}}, {{tip|Drowsy}}, {{tip|Kinematics}}, {{tip|Nearsight}}, and {{tip|Stasis}} do not count as valid crowd control for triggering stacks.
+* Becoming {{tip|untargetable}} during the {{fd|0.25}}-second delay will '''not''' prevent the effect from occurring.
+* The 3 second timer is non-refreshing - the third stack has to be applied within 3 seconds of the first.
+* {{cai|R|Ambessa}} is special cased to apply a stack for the suppression application and the damage dealt.
+* {{cai|Razor Shuriken|Zed}} and {{ai|Shadow Slash|Zed}}, when used together with {{ai|Living Shadow|Zed|Shadows}}, are special cased to generate a stack for each tick of damage.
+* {{cais|Tidecaller's Blessing|Nami}} damage instances beyond its first are special cased to not apply a stack.
+* Effects that deal {{tip|proc damage}} do not trigger a stack unless it is also tagged as {{tip|pet damage}}.
+** Such effects can still trigger a stack if they apply a debuff (i.e {{ii|Black Cleaver}}).
+
+== Map-Specific Differences ==
+{{map changes|Electrocute}}
+
+== Trivia ==
+{{Rune data Electrocute|pst2|caption}}
+* '''Electrocute''' is almost identical to the removed Season 2016 mastery {{mi6|Thunderlord's Decree}}. The primary distinction between the two is that persistent area of effects and multi-hit spells can no longer generate multiple stacks per cast - e.g. {{ai|Ethereal Chains|LeBlanc}} and {{ai|Tormented Shadow|Morgana}}.
+** In addition, '''Electrocute''' requires that all three abilities hit within one three-second window, while '''Thunderlord's Decree''' only required three seconds between each ability. This makes it harder to activate for champions with slow combos, especially champions who primarily use basic attacks.
+
+== Media ==
+=== Rune page client backdrop ===
+<gallery widths="300" position="center">
+Domination Electrocute Precision.png|Electrocute with Precision
+Domination Electrocute Sorcery.png|Electrocute with Sorcery
+Domination Electrocute Resolve.png|Electrocute with Resolve
+Domination Electrocute Inspiration.png|Electrocute with Inspiration
+</gallery>
+=== Visual effects ===
+<gallery navigation=true widths="300" heights="230">
+Electrocute trigger VFX.png|<center>Trigger VFX</center>
+Electrocute shock VFX.png|<center>Trigger VFX</center>
+</gallery>
+=== Sound effects ===
+;3rd stack applied
+* {{sm2|Electrocute SFX 2.ogg}} Rune SFX
+* {{sm2|Electrocute SFX 3.ogg}} Rune SFX
+* {{sm2|Electrocute SFX.ogg}} Rune SFX
+
+== Patch History ==
+{{Scroll box|content=
+;[[V25.S1.3]]
+* Base damage increased to {{pp|70 to 240}} from {{pp|50 to 190}}.
+
+;[[V14.13]]
+* Cooldown reduced to 20 seconds at all levels from {{pp|25 to 20}}.
+* Base damage changed to {{pp|50 to 190}} from {{pp|30 to 220}}.
+
+;[[V13.20]]
+* Base damage increased to {{pp|30 to 220}} from {{pp|30 to 180}}.
+* AD ratio reduced to {{as|10% '''bonus''' AD}} from {{as|40% '''bonus''' AD}}.
+* AP ratio reduced to {{as|5% AP}} from {{as|25% AP}}.
+
+;[[V9.14#July 19th Hotfix|V9.14]] - July 19th Hotfix
+* {{sbc|Bug Fix:}} On-hit skills with basic attacks no longer grant 2 stacks.
+
+;[[V8.16]]
+* Base damage reduced to {{pp|30;39;48;56;65;74;83;92;101;109;118;127;136;145;154;162;171;180}} from {{pp|50;60;70;80;90;100;110;120;130;140;150;160;170;180;190;200;210;220|formula=40 + (10{{times}}level)}}.
+* Bonus AD ratio reduced to {{as|40% '''bonus''' AD}} from {{as|50%|AD}}.
+* AP ratio reduced to {{as|25% AP}} from {{as|30% AP}}.
+* Cooldown reduced to {{pp|25;25;24;24;24;24;23;23;23;22;22;22;21;21;21;21;20;20}} seconds from {{pp|50;48.5;47.1;45.6;44.1;42.6;41.2;39.7;38.2;36.8;35.3;33.8;32.3;30.9;29.4;27.9;26.5;25|formula=51.47 - (1.47{{times}}level)}}.
+
+;[[V8.1]]
+* {{sbc|Bug Fix:}} Ally hits will no longer count towards '''Electrocute''' if both allies have the Keystone equipped.
+
+;[[V7.23]]
+* {{sbc|Bug Fix:}} Allies can no longer help you activate '''Electrocute''' if they're running it as well.
+
+;[[V7.22]] Added
+* [[File:Domination icon.png|20px|link=Domination]] [[Domination]] Keystone rune.
+** {{sbc|Passive:}} Basic attacks and abilities generate stacks on enemy champions hit (up to one per action). If 3 stacks are received within a 3 second interval, the target takes {{pp|50;60;70;80;90;100;110;120;130;140;150;160;170;180;190;200;210;220|formula=40 + (10{{times}}level)}} {{as|(+ 50% '''bonus''' AD)}} {{as|(+ 30% AP)}} {{sti|Adaptive damage}}.
+** {{sbc|Adaptive:}} Deals either physical or magic depending on which would deal the most damage.
+** {{sbc|Cooldown:}} {{pp|50;48.5;47.1;45.6;44.1;42.6;41.2;39.7;38.2;36.8;35.3;33.8;32.3;30.9;29.4;27.9;26.5;25|formula=51.47 - (1.47{{times}}level)}} seconds
+}}
+{{Rune footer}}
+
+[[de:Elektrisieren]]
+[[ru:Казнь электричеством (Руна)]]

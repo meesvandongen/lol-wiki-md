@@ -1,0 +1,25 @@
+{{{{{1<noinclude>|Ability data</noinclude>}}}|Blades of Torment|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}
+|champion     = Aatrox
+|skill        = E
+|icon         = Blades of Torment.png
+|blurb        = Aatrox unleashes the power of his blade, dealing damage to enemies hit and slowing them.
+|description  = {{sbc|Active:}} '''Aatrox''' unleashes two converging energy waves in the target direction, filling 20% of his {{ai|Blood Well|Aatrox}}, dealing {{as|physical damage}} to all units hit and {{tip|slow|slowing}} for 2 seconds.
+|leveling     = {{st|Physical Damage|{{ap|80|120|160|200|240}} {{as|(+ 70% '''bonus''' AD)}}}}{{st|Slow|{{ap|30|35|40|45|50%}}}}
+|target range = 1000
+|cooldown     = {{ap|12|11|10|9|8}}
+|cost         = 30
+|costtype     = health
+|targeting    = Direction
+|affects      = Enemies
+|damagetype   = Physical
+|spellshield  = True
+|spelleffects = Area of effect
+|projectile   = True
+|grounded     = 
+|knockdown    = 
+|notes        = 
+* Units may only be damaged by one projectile of ''Blades of Torment'' per cast.
+* The ability fires two narrow skillshots, converging at a fixed range. Very small units (''such as [[minion]]s'') can potentially avoid the damage and slow altogether if the blades are fired from a close enough range.
+* {{si|Flash}} can be cast during the cast animation of ''Blades of Torment''. If done so, the ability resolves after {{si|Flash}} from the location '''Aatrox''' flashes to.
+* Has a width of 150 decreasing as it converges on its max range.
+}}

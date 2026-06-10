@@ -1,0 +1,23 @@
+{{{{{1<noinclude>|Ability data</noinclude>}}}|Blood Well|{{{2|}}}|{{{3|}}}|{{{4|}}}|{{{5|}}}
+|champion     = Aatrox
+|skill        = I
+|icon         = Blood Well.png
+|blurb        = Aatrox fills up his Blood Well through his abilities. When filled, Aatrox becomes Hellbent for as long as he stays in combat with champions or monsters, granting him attack damage, attack speed, and the ability to survive fatal damage.
+|description  = '''Aatrox''' fills his ''Blood Well'' through his abilities, depleting by (20% '''maximum''') per second while [[Combat status|out of combat]]. When the ''Blood Well'' is filled, '''Aatrox''' becomes ''Hellbent'' for 4 seconds as the ''Blood Well'' drains. While ''Hellbent'', dealing or taking damage against enemy champions or neutral monsters will completely fill the ''Blood Well'' and refresh ''Hellbent's'' duration.
+|description2 = {{sbc|Hellbent:}} '''Aatrox''' gains {{sti|{{as|25% increased '''base''' AD}}}} and {{as|{{pp|30%;40%;50%;60%|1;6;11;16|formula=20%{{plus}}10% every 5 levels.}}|attack speed}} {{sti|{{as|'''bonus''' attack speed}}}}. Upon taking fatal damage '''Aatrox''' will revive over 3 seconds, recovering {{sti|{{as|30% of '''maximum''' health}}}} over the duration. Upon reviving, '''Aatrox''' instantly recovers 100% of ''Blood Well''. '''Aatrox's''' revive is then put on a cooldown.
+|static       = {{pp|180;160;140;120|1;6;11;16|formula=180{{minus}}20 every 5 levels.}}
+|targeting    = Passive 
+|affects      = [[Self-targeted|Self]]
+|damagetype   = 
+|spellshield  = 
+|spelleffects = Heal
+|projectile   = 
+|grounded     = 
+|knockdown    = 
+|notes        = 
+* '''Aatrox's''' resource bar colors red when {{sbc|Hellbent}} is active (light red when the revive is off cooldown, dark red when on cooldown)
+* {{ai|Chronoshift|Zilean}} and {{iis|Guardian Angel}} passive will take precedence over ''Blood Well's'' revive.
+* ''Blood Well's'' {{tip|stasis (buff)|stasis}} causes ''Aatrox'' to become {{tip|untargetable}}, which will reset turret aggro.
+* Tethers from abilities ({{ai|Soul Shackles|Morgana}}) will remain active while '''Aatrox''' is reviving.
+* ''Blood Well's'' healing component interacts with {{iis|Spirit Visage}} passive.
+}}

@@ -131,6 +131,7 @@ pub(super) fn convert_rune(
     Ok(ConversionOutcome {
         entity: name.to_string(),
         output: out_file,
+        skipped: false,
     })
 }
 
