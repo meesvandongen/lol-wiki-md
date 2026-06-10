@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 import { buildPack } from '../src/build.mjs';
 
-const fixturesRoot = fileURLToPath(new URL('./fixtures/markdown', import.meta.url));
+const fixturesRoot = fileURLToPath(new URL('./fixtures/sample-markdown', import.meta.url));
 const serverPath = fileURLToPath(new URL('../src/mcp-server.mjs', import.meta.url));
 
 /** Spawns the MCP server and resolves responses to a batch of requests. */

@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { extractChampion, extractItem, extractRune } from '../src/extract.mjs';
 import { parseDoc } from '../src/markdown.mjs';
 
-const fixturesRoot = fileURLToPath(new URL('./fixtures/markdown', import.meta.url));
+const fixturesRoot = fileURLToPath(new URL('./fixtures/sample-markdown', import.meta.url));
 
 function fixture(relPath) {
   return fs.readFileSync(path.join(fixturesRoot, relPath), 'utf8');

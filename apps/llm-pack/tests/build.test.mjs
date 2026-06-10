@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { buildPack } from '../src/build.mjs';
 import { loadPack } from '../src/pack.mjs';
 
-const fixturesRoot = fileURLToPath(new URL('./fixtures/markdown', import.meta.url));
+const fixturesRoot = fileURLToPath(new URL('./fixtures/sample-markdown', import.meta.url));
 
 function buildToTemp() {
   const outputRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'llm-pack-test-'));

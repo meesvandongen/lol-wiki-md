@@ -112,5 +112,5 @@ cargo run -p lol_wiki_md --bin convert -- \
   --wiki-root ./apps/converter/tests/fixtures/mini_export \
   --output ./test_output/llm-pack-fixtures --champion Aatrox
 # repeat with --item "Infinity Edge" and --rune Electrocute, then copy the
-# .md files into apps/llm-pack/tests/fixtures/markdown/
+# .md files into apps/llm-pack/tests/fixtures/sample-markdown/
 ```

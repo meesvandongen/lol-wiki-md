@@ -8,7 +8,7 @@ import { chunkDoc } from '../src/chunks.mjs';
 import { parseDoc } from '../src/markdown.mjs';
 import { buildIndex, search } from '../src/search.mjs';
 
-const fixturesRoot = fileURLToPath(new URL('./fixtures/markdown', import.meta.url));
+const fixturesRoot = fileURLToPath(new URL('./fixtures/sample-markdown', import.meta.url));
 
 function chunksFor(category, relPath) {
   const markdown = fs.readFileSync(path.join(fixturesRoot, relPath), 'utf8');
