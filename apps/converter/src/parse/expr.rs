@@ -163,6 +163,21 @@ fn tokenize(input: &str) -> Result<Vec<Tok>> {
             while j < chars.len() && (chars[j].is_ascii_digit() || chars[j] == '.') {
                 j += 1;
             }
+            // Glued scientific notation: `1.5e2`, `2e-3`. Only consume the `e`
+            // suffix when an (optionally signed) digit run follows it, so a bare
+            // `e` stays a separate token (Euler's constant / spaced operator).
+            if j < chars.len() && (chars[j] == 'e' || chars[j] == 'E') {
+                let mut k = j + 1;
+                if k < chars.len() && (chars[k] == '+' || chars[k] == '-') {
+                    k += 1;
+                }
+                if k < chars.len() && chars[k].is_ascii_digit() {
+                    while k < chars.len() && chars[k].is_ascii_digit() {
+                        k += 1;
+                    }
+                    j = k;
+                }
+            }
             let lit = chars[start..j].iter().collect::<String>();
             let num: f64 = lit.parse().map_err(|e| ConvertError::Expr {
                 expr: lit.clone(),
@@ -326,8 +341,26 @@ impl<'a> Parser<'a> {
                 let v = self.parse_unary()?;
                 Ok(if v == 0.0 { 1.0 } else { 0.0 })
             }
-            _ => self.parse_atom(),
+            _ => {
+                let base = self.parse_atom()?;
+                self.maybe_e_notation(base)
+            }
         }
+    }
+    /// Scientific notation: `a e b` means `a × 10^b` (MediaWiki). `e` is only an
+    /// operator when an operand follows it; a bare `e` is Euler's constant.
+    fn maybe_e_notation(&mut self, base: f64) -> Result<f64> {
+        if is_kw(self.peek(), "e")
+            && matches!(
+                self.tokens.get(self.pos + 1),
+                Some(Tok::Num(_) | Tok::Op('-') | Tok::Op('+') | Tok::LParen)
+            )
+        {
+            self.bump(); // consume `e`
+            let exp = self.parse_unary()?;
+            return Ok(base * 10f64.powf(exp));
+        }
+        Ok(base)
     }
     fn parse_atom(&mut self) -> Result<f64> {
         match self.bump() {
@@ -492,6 +525,17 @@ mod tests {
         assert_eq!(
             evaluate_expression("not 0", ExprNumberFormat::Float(2)).unwrap(),
             "1"
+        );
+    }
+    #[test]
+    fn e_notation() {
+        assert_eq!(
+            evaluate_expression("2 e 3", ExprNumberFormat::Float(2)).unwrap(),
+            "2000"
+        );
+        assert_eq!(
+            evaluate_expression("1.5e2", ExprNumberFormat::Float(2)).unwrap(),
+            "150"
         );
     }
     #[test]

@@ -74,6 +74,7 @@ impl TemplateRegistry {
         r.register(Box::new(StringMagicWordExpander));
         r.register(Box::new(ReplaceExpander));
         r.register(Box::new(TitlePartsExpander));
+        r.register(Box::new(IfExistExpander));
         r.register(Box::new(IfExpander));
         r.register(Box::new(IfEqExpander));
         r.register(Box::new(SwitchExpander));
@@ -2347,7 +2348,7 @@ fn split_colon_magic_word(lower: &str, name: &str) -> Option<(String, String)> {
         // pipe-form label template `{{lc|X}}` (which renders `**X:**`).
         "lc" | "uc" | "ucfirst" | "lcfirst" | "formatnum" => Some((format!("{kw}:"), rest)),
         // Parser functions are unambiguous (the `#` prefix has no pipe-template).
-        "#replace" | "#titleparts" => Some((kw.to_string(), rest)),
+        "#replace" | "#titleparts" | "#ifexist" => Some((kw.to_string(), rest)),
         _ => None,
     }
 }
@@ -2500,6 +2501,36 @@ impl TemplateExpander for TitlePartsExpander {
         };
         Ok(ExpansionResult {
             expanded: segments[start..end].join("/"),
+        })
+    }
+}
+
+/// `{{#ifexist:page|then|else}}` — `then` if the page exists in the export, else
+/// `else`. Existence is resolved against the exported page index (the converter
+/// only knows the pages it downloaded); with no conversion context the page is
+/// treated as missing.
+struct IfExistExpander;
+impl TemplateExpander for IfExistExpander {
+    fn names(&self) -> &'static [&'static str] {
+        &["#ifexist"]
+    }
+    fn expand(&self, inv: &TemplateInvocation, ctx: &ExpanderCtx) -> Result<ExpansionResult> {
+        let page = inv
+            .params
+            .first()
+            .map(|s| {
+                expand_nested_template_text(s.trim(), ctx).unwrap_or_else(|_| s.trim().to_string())
+            })
+            .unwrap_or_default();
+        let then_v = inv.params.get(1).cloned().unwrap_or_default();
+        let else_v = inv.params.get(2).cloned().unwrap_or_default();
+        let exists = ctx
+            .conversion_ctx
+            .as_ref()
+            .and_then(|c| c.export().read_template_page(page.trim()).ok().flatten())
+            .is_some();
+        Ok(ExpansionResult {
+            expanded: if exists { then_v } else { else_v },
         })
     }
 }
@@ -3052,18 +3083,36 @@ fn render_pp_progression_from_parts(
 
 fn resolve_progression_fragment(fragment: &str, ctx: &ExpanderCtx) -> String {
     let replaced = replace_var_templates(fragment, &ctx.vars_snapshot(), false);
-    if let Some(conv_ctx) = ctx.conversion_ctx.as_ref() {
-        if let Ok(expanded) = expand_inline_templates_with_store(
-            replaced.trim(),
+    let trimmed = replaced.trim();
+    // Expand nested templates inside a progression fragment (e.g. a range whose
+    // endpoints are `{{#expr}}`) before the range/series parser sees it. Use the
+    // conversion context's registry when present, else a fresh default registry
+    // so pure parser-function nesting still resolves without a data context.
+    if !trimmed.contains("{{") {
+        return trimmed.to_string();
+    }
+    let expanded = match ctx.conversion_ctx.as_ref() {
+        Some(conv_ctx) => expand_inline_templates_with_store(
+            trimmed,
             ctx.precision,
             ctx.vars.clone(),
             conv_ctx.registry(),
             ctx.conversion_ctx.clone(),
-        ) {
-            return expanded.trim().to_string();
+        ),
+        None => {
+            let registry = TemplateRegistry::new();
+            expand_inline_templates_with_store(
+                trimmed,
+                ctx.precision,
+                ctx.vars.clone(),
+                &registry,
+                None,
+            )
         }
-    }
-    replaced.trim().to_string()
+    };
+    expanded
+        .map(|value| value.trim().to_string())
+        .unwrap_or_else(|_| trimmed.to_string())
 }
 
 fn expand_progression_values(

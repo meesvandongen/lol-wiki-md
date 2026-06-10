@@ -418,6 +418,25 @@ fn ccd_nested_inside_ap_arithmetic() {
     );
 }
 
+/// #23 — `{{#ifexist:page|then|else}}` resolves against the exported page index.
+#[test]
+fn ifexist_checks_the_export() {
+    let td = tempdir().unwrap();
+    let export = td.path().join("export_out");
+    std::fs::create_dir_all(&export).unwrap();
+    // Page title -> file name uses the exporter's URL encoding (':' -> %3A).
+    std::fs::write(export.join("Template%3AExists.txt"), "anything").unwrap();
+    let ctx = Arc::new(ConversionContext::new(td.path(), 2).unwrap());
+    assert_eq!(
+        render_ctx("{{#ifexist:Template:Exists|yes|no}}", ctx.clone()),
+        "yes"
+    );
+    assert_eq!(
+        render_ctx("{{#ifexist:Template:Missing Page|yes|no}}", ctx),
+        "no"
+    );
+}
+
 // ---------------------------------------------------------------------------
 // Regression tests for divergences that were mined as #[ignore]d failures and
 // have since been FIXED. Each asserts the wiki-correct value (verified against
@@ -451,6 +470,23 @@ mod fixed_divergences {
     #[test]
     fn exponent_is_left_associative() {
         assert_eq!(render("{{#expr:2^3^2}}"), "64");
+    }
+
+    /// #14 — scientific `e` notation (`a e b` = a × 10^b), spaced and glued.
+    #[test]
+    fn expr_e_notation() {
+        assert_eq!(render("{{#expr:2 e 3}}"), "2000");
+        assert_eq!(render("{{#expr:1.5e2}}"), "150");
+    }
+
+    /// ap/pp re-parse a range whose endpoints are nested templates (the fragment
+    /// is expanded before the range parser runs).
+    #[test]
+    fn ap_range_with_nested_template_endpoints() {
+        assert_eq!(
+            render("{{ap|{{#expr:80*1.4}} to {{#expr:310*1.4}} 6}}"),
+            "112 / 176.4 / 240.8 / 305.2 / 369.6 / 434"
+        );
     }
 
     /// #15 — string-casing magic words.
@@ -547,29 +583,5 @@ mod fixed_divergences {
     fn possessive_icon_variants() {
         assert_eq!(render("{{cis|Aatrox}}"), "Aatrox's");
         assert_eq!(render("{{uis|Tibbers}}"), "Tibbers'");
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Still-open divergences: assert the WIKI-CORRECT value, #[ignore]d so the suite
-// stays green. Run with `cargo test -- --ignored`; un-ignore once fixed.
-// ---------------------------------------------------------------------------
-
-mod known_divergences {
-    use super::render;
-
-    /// When an `ap`/`pp` range's endpoints are themselves templates, the range
-    /// is not re-parsed after expansion: the converter code-fences the literal
-    /// (`` `112 to 434 6` ``) instead of interpolating. Wiki expands first, then
-    /// interpolates. (Single-value nested arithmetic like
-    /// `{{ap|(1/{{ccd|..}})*..}}` DOES work — see corpus_coverage; only the
-    /// `X to Y` range form with nested-template endpoints breaks.)
-    #[test]
-    #[ignore = "ap/pp don't reparse a range with nested-template endpoints; see DIVERGENCES.md"]
-    fn ap_range_with_nested_template_endpoints() {
-        assert_eq!(
-            render("{{ap|{{#expr:80*1.4}} to {{#expr:310*1.4}} 6}}"),
-            "112 / 176.4 / 240.8 / 305.2 / 369.6 / 434"
-        );
     }
 }
